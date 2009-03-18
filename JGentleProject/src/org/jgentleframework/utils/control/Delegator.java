@@ -21,6 +21,10 @@ import java.lang.reflect.*;
 import java.util.List;
 import java.util.ArrayList;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.jgentleframework.utils.ReflectUtils;
+
 /**
  * The Class Delegator.
  * 
@@ -30,166 +34,26 @@ import java.util.ArrayList;
  */
 @SuppressWarnings("unchecked")
 public class Delegator {
-	/** The Constant EMPTY_METHOD_ARRAY. */
-	public static final Method[]	EMPTY_METHOD_ARRAY	= {};
-
-	/** The Constant EMPTY_OBJECT_ARRAY. */
-	public static final Object[]	EMPTY_OBJECT_ARRAY	= {};
-
-	/** The Constant EMPTY_ARRAY. */
-	public static final Delegator[]	EMPTY_ARRAY			= {};
-
-	// convenience implementation
-	/** The Constant RUNNABLE_DELEGATE. */
-	public static final Delegator	RUNNABLE_DELEGATE	= new Delegator(
-																Runnable.class);
-
 	/**
-	 * Convenience method to make a runnable delegate.
-	 * 
-	 * @param item
-	 *            non-null target object
-	 * @param methodName
-	 *            non-null name of a method of type void ()
-	 * @return non-null Runnable proxy
+	 * All problems become this type of exception As a runtime we do not impose
+	 * burdens on the calling code.
 	 */
-	public static Runnable buildRunnable(Object item, String methodName) {
+	public static class DelegateInvokeException extends RuntimeException {
+		/**
+		 * 
+		 */
+		private static final long	serialVersionUID	= 2066334114276957295L;
 
-		return ((Runnable) RUNNABLE_DELEGATE.build(item, methodName));
-	}
+		/**
+		 * Instantiates a new delegate invoke exception.
+		 * 
+		 * @param cause
+		 *            the cause
+		 */
+		public DelegateInvokeException(Throwable cause) {
 
-	/**
-	 * Convenience method to make a runnable delegate.
-	 * 
-	 * @param item
-	 *            non-null target class
-	 * @param methodName
-	 *            non-null name of a method of type void ()
-	 * @return non-null Runnable proxy
-	 */
-	public static Runnable buildRunnable(Class item, String methodName) {
-
-		return ((Runnable) RUNNABLE_DELEGATE.build(item, methodName));
-	}
-
-	/** The m_ interface. */
-	private final Class		m_Interface;	// may be null
-
-	/** The m_ return. */
-	private final Class		m_Return;
-
-	/** The m_ arguments. */
-	private final Class[]	m_Arguments;
-
-	/**
-	 * The Constructor.
-	 * 
-	 * @param params
-	 *            non-null array of arguments
-	 * @param retClass
-	 *            possibly null return class null says do not care
-	 */
-	public Delegator(Class[] params, Class retClass) {
-
-		m_Interface = null;
-		m_Return = retClass;
-		m_Arguments = params != null ? params.clone() : null;
-	}
-
-	/**
-	 * The Constructor.
-	 * 
-	 * @param TheInterface
-	 *            an non-null interface with EXACTLY one method
-	 */
-	public Delegator(Class TheInterface) {
-
-		m_Interface = TheInterface;
-		Method met = findMethod(TheInterface);
-		m_Return = met.getReturnType();
-		m_Arguments = met.getParameterTypes();
-	}
-
-	/**
-	 * accessor for return class.
-	 * 
-	 * @return the return
-	 */
-	public Class getReturn() {
-
-		return m_Return;
-	}
-
-	/**
-	 * accessor for argument classes.
-	 * 
-	 * @return the arguments
-	 */
-	public Class[] getArguments() {
-
-		return m_Arguments != null ? m_Arguments.clone() : null;
-	}
-
-	/**
-	 * Gets the interface.
-	 * 
-	 * @return the interface
-	 */
-	public Class getInterface() {
-
-		return m_Interface;
-	}
-
-	/**
-	 * Builds the.
-	 * 
-	 * @param target
-	 *            non-null class with a bindable static method
-	 * @param MethodName
-	 *            name of the static method
-	 * @return non-null IDelegate if getInterface() is non-null it will be a
-	 *         dynamic prozy implementing that interface
-	 */
-	public IDelegate build(Class target, String MethodName) {
-
-		Class myInterface = getInterface();
-		DelegateProxy theDelegate = new DelegateProxy(null, target, MethodName,
-				this);
-		if (myInterface != null) {
-			Class[] interfaces = { myInterface, IDelegate.class };
-			IDelegate ret = (IDelegate) java.lang.reflect.Proxy
-					.newProxyInstance(target.getClassLoader(), interfaces,
-							theDelegate);
-			return (ret);
+			super(cause);
 		}
-		return ((IDelegate) theDelegate);
-	}
-
-	/**
-	 * Builds the.
-	 * 
-	 * @param target
-	 *            non-null target with a bindable method
-	 * @param MethodName
-	 *            name of the method
-	 * @return non-null IDelegate if getInterface() is non-null it will be a
-	 *         dynamic prozy implementing that interface
-	 */
-	public IDelegate build(Object target, String MethodName) {
-
-		Class myInterface = getInterface();
-		DelegateProxy theDelegate = new DelegateProxy(target,
-				target.getClass(), MethodName, this);
-		if (myInterface != null) { // build a dynamic proxy
-			Class[] interfaces = { myInterface, IDelegate.class };
-			IDelegate ret = (IDelegate) java.lang.reflect.Proxy
-					.newProxyInstance(target.getClass().getClassLoader(),
-							interfaces, theDelegate);
-			return (ret);
-		}
-		if (!(theDelegate instanceof IDelegate))
-			throw new ClassCastException();
-		return ((IDelegate) theDelegate);
 	}
 
 	/**
@@ -231,6 +95,26 @@ public class Delegator {
 		}
 
 		/**
+		 * accessor for the method.
+		 * 
+		 * @return the method
+		 */
+		public Method getMethod() {
+
+			return m_Method;
+		}
+
+		/**
+		 * accessor for the target.
+		 * 
+		 * @return the target
+		 */
+		public Object getTarget() {
+
+			return m_Target;
+		}
+
+		/**
 		 * convenience call to handle case of no arguments.
 		 * 
 		 * @return whatever is returned
@@ -264,6 +148,22 @@ public class Delegator {
 		}
 
 		/**
+		 * method required by InvocationHandler so we can build dynamic Proxys.
+		 * 
+		 * @param proxy
+		 *            object for which we are a proxy (ignored)
+		 * @param method
+		 *            method to call (ignored)
+		 * @param args
+		 *            arguments to pass
+		 * @return whatever is returned primitive types are wrapped
+		 */
+		public Object invoke(Object proxy, Method method, Object[] args) {
+
+			return (invoke(args));
+		}
+
+		/**
 		 * convenience call to handle case of two argument.
 		 * 
 		 * @param arg1
@@ -280,22 +180,6 @@ public class Delegator {
 				throws IllegalArgumentException, DelegateInvokeException {
 
 			Object[] args = { arg1, arg2 };
-			return (invoke(args));
-		}
-
-		/**
-		 * method required by InvocationHandler so we can build dynamic Proxys.
-		 * 
-		 * @param proxy
-		 *            object for which we are a proxy (ignored)
-		 * @param method
-		 *            method to call (ignored)
-		 * @param args
-		 *            arguments to pass
-		 * @return whatever is returned primitive types are wrapped
-		 */
-		public Object invoke(Object proxy, Method method, Object[] args) {
-
 			return (invoke(args));
 		}
 
@@ -349,48 +233,160 @@ public class Delegator {
 							+ " must be of class " + MyArgs[i].getName());
 			}
 		}
+	}
 
-		/**
-		 * accessor for the method.
-		 * 
-		 * @return the method
-		 */
-		public Method getMethod() {
+	/** The Constant EMPTY_ARRAY. */
+	public static final Delegator[]	EMPTY_ARRAY			= {};
 
-			return m_Method;
-		}
+	/** The Constant EMPTY_METHOD_ARRAY. */
+	public static final Method[]	EMPTY_METHOD_ARRAY	= {};
 
-		/**
-		 * accessor for the target.
-		 * 
-		 * @return the target
-		 */
-		public Object getTarget() {
+	/** The Constant EMPTY_OBJECT_ARRAY. */
+	public static final Object[]	EMPTY_OBJECT_ARRAY	= {};
 
-			return m_Target;
-		}
+	/** The log. */
+	protected static final Log		log					= LogFactory
+																.getLog(Delegator.class);
+
+	/** The Constant RUNNABLE_DELEGATE */
+	public static final Delegator	RUNNABLE_DELEGATE	= new Delegator(
+																Runnable.class);
+
+	/**
+	 * Convenience method to make a runnable delegate.
+	 * 
+	 * @param item
+	 *            non-null target class
+	 * @param methodName
+	 *            non-null name of a method of type void ()
+	 * @return non-null Runnable proxy
+	 */
+	public static Runnable buildRunnable(Class item, String methodName) {
+
+		return ((Runnable) RUNNABLE_DELEGATE.build(item, methodName));
 	}
 
 	/**
-	 * All problems become this type of exception As a runtime we do not impose
-	 * burdens on the calling code.
+	 * Convenience method to make a runnable delegate.
+	 * 
+	 * @param item
+	 *            non-null target object
+	 * @param methodName
+	 *            non-null name of a method of type void ()
+	 * @return non-null Runnable proxy
 	 */
-	public static class DelegateInvokeException extends RuntimeException {
-		/**
-		 * 
-		 */
-		private static final long	serialVersionUID	= 2066334114276957295L;
+	public static Runnable buildRunnable(Object item, String methodName) {
 
-		/**
-		 * Instantiates a new delegate invoke exception.
-		 * 
-		 * @param cause
-		 *            the cause
-		 */
-		public DelegateInvokeException(Throwable cause) {
+		return ((Runnable) RUNNABLE_DELEGATE.build(item, methodName));
+	}
 
-			super(cause);
+	/**
+	 * utility code to find the one suitable method in the passed in interface.
+	 * 
+	 * @param TheInterface
+	 *            the the interface
+	 * @return the method
+	 */
+	protected static Method findMethod(Class TheInterface) {
+
+		if (!TheInterface.isInterface())
+			throw new IllegalArgumentException(
+					"DelegateTemplate must be constructed with an interface");
+		Method[] methods = TheInterface.getMethods();
+		Method ret = null;
+		for (int i = 0; i < methods.length; i++) {
+			Method test = methods[i];
+			if (Modifier.isAbstract(test.getModifiers())) {
+				if (ret != null)
+					throw new IllegalArgumentException(
+							"DelegateTemplate must be constructed "
+									+ " with an interface implementing only one method!");
+				ret = test;
+			}
 		}
+		if (ret == null)
+			throw new IllegalArgumentException(
+					"DelegateTemplate must be constructed "
+							+ " with an interface implementing exactly method!");
+		return (ret);
+	}
+
+	/**
+	 * Utility method to locate a proper Method object.
+	 * 
+	 * @param targetClass
+	 *            the target class
+	 * @param MethodName
+	 *            the method name
+	 * @param templ
+	 *            the templ
+	 * @return the method
+	 */
+	protected static Method findSuitableMethod(Class targetClass,
+			String MethodName, Delegator templ) {
+
+		Class[] args = templ.getArguments();
+		Class retClass = templ.getReturn();
+		// perfect match
+		Method ret;
+		try {
+			ret = targetClass.getMethod(MethodName, args);
+			if (!isValidReturn(ret, retClass))
+				throw new IllegalArgumentException(
+						"Requested method returns wrong type");
+			if (!Modifier.isPublic(ret.getModifiers()))
+				throw new IllegalArgumentException(
+						"Requested method is not public");
+			return (ret);
+		}
+		catch (SecurityException e) {
+			if (log.isInfoEnabled()) {
+				log
+						.info("Could not found the suitable method of target class ["
+								+ targetClass + "]");
+			}
+		}
+		catch (NoSuchMethodException e) {
+			if (log.isInfoEnabled()) {
+				log
+						.info("Could not found the suitable method of target class ["
+								+ targetClass + "]");
+			}
+		}
+		Method[] possibilities = getCandidateMethods(targetClass, MethodName,
+				args.length);
+		for (int i = 0; i < possibilities.length; i++) {
+			Method possibility = possibilities[i];
+			if (isSuitableMethod(possibility, args, retClass))
+				return (possibility);
+		}
+		throw new IllegalArgumentException("No suitable method found");
+	}
+
+	/**
+	 * utility method to get candidate methods to search.
+	 * 
+	 * @param targetClass
+	 *            the target class
+	 * @param MethodName
+	 *            the method name
+	 * @param nargs
+	 *            the nargs
+	 * @return the candidate methods
+	 */
+	protected static Method[] getCandidateMethods(Class targetClass,
+			String MethodName, int nargs) {
+
+		Method[] possibilities = targetClass.getMethods();
+		List holder = new ArrayList();
+		for (int i = 0; i < possibilities.length; i++) {
+			Method possibility = possibilities[i];
+			if (possibility.getName().equals(MethodName)
+					&& possibility.getParameterTypes().length == nargs
+					&& Modifier.isPublic(possibility.getModifiers()))
+				holder.add(possibility);
+		}
+		return ((Method[]) holder.toArray(EMPTY_METHOD_ARRAY));
 	}
 
 	// ===================================================================
@@ -423,32 +419,6 @@ public class Delegator {
 	}
 
 	/**
-	 * utility method to get candidate methods to search.
-	 * 
-	 * @param targetClass
-	 *            the target class
-	 * @param MethodName
-	 *            the method name
-	 * @param nargs
-	 *            the nargs
-	 * @return the candidate methods
-	 */
-	protected static Method[] getCandidateMethods(Class targetClass,
-			String MethodName, int nargs) {
-
-		Method[] possibilities = targetClass.getMethods();
-		List holder = new ArrayList();
-		for (int i = 0; i < possibilities.length; i++) {
-			Method possibility = possibilities[i];
-			if (possibility.getName().equals(MethodName)
-					&& possibility.getParameterTypes().length == nargs
-					&& Modifier.isPublic(possibility.getModifiers()))
-				holder.add(possibility);
-		}
-		return ((Method[]) holder.toArray(EMPTY_METHOD_ARRAY));
-	}
-
-	/**
 	 * utility method to test return.
 	 * 
 	 * @param test
@@ -468,73 +438,123 @@ public class Delegator {
 		return (false);
 	}
 
-	/**
-	 * Utility method to locate a proper Method object.
-	 * 
-	 * @param targetClass
-	 *            the target class
-	 * @param MethodName
-	 *            the method name
-	 * @param templ
-	 *            the templ
-	 * @return the method
-	 */
-	protected static Method findSuitableMethod(Class targetClass,
-			String MethodName, Delegator templ) {
+	/** The m_ arguments. */
+	private final Class[]	m_Arguments;
 
-		Class[] args = templ.getArguments();
-		Class retClass = templ.getReturn();
-		// perfect match
-		try {
-			Method ret = targetClass.getMethod(MethodName, args);
-			if (!isValidReturn(ret, retClass))
-				throw new IllegalArgumentException(
-						"Requested method returns wrong type");
-			if (!Modifier.isPublic(ret.getModifiers()))
-				throw new IllegalArgumentException(
-						"Requested method is not public");
-			return (ret);
-		}
-		catch (Exception ex) {
-		} // on to try2
-		Method[] possibilities = getCandidateMethods(targetClass, MethodName,
-				args.length);
-		for (int i = 0; i < possibilities.length; i++) {
-			Method possibility = possibilities[i];
-			if (isSuitableMethod(possibility, args, retClass))
-				return (possibility);
-		}
-		throw new IllegalArgumentException("No suitable method found");
+	/** The m_ interface. */
+	private final Class		m_Interface;	// may be null
+
+	/** The m_ return. */
+	private final Class		m_Return;
+
+	/**
+	 * The Constructor.
+	 * 
+	 * @param TheInterface
+	 *            an non-null interface with EXACTLY one method
+	 */
+	public Delegator(Class TheInterface) {
+
+		m_Interface = TheInterface;
+		Method met = findMethod(TheInterface);
+		m_Return = met.getReturnType();
+		m_Arguments = met.getParameterTypes();
 	}
 
 	/**
-	 * utility code to find the one suitable method in the passed in interface.
+	 * The Constructor.
 	 * 
-	 * @param TheInterface
-	 *            the the interface
-	 * @return the method
+	 * @param params
+	 *            non-null array of arguments
+	 * @param retClass
+	 *            possibly null return class null says do not care
 	 */
-	protected static Method findMethod(Class TheInterface) {
+	public Delegator(Class[] params, Class retClass) {
 
-		if (!TheInterface.isInterface())
-			throw new IllegalArgumentException(
-					"DelegateTemplate must be constructed with an interface");
-		Method[] methods = TheInterface.getMethods();
-		Method ret = null;
-		for (int i = 0; i < methods.length; i++) {
-			Method test = methods[i];
-			if (Modifier.isAbstract(test.getModifiers())) {
-				if (ret != null)
-					throw new IllegalArgumentException(
-							"DelegateTemplate must be constructed "
-									+ " with an interface implementing only one method!");
-				ret = test;
-			}
+		m_Interface = null;
+		m_Return = retClass;
+		m_Arguments = params != null ? params.clone() : null;
+	}
+
+	/**
+	 * Builds the.
+	 * 
+	 * @param target
+	 *            non-null class with a bindable static method
+	 * @param MethodName
+	 *            name of the static method
+	 * @return non-null IDelegate if getInterface() is non-null it will be a
+	 *         dynamic prozy implementing that interface
+	 */
+	public IDelegate build(Class target, String MethodName) {
+
+		Class myInterface = getInterface();
+		DelegateProxy theDelegate = new DelegateProxy(null, target, MethodName,
+				this);
+		if (myInterface != null) {
+			Class[] interfaces = { myInterface, IDelegate.class };
+			IDelegate ret = (IDelegate) java.lang.reflect.Proxy
+					.newProxyInstance(target.getClassLoader(), interfaces,
+							theDelegate);
+			return (ret);
 		}
-		if (ret == null)
-			throw new IllegalArgumentException(
-					"DelegateTemplate must be constructed "
-							+ " with an interface implementing exactly method!");
-		return (ret);
+		return ((IDelegate) theDelegate);
+	}
+
+	/**
+	 * Builds the.
+	 * 
+	 * @param target
+	 *            non-null target with a bindable method
+	 * @param MethodName
+	 *            name of the method
+	 * @return non-null IDelegate if getInterface() is non-null it will be a
+	 *         dynamic prozy implementing that interface
+	 */
+	public IDelegate build(Object target, String MethodName) {
+
+		Class myInterface = getInterface();
+		DelegateProxy theDelegate = new DelegateProxy(target,
+				target.getClass(), MethodName, this);
+		if (myInterface != null) { // build a dynamic proxy
+			Class[] interfaces = { myInterface, IDelegate.class };
+			IDelegate ret = (IDelegate) java.lang.reflect.Proxy
+					.newProxyInstance(target.getClass().getClassLoader(),
+							interfaces, theDelegate);
+			return (ret);
+		}
+		if (!ReflectUtils.isCast(IDelegate.class, theDelegate))
+			throw new ClassCastException();
+		return ((IDelegate) theDelegate);
+	}
+
+	/**
+	 * accessor for argument classes.
+	 * 
+	 * @return the arguments
+	 */
+	public Class[] getArguments() {
+
+		return m_Arguments != null ? m_Arguments.clone() : null;
+	}
+
+	/**
+	 * Gets the interface.
+	 * 
+	 * @return the interface
+	 */
+	public Class getInterface() {
+
+		return m_Interface;
+	}
+
+	/**
+	 * accessor for return class.
+	 * 
+	 * @return the return
+	 */
+	public Class getReturn() {
+
+		return m_Return;
 	}
 }
