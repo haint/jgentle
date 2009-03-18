@@ -405,7 +405,7 @@ class AnnotationAroundAdviceMethodInterceptor extends AbstractBeforeAdvice
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.core.interceptor.RuntimeLoading#isRuntimeLoading()
+	 * org.jgentleframework.core.interceptor.RuntimeLoading#isRuntimeLoading()
 	 */
 	@Override
 	public boolean isRuntimeLoading() {
@@ -416,7 +416,7 @@ class AnnotationAroundAdviceMethodInterceptor extends AbstractBeforeAdvice
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.core.interceptor.RuntimeLoading#setRuntimeLoading
+	 * org.jgentleframework.core.interceptor.RuntimeLoading#setRuntimeLoading
 	 * (boolean)
 	 */
 	@Override

@@ -60,7 +60,7 @@ import org.jgentleframework.utils.ReflectUtils;
  * @see ConstructorAnnotatedWithMatcher
  * @see AbstractDefinitionMatcherPointcut
  */
-public class ElementAspectFactory {
+class ElementAspectFactory {
 	/**
 	 * Instantiates a new element aspect factory.
 	 */
@@ -118,7 +118,7 @@ public class ElementAspectFactory {
 						/*
 						 * (non-Javadoc)
 						 * @see
-						 * org.exxlabs.jgentle.context.aop.support.Matching#
+						 * org.jgentleframework.context.aop.support.Matching#
 						 * getTargetObject()
 						 */
 						@Override
@@ -214,7 +214,7 @@ public class ElementAspectFactory {
 						/*
 						 * (non-Javadoc)
 						 * @see
-						 * org.exxlabs.jgentle.context.aop.support.Matching#
+						 * org.jgentleframework.context.aop.support.Matching#
 						 * getTargetObject()
 						 */
 						@Override

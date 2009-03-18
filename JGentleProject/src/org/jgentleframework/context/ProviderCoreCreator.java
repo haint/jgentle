@@ -116,7 +116,7 @@ class ProviderCoreCreator extends AbstractBeanFactory implements Provider {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.context.injecting.Provider#getBean(java.lang.Class)
+	 * org.jgentleframework.context.injecting.Provider#getBean(java.lang.Class)
 	 */
 	@Override
 	public Object getBean(Class<?> clazz) {
@@ -134,7 +134,7 @@ class ProviderCoreCreator extends AbstractBeanFactory implements Provider {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.context.injecting.Provider#getBean(org.exxlabs.jgentle
+	 * org.jgentleframework.context.injecting.Provider#getBean(org.jgentleframework
 	 * .core.reflection.metadata.Definition)
 	 */
 	@Override
@@ -166,7 +166,7 @@ class ProviderCoreCreator extends AbstractBeanFactory implements Provider {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.context.injecting.Provider#getBean(java.lang.String)
+	 * org.jgentleframework.context.injecting.Provider#getBean(java.lang.String)
 	 */
 	@Override
 	public Object getBean(String refer) {
@@ -186,7 +186,7 @@ class ProviderCoreCreator extends AbstractBeanFactory implements Provider {
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.context.injecting.AbstractBeanFactory#
+	 * @seeorg.jgentleframework.context.injecting.AbstractBeanFactory#
 	 * getBeanBoundToDefinition(java.lang.String)
 	 */
 	@Override
@@ -212,7 +212,7 @@ class ProviderCoreCreator extends AbstractBeanFactory implements Provider {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.context.injecting.Provider#getBeanBoundToMapping(
+	 * org.jgentleframework.context.injecting.Provider#getBeanBoundToMapping(
 	 * java.lang.String)
 	 */
 	@Override
@@ -236,7 +236,7 @@ class ProviderCoreCreator extends AbstractBeanFactory implements Provider {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.context.injecting.Provider#getBeanBoundToName(java
+	 * org.jgentleframework.context.injecting.Provider#getBeanBoundToName(java
 	 * .lang.String)
 	 */
 	@Override
@@ -274,7 +274,7 @@ class ProviderCoreCreator extends AbstractBeanFactory implements Provider {
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.exxlabs.jgentle.context.injecting.Provider#getConfigInstances()
+	 * @see org.jgentleframework.context.injecting.Provider#getConfigInstances()
 	 */
 	@Override
 	public ArrayList<Configurable> getConfigInstances() {
@@ -285,7 +285,7 @@ class ProviderCoreCreator extends AbstractBeanFactory implements Provider {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.context.injecting.Provider#getDetectorController()
+	 * org.jgentleframework.context.injecting.Provider#getDetectorController()
 	 */
 	@Override
 	public Detector getDetectorController() {
@@ -304,7 +304,7 @@ class ProviderCoreCreator extends AbstractBeanFactory implements Provider {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.context.injecting.AbstractBeanFactory#getRefInstance
+	 * org.jgentleframework.context.injecting.AbstractBeanFactory#getRefInstance
 	 * (java.lang.String)
 	 */
 	@Override
@@ -411,7 +411,7 @@ class ProviderCoreCreator extends AbstractBeanFactory implements Provider {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.context.injecting.Provider#setConfigInstances(org
+	 * org.jgentleframework.context.injecting.Provider#setConfigInstances(org
 	 * .exxlabs.jgentle.configure.AbstractConfig[])
 	 */
 	@Override

@@ -57,7 +57,7 @@ class SingleClassIdentificationImpl implements SingleClassIdentification {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.general.reflection.Identification#setName(java.lang.String)
+	 * @see org.jgentleframework.general.reflection.Identification#setName(java.lang.String)
 	 */
 	@Override
 	public void setName(String name) {
@@ -68,7 +68,7 @@ class SingleClassIdentificationImpl implements SingleClassIdentification {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.general.reflection.Identification#getMember()
+	 * @see org.jgentleframework.general.reflection.Identification#getMember()
 	 */
 	@Override
 	public Class<?>[] getMember() {
@@ -94,7 +94,7 @@ class SingleClassIdentificationImpl implements SingleClassIdentification {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.general.reflection.SingleClassIdentification#getModifier()
+	 * @see org.jgentleframework.general.reflection.SingleClassIdentification#getModifier()
 	 */
 	public int getModifiers() {
 
@@ -104,7 +104,7 @@ class SingleClassIdentificationImpl implements SingleClassIdentification {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.general.reflection.SingleClassIdentification#setModifier(int)
+	 * @see org.jgentleframework.general.reflection.SingleClassIdentification#setModifier(int)
 	 */
 	public void setModifiers(int modifiers) {
 
@@ -114,7 +114,7 @@ class SingleClassIdentificationImpl implements SingleClassIdentification {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.general.reflection.SingleClassIdentification#getName()
+	 * @see org.jgentleframework.general.reflection.SingleClassIdentification#getName()
 	 */
 	public String getName() {
 

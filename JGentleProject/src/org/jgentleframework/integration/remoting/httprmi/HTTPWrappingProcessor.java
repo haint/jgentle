@@ -29,7 +29,7 @@ public class HTTPWrappingProcessor implements WrappingProcessor {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.integration.remoting.rmi.support.WrappingProcessor#invoke(org.exxlabs.jgentle.integration.remoting.RemoteInvocation,
+	 * @see org.jgentleframework.integration.remoting.rmi.support.WrappingProcessor#invoke(org.jgentleframework.integration.remoting.RemoteInvocation,
 	 *      java.lang.Object)
 	 */
 	@Override

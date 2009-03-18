@@ -35,7 +35,7 @@ public abstract class AbstractMatcher<T> implements Matcher<T> {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.core.intercept.Matcher#and(org.exxlabs.jgentle.core.intercept.Matcher)
+	 * @see org.jgentleframework.core.intercept.Matcher#and(org.jgentleframework.core.intercept.Matcher)
 	 */
 	public Matcher<T> and(final Matcher<T> other) {
 
@@ -45,7 +45,7 @@ public abstract class AbstractMatcher<T> implements Matcher<T> {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.core.intercept.Matcher#or(org.exxlabs.jgentle.core.intercept.Matcher)
+	 * @see org.jgentleframework.core.intercept.Matcher#or(org.jgentleframework.core.intercept.Matcher)
 	 */
 	public Matcher<T> or(Matcher<T> other) {
 
@@ -84,7 +84,7 @@ public abstract class AbstractMatcher<T> implements Matcher<T> {
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.exxlabs.jgentle.core.intercept.Matcher#matches(java.lang.Object)
+		 * @see org.jgentleframework.core.intercept.Matcher#matches(java.lang.Object)
 		 */
 		public boolean matches(T t) {
 
@@ -166,7 +166,7 @@ public abstract class AbstractMatcher<T> implements Matcher<T> {
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.exxlabs.jgentle.core.intercept.Matcher#matches(java.lang.Object)
+		 * @see org.jgentleframework.core.intercept.Matcher#matches(java.lang.Object)
 		 */
 		public boolean matches(T t) {
 

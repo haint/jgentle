@@ -86,7 +86,7 @@ class TrueConstructorFilter extends
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.context.aop.RuntimeSupportFilter#isRuntime()
+	 * @see org.jgentleframework.context.aop.RuntimeSupportFilter#isRuntime()
 	 */
 	@Override
 	public boolean isRuntime() {
@@ -97,7 +97,7 @@ class TrueConstructorFilter extends
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.context.aop.ConstructorFilter#matches(org.exxlabs.jgentle.context.aop.support.MethodConstructorMatching)
+	 * @see org.jgentleframework.context.aop.ConstructorFilter#matches(org.jgentleframework.context.aop.support.MethodConstructorMatching)
 	 */
 	@Override
 	public boolean matches(MethodConstructorMatching<Constructor<?>> matching) {

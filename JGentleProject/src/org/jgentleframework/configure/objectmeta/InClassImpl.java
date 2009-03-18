@@ -51,7 +51,7 @@ public class InClassImpl extends ObjectAnnotatingImpl implements InClass {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.configure.injecting.objectmeta.InClass#in(java.lang
+	 * org.jgentleframework.configure.injecting.objectmeta.InClass#in(java.lang
 	 * .Class)
 	 */
 	@Override
@@ -84,7 +84,7 @@ public class InClassImpl extends ObjectAnnotatingImpl implements InClass {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.configure.injecting.objectmeta.InClass#id(java.lang
+	 * org.jgentleframework.configure.injecting.objectmeta.InClass#id(java.lang
 	 * .String)
 	 */
 	@Override
@@ -97,7 +97,7 @@ public class InClassImpl extends ObjectAnnotatingImpl implements InClass {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.configure.injecting.objectmeta.InClass#lazy_init(
+	 * org.jgentleframework.configure.injecting.objectmeta.InClass#lazy_init(
 	 * boolean)
 	 */
 	@Override
@@ -110,7 +110,7 @@ public class InClassImpl extends ObjectAnnotatingImpl implements InClass {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.configure.injecting.objectmeta.ObjectAnnotatingImpl
+	 * org.jgentleframework.configure.injecting.objectmeta.ObjectAnnotatingImpl
 	 * #getConstant()
 	 */
 	@Override

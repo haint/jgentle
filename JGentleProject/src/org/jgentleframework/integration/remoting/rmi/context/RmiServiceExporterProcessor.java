@@ -60,8 +60,8 @@ public class RmiServiceExporterProcessor implements
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.context.bean.InjectCreatorAware#setInjectCreator(
-	 * org.exxlabs.jgentle.context.injecting.Provider)
+	 * org.jgentleframework.context.bean.InjectCreatorAware#setInjectCreator(
+	 * org.jgentleframework.context.injecting.Provider)
 	 */
 	@Override
 	public synchronized void setProvider(Provider provider) {
@@ -72,10 +72,10 @@ public class RmiServiceExporterProcessor implements
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.core.reflection.annohandler.AnnotationPostProcessor
+	 * org.jgentleframework.core.reflection.annohandler.AnnotationPostProcessor
 	 * #after(java.lang.annotation.Annotation,
-	 * org.exxlabs.jgentle.core.reflection.metadata.AnnoMeta,
-	 * org.exxlabs.jgentle.core.reflection.metadata.AnnoMeta,
+	 * org.jgentleframework.core.reflection.metadata.AnnoMeta,
+	 * org.jgentleframework.core.reflection.metadata.AnnoMeta,
 	 * java.lang.annotation.Annotation[], java.lang.Object)
 	 */
 	@Override
@@ -113,9 +113,9 @@ public class RmiServiceExporterProcessor implements
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.core.reflection.annohandler.AnnotationPostProcessor
+	 * org.jgentleframework.core.reflection.annohandler.AnnotationPostProcessor
 	 * #before(java.lang.annotation.Annotation,
-	 * org.exxlabs.jgentle.core.reflection.metadata.AnnoMeta,
+	 * org.jgentleframework.core.reflection.metadata.AnnoMeta,
 	 * java.lang.annotation.Annotation[], java.lang.Object)
 	 */
 	@Override
@@ -129,10 +129,10 @@ public class RmiServiceExporterProcessor implements
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.core.reflection.annohandler.AnnotationPostProcessor
+	 * org.jgentleframework.core.reflection.annohandler.AnnotationPostProcessor
 	 * #catchException(java.lang.Exception, java.lang.annotation.Annotation,
-	 * org.exxlabs.jgentle.core.reflection.metadata.AnnoMeta,
-	 * org.exxlabs.jgentle.core.reflection.metadata.AnnoMeta,
+	 * org.jgentleframework.core.reflection.metadata.AnnoMeta,
+	 * org.jgentleframework.core.reflection.metadata.AnnoMeta,
 	 * java.lang.annotation.Annotation[], java.lang.Object)
 	 */
 	@Override
@@ -167,7 +167,7 @@ public class RmiServiceExporterProcessor implements
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.core.reflection.annohandler.PointStatus#isEnable()
+	 * org.jgentleframework.core.reflection.annohandler.PointStatus#isEnable()
 	 */
 	@Override
 	public synchronized boolean isEnable() {

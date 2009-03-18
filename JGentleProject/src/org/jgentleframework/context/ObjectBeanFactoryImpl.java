@@ -296,7 +296,7 @@ abstract class ObjectBeanFactoryImpl implements ObjectBeanFactory {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.context.injecting.ObjectBeanFactory#getProvider()
+	 * org.jgentleframework.context.injecting.ObjectBeanFactory#getProvider()
 	 */
 	@Override
 	public Provider getProvider() {
@@ -307,7 +307,7 @@ abstract class ObjectBeanFactoryImpl implements ObjectBeanFactory {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.context.injecting.ObjectBeanFactory#getServiceHandler
+	 * org.jgentleframework.context.injecting.ObjectBeanFactory#getServiceHandler
 	 * ()
 	 */
 	@Override
@@ -616,7 +616,7 @@ abstract class ObjectBeanFactoryImpl implements ObjectBeanFactory {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.context.injecting.Provider#load_ObjectConstant(org
+	 * org.jgentleframework.context.injecting.Provider#load_ObjectConstant(org
 	 * .exxlabs.jgentle.configure.injecting.objectmeta.ObjectConstant)
 	 */
 	@Override
@@ -645,7 +645,7 @@ abstract class ObjectBeanFactoryImpl implements ObjectBeanFactory {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.context.injecting.ObjectBeanFactory#createScopeInstance
+	 * org.jgentleframework.context.injecting.ObjectBeanFactory#createScopeInstance
 	 * (java.lang.String)
 	 */
 	public ScopeImplementation createScopeInstance(String scopeName) {
@@ -685,7 +685,7 @@ abstract class ObjectBeanFactoryImpl implements ObjectBeanFactory {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.context.injecting.ObjectBeanFactory#getRefInstance
+	 * org.jgentleframework.context.injecting.ObjectBeanFactory#getRefInstance
 	 * (java.lang.String)
 	 */
 	public abstract Object getRefInstance(String refInstance);
@@ -693,7 +693,7 @@ abstract class ObjectBeanFactoryImpl implements ObjectBeanFactory {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.context.injecting.ObjectBeanFactory#getAliasMap()
+	 * org.jgentleframework.context.injecting.ObjectBeanFactory#getAliasMap()
 	 */
 	@Override
 	public HashMap<String, Entry<Class<?>, Class<?>>> getAliasMap() {
@@ -704,7 +704,7 @@ abstract class ObjectBeanFactoryImpl implements ObjectBeanFactory {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.context.injecting.ObjectBeanFactory#getMapDirectList
+	 * org.jgentleframework.context.injecting.ObjectBeanFactory#getMapDirectList
 	 * ()
 	 */
 	@Override
@@ -716,7 +716,7 @@ abstract class ObjectBeanFactoryImpl implements ObjectBeanFactory {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.context.injecting.ObjectBeanFactory#getMappingList()
+	 * org.jgentleframework.context.injecting.ObjectBeanFactory#getMappingList()
 	 */
 	@Override
 	public HashMap<Class<?>, Class<?>> getMappingList() {
@@ -727,7 +727,7 @@ abstract class ObjectBeanFactoryImpl implements ObjectBeanFactory {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.context.injecting.ObjectBeanFactory#getScopeList()
+	 * org.jgentleframework.context.injecting.ObjectBeanFactory#getScopeList()
 	 */
 	@Override
 	public HashMap<String, ScopeInstance> getScopeList() {

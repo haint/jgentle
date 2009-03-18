@@ -84,7 +84,7 @@ class TrueClassFilter extends AbstractMatcher<ClassMatching> implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.context.aop.ClassFilter#matches(org.exxlabs.jgentle.context.aop.support.ClassMatching)
+	 * @see org.jgentleframework.context.aop.ClassFilter#matches(org.jgentleframework.context.aop.support.ClassMatching)
 	 */
 	@Override
 	public boolean matches(ClassMatching matching) {

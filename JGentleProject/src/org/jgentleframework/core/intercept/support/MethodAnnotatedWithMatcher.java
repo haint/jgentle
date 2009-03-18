@@ -71,7 +71,7 @@ public class MethodAnnotatedWithMatcher extends
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.context.aop.PointcutOfMethodFilter#getMethodFilter()
+	 * @see org.jgentleframework.context.aop.PointcutOfMethodFilter#getMethodFilter()
 	 */
 	@Override
 	public MethodFilter getMethodFilter() {
@@ -85,7 +85,7 @@ public class MethodAnnotatedWithMatcher extends
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.context.aop.Pointcut#getFilter()
+	 * @see org.jgentleframework.context.aop.Pointcut#getFilter()
 	 */
 	@Override
 	public Filter<MethodConstructorMatching<Method>> getFilter() {

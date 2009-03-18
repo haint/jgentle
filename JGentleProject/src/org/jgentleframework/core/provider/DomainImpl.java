@@ -71,7 +71,7 @@ class DomainImpl extends BeanContextSupport implements Domain {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.core.metadatahandling.aohhandling.provider.ServiceProvider#contains(org.exxlabs.jgentle.core.metadatahandling.aohhandling.provider.ObjectBeanService)
+	 * @see org.jgentleframework.core.metadatahandling.aohhandling.provider.ServiceProvider#contains(org.jgentleframework.core.metadatahandling.aohhandling.provider.ObjectBeanService)
 	 */
 	public boolean contains(ObjectBeanService obs) {
 
@@ -81,7 +81,7 @@ class DomainImpl extends BeanContextSupport implements Domain {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.core.metadatahandling.aohhandling.provider.ServiceProvider#containsAlias(java.lang.String)
+	 * @see org.jgentleframework.core.metadatahandling.aohhandling.provider.ServiceProvider#containsAlias(java.lang.String)
 	 */
 	@Override
 	public boolean containsAlias(String alias) {
@@ -92,7 +92,7 @@ class DomainImpl extends BeanContextSupport implements Domain {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.core.metadatahandling.aohhandling.provider.ServiceProvider#containsServiceClass(java.lang.Class)
+	 * @see org.jgentleframework.core.metadatahandling.aohhandling.provider.ServiceProvider#containsServiceClass(java.lang.Class)
 	 */
 	@Override
 	public boolean containsServiceClass(
@@ -104,7 +104,7 @@ class DomainImpl extends BeanContextSupport implements Domain {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.core.metadatahandling.aohhandling.provider.ServiceProvider#getAliasRegistered()
+	 * @see org.jgentleframework.core.metadatahandling.aohhandling.provider.ServiceProvider#getAliasRegistered()
 	 */
 	@Override
 	public HashMap<String, Class<? extends ServiceClass>> getAliasRegistered() {
@@ -115,7 +115,7 @@ class DomainImpl extends BeanContextSupport implements Domain {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.core.metadatahandling.aohhandling.provider.ServiceProvider#getCurrentServiceSelectors(java.beans.beancontext.BeanContextServices,
+	 * @see org.jgentleframework.core.metadatahandling.aohhandling.provider.ServiceProvider#getCurrentServiceSelectors(java.beans.beancontext.BeanContextServices,
 	 *      java.lang.Class)
 	 */
 	@SuppressWarnings("unchecked")
@@ -130,7 +130,7 @@ class DomainImpl extends BeanContextSupport implements Domain {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.core.metadatahandling.aohhandling.provider.ServiceProvider#getDefManager()
+	 * @see org.jgentleframework.core.metadatahandling.aohhandling.provider.ServiceProvider#getDefManager()
 	 */
 	@Override
 	public DefinitionManager getDefManager() {
@@ -141,7 +141,7 @@ class DomainImpl extends BeanContextSupport implements Domain {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.core.metadatahandling.aohhandling.provider.ServiceProvider#getDomainName()
+	 * @see org.jgentleframework.core.metadatahandling.aohhandling.provider.ServiceProvider#getDomainName()
 	 */
 	public String getDomainName() {
 
@@ -151,7 +151,7 @@ class DomainImpl extends BeanContextSupport implements Domain {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.core.metadatahandling.aohhandling.provider.ServiceProvider#getRegisteredServiceList()
+	 * @see org.jgentleframework.core.metadatahandling.aohhandling.provider.ServiceProvider#getRegisteredServiceList()
 	 */
 	@Override
 	public HashMap<Class<? extends ServiceClass>, ObjectBeanService> getRegisteredServiceList() {
@@ -162,7 +162,7 @@ class DomainImpl extends BeanContextSupport implements Domain {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.core.metadatahandling.aohhandling.provider.ServiceProvider#getService(org.exxlabs.jgentle.configure.injecting.InjectCreator,
+	 * @see org.jgentleframework.core.metadatahandling.aohhandling.provider.ServiceProvider#getService(org.jgentleframework.configure.injecting.InjectCreator,
 	 *      java.beans.beancontext.BeanContextServices, java.lang.Object,
 	 *      java.lang.Class, java.lang.Object)
 	 */
@@ -189,7 +189,7 @@ class DomainImpl extends BeanContextSupport implements Domain {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.core.metadatahandling.aohhandling.provider.ServiceProvider#getService(org.exxlabs.jgentle.configure.injecting.InjectCreator,
+	 * @see org.jgentleframework.core.metadatahandling.aohhandling.provider.ServiceProvider#getService(org.jgentleframework.configure.injecting.InjectCreator,
 	 *      java.beans.beancontext.BeanContextServices, java.lang.Object,
 	 *      java.lang.String, java.lang.Object)
 	 */
@@ -212,7 +212,7 @@ class DomainImpl extends BeanContextSupport implements Domain {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.core.metadatahandling.aohhandling.provider.ServiceProvider#getServiceClass(java.lang.String)
+	 * @see org.jgentleframework.core.metadatahandling.aohhandling.provider.ServiceProvider#getServiceClass(java.lang.String)
 	 */
 	@Override
 	public Class<? extends ServiceClass> getServiceClass(String alias) {
@@ -229,7 +229,7 @@ class DomainImpl extends BeanContextSupport implements Domain {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.core.provider.Domain#getServiceInstance(java.lang.Class,
+	 * @see org.jgentleframework.core.provider.Domain#getServiceInstance(java.lang.Class,
 	 *      java.beans.beancontext.BeanContextServices)
 	 */
 	@Override
@@ -307,7 +307,7 @@ class DomainImpl extends BeanContextSupport implements Domain {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.core.metadatahandling.aohhandling.provider.ServiceProvider#isEmpty()
+	 * @see org.jgentleframework.core.metadatahandling.aohhandling.provider.ServiceProvider#isEmpty()
 	 */
 	public boolean isEmpty() {
 
@@ -317,7 +317,7 @@ class DomainImpl extends BeanContextSupport implements Domain {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.core.metadatahandling.aohhandling.provider.ServiceProvider#isServiceClassRegistered(java.lang.Class)
+	 * @see org.jgentleframework.core.metadatahandling.aohhandling.provider.ServiceProvider#isServiceClassRegistered(java.lang.Class)
 	 */
 	public boolean isServiceClassRegistered(
 			Class<? extends ServiceClass> serviceClass) {
@@ -328,7 +328,7 @@ class DomainImpl extends BeanContextSupport implements Domain {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.core.metadatahandling.aohhandling.provider.ServiceProvider#iterator()
+	 * @see org.jgentleframework.core.metadatahandling.aohhandling.provider.ServiceProvider#iterator()
 	 */
 	@SuppressWarnings("unchecked")
 	public Iterator<ObjectBeanService> iteratorService() {
@@ -339,7 +339,7 @@ class DomainImpl extends BeanContextSupport implements Domain {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.core.metadatahandling.aohhandling.provider.ServiceProvider#registerService(java.lang.Class,
+	 * @see org.jgentleframework.core.metadatahandling.aohhandling.provider.ServiceProvider#registerService(java.lang.Class,
 	 *      java.lang.Class, java.beans.beancontext.BeanContextServices)
 	 */
 	@Override
@@ -352,7 +352,7 @@ class DomainImpl extends BeanContextSupport implements Domain {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.core.metadatahandling.aohhandling.provider.ServiceProvider#registerService(java.lang.Class,
+	 * @see org.jgentleframework.core.metadatahandling.aohhandling.provider.ServiceProvider#registerService(java.lang.Class,
 	 *      java.beans.beancontext.BeanContextServices, java.lang.Object[])
 	 */
 	@Override
@@ -366,7 +366,7 @@ class DomainImpl extends BeanContextSupport implements Domain {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.core.metadatahandling.aohhandling.provider.ServiceProvider#registerService(org.exxlabs.jgentle.configure.injecting.InjectCreator,
+	 * @see org.jgentleframework.core.metadatahandling.aohhandling.provider.ServiceProvider#registerService(org.jgentleframework.configure.injecting.InjectCreator,
 	 *      java.lang.Class, java.lang.Class,
 	 *      java.beans.beancontext.BeanContextServices)
 	 */
@@ -476,7 +476,7 @@ class DomainImpl extends BeanContextSupport implements Domain {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.core.metadatahandling.aohhandling.provider.ServiceProvider#releaseService(java.beans.beancontext.BeanContextServices,
+	 * @see org.jgentleframework.core.metadatahandling.aohhandling.provider.ServiceProvider#releaseService(java.beans.beancontext.BeanContextServices,
 	 *      java.lang.Object, java.lang.Object)
 	 */
 	@Override
@@ -489,7 +489,7 @@ class DomainImpl extends BeanContextSupport implements Domain {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.core.metadatahandling.aohhandling.provider.ServiceProvider#setDomainName(java.lang.String)
+	 * @see org.jgentleframework.core.metadatahandling.aohhandling.provider.ServiceProvider#setDomainName(java.lang.String)
 	 */
 	public void setDomainName(String domainName) {
 
@@ -499,7 +499,7 @@ class DomainImpl extends BeanContextSupport implements Domain {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.core.metadatahandling.aohhandling.provider.ServiceProvider#unregisterService(java.beans.beancontext.BeanContextServices,
+	 * @see org.jgentleframework.core.metadatahandling.aohhandling.provider.ServiceProvider#unregisterService(java.beans.beancontext.BeanContextServices,
 	 *      java.lang.Class)
 	 */
 	public synchronized <T extends ServiceClass> ObjectBeanService unregisterService(
@@ -526,7 +526,7 @@ class DomainImpl extends BeanContextSupport implements Domain {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.core.metadatahandling.aohhandling.provider.ServiceProvider#unregisterService(java.beans.beancontext.BeanContextServices,
+	 * @see org.jgentleframework.core.metadatahandling.aohhandling.provider.ServiceProvider#unregisterService(java.beans.beancontext.BeanContextServices,
 	 *      java.lang.String)
 	 */
 	public synchronized ObjectBeanService unregisterService(

@@ -58,7 +58,7 @@ public class BasicMethodConstructorMatchingAspectPair extends
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.context.aop.support.MethodConstructorMatching#getArgs()
+	 * @see org.jgentleframework.context.aop.support.MethodConstructorMatching#getArgs()
 	 */
 	@Override
 	public Object[] getArgs() {
@@ -69,7 +69,7 @@ public class BasicMethodConstructorMatchingAspectPair extends
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.context.aop.support.MethodConstructorMatching#getElement()
+	 * @see org.jgentleframework.context.aop.support.MethodConstructorMatching#getElement()
 	 */
 	@Override
 	public Method getElement() {
@@ -80,7 +80,7 @@ public class BasicMethodConstructorMatchingAspectPair extends
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.context.aop.support.ClassMatching#getTargetClass()
+	 * @see org.jgentleframework.context.aop.support.ClassMatching#getTargetClass()
 	 */
 	@Override
 	public Class<?> getTargetClass() {
@@ -91,7 +91,7 @@ public class BasicMethodConstructorMatchingAspectPair extends
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.context.aop.support.Matching#getTargetObject()
+	 * @see org.jgentleframework.context.aop.support.Matching#getTargetObject()
 	 */
 	@Override
 	public Object getTargetObject() {

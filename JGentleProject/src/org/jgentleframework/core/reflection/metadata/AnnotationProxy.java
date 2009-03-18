@@ -84,7 +84,7 @@ class AnnotationProxy implements InvocationHandler, SetValueOfAnnotation {
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.core.reflection.metadata.SetValueOfAnnotation#
+	 * @seeorg.jgentleframework.core.reflection.metadata.SetValueOfAnnotation#
 	 * getDefinition()
 	 */
 	@Override
@@ -128,7 +128,7 @@ class AnnotationProxy implements InvocationHandler, SetValueOfAnnotation {
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.core.reflection.metadata.SetValueOfAnnotation#
+	 * @seeorg.jgentleframework.core.reflection.metadata.SetValueOfAnnotation#
 	 * setValueOfAnnotation(java.lang.String, java.lang.Object)
 	 */
 	@Override

@@ -185,7 +185,7 @@ class ObjectBindingConstantImpl implements ObjectBindingConstant {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.configure.injecting.objectmeta.ObjectBindingConstant
+	 * org.jgentleframework.configure.injecting.objectmeta.ObjectBindingConstant
 	 * #to(java.lang.Object[])
 	 */
 	@Override
@@ -230,7 +230,7 @@ class ObjectBindingConstantImpl implements ObjectBindingConstant {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.configure.injecting.objectMeta.ObjectBindingConstant
+	 * org.jgentleframework.configure.injecting.objectMeta.ObjectBindingConstant
 	 * #getInClass()
 	 */
 	@Override
@@ -242,7 +242,7 @@ class ObjectBindingConstantImpl implements ObjectBindingConstant {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.configure.injecting.objectMeta.ObjectBindingConstant
+	 * org.jgentleframework.configure.injecting.objectMeta.ObjectBindingConstant
 	 * #setInClass(java.lang.Class)
 	 */
 	@Override
@@ -254,7 +254,7 @@ class ObjectBindingConstantImpl implements ObjectBindingConstant {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.configure.injecting.objectMeta.ObjectBindingConstant
+	 * org.jgentleframework.configure.injecting.objectMeta.ObjectBindingConstant
 	 * #getID()
 	 */
 	@Override
@@ -266,7 +266,7 @@ class ObjectBindingConstantImpl implements ObjectBindingConstant {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.configure.injecting.objectMeta.ObjectBindingConstant
+	 * org.jgentleframework.configure.injecting.objectMeta.ObjectBindingConstant
 	 * #setID(java.lang.String)
 	 */
 	@Override
@@ -278,7 +278,7 @@ class ObjectBindingConstantImpl implements ObjectBindingConstant {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.configure.injecting.objectmeta.ObjectBindingConstant
+	 * org.jgentleframework.configure.injecting.objectmeta.ObjectBindingConstant
 	 * #getScope()
 	 */
 	@Override
@@ -290,8 +290,8 @@ class ObjectBindingConstantImpl implements ObjectBindingConstant {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.configure.injecting.objectmeta.ObjectBindingConstant
-	 * #setScope(org.exxlabs.jgentle.context.injecting.scope.ScopeInstance)
+	 * org.jgentleframework.configure.injecting.objectmeta.ObjectBindingConstant
+	 * #setScope(org.jgentleframework.context.injecting.scope.ScopeInstance)
 	 */
 	@Override
 	public void setScope(ScopeInstance scope) {
@@ -315,7 +315,7 @@ class ObjectBindingConstantImpl implements ObjectBindingConstant {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.configure.injecting.objectmeta.ObjectBindingConstant
+	 * org.jgentleframework.configure.injecting.objectmeta.ObjectBindingConstant
 	 * #lazy_init(boolean)
 	 */
 	@Override
@@ -328,7 +328,7 @@ class ObjectBindingConstantImpl implements ObjectBindingConstant {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.configure.injecting.objectmeta.ObjectBindingConstant
+	 * org.jgentleframework.configure.injecting.objectmeta.ObjectBindingConstant
 	 * #isLazy_init()
 	 */
 	@Override
@@ -340,7 +340,7 @@ class ObjectBindingConstantImpl implements ObjectBindingConstant {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.configure.injecting.objectmeta.ObjectBindingConstant
+	 * org.jgentleframework.configure.injecting.objectmeta.ObjectBindingConstant
 	 * #setLazy_init(boolean)
 	 */
 	@Override
@@ -352,7 +352,7 @@ class ObjectBindingConstantImpl implements ObjectBindingConstant {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.configure.injecting.objectmeta.ObjectBindingConstant
+	 * org.jgentleframework.configure.injecting.objectmeta.ObjectBindingConstant
 	 * #getInjectedValueList()
 	 */
 	@Override
@@ -375,7 +375,7 @@ class ObjectBindingConstantImpl implements ObjectBindingConstant {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.configure.injecting.objectmeta.ObjectBindingConstant
+	 * org.jgentleframework.configure.injecting.objectmeta.ObjectBindingConstant
 	 * #getAnnotatedValueList()
 	 */
 	@Override

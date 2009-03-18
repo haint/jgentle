@@ -356,7 +356,7 @@ public abstract class AbstractBeanFactory extends AbstractLoadingFactory
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.context.injecting.IAbstractBeanFactory#getBeanInstance
+	 * org.jgentleframework.context.injecting.IAbstractBeanFactory#getBeanInstance
 	 * (java.lang.Class, java.lang.Class, java.lang.String, java.lang.String)
 	 */
 	@Override
@@ -381,9 +381,9 @@ public abstract class AbstractBeanFactory extends AbstractLoadingFactory
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.context.injecting.IAbstractBeanFactory#getBeanInstance
+	 * org.jgentleframework.context.injecting.IAbstractBeanFactory#getBeanInstance
 	 * (java.lang.Class,
-	 * org.exxlabs.jgentle.core.reflection.metadata.Definition)
+	 * org.jgentleframework.core.reflection.metadata.Definition)
 	 */
 	@Override
 	public Object getBeanInstance(Class<?> type, Definition definition) {
@@ -468,7 +468,7 @@ public abstract class AbstractBeanFactory extends AbstractLoadingFactory
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.context.injecting.IAbstractBeanFactory#
+	 * @seeorg.jgentleframework.context.injecting.IAbstractBeanFactory#
 	 * getDefinitionManager()
 	 */
 	@Override
@@ -480,7 +480,7 @@ public abstract class AbstractBeanFactory extends AbstractLoadingFactory
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.context.injecting.IAbstractBeanFactory#getScopeController
+	 * org.jgentleframework.context.injecting.IAbstractBeanFactory#getScopeController
 	 * ()
 	 */
 	@Override
@@ -492,7 +492,7 @@ public abstract class AbstractBeanFactory extends AbstractLoadingFactory
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.context.injecting.ObjectBeanFactory#getServiceHandler
+	 * org.jgentleframework.context.injecting.ObjectBeanFactory#getServiceHandler
 	 * ()
 	 */
 	@Override
@@ -504,7 +504,7 @@ public abstract class AbstractBeanFactory extends AbstractLoadingFactory
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.context.injecting.IAbstractBeanFactory#isContainsConstant
+	 * org.jgentleframework.context.injecting.IAbstractBeanFactory#isContainsConstant
 	 * (java.lang.String)
 	 */
 	@Override
@@ -520,7 +520,7 @@ public abstract class AbstractBeanFactory extends AbstractLoadingFactory
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.context.injecting.IAbstractBeanFactory#
+	 * @seeorg.jgentleframework.context.injecting.IAbstractBeanFactory#
 	 * isContainsMappingName(java.lang.String)
 	 */
 	@Override
@@ -537,7 +537,7 @@ public abstract class AbstractBeanFactory extends AbstractLoadingFactory
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.context.injecting.IAbstractBeanFactory#isPrototype
+	 * org.jgentleframework.context.injecting.IAbstractBeanFactory#isPrototype
 	 * (java.lang.Class)
 	 */
 	@Override
@@ -553,7 +553,7 @@ public abstract class AbstractBeanFactory extends AbstractLoadingFactory
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.context.injecting.IAbstractBeanFactory#isPrototype
+	 * org.jgentleframework.context.injecting.IAbstractBeanFactory#isPrototype
 	 * (java.lang.String)
 	 */
 	@Override
@@ -604,7 +604,7 @@ public abstract class AbstractBeanFactory extends AbstractLoadingFactory
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.context.injecting.IAbstractBeanFactory#isSingleton
+	 * org.jgentleframework.context.injecting.IAbstractBeanFactory#isSingleton
 	 * (java.lang.Class)
 	 */
 	@Override
@@ -620,7 +620,7 @@ public abstract class AbstractBeanFactory extends AbstractLoadingFactory
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.context.injecting.IAbstractBeanFactory#isSingleton
+	 * org.jgentleframework.context.injecting.IAbstractBeanFactory#isSingleton
 	 * (java.lang.Object)
 	 */
 	@Override
@@ -640,7 +640,7 @@ public abstract class AbstractBeanFactory extends AbstractLoadingFactory
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.context.injecting.IAbstractBeanFactory#isSingleton
+	 * org.jgentleframework.context.injecting.IAbstractBeanFactory#isSingleton
 	 * (java.lang.String)
 	 */
 	@Override

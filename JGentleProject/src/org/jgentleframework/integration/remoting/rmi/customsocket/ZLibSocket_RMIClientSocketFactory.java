@@ -18,6 +18,7 @@
 package org.jgentleframework.integration.remoting.rmi.customsocket;
 
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.net.Socket;
 import java.rmi.server.RMIClientSocketFactory;
@@ -47,7 +48,7 @@ public class ZLibSocket_RMIClientSocketFactory implements
 															.hashCode();
 
 	/** The log. */
-	private final Log			log					= LogFactory
+	private transient Log		log					= LogFactory
 															.getLog(getClass());
 
 	/*
@@ -88,5 +89,19 @@ public class ZLibSocket_RMIClientSocketFactory implements
 	public int hashCode() {
 
 		return hashCode;
+	}
+
+	/**
+	 * Overrides default readObject method.
+	 * 
+	 * @param stream
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 */
+	private void readObject(ObjectInputStream stream) throws IOException,
+			ClassNotFoundException {
+
+		stream.defaultReadObject();
+		log = LogFactory.getLog(getClass());
 	}
 }

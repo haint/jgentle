@@ -158,7 +158,7 @@ public class ObjectAttachImpl<T> implements ObjectAttach<T> {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.configure.injecting.objectmeta.ObjectAttach#countEntry
+	 * org.jgentleframework.configure.injecting.objectmeta.ObjectAttach#countEntry
 	 * ()
 	 */
 	@Override
@@ -170,7 +170,7 @@ public class ObjectAttachImpl<T> implements ObjectAttach<T> {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.configure.injecting.objectMeta.ObjectAttach#getName()
+	 * org.jgentleframework.configure.injecting.objectMeta.ObjectAttach#getName()
 	 */
 	@Override
 	public synchronized String getName() {
@@ -182,7 +182,7 @@ public class ObjectAttachImpl<T> implements ObjectAttach<T> {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.configure.injecting.objectMeta.ObjectAttach#getScopeList
+	 * org.jgentleframework.configure.injecting.objectMeta.ObjectAttach#getScopeList
 	 * ()
 	 */
 	@Override
@@ -205,7 +205,7 @@ public class ObjectAttachImpl<T> implements ObjectAttach<T> {
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.configure.injecting.objectMeta.ObjectAttach#
+	 * @seeorg.jgentleframework.configure.injecting.objectMeta.ObjectAttach#
 	 * isEmptySourceList()
 	 */
 	@Override
@@ -217,7 +217,7 @@ public class ObjectAttachImpl<T> implements ObjectAttach<T> {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.configure.injecting.objectMeta.ObjectAttach#isNameBool
+	 * org.jgentleframework.configure.injecting.objectMeta.ObjectAttach#isNameBool
 	 * ()
 	 */
 	@Override
@@ -254,7 +254,7 @@ public class ObjectAttachImpl<T> implements ObjectAttach<T> {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.configure.injecting.objectMeta.ObjectAttach#to(java
+	 * org.jgentleframework.configure.injecting.objectMeta.ObjectAttach#to(java
 	 * .lang.Class)
 	 */
 	@Override
@@ -266,7 +266,7 @@ public class ObjectAttachImpl<T> implements ObjectAttach<T> {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.configure.injecting.objectMeta.ObjectAttach#to(java
+	 * org.jgentleframework.configure.injecting.objectMeta.ObjectAttach#to(java
 	 * .lang.Class<?>[])
 	 */
 	@Override
@@ -320,7 +320,7 @@ public class ObjectAttachImpl<T> implements ObjectAttach<T> {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.configure.injecting.objectMeta.ObjectAttach#to(java
+	 * org.jgentleframework.configure.injecting.objectMeta.ObjectAttach#to(java
 	 * .lang.String[])
 	 */
 	@Override
@@ -342,7 +342,7 @@ public class ObjectAttachImpl<T> implements ObjectAttach<T> {
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.configure.injecting.objectMeta.ObjectAttach#
+	 * @seeorg.jgentleframework.configure.injecting.objectMeta.ObjectAttach#
 	 * toDestinationClass(java.lang.Class, java.lang.Class)
 	 */
 	@Override
@@ -370,7 +370,7 @@ public class ObjectAttachImpl<T> implements ObjectAttach<T> {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.configure.objectmeta.ObjectAttach#named(java.lang
+	 * org.jgentleframework.configure.objectmeta.ObjectAttach#named(java.lang
 	 * .String)
 	 */
 	@Override
@@ -389,7 +389,7 @@ public class ObjectAttachImpl<T> implements ObjectAttach<T> {
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.configure.injecting.objectMeta.ObjectAttach#
+	 * @seeorg.jgentleframework.configure.injecting.objectMeta.ObjectAttach#
 	 * getMappingEntrySet()
 	 */
 	@Override
@@ -401,7 +401,7 @@ public class ObjectAttachImpl<T> implements ObjectAttach<T> {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.configure.injecting.objectmeta.IPresentLoadingClass
+	 * org.jgentleframework.configure.injecting.objectmeta.IPresentLoadingClass
 	 * #getPresentLoadingClasses()
 	 */
 	@Override
@@ -422,7 +422,7 @@ public class ObjectAttachImpl<T> implements ObjectAttach<T> {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.configure.injecting.objectmeta.ObjectAttach#lazy_init
+	 * org.jgentleframework.configure.injecting.objectmeta.ObjectAttach#lazy_init
 	 * (boolean)
 	 */
 	@Override

@@ -63,7 +63,7 @@ public class TypeAnnotatedWithMatcher extends
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.context.aop.PointcutOfClassFilter#getClassFilter()
+	 * @see org.jgentleframework.context.aop.PointcutOfClassFilter#getClassFilter()
 	 */
 	@Override
 	public ClassFilter getClassFilter() {
@@ -74,7 +74,7 @@ public class TypeAnnotatedWithMatcher extends
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.context.aop.Pointcut#getFilter()
+	 * @see org.jgentleframework.context.aop.Pointcut#getFilter()
 	 */
 	@Override
 	public Filter<ClassMatching> getFilter() {

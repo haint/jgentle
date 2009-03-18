@@ -40,7 +40,7 @@ public class BindingConfigImpl extends AbstractBindingConfig implements
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.configure.jgentle.BindingConfig#getBeanClassList()
+	 * org.jgentleframework.configure.jgentle.BindingConfig#getBeanClassList()
 	 */
 	@Override
 	public ArrayList<Class<?>> getBeanClassList() {
@@ -51,7 +51,7 @@ public class BindingConfigImpl extends AbstractBindingConfig implements
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.configure.jgentle.BindingConfig#getObjBindingConstantList
+	 * org.jgentleframework.configure.jgentle.BindingConfig#getObjBindingConstantList
 	 * ()
 	 */
 	@Override
@@ -63,7 +63,7 @@ public class BindingConfigImpl extends AbstractBindingConfig implements
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.configure.jgentle.BindingConfig#getObjectAttachList()
+	 * org.jgentleframework.configure.jgentle.BindingConfig#getObjectAttachList()
 	 */
 	@Override
 	public ArrayList<ObjectAttach<?>> getObjectAttachList() {
@@ -74,7 +74,7 @@ public class BindingConfigImpl extends AbstractBindingConfig implements
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.configure.jgentle.BindingConfig#getObjectConstantList
+	 * org.jgentleframework.configure.jgentle.BindingConfig#getObjectConstantList
 	 * ()
 	 */
 	@Override
@@ -96,7 +96,7 @@ public class BindingConfigImpl extends AbstractBindingConfig implements
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.configure.jgentle.BindingConfig#ref(java.lang.String)
+	 * org.jgentleframework.configure.jgentle.BindingConfig#ref(java.lang.String)
 	 */
 	@Override
 	public String ref(String ID) {
@@ -107,7 +107,7 @@ public class BindingConfigImpl extends AbstractBindingConfig implements
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.configure.jgentle.BindingConfig#refConstant(java.
+	 * org.jgentleframework.configure.jgentle.BindingConfig#refConstant(java.
 	 * lang.String)
 	 */
 	@Override
@@ -118,7 +118,7 @@ public class BindingConfigImpl extends AbstractBindingConfig implements
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.exxlabs.jgentle.configure.jgentle.BindingConfig#refMapping()
+	 * @see org.jgentleframework.configure.jgentle.BindingConfig#refMapping()
 	 */
 	@Override
 	public String refMapping() {
@@ -129,7 +129,7 @@ public class BindingConfigImpl extends AbstractBindingConfig implements
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.configure.jgentle.BindingConfig#refMapping(java.lang
+	 * org.jgentleframework.configure.jgentle.BindingConfig#refMapping(java.lang
 	 * .Class)
 	 */
 	@Override
@@ -141,7 +141,7 @@ public class BindingConfigImpl extends AbstractBindingConfig implements
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.configure.jgentle.BindingConfig#refMapping(java.lang
+	 * org.jgentleframework.configure.jgentle.BindingConfig#refMapping(java.lang
 	 * .String)
 	 */
 	@Override

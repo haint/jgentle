@@ -69,7 +69,7 @@ public abstract class AbstractDefinitionController extends
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.core.reflection.aohreflect.IAnnotationVisitor#addAnnotationBeanProcessor(org.exxlabs.jgentle.core.reflection.annohandler.AnnotationBeanProcessor)
+	 * @see org.jgentleframework.core.reflection.aohreflect.IAnnotationVisitor#addAnnotationBeanProcessor(org.jgentleframework.core.reflection.annohandler.AnnotationBeanProcessor)
 	 */
 	@Override
 	@SuppressWarnings("unchecked")
@@ -102,8 +102,8 @@ public abstract class AbstractDefinitionController extends
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.core.reflection.aohreflect.IAnnotationVisitor#addAnnotationBeanProcessor(java.lang.Class,
-	 *      org.exxlabs.jgentle.core.reflection.annohandler.AnnotationBeanProcessor)
+	 * @see org.jgentleframework.core.reflection.aohreflect.IAnnotationVisitor#addAnnotationBeanProcessor(java.lang.Class,
+	 *      org.jgentleframework.core.reflection.annohandler.AnnotationBeanProcessor)
 	 */
 	@Override
 	public <T extends Annotation> AnnotationBeanProcessor<?> addAnnotationBeanProcessor(
@@ -115,7 +115,7 @@ public abstract class AbstractDefinitionController extends
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.core.reflection.aohreflect.IAnnotationVisitor#addDefinitionPostProcessor(java.lang.Class)
+	 * @see org.jgentleframework.core.reflection.aohreflect.IAnnotationVisitor#addDefinitionPostProcessor(java.lang.Class)
 	 */
 	@Override
 	public void addDefinitionPostProcessor(
@@ -127,7 +127,7 @@ public abstract class AbstractDefinitionController extends
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.core.reflection.aohreflect.IAnnotationVisitor#addDefinitionPostProcessor(org.exxlabs.jgentle.core.reflection.aohreflect.DefinitionPostProcessor)
+	 * @see org.jgentleframework.core.reflection.aohreflect.IAnnotationVisitor#addDefinitionPostProcessor(org.jgentleframework.core.reflection.aohreflect.DefinitionPostProcessor)
 	 */
 	@Override
 	public void addDefinitionPostProcessor(DefinitionPostProcessor dpp) {
@@ -138,7 +138,7 @@ public abstract class AbstractDefinitionController extends
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.core.metadatahandling.aohhandling.defhandling.DefinitionManager#getAnnotationRegister()
+	 * @see org.jgentleframework.core.metadatahandling.aohhandling.defhandling.DefinitionManager#getAnnotationRegister()
 	 */
 	@Override
 	public AnnotationRegister getAnnotationRegister() {
@@ -149,7 +149,7 @@ public abstract class AbstractDefinitionController extends
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.core.reflection.aohreflect.IAnnotationVisitor#getDefinitionPostProcessor(int)
+	 * @see org.jgentleframework.core.reflection.aohreflect.IAnnotationVisitor#getDefinitionPostProcessor(int)
 	 */
 	@Override
 	public DefinitionPostProcessor getDefinitionPostProcessor(int index) {
@@ -160,7 +160,7 @@ public abstract class AbstractDefinitionController extends
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.core.metadatahandling.aohhandling.defhandling.DefinitionManager#getVisitorHandler()
+	 * @see org.jgentleframework.core.metadatahandling.aohhandling.defhandling.DefinitionManager#getVisitorHandler()
 	 */
 	@Override
 	public IAnnotationVisitor getVisitorHandler() {
@@ -171,7 +171,7 @@ public abstract class AbstractDefinitionController extends
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.core.reflection.aohreflect.IAnnotationVisitor#removeAnnotationBeanProcessor(java.lang.Class)
+	 * @see org.jgentleframework.core.reflection.aohreflect.IAnnotationVisitor#removeAnnotationBeanProcessor(java.lang.Class)
 	 */
 	@Override
 	public <T extends Annotation> AnnotationBeanProcessor<?> removeAnnotationBeanProcessor(
@@ -183,7 +183,7 @@ public abstract class AbstractDefinitionController extends
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.core.reflection.aohreflect.IAnnotationVisitor#removeDefinitionPostProcessor(org.exxlabs.jgentle.core.reflection.aohreflect.DefinitionPostProcessor)
+	 * @see org.jgentleframework.core.reflection.aohreflect.IAnnotationVisitor#removeDefinitionPostProcessor(org.jgentleframework.core.reflection.aohreflect.DefinitionPostProcessor)
 	 */
 	@Override
 	public boolean removeDefinitionPostProcessor(DefinitionPostProcessor dpp) {
@@ -194,7 +194,7 @@ public abstract class AbstractDefinitionController extends
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.core.reflection.aohreflect.IAnnotationVisitor#removeDefinitionPostProcessor(int)
+	 * @see org.jgentleframework.core.reflection.aohreflect.IAnnotationVisitor#removeDefinitionPostProcessor(int)
 	 */
 	@Override
 	public DefinitionPostProcessor removeDefinitionPostProcessor(int index) {
@@ -205,8 +205,8 @@ public abstract class AbstractDefinitionController extends
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.core.reflection.aohreflect.IAnnotationVisitor#replaceAnnotationBeanProcessor(org.exxlabs.jgentle.core.reflection.annohandler.AnnotationBeanProcessor,
-	 *      org.exxlabs.jgentle.core.reflection.annohandler.AnnotationBeanProcessor)
+	 * @see org.jgentleframework.core.reflection.aohreflect.IAnnotationVisitor#replaceAnnotationBeanProcessor(org.jgentleframework.core.reflection.annohandler.AnnotationBeanProcessor,
+	 *      org.jgentleframework.core.reflection.annohandler.AnnotationBeanProcessor)
 	 */
 	@Override
 	public <T extends Annotation> void replaceAnnotationBeanProcessor(
@@ -220,7 +220,7 @@ public abstract class AbstractDefinitionController extends
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.core.metadatahandling.aohhandling.defhandling.IDefinitionManager#setVisitorHandler(org.exxlabs.jgentle.core.reflection.aohreflect.AbsVisitorHandler)
+	 * @see org.jgentleframework.core.metadatahandling.aohhandling.defhandling.IDefinitionManager#setVisitorHandler(org.jgentleframework.core.reflection.aohreflect.AbsVisitorHandler)
 	 */
 	@Override
 	public void setVisitorHandler(AbstractVisitorHandler visitorHandler) {
@@ -231,8 +231,8 @@ public abstract class AbstractDefinitionController extends
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.core.reflection.aohreflect.IAnnotationVisitor#visit(java.lang.annotation.Annotation[],
-	 *      org.exxlabs.jgentle.core.reflection.metadata.AnnoMeta)
+	 * @see org.jgentleframework.core.reflection.aohreflect.IAnnotationVisitor#visit(java.lang.annotation.Annotation[],
+	 *      org.jgentleframework.core.reflection.metadata.AnnoMeta)
 	 */
 	@Override
 	public void visit(Annotation[] annoArray, AnnoMeta rootAnnoMeta) {

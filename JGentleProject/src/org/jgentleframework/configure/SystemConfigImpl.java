@@ -82,9 +82,9 @@ public class SystemConfigImpl extends AbstractConfigModule implements
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.configure.jgentle.SystemConfig#addAnnotationPostProcessor
+	 * org.jgentleframework.configure.jgentle.SystemConfig#addAnnotationPostProcessor
 	 * (java.lang.Class,
-	 * org.exxlabs.jgentle.core.reflection.annohandler.AnnotationPostProcessor)
+	 * org.jgentleframework.core.reflection.annohandler.AnnotationPostProcessor)
 	 */
 	@Override
 	@SuppressWarnings("unchecked")
@@ -100,7 +100,7 @@ public class SystemConfigImpl extends AbstractConfigModule implements
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.configure.jgentle.SystemConfig#addAnnotationPostProcessor
+	 * org.jgentleframework.configure.jgentle.SystemConfig#addAnnotationPostProcessor
 	 * (java.lang.Class, java.lang.Class)
 	 */
 	@Override
@@ -118,9 +118,9 @@ public class SystemConfigImpl extends AbstractConfigModule implements
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.configure.jgentle.SystemConfig#addDefinitionPostProcessor
+	 * org.jgentleframework.configure.jgentle.SystemConfig#addDefinitionPostProcessor
 	 * (java.lang.Class<? extends
-	 * org.exxlabs.jgentle.core.reflection.aohreflect.
+	 * org.jgentleframework.core.reflection.aohreflect.
 	 * DefinitionPostProcessor>[])
 	 */
 	@Override
@@ -139,9 +139,9 @@ public class SystemConfigImpl extends AbstractConfigModule implements
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.configure.jgentle.SystemConfig#addDefinitionPostProcessor
+	 * org.jgentleframework.configure.jgentle.SystemConfig#addDefinitionPostProcessor
 	 * (
-	 * org.exxlabs.jgentle.core.reflection.aohreflect.DefinitionPostProcessor[])
+	 * org.jgentleframework.core.reflection.aohreflect.DefinitionPostProcessor[])
 	 */
 	@Override
 	public void addDefinitionPostProcessor(DefinitionPostProcessor... dpps) {
@@ -156,7 +156,7 @@ public class SystemConfigImpl extends AbstractConfigModule implements
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.configure.jgentle.SystemConfig#bindCSC(java.lang.
+	 * org.jgentleframework.configure.jgentle.SystemConfig#bindCSC(java.lang.
 	 * Class)
 	 */
 	@Override
@@ -214,7 +214,7 @@ public class SystemConfigImpl extends AbstractConfigModule implements
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.exxlabs.jgentle.configure.jgentle.SystemConfig#getDPPList()
+	 * @see org.jgentleframework.configure.jgentle.SystemConfig#getDPPList()
 	 */
 	@Override
 	public List<DefinitionPostProcessor> getDPPList() {
@@ -234,7 +234,7 @@ public class SystemConfigImpl extends AbstractConfigModule implements
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.exxlabs.jgentle.configure.jgentle.SystemConfig#getOptionsList()
+	 * @see org.jgentleframework.configure.jgentle.SystemConfig#getOptionsList()
 	 */
 	@Override
 	public Map<String, Object> getOptionsList() {
@@ -334,7 +334,7 @@ public class SystemConfigImpl extends AbstractConfigModule implements
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.configure.jgentle.SystemConfig#initAnnotationConfig()
+	 * org.jgentleframework.configure.jgentle.SystemConfig#initAnnotationConfig()
 	 */
 	public void initAnnotationConfig() throws IllegalArgumentException,
 			IllegalAccessException, InvocationTargetException,
@@ -603,7 +603,7 @@ public class SystemConfigImpl extends AbstractConfigModule implements
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.configure.jgentle.SystemConfig#unbindCSC(java.lang
+	 * org.jgentleframework.configure.jgentle.SystemConfig#unbindCSC(java.lang
 	 * .Class)
 	 */
 	@Override
@@ -621,7 +621,7 @@ public class SystemConfigImpl extends AbstractConfigModule implements
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.configure.jgentle.SystemConfig#usingConfig(java.lang
+	 * org.jgentleframework.configure.jgentle.SystemConfig#usingConfig(java.lang
 	 * .annotation.Annotation)
 	 */
 	@Override

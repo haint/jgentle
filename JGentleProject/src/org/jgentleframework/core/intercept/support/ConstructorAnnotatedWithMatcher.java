@@ -72,7 +72,7 @@ public class ConstructorAnnotatedWithMatcher
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.context.aop.Pointcut#getConstructorFilter()
+	 * @see org.jgentleframework.context.aop.Pointcut#getConstructorFilter()
 	 */
 	@Override
 	public ConstructorFilter getConstructorFilter() {
@@ -86,7 +86,7 @@ public class ConstructorAnnotatedWithMatcher
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.context.aop.Pointcut#getFilter()
+	 * @see org.jgentleframework.context.aop.Pointcut#getFilter()
 	 */
 	@Override
 	public Filter<MethodConstructorMatching<Constructor<?>>> getFilter() {

@@ -33,7 +33,7 @@ public abstract class StaticallySupportFilter<T extends Matching> implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.context.aop.RuntimeSupportFilter#isRuntime()
+	 * @see org.jgentleframework.context.aop.RuntimeSupportFilter#isRuntime()
 	 */
 	@Override
 	public boolean isRuntime() {

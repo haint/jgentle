@@ -52,7 +52,7 @@ public class DomainManagerImpl implements DomainManager {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.core.metadatahandling.aohhandling.provider.ServiceProviderManager#newDomain(java.lang.String)
+	 * @see org.jgentleframework.core.metadatahandling.aohhandling.provider.ServiceProviderManager#newDomain(java.lang.String)
 	 */
 	public synchronized void newDomain(String domain,
 			BeanContextSupport domainContext) throws JGentleException {
@@ -73,7 +73,7 @@ public class DomainManagerImpl implements DomainManager {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.core.metadatahandling.aohhandling.provider.ServiceProviderManager#getDomain(java.lang.String)
+	 * @see org.jgentleframework.core.metadatahandling.aohhandling.provider.ServiceProviderManager#getDomain(java.lang.String)
 	 */
 	public Domain getDomain(String domain) {
 
@@ -83,7 +83,7 @@ public class DomainManagerImpl implements DomainManager {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.core.metadatahandling.aohhandling.provider.ServiceProviderManager#removeDomain(java.lang.String)
+	 * @see org.jgentleframework.core.metadatahandling.aohhandling.provider.ServiceProviderManager#removeDomain(java.lang.String)
 	 */
 	public Domain removeDomain(String domain, BeanContextSupport domainContext) {
 
@@ -96,7 +96,7 @@ public class DomainManagerImpl implements DomainManager {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.core.metadatahandling.aohhandling.provider.ServiceProviderManager#containsDomain(java.lang.String)
+	 * @see org.jgentleframework.core.metadatahandling.aohhandling.provider.ServiceProviderManager#containsDomain(java.lang.String)
 	 */
 	public boolean containsDomain(String domain) {
 
@@ -106,7 +106,7 @@ public class DomainManagerImpl implements DomainManager {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.core.metadatahandling.aohhandling.provider.ServiceProviderManager#containsDomain(org.exxlabs.jgentle.core.metadatahandling.aohhandling.provider.ServiceProvider)
+	 * @see org.jgentleframework.core.metadatahandling.aohhandling.provider.ServiceProviderManager#containsDomain(org.jgentleframework.core.metadatahandling.aohhandling.provider.ServiceProvider)
 	 */
 	public boolean containsDomain(Domain domain) {
 
@@ -116,7 +116,7 @@ public class DomainManagerImpl implements DomainManager {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.core.metadatahandling.aohhandling.provider.ServiceProviderManager#getDomainValues()
+	 * @see org.jgentleframework.core.metadatahandling.aohhandling.provider.ServiceProviderManager#getDomainValues()
 	 */
 	@Override
 	public Collection<Domain> getDomainValues() {
@@ -127,7 +127,7 @@ public class DomainManagerImpl implements DomainManager {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.core.provider.DomainManager#getServiceClass(java.lang.String)
+	 * @see org.jgentleframework.core.provider.DomainManager#getServiceClass(java.lang.String)
 	 */
 	@Override
 	public Class<? extends ServiceClass> getServiceClass(String alias) {

@@ -391,7 +391,7 @@ public class RmiExporterProxyFactoryBean implements FactoryBean, ProviderAware,
 							+ "object service bean of RMI exporter !",
 					new RmiExportingException());
 		}
-		else {
+		else if (objService != null && definition != null) {
 			prepareAttributes(objService, definition);
 		}
 		Map<String, Object> map = new HashMap<String, Object>();

@@ -36,7 +36,7 @@ public interface MethodIdentification extends MemberIdentification<Method> {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.general.reflection.MemberIdentification#setName(java.lang.String)
+	 * @see org.jgentleframework.general.reflection.MemberIdentification#setName(java.lang.String)
 	 */
 	public void setName(String name);
 

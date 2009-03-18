@@ -29,7 +29,7 @@ public abstract class AbstractDefinitionMatcher extends
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.core.intercept.AbstractMatcher#and(org.exxlabs.jgentle.core.intercept.Matcher)
+	 * @see org.jgentleframework.core.intercept.AbstractMatcher#and(org.jgentleframework.core.intercept.Matcher)
 	 */
 	@Override
 	public Matcher<Definition> and(final Matcher<Definition> other) {
@@ -40,7 +40,7 @@ public abstract class AbstractDefinitionMatcher extends
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.core.intercept.AbstractMatcher#or(org.exxlabs.jgentle.core.intercept.Matcher)
+	 * @see org.jgentleframework.core.intercept.AbstractMatcher#or(org.jgentleframework.core.intercept.Matcher)
 	 */
 	public Matcher<Definition> or(Matcher<Definition> other) {
 

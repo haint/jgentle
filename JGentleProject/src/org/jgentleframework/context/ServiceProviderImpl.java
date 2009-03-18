@@ -65,8 +65,8 @@ public class ServiceProviderImpl extends AbstractServiceManagement implements
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.context.ServiceProvider#addCSContext(java.lang.Class,
-	 * org.exxlabs.jgentle.context.ComponentServiceContext)
+	 * org.jgentleframework.context.ServiceProvider#addCSContext(java.lang.Class,
+	 * org.jgentleframework.context.ComponentServiceContext)
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
@@ -87,7 +87,7 @@ public class ServiceProviderImpl extends AbstractServiceManagement implements
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.exxlabs.jgentle.context.ServiceProvider#countCSC()
+	 * @see org.jgentleframework.context.ServiceProvider#countCSC()
 	 */
 	@Override
 	public int countCSC() {
@@ -97,7 +97,7 @@ public class ServiceProviderImpl extends AbstractServiceManagement implements
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.exxlabs.jgentle.context.ServiceProvider#cscValues()
+	 * @see org.jgentleframework.context.ServiceProvider#cscValues()
 	 */
 	@Override
 	public Collection<ComponentServiceContextType<Configurable>> cscValues() {
@@ -107,7 +107,7 @@ public class ServiceProviderImpl extends AbstractServiceManagement implements
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.exxlabs.jgentle.context.ServiceProvider#getCSCList()
+	 * @see org.jgentleframework.context.ServiceProvider#getCSCList()
 	 */
 	@Override
 	public HashMap<Class<?>, ComponentServiceContextType<Configurable>> getCSCList() {
@@ -118,7 +118,7 @@ public class ServiceProviderImpl extends AbstractServiceManagement implements
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.context.ServiceProvider#getCSContext(java.lang.Class)
+	 * org.jgentleframework.context.ServiceProvider#getCSContext(java.lang.Class)
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
@@ -137,7 +137,7 @@ public class ServiceProviderImpl extends AbstractServiceManagement implements
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.context.ServiceProvider#removeComponentServiceContext
+	 * org.jgentleframework.context.ServiceProvider#removeComponentServiceContext
 	 * (java.lang.Class)
 	 */
 	@SuppressWarnings("unchecked")

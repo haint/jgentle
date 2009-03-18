@@ -61,7 +61,7 @@ public class BasicParameterMatchingAspectPair extends MetadataController
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.context.aop.support.ParameterMatching#getArgs()
+	 * @see org.jgentleframework.context.aop.support.ParameterMatching#getArgs()
 	 */
 	@Override
 	public Object[] getArgs() {
@@ -72,7 +72,7 @@ public class BasicParameterMatchingAspectPair extends MetadataController
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.context.aop.support.ParameterMatching#getElement()
+	 * @see org.jgentleframework.context.aop.support.ParameterMatching#getElement()
 	 */
 	@Override
 	public Method getElement() {
@@ -83,7 +83,7 @@ public class BasicParameterMatchingAspectPair extends MetadataController
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.context.aop.support.ParameterMatching#getIndex()
+	 * @see org.jgentleframework.context.aop.support.ParameterMatching#getIndex()
 	 */
 	@Override
 	public int getIndex() {
@@ -94,7 +94,7 @@ public class BasicParameterMatchingAspectPair extends MetadataController
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.context.aop.support.Matching#getTargetObject()
+	 * @see org.jgentleframework.context.aop.support.Matching#getTargetObject()
 	 */
 	@Override
 	public Object getTargetObject() {
@@ -105,7 +105,7 @@ public class BasicParameterMatchingAspectPair extends MetadataController
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.context.aop.support.ClassMatching#getTargetClass()
+	 * @see org.jgentleframework.context.aop.support.ClassMatching#getTargetClass()
 	 */
 	@Override
 	public Class<?> getTargetClass() {

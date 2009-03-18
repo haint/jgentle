@@ -49,7 +49,7 @@ public class FirstDetector extends AbstractDetector {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.context.injecting.autodetect.AbstractDetector#handling
+	 * org.jgentleframework.context.injecting.autodetect.AbstractDetector#handling
 	 * (java.util.ArrayList)
 	 */
 	@Override

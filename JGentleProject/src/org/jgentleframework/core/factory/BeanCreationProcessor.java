@@ -91,7 +91,7 @@ public class BeanCreationProcessor implements ServiceClass,
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.core.provider.ServiceClass#handle(org.exxlabs.jgentle
+	 * org.jgentleframework.core.provider.ServiceClass#handle(org.jgentleframework
 	 * .context.support.Selector, java.lang.Object)
 	 */
 	@Override
@@ -226,7 +226,7 @@ public class BeanCreationProcessor implements ServiceClass,
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.core.factory.BeanPostInstantiationSupportInterface
+	 * org.jgentleframework.core.factory.BeanPostInstantiationSupportInterface
 	 * #addBeanPostInstantiation(java.lang.Object)
 	 */
 	public boolean addBeanPostInstantiation(Object instance) {
@@ -240,7 +240,7 @@ public class BeanCreationProcessor implements ServiceClass,
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.core.factory.BeanPostInstantiationSupportInterface
+	 * org.jgentleframework.core.factory.BeanPostInstantiationSupportInterface
 	 * #addBeanPostInstantiation(int, java.lang.Object)
 	 */
 	public void addBeanPostInstantiation(int index, Object instance) {
@@ -253,7 +253,7 @@ public class BeanCreationProcessor implements ServiceClass,
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.core.factory.BeanPostInstantiationSupportInterface
+	 * org.jgentleframework.core.factory.BeanPostInstantiationSupportInterface
 	 * #addBeanPostInstantiation(java.util.Collection)
 	 */
 	public boolean addBeanPostInstantiation(Collection<Object> collection) {
@@ -267,7 +267,7 @@ public class BeanCreationProcessor implements ServiceClass,
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.core.factory.BeanPostInstantiationSupportInterface
+	 * org.jgentleframework.core.factory.BeanPostInstantiationSupportInterface
 	 * #addBeanPostInstantiation(int, java.util.Collection)
 	 */
 	public boolean addBeanPostInstantiation(int index,
@@ -282,7 +282,7 @@ public class BeanCreationProcessor implements ServiceClass,
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.core.factory.BeanPostInstantiationSupportInterface
+	 * org.jgentleframework.core.factory.BeanPostInstantiationSupportInterface
 	 * #removeBeanPostInstantiation(int)
 	 */
 	public Object removeBeanPostInstantiation(int index) {
@@ -293,7 +293,7 @@ public class BeanCreationProcessor implements ServiceClass,
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.core.factory.BeanPostInstantiationSupportInterface
+	 * org.jgentleframework.core.factory.BeanPostInstantiationSupportInterface
 	 * #removeBeanPostInstantiation(java.lang.Object)
 	 */
 	public boolean removeBeanPostInstantiation(Object obj) {

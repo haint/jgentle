@@ -113,7 +113,7 @@ public class InstantiationSelectorImpl extends CoreInstantiationSelectorImpl imp
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.context.support.InstantiationSelector#getInterceptors()
+	 * @see org.jgentleframework.context.support.InstantiationSelector#getInterceptors()
 	 */
 	@Override
 	public Interceptor[] getInterceptors() {
@@ -127,7 +127,7 @@ public class InstantiationSelectorImpl extends CoreInstantiationSelectorImpl imp
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.context.support.InstantiationSelector#getInstantiationInterceptors()
+	 * @see org.jgentleframework.context.support.InstantiationSelector#getInstantiationInterceptors()
 	 */
 	@Override
 	public InstantiationInterceptor[] getInstantiationInterceptors() {
@@ -147,7 +147,7 @@ public class InstantiationSelectorImpl extends CoreInstantiationSelectorImpl imp
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.context.support.InstantiationSelector#getMethodInterceptors()
+	 * @see org.jgentleframework.context.support.InstantiationSelector#getMethodInterceptors()
 	 */
 	@Override
 	public MethodInterceptor[] getMethodInterceptors() {
@@ -167,7 +167,7 @@ public class InstantiationSelectorImpl extends CoreInstantiationSelectorImpl imp
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.context.support.InstantiationSelector#getFieldInterceptors()
+	 * @see org.jgentleframework.context.support.InstantiationSelector#getFieldInterceptors()
 	 */
 	@Override
 	public FieldInterceptor[] getFieldInterceptors() {
@@ -187,7 +187,7 @@ public class InstantiationSelectorImpl extends CoreInstantiationSelectorImpl imp
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.context.support.InstantiationSelector#getMapMatcherInterceptor()
+	 * @see org.jgentleframework.context.support.InstantiationSelector#getMapMatcherInterceptor()
 	 */
 	@Override
 	public HashMap<Interceptor, Matcher<Definition>> getMapMatcherInterceptor() {
@@ -198,7 +198,7 @@ public class InstantiationSelectorImpl extends CoreInstantiationSelectorImpl imp
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.context.support.InstantiationSelector#setMapMatcherInterceptor(java.util.HashMap)
+	 * @see org.jgentleframework.context.support.InstantiationSelector#setMapMatcherInterceptor(java.util.HashMap)
 	 */
 	@Override
 	public void setMapMatcherInterceptor(

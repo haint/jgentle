@@ -361,7 +361,7 @@ public abstract class AbstractBindingConfig extends AbstractConfigModule
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.configure.jgentle.BindingConfig#clearObjectAttachList
+	 * org.jgentleframework.configure.jgentle.BindingConfig#clearObjectAttachList
 	 * ()
 	 */
 	@Override

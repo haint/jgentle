@@ -90,7 +90,7 @@ class ObjectBeanServiceImpl extends BeanContextChildSupport implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.core.metadatahandling.aohhandling.provider.ObjectBeanService#getDefinition()
+	 * @see org.jgentleframework.core.metadatahandling.aohhandling.provider.ObjectBeanService#getDefinition()
 	 */
 	public Definition getDefinition() {
 
@@ -100,7 +100,7 @@ class ObjectBeanServiceImpl extends BeanContextChildSupport implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.core.metadatahandling.aohhandling.provider.ObjectBeanService#getAlias()
+	 * @see org.jgentleframework.core.metadatahandling.aohhandling.provider.ObjectBeanService#getAlias()
 	 */
 	public String getAlias() {
 
@@ -110,7 +110,7 @@ class ObjectBeanServiceImpl extends BeanContextChildSupport implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.core.metadatahandling.aohhandling.provider.ObjectBeanService#getSingletonObject()
+	 * @see org.jgentleframework.core.metadatahandling.aohhandling.provider.ObjectBeanService#getSingletonObject()
 	 */
 	public ServiceClass getSingletonObject() {
 
@@ -120,7 +120,7 @@ class ObjectBeanServiceImpl extends BeanContextChildSupport implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.core.metadatahandling.aohhandling.provider.ObjectBeanService#setSingletonObject(org.exxlabs.jgentle.core.metadatahandling.aohhandling.pvdhandler.ServiceClass)
+	 * @see org.jgentleframework.core.metadatahandling.aohhandling.provider.ObjectBeanService#setSingletonObject(org.jgentleframework.core.metadatahandling.aohhandling.pvdhandler.ServiceClass)
 	 */
 	public void setSingletonObject(ServiceClass singletonObject) {
 
@@ -195,7 +195,7 @@ class ObjectBeanServiceImpl extends BeanContextChildSupport implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.core.provider.ObjectBeanService#getProvider()
+	 * @see org.jgentleframework.core.provider.ObjectBeanService#getProvider()
 	 */
 	@Override
 	public Provider getProvider() {
@@ -206,7 +206,7 @@ class ObjectBeanServiceImpl extends BeanContextChildSupport implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.core.provider.ObjectBeanService#setProvider(org.exxlabs.jgentle.context.injecting.Provider)
+	 * @see org.jgentleframework.core.provider.ObjectBeanService#setProvider(org.jgentleframework.context.injecting.Provider)
 	 */
 	@Override
 	public void setProvider(Provider provider) {
@@ -217,7 +217,7 @@ class ObjectBeanServiceImpl extends BeanContextChildSupport implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.core.provider.ObjectBeanService#getArgs()
+	 * @see org.jgentleframework.core.provider.ObjectBeanService#getArgs()
 	 */
 	@Override
 	public Object[] getArgs() {
@@ -228,7 +228,7 @@ class ObjectBeanServiceImpl extends BeanContextChildSupport implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.core.provider.ObjectBeanService#getConstructor()
+	 * @see org.jgentleframework.core.provider.ObjectBeanService#getConstructor()
 	 */
 	@Override
 	public Constructor<?> getConstructor() {
@@ -239,7 +239,7 @@ class ObjectBeanServiceImpl extends BeanContextChildSupport implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.core.provider.ObjectBeanService#setArgs(java.lang.Object[])
+	 * @see org.jgentleframework.core.provider.ObjectBeanService#setArgs(java.lang.Object[])
 	 */
 	@Override
 	public void setArgs(Object[] args) {
@@ -250,7 +250,7 @@ class ObjectBeanServiceImpl extends BeanContextChildSupport implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.core.provider.ObjectBeanService#setConstructor(java.lang.reflect.Constructor)
+	 * @see org.jgentleframework.core.provider.ObjectBeanService#setConstructor(java.lang.reflect.Constructor)
 	 */
 	@Override
 	public void setConstructor(Constructor<?> constructor) {

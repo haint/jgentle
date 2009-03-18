@@ -86,7 +86,8 @@ public class CoreProcessorImpl extends AbstractProcesserChecker implements
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.exxlabs.jgentle.core.factory.CoreProcessor#getContext()
+	 * @see
+	 * org.jgentleframework.core.factory.support.CoreProcessor#getProvider()
 	 */
 	@Override
 	public Provider getProvider() {
@@ -97,7 +98,8 @@ public class CoreProcessorImpl extends AbstractProcesserChecker implements
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.core.factory.CoreProcessor#getDefinitionManager()
+	 * org.jgentleframework.core.factory.support.CoreProcessor#getDefinitionManager
+	 * ()
 	 */
 	@Override
 	public DefinitionManager getDefinitionManager() {
@@ -107,9 +109,8 @@ public class CoreProcessorImpl extends AbstractProcesserChecker implements
 
 	/*
 	 * (non-Javadoc)
-	 * @see
-	 * org.exxlabs.jgentle.core.factory.CoreProcessor#handle(org.exxlabs.jgentle
-	 * .context.support.Selector, java.lang.Object)
+	 * @seeorg.jgentleframework.core.factory.support.CoreProcessor#handle(org.
+	 * jgentleframework.context.support.Selector, java.lang.Object)
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
@@ -149,7 +150,7 @@ public class CoreProcessorImpl extends AbstractProcesserChecker implements
 					&& (targetClass.isAnnotation() || targetClass.isInterface())) {
 				throw new InterceptionException(
 						"Bean instantiation is not supported or completed if target class is "
-								+ "annotation or interface and if at least one instantiation interceptor "
+								+ "annotation or interface and if at least one 'instantiation' interceptor "
 								+ "has instantiated the corresponding 'object bean'");
 			}
 			else {

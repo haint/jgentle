@@ -96,9 +96,9 @@ public enum Scope implements ScopeImplementation {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.context.injecting.scope.ScopeImplementation#putBean
+	 * org.jgentleframework.context.injecting.scope.ScopeImplementation#putBean
 	 * (java.lang.String, java.lang.Object,
-	 * org.exxlabs.jgentle.context.injecting.ObjectBeanFactory)
+	 * org.jgentleframework.context.injecting.ObjectBeanFactory)
 	 */
 	@Override
 	public Object putBean(String scopeName, Object bean,
@@ -147,9 +147,9 @@ public enum Scope implements ScopeImplementation {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.context.injecting.scope.ScopeImplementation#getBean
-	 * (org.exxlabs.jgentle.context.support.Selector, java.lang.String,
-	 * org.exxlabs.jgentle.context.injecting.ObjectBeanFactory)
+	 * org.jgentleframework.context.injecting.scope.ScopeImplementation#getBean
+	 * (org.jgentleframework.context.support.Selector, java.lang.String,
+	 * org.jgentleframework.context.injecting.ObjectBeanFactory)
 	 */
 	@Override
 	public Object getBean(Selector selector, String scopeName,
@@ -241,9 +241,9 @@ public enum Scope implements ScopeImplementation {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.context.injecting.scope.ScopeImplementation#remove
+	 * org.jgentleframework.context.injecting.scope.ScopeImplementation#remove
 	 * (java.lang.String,
-	 * org.exxlabs.jgentle.context.injecting.ObjectBeanFactory)
+	 * org.jgentleframework.context.injecting.ObjectBeanFactory)
 	 */
 	@Override
 	public Object remove(String scopeName, ObjectBeanFactory objFactory)

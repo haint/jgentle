@@ -100,7 +100,7 @@ public class CoreInstantiationSelectorImpl extends SelectorImpl implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.context.support.CoreInstantiationSelector#getMappingName()
+	 * @see org.jgentleframework.context.support.CoreInstantiationSelector#getMappingName()
 	 */
 	@Override
 	public String getMappingName() {
@@ -111,7 +111,7 @@ public class CoreInstantiationSelectorImpl extends SelectorImpl implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.context.support.CoreInstantiationSelector#getType()
+	 * @see org.jgentleframework.context.support.CoreInstantiationSelector#getType()
 	 */
 	@Override
 	public Class<?> getType() {
@@ -122,7 +122,7 @@ public class CoreInstantiationSelectorImpl extends SelectorImpl implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.context.support.CoreInstantiationSelector#setMappingName(java.lang.String)
+	 * @see org.jgentleframework.context.support.CoreInstantiationSelector#setMappingName(java.lang.String)
 	 */
 	@Override
 	public void setMappingName(String mappingName) {
@@ -133,7 +133,7 @@ public class CoreInstantiationSelectorImpl extends SelectorImpl implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.context.support.CoreInstantiationSelector#setType(java.lang.Class)
+	 * @see org.jgentleframework.context.support.CoreInstantiationSelector#setType(java.lang.Class)
 	 */
 	@Override
 	public void setType(Class<?> type) {
@@ -144,7 +144,7 @@ public class CoreInstantiationSelectorImpl extends SelectorImpl implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.context.support.CoreInstantiationSelector#getArgTypes()
+	 * @see org.jgentleframework.context.support.CoreInstantiationSelector#getArgTypes()
 	 */
 	@Override
 	public Class<?>[] getArgTypes() {
@@ -155,7 +155,7 @@ public class CoreInstantiationSelectorImpl extends SelectorImpl implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.context.support.CoreInstantiationSelector#setArgTypes(java.lang.Class<?>[])
+	 * @see org.jgentleframework.context.support.CoreInstantiationSelector#setArgTypes(java.lang.Class<?>[])
 	 */
 	@Override
 	public void setArgTypes(Class<?>[] argTypes) {
@@ -166,7 +166,7 @@ public class CoreInstantiationSelectorImpl extends SelectorImpl implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.context.support.CoreInstantiationSelector#getArgs()
+	 * @see org.jgentleframework.context.support.CoreInstantiationSelector#getArgs()
 	 */
 	@Override
 	public Object[] getArgs() {
@@ -177,7 +177,7 @@ public class CoreInstantiationSelectorImpl extends SelectorImpl implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.context.support.CoreInstantiationSelector#setArgs(java.lang.Object[])
+	 * @see org.jgentleframework.context.support.CoreInstantiationSelector#setArgs(java.lang.Object[])
 	 */
 	@Override
 	public void setArgs(Object[] args) {

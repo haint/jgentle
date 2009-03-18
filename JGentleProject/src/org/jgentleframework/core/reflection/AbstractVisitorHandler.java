@@ -179,9 +179,9 @@ public abstract class AbstractVisitorHandler implements IAnnotationVisitor {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.core.reflection.IAnnotationVisitor#visit(java.lang
+	 * org.jgentleframework.core.reflection.IAnnotationVisitor#visit(java.lang
 	 * .annotation.Annotation[],
-	 * org.exxlabs.jgentle.core.reflection.metadata.AnnoMeta)
+	 * org.jgentleframework.core.reflection.metadata.AnnoMeta)
 	 */
 	public void visit(Annotation[] annoArray, AnnoMeta rootAnnoMeta) {
 
@@ -265,9 +265,9 @@ public abstract class AbstractVisitorHandler implements IAnnotationVisitor {
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.core.reflection.IAnnotationVisitor#
+	 * @seeorg.jgentleframework.core.reflection.IAnnotationVisitor#
 	 * addAnnotationBeanProcessor(java.lang.Class,
-	 * org.exxlabs.jgentle.core.reflection.annohandler.AnnotationBeanProcessor)
+	 * org.jgentleframework.core.reflection.annohandler.AnnotationBeanProcessor)
 	 */
 	@Override
 	public <T extends Annotation> AnnotationBeanProcessor<?> addAnnotationBeanProcessor(
@@ -280,7 +280,7 @@ public abstract class AbstractVisitorHandler implements IAnnotationVisitor {
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.core.reflection.IAnnotationVisitor#
+	 * @seeorg.jgentleframework.core.reflection.IAnnotationVisitor#
 	 * removeAnnotationBeanProcessor(java.lang.Class)
 	 */
 	@Override
@@ -292,10 +292,11 @@ public abstract class AbstractVisitorHandler implements IAnnotationVisitor {
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.core.reflection.IAnnotationVisitor#
+	 * @seeorg.jgentleframework.core.reflection.IAnnotationVisitor#
 	 * replaceAnnotationBeanProcessor
-	 * (org.exxlabs.jgentle.core.reflection.annohandler.AnnotationBeanProcessor,
-	 * org.exxlabs.jgentle.core.reflection.annohandler.AnnotationBeanProcessor)
+	 * (org.jgentleframework.core.reflection.annohandler
+	 * .AnnotationBeanProcessor,
+	 * org.jgentleframework.core.reflection.annohandler.AnnotationBeanProcessor)
 	 */
 	@Override
 	@SuppressWarnings("unchecked")

@@ -67,7 +67,7 @@ public class FieldAnnotatedWithMatcher extends
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.context.aop.PointcutOfFieldFilter#getFieldFilter()
+	 * @see org.jgentleframework.context.aop.PointcutOfFieldFilter#getFieldFilter()
 	 */
 	@Override
 	public FieldFilter getFieldFilter() {
@@ -81,7 +81,7 @@ public class FieldAnnotatedWithMatcher extends
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.context.aop.Pointcut#getFilter()
+	 * @see org.jgentleframework.context.aop.Pointcut#getFilter()
 	 */
 	@Override
 	public Filter<FieldMatching> getFilter() {

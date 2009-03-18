@@ -58,7 +58,7 @@ class ObjectBindingInterceptorImpl implements ObjectBindingInterceptor {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.configure.objectmeta.ObjectBindingInterceptor#getMatchers()
+	 * @see org.jgentleframework.configure.objectmeta.ObjectBindingInterceptor#getMatchers()
 	 */
 	@Override
 	public Matcher<Definition>[] getMatchers() {
@@ -69,7 +69,7 @@ class ObjectBindingInterceptorImpl implements ObjectBindingInterceptor {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.configure.objectmeta.ObjectBindingInterceptor#setMatchers(org.exxlabs.jgentle.core.intercept.support.Matcher)
+	 * @see org.jgentleframework.configure.objectmeta.ObjectBindingInterceptor#setMatchers(org.jgentleframework.core.intercept.support.Matcher)
 	 */
 	@Override
 	public void setMatchers(Matcher<Definition>[] matchers) {
@@ -80,7 +80,7 @@ class ObjectBindingInterceptorImpl implements ObjectBindingInterceptor {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.configure.objectmeta.ObjectBindingInterceptor#getInterceptor()
+	 * @see org.jgentleframework.configure.objectmeta.ObjectBindingInterceptor#getInterceptor()
 	 */
 	@Override
 	public Object getInterceptor() {
@@ -91,7 +91,7 @@ class ObjectBindingInterceptorImpl implements ObjectBindingInterceptor {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.configure.objectmeta.ObjectBindingInterceptor#setInterceptor(java.lang.Object)
+	 * @see org.jgentleframework.configure.objectmeta.ObjectBindingInterceptor#setInterceptor(java.lang.Object)
 	 */
 	@Override
 	public void setInterceptor(Object interceptor) {

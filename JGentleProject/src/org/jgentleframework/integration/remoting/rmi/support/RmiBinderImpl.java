@@ -93,7 +93,7 @@ public class RmiBinderImpl extends RmiAbstractBinder implements Initializing,
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.exxlabs.jgentle.context.bean.Initializing#afterBeanCreate()
+	 * @see org.jgentleframework.context.bean.Initializing#afterBeanCreate()
 	 */
 	@Override
 	public void afterBeanCreated() {

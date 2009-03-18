@@ -122,7 +122,7 @@ class AnnoMetaImpl extends MetadataImpl implements Metadata, AnnoMeta {
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.exxlabs.jgentle.core.reflection.metadata.AnnoMeta#clear()
+	 * @see org.jgentleframework.core.reflection.metadata.AnnoMeta#clear()
 	 */
 	@Override
 	public void clear() {
@@ -133,7 +133,7 @@ class AnnoMetaImpl extends MetadataImpl implements Metadata, AnnoMeta {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.core.reflection.metadata.AnnoMeta#contains(java.lang
+	 * org.jgentleframework.core.reflection.metadata.AnnoMeta#contains(java.lang
 	 * .Object)
 	 */
 	@Override
@@ -144,7 +144,7 @@ class AnnoMetaImpl extends MetadataImpl implements Metadata, AnnoMeta {
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.core.reflection.metadata.AnnoMeta#contains(org.
+	 * @seeorg.jgentleframework.core.reflection.metadata.AnnoMeta#contains(org.
 	 * aopalliance.reflect.Metadata)
 	 */
 	@Override
@@ -155,7 +155,7 @@ class AnnoMetaImpl extends MetadataImpl implements Metadata, AnnoMeta {
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.exxlabs.jgentle.core.reflection.metadata.AnnoMeta#count()
+	 * @see org.jgentleframework.core.reflection.metadata.AnnoMeta#count()
 	 */
 	@Override
 	public int count() {
@@ -166,7 +166,7 @@ class AnnoMetaImpl extends MetadataImpl implements Metadata, AnnoMeta {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.core.reflection.metadata.AnnoMeta#getMetadata(java
+	 * org.jgentleframework.core.reflection.metadata.AnnoMeta#getMetadata(java
 	 * .lang.Object)
 	 */
 	@Override
@@ -177,7 +177,7 @@ class AnnoMetaImpl extends MetadataImpl implements Metadata, AnnoMeta {
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.exxlabs.jgentle.core.reflection.metadata.AnnoMeta#getName()
+	 * @see org.jgentleframework.core.reflection.metadata.AnnoMeta#getName()
 	 */
 	@Override
 	public String getName() {
@@ -187,7 +187,7 @@ class AnnoMetaImpl extends MetadataImpl implements Metadata, AnnoMeta {
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.exxlabs.jgentle.core.reflection.metadata.AnnoMeta#getType()
+	 * @see org.jgentleframework.core.reflection.metadata.AnnoMeta#getType()
 	 */
 	@Override
 	public Class<?> getType() {
@@ -197,7 +197,7 @@ class AnnoMetaImpl extends MetadataImpl implements Metadata, AnnoMeta {
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.exxlabs.jgentle.core.reflection.metadata.AnnoMeta#isEmpty()
+	 * @see org.jgentleframework.core.reflection.metadata.AnnoMeta#isEmpty()
 	 */
 	@Override
 	public boolean isEmpty() {
@@ -207,7 +207,7 @@ class AnnoMetaImpl extends MetadataImpl implements Metadata, AnnoMeta {
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.exxlabs.jgentle.core.reflection.metadata.AnnoMeta#keySet()
+	 * @see org.jgentleframework.core.reflection.metadata.AnnoMeta#keySet()
 	 */
 	@Override
 	public Set<Object> keySet() {
@@ -218,7 +218,7 @@ class AnnoMetaImpl extends MetadataImpl implements Metadata, AnnoMeta {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.core.reflection.metadata.AnnoMeta#putMetaData(org
+	 * org.jgentleframework.core.reflection.metadata.AnnoMeta#putMetaData(org
 	 * .aopalliance.reflect.Metadata)
 	 */
 	@Override
@@ -230,7 +230,7 @@ class AnnoMetaImpl extends MetadataImpl implements Metadata, AnnoMeta {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.core.reflection.metadata.AnnoMeta#removeMetadata(
+	 * org.jgentleframework.core.reflection.metadata.AnnoMeta#removeMetadata(
 	 * java.lang.Object)
 	 */
 	@Override
@@ -242,7 +242,7 @@ class AnnoMetaImpl extends MetadataImpl implements Metadata, AnnoMeta {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.core.reflection.metadata.AnnoMeta#setName(java.lang
+	 * org.jgentleframework.core.reflection.metadata.AnnoMeta#setName(java.lang
 	 * .String)
 	 */
 	@Override
@@ -253,7 +253,7 @@ class AnnoMetaImpl extends MetadataImpl implements Metadata, AnnoMeta {
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.exxlabs.jgentle.core.reflection.metadata.AnnoMeta#values()
+	 * @see org.jgentleframework.core.reflection.metadata.AnnoMeta#values()
 	 */
 	@Override
 	public Collection<Metadata> values() {
@@ -263,7 +263,7 @@ class AnnoMetaImpl extends MetadataImpl implements Metadata, AnnoMeta {
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.exxlabs.jgentle.core.reflection.metadata.AnnoMeta#getParents()
+	 * @see org.jgentleframework.core.reflection.metadata.AnnoMeta#getParents()
 	 */
 	@Override
 	public AnnoMeta getParents() {
@@ -273,7 +273,7 @@ class AnnoMetaImpl extends MetadataImpl implements Metadata, AnnoMeta {
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.exxlabs.jgentle.core.reflection.metadata.MetadataImpl#getValue()
+	 * @see org.jgentleframework.core.reflection.metadata.MetadataImpl#getValue()
 	 */
 	@Override
 	public Object getValue() {
@@ -283,7 +283,7 @@ class AnnoMetaImpl extends MetadataImpl implements Metadata, AnnoMeta {
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.exxlabs.jgentle.core.reflection.metadata.AnnoMeta#getMetaList()
+	 * @see org.jgentleframework.core.reflection.metadata.AnnoMeta#getMetaList()
 	 */
 	@Override
 	public HashMap<Object, Metadata> getMetaList() {

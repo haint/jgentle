@@ -53,7 +53,7 @@ public abstract class AbstractDetector implements Detector {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.context.injecting.autodetect.Detector#getProvider()
+	 * org.jgentleframework.context.injecting.autodetect.Detector#getProvider()
 	 */
 	public Provider getProvider() {
 
@@ -63,7 +63,7 @@ public abstract class AbstractDetector implements Detector {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.context.injecting.autodetect.Detector#getNextDetector
+	 * org.jgentleframework.context.injecting.autodetect.Detector#getNextDetector
 	 * ()
 	 */
 	public Detector getNextDetector() {
@@ -82,8 +82,8 @@ public abstract class AbstractDetector implements Detector {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.context.injecting.autodetect.Detector#setProvider
-	 * (org.exxlabs.jgentle.context.injecting.Provider)
+	 * org.jgentleframework.context.injecting.autodetect.Detector#setProvider
+	 * (org.jgentleframework.context.injecting.Provider)
 	 */
 	public void setProvider(Provider provider) {
 
@@ -93,8 +93,8 @@ public abstract class AbstractDetector implements Detector {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.context.injecting.autodetect.Detector#setNextDetector
-	 * (org.exxlabs.jgentle.context.injecting.autodetect.AbstractDetector)
+	 * org.jgentleframework.context.injecting.autodetect.Detector#setNextDetector
+	 * (org.jgentleframework.context.injecting.autodetect.AbstractDetector)
 	 */
 	@Override
 	public void setNextDetector(Detector detectModule) {

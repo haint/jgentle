@@ -93,7 +93,7 @@ public class ObjectConstantImpl implements ObjectConstant {
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.configure.injecting.objectMeta.ObjectConstant#
+	 * @seeorg.jgentleframework.configure.injecting.objectMeta.ObjectConstant#
 	 * addSourceName(java.lang.String)
 	 */
 	@Override
@@ -108,7 +108,7 @@ public class ObjectConstantImpl implements ObjectConstant {
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.configure.injecting.objectMeta.ObjectConstant#
+	 * @seeorg.jgentleframework.configure.injecting.objectMeta.ObjectConstant#
 	 * clearAllSourceName()
 	 */
 	@Override
@@ -120,7 +120,7 @@ public class ObjectConstantImpl implements ObjectConstant {
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.configure.injecting.objectMeta.ObjectConstant#
+	 * @seeorg.jgentleframework.configure.injecting.objectMeta.ObjectConstant#
 	 * containsSourceName(java.lang.String)
 	 */
 	@Override
@@ -131,7 +131,7 @@ public class ObjectConstantImpl implements ObjectConstant {
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.configure.injecting.objectMeta.ObjectConstant#
+	 * @seeorg.jgentleframework.configure.injecting.objectMeta.ObjectConstant#
 	 * getHashDirectSet()
 	 */
 	public Set<Entry<String, Object>> getHashDirectSet() {
@@ -141,7 +141,7 @@ public class ObjectConstantImpl implements ObjectConstant {
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.configure.injecting.objectMeta.ObjectConstant#
+	 * @seeorg.jgentleframework.configure.injecting.objectMeta.ObjectConstant#
 	 * getStrNameList()
 	 */
 	public String[] getStrNameList() {
@@ -151,7 +151,7 @@ public class ObjectConstantImpl implements ObjectConstant {
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.configure.injecting.objectMeta.ObjectConstant#
+	 * @seeorg.jgentleframework.configure.injecting.objectMeta.ObjectConstant#
 	 * isEmptySourceNameList()
 	 */
 	@Override
@@ -162,7 +162,7 @@ public class ObjectConstantImpl implements ObjectConstant {
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.configure.injecting.objectMeta.ObjectConstant#
+	 * @seeorg.jgentleframework.configure.injecting.objectMeta.ObjectConstant#
 	 * removeSourceName(java.lang.String)
 	 */
 	@Override
@@ -184,7 +184,7 @@ public class ObjectConstantImpl implements ObjectConstant {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.configure.injecting.objectMeta.ObjectConstant#to(
+	 * org.jgentleframework.configure.injecting.objectMeta.ObjectConstant#to(
 	 * java.lang.Object[])
 	 */
 	@Override
@@ -215,7 +215,7 @@ public class ObjectConstantImpl implements ObjectConstant {
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.configure.injecting.objectMeta.ObjectConstant#
+	 * @seeorg.jgentleframework.configure.injecting.objectMeta.ObjectConstant#
 	 * toDestinationObject(java.lang.String, java.lang.Object)
 	 */
 	@Override
@@ -234,7 +234,7 @@ public class ObjectConstantImpl implements ObjectConstant {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.configure.injecting.objectmeta.IPresentLoadingClass
+	 * org.jgentleframework.configure.injecting.objectmeta.IPresentLoadingClass
 	 * #getPresentLoadingClasses()
 	 */
 	@Override
@@ -253,7 +253,7 @@ public class ObjectConstantImpl implements ObjectConstant {
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.exxlabs.jgentle.configure.objectmeta.ObjectConstant#getScope()
+	 * @see org.jgentleframework.configure.objectmeta.ObjectConstant#getScope()
 	 */
 	@Override
 	public ScopeInstance getScope() {
@@ -264,7 +264,7 @@ public class ObjectConstantImpl implements ObjectConstant {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.configure.objectmeta.ObjectConstant#setScope(org.
+	 * org.jgentleframework.configure.objectmeta.ObjectConstant#setScope(org.
 	 * exxlabs.jgentle.context.injecting.scope.ScopeInstance)
 	 */
 	@Override

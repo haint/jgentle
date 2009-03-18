@@ -104,8 +104,8 @@ public class ServiceHandlerImpl implements ServiceHandler {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.context.services.ServiceHandler#addService(java.lang
-	 * .Class,org.exxlabs.jgentle.core.metadatahandling.aohhandling.provider.
+	 * org.jgentleframework.context.services.ServiceHandler#addService(java.lang
+	 * .Class,org.jgentleframework.core.metadatahandling.aohhandling.provider.
 	 * ServiceProvider)
 	 */
 	@Override
@@ -118,8 +118,8 @@ public class ServiceHandlerImpl implements ServiceHandler {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.context.services.ServiceHandler#addService(java.lang
-	 * .Class,org.exxlabs.jgentle.core.metadatahandling.aohhandling.provider.
+	 * org.jgentleframework.context.services.ServiceHandler#addService(java.lang
+	 * .Class,org.jgentleframework.core.metadatahandling.aohhandling.provider.
 	 * ServiceProvider, java.lang.Class<?>[], java.lang.Object[])
 	 */
 	@Override
@@ -133,7 +133,7 @@ public class ServiceHandlerImpl implements ServiceHandler {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.context.services.ServiceHandler#addService(java.lang
+	 * org.jgentleframework.context.services.ServiceHandler#addService(java.lang
 	 * .Class, java.lang.String)
 	 */
 	@Override
@@ -146,7 +146,7 @@ public class ServiceHandlerImpl implements ServiceHandler {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.context.services.ServiceHandler#addService(java.lang
+	 * org.jgentleframework.context.services.ServiceHandler#addService(java.lang
 	 * .Class, java.lang.String, java.lang.Class<?>[], java.lang.Object[])
 	 */
 	@Override
@@ -167,9 +167,9 @@ public class ServiceHandlerImpl implements ServiceHandler {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.context.services.ServiceHandler#addService(org.exxlabs
+	 * org.jgentleframework.context.services.ServiceHandler#addService(org.exxlabs
 	 * .jgentle.context.injecting.Provider, java.lang.Class,
-	 * org.exxlabs.jgentle.
+	 * org.jgentleframework.
 	 * core.metadatahandling.aohhandling.provider.ServiceProvider)
 	 */
 	@Override
@@ -182,9 +182,9 @@ public class ServiceHandlerImpl implements ServiceHandler {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.context.services.ServiceHandler#addService(org.exxlabs
+	 * org.jgentleframework.context.services.ServiceHandler#addService(org.exxlabs
 	 * .jgentle.context.injecting.Provider, java.lang.Class,
-	 * org.exxlabs.jgentle.
+	 * org.jgentleframework.
 	 * core.metadatahandling.aohhandling.provider.ServiceProvider,
 	 * java.lang.Class<?>[], java.lang.Object[])
 	 */
@@ -207,7 +207,7 @@ public class ServiceHandlerImpl implements ServiceHandler {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.context.services.ServiceHandler#addService(org.exxlabs
+	 * org.jgentleframework.context.services.ServiceHandler#addService(org.exxlabs
 	 * .jgentle.context.injecting.Provider, java.lang.Class, java.lang.String)
 	 */
 	@Override
@@ -227,7 +227,7 @@ public class ServiceHandlerImpl implements ServiceHandler {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.context.services.ServiceHandler#addService(org.exxlabs
+	 * org.jgentleframework.context.services.ServiceHandler#addService(org.exxlabs
 	 * .jgentle.context.injecting.Provider, java.lang.Class, java.lang.String,
 	 * java.lang.Class<?>[], java.lang.Object[])
 	 */
@@ -248,9 +248,9 @@ public class ServiceHandlerImpl implements ServiceHandler {
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.core.metadatahandling.aohhandling.defhandling.
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
 	 * AnnotationRegister#addValidator(java.lang.Class,
-	 * org.exxlabs.jgentle.core.
+	 * org.jgentleframework.core.
 	 * metadatahandling.aohhandling.pvdhandler.AnnotationValidator)
 	 */
 	@Override
@@ -262,7 +262,7 @@ public class ServiceHandlerImpl implements ServiceHandler {
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.core.metadatahandling.aohhandling.defhandling.
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
 	 * AnnotationRegister#clearAllAnnotationRegistered()
 	 */
 	@Override
@@ -273,9 +273,9 @@ public class ServiceHandlerImpl implements ServiceHandler {
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.core.metadatahandling.aohhandling.provider.
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.provider.
 	 * ServiceProviderManager
-	 * #containsDomain(org.exxlabs.jgentle.core.metadatahandling
+	 * #containsDomain(org.jgentleframework.core.metadatahandling
 	 * .aohhandling.provider.ServiceProvider)
 	 */
 	@Override
@@ -286,7 +286,7 @@ public class ServiceHandlerImpl implements ServiceHandler {
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.core.metadatahandling.aohhandling.provider.
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.provider.
 	 * ServiceProviderManager#containsDomain(java.lang.String)
 	 */
 	@Override
@@ -297,7 +297,7 @@ public class ServiceHandlerImpl implements ServiceHandler {
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.core.metadatahandling.aohhandling.defhandling.
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
 	 * AnnotationRegister#countAnnotationRegistered()
 	 */
 	@Override
@@ -308,7 +308,7 @@ public class ServiceHandlerImpl implements ServiceHandler {
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.core.metadatahandling.aohhandling.defhandling.
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
 	 * AnnotationRegister#countValidator()
 	 */
 	@Override
@@ -320,7 +320,7 @@ public class ServiceHandlerImpl implements ServiceHandler {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.context.services.ServiceHandler#getAnnoRegister()
+	 * org.jgentleframework.context.services.ServiceHandler#getAnnoRegister()
 	 */
 	@Override
 	public AnnotationRegister getAnnoRegister() {
@@ -330,7 +330,7 @@ public class ServiceHandlerImpl implements ServiceHandler {
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.core.metadatahandling.aohhandling.defhandling.
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
 	 * AnnotationRegister#getAnnotationRegistered()
 	 */
 	@Override
@@ -341,7 +341,7 @@ public class ServiceHandlerImpl implements ServiceHandler {
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.exxlabs.jgentle.context.services.ServiceHandler#getContext()
+	 * @see org.jgentleframework.context.services.ServiceHandler#getContext()
 	 */
 	@Override
 	public BeanContextServicesSupport getContext() {
@@ -363,7 +363,7 @@ public class ServiceHandlerImpl implements ServiceHandler {
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.core.metadatahandling.aohhandling.provider.
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.provider.
 	 * ServiceProviderManager#getDomain(java.lang.String)
 	 */
 	@Override
@@ -375,7 +375,7 @@ public class ServiceHandlerImpl implements ServiceHandler {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.context.services.ServiceHandler#getDomainContext()
+	 * org.jgentleframework.context.services.ServiceHandler#getDomainContext()
 	 */
 	@Override
 	public BeanContextSupport getDomainContext() {
@@ -386,7 +386,7 @@ public class ServiceHandlerImpl implements ServiceHandler {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.context.services.ServiceHandler#getDomainListener()
+	 * org.jgentleframework.context.services.ServiceHandler#getDomainListener()
 	 */
 	@Override
 	public DomainListener getDomainListener() {
@@ -396,7 +396,7 @@ public class ServiceHandlerImpl implements ServiceHandler {
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.core.metadatahandling.aohhandling.provider.
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.provider.
 	 * ServiceProviderManager#getDomainValues()
 	 */
 	@Override
@@ -438,7 +438,7 @@ public class ServiceHandlerImpl implements ServiceHandler {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.context.services.ServiceHandler#getService(java.lang
+	 * org.jgentleframework.context.services.ServiceHandler#getService(java.lang
 	 * .Object, java.lang.Class, java.lang.Object)
 	 */
 	@Override
@@ -451,7 +451,7 @@ public class ServiceHandlerImpl implements ServiceHandler {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.context.services.ServiceHandler#getService(java.lang
+	 * org.jgentleframework.context.services.ServiceHandler#getService(java.lang
 	 * .Object, java.lang.String, java.lang.Object)
 	 */
 	@Override
@@ -464,7 +464,7 @@ public class ServiceHandlerImpl implements ServiceHandler {
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.core.metadatahandling.aohhandling.provider.
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.provider.
 	 * ServiceProviderManager#getServiceClass(java.lang.String)
 	 */
 	@Override
@@ -476,7 +476,7 @@ public class ServiceHandlerImpl implements ServiceHandler {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.context.services.ServiceHandler#getServiceListener()
+	 * org.jgentleframework.context.services.ServiceHandler#getServiceListener()
 	 */
 	@Override
 	public ServiceBindingListener getServiceListener() {
@@ -486,7 +486,7 @@ public class ServiceHandlerImpl implements ServiceHandler {
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.core.metadatahandling.aohhandling.defhandling.
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
 	 * AnnotationRegister#getValidatorlist()
 	 */
 	@Override
@@ -497,7 +497,7 @@ public class ServiceHandlerImpl implements ServiceHandler {
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.core.metadatahandling.aohhandling.defhandling.
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
 	 * AnnotationRegister#isAnnotationListEmpty()
 	 */
 	@Override
@@ -508,7 +508,7 @@ public class ServiceHandlerImpl implements ServiceHandler {
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.core.metadatahandling.aohhandling.defhandling.
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
 	 * AnnotationRegister#isRegisteredAnnotation(java.lang.Class)
 	 */
 	@Override
@@ -519,7 +519,7 @@ public class ServiceHandlerImpl implements ServiceHandler {
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.core.metadatahandling.aohhandling.defhandling.
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
 	 * AnnotationRegister#iteratorRegisteredAnno()
 	 */
 	@Override
@@ -531,7 +531,7 @@ public class ServiceHandlerImpl implements ServiceHandler {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.context.services.ServiceHandler#newDomain(java.lang
+	 * org.jgentleframework.context.services.ServiceHandler#newDomain(java.lang
 	 * .String)
 	 */
 	@Override
@@ -542,7 +542,7 @@ public class ServiceHandlerImpl implements ServiceHandler {
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.core.metadatahandling.aohhandling.provider.
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.provider.
 	 * ServiceProviderManager#newDomain(java.lang.String,
 	 * java.beans.beancontext.BeanContextSupport)
 	 */
@@ -555,7 +555,7 @@ public class ServiceHandlerImpl implements ServiceHandler {
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.core.metadatahandling.aohhandling.defhandling.
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
 	 * AnnotationRegister#registerAnnotation(java.lang.Class)
 	 */
 	@Override
@@ -566,9 +566,9 @@ public class ServiceHandlerImpl implements ServiceHandler {
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.core.metadatahandling.aohhandling.defhandling.
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
 	 * AnnotationRegister#registerAnnotation(java.lang.Class,
-	 * org.exxlabs.jgentle
+	 * org.jgentleframework
 	 * .core.metadatahandling.aohhandling.pvdhandler.AnnotationValidator)
 	 */
 	@Override
@@ -581,7 +581,7 @@ public class ServiceHandlerImpl implements ServiceHandler {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.context.services.ServiceHandler#registerAnnotations
+	 * org.jgentleframework.context.services.ServiceHandler#registerAnnotations
 	 * (java.lang.Class)
 	 */
 	@SuppressWarnings("unchecked")
@@ -721,7 +721,7 @@ public class ServiceHandlerImpl implements ServiceHandler {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.context.services.ServiceHandler#removeDomain(java
+	 * org.jgentleframework.context.services.ServiceHandler#removeDomain(java
 	 * .lang.String)
 	 */
 	@Override
@@ -732,7 +732,7 @@ public class ServiceHandlerImpl implements ServiceHandler {
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.core.metadatahandling.aohhandling.provider.
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.provider.
 	 * ServiceProviderManager#removeDomain(java.lang.String,
 	 * java.beans.beancontext.BeanContextSupport)
 	 */
@@ -744,9 +744,9 @@ public class ServiceHandlerImpl implements ServiceHandler {
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.core.metadatahandling.aohhandling.defhandling.
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
 	 * AnnotationRegister
-	 * #removeValidator(org.exxlabs.jgentle.core.metadatahandling
+	 * #removeValidator(org.jgentleframework.core.metadatahandling
 	 * .aohhandling.pvdhandler.AnnotationValidator)
 	 */
 	@Override
@@ -758,7 +758,7 @@ public class ServiceHandlerImpl implements ServiceHandler {
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.core.metadatahandling.aohhandling.defhandling.
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
 	 * AnnotationRegister#removeValidator(java.lang.Class)
 	 */
 	@Override
@@ -769,7 +769,7 @@ public class ServiceHandlerImpl implements ServiceHandler {
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.core.metadatahandling.aohhandling.defhandling.
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
 	 * AnnotationRegister#subListAnnoRegistered(int, int)
 	 */
 	@Override
@@ -781,7 +781,7 @@ public class ServiceHandlerImpl implements ServiceHandler {
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.core.metadatahandling.aohhandling.defhandling.
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
 	 * AnnotationRegister#unregisterAnnotation(java.lang.Class)
 	 */
 	@Override
@@ -793,7 +793,7 @@ public class ServiceHandlerImpl implements ServiceHandler {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.context.services.ServiceHandler#getDomainManager()
+	 * org.jgentleframework.context.services.ServiceHandler#getDomainManager()
 	 */
 	@Override
 	public DomainManager getDomainManager() {

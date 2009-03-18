@@ -218,8 +218,8 @@ public abstract class AbstractDefinitionMatcherPointcut<T extends Matching>
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.core.intercept.support.AnnotatedWithMatcher#matches
-	 * (org.exxlabs.jgentle.core.reflection.metadata.Definition)
+	 * org.jgentleframework.core.intercept.support.AnnotatedWithMatcher#matches
+	 * (org.jgentleframework.core.reflection.metadata.Definition)
 	 */
 	@Override
 	public boolean matches(Definition definition) {

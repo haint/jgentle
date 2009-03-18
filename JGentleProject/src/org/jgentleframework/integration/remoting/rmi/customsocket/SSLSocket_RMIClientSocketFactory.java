@@ -50,7 +50,7 @@ public class SSLSocket_RMIClientSocketFactory implements
 															.hashCode();
 
 	/** The log. */
-	private final Log			log					= LogFactory
+	private transient Log		log					= LogFactory
 															.getLog(getClass());
 
 	/**
@@ -116,5 +116,19 @@ public class SSLSocket_RMIClientSocketFactory implements
 	public int hashCode() {
 
 		return hashCode;
+	}
+
+	/**
+	 * Overrides default readObject method.
+	 * 
+	 * @param stream
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 */
+	private void readObject(ObjectInputStream stream) throws IOException,
+			ClassNotFoundException {
+
+		stream.defaultReadObject();
+		log = LogFactory.getLog(getClass());
 	}
 }

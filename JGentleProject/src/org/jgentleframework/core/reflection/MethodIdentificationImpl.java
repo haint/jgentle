@@ -262,7 +262,7 @@ class MethodIdentificationImpl implements MethodIdentification {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.general.reflection.Identification#getMember()
+	 * @see org.jgentleframework.general.reflection.Identification#getMember()
 	 */
 	@Override
 	public Method[] getMember() {
@@ -322,7 +322,7 @@ class MethodIdentificationImpl implements MethodIdentification {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.general.reflection.MemberIdentification#setFoundOnSuperclass(boolean)
+	 * @see org.jgentleframework.general.reflection.MemberIdentification#setFoundOnSuperclass(boolean)
 	 */
 	@Override
 	public void setFoundOnSuperclass(boolean bool) {
@@ -333,7 +333,7 @@ class MethodIdentificationImpl implements MethodIdentification {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.general.reflection.MemberIdentification#setModifiers(int)
+	 * @see org.jgentleframework.general.reflection.MemberIdentification#setModifiers(int)
 	 */
 	@Override
 	public void setModifiers(int modifiers) {
@@ -344,7 +344,7 @@ class MethodIdentificationImpl implements MethodIdentification {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.general.reflection.MethodIdentification#setName(java.lang.String)
+	 * @see org.jgentleframework.general.reflection.MethodIdentification#setName(java.lang.String)
 	 */
 	@Override
 	public void setName(String name) {
@@ -355,7 +355,7 @@ class MethodIdentificationImpl implements MethodIdentification {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.general.reflection.MethodIdentification#getDeclaringClass()
+	 * @see org.jgentleframework.general.reflection.MethodIdentification#getDeclaringClass()
 	 */
 	public Class<?> getDeclaringClass() {
 
@@ -365,7 +365,7 @@ class MethodIdentificationImpl implements MethodIdentification {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.general.reflection.MemberIdentification#setDeclaringClass(java.lang.Class)
+	 * @see org.jgentleframework.general.reflection.MemberIdentification#setDeclaringClass(java.lang.Class)
 	 */
 	@Override
 	public void setDeclaringClass(Class<?> declaringClass) {
@@ -376,7 +376,7 @@ class MethodIdentificationImpl implements MethodIdentification {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.general.reflection.MethodIdentification#getArgsType()
+	 * @see org.jgentleframework.general.reflection.MethodIdentification#getArgsType()
 	 */
 	public Class<?>[] getArgsType() {
 
@@ -386,7 +386,7 @@ class MethodIdentificationImpl implements MethodIdentification {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.general.reflection.MethodIdentification#setArgsType(java.lang.Class)
+	 * @see org.jgentleframework.general.reflection.MethodIdentification#setArgsType(java.lang.Class)
 	 */
 	public void setArgsType(Class<?>[] argsType) {
 
@@ -396,7 +396,7 @@ class MethodIdentificationImpl implements MethodIdentification {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.general.reflection.MethodIdentification#getThrowableClasses()
+	 * @see org.jgentleframework.general.reflection.MethodIdentification#getThrowableClasses()
 	 */
 	public Class<? extends Throwable>[] getThrowableClasses() {
 
@@ -406,7 +406,7 @@ class MethodIdentificationImpl implements MethodIdentification {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.general.reflection.MethodIdentification#setThrowableClasses(java.lang.Class)
+	 * @see org.jgentleframework.general.reflection.MethodIdentification#setThrowableClasses(java.lang.Class)
 	 */
 	public void setThrowableClasses(
 			Class<? extends Throwable>[] throwableClasses) {
@@ -417,7 +417,7 @@ class MethodIdentificationImpl implements MethodIdentification {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.general.reflection.MethodIdentification#getName()
+	 * @see org.jgentleframework.general.reflection.MethodIdentification#getName()
 	 */
 	public String getName() {
 
@@ -427,7 +427,7 @@ class MethodIdentificationImpl implements MethodIdentification {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.general.reflection.MethodIdentification#isFoundOnSuperclass()
+	 * @see org.jgentleframework.general.reflection.MethodIdentification#isFoundOnSuperclass()
 	 */
 	public boolean isFoundOnSuperclass() {
 
@@ -437,7 +437,7 @@ class MethodIdentificationImpl implements MethodIdentification {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.general.reflection.MethodIdentification#getModifiers()
+	 * @see org.jgentleframework.general.reflection.MethodIdentification#getModifiers()
 	 */
 	public int getModifiers() {
 

@@ -49,8 +49,8 @@ abstract class ObjectAnnotatingImpl implements InClass, ObjectAnnotating {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.configure.injecting.objectmeta.ObjectAnnotating#annotate
-	 * (org.exxlabs.jgentle.general.reflection.Identification, java.lang.Object)
+	 * org.jgentleframework.configure.injecting.objectmeta.ObjectAnnotating#annotate
+	 * (org.jgentleframework.general.reflection.Identification, java.lang.Object)
 	 */
 	@Override
 	public InClass annotate(Identification<?> key, Object value) {
@@ -61,8 +61,8 @@ abstract class ObjectAnnotatingImpl implements InClass, ObjectAnnotating {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.configure.injecting.objectmeta.ObjectAnnotating#annotate
-	 * (org.exxlabs.jgentle.general.reflection.Identification,
+	 * org.jgentleframework.configure.injecting.objectmeta.ObjectAnnotating#annotate
+	 * (org.jgentleframework.general.reflection.Identification,
 	 * java.lang.Object[])
 	 */
 	@Override
@@ -79,7 +79,7 @@ abstract class ObjectAnnotatingImpl implements InClass, ObjectAnnotating {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.configure.injecting.objectmeta.ObjectAnnotating#annotate
+	 * org.jgentleframework.configure.injecting.objectmeta.ObjectAnnotating#annotate
 	 * (java.lang.Object[][])
 	 */
 	@Override
@@ -91,9 +91,9 @@ abstract class ObjectAnnotatingImpl implements InClass, ObjectAnnotating {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.configure.injecting.objectmeta.ObjectAnnotating#annotate
+	 * org.jgentleframework.configure.injecting.objectmeta.ObjectAnnotating#annotate
 	 * (
-	 * org.exxlabs.jgentle.utils.data.Pair<org.exxlabs.jgentle.general.reflection
+	 * org.jgentleframework.utils.data.Pair<org.jgentleframework.general.reflection
 	 * .Identification<?>,java.lang.Object>[])
 	 */
 	@Override
@@ -113,8 +113,8 @@ abstract class ObjectAnnotatingImpl implements InClass, ObjectAnnotating {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.configure.injecting.objectmeta.ObjectAnnotating#annotate
-	 * (org.exxlabs.jgentle.configure.injecting.enums.Types,
+	 * org.jgentleframework.configure.injecting.objectmeta.ObjectAnnotating#annotate
+	 * (org.jgentleframework.configure.injecting.enums.Types,
 	 * java.lang.Object[][])
 	 */
 	@Override
@@ -181,7 +181,7 @@ abstract class ObjectAnnotatingImpl implements InClass, ObjectAnnotating {
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.configure.injecting.objectmeta.ObjectAnnotating#
+	 * @seeorg.jgentleframework.configure.injecting.objectmeta.ObjectAnnotating#
 	 * getConstant()
 	 */
 	@Override

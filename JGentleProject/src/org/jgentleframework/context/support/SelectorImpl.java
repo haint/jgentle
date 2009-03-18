@@ -57,7 +57,7 @@ public class SelectorImpl implements Selector {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.context.support.Selector#getDefinition()
+	 * @see org.jgentleframework.context.support.Selector#getDefinition()
 	 */
 	@Override
 	public Definition getDefinition() {
@@ -68,7 +68,7 @@ public class SelectorImpl implements Selector {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.context.support.Selector#getTargetClass()
+	 * @see org.jgentleframework.context.support.Selector#getTargetClass()
 	 */
 	@Override
 	public Class<?> getTargetClass() {
@@ -79,7 +79,7 @@ public class SelectorImpl implements Selector {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.context.support.Selector#setDefinition(org.exxlabs.jgentle.core.reflection.metadata.Definition)
+	 * @see org.jgentleframework.context.support.Selector#setDefinition(org.jgentleframework.core.reflection.metadata.Definition)
 	 */
 	@Override
 	public void setDefinition(Definition definition) {
@@ -90,7 +90,7 @@ public class SelectorImpl implements Selector {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.context.support.Selector#setTargetClass(java.lang.Class)
+	 * @see org.jgentleframework.context.support.Selector#setTargetClass(java.lang.Class)
 	 */
 	@Override
 	public void setTargetClass(Class<?> targetClass) {

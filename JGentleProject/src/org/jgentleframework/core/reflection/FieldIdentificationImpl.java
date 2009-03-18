@@ -114,7 +114,7 @@ class FieldIdentificationImpl implements FieldIdentification {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.general.reflection.FieldIdentification#getModifiers()
+	 * @see org.jgentleframework.general.reflection.FieldIdentification#getModifiers()
 	 */
 	@Override
 	public int getModifiers() {
@@ -125,7 +125,7 @@ class FieldIdentificationImpl implements FieldIdentification {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.general.reflection.MemberIdentification#setModifiers(int)
+	 * @see org.jgentleframework.general.reflection.MemberIdentification#setModifiers(int)
 	 */
 	@Override
 	public void setModifiers(int modifiers) {
@@ -136,7 +136,7 @@ class FieldIdentificationImpl implements FieldIdentification {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.general.reflection.FieldIdentification#getName()
+	 * @see org.jgentleframework.general.reflection.FieldIdentification#getName()
 	 */
 	@Override
 	public String getName() {
@@ -147,7 +147,7 @@ class FieldIdentificationImpl implements FieldIdentification {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.general.reflection.Identification#setName(java.lang.String)
+	 * @see org.jgentleframework.general.reflection.Identification#setName(java.lang.String)
 	 */
 	@Override
 	public void setName(String name) {
@@ -158,7 +158,7 @@ class FieldIdentificationImpl implements FieldIdentification {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.general.reflection.FieldIdentification#getDeclaringClass()
+	 * @see org.jgentleframework.general.reflection.FieldIdentification#getDeclaringClass()
 	 */
 	@Override
 	public Class<?> getDeclaringClass() {
@@ -169,7 +169,7 @@ class FieldIdentificationImpl implements FieldIdentification {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.general.reflection.MemberIdentification#setDeclaringClass(java.lang.Class)
+	 * @see org.jgentleframework.general.reflection.MemberIdentification#setDeclaringClass(java.lang.Class)
 	 */
 	@Override
 	public void setDeclaringClass(Class<?> declaringClass) {
@@ -180,7 +180,7 @@ class FieldIdentificationImpl implements FieldIdentification {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.general.reflection.Identification#getMember()
+	 * @see org.jgentleframework.general.reflection.Identification#getMember()
 	 */
 	@Override
 	public Field[] getMember() {
@@ -208,7 +208,7 @@ class FieldIdentificationImpl implements FieldIdentification {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.general.reflection.MemberIdentification#setFoundOnSuperclass(boolean)
+	 * @see org.jgentleframework.general.reflection.MemberIdentification#setFoundOnSuperclass(boolean)
 	 */
 	@Override
 	public void setFoundOnSuperclass(boolean bool) {
@@ -219,7 +219,7 @@ class FieldIdentificationImpl implements FieldIdentification {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.general.reflection.FieldIdentification#isFoundOnSuperclass()
+	 * @see org.jgentleframework.general.reflection.FieldIdentification#isFoundOnSuperclass()
 	 */
 	@Override
 	public boolean isFoundOnSuperclass() {

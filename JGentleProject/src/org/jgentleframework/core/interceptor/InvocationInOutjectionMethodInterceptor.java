@@ -212,7 +212,7 @@ class InvocationInOutjectionMethodInterceptor implements MethodInterceptor,
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.core.interceptor.RuntimeLoading#isRuntimeLoading()
+	 * @see org.jgentleframework.core.interceptor.RuntimeLoading#isRuntimeLoading()
 	 */
 	@Override
 	public boolean isRuntimeLoading() {
@@ -246,7 +246,7 @@ class InvocationInOutjectionMethodInterceptor implements MethodInterceptor,
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.core.interceptor.RuntimeLoading#setRuntimeLoading(boolean)
+	 * @see org.jgentleframework.core.interceptor.RuntimeLoading#setRuntimeLoading(boolean)
 	 */
 	@Override
 	public void setRuntimeLoading(boolean runtimeLoading) {

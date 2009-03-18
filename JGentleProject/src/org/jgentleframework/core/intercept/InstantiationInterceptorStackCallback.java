@@ -144,8 +144,8 @@ public class InstantiationInterceptorStackCallback {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.core.intercept.InstantiationInterceptor#instantiate
-	 * (org.exxlabs.jgentle.core.intercept.ObjectInstantiation)
+	 * org.jgentleframework.core.intercept.InstantiationInterceptor#instantiate
+	 * (org.jgentleframework.core.intercept.ObjectInstantiation)
 	 */
 	public Object instantiate() throws Throwable {
 
@@ -197,7 +197,7 @@ public class InstantiationInterceptorStackCallback {
 		/*
 		 * (non-Javadoc)
 		 * @see
-		 * org.exxlabs.jgentle.core.intercept.ObjectInstantiation#argTypes()
+		 * org.jgentleframework.core.intercept.ObjectInstantiation#argTypes()
 		 */
 		@Override
 		public Class<?>[] argTypes() {
@@ -207,7 +207,7 @@ public class InstantiationInterceptorStackCallback {
 
 		/*
 		 * (non-Javadoc)
-		 * @see org.exxlabs.jgentle.core.intercept.ObjectInstantiation#args()
+		 * @see org.jgentleframework.core.intercept.ObjectInstantiation#args()
 		 */
 		@Override
 		public Object[] args() {
@@ -218,7 +218,7 @@ public class InstantiationInterceptorStackCallback {
 		/*
 		 * (non-Javadoc)
 		 * @see
-		 * org.exxlabs.jgentle.core.intercept.ObjectInstantiation#getRequestor()
+		 * org.jgentleframework.core.intercept.ObjectInstantiation#getRequestor()
 		 */
 		@Override
 		public Object getRequestor() {
@@ -229,7 +229,7 @@ public class InstantiationInterceptorStackCallback {
 		/*
 		 * (non-Javadoc)
 		 * @see
-		 * org.exxlabs.jgentle.core.intercept.ObjectInstantiation#getTargetClass
+		 * org.jgentleframework.core.intercept.ObjectInstantiation#getTargetClass
 		 * ()
 		 */
 		@Override
@@ -241,7 +241,7 @@ public class InstantiationInterceptorStackCallback {
 		/*
 		 * (non-Javadoc)
 		 * @see
-		 * org.exxlabs.jgentle.core.intercept.ObjectInstantiation#getInterfaces
+		 * org.jgentleframework.core.intercept.ObjectInstantiation#getInterfaces
 		 * ()
 		 */
 		@Override
@@ -319,7 +319,7 @@ public class InstantiationInterceptorStackCallback {
 		/*
 		 * (non-Javadoc)
 		 * @see
-		 * org.exxlabs.jgentle.core.intercept.ObjectInstantiation#getPreviousResult
+		 * org.jgentleframework.core.intercept.ObjectInstantiation#getPreviousResult
 		 * ()
 		 */
 		@Override
@@ -331,7 +331,7 @@ public class InstantiationInterceptorStackCallback {
 		/*
 		 * (non-Javadoc)
 		 * @see
-		 * org.exxlabs.jgentle.core.intercept.ObjectInstantiation#setPreviousResult
+		 * org.jgentleframework.core.intercept.ObjectInstantiation#setPreviousResult
 		 * (java.lang.Object)
 		 */
 		@Override

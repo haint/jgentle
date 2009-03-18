@@ -57,7 +57,7 @@ public class BasicFieldMatchingAspectPair extends MetadataController implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.context.aop.support.FieldMatching#getField()
+	 * @see org.jgentleframework.context.aop.support.FieldMatching#getField()
 	 */
 	@Override
 	public Field getField() {
@@ -68,7 +68,7 @@ public class BasicFieldMatchingAspectPair extends MetadataController implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.context.aop.support.Matching#getTargetObject()
+	 * @see org.jgentleframework.context.aop.support.Matching#getTargetObject()
 	 */
 	@Override
 	public Object getTargetObject() {
@@ -79,7 +79,7 @@ public class BasicFieldMatchingAspectPair extends MetadataController implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.context.aop.support.ClassMatching#getTargetClass()
+	 * @see org.jgentleframework.context.aop.support.ClassMatching#getTargetClass()
 	 */
 	@Override
 	public Class<?> getTargetClass() {

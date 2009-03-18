@@ -97,9 +97,9 @@ public class RmiWrappingBeanExporterImpl implements Processing,
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.integration.remoting.rmi.support.Processing#invoke
-	 * (org.exxlabs.jgentle.integration.remoting.rmi.support.WrappingProcessor,
-	 * org.exxlabs.jgentle.integration.remoting.RemoteInvocation)
+	 * org.jgentleframework.integration.remoting.rmi.support.Processing#invoke
+	 * (org.jgentleframework.integration.remoting.rmi.support.WrappingProcessor,
+	 * org.jgentleframework.integration.remoting.RemoteInvocation)
 	 */
 	@Override
 	public Object invoke(WrappingProcessor processor,

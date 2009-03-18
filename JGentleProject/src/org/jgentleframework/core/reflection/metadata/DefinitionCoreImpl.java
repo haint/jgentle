@@ -126,8 +126,8 @@ abstract class DefinitionCoreImpl extends MetadataController implements
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.core.reflection.metadata.DefinitionCore#containsMeta
-	 * (org.exxlabs.jgentle.core.reflection.metadata.AnnoMeta)
+	 * org.jgentleframework.core.reflection.metadata.DefinitionCore#containsMeta
+	 * (org.jgentleframework.core.reflection.metadata.AnnoMeta)
 	 */
 	@Override
 	public boolean containsMeta(AnnoMeta annoMeta) {
@@ -138,7 +138,7 @@ abstract class DefinitionCoreImpl extends MetadataController implements
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.core.reflection.metadata.DefinitionCore#getAnnoMeta()
+	 * org.jgentleframework.core.reflection.metadata.DefinitionCore#getAnnoMeta()
 	 */
 	@Override
 	public AnnoMeta getAnnoMeta() {
@@ -148,7 +148,7 @@ abstract class DefinitionCoreImpl extends MetadataController implements
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.core.reflection.metadata.DefinitionCore#
+	 * @seeorg.jgentleframework.core.reflection.metadata.DefinitionCore#
 	 * getConstructorDefList()
 	 */
 	@Override
@@ -160,7 +160,7 @@ abstract class DefinitionCoreImpl extends MetadataController implements
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.core.reflection.metadata.DefinitionCore#getFieldDefList
+	 * org.jgentleframework.core.reflection.metadata.DefinitionCore#getFieldDefList
 	 * ()
 	 */
 	@Override
@@ -172,7 +172,7 @@ abstract class DefinitionCoreImpl extends MetadataController implements
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.core.reflection.metadata.DefinitionCore#getMethodDefList
+	 * org.jgentleframework.core.reflection.metadata.DefinitionCore#getMethodDefList
 	 * ()
 	 */
 	@Override
@@ -183,7 +183,7 @@ abstract class DefinitionCoreImpl extends MetadataController implements
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.core.reflection.metadata.DefinitionCore#
+	 * @seeorg.jgentleframework.core.reflection.metadata.DefinitionCore#
 	 * getOriginalAnnotation(java.lang.Class)
 	 */
 	@SuppressWarnings("unchecked")
@@ -200,7 +200,7 @@ abstract class DefinitionCoreImpl extends MetadataController implements
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.core.reflection.metadata.DefinitionCore#
+	 * @seeorg.jgentleframework.core.reflection.metadata.DefinitionCore#
 	 * getOriginalAnnotations()
 	 */
 	@Override
@@ -211,7 +211,7 @@ abstract class DefinitionCoreImpl extends MetadataController implements
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.core.reflection.metadata.DefinitionCore#
+	 * @seeorg.jgentleframework.core.reflection.metadata.DefinitionCore#
 	 * getParameterDefList()
 	 */
 	@Override
@@ -225,7 +225,7 @@ abstract class DefinitionCoreImpl extends MetadataController implements
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.core.reflection.metadata.DefinitionCore#
+	 * @seeorg.jgentleframework.core.reflection.metadata.DefinitionCore#
 	 * isInterpretedOfClass()
 	 */
 	@Override
@@ -239,7 +239,7 @@ abstract class DefinitionCoreImpl extends MetadataController implements
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.core.reflection.metadata.DefinitionCore#
+	 * @seeorg.jgentleframework.core.reflection.metadata.DefinitionCore#
 	 * isInterpretedOfConstructor()
 	 */
 	@Override
@@ -253,7 +253,7 @@ abstract class DefinitionCoreImpl extends MetadataController implements
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.core.reflection.metadata.DefinitionCore#
+	 * @seeorg.jgentleframework.core.reflection.metadata.DefinitionCore#
 	 * isInterpretedOfField()
 	 */
 	@Override
@@ -267,7 +267,7 @@ abstract class DefinitionCoreImpl extends MetadataController implements
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.core.reflection.metadata.DefinitionCore#
+	 * @seeorg.jgentleframework.core.reflection.metadata.DefinitionCore#
 	 * isInterpretedOfMethod()
 	 */
 	@Override
@@ -281,7 +281,7 @@ abstract class DefinitionCoreImpl extends MetadataController implements
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.core.reflection.metadata.DefinitionCore#
+	 * @seeorg.jgentleframework.core.reflection.metadata.DefinitionCore#
 	 * setOriginalAnnotations(java.lang.annotation.Annotation[])
 	 */
 	@Override
@@ -293,9 +293,9 @@ abstract class DefinitionCoreImpl extends MetadataController implements
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.core.reflection.metadata.DefinitionCore#
+	 * @seeorg.jgentleframework.core.reflection.metadata.DefinitionCore#
 	 * setParameterDefList
-	 * (org.exxlabs.jgentle.core.reflection.metadata.Definition[])
+	 * (org.jgentleframework.core.reflection.metadata.Definition[])
 	 */
 	@Override
 	public void setParameterDefList(Definition[] parameterDefList) {

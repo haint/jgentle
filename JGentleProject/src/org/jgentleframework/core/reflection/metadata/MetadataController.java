@@ -75,7 +75,7 @@ public class MetadataController extends MetadataImpl implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.core.reflection.metadata.MetadataControl#addMetadata(org.aopalliance.reflect.Metadata)
+	 * @see org.jgentleframework.core.reflection.metadata.MetadataControl#addMetadata(org.aopalliance.reflect.Metadata)
 	 */
 	@Override
 	public void addMetadata(Metadata metadata) {
@@ -90,7 +90,7 @@ public class MetadataController extends MetadataImpl implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.core.reflection.metadata.MetadataControl#getMetadata(java.lang.Object)
+	 * @see org.jgentleframework.core.reflection.metadata.MetadataControl#getMetadata(java.lang.Object)
 	 */
 	@Override
 	public Metadata getMetadata(Object key) {
@@ -101,7 +101,7 @@ public class MetadataController extends MetadataImpl implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.core.reflection.metadata.MetadataControl#getMetadatas()
+	 * @see org.jgentleframework.core.reflection.metadata.MetadataControl#getMetadatas()
 	 */
 	@Override
 	public Metadata[] getMetadatas() {
@@ -113,7 +113,7 @@ public class MetadataController extends MetadataImpl implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.core.reflection.metadata.MetadataControl#removeMetadata(java.lang.Object)
+	 * @see org.jgentleframework.core.reflection.metadata.MetadataControl#removeMetadata(java.lang.Object)
 	 */
 	@Override
 	public void removeMetadata(Object key) {

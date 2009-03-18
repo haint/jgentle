@@ -58,7 +58,7 @@ class TruePointcut implements PointcutOfAll, Serializable {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.context.aop.Pointcut#getClassFilter()
+	 * @see org.jgentleframework.context.aop.Pointcut#getClassFilter()
 	 */
 	public ClassFilter getClassFilter() {
 
@@ -68,7 +68,7 @@ class TruePointcut implements PointcutOfAll, Serializable {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.context.aop.Pointcut#getConstructorFilter()
+	 * @see org.jgentleframework.context.aop.Pointcut#getConstructorFilter()
 	 */
 	@Override
 	public ConstructorFilter getConstructorFilter() {
@@ -79,7 +79,7 @@ class TruePointcut implements PointcutOfAll, Serializable {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.context.aop.Pointcut#getFieldFilter()
+	 * @see org.jgentleframework.context.aop.Pointcut#getFieldFilter()
 	 */
 	@Override
 	public FieldFilter getFieldFilter() {
@@ -90,7 +90,7 @@ class TruePointcut implements PointcutOfAll, Serializable {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.context.aop.Pointcut#getMethodFilter()
+	 * @see org.jgentleframework.context.aop.Pointcut#getMethodFilter()
 	 */
 	@Override
 	public MethodFilter getMethodFilter() {
@@ -123,7 +123,7 @@ class TruePointcut implements PointcutOfAll, Serializable {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.context.aop.Pointcut#getFilter()
+	 * @see org.jgentleframework.context.aop.Pointcut#getFilter()
 	 */
 	@Override
 	public Filter<Matching> getFilter() {
@@ -140,7 +140,7 @@ class TruePointcut implements PointcutOfAll, Serializable {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.context.aop.PointcutOfParameterFilter#getParameterFilter()
+	 * @see org.jgentleframework.context.aop.PointcutOfParameterFilter#getParameterFilter()
 	 */
 	@Override
 	public ParameterFilter<?> getParameterFilter() {

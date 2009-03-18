@@ -74,7 +74,7 @@ public class ParameterAnnotatedWithMatcher extends
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.context.aop.PointcutOfParameterFilter#getParameterFilter()
+	 * @see org.jgentleframework.context.aop.PointcutOfParameterFilter#getParameterFilter()
 	 */
 	@Override
 	public ParameterFilter<Method> getParameterFilter() {
@@ -88,7 +88,7 @@ public class ParameterAnnotatedWithMatcher extends
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.context.aop.Pointcut#getFilter()
+	 * @see org.jgentleframework.context.aop.Pointcut#getFilter()
 	 */
 	@Override
 	public Filter<ParameterMatching<Method>> getFilter() {

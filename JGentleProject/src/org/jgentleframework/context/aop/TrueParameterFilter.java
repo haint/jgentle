@@ -62,7 +62,7 @@ public class TrueParameterFilter extends
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.context.aop.ParameterFilter#matches(org.exxlabs.jgentle.context.aop.support.ParameterMatching)
+	 * @see org.jgentleframework.context.aop.ParameterFilter#matches(org.jgentleframework.context.aop.support.ParameterMatching)
 	 */
 	@Override
 	public boolean matches(ParameterMatching<Method> matching) {
@@ -73,7 +73,7 @@ public class TrueParameterFilter extends
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.context.aop.RuntimeSupportFilter#isRuntime()
+	 * @see org.jgentleframework.context.aop.RuntimeSupportFilter#isRuntime()
 	 */
 	@Override
 	public boolean isRuntime() {

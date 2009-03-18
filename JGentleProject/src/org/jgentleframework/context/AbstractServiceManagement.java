@@ -73,7 +73,7 @@ public abstract class AbstractServiceManagement extends ProviderCoreCreator
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.context.injecting.AbstractBeanFactory#getBeanInstance
+	 * org.jgentleframework.context.injecting.AbstractBeanFactory#getBeanInstance
 	 * (java.lang.Class, java.lang.Class, java.lang.String, java.lang.String)
 	 */
 	@Override
@@ -170,9 +170,9 @@ public abstract class AbstractServiceManagement extends ProviderCoreCreator
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.context.support.IAbstractServiceManagement#
+	 * @seeorg.jgentleframework.context.support.IAbstractServiceManagement#
 	 * getCachedMatcherOf
-	 * (org.exxlabs.jgentle.core.reflection.metadata.Definition)
+	 * (org.jgentleframework.core.reflection.metadata.Definition)
 	 */
 	@Override
 	public Matcher<Definition> getCachedMatcherOf(Definition def) {
@@ -182,9 +182,9 @@ public abstract class AbstractServiceManagement extends ProviderCoreCreator
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.context.support.IAbstractServiceManagement#
+	 * @seeorg.jgentleframework.context.support.IAbstractServiceManagement#
 	 * getInterceptorFromMatcher
-	 * (org.exxlabs.jgentle.core.intercept.support.Matcher, java.util.List)
+	 * (org.jgentleframework.core.intercept.support.Matcher, java.util.List)
 	 */
 	@Override
 	public void getInterceptorFromMatcher(Matcher<Definition> matcher,
@@ -223,7 +223,7 @@ public abstract class AbstractServiceManagement extends ProviderCoreCreator
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.context.support.IAbstractServiceManagement#
+	 * @seeorg.jgentleframework.context.support.IAbstractServiceManagement#
 	 * getInterceptorsFromMatcher(java.util.ArrayList)
 	 */
 	@Override
@@ -240,7 +240,7 @@ public abstract class AbstractServiceManagement extends ProviderCoreCreator
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.context.support.IAbstractServiceManagement#
+	 * @seeorg.jgentleframework.context.support.IAbstractServiceManagement#
 	 * getMatcherCache()
 	 */
 	@Override
@@ -252,7 +252,7 @@ public abstract class AbstractServiceManagement extends ProviderCoreCreator
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.context.support.IAbstractServiceManagement#getMatcherOf
+	 * org.jgentleframework.context.support.IAbstractServiceManagement#getMatcherOf
 	 * (org.aopalliance.intercept.Interceptor)
 	 */
 	@Override
@@ -271,8 +271,8 @@ public abstract class AbstractServiceManagement extends ProviderCoreCreator
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.context.support.IAbstractServiceManagement#isRegistered
-	 * (org.exxlabs.jgentle.core.intercept.support.Matcher,
+	 * org.jgentleframework.context.support.IAbstractServiceManagement#isRegistered
+	 * (org.jgentleframework.core.intercept.support.Matcher,
 	 * org.aopalliance.intercept.Interceptor)
 	 */
 	@Override
@@ -298,8 +298,8 @@ public abstract class AbstractServiceManagement extends ProviderCoreCreator
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.context.support.IAbstractServiceManagement#
-	 * isRegisteredMatcher(org.exxlabs.jgentle.core.intercept.support.Matcher)
+	 * @seeorg.jgentleframework.context.support.IAbstractServiceManagement#
+	 * isRegisteredMatcher(org.jgentleframework.core.intercept.support.Matcher)
 	 */
 	@Override
 	public boolean isRegisteredMatcher(Matcher<Definition> matcher) {
@@ -313,9 +313,9 @@ public abstract class AbstractServiceManagement extends ProviderCoreCreator
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.context.support.IAbstractServiceManagement#
+	 * @seeorg.jgentleframework.context.support.IAbstractServiceManagement#
 	 * refreshMatcherCache
-	 * (org.exxlabs.jgentle.core.reflection.metadata.Definition)
+	 * (org.jgentleframework.core.reflection.metadata.Definition)
 	 */
 	@Override
 	public void refreshMatcherCache(Definition definition) {
@@ -373,8 +373,8 @@ public abstract class AbstractServiceManagement extends ProviderCoreCreator
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.context.support.IAbstractServiceManagement#unregisters
-	 * (org.exxlabs.jgentle.core.intercept.support.Matcher)
+	 * org.jgentleframework.context.support.IAbstractServiceManagement#unregisters
+	 * (org.jgentleframework.core.intercept.support.Matcher)
 	 */
 	@Override
 	public void unregisters(Matcher<Definition> matcher) {
@@ -386,7 +386,7 @@ public abstract class AbstractServiceManagement extends ProviderCoreCreator
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.context.support.IAbstractServiceManagement#unregisters
+	 * org.jgentleframework.context.support.IAbstractServiceManagement#unregisters
 	 * (org.aopalliance.intercept.Interceptor)
 	 */
 	@Override

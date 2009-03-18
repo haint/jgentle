@@ -17,6 +17,8 @@
  */
 package org.jgentleframework.core.reflection.metadata;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -48,7 +50,7 @@ class DefinitionImpl extends DefinitionCoreImpl implements Metadata, Definition 
 	/** The Constant serialVersionUID. */
 	private static final long		serialVersionUID	= -4259116314930030126L;
 
-	protected final Log				log					= LogFactory
+	transient protected Log			log					= LogFactory
 																.getLog(getClass());
 
 	/** The visitor. */
@@ -89,7 +91,7 @@ class DefinitionImpl extends DefinitionCoreImpl implements Metadata, Definition 
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.core.reflection.metadata.DefinitionCore#buildAnnoMeta
+	 * org.jgentleframework.core.reflection.metadata.DefinitionCore#buildAnnoMeta
 	 * ()
 	 */
 	@Override
@@ -101,7 +103,7 @@ class DefinitionImpl extends DefinitionCoreImpl implements Metadata, Definition 
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.core.reflection.metadata.Definition#
+	 * @seeorg.jgentleframework.core.reflection.metadata.Definition#
 	 * getAllAnnotatedConstructors()
 	 */
 	@Override
@@ -115,9 +117,8 @@ class DefinitionImpl extends DefinitionCoreImpl implements Metadata, Definition 
 
 	/*
 	 * (non-Javadoc)
-	 * @see
-	 * org.exxlabs.jgentle.core.reflection.metadata.Definition#getAllAnnotatedFields
-	 * ()
+	 * @seeorg.jgentleframework.core.reflection.metadata.Definition#
+	 * getAllAnnotatedFields ()
 	 */
 	@Override
 	public Set<Field> getAllAnnotatedFields() {
@@ -130,7 +131,7 @@ class DefinitionImpl extends DefinitionCoreImpl implements Metadata, Definition 
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.core.reflection.metadata.Definition#
+	 * @seeorg.jgentleframework.core.reflection.metadata.Definition#
 	 * getAllAnnotatedMethods()
 	 */
 	@Override
@@ -144,7 +145,7 @@ class DefinitionImpl extends DefinitionCoreImpl implements Metadata, Definition 
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.core.reflection.metadata.Definition#
+	 * @seeorg.jgentleframework.core.reflection.metadata.Definition#
 	 * getAllConstructorsAnnotatedParameter()
 	 */
 	@Override
@@ -166,7 +167,7 @@ class DefinitionImpl extends DefinitionCoreImpl implements Metadata, Definition 
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.core.reflection.metadata.Definition#
+	 * @seeorg.jgentleframework.core.reflection.metadata.Definition#
 	 * getAllMethodsAnnotatedParameter()
 	 */
 	@Override
@@ -224,7 +225,7 @@ class DefinitionImpl extends DefinitionCoreImpl implements Metadata, Definition 
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.core.reflection.metadata.Definition#
+	 * @seeorg.jgentleframework.core.reflection.metadata.Definition#
 	 * getArgsMemberDefinitions(java.lang.reflect.Method)
 	 */
 	@Override
@@ -240,7 +241,7 @@ class DefinitionImpl extends DefinitionCoreImpl implements Metadata, Definition 
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.core.reflection.metadata.Definition#
+	 * @seeorg.jgentleframework.core.reflection.metadata.Definition#
 	 * getConstructorsAnnotatedWith(java.lang.Class)
 	 */
 	@Override
@@ -263,7 +264,7 @@ class DefinitionImpl extends DefinitionCoreImpl implements Metadata, Definition 
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.core.reflection.metadata.Definition#
+	 * @seeorg.jgentleframework.core.reflection.metadata.Definition#
 	 * getConstructorsAnnotatedWith(java.lang.Class<? extends
 	 * java.lang.annotation.Annotation>[])
 	 */
@@ -297,7 +298,7 @@ class DefinitionImpl extends DefinitionCoreImpl implements Metadata, Definition 
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.core.reflection.metadata.Definition#
+	 * @seeorg.jgentleframework.core.reflection.metadata.Definition#
 	 * getFieldsAnnotatedWith(java.lang.Class)
 	 */
 	@Override
@@ -319,7 +320,7 @@ class DefinitionImpl extends DefinitionCoreImpl implements Metadata, Definition 
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.core.reflection.metadata.Definition#
+	 * @seeorg.jgentleframework.core.reflection.metadata.Definition#
 	 * getFieldsAnnotatedWith(java.lang.Class<? extends
 	 * java.lang.annotation.Annotation>[])
 	 */
@@ -344,7 +345,7 @@ class DefinitionImpl extends DefinitionCoreImpl implements Metadata, Definition 
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.core.reflection.metadata.Definition#getMemberDefinition
+	 * org.jgentleframework.core.reflection.metadata.Definition#getMemberDefinition
 	 * (java.lang.reflect.Constructor)
 	 */
 	@Override
@@ -361,7 +362,7 @@ class DefinitionImpl extends DefinitionCoreImpl implements Metadata, Definition 
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.core.reflection.metadata.Definition#getMemberDefinition
+	 * org.jgentleframework.core.reflection.metadata.Definition#getMemberDefinition
 	 * (java.lang.reflect.Field)
 	 */
 	@Override
@@ -378,7 +379,7 @@ class DefinitionImpl extends DefinitionCoreImpl implements Metadata, Definition 
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.core.reflection.metadata.Definition#getMemberDefinition
+	 * org.jgentleframework.core.reflection.metadata.Definition#getMemberDefinition
 	 * (java.lang.reflect.Method)
 	 */
 	@Override
@@ -395,7 +396,7 @@ class DefinitionImpl extends DefinitionCoreImpl implements Metadata, Definition 
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.core.reflection.metadata.Definition#getMemberDefinition
+	 * org.jgentleframework.core.reflection.metadata.Definition#getMemberDefinition
 	 * (java.lang.Object)
 	 */
 	@Override
@@ -423,7 +424,7 @@ class DefinitionImpl extends DefinitionCoreImpl implements Metadata, Definition 
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.core.reflection.metadata.Definition#
+	 * @seeorg.jgentleframework.core.reflection.metadata.Definition#
 	 * getMemberDefinitionOfField(java.lang.String)
 	 */
 	@Override
@@ -447,7 +448,7 @@ class DefinitionImpl extends DefinitionCoreImpl implements Metadata, Definition 
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.core.reflection.metadata.Definition#
+	 * @seeorg.jgentleframework.core.reflection.metadata.Definition#
 	 * getMemberDefinitionOfMethod(java.lang.String, java.lang.Class<?>[])
 	 */
 	@Override
@@ -500,7 +501,7 @@ class DefinitionImpl extends DefinitionCoreImpl implements Metadata, Definition 
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.core.reflection.metadata.Definition#
+	 * @seeorg.jgentleframework.core.reflection.metadata.Definition#
 	 * getMethodsAnnotatedWith(java.lang.Class)
 	 */
 	@Override
@@ -523,7 +524,7 @@ class DefinitionImpl extends DefinitionCoreImpl implements Metadata, Definition 
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.core.reflection.metadata.Definition#
+	 * @seeorg.jgentleframework.core.reflection.metadata.Definition#
 	 * getMethodsAnnotatedWith(java.lang.Class<? extends
 	 * java.lang.annotation.Annotation>[])
 	 */
@@ -579,7 +580,7 @@ class DefinitionImpl extends DefinitionCoreImpl implements Metadata, Definition 
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.core.reflection.metadata.Definition#isAnnotationPresent
+	 * org.jgentleframework.core.reflection.metadata.Definition#isAnnotationPresent
 	 * ()
 	 */
 	@Override
@@ -611,7 +612,7 @@ class DefinitionImpl extends DefinitionCoreImpl implements Metadata, Definition 
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.core.reflection.metadata.Definition#
+	 * @seeorg.jgentleframework.core.reflection.metadata.Definition#
 	 * isAnnotationPresentAtAnyConstructor()
 	 */
 	@Override
@@ -627,7 +628,7 @@ class DefinitionImpl extends DefinitionCoreImpl implements Metadata, Definition 
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.core.reflection.metadata.Definition#
+	 * @seeorg.jgentleframework.core.reflection.metadata.Definition#
 	 * isAnnotationPresentAtAnyConstructor(java.lang.Class)
 	 */
 	@Override
@@ -646,7 +647,7 @@ class DefinitionImpl extends DefinitionCoreImpl implements Metadata, Definition 
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.core.reflection.metadata.Definition#
+	 * @seeorg.jgentleframework.core.reflection.metadata.Definition#
 	 * isAnnotationPresentAtAnyField()
 	 */
 	@Override
@@ -662,7 +663,7 @@ class DefinitionImpl extends DefinitionCoreImpl implements Metadata, Definition 
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.core.reflection.metadata.Definition#
+	 * @seeorg.jgentleframework.core.reflection.metadata.Definition#
 	 * isAnnotationPresentAtAnyField(java.lang.Class)
 	 */
 	@Override
@@ -684,7 +685,7 @@ class DefinitionImpl extends DefinitionCoreImpl implements Metadata, Definition 
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.core.reflection.metadata.Definition#
+	 * @seeorg.jgentleframework.core.reflection.metadata.Definition#
 	 * isAnnotationPresentAtAnyMethod()
 	 */
 	@Override
@@ -700,7 +701,7 @@ class DefinitionImpl extends DefinitionCoreImpl implements Metadata, Definition 
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.core.reflection.metadata.Definition#
+	 * @seeorg.jgentleframework.core.reflection.metadata.Definition#
 	 * isAnnotationPresentAtAnyMethod(java.lang.Class)
 	 */
 	@Override
@@ -719,7 +720,7 @@ class DefinitionImpl extends DefinitionCoreImpl implements Metadata, Definition 
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.core.reflection.metadata.Definition#
+	 * @seeorg.jgentleframework.core.reflection.metadata.Definition#
 	 * isAnnotationPresentAtAnyParameter()
 	 */
 	@Override
@@ -757,7 +758,7 @@ class DefinitionImpl extends DefinitionCoreImpl implements Metadata, Definition 
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.core.reflection.metadata.Definition#
+	 * @seeorg.jgentleframework.core.reflection.metadata.Definition#
 	 * isAnnotationPresentAtAnyParameter(java.lang.Class)
 	 */
 	@Override
@@ -806,7 +807,7 @@ class DefinitionImpl extends DefinitionCoreImpl implements Metadata, Definition 
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.core.reflection.metadata.Definition#
+	 * @seeorg.jgentleframework.core.reflection.metadata.Definition#
 	 * isAnnotationPresentAtAnyWhere()
 	 */
 	@Override
@@ -820,7 +821,7 @@ class DefinitionImpl extends DefinitionCoreImpl implements Metadata, Definition 
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.exxlabs.jgentle.core.reflection.metadata.Definition#
+	 * @seeorg.jgentleframework.core.reflection.metadata.Definition#
 	 * isAnnotationPresentAtAnyWhere(java.lang.Class)
 	 */
 	@Override
@@ -834,10 +835,24 @@ class DefinitionImpl extends DefinitionCoreImpl implements Metadata, Definition 
 				|| isAnnotationPresentAtAnyConstructors(annotationClass);
 	}
 
+	/**
+	 * Overrides default readObject method.
+	 * 
+	 * @param stream
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 */
+	private void readObject(ObjectInputStream stream) throws IOException,
+			ClassNotFoundException {
+
+		stream.defaultReadObject();
+		log = LogFactory.getLog(getClass());
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.core.reflection.metadata.Definition#setValueOfAnnotation
+	 * org.jgentleframework.core.reflection.metadata.Definition#setValueOfAnnotation
 	 * (java.lang.Class, java.lang.String, java.lang.Object)
 	 */
 	@Override
@@ -851,8 +866,8 @@ class DefinitionImpl extends DefinitionCoreImpl implements Metadata, Definition 
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.core.reflection.metadata.DefinitionCore#setVisitor
-	 * (org.exxlabs.jgentle.core.reflection.aohreflect.IAnnotationVisitor)
+	 * org.jgentleframework.core.reflection.metadata.DefinitionCore#setVisitor
+	 * (org.jgentleframework.core.reflection.aohreflect.IAnnotationVisitor)
 	 */
 	@Override
 	public void setVisitor(IAnnotationVisitor visitor) {
