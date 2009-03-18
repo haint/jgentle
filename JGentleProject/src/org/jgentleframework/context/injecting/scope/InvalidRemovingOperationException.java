@@ -20,21 +20,30 @@ package org.jgentleframework.context.injecting.scope;
 import org.jgentleframework.core.JGentleException;
 
 /**
+ * The Class InvalidRemovingOperationException.
+ * 
  * @author LE QUOC CHUNG - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
  * @date Mar 11, 2008
  */
 public class InvalidRemovingOperationException extends JGentleException {
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long	serialVersionUID	= 5689282754676881836L;
 
+	/**
+	 * Instantiates a new invalid removing operation exception.
+	 */
 	public InvalidRemovingOperationException() {
 
 		super();
 	}
 
+	/**
+	 * Instantiates a new invalid removing operation exception.
+	 * 
+	 * @param strEx
+	 *            the str ex
+	 */
 	public InvalidRemovingOperationException(String strEx) {
 
 		super(strEx);

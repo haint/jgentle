@@ -24,10 +24,10 @@ import java.util.Map;
 import org.jgentleframework.context.injecting.Provider;
 
 /**
- * This class represents a detector manager. It manages all detector in the
+ * This class represents a detector manager. It manages all detectors in the
  * chain of its. After the {@link Provider} is created but before it is returned
- * to client, all detectors in the chain will be serial performed in order to
- * detect specified bean or execute some specified task.
+ * to client, all detectors in the chain will be executed serially in order to
+ * detect specified bean or execute some specified tasks.
  * 
  * @author LE QUOC CHUNG - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>

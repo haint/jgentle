@@ -20,9 +20,8 @@ package org.jgentleframework.context.services;
 import java.util.Iterator;
 
 /**
- * Chỉ định thông tin listener của domain context, DomainContextListener sẽ nắm
- * hết tất cả thông tin event được ném ra khi có bất kì một domain nào được thêm
- * vào hoặc gỡ bỏ ra khỏi context.
+ * Represents the domain context listener that allows for custom behaviour when
+ * each domain is added or removed.
  * 
  * @author LE QUOC CHUNG - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
@@ -30,19 +29,21 @@ import java.util.Iterator;
  */
 public interface DomainContextListener {
 	/**
-	 * Chỉ định được thực thi khi có domain được add thêm vào trong context.
+	 * The implementation of this method will be invoked aumatically when each
+	 * domain is added to context.
 	 * 
 	 * @param childrenAffected
-	 *            một Iterator danh sách các domain vừa được add thêm vào.
+	 *            the {@link Iterator} containing all adding domains.
 	 */
 	@SuppressWarnings("unchecked")
 	public void childrenAdded(Iterator childrenAffected);
 
 	/**
-	 * Chỉ định được thực thi khi có domain bị remove ra khỏi context.
+	 * The implementation of this method will be invoked automatically when each
+	 * domain is removed.
 	 * 
 	 * @param childrenAffected
-	 *            một Iterator danh sách các domain vừa bị remove.
+	 *            the {@link Iterator} containing all removed domains.
 	 */
 	@SuppressWarnings("unchecked")
 	public void childrenRemoved(Iterator childrenAffected);

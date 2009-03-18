@@ -26,14 +26,18 @@ import org.jgentleframework.core.reflection.metadata.Definition;
  * {@link Definition} to the argument of method.
  * <p>
  * <b>Note:</b>
- * <p>- The {@link #setDefinition(Definition)} method will be invoked before
- * the {@link Initializing#afterBeanCreated()} method is invoked.
- * <p> - For a list of all bean lifecycle methods, see the {@link Initializing}
- * and {@link Disposable}.
+ * <p>
+ * - The {@link #setDefinition(Definition)} method will be invoked before the
+ * {@link Initializing#afterBeanCreated()} method is invoked.
+ * <p>
+ * - For a list of all bean lifecycle methods, see the {@link Initializing} and
+ * {@link Disposable}.
  * 
  * @author LE QUOC CHUNG - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
  * @date Jul 28, 2008
+ * @see Initializing
+ * @see Disposable
  */
 public interface DefinitionAware {
 	/**
@@ -42,8 +46,8 @@ public interface DefinitionAware {
 	 * initialization callback such as {@link Initializing#afterBeanCreated()}
 	 * or a custom init-method.
 	 * 
-	 * @param def
+	 * @param definition
 	 *            owning {@link Definition} (never <code>null</code>).
 	 */
-	public void setDefinition(Definition def);
+	public void setDefinition(Definition definition);
 }

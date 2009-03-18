@@ -67,11 +67,10 @@ public class ExtensionPointsDetector extends AbstractDetector {
 	}
 
 	/**
-	 * Gets the iD from bean class.
+	 * Returns the ID ({@link Definition}) of the given bean class.
 	 * 
 	 * @param clazz
-	 *            the clazz
-	 * @return the iD from bean class
+	 *            the given object class corresponding to specified bean.
 	 */
 	private String getIDFromBeanClass(Class<?> clazz) {
 
@@ -213,7 +212,7 @@ public class ExtensionPointsDetector extends AbstractDetector {
 	 * Detects {@link ObjectAttach}.
 	 * 
 	 * @param oa
-	 *            the oa
+	 *            the given {@link ObjectAttach} instance.
 	 */
 	private void checkObjectAttach(ObjectAttach<?> oa) {
 

@@ -70,7 +70,7 @@ class BeforeAdviceStackMethodInterceptor extends AbstractBeforeAdvice implements
 	}
 
 	/**
-	 * Find advice instances.
+	 * Finds the advice instances.
 	 * 
 	 * @param before
 	 *            the before
@@ -196,7 +196,9 @@ class BeforeAdviceStackMethodInterceptor extends AbstractBeforeAdvice implements
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.jgentleframework.core.interceptor.RuntimeLoading#setRuntimeLoading(boolean)
+	 * @see
+	 * org.jgentleframework.core.interceptor.RuntimeLoading#setRuntimeLoading
+	 * (boolean)
 	 */
 	@Override
 	public void setRuntimeLoading(boolean runtimeLoading) {
@@ -206,7 +208,8 @@ class BeforeAdviceStackMethodInterceptor extends AbstractBeforeAdvice implements
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.jgentleframework.core.interceptor.RuntimeLoading#isRuntimeLoading()
+	 * @see
+	 * org.jgentleframework.core.interceptor.RuntimeLoading#isRuntimeLoading()
 	 */
 	@Override
 	public boolean isRuntimeLoading() {

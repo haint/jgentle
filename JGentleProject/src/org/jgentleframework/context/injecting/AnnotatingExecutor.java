@@ -42,14 +42,14 @@ import org.jgentleframework.utils.ReflectUtils;
  * @See {@link ObjectAnnotating}
  */
 public class AnnotatingExecutor {
-	/** Đối tượng {@link DefinitionManager}. */
-	DefinitionManager					defManager	= null;
+	/** The definition manager. */
+	DefinitionManager					definitionManager	= null;
 
-	/** Đối tượng {@link AbstractBeanFactory}. */
-	AbstractBeanFactory					abf			= null;
+	/** The abf. */
+	AbstractBeanFactory					abf					= null;
 
-	/** Đối tượng static {@link AnnotatingExecutor}. */
-	private static AnnotatingExecutor	objInstance	= null;
+	/** The obj instance. */
+	private static AnnotatingExecutor	objInstance			= null;
 
 	/**
 	 * Constructor.
@@ -60,7 +60,7 @@ public class AnnotatingExecutor {
 	private AnnotatingExecutor(AbstractBeanFactory abf) {
 
 		this.abf = abf;
-		this.defManager = abf.getDefinitionManager();
+		this.definitionManager = abf.getDefinitionManager();
 	}
 
 	/**
@@ -96,20 +96,20 @@ public class AnnotatingExecutor {
 	private void loadingValue(Object singleKey, Object singleValue, String ID,
 			Class<?> inClass, List<Object> annotateIDList) {
 
-		Definition defID = this.defManager.getDefinition(ID);
+		Definition defID = this.definitionManager.getDefinition(ID);
 		Definition def = defID != null ? defID.getMemberDefinition(singleKey)
 				: null;
 		if (def == null || !def.isAnnotationPresent(Annotate.class)) {
-			this.defManager.loadCustomizedDefinition(ID, singleKey, inClass,
-					TemplateClass.getAnnotation(Annotate.class));
-			defID = this.defManager.getDefinition(ID);
+			this.definitionManager.loadCustomizedDefinition(ID, singleKey,
+					inClass, TemplateClass.getAnnotation(Annotate.class));
+			defID = this.definitionManager.getDefinition(ID);
 			def = defID.getMemberDefinition(singleKey);
 		}
 		if (ReflectUtils.isCast(String.class, singleValue)) {
 			Object objAnno = this.abf.getBean((String) singleValue);
 			if (objAnno != null
 					&& ReflectUtils.isCast(Annotation.class, objAnno)) {
-				this.defManager.loadCustomizedDefinition(ID, singleKey,
+				this.definitionManager.loadCustomizedDefinition(ID, singleKey,
 						inClass, (Annotation) objAnno);
 			}
 			else {
@@ -133,8 +133,8 @@ public class AnnotatingExecutor {
 			}
 		}
 		else if (ReflectUtils.isCast(Annotation.class, singleValue)) {
-			this.defManager.loadCustomizedDefinition(ID, singleKey, inClass,
-					(Annotation) singleValue);
+			this.definitionManager.loadCustomizedDefinition(ID, singleKey,
+					inClass, (Annotation) singleValue);
 		}
 		else {
 			throw new AnnotatingRuntimeException(

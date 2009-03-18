@@ -20,21 +20,30 @@ package org.jgentleframework.context.injecting.scope;
 import org.jgentleframework.core.JGentleException;
 
 /**
+ * The Class InvalidAddingOperationException.
+ * 
  * @author LE QUOC CHUNG - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
  * @date Mar 12, 2008
  */
 public class InvalidAddingOperationException extends JGentleException {
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long	serialVersionUID	= -4444217466990278905L;
 
+	/**
+	 * Instantiates a new invalid adding operation exception.
+	 */
 	public InvalidAddingOperationException() {
 
 		super();
 	}
 
+	/**
+	 * Instantiates a new invalid adding operation exception.
+	 * 
+	 * @param strEx
+	 *            the str ex
+	 */
 	public InvalidAddingOperationException(String strEx) {
 
 		super(strEx);

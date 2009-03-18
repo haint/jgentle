@@ -22,8 +22,7 @@ import java.util.ArrayList;
 import org.jgentleframework.configure.enums.Scope;
 
 /**
- * Chịu trách nhiệm quản lý các <code>scope implementation</code> trong
- * <code>container</code>.
+ * Manages all scope instances in container.
  * 
  * @author LE QUOC CHUNG - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
@@ -44,12 +43,12 @@ public class ScopeController {
 	}
 
 	/**
-	 * Add một {@link ScopeImplementation} vào trong hệ thống.
+	 * Adds the given scope instance {@link ScopeImplementation} to current
+	 * scope controller.
 	 * 
 	 * @param scopeInstance
-	 *            đối tượng hiện thực cài đặt {@link ScopeImplementation}
-	 * @return boolean trả về <b>true</b> nếu thực thi thành công, ngược lại
-	 *         trả về <b>false</b>.
+	 *            the given scope instance.
+	 * @return returns <b>true</b> if success, if not, returns <b>false</b>.
 	 */
 	public synchronized boolean addScope(ScopeImplementation scopeInstance) {
 
@@ -57,9 +56,7 @@ public class ScopeController {
 	}
 
 	/**
-	 * Trả về số lượng {@link ScopeImplementation} hiện đang được quản lý.
-	 * 
-	 * @return int
+	 * Returns the number of scope instance which is managed.
 	 */
 	public synchronized int countScope() {
 
@@ -67,12 +64,10 @@ public class ScopeController {
 	}
 
 	/**
-	 * Kiểm tra một {@link ScopeImplementation} hiện có đang được chỉ định trong
-	 * hệ thống hay không.
+	 * Returns <b>true</b> if the current container contains the given scope.
 	 * 
 	 * @param scopeInstance
-	 *            đối tượng {@link ScopeImplementation} chỉ định cần kiểm tra.
-	 * @return boolean trả về <b>true</b> nếu có, ngược lại trả về <b>false</b>.
+	 *            the given scope instance.
 	 */
 	public synchronized boolean containsScope(ScopeImplementation scopeInstance) {
 
@@ -80,13 +75,12 @@ public class ScopeController {
 	}
 
 	/**
-	 * Gỡ bỏ một hiện thực cài đặt <code>scope</code> (
-	 * {@link ScopeImplementation} ) ra khỏi hệ thống.
+	 * Removes the given scope instance
 	 * 
 	 * @param scopeInstance
-	 *            đối tượng {@link ScopeImplementation} chỉ định cần kiểm tra.
-	 * @return boolean trả về <b>true</b> nếu việc gỡ bỏ thực thi thành công,
-	 *         ngược lại trả về <b>false</b>.
+	 *            the scope instance {@link ScopeImplementation} need to be
+	 *            removed.
+	 * @return returns <b>true</b> if success, if not, returns <b>false</b>.
 	 */
 	public synchronized boolean removeScope(ScopeImplementation scopeInstance) {
 
