@@ -21,8 +21,6 @@ import java.beans.ConstructorProperties;
 import java.beans.beancontext.BeanContextChildSupport;
 import java.beans.beancontext.BeanContextMembershipEvent;
 import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.util.Iterator;
 
 import org.jgentleframework.configure.annotation.BeanServices;
 import org.jgentleframework.context.injecting.Provider;
@@ -41,18 +39,39 @@ class ObjectBeanServiceImpl extends BeanContextChildSupport implements
 		ObjectBeanService {
 	/** The Constant serialVersionUID. */
 	private static final long	serialVersionUID	= 2135890119487753437L;
-	/** The definition. */
-	Definition					definition			= null;
+
 	/** The alias. */
 	String						alias				= null;
-	/** The singleton object. */
-	transient ServiceClass		singletonObject		= null;
-	/** The provider. */
-	transient Provider			provider			= null;
+
 	/** The args. */
 	transient Object[]			args				= null;
+
 	/** The constructor. */
 	transient Constructor<?>	constructor			= null;
+
+	/** The definition. */
+	Definition					definition			= null;
+
+	/** The provider. */
+	transient Provider			provider			= null;
+
+	/** The singleton object. */
+	transient ServiceClass		singletonObject		= null;
+
+	/**
+	 * Instantiates a new object bean service impl.
+	 * 
+	 * @param definition
+	 *            the definition
+	 * @param serviceClass
+	 *            the service class
+	 */
+	@ConstructorProperties(value = { "definition, serviceClass" })
+	public ObjectBeanServiceImpl(Definition definition,
+			Class<? extends ServiceClass> serviceClass) {
+
+		this.definition = definition;
+	}
 
 	/**
 	 * Instantiates a new object bean service impl.
@@ -73,91 +92,6 @@ class ObjectBeanServiceImpl extends BeanContextChildSupport implements
 	}
 
 	/**
-	 * Instantiates a new object bean service impl.
-	 * 
-	 * @param definition
-	 *            the definition
-	 * @param serviceClass
-	 *            the service class
-	 */
-	@ConstructorProperties(value = { "definition, serviceClass" })
-	public ObjectBeanServiceImpl(Definition definition,
-			Class<? extends ServiceClass> serviceClass) {
-
-		this.definition = definition;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.aohhandling.provider.ObjectBeanService#getDefinition()
-	 */
-	public Definition getDefinition() {
-
-		return this.definition;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.aohhandling.provider.ObjectBeanService#getAlias()
-	 */
-	public String getAlias() {
-
-		return alias;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.aohhandling.provider.ObjectBeanService#getSingletonObject()
-	 */
-	public ServiceClass getSingletonObject() {
-
-		return singletonObject;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.aohhandling.provider.ObjectBeanService#setSingletonObject(org.jgentleframework.core.metadatahandling.aohhandling.pvdhandler.ServiceClass)
-	 */
-	public void setSingletonObject(ServiceClass singletonObject) {
-
-		this.singletonObject = singletonObject;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.beans.beancontext.BeanContextMembershipListener#childrenAdded(java.beans.beancontext.BeanContextMembershipEvent)
-	 */
-	@Override
-	public void childrenAdded(BeanContextMembershipEvent bcme) {
-
-		if (this.singletonObject == null)
-			return;
-		synchronized (bcme) {
-			actionToDo(bcme, "childrenAdded");
-		}
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.beans.beancontext.BeanContextMembershipListener#childrenRemoved(java.beans.beancontext.BeanContextMembershipEvent)
-	 */
-	@Override
-	public void childrenRemoved(BeanContextMembershipEvent bcme) {
-
-		if (this.singletonObject == null)
-			return;
-		synchronized (bcme) {
-			actionToDo(bcme, "childrenRemoved");
-		}
-	}
-
-	/**
 	 * Action to do.
 	 * 
 	 * @param bcme
@@ -167,56 +101,68 @@ class ObjectBeanServiceImpl extends BeanContextChildSupport implements
 	 */
 	private void actionToDo(BeanContextMembershipEvent bcme, String name) {
 
-		Class<?>[] paramTypes = new Class[] { Iterator.class, Domain.class,
-				ObjectBeanService.class };
-		Object[] args = new Object[] { bcme.iterator(), bcme.getSource(), this };
 		/*
 		 * Nếu là singleton
 		 */
 		if (this.definition.getAnnotation(BeanServices.class).singleton() == true) {
-			if (!(this.singletonObject == null)) {
-				try {
-					ReflectUtils.invokeMethod(this.singletonObject, name,
-							paramTypes, args, true, true);
-				}
-				catch (NoSuchMethodException e) {
-					e.printStackTrace();
-				}
-				catch (IllegalAccessException e) {
-					e.printStackTrace();
-				}
-				catch (InvocationTargetException e) {
-					e.printStackTrace();
-				}
+			if (!(this.singletonObject == null)
+					&& ReflectUtils.isCast(ChildServiceListener.class,
+							this.singletonObject)) {
+				ChildServiceListener obj = (ChildServiceListener) this.singletonObject;
+				if (name.equals(ObjectBeanService.childrenAdded))
+					obj.childrenAdded(bcme.iterator(), (Domain) bcme
+							.getSource(), this);
+				if (name.equals(ObjectBeanService.childrenRemoved))
+					obj.childrenRemoved(bcme.iterator(), (Domain) bcme
+							.getSource(), this);
 			}
 		}
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.provider.ObjectBeanService#getProvider()
+	 * @see
+	 * java.beans.beancontext.BeanContextMembershipListener#childrenAdded(java
+	 * .beans.beancontext.BeanContextMembershipEvent)
 	 */
 	@Override
-	public Provider getProvider() {
+	public void childrenAdded(BeanContextMembershipEvent bcme) {
 
-		return provider;
+		if (this.singletonObject == null)
+			return;
+		synchronized (bcme) {
+			actionToDo(bcme, ObjectBeanService.childrenAdded);
+		}
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.provider.ObjectBeanService#setProvider(org.jgentleframework.context.injecting.Provider)
+	 * @see
+	 * java.beans.beancontext.BeanContextMembershipListener#childrenRemoved(
+	 * java.beans.beancontext.BeanContextMembershipEvent)
 	 */
 	@Override
-	public void setProvider(Provider provider) {
+	public void childrenRemoved(BeanContextMembershipEvent bcme) {
 
-		this.provider = provider;
+		if (this.singletonObject == null)
+			return;
+		synchronized (bcme) {
+			actionToDo(bcme, ObjectBeanService.childrenRemoved);
+		}
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.provider.
+	 * ObjectBeanService#getAlias()
+	 */
+	public String getAlias() {
+
+		return alias;
+	}
+
+	/*
+	 * (non-Javadoc)
 	 * @see org.jgentleframework.core.provider.ObjectBeanService#getArgs()
 	 */
 	@Override
@@ -227,8 +173,8 @@ class ObjectBeanServiceImpl extends BeanContextChildSupport implements
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.provider.ObjectBeanService#getConstructor()
+	 * @see
+	 * org.jgentleframework.core.provider.ObjectBeanService#getConstructor()
 	 */
 	@Override
 	public Constructor<?> getConstructor() {
@@ -238,8 +184,39 @@ class ObjectBeanServiceImpl extends BeanContextChildSupport implements
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.provider.ObjectBeanService#setArgs(java.lang.Object[])
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.provider.
+	 * ObjectBeanService#getDefinition()
+	 */
+	public Definition getDefinition() {
+
+		return this.definition;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see org.jgentleframework.core.provider.ObjectBeanService#getProvider()
+	 */
+	@Override
+	public Provider getProvider() {
+
+		return provider;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.provider.
+	 * ObjectBeanService#getSingletonObject()
+	 */
+	public ServiceClass getSingletonObject() {
+
+		return singletonObject;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * org.jgentleframework.core.provider.ObjectBeanService#setArgs(java.lang
+	 * .Object[])
 	 */
 	@Override
 	public void setArgs(Object[] args) {
@@ -249,12 +226,37 @@ class ObjectBeanServiceImpl extends BeanContextChildSupport implements
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.provider.ObjectBeanService#setConstructor(java.lang.reflect.Constructor)
+	 * @see
+	 * org.jgentleframework.core.provider.ObjectBeanService#setConstructor(java
+	 * .lang.reflect.Constructor)
 	 */
 	@Override
 	public void setConstructor(Constructor<?> constructor) {
 
 		this.constructor = constructor;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * org.jgentleframework.core.provider.ObjectBeanService#setProvider(org.
+	 * jgentleframework.context.injecting.Provider)
+	 */
+	@Override
+	public void setProvider(Provider provider) {
+
+		this.provider = provider;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.provider.
+	 * ObjectBeanService
+	 * #setSingletonObject(org.jgentleframework.core.metadatahandling
+	 * .aohhandling.pvdhandler.ServiceClass)
+	 */
+	public void setSingletonObject(ServiceClass singletonObject) {
+
+		this.singletonObject = singletonObject;
 	}
 }

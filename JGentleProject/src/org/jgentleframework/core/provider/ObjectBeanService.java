@@ -31,6 +31,10 @@ import org.jgentleframework.core.reflection.metadata.Definition;
  * @date Sep 13, 2007
  */
 public interface ObjectBeanService extends BeanContextMembershipListener {
+	static final String	childrenAdded	= "childrenAdded";
+
+	static final String	childrenRemoved	= "childrenRemoved";
+
 	/**
 	 * Returns the corresponding constructor of service class used to create
 	 * service instance.
@@ -46,7 +50,8 @@ public interface ObjectBeanService extends BeanContextMembershipListener {
 	/**
 	 * Sets the args.
 	 * 
-	 * @param args the args to set
+	 * @param args
+	 *            the args to set
 	 */
 	public void setArgs(Object[] args);
 

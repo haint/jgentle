@@ -80,7 +80,7 @@ public interface Domain extends BeanContextServiceProvider {
 	 * 
 	 * @see DefinitionManager
 	 */
-	public DefinitionManager getDefManager();
+	public DefinitionManager getDefinitionManager();
 
 	/**
 	 * Returns the name of this {@link Domain}
@@ -94,16 +94,6 @@ public interface Domain extends BeanContextServiceProvider {
 	 * and its value is corresponding {@link ObjectBeanService} instance.
 	 */
 	public HashMap<Class<? extends ServiceClass>, ObjectBeanService> getRegisteredServiceList();
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.beans.beancontext.BeanContextServiceProvider#getService(java.beans.beancontext.BeanContextServices,
-	 *      java.lang.Object, java.lang.Class, java.lang.Object)
-	 */
-	@SuppressWarnings("unchecked")
-	public Object getService(BeanContextServices bcs, Object requestor,
-			Class serviceClass, Object serviceSelector);
 
 	/**
 	 * Returns the result product of the specified service.
@@ -140,7 +130,8 @@ public interface Domain extends BeanContextServiceProvider {
 	public Class<? extends ServiceClass> getServiceClass(String alias);
 
 	/**
-	 * Returns <b>true</b> if this domain is empty, otherwise returns <b>false</b>.
+	 * Returns <b>true</b> if this domain is empty, otherwise returns
+	 * <b>false</b>.
 	 */
 	public boolean isEmpty();
 
@@ -225,15 +216,6 @@ public interface Domain extends BeanContextServiceProvider {
 			Class<? extends ServiceClass> serviceClass,
 			BeanContextServices bcs, Class<?>[] argsType, Object[] args);
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.beans.beancontext.BeanContextServiceProvider#releaseService(java.beans.beancontext.BeanContextServices,
-	 *      java.lang.Object, java.lang.Object)
-	 */
-	public void releaseService(BeanContextServices bcs, Object requestor,
-			Object service);
-
 	/**
 	 * Sets the given domain name to current {@link Domain}
 	 * 
@@ -256,7 +238,7 @@ public interface Domain extends BeanContextServiceProvider {
 			BeanContextServices bcs, Class<T> serviceClass);
 
 	/**
-	 * Unregisters the specified registered service of this {@link Domain}
+	 * Unregisters the given registered service of this {@link Domain}
 	 * 
 	 * @param bcs
 	 *            BeanContextServices

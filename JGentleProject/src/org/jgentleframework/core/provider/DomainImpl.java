@@ -45,12 +45,16 @@ import org.jgentleframework.utils.ReflectUtils;
 class DomainImpl extends BeanContextSupport implements Domain {
 	/** The Constant serialVersionUID. */
 	private static final long											serialVersionUID		= -5830600236030819223L;
+
 	/** The list of registered services. */
 	private HashMap<String, Class<? extends ServiceClass>>				aliasRegistered			= new HashMap<String, Class<? extends ServiceClass>>();
+
 	/** The {@link DefinitionManager}. */
-	private transient DefinitionManager									defManager				= null;
+	private transient DefinitionManager									definitionManager		= null;
+
 	/** domain name of this domain. */
 	String																domainName				= "";
+
 	/** The registered service list. */
 	private HashMap<Class<? extends ServiceClass>, ObjectBeanService>	registeredServiceList	= new HashMap<Class<? extends ServiceClass>, ObjectBeanService>();
 
@@ -65,13 +69,14 @@ class DomainImpl extends BeanContextSupport implements Domain {
 	public DomainImpl(String domain, DefinitionManager defManager) {
 
 		this.domainName = domain;
-		this.defManager = defManager;
+		this.definitionManager = defManager;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.aohhandling.provider.ServiceProvider#contains(org.jgentleframework.core.metadatahandling.aohhandling.provider.ObjectBeanService)
+	 * @see
+	 * org.jgentleframework.core.provider.Domain#contains(org.jgentleframework
+	 * .core.provider.ObjectBeanService)
 	 */
 	public boolean contains(ObjectBeanService obs) {
 
@@ -80,8 +85,8 @@ class DomainImpl extends BeanContextSupport implements Domain {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.aohhandling.provider.ServiceProvider#containsAlias(java.lang.String)
+	 * @see
+	 * org.jgentleframework.core.provider.Domain#containsAlias(java.lang.String)
 	 */
 	@Override
 	public boolean containsAlias(String alias) {
@@ -91,8 +96,9 @@ class DomainImpl extends BeanContextSupport implements Domain {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.aohhandling.provider.ServiceProvider#containsServiceClass(java.lang.Class)
+	 * @see
+	 * org.jgentleframework.core.provider.Domain#containsServiceClass(java.lang
+	 * .Class)
 	 */
 	@Override
 	public boolean containsServiceClass(
@@ -103,8 +109,7 @@ class DomainImpl extends BeanContextSupport implements Domain {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.aohhandling.provider.ServiceProvider#getAliasRegistered()
+	 * @see org.jgentleframework.core.provider.Domain#getAliasRegistered()
 	 */
 	@Override
 	public HashMap<String, Class<? extends ServiceClass>> getAliasRegistered() {
@@ -114,9 +119,9 @@ class DomainImpl extends BeanContextSupport implements Domain {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.aohhandling.provider.ServiceProvider#getCurrentServiceSelectors(java.beans.beancontext.BeanContextServices,
-	 *      java.lang.Class)
+	 * @see
+	 * java.beans.beancontext.BeanContextServiceProvider#getCurrentServiceSelectors
+	 * (java.beans.beancontext.BeanContextServices, java.lang.Class)
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
@@ -129,19 +134,18 @@ class DomainImpl extends BeanContextSupport implements Domain {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.aohhandling.provider.ServiceProvider#getDefManager()
+	 * @see org.jgentleframework.core.provider.Domain#getDefinitionManager()
 	 */
 	@Override
-	public DefinitionManager getDefManager() {
+	public DefinitionManager getDefinitionManager() {
 
-		return defManager;
+		return definitionManager;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.aohhandling.provider.ServiceProvider#getDomainName()
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.provider.
+	 * ServiceProvider#getDomainName()
 	 */
 	public String getDomainName() {
 
@@ -150,8 +154,8 @@ class DomainImpl extends BeanContextSupport implements Domain {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.aohhandling.provider.ServiceProvider#getRegisteredServiceList()
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.provider.
+	 * ServiceProvider#getRegisteredServiceList()
 	 */
 	@Override
 	public HashMap<Class<? extends ServiceClass>, ObjectBeanService> getRegisteredServiceList() {
@@ -161,10 +165,11 @@ class DomainImpl extends BeanContextSupport implements Domain {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.aohhandling.provider.ServiceProvider#getService(org.jgentleframework.configure.injecting.InjectCreator,
-	 *      java.beans.beancontext.BeanContextServices, java.lang.Object,
-	 *      java.lang.Class, java.lang.Object)
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.provider.
+	 * ServiceProvider
+	 * #getService(org.jgentleframework.configure.injecting.InjectCreator,
+	 * java.beans.beancontext.BeanContextServices, java.lang.Object,
+	 * java.lang.Class, java.lang.Object)
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
@@ -188,10 +193,11 @@ class DomainImpl extends BeanContextSupport implements Domain {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.aohhandling.provider.ServiceProvider#getService(org.jgentleframework.configure.injecting.InjectCreator,
-	 *      java.beans.beancontext.BeanContextServices, java.lang.Object,
-	 *      java.lang.String, java.lang.Object)
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.provider.
+	 * ServiceProvider
+	 * #getService(org.jgentleframework.configure.injecting.InjectCreator,
+	 * java.beans.beancontext.BeanContextServices, java.lang.Object,
+	 * java.lang.String, java.lang.Object)
 	 */
 	@Override
 	public Object getService(BeanContextServices bcs, Object requestor,
@@ -211,8 +217,8 @@ class DomainImpl extends BeanContextSupport implements Domain {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.aohhandling.provider.ServiceProvider#getServiceClass(java.lang.String)
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.provider.
+	 * ServiceProvider#getServiceClass(java.lang.String)
 	 */
 	@Override
 	public Class<? extends ServiceClass> getServiceClass(String alias) {
@@ -228,9 +234,9 @@ class DomainImpl extends BeanContextSupport implements Domain {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.provider.Domain#getServiceInstance(java.lang.Class,
-	 *      java.beans.beancontext.BeanContextServices)
+	 * @see
+	 * org.jgentleframework.core.provider.Domain#getServiceInstance(java.lang
+	 * .Class, java.beans.beancontext.BeanContextServices)
 	 */
 	@Override
 	@SuppressWarnings("unchecked")
@@ -306,8 +312,8 @@ class DomainImpl extends BeanContextSupport implements Domain {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.aohhandling.provider.ServiceProvider#isEmpty()
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.provider.
+	 * ServiceProvider#isEmpty()
 	 */
 	public boolean isEmpty() {
 
@@ -316,8 +322,8 @@ class DomainImpl extends BeanContextSupport implements Domain {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.aohhandling.provider.ServiceProvider#isServiceClassRegistered(java.lang.Class)
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.provider.
+	 * ServiceProvider#isServiceClassRegistered(java.lang.Class)
 	 */
 	public boolean isServiceClassRegistered(
 			Class<? extends ServiceClass> serviceClass) {
@@ -327,8 +333,8 @@ class DomainImpl extends BeanContextSupport implements Domain {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.aohhandling.provider.ServiceProvider#iterator()
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.provider.
+	 * ServiceProvider#iterator()
 	 */
 	@SuppressWarnings("unchecked")
 	public Iterator<ObjectBeanService> iteratorService() {
@@ -338,9 +344,9 @@ class DomainImpl extends BeanContextSupport implements Domain {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.aohhandling.provider.ServiceProvider#registerService(java.lang.Class,
-	 *      java.lang.Class, java.beans.beancontext.BeanContextServices)
+	 * @see
+	 * org.jgentleframework.core.provider.Domain#registerService(java.lang.Class
+	 * , java.beans.beancontext.BeanContextServices)
 	 */
 	@Override
 	public ObjectBeanService registerService(
@@ -351,9 +357,10 @@ class DomainImpl extends BeanContextSupport implements Domain {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.aohhandling.provider.ServiceProvider#registerService(java.lang.Class,
-	 *      java.beans.beancontext.BeanContextServices, java.lang.Object[])
+	 * @see
+	 * org.jgentleframework.core.provider.Domain#registerService(java.lang.Class
+	 * , java.beans.beancontext.BeanContextServices, java.lang.Class<?>[],
+	 * java.lang.Object[])
 	 */
 	@Override
 	public ObjectBeanService registerService(
@@ -365,10 +372,10 @@ class DomainImpl extends BeanContextSupport implements Domain {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.aohhandling.provider.ServiceProvider#registerService(org.jgentleframework.configure.injecting.InjectCreator,
-	 *      java.lang.Class, java.lang.Class,
-	 *      java.beans.beancontext.BeanContextServices)
+	 * @seeorg.jgentleframework.core.provider.Domain#registerService(org.
+	 * jgentleframework.context.injecting.Provider, java.lang.Class,
+	 * java.beans.beancontext.BeanContextServices, java.lang.Class<?>[],
+	 * java.lang.Object[])
 	 */
 	@Override
 	public synchronized ObjectBeanService registerService(Provider provider,
@@ -377,7 +384,7 @@ class DomainImpl extends BeanContextSupport implements Domain {
 
 		Assertor.notNull(serviceClass);
 		Assertor.notNull(bcs);
-		Definition defSC = this.defManager.getDefinition(serviceClass);
+		Definition defSC = this.definitionManager.getDefinition(serviceClass);
 		ObjectBeanService returnObject = null;
 		/*
 		 * Nếu definition của service class không cấu hình annotation
@@ -475,9 +482,10 @@ class DomainImpl extends BeanContextSupport implements Domain {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.aohhandling.provider.ServiceProvider#releaseService(java.beans.beancontext.BeanContextServices,
-	 *      java.lang.Object, java.lang.Object)
+	 * @see
+	 * java.beans.beancontext.BeanContextServiceProvider#releaseService(java
+	 * .beans.beancontext.BeanContextServices, java.lang.Object,
+	 * java.lang.Object)
 	 */
 	@Override
 	public void releaseService(BeanContextServices bcs, Object requestor,
@@ -488,8 +496,8 @@ class DomainImpl extends BeanContextSupport implements Domain {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.aohhandling.provider.ServiceProvider#setDomainName(java.lang.String)
+	 * @see
+	 * org.jgentleframework.core.provider.Domain#setDomainName(java.lang.String)
 	 */
 	public void setDomainName(String domainName) {
 
@@ -498,9 +506,9 @@ class DomainImpl extends BeanContextSupport implements Domain {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.aohhandling.provider.ServiceProvider#unregisterService(java.beans.beancontext.BeanContextServices,
-	 *      java.lang.Class)
+	 * @see
+	 * org.jgentleframework.core.provider.Domain#unregisterService(java.beans
+	 * .beancontext.BeanContextServices, java.lang.Class)
 	 */
 	public synchronized <T extends ServiceClass> ObjectBeanService unregisterService(
 			BeanContextServices bcs, Class<T> serviceClass) {
@@ -525,9 +533,9 @@ class DomainImpl extends BeanContextSupport implements Domain {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.aohhandling.provider.ServiceProvider#unregisterService(java.beans.beancontext.BeanContextServices,
-	 *      java.lang.String)
+	 * @see
+	 * org.jgentleframework.core.provider.Domain#unregisterService(java.beans
+	 * .beancontext.BeanContextServices, java.lang.String)
 	 */
 	public synchronized ObjectBeanService unregisterService(
 			BeanContextServices bcs, String alias) {

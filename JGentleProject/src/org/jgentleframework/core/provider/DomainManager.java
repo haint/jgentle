@@ -23,7 +23,10 @@ import java.util.Collection;
 import org.jgentleframework.core.JGentleException;
 
 /**
- * The implementation of this is responsible for {@link Domain} management.
+ * This implementation is responsible for {@link Domain} management. It provides
+ * some methods to create, remove ... and control <b>domain</b>. A domain is
+ * specified by a unique string name and all services in system must be executed
+ * in the specified domain.
  * 
  * @author LE QUOC CHUNG - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
@@ -89,7 +92,8 @@ public interface DomainManager {
 	 * 
 	 * @param alias
 	 *            the alias name
-	 * @return returns the object class if it exists, if not, returns <b>null</b>.
+	 * @return returns the object class if it exists, if not, returns
+	 *         <b>null</b>.
 	 */
 	public Class<? extends ServiceClass> getServiceClass(String alias);
 }
