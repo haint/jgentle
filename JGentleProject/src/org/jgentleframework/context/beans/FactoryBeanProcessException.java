@@ -17,7 +17,7 @@
  */
 package org.jgentleframework.context.beans;
 
-import org.jgentleframework.core.JGentelIllegalArgumentException;
+import org.jgentleframework.core.JGentleRuntimeException;
 
 /**
  * The Class FactoryBeanProcessException.
@@ -27,7 +27,7 @@ import org.jgentleframework.core.JGentelIllegalArgumentException;
  * @date Jun 4, 2008 3:41:37 PM
  */
 public class FactoryBeanProcessException extends
-		JGentelIllegalArgumentException {
+		JGentleRuntimeException {
 	/** The Constant serialVersionUID. */
 	private static final long	serialVersionUID	= -3067069429956221619L;
 

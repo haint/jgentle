@@ -31,7 +31,7 @@ import org.jgentleframework.core.reflection.annohandler.AnnotationBeanProcessor;
 
 /**
  * Provides some system methods in order to execute some system configurations
- * includes {@link DefinitionPostProcessor}, {@link AnnotationBeanProcessor},
+ * including {@link DefinitionPostProcessor}, {@link AnnotationBeanProcessor},
  * ... {@link ComponentServiceContextType} and ... some others.
  * 
  * @author LE QUOC CHUNG - mailto: <a

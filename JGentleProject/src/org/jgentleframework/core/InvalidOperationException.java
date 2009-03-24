@@ -24,7 +24,7 @@ package org.jgentleframework.core;
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
  * @date Mar 11, 2008
  */
-public class InvalidOperationException extends JGentelIllegalArgumentException {
+public class InvalidOperationException extends JGentleRuntimeException {
 	/** The Constant serialVersionUID. */
 	private static final long	serialVersionUID	= 8055118074231439805L;
 

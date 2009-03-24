@@ -23,6 +23,8 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
+ * The Interface AlwaysReload.
+ * 
  * @author Quoc Chung - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
  * @date Sep 17, 2008
@@ -30,5 +32,10 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 public @interface AlwaysReload {
+	/**
+	 * Value.
+	 * 
+	 * @return true, if successful
+	 */
 	boolean value() default false;
 }

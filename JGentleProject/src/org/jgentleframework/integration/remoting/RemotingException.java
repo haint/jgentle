@@ -17,7 +17,7 @@
  */
 package org.jgentleframework.integration.remoting;
 
-import org.jgentleframework.core.JGentelIllegalArgumentException;
+import org.jgentleframework.core.JGentleRuntimeException;
 
 /**
  * The Class RemotingException.
@@ -26,7 +26,7 @@ import org.jgentleframework.core.JGentelIllegalArgumentException;
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
  * @date Feb 26, 2008
  */
-public class RemotingException extends JGentelIllegalArgumentException {
+public class RemotingException extends JGentleRuntimeException {
 	/**
 	 * 
 	 */

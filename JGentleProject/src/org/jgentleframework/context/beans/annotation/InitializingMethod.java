@@ -27,9 +27,9 @@ import org.jgentleframework.context.beans.Initializing;
 
 /**
  * This annotation is responsible for method designating in order to allow
- * container to identify one method as Initializing Method. A
- * <code>Initializing Method</code> is a method that is automatically invoked
- * by JGentle container when corresponding bean is created.
+ * container to identify one method as <code>Initializing Method</code>. A
+ * <code>Initializing Method</code> is a method that is automatically invoked by
+ * JGentle container when corresponding bean is created.
  * 
  * @author LE QUOC CHUNG - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>

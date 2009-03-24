@@ -18,31 +18,54 @@
 package org.jgentleframework.core.intercept;
 
 /**
- * @author Quoc Chung - mailto: <a href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
+ * The Class MethodInterceptorCallbackException.
+ * 
+ * @author Quoc Chung - mailto: <a
+ *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
  * @date Feb 22, 2009
  */
-public class MethodInterceptorCallbackException extends Exception{
+public class MethodInterceptorCallbackException extends Exception {
+	/** The Constant serialVersionUID. */
+	private static final long	serialVersionUID	= -2208728507911276251L;
 
 	/**
-	 * 
+	 * Instantiates a new method interceptor callback exception.
 	 */
-	private static final long	serialVersionUID	= -2208728507911276251L;
-	
 	public MethodInterceptorCallbackException() {
 
 		super();
 	}
 
+	/**
+	 * Instantiates a new method interceptor callback exception.
+	 * 
+	 * @param strEx
+	 *            the str ex
+	 */
 	public MethodInterceptorCallbackException(String strEx) {
 
 		super(strEx);
 	}
 
+	/**
+	 * Instantiates a new method interceptor callback exception.
+	 * 
+	 * @param message
+	 *            the message
+	 * @param cause
+	 *            the cause
+	 */
 	public MethodInterceptorCallbackException(String message, Throwable cause) {
 
 		super(message, cause);
 	}
 
+	/**
+	 * Instantiates a new method interceptor callback exception.
+	 * 
+	 * @param cause
+	 *            the cause
+	 */
 	public MethodInterceptorCallbackException(Throwable cause) {
 
 		super(cause);

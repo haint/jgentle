@@ -17,7 +17,7 @@
  */
 package org.jgentleframework.integration.dao;
 
-import org.jgentleframework.core.JGentelIllegalArgumentException;
+import org.jgentleframework.core.JGentleRuntimeException;
 
 /**
  * Nắm bắt các ngoại lệ khi thực thi access database.
@@ -26,7 +26,7 @@ import org.jgentleframework.core.JGentelIllegalArgumentException;
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
  * @date Apr 15, 2008
  */
-public class DataAccessRunTimeException extends JGentelIllegalArgumentException {
+public class DataAccessRunTimeException extends JGentleRuntimeException {
 	/** The Constant serialVersionUID. */
 	private static final long	serialVersionUID	= 6485155594738587862L;
 

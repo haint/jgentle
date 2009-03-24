@@ -17,33 +17,55 @@
  */
 package org.jgentleframework.core;
 
-
 /**
+ * The Class UniqueException.
+ * 
  * @author LE QUOC CHUNG - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
  * @date Sep 27, 2007
  */
-public class UniqueException extends JGentelIllegalArgumentException {
-	/**
-	 * 
-	 */
+public class UniqueException extends JGentleRuntimeException {
+	/** The Constant serialVersionUID. */
 	private static final long	serialVersionUID	= 1L;
 
+	/**
+	 * Instantiates a new unique exception.
+	 */
 	public UniqueException() {
 
 		super();
 	}
 
+	/**
+	 * Instantiates a new unique exception.
+	 * 
+	 * @param strEx
+	 *            the str ex
+	 */
 	public UniqueException(String strEx) {
 
 		super(strEx);
 	}
 
+	/**
+	 * Instantiates a new unique exception.
+	 * 
+	 * @param message
+	 *            the message
+	 * @param cause
+	 *            the cause
+	 */
 	public UniqueException(String message, Throwable cause) {
 
 		super(message, cause);
 	}
 
+	/**
+	 * Instantiates a new unique exception.
+	 * 
+	 * @param cause
+	 *            the cause
+	 */
 	public UniqueException(Throwable cause) {
 
 		super(cause);

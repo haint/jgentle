@@ -38,7 +38,7 @@ import org.jgentleframework.context.injecting.scope.ScopeInstance;
 import org.jgentleframework.context.services.ServiceHandler;
 import org.jgentleframework.context.support.CoreInstantiationSelector;
 import org.jgentleframework.context.support.CoreInstantiationSelectorImpl;
-import org.jgentleframework.core.JGentelIllegalArgumentException;
+import org.jgentleframework.core.JGentleRuntimeException;
 import org.jgentleframework.core.JGentleException;
 import org.jgentleframework.core.factory.BeanCreationProcessor;
 import org.jgentleframework.core.factory.InOutDependencyException;
@@ -150,14 +150,14 @@ class ProviderCoreCreator extends AbstractBeanFactory implements Provider {
 					log
 							.error(
 									"The specified definition instance is not object-class definition !",
-									new JGentelIllegalArgumentException());
+									new JGentleRuntimeException());
 				}
 			}
 		}
 		else {
 			if (log.isErrorEnabled()) {
 				log.error("The given definition must not be null!",
-						new JGentelIllegalArgumentException());
+						new JGentleRuntimeException());
 			}
 		}
 		return null;
@@ -202,7 +202,7 @@ class ProviderCoreCreator extends AbstractBeanFactory implements Provider {
 				if (log.isErrorEnabled()) {
 					log.error("The definition instance corresponds to ID '"
 							+ ID + "' is not object-class Definition !",
-							new JGentelIllegalArgumentException());
+							new JGentleRuntimeException());
 				}
 			}
 		}

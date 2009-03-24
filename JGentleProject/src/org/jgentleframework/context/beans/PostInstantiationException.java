@@ -17,7 +17,7 @@
  */
 package org.jgentleframework.context.beans;
 
-import org.jgentleframework.core.JGentelIllegalArgumentException;
+import org.jgentleframework.core.JGentleRuntimeException;
 
 /**
  * The Class PostInstantiationException.
@@ -26,7 +26,7 @@ import org.jgentleframework.core.JGentelIllegalArgumentException;
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
  * @date Aug 20, 2008
  */
-public class PostInstantiationException extends JGentelIllegalArgumentException {
+public class PostInstantiationException extends JGentleRuntimeException {
 	/** The Constant serialVersionUID. */
 	private static final long	serialVersionUID	= 1367715866120852617L;
 

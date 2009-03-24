@@ -24,7 +24,7 @@ package org.jgentleframework.core;
  * @author LE QUOC CHUNG
  * @date Sep 1, 2007
  */
-public class ConstraintException extends JGentelIllegalArgumentException {
+public class ConstraintException extends JGentleRuntimeException {
 	/**
 	 * 
 	 */

@@ -34,7 +34,7 @@ import org.jgentleframework.configure.annotation.ToClass;
 import org.jgentleframework.configure.annotation.ToMethod;
 import org.jgentleframework.configure.annotation.ToProperty;
 import org.jgentleframework.context.ComponentServiceContextType;
-import org.jgentleframework.core.JGentelIllegalArgumentException;
+import org.jgentleframework.core.JGentleRuntimeException;
 import org.jgentleframework.core.factory.InOutDependencyException;
 import org.jgentleframework.core.handling.AnnotationRegister;
 import org.jgentleframework.core.handling.DefinitionManager;
@@ -165,7 +165,7 @@ public class SystemConfigImpl extends AbstractConfigModule implements
 
 		Assertor.notNull(cscClass, "cscClass argument must not be null.");
 		if (this.cscClassList.contains(cscClass)) {
-			throw new JGentelIllegalArgumentException(
+			throw new JGentleRuntimeException(
 					"This CSC object class is existed.");
 		}
 		this.cscClassList.add(cscClass);
@@ -612,7 +612,7 @@ public class SystemConfigImpl extends AbstractConfigModule implements
 
 		Assertor.notNull(cscClass, "cscClass argument must not be null.");
 		if (!this.cscClassList.contains(cscClass)) {
-			throw new JGentelIllegalArgumentException(
+			throw new JGentleRuntimeException(
 					"This CSC object class is not existed.");
 		}
 		this.cscClassList.remove(cscClass);

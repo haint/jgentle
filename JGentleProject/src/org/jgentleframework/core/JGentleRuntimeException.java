@@ -18,32 +18,55 @@
 package org.jgentleframework.core;
 
 /**
- * The Class JGentelIllegalArgumentException.
+ * The Class JGentleRuntimeException.
  * 
  * @author LE QUOC CHUNG - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
  * @date Nov 22, 2007
  */
-public class JGentelIllegalArgumentException extends RuntimeException {
+public class JGentleRuntimeException extends RuntimeException {
 	/** The Constant serialVersionUID. */
 	private static final long	serialVersionUID	= 7751295094743604631L;
 
-	public JGentelIllegalArgumentException() {
+	/**
+	 * Instantiates a new j gentle runtime exception.
+	 */
+	public JGentleRuntimeException() {
 
 		super();
 	}
 
-	public JGentelIllegalArgumentException(String strEx) {
+	/**
+	 * Instantiates a new j gentle runtime exception.
+	 * 
+	 * @param strEx
+	 *            the str ex
+	 */
+	public JGentleRuntimeException(String strEx) {
 
 		super(strEx);
 	}
 
-	public JGentelIllegalArgumentException(String message, Throwable cause) {
+	/**
+	 * Instantiates a new j gentle runtime exception.
+	 * 
+	 * @param message
+	 *            the message
+	 * @param cause
+	 *            the cause
+	 */
+	public JGentleRuntimeException(String message, Throwable cause) {
 
 		super(message, cause);
 	}
 
-	public JGentelIllegalArgumentException(Throwable cause) {
+	/**
+	 * Instantiates a new j gentle runtime exception.
+	 * 
+	 * @param cause
+	 *            the cause
+	 */
+	public JGentleRuntimeException(Throwable cause) {
 
 		super(cause);
 	}

@@ -17,35 +17,58 @@
  */
 package org.jgentleframework.core.factory;
 
-import org.jgentleframework.core.JGentelIllegalArgumentException;
+import org.jgentleframework.core.JGentleRuntimeException;
 
 /**
+ * The Class AOPRuntimeException.
+ * 
  * @author LE QUOC CHUNG - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
  * @date Oct 31, 2007
  */
-public class AOPExecuteException extends JGentelIllegalArgumentException {
-	/**
-	 * 
-	 */
+public class AOPRuntimeException extends JGentleRuntimeException {
+	/** The Constant serialVersionUID. */
 	private static final long	serialVersionUID	= 1348576345986208319L;
 
-	public AOPExecuteException() {
+	/**
+	 * Instantiates a new aOP execute exception.
+	 */
+	public AOPRuntimeException() {
 
 		super();
 	}
 
-	public AOPExecuteException(String strEx) {
+	/**
+	 * Instantiates a new aOP execute exception.
+	 * 
+	 * @param strEx
+	 *            the str ex
+	 */
+	public AOPRuntimeException(String strEx) {
 
 		super(strEx);
 	}
 
-	public AOPExecuteException(String message, Throwable cause) {
+	/**
+	 * Instantiates a new aOP execute exception.
+	 * 
+	 * @param message
+	 *            the message
+	 * @param cause
+	 *            the cause
+	 */
+	public AOPRuntimeException(String message, Throwable cause) {
 
 		super(message, cause);
 	}
 
-	public AOPExecuteException(Throwable cause) {
+	/**
+	 * Instantiates a new aOP execute exception.
+	 * 
+	 * @param cause
+	 *            the cause
+	 */
+	public AOPRuntimeException(Throwable cause) {
 
 		super(cause);
 	}

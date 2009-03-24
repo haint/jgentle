@@ -17,15 +17,14 @@
  */
 package org.jgentleframework.core;
 
-
 /**
+ * The Class MustBeImplementedByException.
+ * 
  * @author LE QUOC CHUNG
  * @date Sep 27, 2007
  */
 public class MustBeImplementedByException extends
-		JGentelIllegalArgumentException {
-	/**
-	 * 
-	 */
+		JGentleRuntimeException {
+	/** The Constant serialVersionUID. */
 	private static final long	serialVersionUID	= 1L;
 }

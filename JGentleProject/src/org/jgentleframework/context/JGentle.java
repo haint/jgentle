@@ -44,7 +44,7 @@ import org.jgentleframework.context.enums.RegisterAnnotationInjecting;
 import org.jgentleframework.context.injecting.Provider;
 import org.jgentleframework.context.services.ServiceHandler;
 import org.jgentleframework.context.services.ServiceHandlerImpl;
-import org.jgentleframework.core.JGentelIllegalArgumentException;
+import org.jgentleframework.core.JGentleRuntimeException;
 import org.jgentleframework.core.JGentleException;
 import org.jgentleframework.core.handling.AnnotationRegister;
 import org.jgentleframework.core.handling.AnnotationRegisterImpl;
@@ -96,7 +96,7 @@ public abstract class JGentle {
 				JGentle.getBeforeConfigBeanList().add(result);
 			}
 			else {
-				throw new JGentelIllegalArgumentException(
+				throw new JGentleRuntimeException(
 						"This BeforeConfigure Bean is existed.");
 			}
 		}
@@ -138,7 +138,7 @@ public abstract class JGentle {
 				JGentle.beforeInitContextList.add(obj);
 			}
 			else {
-				throw new JGentelIllegalArgumentException(
+				throw new JGentleRuntimeException(
 						"This BeforeInitContext bean is existed.");
 			}
 		}
@@ -181,10 +181,10 @@ public abstract class JGentle {
 		Assertor.notNull(interfaze);
 		Assertor.notNull(clazz);
 		if (interfaze.equals(clazz)) {
-			throw new JGentelIllegalArgumentException("invalid arguments !");
+			throw new JGentleRuntimeException("invalid arguments !");
 		}
 		if (!interfaze.isInterface()) {
-			throw new JGentelIllegalArgumentException(interfaze.toString()
+			throw new JGentleRuntimeException(interfaze.toString()
 					+ " must be a interface.");
 		}
 		return (T) JGentle.configObjClassList.put(interfaze, clazz);
@@ -210,16 +210,16 @@ public abstract class JGentle {
 		Assertor.notNull((Object[]) configClasses);
 		if ((argsType == null && args != null)
 				|| (argsType != null && args == null)) {
-			throw new JGentelIllegalArgumentException(
+			throw new JGentleRuntimeException(
 					"Property 'argsType' or 'args' is invalid !");
 		}
 		if (argsType != null && args != null) {
 			if (argsType.length != args.length) {
-				throw new JGentelIllegalArgumentException(
+				throw new JGentleRuntimeException(
 						"Property 'argsType' or 'args' is invalid !");
 			}
 			if (configClasses.length != 1) {
-				throw new JGentelIllegalArgumentException(
+				throw new JGentleRuntimeException(
 						"Lenght of array property 'configClasses' must be not greater than"
 								+ " one if property 'argsType' and 'args' are not null.");
 			}
@@ -516,7 +516,7 @@ public abstract class JGentle {
 				}
 				if (result.getDefinitionManager().getDefinition(scClazz)
 						.isAnnotationPresent(BeanServices.class)) {
-					throw new JGentelIllegalArgumentException(
+					throw new JGentleRuntimeException(
 							"Service Class "
 									+ scClazz.getName()
 									+ " must be annotated with @BeanServices annotation !");
@@ -635,7 +635,7 @@ public abstract class JGentle {
 
 		Assertor.notNull(interfaze);
 		if (!JGentle.containsConfigClass(interfaze)) {
-			throw new JGentelIllegalArgumentException(
+			throw new JGentleRuntimeException(
 					"Does not found config class with type " + interfaze);
 		}
 		return (Class<? extends T>) JGentle.configObjClassList.get(interfaze);
@@ -695,7 +695,7 @@ public abstract class JGentle {
 			Provider provider) {
 
 		if (getProvider == true && provider == null) {
-			throw new JGentelIllegalArgumentException(
+			throw new JGentleRuntimeException(
 					"Provider must not be null while getProvider is true.");
 		}
 		Class<Annotation>[] annoList = (Class<Annotation>[]) annotation
@@ -703,7 +703,7 @@ public abstract class JGentle {
 		Class<?>[] validators = annotation.validators();
 		if (annoList.length != 0) {
 			if (annoList.length < validators.length) {
-				throw new JGentelIllegalArgumentException(
+				throw new JGentleRuntimeException(
 						"invalid validators configuration in annotation: "
 								+ annotation);
 			}
@@ -758,7 +758,7 @@ public abstract class JGentle {
 			JGentle.beforeConfigBeanList.remove(instance);
 		}
 		else {
-			throw new JGentelIllegalArgumentException(
+			throw new JGentleRuntimeException(
 					"BeforeConfigure instance is not existed.");
 		}
 	}
@@ -776,7 +776,7 @@ public abstract class JGentle {
 			JGentle.beforeInitContextList.remove(instance);
 		}
 		else {
-			throw new JGentelIllegalArgumentException(
+			throw new JGentleRuntimeException(
 					"BeforeInitContext instance is not existed.");
 		}
 	}
@@ -794,7 +794,7 @@ public abstract class JGentle {
 
 		Assertor.notNull(interfaze);
 		if (!interfaze.isInterface()) {
-			throw new JGentelIllegalArgumentException(interfaze.toString()
+			throw new JGentleRuntimeException(interfaze.toString()
 					+ " must be a interface.");
 		}
 		return (T) JGentle.configObjClassList.remove(interfaze);

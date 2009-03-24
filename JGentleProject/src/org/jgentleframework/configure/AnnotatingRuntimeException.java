@@ -17,7 +17,7 @@
  */
 package org.jgentleframework.configure;
 
-import org.jgentleframework.core.JGentelIllegalArgumentException;
+import org.jgentleframework.core.JGentleRuntimeException;
 
 /**
  * The Class AnnotatingRuntimeException.
@@ -26,7 +26,7 @@ import org.jgentleframework.core.JGentelIllegalArgumentException;
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
  * @date Jul 1, 2008
  */
-public class AnnotatingRuntimeException extends JGentelIllegalArgumentException {
+public class AnnotatingRuntimeException extends JGentleRuntimeException {
 	/** The Constant serialVersionUID. */
 	private static final long	serialVersionUID	= -9095569791540907582L;
 

@@ -17,7 +17,7 @@
  */
 package org.jgentleframework.context.injecting.autodetect;
 
-import org.jgentleframework.core.JGentelIllegalArgumentException;
+import org.jgentleframework.core.JGentleRuntimeException;
 
 /**
  * The Class AutoDetectException.
@@ -26,7 +26,7 @@ import org.jgentleframework.core.JGentelIllegalArgumentException;
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
  * @date Mar 7, 2008
  */
-public class AutoDetectException extends JGentelIllegalArgumentException {
+public class AutoDetectException extends JGentleRuntimeException {
 	/** The Constant serialVersionUID. */
 	private static final long	serialVersionUID	= 6238845193254998635L;
 

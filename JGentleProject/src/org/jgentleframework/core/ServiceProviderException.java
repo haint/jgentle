@@ -17,34 +17,54 @@
  */
 package org.jgentleframework.core;
 
-
 /**
- * Bắt các ngoại lệ xảy ra khi làm việc với Service Provider.
+ * The Class ServiceProviderException.
  * 
  * @author LE QUOC CHUNG
  * @date Sep 11, 2007
  */
-public class ServiceProviderException extends JGentelIllegalArgumentException {
-	/**
-	 * 
-	 */
+public class ServiceProviderException extends JGentleRuntimeException {
+	/** The Constant serialVersionUID. */
 	private static final long	serialVersionUID	= 1L;
 
+	/**
+	 * Instantiates a new service provider exception.
+	 */
 	public ServiceProviderException() {
 
 		super();
 	}
 
+	/**
+	 * Instantiates a new service provider exception.
+	 * 
+	 * @param strEx
+	 *            the str ex
+	 */
 	public ServiceProviderException(String strEx) {
 
 		super(strEx);
 	}
 
+	/**
+	 * Instantiates a new service provider exception.
+	 * 
+	 * @param message
+	 *            the message
+	 * @param cause
+	 *            the cause
+	 */
 	public ServiceProviderException(String message, Throwable cause) {
 
 		super(message, cause);
 	}
 
+	/**
+	 * Instantiates a new service provider exception.
+	 * 
+	 * @param cause
+	 *            the cause
+	 */
 	public ServiceProviderException(Throwable cause) {
 
 		super(cause);

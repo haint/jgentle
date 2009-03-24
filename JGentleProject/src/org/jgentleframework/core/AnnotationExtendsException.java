@@ -21,7 +21,7 @@ package org.jgentleframework.core;
 /**
  * @author LE QUOC CHUNG
  */
-public class AnnotationExtendsException extends JGentelIllegalArgumentException {
+public class AnnotationExtendsException extends JGentleRuntimeException {
 	/**
 	 * 
 	 */

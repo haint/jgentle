@@ -25,7 +25,7 @@ import java.util.Map;
 import org.jgentleframework.configure.Configurable;
 import org.jgentleframework.context.injecting.Provider;
 import org.jgentleframework.context.services.ServiceHandler;
-import org.jgentleframework.core.JGentelIllegalArgumentException;
+import org.jgentleframework.core.JGentleRuntimeException;
 import org.jgentleframework.utils.Assertor;
 
 /**
@@ -77,7 +77,7 @@ public class ServiceProviderImpl extends AbstractServiceManagement implements
 		Assertor.notNull(csc, "Component Service Context must not be null.");
 		synchronized (this.CSCList) {
 			if (this.CSCList.containsKey(clazzType)) {
-				throw new JGentelIllegalArgumentException("Object class "
+				throw new JGentleRuntimeException("Object class "
 						+ clazzType.getName() + " is existed.");
 			}
 			this.CSCList.put(clazzType,
@@ -127,7 +127,7 @@ public class ServiceProviderImpl extends AbstractServiceManagement implements
 		Assertor.notNull(clazzType, "Object class must not be null.");
 		synchronized (CSCList) {
 			if (!this.CSCList.containsKey(clazzType)) {
-				throw new JGentelIllegalArgumentException("Object class "
+				throw new JGentleRuntimeException("Object class "
 						+ clazzType.getName() + " is not existed.");
 			}
 			return (T) this.CSCList.get(clazzType);
@@ -147,7 +147,7 @@ public class ServiceProviderImpl extends AbstractServiceManagement implements
 		Assertor.notNull(clazzType, "Object class must not be null.");
 		synchronized (CSCList) {
 			if (!this.CSCList.containsKey(clazzType)) {
-				throw new JGentelIllegalArgumentException("Object class "
+				throw new JGentleRuntimeException("Object class "
 						+ clazzType.getName() + " is not existed.");
 			}
 			return (T) this.CSCList.remove(clazzType);

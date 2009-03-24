@@ -23,7 +23,7 @@ import java.util.Collection;
 import java.util.Map;
 
 import org.jgentleframework.core.IllegalPropertyException;
-import org.jgentleframework.core.JGentelIllegalArgumentException;
+import org.jgentleframework.core.JGentleRuntimeException;
 
 /**
  * Chịu trách nhiệm xác nhận các thông tin trạng thái của các entities, nếu
@@ -89,7 +89,7 @@ public abstract class Assertor {
 	/**
 	 * Xác nhận một class có chứa một annotation cụ thể nào hay không, nếu class
 	 * Type cung cấp không chứa annotation type cung cấp, một ngoại lệ
-	 * JGentelIllegalArgumentException sẽ được ném ra.
+	 * JGentleRuntimeException sẽ được ném ra.
 	 * 
 	 * @param clazz
 	 *            class Type cần kiểm tra
@@ -108,7 +108,7 @@ public abstract class Assertor {
 	/**
 	 * Xác nhận một class có chứa một annotation cụ thể nào hay không, nếu class
 	 * Type cung cấp không chứa annotation type cung cấp , một ngoại lệ
-	 * JGentelIllegalArgumentException sẽ được ném ra.
+	 * JGentleRuntimeException sẽ được ném ra.
 	 * 
 	 * @param clazz
 	 *            class Type cần kiểm tra
@@ -124,14 +124,14 @@ public abstract class Assertor {
 
 		isAnnotation(annotationType);
 		if (!clazz.isAnnotationPresent(annotationType)) {
-			throw new JGentelIllegalArgumentException(message);
+			throw new JGentleRuntimeException(message);
 		}
 	}
 
 	/**
 	 * Xác nhận một classType có phải là một annotation hay không, nếu classType
 	 * cung cấp không phải là một annotation một ngoại lệ
-	 * JGentelIllegalArgumentException sẽ được ném ra.
+	 * JGentleRuntimeException sẽ được ném ra.
 	 * 
 	 * @param annotation
 	 *            class type của annotation cần xác nhận
@@ -145,7 +145,7 @@ public abstract class Assertor {
 	/**
 	 * Xác nhận một classType có phải là một annotation hay không, nếu classType
 	 * cung cấp không phải là một annotation một ngoại lệ
-	 * JGentelIllegalArgumentException sẽ được ném ra.
+	 * JGentleRuntimeException sẽ được ném ra.
 	 * 
 	 * @param annotation
 	 *            class type của annotation cần xác nhận
@@ -157,13 +157,13 @@ public abstract class Assertor {
 			String message) {
 
 		if (!annotation.isAnnotation()) {
-			throw new JGentelIllegalArgumentException(message);
+			throw new JGentleRuntimeException(message);
 		}
 	}
 
 	/**
 	 * Xác nhận 2 object có cùng kiểu khởi tạo giống nhau, nếu không ném ra một
-	 * ngoại lệ JGentelIllegalArgumentException.
+	 * ngoại lệ JGentleRuntimeException.
 	 * 
 	 * @param object1
 	 *            đối tượng cần so sánh 1
@@ -178,7 +178,7 @@ public abstract class Assertor {
 
 	/**
 	 * Xác nhận 2 object có cùng kiểu khởi tạo giống nhau, nếu không ném ra một
-	 * ngoại lệ JGentelIllegalArgumentException.
+	 * ngoại lệ JGentleRuntimeException.
 	 * 
 	 * @param object1
 	 *            đối tượng cần so sánh 1
@@ -194,7 +194,7 @@ public abstract class Assertor {
 		Assertor.notNull(object1);
 		Assertor.notNull(object2);
 		if (!object1.getClass().equals(object2.getClass())) {
-			throw new JGentelIllegalArgumentException(message);
+			throw new JGentleRuntimeException(message);
 		}
 	}
 
@@ -217,7 +217,7 @@ public abstract class Assertor {
 				.notNull(arrayList,
 						"[Quá trình xác nhận failed] - đối tượng arrayList không được phép là NULL");
 		if (index < 0 || index > arrayList.size() - 1) {
-			throw new JGentelIllegalArgumentException(message);
+			throw new JGentleRuntimeException(message);
 		}
 	}
 
@@ -238,7 +238,7 @@ public abstract class Assertor {
 
 	/**
 	 * Xác nhận một biểu thức trả về kiểu boolean, ném ra ngoại lệ
-	 * <code>JGentelIllegalArgumentException</code> nếu kết quả kiểm tra là
+	 * <code>JGentleRuntimeException</code> nếu kết quả kiểm tra là
 	 * <code>false</code>.
 	 * 
 	 * <pre class="code">
@@ -250,19 +250,19 @@ public abstract class Assertor {
 	 * @param message
 	 *            Chuỗi String mô tả message của exception nếu quá trình xác
 	 *            nhận failed
-	 * @throws JGentelIllegalArgumentException
+	 * @throws JGentleRuntimeException
 	 *             ném ra ngoại lệ nếu quá trình xác nhận <code>failed</code>
 	 */
 	public static void isTrue(boolean expression, String message) {
 
 		if (!expression) {
-			throw new JGentelIllegalArgumentException(message);
+			throw new JGentleRuntimeException(message);
 		}
 	}
 
 	/**
 	 * Xác nhận một biểu thức trả về kiểu boolean, ném ra ngoại lệ
-	 * <code>JGentelIllegalArgumentException</code> nếu kết quả kiểm tra là
+	 * <code>JGentleRuntimeException</code> nếu kết quả kiểm tra là
 	 * <code>false</code>.
 	 * 
 	 * <pre class="code">
@@ -271,7 +271,7 @@ public abstract class Assertor {
 	 * 
 	 * @param expression
 	 *            biểu thức boolean cần kiểm tra
-	 * @throws JGentelIllegalArgumentException
+	 * @throws JGentleRuntimeException
 	 *             ném ra ngoại lệ nếu quá trình xác nhận <code>failed</code>
 	 */
 	public static void isTrue(boolean expression) {
@@ -292,13 +292,13 @@ public abstract class Assertor {
 	 * @param message
 	 *            Chuỗi String mô tả message của exception nếu quá trình xác
 	 *            nhận failed
-	 * @throws JGentelIllegalArgumentException
+	 * @throws JGentleRuntimeException
 	 *             ném ra ngoại lệ nếu quá trình xác nhận <code>failed</code>
 	 */
 	public static void isNull(Object object, String message) {
 
 		if (object != null) {
-			throw new JGentelIllegalArgumentException(message);
+			throw new JGentleRuntimeException(message);
 		}
 	}
 
@@ -311,7 +311,7 @@ public abstract class Assertor {
 	 * 
 	 * @param object
 	 *            đối tượng cần kiểm tra
-	 * @throws JGentelIllegalArgumentException
+	 * @throws JGentleRuntimeException
 	 *             ném ra ngoại lệ nếu đối tượng không phải là <code>null</code>
 	 */
 	public static void isNull(Object object) {
@@ -332,7 +332,7 @@ public abstract class Assertor {
 	 * @param message
 	 *            Chuỗi String mô tả message của exception nếu quá trình xác
 	 *            nhận failed
-	 * @throws JGentelIllegalArgumentException
+	 * @throws JGentleRuntimeException
 	 *             ném ra ngoại lệ nếu đối tượng là <code>null</code>
 	 */
 	public static void notNull(Object object, String message) {
@@ -351,7 +351,7 @@ public abstract class Assertor {
 	 * 
 	 * @param object
 	 *            đối tượng cần kiểm tra
-	 * @throws JGentelIllegalArgumentException
+	 * @throws JGentleRuntimeException
 	 *             ném ra ngoại lệ nếu đối tượng là <code>null</code>
 	 */
 	public static void notNull(Object object) {
@@ -377,7 +377,7 @@ public abstract class Assertor {
 	public static void hasLength(String text, String message) {
 
 		if (text == null || text.isEmpty()) {
-			throw new JGentelIllegalArgumentException(message);
+			throw new JGentleRuntimeException(message);
 		}
 	}
 
@@ -417,11 +417,11 @@ public abstract class Assertor {
 	public static void hasText(String text, String message) {
 
 		if (text == null) {
-			throw new JGentelIllegalArgumentException(message);
+			throw new JGentleRuntimeException(message);
 		}
 		int strLen = text.length();
 		if (strLen == 0)
-			throw new JGentelIllegalArgumentException(message);
+			throw new JGentleRuntimeException(message);
 		int notSpaceNum = 0;
 		for (int i = 0; i < strLen; i++) {
 			if (!Character.isWhitespace(text.charAt(i))) {
@@ -429,7 +429,7 @@ public abstract class Assertor {
 			}
 		}
 		if (notSpaceNum == 0)
-			throw new JGentelIllegalArgumentException(message);
+			throw new JGentleRuntimeException(message);
 	}
 
 	/**
@@ -471,7 +471,7 @@ public abstract class Assertor {
 		if ((textToSearch == null || textToSearch.isEmpty())
 				&& (substring == null || substring.isEmpty())
 				&& (textToSearch != null && textToSearch.indexOf(substring) != -1)) {
-			throw new JGentelIllegalArgumentException(message);
+			throw new JGentleRuntimeException(message);
 		}
 	}
 
@@ -506,13 +506,13 @@ public abstract class Assertor {
 	 *            the array to check
 	 * @param message
 	 *            the exception message to use if the assertion fails
-	 * @throws JGentelIllegalArgumentException
+	 * @throws JGentleRuntimeException
 	 *             if the object array is <code>null</code> or has no elements
 	 */
 	public static void notEmpty(Object[] array, String message) {
 
 		if (array == null || array.length < 1) {
-			throw new JGentelIllegalArgumentException(message);
+			throw new JGentleRuntimeException(message);
 		}
 	}
 
@@ -526,7 +526,7 @@ public abstract class Assertor {
 	 * 
 	 * @param array
 	 *            the array to check
-	 * @throws JGentelIllegalArgumentException
+	 * @throws JGentleRuntimeException
 	 *             if the object array is <code>null</code> or has no elements
 	 */
 	public static void notEmpty(Object[] array) {
@@ -548,13 +548,13 @@ public abstract class Assertor {
 	 *            the collection to check
 	 * @param message
 	 *            the exception message to use if the assertion fails
-	 * @throws JGentelIllegalArgumentException
+	 * @throws JGentleRuntimeException
 	 *             if the collection is <code>null</code> or has no elements
 	 */
 	public static void notEmpty(Collection<?> collection, String message) {
 
 		if (collection == null || collection.size() < 1) {
-			throw new JGentelIllegalArgumentException(message);
+			throw new JGentleRuntimeException(message);
 		}
 	}
 
@@ -568,7 +568,7 @@ public abstract class Assertor {
 	 * 
 	 * @param collection
 	 *            the collection to check
-	 * @throws JGentelIllegalArgumentException
+	 * @throws JGentleRuntimeException
 	 *             if the collection is <code>null</code> or has no elements
 	 */
 	public static void notEmpty(Collection<?> collection) {
@@ -590,13 +590,13 @@ public abstract class Assertor {
 	 *            the map to check
 	 * @param message
 	 *            the exception message to use if the assertion fails
-	 * @throws JGentelIllegalArgumentException
+	 * @throws JGentleRuntimeException
 	 *             if the map is <code>null</code> or has no entries
 	 */
 	public static void notEmpty(Map<?, ?> map, String message) {
 
 		if (map == null || map.size() < 1) {
-			throw new JGentelIllegalArgumentException(message);
+			throw new JGentleRuntimeException(message);
 		}
 	}
 
@@ -610,7 +610,7 @@ public abstract class Assertor {
 	 * 
 	 * @param map
 	 *            the map to check
-	 * @throws JGentelIllegalArgumentException
+	 * @throws JGentleRuntimeException
 	 *             if the map is <code>null</code> or has no entries
 	 */
 	public static void notEmpty(Map<?, ?> map) {
@@ -631,7 +631,7 @@ public abstract class Assertor {
 	 *            the required class
 	 * @param obj
 	 *            the object to check
-	 * @throws JGentelIllegalArgumentException
+	 * @throws JGentleRuntimeException
 	 *             if the object is not an instance of clazz
 	 * @see Class#isInstance
 	 */
@@ -656,7 +656,7 @@ public abstract class Assertor {
 	 *            the function itself, and which may be used to provide context.
 	 *            It should normally end in a ": " or ". " so that the function
 	 *            generate message looks ok when prepended to it.
-	 * @throws JGentelIllegalArgumentException
+	 * @throws JGentleRuntimeException
 	 *             if the object is not an instance of clazz
 	 * @see Class#isInstance
 	 */
@@ -681,7 +681,7 @@ public abstract class Assertor {
 	 *            the super type to check
 	 * @param subType
 	 *            the sub type to check
-	 * @throws JGentelIllegalArgumentException
+	 * @throws JGentleRuntimeException
 	 *             if the classes are not assignable
 	 */
 	public static void isAssignable(Class<?> superType, Class<?> subType) {
@@ -706,7 +706,7 @@ public abstract class Assertor {
 	 *            the function itself, and which may be used to provide context.
 	 *            It should normally end in a ": " or ". " so that the function
 	 *            generate message looks ok when prepended to it.
-	 * @throws JGentelIllegalArgumentException
+	 * @throws JGentleRuntimeException
 	 *             if the classes are not assignable
 	 */
 	public static void isAssignable(Class<?> superType, Class<?> subType,
@@ -722,7 +722,7 @@ public abstract class Assertor {
 	/**
 	 * Assert a boolean expression, throwing <code>IllegalStateException</code>
 	 * if the test result is <code>false</code>. Call isTrue if you wish to
-	 * throw JGentelIllegalArgumentException on an assertion failure.
+	 * throw JGentleRuntimeException on an assertion failure.
 	 * 
 	 * <pre class="code">
 	 * Assert.state(id == null, &quot;The id property must not already be initialized&quot;);
@@ -747,7 +747,7 @@ public abstract class Assertor {
 	 * the test result is <code>false</code>.
 	 * <p>
 	 * Call {@link #isTrue(boolean)} if you wish to throw
-	 * {@link JGentelIllegalArgumentException} on an assertion failure.
+	 * {@link JGentleRuntimeException} on an assertion failure.
 	 * 
 	 * <pre class="code">
 	 * Assert.state(id == null);

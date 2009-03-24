@@ -17,32 +17,54 @@
  */
 package org.jgentleframework.core;
 
-
 /**
+ * The Class NoSuchDefinitionException.
+ * 
  * @author LE QUOC CHUNG
  * @date Sep 9, 2007
  */
-public class NoSuchDefinitionException extends JGentelIllegalArgumentException {
-	/**
-	 * 
-	 */
+public class NoSuchDefinitionException extends JGentleRuntimeException {
+	/** The Constant serialVersionUID. */
 	private static final long	serialVersionUID	= 1L;
 
+	/**
+	 * Instantiates a new no such definition exception.
+	 */
 	public NoSuchDefinitionException() {
 
 		super();
 	}
 
+	/**
+	 * Instantiates a new no such definition exception.
+	 * 
+	 * @param strEx
+	 *            the str ex
+	 */
 	public NoSuchDefinitionException(String strEx) {
 
 		super(strEx);
 	}
 
+	/**
+	 * Instantiates a new no such definition exception.
+	 * 
+	 * @param message
+	 *            the message
+	 * @param cause
+	 *            the cause
+	 */
 	public NoSuchDefinitionException(String message, Throwable cause) {
 
 		super(message, cause);
 	}
 
+	/**
+	 * Instantiates a new no such definition exception.
+	 * 
+	 * @param cause
+	 *            the cause
+	 */
 	public NoSuchDefinitionException(Throwable cause) {
 
 		super(cause);

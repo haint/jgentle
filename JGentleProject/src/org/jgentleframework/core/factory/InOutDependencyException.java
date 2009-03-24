@@ -17,13 +17,13 @@
  */
 package org.jgentleframework.core.factory;
 
-import org.jgentleframework.core.JGentelIllegalArgumentException;
+import org.jgentleframework.core.JGentleRuntimeException;
 
 /**
  * @author <a href="mailto:skydunkpro@yahoo.com">LE QUOC CHUNG</a>
  * @date Oct 3, 2007
  */
-public class InOutDependencyException extends JGentelIllegalArgumentException {
+public class InOutDependencyException extends JGentleRuntimeException {
 	
 
 	/**

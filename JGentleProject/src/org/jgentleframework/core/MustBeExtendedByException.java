@@ -22,7 +22,7 @@ package org.jgentleframework.core;
  * @author LE QUOC CHUNG
  * @date Sep 26, 2007
  */
-public class MustBeExtendedByException extends JGentelIllegalArgumentException {
+public class MustBeExtendedByException extends JGentleRuntimeException {
 	/**
 	 * 
 	 */

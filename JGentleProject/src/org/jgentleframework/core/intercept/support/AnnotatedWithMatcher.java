@@ -46,8 +46,12 @@ import org.jgentleframework.context.aop.support.ParameterMatching;
 public class AnnotatedWithMatcher extends
 		AbstractDefinitionMatcherPointcut<Matching> implements PointcutOfAll {
 	/**
+	 * The Constructor.
+	 * 
 	 * @param andor
+	 *            the andor
 	 * @param classes
+	 *            the classes
 	 */
 	public AnnotatedWithMatcher(AND_OR andor,
 			Class<? extends Annotation>[] classes) {
@@ -57,7 +61,6 @@ public class AnnotatedWithMatcher extends
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.jgentleframework.context.aop.Pointcut#getClassFilter()
 	 */
 	@Override
@@ -74,7 +77,6 @@ public class AnnotatedWithMatcher extends
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.jgentleframework.context.aop.Pointcut#getConstructorFilter()
 	 */
 	@Override
@@ -101,7 +103,6 @@ public class AnnotatedWithMatcher extends
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.jgentleframework.context.aop.Pointcut#getFieldFilter()
 	 */
 	@Override
@@ -127,7 +128,6 @@ public class AnnotatedWithMatcher extends
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.jgentleframework.context.aop.Pointcut#getMethodFilter()
 	 */
 	@Override
@@ -153,8 +153,9 @@ public class AnnotatedWithMatcher extends
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.context.aop.PointcutOfParameterFilter#getParameterFilter()
+	 * @see
+	 * org.jgentleframework.context.aop.PointcutOfParameterFilter#getParameterFilter
+	 * ()
 	 */
 	@Override
 	public ParameterFilter<?> getParameterFilter() {
@@ -179,7 +180,6 @@ public class AnnotatedWithMatcher extends
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.jgentleframework.context.aop.Pointcut#getFilter()
 	 */
 	@Override
