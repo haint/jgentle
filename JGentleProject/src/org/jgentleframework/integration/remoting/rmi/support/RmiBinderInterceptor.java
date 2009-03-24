@@ -27,6 +27,8 @@ import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;
 
 import org.aopalliance.intercept.MethodInvocation;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.jgentleframework.core.intercept.BasicMethodInvocation;
 import org.jgentleframework.integration.remoting.RemoteInvocation;
 import org.jgentleframework.integration.remoting.RemoteInvocationException;
@@ -41,10 +43,13 @@ import org.jgentleframework.utils.ExceptionUtils;
  * @author LE QUOC CHUNG - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
  * @date Mar 17, 2008
+ * @see MethodInterceptor
  */
 public class RmiBinderInterceptor implements MethodInterceptor {
 	/** The binder. */
 	private RmiBinder	binder	= null;
+
+	private final Log	log		= LogFactory.getLog(getClass());
 
 	/**
 	 * Constructor.
@@ -100,12 +105,18 @@ public class RmiBinderInterceptor implements MethodInterceptor {
 					this.binder.refreshStubAndRetryInvocation(invocation);
 				}
 				else {
-					throw new RemoteInvocationException("Invocation of method ["
-							+ invocation.getMethod() + "] failed in RMI service ["
-							+ this.binder.getServiceName() + "]", e);
+					throw new RemoteInvocationException(
+							"Invocation of method [" + invocation.getMethod()
+									+ "] failed in RMI service ["
+									+ this.binder.getServiceName() + "]", e);
 				}
 			}
 			catch (Throwable ex) {
+				if (log.isErrorEnabled()) {
+					log.error("Invocation of method [" + invocation.getMethod()
+							+ "] failed in RMI service ["
+							+ this.binder.getServiceName() + "]", ex);
+				}
 				throw new RemoteInvocationException("Invocation of method ["
 						+ invocation.getMethod() + "] failed in RMI service ["
 						+ this.binder.getServiceName() + "]", ex);

@@ -26,4 +26,11 @@ public class RemoteClass implements RemoteInterface {
 
 		return "Hello world ....";
 	}
+
+	@Override
+	public ReferObject process(ReferObject obj) {
+
+		obj.setName("Chung");
+		return obj;
+	}
 }

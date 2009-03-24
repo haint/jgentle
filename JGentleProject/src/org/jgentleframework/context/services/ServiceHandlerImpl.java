@@ -63,7 +63,7 @@ public class ServiceHandlerImpl implements ServiceHandler {
 	/** The context. */
 	private BeanContextServicesSupport	context				= new BeanContextServicesSupport();
 
-	/** The def manager. */
+	/** The definition manager. */
 	private DefinitionManager			definitionManager	= null;
 
 	/** The domain context. */

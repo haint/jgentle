@@ -32,12 +32,12 @@ import org.jgentleframework.core.provider.ObjectBeanService;
 import org.jgentleframework.core.provider.ServiceClass;
 
 /**
- * This interface represents the service handler, the controller of all services
- * in JGentle system. It contains all core services of container such as IoC
- * service, ... moreover if corresponding provider is the
- * {@link ServiceProvider}, besides core services such as IoC, AOP, Intercepting
- * service, ... it also holds adscititious services such as RMI support, JDBC
- * wrapper, JMS support, ... or customized service of other third party.
+ * Represents the service handler, the controller of all services in JGentle
+ * system. It contains all core services of container such as IoC service, ...
+ * moreover if corresponding provider is the {@link ServiceProvider}, besides
+ * core services such as IoC, AOP, Intercepting service, ... it also holds
+ * adscititious services such as RMI support, JDBC wrapper, JMS support, ... or
+ * customized service of other third party.
  * 
  * @author LE QUOC CHUNG - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>

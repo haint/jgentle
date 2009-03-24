@@ -15,10 +15,6 @@
  * 
  * Project: JGentleFrameworkExample
  */
-/**
- * @author Quoc Chung - mailto: <a href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
- * @date Dec 30, 2008
- */
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -29,6 +25,11 @@ import org.jgentleframework.configure.enums.Scope;
 import org.jgentleframework.context.JGentle;
 import org.jgentleframework.context.injecting.Provider;
 
+/**
+ * @author Quoc Chung - mailto: <a
+ *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
+ * @date Dec 30, 2008
+ */
 public class JGentleWiring extends TestCase {
 	/**
 	 * Create the test case

@@ -16,4 +16,6 @@ import org.jgentleframework.integration.remoting.rmi.annotation.RmiBinding;
 @RmiBinding(serviceName = "TestRMI", refreshStubOnConnectFailure = true, cacheStub = true)
 public interface RemoteInterface {
 	public String helloWorld();
+
+	public ReferObject process(ReferObject obj);
 }

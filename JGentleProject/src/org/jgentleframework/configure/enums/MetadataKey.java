@@ -18,7 +18,7 @@
 package org.jgentleframework.configure.enums;
 
 /**
- * Enum MetadataKey provides some constant key.
+ * Enum MetadataKey provides some constant keys.
  * 
  * @author LE QUOC CHUNG - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>

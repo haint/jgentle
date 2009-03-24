@@ -30,15 +30,16 @@ import org.jgentleframework.core.reflection.DefinitionPostProcessor;
 import org.jgentleframework.core.reflection.annohandler.AnnotationBeanProcessor;
 
 /**
- * Chỉ định các <code>system method</code> quản lý việc thực thi các
- * <code>config</code> hệ thống, bao gồm quản lý các thông tin
- * {@link DefinitionPostProcessor}, {@link AnnotationBeanProcessor}, ... chỉ
- * định binding {@link ComponentServiceContextType}, và các <code>method</code>
- * quản lý thông tin cấu hình khác.
+ * Provides some system methods in order to execute some system configurations
+ * includes {@link DefinitionPostProcessor}, {@link AnnotationBeanProcessor},
+ * ... {@link ComponentServiceContextType} and ... some others.
  * 
  * @author LE QUOC CHUNG - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
  * @date Jan 15, 2008
+ * @see AnnotationBeanProcessor
+ * @see ComponentServiceContextType
+ * @see DefinitionPostProcessor
  */
 public interface SystemConfig {
 	/**
@@ -182,10 +183,10 @@ public interface SystemConfig {
 	 * instance. The invoking of this method will also execute the
 	 * {@link AnnotationRegister} setting to current configurable instance.
 	 * 
-	 * @param defManager
+	 * @param definitionManager
 	 *            the given {@link DefinitionManager} need to be setted.
 	 */
-	public void setDefinitionManager(DefinitionManager defManager);
+	public void setDefinitionManager(DefinitionManager definitionManager);
 
 	/**
 	 * Sets the list of imported configurable classes

@@ -26,43 +26,50 @@ package org.jgentleframework.configure.enums;
  */
 public enum WrapperPrimitiveTypeList {
 	/** The _byte. */
-	_byte(byte.class, Byte.class),
+	_byte (byte.class,Byte.class),
 	/** The _char. */
-	_char(char.class, Character.class),
+	_char (char.class,Character.class),
 	/** The _double. */
-	_double(double.class, Double.class),
+	_double (double.class,Double.class),
 	/** The _float. */
-	_float(float.class, Float.class),
+	_float (float.class,Float.class),
 	/** The _int. */
-	_int(int.class, Integer.class),
+	_int (int.class,Integer.class),
 	/** The _long. */
-	_long(long.class, Long.class),
+	_long (long.class,Long.class),
 	/** The _short. */
-	_short(short.class, Short.class),
+	_short (short.class,Short.class),
 	/** The _boolean. */
-	_boolean(boolean.class, Boolean.class);
+	_boolean (boolean.class,Boolean.class);
 	/** The primitive. */
 	Class<?>	primitive;
+
 	/** The wrapper. */
 	Class<?>	wrapper;
 
 	/**
+	 * Gets the primitive.
+	 * 
 	 * @return the primitive
 	 */
 	public Class<?> getPrimitive() {
-	
+
 		return primitive;
 	}
 
 	/**
+	 * Gets the wrapper.
+	 * 
 	 * @return the wrapper
 	 */
 	public Class<?> getWrapper() {
-	
+
 		return wrapper;
 	}
 
 	/**
+	 * The Constructor.
+	 * 
 	 * @param primitive
 	 *            the primitive
 	 * @param wrapper

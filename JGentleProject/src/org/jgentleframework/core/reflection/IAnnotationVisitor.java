@@ -25,7 +25,7 @@ import org.jgentleframework.core.reflection.metadata.Definition;
 
 /**
  * Provides some method in order to manage extension points in course interpret
- * annotations or {@link Definition}s.
+ * annotations or {@link Definition definitions}.
  * 
  * @author LE QUOC CHUNG - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>

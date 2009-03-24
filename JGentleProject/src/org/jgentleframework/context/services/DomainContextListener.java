@@ -35,8 +35,7 @@ public interface DomainContextListener {
 	 * @param childrenAffected
 	 *            the {@link Iterator} containing all adding domains.
 	 */
-	@SuppressWarnings("unchecked")
-	public void childrenAdded(Iterator childrenAffected);
+	public void childrenAdded(Iterator<?> childrenAffected);
 
 	/**
 	 * The implementation of this method will be invoked automatically when each
@@ -45,6 +44,5 @@ public interface DomainContextListener {
 	 * @param childrenAffected
 	 *            the {@link Iterator} containing all removed domains.
 	 */
-	@SuppressWarnings("unchecked")
-	public void childrenRemoved(Iterator childrenAffected);
+	public void childrenRemoved(Iterator<?> childrenAffected);
 }

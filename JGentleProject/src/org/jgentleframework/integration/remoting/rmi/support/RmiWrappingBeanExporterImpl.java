@@ -26,11 +26,8 @@ import org.jgentleframework.integration.remoting.RemotingException;
 import org.jgentleframework.integration.remoting.WrappingProcessor;
 
 /**
- * Chỉ định một <code>Wrapping Bean Exporter</code>, chịu trách nhiệm như là một
- * <code>wrapper</code> của <code>object bean</code> cần <code>export</code>
- * trong trường hợp <code>object bean</code> chỉ đơn thuần là
- * <code>object bean bình thường</code>, cài đặt <code>remote</code> không chỉ
- * định theo <code>traditional RMI</code>.
+ * Represents the <code>Wrapping Bean Exporter</code> which is resposible for
+ * wrapper of exported bean.
  * 
  * @author LE QUOC CHUNG - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>

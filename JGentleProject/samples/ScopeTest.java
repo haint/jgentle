@@ -46,10 +46,10 @@ class MyScope implements ScopeImplementation {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.context.injecting.scope.ScopeImplementation#getBean(java.lang.Class,
-	 *      org.exxlabs.jgentle.core.reflection.metadata.Definition,
+	 * @see org.jgentleframework.context.injecting.scope.ScopeImplementation#getBean(java.lang.Class,
+	 *      org.jgentleframework.core.reflection.metadata.Definition,
 	 *      java.lang.String,
-	 *      org.exxlabs.jgentle.context.injecting.ObjectBeanFactory)
+	 *      org.jgentleframework.context.injecting.ObjectBeanFactory)
 	 */
 	@Override
 	public Object getBean(Selector selector, String nameScope,
@@ -67,9 +67,9 @@ class MyScope implements ScopeImplementation {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.context.injecting.scope.ScopeImplementation#putBean(java.lang.String,
+	 * @see org.jgentleframework.context.injecting.scope.ScopeImplementation#putBean(java.lang.String,
 	 *      java.lang.Object,
-	 *      org.exxlabs.jgentle.context.injecting.ObjectBeanFactory)
+	 *      org.jgentleframework.context.injecting.ObjectBeanFactory)
 	 */
 	@Override
 	public Object putBean(String nameScope, Object bean,
@@ -82,8 +82,8 @@ class MyScope implements ScopeImplementation {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.exxlabs.jgentle.context.injecting.scope.ScopeImplementation#remove(java.lang.String,
-	 *      org.exxlabs.jgentle.context.injecting.ObjectBeanFactory)
+	 * @see org.jgentleframework.context.injecting.scope.ScopeImplementation#remove(java.lang.String,
+	 *      org.jgentleframework.context.injecting.ObjectBeanFactory)
 	 */
 	@Override
 	public Object remove(String nameScope, ObjectBeanFactory objFactory)

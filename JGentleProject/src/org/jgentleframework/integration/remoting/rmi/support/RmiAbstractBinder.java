@@ -33,6 +33,7 @@ import java.rmi.server.RMIClientSocketFactory;
 
 import org.aopalliance.intercept.MethodInvocation;
 import org.jgentleframework.integration.remoting.RemoteAbstractBinder;
+import org.jgentleframework.integration.remoting.RemoteInvocation;
 import org.jgentleframework.integration.remoting.RemoteInvocationImpl;
 import org.jgentleframework.integration.remoting.RemoteLookupException;
 import org.jgentleframework.integration.remoting.RemotingException;
@@ -165,7 +166,9 @@ public abstract class RmiAbstractBinder extends RemoteAbstractBinder implements
 	protected Object invoke(MethodInvocation methodInvocation,
 			RmiWrappingBeanExporter wrapperBean) throws RemoteException {
 
-		return wrapperBean.invoke(new RemoteInvocationImpl(methodInvocation));
+		RemoteInvocation invocation = new RemoteInvocationImpl(methodInvocation);
+		Object result = wrapperBean.invoke(invocation);
+		return result;
 	}
 
 	/*

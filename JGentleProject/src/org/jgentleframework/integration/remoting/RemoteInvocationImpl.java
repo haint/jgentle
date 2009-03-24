@@ -25,18 +25,14 @@ import org.aopalliance.intercept.MethodInvocation;
 import org.jgentleframework.core.reflection.metadata.SerializableMetadataControl;
 
 /**
- * Chỉ định một <code>invocation</code> được <code>remote</code>. Một
- * <code>remote invocation</code> sẽ được khởi tạo và thông tin dữ liệu sẽ được
- * chu truyển khi có yêu cầu <code>invoke</code> từ phía <code>client</code> đến
- * <code>remote server</code>. Thông tin cất trữ trong
- * <code>remote invocation</code> chứa đựng bao gồm các thông tin về
- * <code>method</code> cần
- * <code>invoke (method name, parameter, parameter type, ...)</code> và một số
- * tin phụ kèm theo khác nếu có.
+ * Represents an remote invocation implementation providing core method
+ * invocation properties in a serializable fashion.
  * 
  * @author LE QUOC CHUNG - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
  * @date Mar 13, 2008
+ * @see SerializableMetadataControl
+ * @see RemoteInvocation
  */
 public class RemoteInvocationImpl extends SerializableMetadataControl implements
 		Serializable, RemoteInvocation {
@@ -81,6 +77,19 @@ public class RemoteInvocationImpl extends SerializableMetadataControl implements
 		this.methodName = methodInvocation.getMethod().getName();
 		this.argsType = methodInvocation.getMethod().getParameterTypes();
 		this.args = methodInvocation.getArguments();
+		// if (args != null) {
+		// for (Object obj : this.args) {
+		// if (ReflectUtils.isCast(Remote.class, obj)) {
+		// try {
+		// UnicastRemoteObject.exportObject((Remote) obj);
+		// // UnicastRemoteObject.exportObject(this,0);
+		// }
+		// catch (RemoteException e) {
+		// e.printStackTrace();
+		// }
+		// }
+		// }
+		// }
 	}
 
 	/*

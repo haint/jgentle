@@ -23,10 +23,8 @@ import java.beans.beancontext.BeanContextServicesListener;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
-
 /**
- * Lắng nghe sự kiện khi có các service được thêm vào, hoặc gỡ bỏ ra khỏi
- * context.
+ * The Class ServiceBindingListener.
  * 
  * @author LE QUOC CHUNG - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
@@ -34,10 +32,14 @@ import java.util.Map.Entry;
  * @see ServiceContextListener
  */
 public class ServiceBindingListener implements BeanContextServicesListener {
+	/** The listener list. */
 	HashMap<String, ServiceContextListener>	listenerList	= new HashMap<String, ServiceContextListener>();
 
 	/**
+	 * Action to do.
+	 * 
 	 * @param bcsae
+	 *            the bcsae
 	 */
 	private void actionToDo(BeanContextServiceAvailableEvent bcsae) {
 
@@ -47,7 +49,10 @@ public class ServiceBindingListener implements BeanContextServicesListener {
 	}
 
 	/**
+	 * Action to do.
+	 * 
 	 * @param bcsre
+	 *            the bcsre
 	 */
 	private void actionToDo(BeanContextServiceRevokedEvent bcsre) {
 
@@ -57,21 +62,29 @@ public class ServiceBindingListener implements BeanContextServicesListener {
 	}
 
 	/**
+	 * Adds the listener.
+	 * 
 	 * @param id
+	 *            the id
 	 * @param listener
+	 *            the listener
 	 * @return {@link ServiceContextListener}
 	 */
-	public ServiceContextListener addListener(String id,
+	public synchronized ServiceContextListener addListener(String id,
 			ServiceContextListener listener) {
 
 		return this.listenerList.put(id, listener);
 	}
 
 	/**
+	 * Removes the listener.
+	 * 
 	 * @param listener
+	 *            the listener
 	 * @return {@link ServiceContextListener}
 	 */
-	public ServiceContextListener removeListener(ServiceContextListener listener) {
+	public synchronized ServiceContextListener removeListener(
+			ServiceContextListener listener) {
 
 		for (Entry<String, ServiceContextListener> obj : this.listenerList
 				.entrySet()) {
@@ -83,18 +96,22 @@ public class ServiceBindingListener implements BeanContextServicesListener {
 	}
 
 	/**
+	 * Removes the listener.
+	 * 
 	 * @param id
+	 *            the id
 	 * @return {@link ServiceContextListener}
 	 */
-	public ServiceContextListener removeListener(String id) {
+	public synchronized ServiceContextListener removeListener(String id) {
 
 		return this.listenerList.remove(id);
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see java.beans.beancontext.BeanContextServicesListener#serviceAvailable(java.beans.beancontext.BeanContextServiceAvailableEvent)
+	 * @see
+	 * java.beans.beancontext.BeanContextServicesListener#serviceAvailable(java
+	 * .beans.beancontext.BeanContextServiceAvailableEvent)
 	 */
 	@Override
 	public void serviceAvailable(BeanContextServiceAvailableEvent bcsae) {
@@ -106,8 +123,9 @@ public class ServiceBindingListener implements BeanContextServicesListener {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see java.beans.beancontext.BeanContextServiceRevokedListener#serviceRevoked(java.beans.beancontext.BeanContextServiceRevokedEvent)
+	 * @see
+	 * java.beans.beancontext.BeanContextServiceRevokedListener#serviceRevoked
+	 * (java.beans.beancontext.BeanContextServiceRevokedEvent)
 	 */
 	@Override
 	public void serviceRevoked(BeanContextServiceRevokedEvent bcsre) {

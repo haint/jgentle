@@ -37,23 +37,23 @@ import org.jgentleframework.core.reflection.SingleClassIdentification;
  * @date Sep 26, 2007
  */
 public enum Types {
-	CONSTRUCTOR(Constructor.class, null),
+	CONSTRUCTOR (Constructor.class,null),
 	/** The METHOD. */
-	METHOD(Method.class, MethodIdentification.class),
+	METHOD (Method.class,MethodIdentification.class),
 	/** The FIELD. */
-	FIELD(Field.class, FieldIdentification.class),
+	FIELD (Field.class,FieldIdentification.class),
 	/** The CLASS. */
-	CLASS(Class.class, SingleClassIdentification.class),
+	CLASS (Class.class,SingleClassIdentification.class),
 	/** The ALL. */
-	ALL(null, null),
+	ALL (null,null),
 	/** The ANNOTATION. */
-	ANNOTATION(Annotation.class, null),
+	ANNOTATION (Annotation.class,null),
 	/** The NO n_ annotation. */
-	NON_ANNOTATION(null, null),
+	NON_ANNOTATION (null,null),
 	/** The ENUM. */
-	ENUM(Enum.class, null),
+	ENUM (Enum.class,null),
 	/** The DEFAULT. */
-	DEFAULT(null, null);
+	DEFAULT (null,null);
 	/** The object class represents class type of enum constant. */
 	Class<?>							classType		= null;
 

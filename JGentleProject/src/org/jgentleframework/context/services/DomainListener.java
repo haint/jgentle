@@ -22,8 +22,11 @@ import java.beans.beancontext.BeanContextMembershipListener;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
+import org.jgentleframework.core.provider.Domain;
+
 /**
- * Lắng nghe sự kiện khi có các domain được thêm vào hoặc gỡ bỏ ra khỏi context.
+ * Represents the Domain Listener that allows for custom behaviour when each
+ * {@link Domain} is added or removed.
  * 
  * @author LE QUOC CHUNG - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
@@ -31,11 +34,16 @@ import java.util.Map.Entry;
  * @see DomainContextListener
  */
 public class DomainListener implements BeanContextMembershipListener {
+	/** The listener list. */
 	HashMap<String, DomainContextListener>	listenerList	= new HashMap<String, DomainContextListener>();
 
 	/**
+	 * Action to do.
+	 * 
 	 * @param bcme
+	 *            the bcme
 	 * @param number
+	 *            the number
 	 */
 	private void actionToDo(BeanContextMembershipEvent bcme, int number) {
 
@@ -54,8 +62,12 @@ public class DomainListener implements BeanContextMembershipListener {
 	}
 
 	/**
+	 * Adds the listener.
+	 * 
 	 * @param id
+	 *            the id
 	 * @param listener
+	 *            the listener
 	 * @return {@link DomainContextListener}
 	 */
 	public DomainContextListener addListener(String id,
@@ -66,8 +78,9 @@ public class DomainListener implements BeanContextMembershipListener {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see java.beans.beancontext.BeanContextMembershipListener#childrenAdded(java.beans.beancontext.BeanContextMembershipEvent)
+	 * @see
+	 * java.beans.beancontext.BeanContextMembershipListener#childrenAdded(java
+	 * .beans.beancontext.BeanContextMembershipEvent)
 	 */
 	@Override
 	public void childrenAdded(BeanContextMembershipEvent bcme) {
@@ -79,8 +92,9 @@ public class DomainListener implements BeanContextMembershipListener {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see java.beans.beancontext.BeanContextMembershipListener#childrenRemoved(java.beans.beancontext.BeanContextMembershipEvent)
+	 * @see
+	 * java.beans.beancontext.BeanContextMembershipListener#childrenRemoved(
+	 * java.beans.beancontext.BeanContextMembershipEvent)
 	 */
 	@Override
 	public void childrenRemoved(BeanContextMembershipEvent bcme) {
@@ -91,7 +105,10 @@ public class DomainListener implements BeanContextMembershipListener {
 	}
 
 	/**
+	 * Removes the listener.
+	 * 
 	 * @param listener
+	 *            the listener
 	 * @return {@link DomainContextListener}
 	 */
 	public DomainContextListener removeListener(DomainContextListener listener) {
@@ -106,7 +123,10 @@ public class DomainListener implements BeanContextMembershipListener {
 	}
 
 	/**
+	 * Removes the listener.
+	 * 
 	 * @param id
+	 *            the id
 	 * @return {@link DomainContextListener}
 	 */
 	public DomainContextListener removeListener(String id) {

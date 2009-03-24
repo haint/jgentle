@@ -27,26 +27,47 @@ import org.jgentleframework.core.JGentelIllegalArgumentException;
  * @date Apr 15, 2008
  */
 public class DataAccessRunTimeException extends JGentelIllegalArgumentException {
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long	serialVersionUID	= 6485155594738587862L;
 
+	/**
+	 * Instantiates a new data access run time exception.
+	 */
 	public DataAccessRunTimeException() {
 
 		super();
 	}
 
+	/**
+	 * Instantiates a new data access run time exception.
+	 * 
+	 * @param strEx
+	 *            the str ex
+	 */
 	public DataAccessRunTimeException(String strEx) {
 
 		super(strEx);
 	}
 
+	/**
+	 * Instantiates a new data access run time exception.
+	 * 
+	 * @param message
+	 *            the message
+	 * @param cause
+	 *            the cause
+	 */
 	public DataAccessRunTimeException(String message, Throwable cause) {
 
 		super(message, cause);
 	}
 
+	/**
+	 * Instantiates a new data access run time exception.
+	 * 
+	 * @param cause
+	 *            the cause
+	 */
 	public DataAccessRunTimeException(Throwable cause) {
 
 		super(cause);

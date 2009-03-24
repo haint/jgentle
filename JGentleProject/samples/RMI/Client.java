@@ -17,6 +17,8 @@
  */
 package RMI;
 
+import java.io.Serializable;
+
 import org.jgentleframework.context.JGentle;
 import org.jgentleframework.context.ServiceProvider;
 
@@ -32,9 +34,44 @@ public class Client {
 		RemoteInterface RMIObj = (RemoteInterface) context
 				.getBean(RemoteInterface.class);
 		int x = 0;
-		while (true) {
-			System.out.println(x + " " + RMIObj.helloWorld());
-			x++;
-		}
+		// while (true) {
+		// System.out.println(x + " " + RMIObj.helloWorld());
+		// x++;
+		// }
+		System.out.println(x + " " + RMIObj.helloWorld());
+		ReferObject refer = new ReferObject("Not NULL");
+		System.out.println(refer.getName());
+		System.out.println(RMIObj.process(refer).getName());
+	}
+}
+
+class ReferObject implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long	serialVersionUID	= -5890441747373065164L;
+
+	public ReferObject(String name) {
+
+		this.name = name;
+	}
+
+	private String	name	= "";
+
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+
+		return name;
+	}
+
+	/**
+	 * @param name
+	 *            the name to set
+	 */
+	public void setName(String name) {
+
+		this.name = name;
 	}
 }

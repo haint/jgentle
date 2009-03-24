@@ -18,36 +18,31 @@
 package org.jgentleframework.configure;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-
+import java.util.Map;
 
 /**
+ * The Interface ConfigModule.
+ * 
  * @author LE QUOC CHUNG - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
  * @date Jan 17, 2008
  */
 public interface ConfigModule {
 	/**
-	 * Trả về danh sách chứa đựng các thông tin cấu hình.
-	 * 
-	 * @return Hashmap
+	 * Returns the {@link Map} containing all configured information.
 	 */
-	HashMap<String, ArrayList<?>> getOptionsList();
+	Map<String, ArrayList<?>> getOptionsList();
 
 	/**
-	 * Trả về target class của proxy hiện hành.
-	 * 
-	 * @return Class
+	 * Returns the target object class of current proxy.
 	 */
 	Class<? extends Configurable> getTargetClass();
 
 	/**
-	 * Trả về đối tượng thực thể của config module tương ứng với kiểu type chỉ
-	 * định.
+	 * Returns the config instance appropriate to given type.
 	 * 
 	 * @param type
-	 *            kiểu type của config module class tương ứng.
-	 * @return Object
+	 *            the given type
 	 */
 	Object getConfigInstance(Class<?> type);
 }

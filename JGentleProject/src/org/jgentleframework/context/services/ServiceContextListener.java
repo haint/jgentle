@@ -18,30 +18,30 @@
 package org.jgentleframework.context.services;
 
 /**
- * Chỉ định thông tin listener của service context, ServiceContextListener sẽ
- * nắm hết tất cả thông tin event được ném ra khi có bất kì một service nào được
- * thêm vào hoặc gỡ bỏ ra khỏi context.
+ * Represents the Service Listener that allows for custom behaviour when each
+ * service is added or removed.
  * 
  * @author LE QUOC CHUNG - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
  * @date Oct 1, 2007
+ * @see ServiceHandler
  */
 public interface ServiceContextListener {
 	/**
-	 * Chịu trách nhiệm thực thi khi có bất kì một service nào được add thêm vào
-	 * trong context.
+	 * The implementation of this method will be invoked automatically when each
+	 * service is added.
 	 * 
 	 * @param serviceClass
-	 *            đối tượng object class của service class.
+	 *            the corresponding service object class.
 	 */
 	public void serviceAvailable(Class<?> serviceClass);
 
 	/**
-	 * Chịu trách nhiệm thực thi khi có bất kì một service nào bị remove ra khỏi
-	 * context.
+	 * The implementation of this method will be invoked automatically when each
+	 * service is revoked.
 	 * 
 	 * @param serviceClass
-	 *            đối tượng object class của service class.
+	 *            the corresponding service object class.
 	 */
 	public void serviceRevoked(Class<?> serviceClass);
 }

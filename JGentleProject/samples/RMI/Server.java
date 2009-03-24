@@ -42,7 +42,6 @@ abstract class Config implements Configurable {
 	@Override
 	public void configure() {
 
-		// imports configuration data of RMI service.
 		imports(RmiService.class);
 	}
 }
