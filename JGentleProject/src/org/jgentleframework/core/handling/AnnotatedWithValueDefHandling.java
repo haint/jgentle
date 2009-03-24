@@ -31,15 +31,23 @@ import org.jgentleframework.utils.ReflectUtils;
 import org.jgentleframework.utils.data.NullAnno;
 
 /**
- * Class validator này được implements từ interface {@link AnnotationValidator}
- * thực thi việc validate cho annotation {@link AnnotatedWithValue}.
+ * This class is an implementation of {@link AnnotationValidator} interface. It
+ * is reponsible for {@link AnnotatedWithValue} annotation validation.
  * 
  * @author LE QUOC CHUNG - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
  * @date Sep 20, 2007
+ * @see AnnotationValidator
+ * @see AnnotatedWithValue
  */
 public class AnnotatedWithValueDefHandling implements
 		AnnotationValidator<AnnotatedWithValue> {
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * org.jgentleframework.core.provider.AnnotationValidator#catchException
+	 * (java.lang.RuntimeException, java.lang.annotation.Annotation)
+	 */
 	@Override
 	public <V extends RuntimeException, U extends Annotation> boolean catchException(
 			V exception, U annotation) {
@@ -47,6 +55,14 @@ public class AnnotatedWithValueDefHandling implements
 		return false;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * org.jgentleframework.core.provider.AnnotationValidator#validate(java.
+	 * lang.annotation.Annotation, java.lang.annotation.Annotation[],
+	 * java.lang.Object, java.lang.Class,
+	 * org.jgentleframework.core.handling.DefinitionManager)
+	 */
 	@Override
 	public void validate(AnnotatedWithValue annotation, Annotation[] annoList,
 			Object object, Class<?> clazz, DefinitionManager definitionManager) {
@@ -100,7 +116,7 @@ public class AnnotatedWithValueDefHandling implements
 	}
 
 	/**
-	 * Kiểm tra thông tin của annoClassPath
+	 * Kiểm tra thông tin của annoClassPath.
 	 * 
 	 * @param strClazz
 	 *            đối tượng String giữ thông về classpath của annotation
@@ -149,7 +165,7 @@ public class AnnotatedWithValueDefHandling implements
 	}
 
 	/**
-	 * Kiểm tra thông tin các cặp giá trị trong một annotation chỉ định
+	 * Kiểm tra thông tin các cặp giá trị trong một annotation chỉ định.
 	 * 
 	 * @param object_value_pair
 	 *            các cặp giá trị

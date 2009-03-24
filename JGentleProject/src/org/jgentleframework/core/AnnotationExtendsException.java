@@ -17,13 +17,14 @@
  */
 package org.jgentleframework.core;
 
-
 /**
- * @author LE QUOC CHUNG
+ * The Class AnnotationExtendsException.
+ * 
+ * @author Quoc Chung - mailto: <a
+ *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
+ * @date Mar 24, 2007
  */
 public class AnnotationExtendsException extends JGentleRuntimeException {
-	/**
-	 * 
-	 */
-	private static final long	serialVersionUID	= 1L;
+	/** The Constant serialVersionUID. */
+	private static final long	serialVersionUID	= 8068047221540707967L;
 }

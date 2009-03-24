@@ -68,16 +68,16 @@ import org.jgentleframework.utils.data.NullClass;
  */
 public abstract class JGentle {
 	/** The before config bean list. */
-	private static ArrayList<BeforeConfigure>	beforeConfigBeanList	= new ArrayList<BeforeConfigure>();
+	private static List<BeforeConfigure>	beforeConfigBeanList	= new ArrayList<BeforeConfigure>();
 
 	/** The before init context list. */
-	private static ArrayList<BeforeInitContext>	beforeInitContextList	= new ArrayList<BeforeInitContext>();
+	private static List<BeforeInitContext>	beforeInitContextList	= new ArrayList<BeforeInitContext>();
 
 	/** The config obj class list. */
-	private static HashMap<Class<?>, Class<?>>	configObjClassList		= new HashMap<Class<?>, Class<?>>();
+	private static Map<Class<?>, Class<?>>	configObjClassList		= new HashMap<Class<?>, Class<?>>();
 
-	public static Log							log						= LogFactory
-																				.getLog(JGentle.class);
+	public static Log						log						= LogFactory
+																			.getLog(JGentle.class);
 
 	/**
 	 * Adds a {@link BeforeConfigure} or a group of {@link BeforeConfigure}

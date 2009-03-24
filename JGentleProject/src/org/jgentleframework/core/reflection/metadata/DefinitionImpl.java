@@ -50,6 +50,7 @@ class DefinitionImpl extends DefinitionCoreImpl implements Metadata, Definition 
 	/** The Constant serialVersionUID. */
 	private static final long		serialVersionUID	= -4259116314930030126L;
 
+	/** The log. */
 	transient protected Log			log					= LogFactory
 																.getLog(getClass());
 
@@ -839,8 +840,11 @@ class DefinitionImpl extends DefinitionCoreImpl implements Metadata, Definition 
 	 * Overrides default readObject method.
 	 * 
 	 * @param stream
+	 *            the stream
 	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 * @throws ClassNotFoundException
+	 *             the class not found exception
 	 */
 	private void readObject(ObjectInputStream stream) throws IOException,
 			ClassNotFoundException {

@@ -23,7 +23,8 @@ import org.aopalliance.reflect.Metadata;
 import org.jgentleframework.core.reflection.IAnnotationVisitor;
 
 /**
- * Provides some static methods are responsible for {@link Metadata} creation.
+ * Provides some static methods are responsible for {@link Metadata metadatas}
+ * creation.
  * 
  * @author LE QUOC CHUNG - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>

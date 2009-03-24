@@ -37,6 +37,7 @@ import org.jgentleframework.utils.Assertor;
  */
 public class AnnotationRegisterImpl implements AnnotationRegister {
 	private ArrayList<Class<? extends Annotation>>											annotationRegistered	= new ArrayList<Class<? extends Annotation>>();
+
 	/**
 	 * Danh sách các annotation validator được đăng kí.
 	 */
@@ -51,9 +52,10 @@ public class AnnotationRegisterImpl implements AnnotationRegister {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.aohhandling.defhandling.AnnotationRegister#addValidator(java.lang.Class,
-	 *      org.jgentleframework.core.metadatahandling.aohhandling.pvdhandler.AnnotationValidator)
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
+	 * AnnotationRegister#addValidator(java.lang.Class,
+	 * org.jgentleframework.core
+	 * .metadatahandling.aohhandling.pvdhandler.AnnotationValidator)
 	 */
 	@Override
 	public synchronized <T extends Annotation> void addValidator(Class<T> anno,
@@ -70,8 +72,8 @@ public class AnnotationRegisterImpl implements AnnotationRegister {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.aohhandling.defhandling.AnnotationRegister#clearAllAnnotationRegistered()
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
+	 * AnnotationRegister#clearAllAnnotationRegistered()
 	 */
 	public void clearAllAnnotationRegistered() {
 
@@ -80,8 +82,8 @@ public class AnnotationRegisterImpl implements AnnotationRegister {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.aohhandling.defhandling.AnnotationRegister#countAnnotationRegistered()
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
+	 * AnnotationRegister#countAnnotationRegistered()
 	 */
 	@Override
 	public int countAnnotationRegistered() {
@@ -91,8 +93,8 @@ public class AnnotationRegisterImpl implements AnnotationRegister {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.aohhandling.defhandling.AnnotationRegister#countValidator()
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
+	 * AnnotationRegister#countValidator()
 	 */
 	@Override
 	public int countValidator() {
@@ -102,8 +104,8 @@ public class AnnotationRegisterImpl implements AnnotationRegister {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.aohhandling.defhandling.AnnotationRegister#getValidatorlist()
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
+	 * AnnotationRegister#getValidatorlist()
 	 */
 	public HashMap<Class<? extends Annotation>, AnnotationValidator<? extends Annotation>> getValidatorlist() {
 
@@ -112,8 +114,8 @@ public class AnnotationRegisterImpl implements AnnotationRegister {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.aohhandling.defhandling.AnnotationRegister#isAnnotationListEmpty()
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
+	 * AnnotationRegister#isAnnotationListEmpty()
 	 */
 	public boolean isAnnotationListEmpty() {
 
@@ -122,8 +124,8 @@ public class AnnotationRegisterImpl implements AnnotationRegister {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.aohhandling.defhandling.AnnotationRegister#isRegisteredAnnotation(java.lang.Class)
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
+	 * AnnotationRegister#isRegisteredAnnotation(java.lang.Class)
 	 */
 	public boolean isRegisteredAnnotation(Class<? extends Annotation> anno) {
 
@@ -133,8 +135,8 @@ public class AnnotationRegisterImpl implements AnnotationRegister {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.aohhandling.defhandling.AnnotationRegister#iteratorRegisteredAnno()
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
+	 * AnnotationRegister#iteratorRegisteredAnno()
 	 */
 	public Iterator<Class<? extends Annotation>> iteratorRegisteredAnno() {
 
@@ -143,8 +145,8 @@ public class AnnotationRegisterImpl implements AnnotationRegister {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.aohhandling.defhandling.AnnotationRegister#registerAnnotation(java.lang.Class)
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
+	 * AnnotationRegister#registerAnnotation(java.lang.Class)
 	 */
 	@Override
 	public void registerAnnotation(Class<? extends Annotation> anno) {
@@ -160,9 +162,10 @@ public class AnnotationRegisterImpl implements AnnotationRegister {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.aohhandling.defhandling.AnnotationRegister#registerAnnotation(java.lang.Class,
-	 *      org.jgentleframework.core.metadatahandling.aohhandling.pvdhandler.AnnotationValidator)
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
+	 * AnnotationRegister#registerAnnotation(java.lang.Class,
+	 * org.jgentleframework
+	 * .core.metadatahandling.aohhandling.pvdhandler.AnnotationValidator)
 	 */
 	@Override
 	public <T extends Annotation> void registerAnnotation(Class<T> anno,
@@ -174,8 +177,10 @@ public class AnnotationRegisterImpl implements AnnotationRegister {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.aohhandling.defhandling.AnnotationRegister#removeValidator(org.jgentleframework.core.metadatahandling.aohhandling.pvdhandler.AnnotationValidator)
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
+	 * AnnotationRegister
+	 * #removeValidator(org.jgentleframework.core.metadatahandling
+	 * .aohhandling.pvdhandler.AnnotationValidator)
 	 */
 	@Override
 	public synchronized <T extends Annotation> void removeValidator(
@@ -196,8 +201,8 @@ public class AnnotationRegisterImpl implements AnnotationRegister {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.aohhandling.defhandling.AnnotationRegister#removeValidator(java.lang.Class)
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
+	 * AnnotationRegister#removeValidator(java.lang.Class)
 	 */
 	@Override
 	public synchronized <T extends Annotation> void removeValidator(
@@ -216,9 +221,8 @@ public class AnnotationRegisterImpl implements AnnotationRegister {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.aohhandling.defhandling.AnnotationRegister#subListAnnoRegistered(int,
-	 *      int)
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
+	 * AnnotationRegister#subListAnnoRegistered(int, int)
 	 */
 	public List<Class<? extends Annotation>> subListAnnoRegistered(
 			int fromIndex, int toIndex) {
@@ -228,8 +232,8 @@ public class AnnotationRegisterImpl implements AnnotationRegister {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.aohhandling.defhandling.AnnotationRegister#unregisterAnnotation(java.lang.Class)
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
+	 * AnnotationRegister#unregisterAnnotation(java.lang.Class)
 	 */
 	public void unregisterAnnotation(Class<? extends Annotation> anno) {
 
@@ -244,8 +248,8 @@ public class AnnotationRegisterImpl implements AnnotationRegister {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.aohhandling.defhandling.AnnotationRegister#getAnnotationRegistered()
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
+	 * AnnotationRegister#getAnnotationRegistered()
 	 */
 	@Override
 	public ArrayList<Class<? extends Annotation>> getAnnotationRegistered() {

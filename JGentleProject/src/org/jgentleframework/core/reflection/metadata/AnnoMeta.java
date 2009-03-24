@@ -25,9 +25,9 @@ import org.aopalliance.reflect.Metadata;
 
 /**
  * This class represents {@link AnnoMeta} is created in JGentle system. An
- * {@link AnnoMeta} will have a holding list of {@link Metadata}s which may be
- * another {@link AnnoMeta}s or also may be basic data (value of an attribute
- * of an annotation) which is interpreted.
+ * {@link AnnoMeta} will have a holding list of {@link Metadata metadatas} which
+ * may be another {@link AnnoMeta} or also may be basic datas (values of
+ * attributes of an annotation) which is interpreted.
  * <p>
  * If {@link AnnoMeta} is interpreted of annotation, key of {@link AnnoMeta}
  * will be the instance which is annotated with that <code>annotation</code>,
@@ -85,12 +85,12 @@ public interface AnnoMeta extends Metadata {
 	public int count();
 
 	/**
-	 * Remove all the {@link Metadata}s in this {@link AnnoMeta}
+	 * Removes all the {@link Metadata}s in this {@link AnnoMeta}
 	 */
 	public void clear();
 
 	/**
-	 * Remove a specified {@link Metadata}
+	 * Removes a specified {@link Metadata}
 	 * 
 	 * @param key
 	 *            key of {@link Metadata} need to be remove.

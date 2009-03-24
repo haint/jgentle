@@ -20,6 +20,8 @@ package org.jgentleframework.core.reflection.metadata;
 import org.aopalliance.reflect.Metadata;
 
 /**
+ * The Interface SetValueOfAnnotation.
+ * 
  * @author LE QUOC CHUNG - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
  * @date Oct 15, 2007
@@ -41,7 +43,9 @@ public interface SetValueOfAnnotation {
 	Metadata setValueOfAnnotation(String valueName, Object value);
 
 	/**
-	 * Returns current {@link Definition} holding current annotation data.
+	 * Returns current {@link Definition} holding annotation data.
+	 * 
+	 * @return the definition
 	 */
 	Definition getDefinition();
 }

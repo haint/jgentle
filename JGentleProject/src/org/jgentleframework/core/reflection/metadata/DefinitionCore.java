@@ -91,8 +91,8 @@ public interface DefinitionCore extends MetadataControl {
 	/**
 	 * Returns an instance of original annotation according as its given object
 	 * class. <br>
-	 * <b>Note:</b> the returned annotation instance is original annotation,
-	 * not proxied annotation. To get the proxied annotation, invoke
+	 * <b>Note:</b> the returned annotation instance is original annotation, not
+	 * proxied annotation. To get the proxied annotation, invoke
 	 * {@link AnnotatedElement#getAnnotation(Class)}
 	 * 
 	 * @param <T>
@@ -154,7 +154,7 @@ public interface DefinitionCore extends MetadataControl {
 	public boolean isInterpretedOfMethod();
 
 	/**
-	 * Set original annotations
+	 * Sets original annotations
 	 * <p>
 	 * <b>Note:</b> The invoking of this method will also execute creating of
 	 * {@link AnnoMeta} content by automate invoke {@link #buildAnnoMeta()}
@@ -171,20 +171,20 @@ public interface DefinitionCore extends MetadataControl {
 	public void setParameterDefList(Definition[] parameterDefList);
 
 	/**
-	 * Set a new value to an attribute of specified annotation in this
+	 * Sets a new value to an attribute of specified annotation in this
 	 * {@link Definition}.
 	 * 
 	 * @param annotation
-	 *            <code>object class</code> of specified
-	 *            <code>annotation</code> need to be set a new value.
+	 *            <code>object class</code> of specified <code>annotation</code>
+	 *            need to be set a new value.
 	 * @param valueName
 	 *            name of specified attribute of annotation.
 	 * @param value
 	 *            new object value
-	 * @return returns the previous value associated with attribute, or <b>null</b>
-	 *         if there was no specified value for attribute. (A null return can
-	 *         also indicate that the attribute previously associated null with
-	 *         value.)
+	 * @return returns the previous value associated with attribute, or
+	 *         <b>null</b> if there was no specified value for attribute. (A
+	 *         null return can also indicate that the attribute previously
+	 *         associated null with value.)
 	 */
 	public Object setValueOfAnnotation(Class<? extends Annotation> annotation,
 			String valueName, Object value);

@@ -17,7 +17,7 @@
  */
 package org.jgentleframework.configure.enums;
 
-import java.util.HashMap;
+import java.util.Map;
 import java.util.TooManyListenersException;
 
 import org.apache.commons.logging.Log;
@@ -107,8 +107,8 @@ public enum Scope implements ScopeImplementation {
 
 		Object result = null;
 		Provider provider = objFactory.getProvider();
-		HashMap<String, ScopeInstance> scopeList = objFactory.getScopeList();
-		HashMap<String, Object> mapDirectList = objFactory.getMapDirectList();
+		Map<String, ScopeInstance> scopeList = objFactory.getScopeList();
+		Map<String, Object> mapDirectList = objFactory.getMapDirectList();
 		synchronized (scopeList) {
 			synchronized (mapDirectList) {
 				Scope scope = null;
@@ -157,8 +157,8 @@ public enum Scope implements ScopeImplementation {
 
 		Object result = null;
 		Provider provider = objFactory.getProvider();
-		HashMap<String, ScopeInstance> scopeList = objFactory.getScopeList();
-		HashMap<String, Object> mapDirectList = objFactory.getMapDirectList();
+		Map<String, ScopeInstance> scopeList = objFactory.getScopeList();
+		Map<String, Object> mapDirectList = objFactory.getMapDirectList();
 		// Nếu là singleton
 		synchronized (scopeList) {
 			synchronized (mapDirectList) {
@@ -251,8 +251,8 @@ public enum Scope implements ScopeImplementation {
 
 		Object result = null;
 		Provider provider = objFactory.getProvider();
-		HashMap<String, ScopeInstance> scopeList = objFactory.getScopeList();
-		HashMap<String, Object> mapDirectList = objFactory.getMapDirectList();
+		Map<String, ScopeInstance> scopeList = objFactory.getScopeList();
+		Map<String, Object> mapDirectList = objFactory.getMapDirectList();
 		synchronized (scopeList) {
 			synchronized (mapDirectList) {
 				if (scopeList.containsKey(scopeName)) {

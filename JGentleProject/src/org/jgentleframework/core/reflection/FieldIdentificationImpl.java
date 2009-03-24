@@ -35,20 +35,27 @@ import org.jgentleframework.utils.ReflectUtils;
  * @see SingleClassIdentification
  */
 class FieldIdentificationImpl implements FieldIdentification {
+	/** The name. */
 	String		name				= null;
+
+	/** The declaring class. */
 	Class<?>	declaringClass		= null;
+
+	/** The found on superclass. */
 	boolean		foundOnSuperclass	= false;
+
+	/** The modifiers. */
 	int			modifiers			= Identification.NO_MODIFIERS;
 
 	/**
-	 * Constructor
+	 * Constructor.
 	 */
 	public FieldIdentificationImpl() {
 
 	}
 
 	/**
-	 * Constructor
+	 * Constructor.
 	 * 
 	 * @param name
 	 *            the name of member.
@@ -59,7 +66,7 @@ class FieldIdentificationImpl implements FieldIdentification {
 	}
 
 	/**
-	 * Constructor
+	 * Constructor.
 	 * 
 	 * @param name
 	 *            the name of member.
@@ -113,8 +120,9 @@ class FieldIdentificationImpl implements FieldIdentification {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.general.reflection.FieldIdentification#getModifiers()
+	 * @see
+	 * org.jgentleframework.general.reflection.FieldIdentification#getModifiers
+	 * ()
 	 */
 	@Override
 	public int getModifiers() {
@@ -124,8 +132,9 @@ class FieldIdentificationImpl implements FieldIdentification {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.general.reflection.MemberIdentification#setModifiers(int)
+	 * @see
+	 * org.jgentleframework.general.reflection.MemberIdentification#setModifiers
+	 * (int)
 	 */
 	@Override
 	public void setModifiers(int modifiers) {
@@ -135,8 +144,8 @@ class FieldIdentificationImpl implements FieldIdentification {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.general.reflection.FieldIdentification#getName()
+	 * @see
+	 * org.jgentleframework.general.reflection.FieldIdentification#getName()
 	 */
 	@Override
 	public String getName() {
@@ -146,8 +155,9 @@ class FieldIdentificationImpl implements FieldIdentification {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.general.reflection.Identification#setName(java.lang.String)
+	 * @see
+	 * org.jgentleframework.general.reflection.Identification#setName(java.lang
+	 * .String)
 	 */
 	@Override
 	public void setName(String name) {
@@ -157,8 +167,9 @@ class FieldIdentificationImpl implements FieldIdentification {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.general.reflection.FieldIdentification#getDeclaringClass()
+	 * @see
+	 * org.jgentleframework.general.reflection.FieldIdentification#getDeclaringClass
+	 * ()
 	 */
 	@Override
 	public Class<?> getDeclaringClass() {
@@ -168,8 +179,8 @@ class FieldIdentificationImpl implements FieldIdentification {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.general.reflection.MemberIdentification#setDeclaringClass(java.lang.Class)
+	 * @seeorg.jgentleframework.general.reflection.MemberIdentification#
+	 * setDeclaringClass(java.lang.Class)
 	 */
 	@Override
 	public void setDeclaringClass(Class<?> declaringClass) {
@@ -179,7 +190,6 @@ class FieldIdentificationImpl implements FieldIdentification {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.jgentleframework.general.reflection.Identification#getMember()
 	 */
 	@Override
@@ -207,8 +217,8 @@ class FieldIdentificationImpl implements FieldIdentification {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.general.reflection.MemberIdentification#setFoundOnSuperclass(boolean)
+	 * @seeorg.jgentleframework.general.reflection.MemberIdentification#
+	 * setFoundOnSuperclass(boolean)
 	 */
 	@Override
 	public void setFoundOnSuperclass(boolean bool) {
@@ -218,8 +228,8 @@ class FieldIdentificationImpl implements FieldIdentification {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.general.reflection.FieldIdentification#isFoundOnSuperclass()
+	 * @seeorg.jgentleframework.general.reflection.FieldIdentification#
+	 * isFoundOnSuperclass()
 	 */
 	@Override
 	public boolean isFoundOnSuperclass() {

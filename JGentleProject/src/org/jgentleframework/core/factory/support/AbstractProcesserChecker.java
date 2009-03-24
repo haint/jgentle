@@ -212,7 +212,6 @@ public abstract class AbstractProcesserChecker {
 		CachedConstructor cons = null;
 		MetaDefObject metaObj = new MetaDefObject();
 		boolean invocation = findInOutNonRuntime(metaObj, definition);
-		
 		if (!targetClass.isInterface() && !targetClass.isAnnotation()) {
 			metaObj = new MetaDefObject();
 			invocation = findInOutNonRuntime(metaObj, definition);
@@ -449,8 +448,8 @@ public abstract class AbstractProcesserChecker {
 		String scopeName = Utils.createScopeName(selector.getType(), selector
 				.getTargetClass(), selector.getDefinition(), selector
 				.getMappingName());
-		HashMap<String, ScopeInstance> scopeList = provider
-				.getObjectBeanFactory().getScopeList();
+		Map<String, ScopeInstance> scopeList = provider.getObjectBeanFactory()
+				.getScopeList();
 		Scope scope = (Scope) scopeList.get(scopeName);
 		if (scope.equals(Scope.SINGLETON)) {
 			provider.getObjectBeanFactory().getMapDirectList().put(scopeName,

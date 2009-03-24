@@ -61,6 +61,18 @@ class ThrowsAdviceStackMethodInterceptor implements MethodInterceptor {
 	/** The definition. */
 	Definition											definition;
 
+	/**
+	 * Instantiates a new throws advice stack method interceptor.
+	 * 
+	 * @param definition
+	 *            the definition
+	 * @param provider
+	 *            the provider
+	 * @param runtimeLoading
+	 *            the runtime loading
+	 * @throws ClassNotFoundException
+	 *             the class not found exception
+	 */
 	public ThrowsAdviceStackMethodInterceptor(Definition definition,
 			Provider provider, boolean runtimeLoading)
 			throws ClassNotFoundException {
@@ -71,6 +83,14 @@ class ThrowsAdviceStackMethodInterceptor implements MethodInterceptor {
 		this.runtimeLoading = runtimeLoading;
 	}
 
+	/**
+	 * Find advice instances.
+	 * 
+	 * @param throwz
+	 *            the throwz
+	 * @throws ClassNotFoundException
+	 *             the class not found exception
+	 */
 	@SuppressWarnings("unchecked")
 	private void findAdviceInstances(Throws throwz)
 			throws ClassNotFoundException {

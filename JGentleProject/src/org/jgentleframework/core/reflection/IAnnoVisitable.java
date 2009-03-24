@@ -18,13 +18,18 @@
 package org.jgentleframework.core.reflection;
 
 /**
- * Chỉ định một dữ liệu metadata cho phép visitable (chỉ định cho phép được diễn
- * dịch).
+ * The Interface IAnnoVisitable.
  * 
  * @author LE QUOC CHUNG - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
  * @date Sep 4, 2007
  */
 public interface IAnnoVisitable {
+	/**
+	 * Accept.
+	 * 
+	 * @param visitor
+	 *            the visitor
+	 */
 	void accept(IAnnotationVisitor visitor);
 }

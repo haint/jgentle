@@ -37,8 +37,9 @@ public abstract class AbstractProgramUnit implements ProgramUnit {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.aopalliance.reflect.ProgramUnit#addMetadata(org.aopalliance.reflect.Metadata)
+	 * @see
+	 * org.aopalliance.reflect.ProgramUnit#addMetadata(org.aopalliance.reflect
+	 * .Metadata)
 	 */
 	@Override
 	public void addMetadata(Metadata metadata) {
@@ -52,7 +53,6 @@ public abstract class AbstractProgramUnit implements ProgramUnit {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.aopalliance.reflect.ProgramUnit#getMetadata(java.lang.Object)
 	 */
 	@Override
@@ -63,7 +63,6 @@ public abstract class AbstractProgramUnit implements ProgramUnit {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.aopalliance.reflect.ProgramUnit#getMetadatas()
 	 */
 	@Override
@@ -75,7 +74,6 @@ public abstract class AbstractProgramUnit implements ProgramUnit {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.aopalliance.reflect.ProgramUnit#removeMetadata(java.lang.Object)
 	 */
 	@Override

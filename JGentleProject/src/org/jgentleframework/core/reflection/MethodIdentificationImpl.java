@@ -34,14 +34,19 @@ import org.jgentleframework.utils.ReflectUtils;
 class MethodIdentificationImpl implements MethodIdentification {
 	/** The name. */
 	String							name				= null;
+
 	/** The declaring class. */
 	Class<?>						declaringClass		= null;
+
 	/** The found on superclass. */
 	boolean							foundOnSuperclass	= false;
+
 	/** The modifiers. */
 	int								modifiers			= Identification.NO_MODIFIERS;
+
 	/** The args type. */
 	Class<?>[]						argsType			= null;
+
 	/** The throwable classes. */
 	Class<? extends Throwable>[]	throwableClasses	= null;
 
@@ -261,7 +266,6 @@ class MethodIdentificationImpl implements MethodIdentification {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.jgentleframework.general.reflection.Identification#getMember()
 	 */
 	@Override
@@ -321,8 +325,8 @@ class MethodIdentificationImpl implements MethodIdentification {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.general.reflection.MemberIdentification#setFoundOnSuperclass(boolean)
+	 * @seeorg.jgentleframework.general.reflection.MemberIdentification#
+	 * setFoundOnSuperclass(boolean)
 	 */
 	@Override
 	public void setFoundOnSuperclass(boolean bool) {
@@ -332,8 +336,9 @@ class MethodIdentificationImpl implements MethodIdentification {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.general.reflection.MemberIdentification#setModifiers(int)
+	 * @see
+	 * org.jgentleframework.general.reflection.MemberIdentification#setModifiers
+	 * (int)
 	 */
 	@Override
 	public void setModifiers(int modifiers) {
@@ -343,8 +348,9 @@ class MethodIdentificationImpl implements MethodIdentification {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.general.reflection.MethodIdentification#setName(java.lang.String)
+	 * @see
+	 * org.jgentleframework.general.reflection.MethodIdentification#setName(
+	 * java.lang.String)
 	 */
 	@Override
 	public void setName(String name) {
@@ -354,8 +360,8 @@ class MethodIdentificationImpl implements MethodIdentification {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.general.reflection.MethodIdentification#getDeclaringClass()
+	 * @seeorg.jgentleframework.general.reflection.MethodIdentification#
+	 * getDeclaringClass()
 	 */
 	public Class<?> getDeclaringClass() {
 
@@ -364,8 +370,8 @@ class MethodIdentificationImpl implements MethodIdentification {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.general.reflection.MemberIdentification#setDeclaringClass(java.lang.Class)
+	 * @seeorg.jgentleframework.general.reflection.MemberIdentification#
+	 * setDeclaringClass(java.lang.Class)
 	 */
 	@Override
 	public void setDeclaringClass(Class<?> declaringClass) {
@@ -375,8 +381,9 @@ class MethodIdentificationImpl implements MethodIdentification {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.general.reflection.MethodIdentification#getArgsType()
+	 * @see
+	 * org.jgentleframework.general.reflection.MethodIdentification#getArgsType
+	 * ()
 	 */
 	public Class<?>[] getArgsType() {
 
@@ -385,8 +392,9 @@ class MethodIdentificationImpl implements MethodIdentification {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.general.reflection.MethodIdentification#setArgsType(java.lang.Class)
+	 * @see
+	 * org.jgentleframework.general.reflection.MethodIdentification#setArgsType
+	 * (java.lang.Class)
 	 */
 	public void setArgsType(Class<?>[] argsType) {
 
@@ -395,8 +403,8 @@ class MethodIdentificationImpl implements MethodIdentification {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.general.reflection.MethodIdentification#getThrowableClasses()
+	 * @seeorg.jgentleframework.general.reflection.MethodIdentification#
+	 * getThrowableClasses()
 	 */
 	public Class<? extends Throwable>[] getThrowableClasses() {
 
@@ -405,8 +413,8 @@ class MethodIdentificationImpl implements MethodIdentification {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.general.reflection.MethodIdentification#setThrowableClasses(java.lang.Class)
+	 * @seeorg.jgentleframework.general.reflection.MethodIdentification#
+	 * setThrowableClasses(java.lang.Class)
 	 */
 	public void setThrowableClasses(
 			Class<? extends Throwable>[] throwableClasses) {
@@ -416,8 +424,8 @@ class MethodIdentificationImpl implements MethodIdentification {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.general.reflection.MethodIdentification#getName()
+	 * @see
+	 * org.jgentleframework.general.reflection.MethodIdentification#getName()
 	 */
 	public String getName() {
 
@@ -426,8 +434,8 @@ class MethodIdentificationImpl implements MethodIdentification {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.general.reflection.MethodIdentification#isFoundOnSuperclass()
+	 * @seeorg.jgentleframework.general.reflection.MethodIdentification#
+	 * isFoundOnSuperclass()
 	 */
 	public boolean isFoundOnSuperclass() {
 
@@ -436,8 +444,9 @@ class MethodIdentificationImpl implements MethodIdentification {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.general.reflection.MethodIdentification#getModifiers()
+	 * @see
+	 * org.jgentleframework.general.reflection.MethodIdentification#getModifiers
+	 * ()
 	 */
 	public int getModifiers() {
 

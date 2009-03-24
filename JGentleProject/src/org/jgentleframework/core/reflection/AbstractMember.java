@@ -21,16 +21,17 @@ import org.aopalliance.reflect.Class;
 import org.aopalliance.reflect.Member;
 
 /**
- * This class is an abstract class that is represented a {@link Member}
+ * This class is an abstract class which represents a {@link Member}.
  * 
  * @author LE QUOC CHUNG - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
  * @date Jul 16, 2008
+ * @see Member
  */
 public abstract class AbstractMember extends AbstractProgramUnit implements
 		Member {
 	/**
-	 * Constructor
+	 * Constructor.
 	 * 
 	 * @param declaringClass
 	 *            the class that declares this member.
@@ -46,13 +47,17 @@ public abstract class AbstractMember extends AbstractProgramUnit implements
 		this.modifiers = modifiers;
 	}
 
+	/** The declaring class. */
 	Class	declaringClass	= null;
+
+	/** The name. */
 	String	name;
+
+	/** The modifiers. */
 	int		modifiers;
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.aopalliance.reflect.Member#getDeclaringClass()
 	 */
 	@Override
@@ -63,7 +68,6 @@ public abstract class AbstractMember extends AbstractProgramUnit implements
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.aopalliance.reflect.Member#getName()
 	 */
 	@Override
@@ -74,7 +78,6 @@ public abstract class AbstractMember extends AbstractProgramUnit implements
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.aopalliance.reflect.Member#getModifiers()
 	 */
 	@Override

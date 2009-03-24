@@ -17,8 +17,8 @@
  */
 package org.jgentleframework.context.injecting;
 
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import org.jgentleframework.configure.AbstractConfig;
@@ -210,28 +210,28 @@ public interface ObjectBeanFactory {
 	 * 
 	 * @return the scope list
 	 */
-	public HashMap<String, ScopeInstance> getScopeList();
+	public Map<String, ScopeInstance> getScopeList();
 
 	/**
 	 * Gets the map direct list.
 	 * 
 	 * @return the map direct list
 	 */
-	public HashMap<String, Object> getMapDirectList();
+	public Map<String, Object> getMapDirectList();
 
 	/**
 	 * Gets the mapping list.
 	 * 
 	 * @return the mapping list
 	 */
-	public HashMap<Class<?>, Class<?>> getMappingList();
+	public Map<Class<?>, Class<?>> getMappingList();
 
 	/**
 	 * Gets the alias map.
 	 * 
 	 * @return the alias map
 	 */
-	public HashMap<String, Entry<Class<?>, Class<?>>> getAliasMap();
+	public Map<String, Entry<Class<?>, Class<?>>> getAliasMap();
 
 	/**
 	 * Creates {@link ScopeImplementation}.

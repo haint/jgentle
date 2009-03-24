@@ -17,14 +17,14 @@
  */
 package org.jgentleframework.core;
 
-
 /**
- * @author LE QUOC CHUNG
+ * The Class MustBeExtendedByException.
+ * 
+ * @author LE QUOC CHUNG - mailto: <a
+ *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
  * @date Sep 26, 2007
  */
 public class MustBeExtendedByException extends JGentleRuntimeException {
-	/**
-	 * 
-	 */
-	private static final long	serialVersionUID	= 1L;
+	/** The Constant serialVersionUID. */
+	private static final long	serialVersionUID	= -9080304149422513386L;
 }

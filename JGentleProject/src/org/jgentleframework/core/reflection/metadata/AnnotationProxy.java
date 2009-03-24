@@ -38,10 +38,11 @@ import org.jgentleframework.utils.ReflectUtils;
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
  * @date Oct 15, 2007
  * @see SetValueOfAnnotation
+ * @see InvocationHandler
  */
 class AnnotationProxy implements InvocationHandler, SetValueOfAnnotation {
 	/**
-	 * Create proxied annotation
+	 * Create proxied annotation.
 	 * 
 	 * @param obj
 	 *            desired original annotation instance.
@@ -62,17 +63,22 @@ class AnnotationProxy implements InvocationHandler, SetValueOfAnnotation {
 						definition));
 	}
 
+	/** The anno meta. */
 	private AnnoMeta	annoMeta;
 
+	/** The definition. */
 	private Definition	definition;
 
+	/** The target. */
 	private Object		target	= null;
 
 	/**
-	 * Constructor
+	 * Constructor.
 	 * 
 	 * @param obj
+	 *            the obj
 	 * @param definition
+	 *            the definition
 	 */
 	protected AnnotationProxy(Object obj, Definition definition) {
 

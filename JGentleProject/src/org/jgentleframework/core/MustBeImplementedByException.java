@@ -20,11 +20,13 @@ package org.jgentleframework.core;
 /**
  * The Class MustBeImplementedByException.
  * 
- * @author LE QUOC CHUNG
+ * @author LE QUOC CHUNG - mailto: <a
+ *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
  * @date Sep 27, 2007
  */
-public class MustBeImplementedByException extends
-		JGentleRuntimeException {
-	/** The Constant serialVersionUID. */
-	private static final long	serialVersionUID	= 1L;
+public class MustBeImplementedByException extends JGentleRuntimeException {
+	/**
+	 * 
+	 */
+	private static final long	serialVersionUID	= -5613334826877167048L;
 }

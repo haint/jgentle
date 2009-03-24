@@ -23,6 +23,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.NoSuchElementException;
 
 import org.apache.commons.logging.Log;
@@ -423,7 +424,7 @@ public abstract class AbstractBeanFactory extends AbstractLoadingFactory
 			scopeName = Utils.createScopeName(type, targetClass, definition,
 					mappingName);
 			// creates scope info, default is SINGLETON
-			HashMap<String, ScopeInstance> scopeList = this.objectBeanFactory
+			Map<String, ScopeInstance> scopeList = this.objectBeanFactory
 					.getScopeList();
 			synchronized (scopeList) {
 				if (!scopeList.containsKey(scopeName)) {
@@ -479,9 +480,8 @@ public abstract class AbstractBeanFactory extends AbstractLoadingFactory
 
 	/*
 	 * (non-Javadoc)
-	 * @see
-	 * org.jgentleframework.context.injecting.IAbstractBeanFactory#getScopeController
-	 * ()
+	 * @seeorg.jgentleframework.context.injecting.IAbstractBeanFactory#
+	 * getScopeController ()
 	 */
 	@Override
 	public ScopeController getScopeController() {
@@ -503,9 +503,8 @@ public abstract class AbstractBeanFactory extends AbstractLoadingFactory
 
 	/*
 	 * (non-Javadoc)
-	 * @see
-	 * org.jgentleframework.context.injecting.IAbstractBeanFactory#isContainsConstant
-	 * (java.lang.String)
+	 * @seeorg.jgentleframework.context.injecting.IAbstractBeanFactory#
+	 * isContainsConstant (java.lang.String)
 	 */
 	@Override
 	public boolean isContainsConstant(String name) {

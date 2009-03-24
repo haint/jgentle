@@ -18,15 +18,13 @@
 package org.jgentleframework.core;
 
 /**
- * Bắt các ngoại lệ khi thông tin chỉ định với annotation AnnotatedWith không
- * phù hợp.
+ * The Class AnnotatedWithException.
  * 
- * @author LE QUOC CHUNG
- * @see AnnotationExtendsException
+ * @author Quoc Chung - mailto: <a
+ *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
+ * @date Mar 24, 2007
  */
 public class AnnotatedWithException extends AnnotationExtendsException {
-	/**
-	 * 
-	 */
-	private static final long	serialVersionUID	= 1L;
+	/** The Constant serialVersionUID. */
+	private static final long	serialVersionUID	= 5478238979514825276L;
 }

@@ -31,19 +31,25 @@ import org.jgentleframework.core.reflection.metadata.Definition;
  * @date Sep 13, 2007
  */
 public interface ObjectBeanService extends BeanContextMembershipListener {
+	/** The Constant childrenAdded. */
 	static final String	childrenAdded	= "childrenAdded";
 
+	/** The Constant childrenRemoved. */
 	static final String	childrenRemoved	= "childrenRemoved";
 
 	/**
 	 * Returns the corresponding constructor of service class used to create
 	 * service instance.
+	 * 
+	 * @return the constructor
 	 */
 	public Constructor<?> getConstructor();
 
 	/**
 	 * Returns the arguments used for the constructor call. This method is only
 	 * invoked if {@link #getConstructor()} returns a <b>not-null</b> value.
+	 * 
+	 * @return the args
 	 */
 	public Object[] getArgs();
 

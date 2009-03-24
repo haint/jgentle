@@ -251,7 +251,7 @@ class ProviderCoreCreator extends AbstractBeanFactory implements Provider {
 		CoreInstantiationSelector coreSelector = new CoreInstantiationSelectorImpl(
 				ref);
 		// creates scope info, default is SINGLETON
-		HashMap<String, ScopeInstance> scopeList = this.objectBeanFactory
+		Map<String, ScopeInstance> scopeList = this.objectBeanFactory
 				.getScopeList();
 		synchronized (scopeList) {
 			if (!scopeList.containsKey(ref)) {

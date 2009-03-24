@@ -35,16 +35,24 @@ import org.aopalliance.intercept.MethodInvocation;
  * @see MethodInterceptor
  */
 public class BasicMethodInvocation implements MethodInvocation {
+	/** The this object. */
 	Object		thisObject	= null;
+
+	/** The method. */
 	Method		method		= null;
+
+	/** The arguments. */
 	Object[]	arguments	= null;
 
 	/**
-	 * Constructor
+	 * Constructor.
 	 * 
 	 * @param thisObject
+	 *            the this object
 	 * @param method
+	 *            the method
 	 * @param arguments
+	 *            the arguments
 	 */
 	public BasicMethodInvocation(Object thisObject, Method method,
 			Object[] arguments) {
@@ -56,7 +64,6 @@ public class BasicMethodInvocation implements MethodInvocation {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.aopalliance.intercept.MethodInvocation#getMethod()
 	 */
 	@Override
@@ -67,7 +74,6 @@ public class BasicMethodInvocation implements MethodInvocation {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.aopalliance.intercept.Invocation#getArguments()
 	 */
 	@Override
@@ -78,7 +84,6 @@ public class BasicMethodInvocation implements MethodInvocation {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.aopalliance.intercept.Joinpoint#getStaticPart()
 	 */
 	@Override
@@ -90,7 +95,6 @@ public class BasicMethodInvocation implements MethodInvocation {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.aopalliance.intercept.Joinpoint#getThis()
 	 */
 	@Override
@@ -101,7 +105,6 @@ public class BasicMethodInvocation implements MethodInvocation {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.aopalliance.intercept.Joinpoint#proceed()
 	 */
 	@Override

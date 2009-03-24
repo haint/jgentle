@@ -71,25 +71,25 @@ import org.jgentleframework.utils.data.Pair;
  */
 abstract class ObjectBeanFactoryImpl implements ObjectBeanFactory {
 	/** The definition manager. */
-	private DefinitionManager								defManager		= null;
+	private DefinitionManager							definitionManager	= null;
 
 	/** The provider. */
-	private Provider										provider		= null;
+	private Provider									provider			= null;
 
 	/** The service handler. */
-	private ServiceHandler									serviceHandler	= null;
+	private ServiceHandler								serviceHandler		= null;
 
-	/** The {@link HashMap} holds mapping list which has mapping name. */
-	protected HashMap<String, Entry<Class<?>, Class<?>>>	aliasMap		= new HashMap<String, Entry<Class<?>, Class<?>>>();
+	/** The {@link Map} holds mapping list which has mapping name. */
+	protected Map<String, Entry<Class<?>, Class<?>>>	aliasMap			= new HashMap<String, Entry<Class<?>, Class<?>>>();
 
-	/** The {@link HashMap} holds mapping constant. */
-	protected HashMap<String, Object>						mapDirectList	= new HashMap<String, Object>();
+	/** The {@link Map} holds mapping constant. */
+	protected Map<String, Object>						mapDirectList		= new HashMap<String, Object>();
 
-	/** The {@link HashMap} holds mapping scoped list. */
-	protected HashMap<String, ScopeInstance>				scopeList		= new HashMap<String, ScopeInstance>();
+	/** The {@link Map} holds mapping scoped list. */
+	protected Map<String, ScopeInstance>				scopeList			= new HashMap<String, ScopeInstance>();
 
-	/** The {@link HashMap} holds mapping list. */
-	protected HashMap<Class<?>, Class<?>>					mappingList		= new HashMap<Class<?>, Class<?>>();
+	/** The {@link Map} holds mapping list. */
+	protected Map<Class<?>, Class<?>>					mappingList			= new HashMap<Class<?>, Class<?>>();
 
 	/**
 	 * Instantiates a new object bean factory impl.
@@ -101,7 +101,7 @@ abstract class ObjectBeanFactoryImpl implements ObjectBeanFactory {
 
 		this.provider = provider;
 		this.serviceHandler = this.provider.getServiceHandler();
-		this.defManager = this.provider.getDefinitionManager();
+		this.definitionManager = this.provider.getDefinitionManager();
 	}
 
 	/**
@@ -207,18 +207,18 @@ abstract class ObjectBeanFactoryImpl implements ObjectBeanFactory {
 				String valueStr = (String) value;
 				Definition def = null;
 				if (bool) {
-					this.defManager.loadCustomizedDefinition(ID,
+					this.definitionManager.loadCustomizedDefinition(ID,
 							(Method) result.get(name), inClass, TemplateClass
 									.getAnnotation(Inject.class));
-					def = this.defManager.getDefinition(ID).getMethodDefList()
-							.get(result.get(name));
+					def = this.definitionManager.getDefinition(ID)
+							.getMethodDefList().get(result.get(name));
 				}
 				else {
-					this.defManager.loadCustomizedDefinition(ID, (Field) result
-							.get(name), inClass, TemplateClass
-							.getAnnotation(Inject.class));
-					def = this.defManager.getDefinition(ID).getFieldDefList()
-							.get(result.get(name));
+					this.definitionManager.loadCustomizedDefinition(ID,
+							(Field) result.get(name), inClass, TemplateClass
+									.getAnnotation(Inject.class));
+					def = this.definitionManager.getDefinition(ID)
+							.getFieldDefList().get(result.get(name));
 				}
 				if (value.equals(Configurable.REF_MAPPING)) {
 					String unique = UniqueNumberGenerator.getNextUID();
@@ -247,17 +247,18 @@ abstract class ObjectBeanFactoryImpl implements ObjectBeanFactory {
 			// nếu khác String (object)
 			else {
 				if (bool)
-					this.defManager.loadCustomizedDefinition(ID,
+					this.definitionManager.loadCustomizedDefinition(ID,
 							(Method) result.get(name), inClass, TemplateClass
 									.getAnnotation(Inject.class));
 				else
-					this.defManager.loadCustomizedDefinition(ID, (Field) result
-							.get(name), inClass, TemplateClass
-							.getAnnotation(Inject.class));
-				Definition def = bool ? this.defManager.getDefinition(ID)
-						.getMethodDefList().get(result.get(name))
-						: this.defManager.getDefinition(ID).getFieldDefList()
-								.get(result.get(name));
+					this.definitionManager.loadCustomizedDefinition(ID,
+							(Field) result.get(name), inClass, TemplateClass
+									.getAnnotation(Inject.class));
+				Definition def = bool ? this.definitionManager
+						.getDefinition(ID).getMethodDefList().get(
+								result.get(name)) : this.definitionManager
+						.getDefinition(ID).getFieldDefList().get(
+								result.get(name));
 				String unique = UniqueNumberGenerator.getNextUID();
 				def.setValueOfAnnotation(Inject.class, "value", REF
 						.refConstant(unique));
@@ -290,7 +291,7 @@ abstract class ObjectBeanFactoryImpl implements ObjectBeanFactory {
 	@Override
 	public DefinitionManager getDefinitionManager() {
 
-		return this.defManager;
+		return this.definitionManager;
 	}
 
 	/*
@@ -365,7 +366,7 @@ abstract class ObjectBeanFactoryImpl implements ObjectBeanFactory {
 				|| (type.equals(Types.NON_ANNOTATION) && !Annotation.class
 						.isAssignableFrom(objClass))) {
 			String ID = "";
-			Definition def = this.defManager.getDefinition(objClass);
+			Definition def = this.definitionManager.getDefinition(objClass);
 			if (def.isAnnotationPresent(Bean.class)) {
 				Bean annoBean = def.getAnnotation(Bean.class);
 				ID = annoBean.value();
@@ -455,9 +456,9 @@ abstract class ObjectBeanFactoryImpl implements ObjectBeanFactory {
 					else {
 						this.aliasMap.put(name, entry);
 						if (annotateIDList != null) {
-							Definition defKey = this.defManager
+							Definition defKey = this.definitionManager
 									.getDefinition(entry.getKey());
-							Definition defValue = this.defManager
+							Definition defValue = this.definitionManager
 									.getDefinition(entry.getValue());
 							if (defKey
 									.isAnnotationPresentAtAnyWhere(Annotate.class))
@@ -481,9 +482,9 @@ abstract class ObjectBeanFactoryImpl implements ObjectBeanFactory {
 								.isAssignableFrom(entry.getValue()))) {
 					this.mappingList.put(entry.getKey(), entry.getValue());
 					if (annotateIDList != null) {
-						Definition defKey = this.defManager.getDefinition(entry
-								.getKey());
-						Definition defValue = this.defManager
+						Definition defKey = this.definitionManager
+								.getDefinition(entry.getKey());
+						Definition defValue = this.definitionManager
 								.getDefinition(entry.getValue());
 						if (defKey
 								.isAnnotationPresentAtAnyWhere(Annotate.class))
@@ -506,7 +507,7 @@ abstract class ObjectBeanFactoryImpl implements ObjectBeanFactory {
 					|| type.equals(Types.ALL)
 					|| (type.equals(Types.NON_ANNOTATION) && !Annotation.class
 							.isAssignableFrom(targetClass))) {
-				Definition def = defManager.getDefinition(targetClass);
+				Definition def = definitionManager.getDefinition(targetClass);
 				scopeName = Utils.createScopeName(typeClass, targetClass, def,
 						objAth.getName());
 				this.scopeList.put(scopeName, enScope.getValue());
@@ -577,7 +578,7 @@ abstract class ObjectBeanFactoryImpl implements ObjectBeanFactory {
 		boolean lazyInit = objBndCst.isLazyInit();
 		ScopeInstance scope = objBndCst.getScope();
 		if (injectedValueList.size() == 0 && annotatedValueList.size() == 0) {
-			this.defManager.loadCustomizedDefinition(inClass, null, ID);
+			this.definitionManager.loadCustomizedDefinition(inClass, null, ID);
 			return;
 		}
 		// Creates the Definition
@@ -609,7 +610,7 @@ abstract class ObjectBeanFactoryImpl implements ObjectBeanFactory {
 		}
 		/* Sets scope */
 		String scopeName = Utils.createScopeName(inClass, inClass,
-				this.defManager.getDefinition(ID), null);
+				this.definitionManager.getDefinition(ID), null);
 		this.scopeList.put(scopeName, objBndCst.getScope());
 	}
 
@@ -696,7 +697,7 @@ abstract class ObjectBeanFactoryImpl implements ObjectBeanFactory {
 	 * org.jgentleframework.context.injecting.ObjectBeanFactory#getAliasMap()
 	 */
 	@Override
-	public HashMap<String, Entry<Class<?>, Class<?>>> getAliasMap() {
+	public Map<String, Entry<Class<?>, Class<?>>> getAliasMap() {
 
 		return this.aliasMap;
 	}
@@ -708,7 +709,7 @@ abstract class ObjectBeanFactoryImpl implements ObjectBeanFactory {
 	 * ()
 	 */
 	@Override
-	public HashMap<String, Object> getMapDirectList() {
+	public Map<String, Object> getMapDirectList() {
 
 		return this.mapDirectList;
 	}
@@ -719,7 +720,7 @@ abstract class ObjectBeanFactoryImpl implements ObjectBeanFactory {
 	 * org.jgentleframework.context.injecting.ObjectBeanFactory#getMappingList()
 	 */
 	@Override
-	public HashMap<Class<?>, Class<?>> getMappingList() {
+	public Map<Class<?>, Class<?>> getMappingList() {
 
 		return this.mappingList;
 	}
@@ -730,7 +731,7 @@ abstract class ObjectBeanFactoryImpl implements ObjectBeanFactory {
 	 * org.jgentleframework.context.injecting.ObjectBeanFactory#getScopeList()
 	 */
 	@Override
-	public HashMap<String, ScopeInstance> getScopeList() {
+	public Map<String, ScopeInstance> getScopeList() {
 
 		return this.scopeList;
 	}

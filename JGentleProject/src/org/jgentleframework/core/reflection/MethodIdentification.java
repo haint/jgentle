@@ -31,26 +31,24 @@ import java.lang.reflect.Method;
  * @see MemberIdentification
  * @see FieldIdentification
  * @see Identification
+ * @see Method
  */
 public interface MethodIdentification extends MemberIdentification<Method> {
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.general.reflection.MemberIdentification#setName(java.lang.String)
+	 * @see
+	 * org.jgentleframework.general.reflection.MemberIdentification#setName(
+	 * java.lang.String)
 	 */
 	public void setName(String name);
 
 	/**
 	 * Gets the declaring class.
-	 * 
-	 * @return the declaringClass
 	 */
 	public Class<?> getDeclaringClass();
 
 	/**
 	 * Gets the args type.
-	 * 
-	 * @return the argsType
 	 */
 	public Class<?>[] getArgsType();
 
@@ -64,8 +62,6 @@ public interface MethodIdentification extends MemberIdentification<Method> {
 
 	/**
 	 * Gets the throwable classes.
-	 * 
-	 * @return the throwableClasses
 	 */
 	public Class<? extends Throwable>[] getThrowableClasses();
 
@@ -80,22 +76,16 @@ public interface MethodIdentification extends MemberIdentification<Method> {
 
 	/**
 	 * Gets the name.
-	 * 
-	 * @return the name
 	 */
 	public String getName();
 
 	/**
 	 * Checks if is found on superclass.
-	 * 
-	 * @return the foundOnSuperclass
 	 */
 	public boolean isFoundOnSuperclass();
 
 	/**
 	 * Gets the modifiers.
-	 * 
-	 * @return the modifiers
 	 */
 	public int getModifiers();
 }

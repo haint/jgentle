@@ -17,16 +17,14 @@
  */
 package org.jgentleframework.core;
 
-
 /**
- * Bắt các ngoại lệ khi xử lý constraint trong annotation lúc run-time.
+ * The Class ConstraintException.
  * 
- * @author LE QUOC CHUNG
+ * @author LE QUOC CHUNG - mailto: <a
+ *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
  * @date Sep 1, 2007
  */
 public class ConstraintException extends JGentleRuntimeException {
-	/**
-	 * 
-	 */
-	private static final long	serialVersionUID	= 1L;
+	/** The Constant serialVersionUID. */
+	private static final long	serialVersionUID	= -5938419793170473346L;
 }
