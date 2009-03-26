@@ -68,26 +68,19 @@ public enum Scope implements ScopeImplementation {
 	 * request for that specific bean is made.
 	 */
 	PROTOTYPE,
-	/**
-	 * The request scope.
-	 */
+	/** The request scope. */
 	REQUEST,
-	/**
-	 * The session scope.
-	 */
+	/** The session scope. */
 	SESSION,
-	/**
-	 * The application scope (Servlet context)
-	 */
+	/** The application scope (Servlet context). */
 	APPLICATION,
-	/**
-	 * The unspecified scope
-	 */
+	/** The unspecified scope. */
 	UNSPECIFIED;
+	/** The Constant log. */
 	private static final Log	log	= LogFactory.getLog(Scope.class);
 
 	/**
-	 * Constructor
+	 * Constructor.
 	 */
 	Scope() {
 
@@ -159,7 +152,6 @@ public enum Scope implements ScopeImplementation {
 		Provider provider = objFactory.getProvider();
 		Map<String, ScopeInstance> scopeList = objFactory.getScopeList();
 		Map<String, Object> mapDirectList = objFactory.getMapDirectList();
-		// Nếu là singleton
 		synchronized (scopeList) {
 			synchronized (mapDirectList) {
 				Scope scope = (Scope) scopeList.get(scopeName);

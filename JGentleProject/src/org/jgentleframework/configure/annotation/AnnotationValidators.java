@@ -23,11 +23,14 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Chỉ định một method sẽ trả về 1 validator ứng với 1 annotation.
+ * Represents a method will return a validator appropriate to specififed
+ * annotation. It's only used for method of [registering annotation
+ * <b>enum</b>].
  * 
  * @author LE QUOC CHUNG - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
  * @date Oct 20, 2007
+ * @see AnnotationClass
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)

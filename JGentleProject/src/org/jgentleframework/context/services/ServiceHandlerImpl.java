@@ -32,7 +32,7 @@ import java.util.List;
 import java.util.TooManyListenersException;
 
 import org.jgentleframework.configure.annotation.AnnotationClass;
-import org.jgentleframework.context.enums.RegisterAnnotationAOH;
+import org.jgentleframework.context.enums.RegisterSystemAnnotation;
 import org.jgentleframework.context.injecting.Provider;
 import org.jgentleframework.core.IllegalPropertyException;
 import org.jgentleframework.core.JGentleException;
@@ -81,14 +81,14 @@ public class ServiceHandlerImpl implements ServiceHandler {
 	/**
 	 * Constructor.
 	 * 
-	 * @param defManager
+	 * @param definitionManager
 	 *            đối tượng Definition Manager
 	 */
-	public ServiceHandlerImpl(DefinitionManager defManager) {
+	public ServiceHandlerImpl(DefinitionManager definitionManager) {
 
-		this.definitionManager = defManager;
+		this.definitionManager = definitionManager;
 		this.domainManager = new DomainManagerImpl(this.definitionManager);
-		this.annoRegister = defManager.getAnnotationRegister();
+		this.annoRegister = definitionManager.getAnnotationRegister();
 		// add context chính nó và khởi tạo bộ listener cho các service trong
 		// context.
 		this.context.add(this.context);
@@ -98,7 +98,7 @@ public class ServiceHandlerImpl implements ServiceHandler {
 		this.domainContext
 				.addBeanContextMembershipListener(this.domainListener);
 		// Đăng kí các annotation liên quan và validator tương ứng
-		this.registerAnnotations(RegisterAnnotationAOH.class);
+		this.registerAnnotations(RegisterSystemAnnotation.class);
 	}
 
 	/*

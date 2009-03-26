@@ -25,7 +25,6 @@ import org.jgentleframework.configure.AbstractConfig;
 import org.jgentleframework.configure.BindingConfigImpl;
 import org.jgentleframework.configure.Configurable;
 import org.jgentleframework.context.AbstractInitLoading;
-import org.jgentleframework.context.injecting.ObjectBeanFactory;
 import org.jgentleframework.context.injecting.Provider;
 import org.jgentleframework.core.intercept.support.Matcher;
 import org.jgentleframework.core.reflection.metadata.Definition;
@@ -33,16 +32,15 @@ import org.jgentleframework.utils.Assertor;
 import org.jgentleframework.utils.data.Pair;
 
 /**
- * This class manages all necessary information includes the meta objects (
+ * This class manages all necessary information including the meta objects (
  * {@link ObjectBindingConstant}, {@link ObjectAttach}, {@link ObjectConstant},
  * {@link ObjectBindingInterceptor}, ...) in order to instantiate bean.
  * <p>
- * On the other hand, it looks like similar to configurable class (extension of
- * {@link Configurable} interface or {@link AbstractConfig}) class which
- * provides a few methods in order to configure bean instance, however there is
- * a difference that the configurable class is only runable at startup time
- * (configuration time) while {@link ObjectBeanFactory} is only used at
- * run-time.
+ * On the other hand, it looks like similar to abstract configurable class
+ * (extension of {@link Configurable} interface or {@link AbstractConfig}) class
+ * which provide a few methods in order to configure bean instance, however
+ * there is a difference that the configurable class is only runable at startup
+ * time (configuration time) while {@link Binder} is only used at run-time.
  * <p>
  * In addition, it provides some static method in order to create object metas (
  * {@link ObjectAttach}, {@link ObjectConstant}, {@link ObjectBindingConstant},

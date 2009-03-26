@@ -28,10 +28,10 @@ import org.jgentleframework.core.reflection.Identification;
 import org.jgentleframework.utils.data.Pair;
 
 /**
- * This interface represents an <code>ObjectBindingConstant</code> which is
- * responsible for mapping management and injected data controller. An
- * <code>ObjectBindingConstant</code> holds configuration data of one bean that
- * corresponds to one unique<b>ID</b>. The configuration data is held in
+ * Represents an <code>ObjectBindingConstant</code> which is responsible for
+ * mapping management and injected data controller. An
+ * <code>ObjectBindingConstant</code> holds all configuration information of one
+ * bean appropriate to one unique<b>ID</b>. The configuration data is held in
  * {@link ObjectBindingConstant} shall be used in order to instantiate bean. The
  * configuration includes information of {@link ObjectBindingConstant} ... and
  * all <code>specified wiring bean information</code> corresponding to

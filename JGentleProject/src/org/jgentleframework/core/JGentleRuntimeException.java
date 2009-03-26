@@ -23,13 +23,14 @@ package org.jgentleframework.core;
  * @author LE QUOC CHUNG - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
  * @date Nov 22, 2007
+ * @see RuntimeException
  */
 public class JGentleRuntimeException extends RuntimeException {
 	/** The Constant serialVersionUID. */
 	private static final long	serialVersionUID	= 7751295094743604631L;
 
 	/**
-	 * Instantiates a new j gentle runtime exception.
+	 * Instantiates a new jgentle runtime exception.
 	 */
 	public JGentleRuntimeException() {
 
@@ -37,7 +38,7 @@ public class JGentleRuntimeException extends RuntimeException {
 	}
 
 	/**
-	 * Instantiates a new j gentle runtime exception.
+	 * Instantiates a new jgentle runtime exception.
 	 * 
 	 * @param strEx
 	 *            the str ex
@@ -48,7 +49,7 @@ public class JGentleRuntimeException extends RuntimeException {
 	}
 
 	/**
-	 * Instantiates a new j gentle runtime exception.
+	 * Instantiates a new jgentle runtime exception.
 	 * 
 	 * @param message
 	 *            the message
@@ -61,7 +62,7 @@ public class JGentleRuntimeException extends RuntimeException {
 	}
 
 	/**
-	 * Instantiates a new j gentle runtime exception.
+	 * Instantiates a new jgentle runtime exception.
 	 * 
 	 * @param cause
 	 *            the cause

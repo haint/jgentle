@@ -118,8 +118,9 @@ class ProviderCoreCreator extends AbstractBeanFactory implements Provider {
 	 * @see
 	 * org.jgentleframework.context.injecting.Provider#getBean(java.lang.Class)
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
-	public Object getBean(Class<?> clazz) {
+	public <T> T getBean(Class<T> clazz) {
 
 		Class<?> targetClass = null;
 		if (this.objectBeanFactory.getMappingList().containsKey(clazz)) {
@@ -128,7 +129,7 @@ class ProviderCoreCreator extends AbstractBeanFactory implements Provider {
 		else
 			targetClass = clazz;
 		Definition def = this.defManager.getDefinition(targetClass);
-		return getBeanInstance(clazz, targetClass, null, def);
+		return (T) getBeanInstance(clazz, targetClass, null, def);
 	}
 
 	/*

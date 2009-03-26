@@ -23,11 +23,14 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Chỉ định một method sẽ trả về 1 object class của 1 annotation.
+ * Represents a method will return an object class type of the specififed
+ * annotation. It's only used for method of [registering annotation
+ * <b>enum</b>].
  * 
  * @author LE QUOC CHUNG - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
  * @date Oct 19, 2007
+ * @see AnnotationValidators
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)

@@ -55,7 +55,7 @@ public interface Provider extends IAbstractBeanFactory, Context {
 	 *            the given type.
 	 * @return an instance of the bean
 	 */
-	public Object getBean(Class<?> type);
+	public <T> T getBean(Class<T> type);
 
 	/**
 	 * Returns an instance bound to the given {@link Definition}

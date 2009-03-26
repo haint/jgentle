@@ -39,9 +39,9 @@ import org.jgentleframework.utils.data.Pair;
 public interface ObjectAnnotating {
 	/**
 	 * Executes the <code>annotating action</code> in order to annotate one or
-	 * more <b><i>dynamic annotation instances</i></b> at differrent target
-	 * in current configuring {@link ObjectBindingConstant}. Hence, annotating
-	 * data will be combined with injecting data in order to create the last
+	 * more <b><i>dynamic annotation instances</i></b> at differrent target in
+	 * current configuring {@link ObjectBindingConstant}. Hence, annotating data
+	 * will be combined with injecting data in order to create the last
 	 * {@link Definition}.
 	 * 
 	 * @param key
@@ -81,8 +81,8 @@ public interface ObjectAnnotating {
 	 * the last {@link Definition}.
 	 * <p>
 	 * <b>Note:</b> This method will be performed the same way as
-	 * {@link #annotate(Types, Object[][])} method with specified
-	 * <code>'type' argument</code> is {@link Types#DEFAULT}
+	 * {@link #annotate(Types, Object[][])} method with specified <code>'type' argument</code> is
+	 * {@link Types#DEFAULT}
 	 * 
 	 * @param pairs
 	 *            a list of array containing the mapping pair. One mapping pair
@@ -131,7 +131,8 @@ public interface ObjectAnnotating {
 	 *            field, method or Class of current specified class in
 	 *            {@link ObjectBindingConstant}. To specify key, use static
 	 *            methods of {@link Reflect} class.
-	 *            <p> - Note: <i> In case mapping pairs have variety types, type
+	 *            <p>
+	 *            - Note: <i> In case mapping pairs have variety types, type
 	 *            argument must be {@link Types#DEFAULT}.</i>
 	 * @return {@link InClass}
 	 */

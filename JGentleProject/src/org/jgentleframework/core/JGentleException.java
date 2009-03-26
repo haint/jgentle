@@ -20,14 +20,17 @@ package org.jgentleframework.core;
 /**
  * The Class JGentleException.
  * 
- * @author LE QUOC CHUNG
+ * @author Quoc Chung - mailto: <a
+ *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
+ * @date Mar 26, 2007
+ * @see Exception
  */
 public class JGentleException extends Exception {
 	/** The Constant serialVersionUID. */
 	private static final long	serialVersionUID	= 5443130164142440134L;
 
 	/**
-	 * Instantiates a new j gentle exception.
+	 * Instantiates a new jgentle exception.
 	 */
 	public JGentleException() {
 
@@ -35,7 +38,7 @@ public class JGentleException extends Exception {
 	}
 
 	/**
-	 * Instantiates a new j gentle exception.
+	 * Instantiates a new jgentle exception.
 	 * 
 	 * @param strEx
 	 *            the str ex

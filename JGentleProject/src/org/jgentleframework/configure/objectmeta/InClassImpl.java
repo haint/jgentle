@@ -28,8 +28,7 @@ import org.jgentleframework.utils.ReflectUtils;
 import org.jgentleframework.utils.data.Pair;
 
 /**
- * Chịu trách nhiệm thực hiện việc thiết lập inClass và ID trên một
- * {@link ObjectBindingConstant} chỉ định.
+ * The implementation of {@link InClass} interface.
  * 
  * @author LE QUOC CHUNG - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
@@ -38,7 +37,7 @@ import org.jgentleframework.utils.data.Pair;
  */
 public class InClassImpl extends ObjectAnnotatingImpl implements InClass {
 	/**
-	 * Constructor
+	 * Constructor.
 	 * 
 	 * @param constant
 	 *            {@link ObjectBindingConstant} chỉ định tương ứng.
@@ -63,7 +62,10 @@ public class InClassImpl extends ObjectAnnotatingImpl implements InClass {
 	}
 
 	/**
+	 * Sets the declaring class identification.
+	 * 
 	 * @param clazz
+	 *            the clazz
 	 */
 	public void setDeclaringClassIdentification(Class<?> clazz) {
 

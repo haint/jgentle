@@ -41,8 +41,8 @@ import org.jgentleframework.core.reflection.metadata.AnnoMeta;
 import org.jgentleframework.core.reflection.metadata.MetaDataFactory;
 
 /**
- * This abstract class provides some of static methods in order to execute
- * common reflect operations.
+ * Provides some of static methods in order to execute common reflect
+ * operations.
  * <p>
  * Mainly for use within the framework, but also useful for application code.
  * 
@@ -61,7 +61,7 @@ public abstract class ReflectUtils {
 	 *            annotation instance need to be create to {@link AnnoMeta}
 	 * @param container
 	 *            the parrent {@link AnnoMeta} of returned {@link AnnoMeta}
-	 * @param defManager
+	 * @param definitionManager
 	 *            the {@link DefinitionManager} instance
 	 * @return AnnoMeta
 	 * @throws InvocationTargetException
@@ -72,8 +72,9 @@ public abstract class ReflectUtils {
 	 *             the illegal argument exception
 	 */
 	public static AnnoMeta buildAnnoMeta(Annotation annos, AnnoMeta container,
-			DefinitionManager defManager) throws IllegalArgumentException,
-			IllegalAccessException, InvocationTargetException {
+			DefinitionManager definitionManager)
+			throws IllegalArgumentException, IllegalAccessException,
+			InvocationTargetException {
 
 		AnnoMeta thisMeta = null;
 		Class<?> clazz = annos.annotationType();

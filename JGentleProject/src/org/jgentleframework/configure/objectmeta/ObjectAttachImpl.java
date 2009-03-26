@@ -30,8 +30,7 @@ import org.jgentleframework.core.factory.InOutDependencyException;
 import org.jgentleframework.utils.Assertor;
 
 /**
- * Nắm giữ thông tin thể hiện của một {@link ObjectAttach}, chỉ định việc ánh xạ
- * thông tin dữ liệu được tiêm dependency.
+ * The implementation of {@link ObjectAttach} interface.
  * 
  * @author LE QUOC CHUNG - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
@@ -39,45 +38,29 @@ import org.jgentleframework.utils.Assertor;
  * @see ObjectAttach
  */
 public class ObjectAttachImpl<T> implements ObjectAttach<T> {
-	/**
-	 * Danh sách chứa đựng các cặp giá trị entry diễn tả thông tin ánh xạ.
-	 */
+	/** The hash list. */
 	private HashMap<Class<?>, Class<?>>							hashList	= new HashMap<Class<?>, Class<?>>();
 
-	/**
-	 * Tên định danh của {@link ObjectAttach} hiện hành. Tên định danh chỉ có
-	 * giá trị khi sourceList chỉ chứa 1 và chỉ 1 source class. Hay nói cách
-	 * khác ObjectAttach có chỉ định tên định danh name sẽ chỉ ánh xạ 1 và chỉ 1
-	 * attachment.
-	 */
+	/** The name. */
 	private String												name		= "";
 
-	/**
-	 * Chỉ định thông tin cho biết tên định danh name có được phép đặt tên hay
-	 * không.
-	 */
+	/** The name bool. */
 	private boolean												nameBool	= true;
 
-	/**
-	 * Danh sách chứa đựng thông tin phạm vi miền hoạt động của các cặp ánh xạ.
-	 */
+	/** The scope list. */
 	private HashMap<Entry<Class<?>, Class<?>>, ScopeInstance>	scopeList	= new HashMap<Entry<Class<?>, Class<?>>, ScopeInstance>();
 
-	/**
-	 * Danh sách chứa đựng class type list của objectAttach hiện hành.
-	 */
+	/** The type list. */
 	private ArrayList<Class<?>>									typeList	= new ArrayList<Class<?>>();
 
-	/**
-	 * Thuộc tính lazy_init, giá trị mặc định là <b>true</b>.
-	 */
+	/** lazy_init property, default setting is <b>true</b>. */
 	private boolean												lazyInit	= true;
 
 	/**
-	 * Hàm khởi tạo
+	 * The Constructor.
 	 * 
 	 * @param classes
-	 *            danh sách các from classes cần khởi tạo.
+	 *            the classes
 	 */
 	protected ObjectAttachImpl(Class<?>... classes) {
 
@@ -91,10 +74,10 @@ public class ObjectAttachImpl<T> implements ObjectAttach<T> {
 	}
 
 	/**
-	 * Hàm khởi tạo
+	 * The Constructor.
 	 * 
 	 * @param clazz
-	 *            from clazz cần khởi tạo.
+	 *            the clazz
 	 */
 	protected ObjectAttachImpl(Class<T> clazz) {
 
@@ -170,7 +153,8 @@ public class ObjectAttachImpl<T> implements ObjectAttach<T> {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.jgentleframework.configure.injecting.objectMeta.ObjectAttach#getName()
+	 * org.jgentleframework.configure.injecting.objectMeta.ObjectAttach#getName
+	 * ()
 	 */
 	@Override
 	public synchronized String getName() {

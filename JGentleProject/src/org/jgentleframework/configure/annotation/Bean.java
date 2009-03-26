@@ -26,12 +26,9 @@ import org.jgentleframework.configure.enums.Scope;
 import org.jgentleframework.context.injecting.scope.ScopeImplementation;
 
 /**
- * Chỉ định một Class sẽ được dùng để khởi tạo bean (JGentle Bean). <br>
- * <br>
- * <b>Lưu ý:</b> Do container sẽ tự động sử dụng kiểu Class đang được đính kèm
- * annotation để khởi tạo bean nên không thể chỉ định trên
- * <code>interface, abstract class</code> hoặc <code>annotation</code> ...
- * hay bất kì kiểu type nào khác <code>Class</code>.
+ * Represents the class is a JGentle class which can be used to instantiate
+ * JGentle bean. Chỉ định một Class sẽ được dùng để khởi tạo bean (JGentle
+ * Bean).
  * 
  * @author LE QUOC CHUNG - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
@@ -41,14 +38,15 @@ import org.jgentleframework.context.injecting.scope.ScopeImplementation;
 @Target(ElementType.TYPE)
 public @interface Bean {
 	/**
-	 * Thuộc tính chỉ định tên định danh sẽ được dùng cho <code>bean</code>
-	 * nếu có.<br>
+	 * Thuộc tính chỉ định tên định danh sẽ được dùng cho <code>bean</code> nếu
+	 * có.<br>
 	 * <br>
-	 * <b>Lưu ý:</b><br> - tên định danh sử dụng phải là duy nhất, do đó sẽ
-	 * không thể tồn tại 2 tên định danh giống nhau của 2 bean khác nhau trong
-	 * cùng 1 context. <br> - Nếu trong trường hợp tên định danh không được chỉ
-	 * định tường minh, mặc định sẽ là tên của <code>class</code>,
-	 * <code>annotation</code> hoặc <code>enum</code> được chỉ định.
+	 * <b>Lưu ý:</b><br>
+	 * - tên định danh sử dụng phải là duy nhất, do đó sẽ không thể tồn tại 2
+	 * tên định danh giống nhau của 2 bean khác nhau trong cùng 1 context. <br>
+	 * - Nếu trong trường hợp tên định danh không được chỉ định tường minh, mặc
+	 * định sẽ là tên của <code>class</code>, <code>annotation</code> hoặc
+	 * <code>enum</code> được chỉ định.
 	 * 
 	 * @return String
 	 */
@@ -71,18 +69,17 @@ public @interface Bean {
 	Scope scope() default Scope.SINGLETON;
 
 	/**
-	 * Thuộc tính <b>lazy_init</b> chỉ định cách thức khởi tạo của các bean
-	 * được định nghĩa bởi <code>configuration</code>. Mặc định
-	 * <code>Context</code> sẽ tự động khởi tạo các instance bean khi và chỉ
-	 * khi instance bean được get ra từ Context , tương đương thuộc tính
-	 * <b>lazy_init</b> là <b>true</b>. Ngược lại nếu thuộc tính <b>lazy-init</b>
-	 * là <b>false</b>, instance bean của <code>definition</code> đang xét sẽ
-	 * tự động được khởi tạo ngay khi definition được nạp vào Context (JGentle
-	 * container).<br>
+	 * Thuộc tính <b>lazy_init</b> chỉ định cách thức khởi tạo của các bean được
+	 * định nghĩa bởi <code>configuration</code>. Mặc định <code>Context</code>
+	 * sẽ tự động khởi tạo các instance bean khi và chỉ khi instance bean được
+	 * get ra từ Context , tương đương thuộc tính <b>lazy_init</b> là
+	 * <b>true</b>. Ngược lại nếu thuộc tính <b>lazy-init</b> là <b>false</b>,
+	 * instance bean của <code>definition</code> đang xét sẽ tự động được khởi
+	 * tạo ngay khi definition được nạp vào Context (JGentle container).<br>
 	 * <br>
-	 * <b>Chú ý</b> Giá trị mặc định của thuộc tính là <b>true</b> và thuộc
-	 * tính thực sự không có hiệu lực với các bean được chỉ định <b>scope</b>
-	 * là <code>Prototype</code>.
+	 * <b>Chú ý</b> Giá trị mặc định của thuộc tính là <b>true</b> và thuộc tính
+	 * thực sự không có hiệu lực với các bean được chỉ định <b>scope</b> là
+	 * <code>Prototype</code>.
 	 * 
 	 * @return boolean
 	 * @see Scope

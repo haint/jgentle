@@ -23,24 +23,36 @@ import org.jgentleframework.configure.annotation.AnnotationClass;
 import org.jgentleframework.context.annotation.ComponentServiceContext;
 
 /**
- * Chứa đựng thông tin của các annotation cần phải đăng kí của JGentle Context.
+ * The Enum RegisterAnnotationContext.
  * 
  * @author LE QUOC CHUNG - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
  * @date Nov 27, 2007
  */
 public enum RegisterAnnotationContext {
-	CSContext(ComponentServiceContext.class);
-	Class<? extends Annotation>	annoClazz;
+	CSContext (ComponentServiceContext.class);
+	Class<? extends Annotation>	annotationClass;
 
+	/**
+	 * Instantiates a new register annotation context.
+	 * 
+	 * @param clazz
+	 *            the clazz
+	 */
 	RegisterAnnotationContext(Class<? extends Annotation> clazz) {
 
-		this.annoClazz = clazz;
+		this.annotationClass = clazz;
 	}
 
+	
+	/**
+	 * Gets the annotation class.
+	 * 
+	 * @return the annotation class
+	 */
 	@AnnotationClass
-	public Class<? extends Annotation> getAnnoClazz() {
+	public Class<? extends Annotation> getAnnotationClass() {
 
-		return annoClazz;
+		return annotationClass;
 	}
 }

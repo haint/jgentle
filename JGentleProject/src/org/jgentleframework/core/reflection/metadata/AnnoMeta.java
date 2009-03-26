@@ -39,75 +39,9 @@ import org.aopalliance.reflect.Metadata;
  */
 public interface AnnoMeta extends Metadata {
 	/**
-	 * Put a {@link Metadata} into current {@link AnnoMeta}.
-	 * 
-	 * @param data
-	 *            desired metadata.
-	 * @return {@link Metadata}
-	 */
-	public Metadata putMetaData(Metadata data);
-
-	/**
-	 * Returns the {@link Metadata} to which the specified key is mapped, or
-	 * null if this {@link AnnoMeta} contains no mapping for the key.
-	 * 
-	 * @param key
-	 *            object key
-	 * @return {@link Metadata}
-	 */
-	public Metadata getMetadata(Object key);
-
-	/**
-	 * Returns the class type of current {@link AnnoMeta}
-	 */
-	public Class<?> getType();
-
-	/**
-	 * Returns the name of this {@link AnnoMeta}, if it is not specified, an
-	 * default name is name of object class of {@link AnnoMeta} will be
-	 * specified.
-	 * 
-	 * @return String
-	 */
-	public String getName();
-
-	/**
-	 * Sets the name.
-	 * 
-	 * @param name
-	 *            the name
-	 */
-	public void setName(String name);
-
-	/**
-	 * Returns the number of {@link Metadata} in this {@link AnnoMeta}
-	 */
-	public int count();
-
-	/**
 	 * Removes all the {@link Metadata}s in this {@link AnnoMeta}
 	 */
 	public void clear();
-
-	/**
-	 * Removes a specified {@link Metadata}
-	 * 
-	 * @param key
-	 *            key of {@link Metadata} need to be remove.
-	 * @return {@link Metadata}
-	 */
-	public Metadata removeMetadata(Object key);
-
-	/**
-	 * Returns <b>true</b> if this {@link AnnoMeta} contains a {@link Metadata}
-	 * for specified key.
-	 * 
-	 * @param key
-	 *            key of {@link Metadata} need to be tested.
-	 * @return returns <b>true</b> if this {@link AnnoMeta} contains a
-	 *         {@link Metadata} for specified key, <b>false</b> otherwise.
-	 */
-	public boolean contains(Object key);
 
 	/**
 	 * Returns {@link AnnoMeta} if this {@link AnnoMeta} contains a specified
@@ -121,12 +55,58 @@ public interface AnnoMeta extends Metadata {
 	public boolean contains(Metadata metadata);
 
 	/**
-	 * Returns a {@link Collection} view of the {@link Metadata}s contained in
-	 * this {@link AnnoMeta}.
+	 * Returns <b>true</b> if this {@link AnnoMeta} contains a {@link Metadata}
+	 * for specified key.
 	 * 
-	 * @return {@link Collection}
+	 * @param key
+	 *            key of {@link Metadata} need to be tested.
+	 * @return returns <b>true</b> if this {@link AnnoMeta} contains a
+	 *         {@link Metadata} for specified key, <b>false</b> otherwise.
 	 */
-	public Collection<Metadata> values();
+	public boolean contains(Object key);
+
+	/**
+	 * Returns the number of {@link Metadata} in this {@link AnnoMeta}
+	 */
+	public int count();
+
+	/**
+	 * Returns the {@link Metadata} to which the specified key is mapped, or
+	 * null if this {@link AnnoMeta} contains no mapping for the key.
+	 * 
+	 * @param key
+	 *            object key
+	 * @return {@link Metadata}
+	 */
+	public Metadata getMetadata(Object key);
+
+	/**
+	 * Returns the list of {@link Metadata}s in this {@link AnnoMeta}
+	 */
+	public HashMap<Object, Metadata> getMetaList();
+
+	/**
+	 * Returns the name of this {@link AnnoMeta}, if it is not specified, an
+	 * default name is name of object class of {@link AnnoMeta} will be
+	 * specified.
+	 * 
+	 * @return String
+	 */
+	public String getName();
+
+	/**
+	 * Returns the parents of current {@link AnnoMeta}, if returned value is
+	 * <b>null</b>, this {@link AnnoMeta} is key of one {@link Definition}.
+	 * 
+	 * @see Definition
+	 * @see DefinitionCore
+	 */
+	public AnnoMeta getParents();
+
+	/**
+	 * Returns the class type of current {@link AnnoMeta}
+	 */
+	public Class<?> getType();
 
 	/**
 	 * Returns <b>true</b> if this {@link AnnoMeta} is empty, otherwise returns
@@ -141,16 +121,36 @@ public interface AnnoMeta extends Metadata {
 	public Set<Object> keySet();
 
 	/**
-	 * Returns the parents of current {@link AnnoMeta}, if returned value is
-	 * <b>null</b>, this {@link AnnoMeta} is key of one {@link Definition}.
+	 * Put a {@link Metadata} into current {@link AnnoMeta}.
 	 * 
-	 * @see Definition
-	 * @see DefinitionCore
+	 * @param data
+	 *            desired metadata.
+	 * @return {@link Metadata}
 	 */
-	public AnnoMeta getParents();
+	public Metadata putMetaData(Metadata data);
 
 	/**
-	 * Returns the list of {@link Metadata}s in this {@link AnnoMeta}
+	 * Removes a specified {@link Metadata}
+	 * 
+	 * @param key
+	 *            key of {@link Metadata} need to be remove.
+	 * @return {@link Metadata}
 	 */
-	public HashMap<Object, Metadata> getMetaList();
+	public Metadata removeMetadata(Object key);
+
+	/**
+	 * Sets the name.
+	 * 
+	 * @param name
+	 *            the name
+	 */
+	public void setName(String name);
+
+	/**
+	 * Returns a {@link Collection} view of the {@link Metadata}s contained in
+	 * this {@link AnnoMeta}.
+	 * 
+	 * @return {@link Collection}
+	 */
+	public Collection<Metadata> values();
 }

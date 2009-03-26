@@ -29,30 +29,51 @@ import org.jgentleframework.configure.annotation.Inject;
 import org.jgentleframework.configure.annotation.Outject;
 
 /**
- * Chứa đựng thông tin các annotation cần phải đăng kí của injecting service.
+ * The Enum RegisterAnnotationInjecting.
  * 
  * @author LE QUOC CHUNG - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
  * @date Oct 19, 2007
  */
 public enum RegisterAnnotationInjecting {
-	Inject(Inject.class), Outject(Outject.class), Filter(Filter.class), DefaultConstructor(
-			DefaultConstructor.class), Builder(Builder.class), Bean(Bean.class), AnnotationClass(
-			AnnotationClass.class), AnnotationValidator(
-			AnnotationValidators.class);
-	Class<? extends Annotation>	annoClazz;
+	/** The Inject. */
+	Inject (Inject.class),
+	/** The Outject. */
+	Outject (Outject.class),
+	/** The Filter. */
+	Filter (Filter.class),
+	/** The Default constructor. */
+	DefaultConstructor (DefaultConstructor.class),
+	/** The Builder. */
+	Builder (Builder.class),
+	/** The Bean. */
+	Bean (Bean.class),
+	/** The Annotation class. */
+	AnnotationClass (AnnotationClass.class),
+	/** The Annotation validator. */
+	AnnotationValidator (AnnotationValidators.class);
+	/** The annotation class. */
+	Class<? extends Annotation>	annotationClass;
 
 	/**
+	 * The Constructor.
+	 * 
 	 * @param clazz
+	 *            the clazz
 	 */
 	RegisterAnnotationInjecting(Class<? extends Annotation> clazz) {
 
-		this.annoClazz = clazz;
+		this.annotationClass = clazz;
 	}
 
+	/**
+	 * Gets the annotation class.
+	 * 
+	 * @return the annotation class
+	 */
 	@AnnotationClass
-	public Class<? extends Annotation> getAnnoClazz() {
+	public Class<? extends Annotation> getAnnotationClass() {
 
-		return annoClazz;
+		return annotationClass;
 	}
 }

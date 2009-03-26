@@ -21,6 +21,8 @@ import org.jgentleframework.core.intercept.support.Matcher;
 import org.jgentleframework.core.reflection.metadata.Definition;
 
 /**
+ * The Interface ObjectBindingInterceptor.
+ * 
  * @author LE QUOC CHUNG - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
  * @date Aug 14, 2008
