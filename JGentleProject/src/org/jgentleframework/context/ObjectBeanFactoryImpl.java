@@ -82,7 +82,7 @@ abstract class ObjectBeanFactoryImpl implements ObjectBeanFactory {
 	/** The {@link Map} holds mapping list which has mapping name. */
 	protected Map<String, Entry<Class<?>, Class<?>>>	aliasMap			= new HashMap<String, Entry<Class<?>, Class<?>>>();
 
-	/** The {@link Map} holds mapping constant. */
+	/** The {@link Map} holds mapping constants. */
 	protected Map<String, Object>						mapDirectList		= new HashMap<String, Object>();
 
 	/** The {@link Map} holds mapping scoped list. */

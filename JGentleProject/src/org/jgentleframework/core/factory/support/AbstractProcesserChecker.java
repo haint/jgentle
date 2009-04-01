@@ -433,7 +433,7 @@ public abstract class AbstractProcesserChecker {
 	}
 
 	/**
-	 * Prepare singleton bean.
+	 * Prepares singleton bean.
 	 * 
 	 * @param selector
 	 *            the selector
@@ -450,10 +450,15 @@ public abstract class AbstractProcesserChecker {
 				.getMappingName());
 		Map<String, ScopeInstance> scopeList = provider.getObjectBeanFactory()
 				.getScopeList();
-		Scope scope = (Scope) scopeList.get(scopeName);
+		Scope scope;
+		synchronized (scopeList) {
+			scope = (Scope) scopeList.get(scopeName);
+		}
 		if (scope.equals(Scope.SINGLETON)) {
-			provider.getObjectBeanFactory().getMapDirectList().put(scopeName,
-					result);
+			synchronized (provider.getObjectBeanFactory().getMapDirectList()) {
+				provider.getObjectBeanFactory().getMapDirectList().put(
+						scopeName, result);
+			}
 		}
 	}
 }

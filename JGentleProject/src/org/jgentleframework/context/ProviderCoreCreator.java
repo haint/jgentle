@@ -21,6 +21,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 import org.jgentleframework.configure.Configurable;
 import org.jgentleframework.configure.REF;
@@ -72,7 +74,7 @@ class ProviderCoreCreator extends AbstractBeanFactory implements Provider {
 	protected HashMap<Matcher<Definition>, ArrayList<Object>>	interceptorList		= null;
 
 	/** The interceptor cacher. */
-	protected HashMap<Definition, Matcher<Definition>>			matcherCache		= null;
+	protected ConcurrentMap<Definition, Matcher<Definition>>	matcherCache		= null;
 
 	/**
 	 * Constructor.
@@ -101,7 +103,7 @@ class ProviderCoreCreator extends AbstractBeanFactory implements Provider {
 			}
 		};
 		this.detectorController = new FirstDetector(this);
-		this.matcherCache = new HashMap<Definition, Matcher<Definition>>();
+		this.matcherCache = new ConcurrentHashMap<Definition, Matcher<Definition>>();
 		this.interceptorList = new HashMap<Matcher<Definition>, ArrayList<Object>>();
 		// Creates detector
 		Detector espDetector = new ExtensionPointsDetector(this);
@@ -322,12 +324,6 @@ class ProviderCoreCreator extends AbstractBeanFactory implements Provider {
 			String[] values = refInstance.split(":");
 			if (values[0].equals(Configurable.REF_CONSTANT)) {
 				result = getBeanBoundToName(values[1]);
-				// HashMap<String, Object> mapDirectList =
-				// this.objectBeanFactory
-				// .getMapDirectList();
-				// synchronized (mapDirectList) {
-				// result = mapDirectList.get(refInstance);
-				// }
 			}
 			// TODO fix other Configurable.REF_MAPPING
 			else if (values[0].equals(Configurable.REF_MAPPING)) {

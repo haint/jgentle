@@ -46,6 +46,8 @@ import org.jgentleframework.core.reflection.metadata.Definition;
  * @author LE QUOC CHUNG - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
  * @date Sep 12, 2007
+ * @see Context
+ * @see IAbstractBeanFactory
  */
 public interface Provider extends IAbstractBeanFactory, Context {
 	/**

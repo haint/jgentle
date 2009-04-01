@@ -45,7 +45,7 @@ public class AnnotatingExecutor {
 	/** The definition manager. */
 	DefinitionManager					definitionManager	= null;
 
-	/** The abf. */
+	/** The AbstractBeanFactory instance. */
 	AbstractBeanFactory					abf					= null;
 
 	/** The obj instance. */

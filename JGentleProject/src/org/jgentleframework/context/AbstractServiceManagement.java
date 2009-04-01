@@ -23,6 +23,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.aopalliance.intercept.Interceptor;
 import org.jgentleframework.configure.AbstractConfig;
@@ -46,7 +47,7 @@ import org.jgentleframework.utils.data.Pair;
  * {@link #getBeanInstance(Class, Class, String, Definition)} method is
  * overrided in order to customize the bean instantiation according as its
  * configuration data. Moreover, this class provides some methods in order to
- * manage customized {@link Interceptor}s, matcher cache, ...
+ * manage customized {@link Interceptor interceptors}, matcher cache, ...
  * 
  * @author LE QUOC CHUNG - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
@@ -81,13 +82,13 @@ public abstract class AbstractServiceManagement extends ProviderCoreCreator
 			String mappingName, Definition definition) {
 
 		Assertor.notNull(type);
-		DefinitionManager defManager = this.getDefinitionManager();
+		DefinitionManager definitionManager = this.getDefinitionManager();
 		targetClass = targetClass == null ? this.objectBeanFactory
 				.getMappingList().get(type) : targetClass;
 		targetClass = targetClass == null ? type : targetClass;
-		definition = definition == null ? defManager.getDefinition(targetClass)
-				: definition;
-		matcherCache = this.matcherCache == null ? new HashMap<Definition, Matcher<Definition>>()
+		definition = definition == null ? definitionManager
+				.getDefinition(targetClass) : definition;
+		matcherCache = this.matcherCache == null ? new ConcurrentHashMap<Definition, Matcher<Definition>>()
 				: matcherCache;
 		interceptorList = this.interceptorList == null ? new HashMap<Matcher<Definition>, ArrayList<Object>>()
 				: interceptorList;
@@ -140,8 +141,6 @@ public abstract class AbstractServiceManagement extends ProviderCoreCreator
 					type, targetClass, mappingName, definition, null, null,
 					mapMatcherInterceptor);
 			result = super.getBeanInstance(selector);
-			// result = super.getBeanInstance(type, targetClass, mappingName,
-			// definition);
 		}
 		return result;
 	}
@@ -175,9 +174,10 @@ public abstract class AbstractServiceManagement extends ProviderCoreCreator
 	 * (org.jgentleframework.core.reflection.metadata.Definition)
 	 */
 	@Override
-	public Matcher<Definition> getCachedMatcherOf(Definition def) {
+	public synchronized Matcher<Definition> getCachedMatcherOf(
+			Definition definition) {
 
-		return this.matcherCache.get(def);
+		return this.matcherCache.get(definition);
 	}
 
 	/*
@@ -187,8 +187,8 @@ public abstract class AbstractServiceManagement extends ProviderCoreCreator
 	 * (org.jgentleframework.core.intercept.support.Matcher, java.util.List)
 	 */
 	@Override
-	public void getInterceptorFromMatcher(Matcher<Definition> matcher,
-			List<Interceptor> result) {
+	public synchronized void getInterceptorFromMatcher(
+			Matcher<Definition> matcher, List<Interceptor> result) {
 
 		Assertor.notNull(result);
 		Assertor.notNull(matcher);
@@ -223,7 +223,7 @@ public abstract class AbstractServiceManagement extends ProviderCoreCreator
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.jgentleframework.context.support.IAbstractServiceManagement#
+	 * @see org.jgentleframework.context.support.IAbstractServiceManagement#
 	 * getInterceptorsFromMatcher(java.util.ArrayList)
 	 */
 	@Override
@@ -240,11 +240,11 @@ public abstract class AbstractServiceManagement extends ProviderCoreCreator
 
 	/*
 	 * (non-Javadoc)
-	 * @seeorg.jgentleframework.context.support.IAbstractServiceManagement#
+	 * @see org.jgentleframework.context.support.IAbstractServiceManagement#
 	 * getMatcherCache()
 	 */
 	@Override
-	public HashMap<Definition, Matcher<Definition>> getMatcherCache() {
+	public Map<Definition, Matcher<Definition>> getMatcherCache() {
 
 		return this.matcherCache;
 	}
@@ -256,7 +256,8 @@ public abstract class AbstractServiceManagement extends ProviderCoreCreator
 	 * (org.aopalliance.intercept.Interceptor)
 	 */
 	@Override
-	public List<Matcher<Definition>> getMatcherOf(Object interceptor) {
+	public synchronized List<Matcher<Definition>> getMatcherOf(
+			Object interceptor) {
 
 		List<Matcher<Definition>> list = new ArrayList<Matcher<Definition>>();
 		for (Entry<Matcher<Definition>, ArrayList<Object>> entry : this.interceptorList
@@ -276,7 +277,8 @@ public abstract class AbstractServiceManagement extends ProviderCoreCreator
 	 * org.aopalliance.intercept.Interceptor)
 	 */
 	@Override
-	public boolean isRegistered(Matcher<Definition> matcher, Object interceptor) {
+	public synchronized boolean isRegistered(Matcher<Definition> matcher,
+			Object interceptor) {
 
 		Assertor.notNull(interceptor);
 		Assertor.notNull(matcher);
@@ -302,7 +304,7 @@ public abstract class AbstractServiceManagement extends ProviderCoreCreator
 	 * isRegisteredMatcher(org.jgentleframework.core.intercept.support.Matcher)
 	 */
 	@Override
-	public boolean isRegisteredMatcher(Matcher<Definition> matcher) {
+	public synchronized boolean isRegisteredMatcher(Matcher<Definition> matcher) {
 
 		Assertor.notNull(matcher);
 		if (this.interceptorList.containsKey(matcher)) {
@@ -318,7 +320,7 @@ public abstract class AbstractServiceManagement extends ProviderCoreCreator
 	 * (org.jgentleframework.core.reflection.metadata.Definition)
 	 */
 	@Override
-	public void refreshMatcherCache(Definition definition) {
+	public synchronized void refreshMatcherCache(Definition definition) {
 
 		Assertor.notNull(definition);
 		this.matcherCache.remove(definition);
@@ -346,7 +348,8 @@ public abstract class AbstractServiceManagement extends ProviderCoreCreator
 	 * .reflection.metadata.Definition>[], java.lang.Object)
 	 */
 	@Override
-	public void registers(Matcher<Definition>[] matchers, Object interceptor) {
+	public synchronized void registers(Matcher<Definition>[] matchers,
+			Object interceptor) {
 
 		Assertor.notNull(interceptor);
 		Assertor.notNull(matchers);
@@ -377,7 +380,7 @@ public abstract class AbstractServiceManagement extends ProviderCoreCreator
 	 * (org.jgentleframework.core.intercept.support.Matcher)
 	 */
 	@Override
-	public void unregisters(Matcher<Definition> matcher) {
+	public synchronized void unregisters(Matcher<Definition> matcher) {
 
 		Assertor.notNull(matcher);
 		this.interceptorList.remove(matcher);
@@ -390,7 +393,7 @@ public abstract class AbstractServiceManagement extends ProviderCoreCreator
 	 * (org.aopalliance.intercept.Interceptor)
 	 */
 	@Override
-	public void unregisters(Object interceptor) {
+	public synchronized void unregisters(Object interceptor) {
 
 		Assertor.notNull(interceptor);
 		for (Entry<Matcher<Definition>, ArrayList<Object>> entry : this.interceptorList

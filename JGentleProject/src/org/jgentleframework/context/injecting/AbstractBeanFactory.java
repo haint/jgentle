@@ -18,11 +18,9 @@
 package org.jgentleframework.context.injecting;
 
 import java.lang.annotation.Annotation;
-import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
@@ -31,7 +29,6 @@ import org.apache.commons.logging.LogFactory;
 import org.jgentleframework.configure.AnnotatingRuntimeException;
 import org.jgentleframework.configure.Configurable;
 import org.jgentleframework.configure.annotation.Annotate;
-import org.jgentleframework.configure.annotation.Inject;
 import org.jgentleframework.configure.enums.Scope;
 import org.jgentleframework.context.beans.FactoryBean;
 import org.jgentleframework.context.injecting.scope.ScopeController;
@@ -42,17 +39,17 @@ import org.jgentleframework.context.support.CoreInstantiationSelector;
 import org.jgentleframework.context.support.CoreInstantiationSelectorImpl;
 import org.jgentleframework.context.support.Selector;
 import org.jgentleframework.core.factory.InOutDependencyException;
-import org.jgentleframework.core.factory.InOutExecutor;
 import org.jgentleframework.core.factory.support.CommonFactory;
 import org.jgentleframework.core.handling.DefinitionManager;
 import org.jgentleframework.core.reflection.metadata.Definition;
 import org.jgentleframework.utils.Assertor;
+import org.jgentleframework.utils.DefinitionUtils;
 import org.jgentleframework.utils.ReflectUtils;
 import org.jgentleframework.utils.Utils;
 import org.jgentleframework.utils.data.Pair;
 
 /**
- * This is an abstract class, an implementation of {@link IAbstractBeanFactory}
+ * This abstract class is implementation of {@link IAbstractBeanFactory}
  * interface. This class is responsible for configured data management of
  * JGentle container. It provides some methods in order to check, manage and
  * access to configured data.
@@ -70,6 +67,7 @@ public abstract class AbstractBeanFactory extends AbstractLoadingFactory
 	/** The log. */
 	protected final Log			log			= LogFactory.getLog(getClass());
 
+	/** The Constant staticLog. */
 	private final static Log	staticLog	= LogFactory
 													.getLog(AbstractBeanFactory.class);
 
@@ -258,7 +256,7 @@ public abstract class AbstractBeanFactory extends AbstractLoadingFactory
 	protected ServiceHandler	serviceHandler	= null;
 
 	/**
-	 * Find args of default constructor.
+	 * Finds args of default constructor.
 	 * 
 	 * @param definition
 	 *            the definition
@@ -267,53 +265,7 @@ public abstract class AbstractBeanFactory extends AbstractLoadingFactory
 	protected Pair<Class<?>[], Object[]> findArgsOfDefaultConstructor(
 			Definition definition) {
 
-		Class<?>[] argTypes = null;
-		Object[] args = null;
-		// find default constructor.
-		if (definition.isInterpretedOfClass()) {
-			HashMap<Constructor<?>, Definition> hash = definition
-					.getConstructorDefList();
-			Constructor<?> constructor = null;
-			if (hash.size() != 0) {
-				constructor = Utils.getDefaultConstructor((Class<?>) definition
-						.getKey());
-			}
-			Definition defCons = hash.get(constructor);
-			if (defCons != null) {
-				argTypes = constructor.getParameterTypes();
-				if (argTypes != null && argTypes.length != 0) {
-					args = new Object[argTypes.length];
-					if (defCons.isAnnotationPresent(Inject.class)) {
-						Inject inject = defCons.getAnnotation(Inject.class);
-						for (int i = 0; i < args.length; i++) {
-							args[i] = InOutExecutor.getInjectedDependency(
-									inject, argTypes[i], this);
-						}
-					}
-					if (defCons
-							.isAnnotationPresentAtAnyParameters(Inject.class)) {
-						Definition[] defList = defCons.getParameterDefList();
-						for (int i = 0; i < defList.length; i++) {
-							if (defList[i] != null
-									&& defList[i]
-											.isAnnotationPresent(Inject.class)) {
-								Inject inject = defList[i]
-										.getAnnotation(Inject.class);
-								args[i] = InOutExecutor.getInjectedDependency(
-										inject, argTypes[i], this);
-							}
-						}
-					}
-				}
-			}
-		}
-		Pair<Class<?>[], Object[]> result = null;
-		if (argTypes != null && args != null)
-			result = new Pair<Class<?>[], Object[]>(argTypes.clone(), args
-					.clone());
-		else
-			result = new Pair<Class<?>[], Object[]>(null, null);
-		return result;
+		return DefinitionUtils.findArgsOfDefaultConstructor(definition, this);
 	}
 
 	/**
@@ -339,19 +291,15 @@ public abstract class AbstractBeanFactory extends AbstractLoadingFactory
 	protected Object getBeanFromScope(ScopeImplementation scopeImple,
 			Selector selector, String nameScope) {
 
-		Object result = null;
-		// Thực thi lấy ra bean từ ScopeImplementation nếu bean đã được khởi tạo
-		// trong scope hoặc khởi tạo bean tương ứng với scope chỉ định.
 		synchronized (this.scopeController) {
 			if (!this.scopeController.containsScope(scopeImple)) {
 				this.scopeController.addScope(scopeImple);
 			}
-			synchronized (scopeImple) {
-				result = scopeImple.getBean(selector, nameScope, this
-						.getObjectBeanFactory());
-			}
 		}
-		return result;
+		// Thực thi lấy ra bean từ ScopeImplementation nếu bean đã được khởi tạo
+		// trong scope hoặc khởi tạo bean tương ứng với scope chỉ định.
+		return scopeImple.getBean(selector, nameScope, this
+				.getObjectBeanFactory());
 	}
 
 	/*
@@ -581,8 +529,10 @@ public abstract class AbstractBeanFactory extends AbstractLoadingFactory
 
 		if (def != null) {
 			String scopeName = def.getKey().toString() + ":" + def.toString();
-			ScopeInstance scope = this.objectBeanFactory.getScopeList().get(
-					scopeName);
+			ScopeInstance scope;
+			synchronized (this.objectBeanFactory.getScopeList()) {
+				scope = this.objectBeanFactory.getScopeList().get(scopeName);
+			}
 			if (ReflectUtils.isCast(sc.getClass(), scope)) {
 				if (scope.equals(sc)) {
 					return true;

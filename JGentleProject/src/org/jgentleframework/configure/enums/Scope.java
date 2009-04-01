@@ -68,30 +68,38 @@ public enum Scope implements ScopeImplementation {
 	 * request for that specific bean is made.
 	 */
 	PROTOTYPE,
-	/** The request scope. */
-	REQUEST,
-	/** The session scope. */
-	SESSION,
-	/** The application scope (Servlet context). */
-	APPLICATION,
-	/** The unspecified scope. */
-	UNSPECIFIED;
-	/** The Constant log. */
-	private static final Log	log	= LogFactory.getLog(Scope.class);
-
 	/**
-	 * Constructor.
+	 * The request scope.
+	 */
+	REQUEST,
+	/**
+	 * The session scope.
+	 */
+	SESSION,
+	/**
+	 * The application scope (Servlet context)
+	 */
+	APPLICATION,
+	/**
+	 * 
+	 */
+	UNSPECIFIED;
+	/**
+	 * Constructor
 	 */
 	Scope() {
 
 	}
 
+	/** The log. */
+	private final Log	log	= LogFactory.getLog(getClass());
+
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.jgentleframework.context.injecting.scope.ScopeImplementation#putBean
+	 * org.exxlabs.jgentle.context.injecting.scope.ScopeImplementation#putBean
 	 * (java.lang.String, java.lang.Object,
-	 * org.jgentleframework.context.injecting.ObjectBeanFactory)
+	 * org.exxlabs.jgentle.context.injecting.ObjectBeanFactory)
 	 */
 	@Override
 	public Object putBean(String scopeName, Object bean,
@@ -102,37 +110,34 @@ public enum Scope implements ScopeImplementation {
 		Provider provider = objFactory.getProvider();
 		Map<String, ScopeInstance> scopeList = objFactory.getScopeList();
 		Map<String, Object> mapDirectList = objFactory.getMapDirectList();
+		Scope scope = null;
 		synchronized (scopeList) {
-			synchronized (mapDirectList) {
-				Scope scope = null;
-				if (!scopeList.containsKey(scopeName)) {
-					scopeList.put(scopeName, this);
-				}
-				scope = (Scope) scopeList.get(scopeName);
-				// Nếu scope là Singleton
-				if (scope.equals(Scope.SINGLETON)) {
-					result = mapDirectList.put(scopeName, bean);
-				}
-				else if (scope.equals(Scope.REQUEST)
-						|| scope.equals(Scope.SESSION)
-						|| scope.equals(Scope.APPLICATION)) {
-					if (!ReflectUtils.isCast(WebProvider.class, provider)) {
-						if (log.isErrorEnabled()) {
-							log
-									.error(
-											"This container does not support REQUEST, SESSION or APPLICATION scope.",
-											new InvalidOperationException());
-						}
-					}
-					// TODO Thực thi trên các scope khác.
-				}
-				else {
-					if (log.isErrorEnabled()) {
-						log.error("The specified scope is invalid !",
-								new InvalidOperationException());
-					}
-				}
+			if (!scopeList.containsKey(scopeName)) {
+				scopeList.put(scopeName, this);
 			}
+			scope = (Scope) scopeList.get(scopeName);
+		}
+		// If is Singleton scope
+		if (scope.equals(Scope.SINGLETON)) {
+			synchronized (mapDirectList) {
+				result = mapDirectList.put(scopeName, bean);
+			}
+		}
+		else if (scope.equals(Scope.PROTOTYPE)) {
+			throw new InvalidAddingOperationException(
+					"Adding Operation does not support prototype-scoped bean !");
+		}
+		else if (scope.equals(Scope.REQUEST) || scope.equals(Scope.SESSION)
+				|| scope.equals(Scope.APPLICATION)) {
+			if (!ReflectUtils.isCast(WebProvider.class, provider)) {
+				throw new InvalidAddingOperationException(
+						"This container does not support REQUEST, SESSION or APPLICATION scope.");
+			}
+			// TODO Thực thi trên các scope khác.
+		}
+		else {
+			throw new InvalidAddingOperationException(
+					"The specified scope is invalid !");
 		}
 		return result;
 	}
@@ -140,9 +145,9 @@ public enum Scope implements ScopeImplementation {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.jgentleframework.context.injecting.scope.ScopeImplementation#getBean
-	 * (org.jgentleframework.context.support.Selector, java.lang.String,
-	 * org.jgentleframework.context.injecting.ObjectBeanFactory)
+	 * org.exxlabs.jgentle.context.injecting.scope.ScopeImplementation#getBean
+	 * (org.exxlabs.jgentle.context.support.Selector, java.lang.String,
+	 * org.exxlabs.jgentle.context.injecting.ObjectBeanFactory)
 	 */
 	@Override
 	public Object getBean(Selector selector, String scopeName,
@@ -152,80 +157,77 @@ public enum Scope implements ScopeImplementation {
 		Provider provider = objFactory.getProvider();
 		Map<String, ScopeInstance> scopeList = objFactory.getScopeList();
 		Map<String, Object> mapDirectList = objFactory.getMapDirectList();
+		// If is Singleton scope
+		Scope scope;
 		synchronized (scopeList) {
+			scope = (Scope) scopeList.get(scopeName);
+		}
+		if (scope.equals(Scope.SINGLETON)) {
 			synchronized (mapDirectList) {
-				Scope scope = (Scope) scopeList.get(scopeName);
-				if (scope.equals(Scope.SINGLETON)) {
-					if (mapDirectList.containsKey(scopeName)) {
-						return mapDirectList.get(scopeName);
-					}
-					if (selector instanceof CoreInstantiationSelectorImpl) {
-						CoreInstantiationSelector coreSelector = (CoreInstantiationSelector) selector;
-						String mappingName = coreSelector.getMappingName();
-						if (mappingName != null && !mappingName.isEmpty()) {
-							if (mappingName.indexOf(":") != -1) {
-								if (mapDirectList.containsKey(mappingName
-										.replace(":", "_"))) {
-									return mapDirectList.get(mappingName
-											.replace(":", "_"));
-								}
-							}
-							result = provider.getRefInstance(mappingName);
-						}
-					}
-					if (result == null) {
-						try {
-							result = provider.getServiceHandler()
-									.getService(this,
-											BeanCreationProcessor.class,
-											selector);
-						}
-						catch (TooManyListenersException e) {
-							if (log.isErrorEnabled()) {
-								log.error(e.getMessage(), e);
-							}
-						}
-						if (result == NullClass.class)
-							result = null;
-						// Đưa object vừa khởi tạo vào danh sách singleton cache
-						mapDirectList.put(scopeName, result);
-					}
-				}
-				// if prototype
-				else if (scope.equals(Scope.PROTOTYPE)) {
-					try {
-						result = provider.getServiceHandler().getService(this,
-								BeanCreationProcessor.class, selector);
-					}
-					catch (TooManyListenersException e) {
-						if (log.isErrorEnabled()) {
-							log.error(e.getMessage(), e);
-						}
-					}
-					if (result == NullClass.class)
-						result = null;
-					return result;
-				}
-				else if (scope.equals(Scope.REQUEST)
-						|| scope.equals(Scope.SESSION)
-						|| scope.equals(Scope.APPLICATION)) {
-					if (!ReflectUtils.isCast(WebProvider.class, provider)) {
-						if (log.isErrorEnabled()) {
-							log
-									.error(
-											"This container does not support REQUEST, SESSION or APPLICATION scope.",
-											new InvalidOperationException());
-						}
-					}
-					// TODO Thực thi trên các scope khác.
-				}
-				else {
-					if (log.isErrorEnabled()) {
-						log.error("The specified scope is invalid !",
-								new InvalidOperationException());
-					}
+				if (mapDirectList.containsKey(scopeName)) {
+					return mapDirectList.get(scopeName);
 				}
 			}
+			if (selector instanceof CoreInstantiationSelectorImpl) {
+				CoreInstantiationSelector coreSelector = (CoreInstantiationSelector) selector;
+				String mappingName = coreSelector.getMappingName();
+				if (mappingName != null && !mappingName.isEmpty()) {
+					if (mappingName.indexOf(":") != -1) {
+						synchronized (mapDirectList) {
+							if (mapDirectList.containsKey(mappingName.replace(
+									":", "_"))) {
+								return mapDirectList.get(mappingName.replace(
+										":", "_"));
+							}
+						}
+					}
+					result = provider.getRefInstance(mappingName);
+				}
+			}
+			if (result == null) {
+				try {
+					result = provider.getServiceHandler().getService(this,
+							BeanCreationProcessor.class, selector);
+				}
+				catch (TooManyListenersException e) {
+					if (log.isErrorEnabled()) {
+						log.error(e.getMessage(), e);
+					}
+				}
+				if (result == NullClass.class)
+					result = null;
+				// Đưa object vừa khởi tạo vào danh sách singleton cache
+				synchronized (mapDirectList) {
+					mapDirectList.put(scopeName, result);
+				}
+			}
+		}
+		// if prototype
+		else if (scope.equals(Scope.PROTOTYPE)) {
+			try {
+				result = provider.getServiceHandler().getService(this,
+						BeanCreationProcessor.class, selector);
+			}
+			catch (TooManyListenersException e) {
+				if (log.isErrorEnabled()) {
+					log.error(e.getMessage(), e);
+				}
+			}
+			if (result == NullClass.class)
+				result = null;
+			return result;
+		}
+		else if (scope.equals(Scope.REQUEST) || scope.equals(Scope.SESSION)
+				|| scope.equals(Scope.APPLICATION)) {
+			if (!ReflectUtils.isCast(WebProvider.class, provider)) {
+				throw new InvalidOperationException(
+						"This container does not support REQUEST, SESSION or APPLICATION scope.");
+			}
+			// TODO Thực thi trên các scope khác.
+		}
+		else {
+			throw new InvalidOperationException(
+					"The specified scope is invalid !");
 		}
 		return result;
 	}
@@ -233,9 +235,9 @@ public enum Scope implements ScopeImplementation {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.jgentleframework.context.injecting.scope.ScopeImplementation#remove
+	 * org.exxlabs.jgentle.context.injecting.scope.ScopeImplementation#remove
 	 * (java.lang.String,
-	 * org.jgentleframework.context.injecting.ObjectBeanFactory)
+	 * org.exxlabs.jgentle.context.injecting.ObjectBeanFactory)
 	 */
 	@Override
 	public Object remove(String scopeName, ObjectBeanFactory objFactory)
@@ -245,35 +247,32 @@ public enum Scope implements ScopeImplementation {
 		Provider provider = objFactory.getProvider();
 		Map<String, ScopeInstance> scopeList = objFactory.getScopeList();
 		Map<String, Object> mapDirectList = objFactory.getMapDirectList();
+		Scope scope = null;
 		synchronized (scopeList) {
-			synchronized (mapDirectList) {
-				if (scopeList.containsKey(scopeName)) {
-					Scope scope = (Scope) scopeList.get(scopeName);
-					scopeList.remove(scopeName);
-					if (scope.equals(Scope.PROTOTYPE)) {
-					}
-					else if (scope.equals(Scope.SINGLETON)) {
-						result = mapDirectList.remove(scopeName);
-						return result;
-					}
-					else if (scope.equals(Scope.REQUEST)
-							|| scope.equals(Scope.SESSION)
-							|| scope.equals(Scope.APPLICATION)) {
-						if (!ReflectUtils.isCast(WebProvider.class, provider)) {
-							if (log.isErrorEnabled()) {
-								log
-										.error(
-												"This container does not support REQUEST, SESSION or APPLICATION scope.",
-												new InvalidOperationException());
-							}
-						}
-						// TODO Thực thi trên các scope khác.
-					}
-				}
-				else {
-					return null;
-				}
+			if (scopeList.containsKey(scopeName)) {
+				scope = (Scope) scopeList.get(scopeName);
+				scopeList.remove(scopeName);
 			}
+		}
+		// If is Prototype scope
+		if (scope.equals(Scope.PROTOTYPE)) {
+			throw new InvalidRemovingOperationException(
+					"Removing Operation does not support prototype-scoped bean !");
+		}
+		// If is Singleton scope
+		else if (scope.equals(Scope.SINGLETON)) {
+			synchronized (mapDirectList) {
+				result = mapDirectList.remove(scopeName);
+			}
+			return result;
+		}
+		else if (scope.equals(Scope.REQUEST) || scope.equals(Scope.SESSION)
+				|| scope.equals(Scope.APPLICATION)) {
+			if (!ReflectUtils.isCast(WebProvider.class, provider)) {
+				throw new InvalidRemovingOperationException(
+						"This container does not support REQUEST, SESSION or APPLICATION scope.");
+			}
+			// TODO Thực thi trên các scope khác.
 		}
 		return result;
 	}

@@ -18,8 +18,8 @@
 package org.jgentleframework.context;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.aopalliance.intercept.Interceptor;
 import org.jgentleframework.core.intercept.support.Matcher;
@@ -35,8 +35,8 @@ import org.jgentleframework.core.reflection.metadata.Definition;
  */
 public interface IAbstractServiceManagement {
 	/**
-	 * Returns <b>true</b> if given {@link Interceptor} is registered, <b>false</b>
-	 * otherwise.
+	 * Returns <b>true</b> if given {@link Interceptor} is registered,
+	 * <b>false</b> otherwise.
 	 * 
 	 * @param matcher
 	 *            the matcher of specified interceptor
@@ -80,12 +80,12 @@ public interface IAbstractServiceManagement {
 	/**
 	 * Returns the matcher of given {@link Definition} which is cached in.
 	 * 
-	 * @param def
+	 * @param definition
 	 *            the given definition
 	 * @return returns a corresponding {@link Matcher} if it exists, if not,
 	 *         returns <b>null</b>.
 	 */
-	public Matcher<Definition> getCachedMatcherOf(Definition def);
+	public Matcher<Definition> getCachedMatcherOf(Definition definition);
 
 	/**
 	 * Returns a list containing all matchers according to given registered
@@ -111,7 +111,7 @@ public interface IAbstractServiceManagement {
 	/**
 	 * Gets the matcher cache.
 	 */
-	public HashMap<Definition, Matcher<Definition>> getMatcherCache();
+	public Map<Definition, Matcher<Definition>> getMatcherCache();
 
 	/**
 	 * Gets all interceptors bound to the given {@link Matcher}
