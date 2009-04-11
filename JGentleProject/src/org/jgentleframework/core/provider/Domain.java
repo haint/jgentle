@@ -26,10 +26,10 @@ import org.jgentleframework.context.injecting.Provider;
 import org.jgentleframework.core.handling.DefinitionManager;
 
 /**
- * Domain is a {@link BeanContextServiceProvider}. It contains all
+ * {@link Domain} is a {@link BeanContextServiceProvider}. It contains all
  * {@link ServiceClass} instance in JGentle system. It provides some necessary
  * features in order to manage {@link ServiceClass} includes instantiate
- * {@link ServiceClass} instane, register or checking status of {@link Domain}.
+ * {@link ServiceClass} instane, register or manage status of {@link Domain}.
  * Moreover, it also offers some programmatic introspection tools in order to
  * support tool development.
  * 

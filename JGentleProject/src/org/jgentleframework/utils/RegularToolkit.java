@@ -27,7 +27,7 @@ import java.util.regex.Pattern;
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
  * @date Oct 23, 2007
  */
-public abstract class RegularToolkit {
+public final class RegularToolkit {
 	/**
 	 * Matches.
 	 * 

@@ -40,14 +40,15 @@ import org.jgentleframework.integration.remoting.rmi.support.RmiBinderIntercepto
  * The Class RmiBindingInstantiationInterceptor.
  * 
  * @author LE QUOC CHUNG - mailto: <a
- * href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
+ *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
  * @date Feb 23, 2008
  */
 public class RmiBindingInstantiationInterceptor implements
 		BeanInstantiationInterceptor, ProviderAware {
-	private final Log			log			= LogFactory.getLog(getClass());
+	private final Log			log					= LogFactory
+															.getLog(getClass());
 
-	private DefinitionManager	defManager	= null;
+	private DefinitionManager	definitionManager	= null;
 
 	/*
 	 * (non-Javadoc)
@@ -71,7 +72,7 @@ public class RmiBindingInstantiationInterceptor implements
 
 		Object result = null;
 		Class<?> target = oi.getTargetClass();
-		Definition definition = this.defManager.getDefinition(target);
+		Definition definition = this.definitionManager.getDefinition(target);
 		if (definition.isAnnotationPresent(Remote.class)) {
 			if (!target.isInterface()) {
 				if (log.isFatalEnabled()) {
@@ -158,6 +159,6 @@ public class RmiBindingInstantiationInterceptor implements
 	@Override
 	public void setProvider(Provider provider) {
 
-		this.defManager = provider.getDefinitionManager();
+		this.definitionManager = provider.getDefinitionManager();
 	}
 }

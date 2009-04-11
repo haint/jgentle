@@ -43,7 +43,7 @@ import org.jgentleframework.core.reflection.metadata.Definition;
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
  * @date Aug 20, 2007
  */
-public abstract class Utils {
+public final class Utils {
 	/**
 	 * Creates the scope name.
 	 * 

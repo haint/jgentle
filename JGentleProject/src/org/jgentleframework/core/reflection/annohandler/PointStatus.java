@@ -18,12 +18,9 @@
 package org.jgentleframework.core.reflection.annohandler;
 
 /**
- * Chỉ định một thành phần <code>components</code> có khả năng trả về trạng
- * thái kích hoạt của chính nó. Một <code>component</code> có thể là những
- * <code>extension-points</code> trong <code>JGentle</code>, cũng có thể là
- * những <code>components</code> đặc biệt chỉ định cho phép JGentle truy vấn
- * và sử dụng các chức năng như là một trong những thành phần cấu trúc hệ thống
- * cục bộ của <code>JGentle</code>.
+ * Interface to be implemented by component beans that need to inform its
+ * activated state. The component beans may be <code>extension-points</code> in
+ * <code>JGentle</code> system, or another specified components in container.
  * 
  * @author LE QUOC CHUNG - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
@@ -31,10 +28,7 @@ package org.jgentleframework.core.reflection.annohandler;
  */
 public interface PointStatus {
 	/**
-	 * Trả về trạng thái hoạt động của <code>component</code> hiện hành.
-	 * 
-	 * @return trả về true nếu <code>component</code> hiện hành đang được
-	 *         <code>enable</code>, ngược lại trả về false.
+	 * Returns the activated state of current <code>component</code>
 	 */
 	boolean isEnable();
 }

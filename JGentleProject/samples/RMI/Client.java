@@ -33,12 +33,7 @@ public class Client {
 		ServiceProvider context = JGentle.buildServiceProvider(Config.class);
 		RemoteInterface RMIObj = (RemoteInterface) context
 				.getBean(RemoteInterface.class);
-		int x = 0;
-		// while (true) {
-		// System.out.println(x + " " + RMIObj.helloWorld());
-		// x++;
-		// }
-		System.out.println(x + " " + RMIObj.helloWorld());
+		System.out.println(RMIObj.helloWorld());
 		ReferObject refer = new ReferObject("Not NULL");
 		System.out.println(refer.getName());
 		System.out.println(RMIObj.process(refer).getName());

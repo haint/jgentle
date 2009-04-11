@@ -60,7 +60,7 @@ import org.jgentleframework.utils.data.NullClass;
 /**
  * This class is responsible for management and instantiation of container in
  * JGentle system. It provides some static methods in order to configure JGentle
- * system and instantiating container.
+ * system and instantiate container.
  * 
  * @author LE QUOC CHUNG - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>

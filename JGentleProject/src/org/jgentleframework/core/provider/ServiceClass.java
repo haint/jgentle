@@ -29,7 +29,7 @@ import org.jgentleframework.context.support.Selector;
  */
 public interface ServiceClass {
 	/**
-	 * Handle.
+	 * The handle method
 	 * 
 	 * @param targetSelector
 	 *            the target selector

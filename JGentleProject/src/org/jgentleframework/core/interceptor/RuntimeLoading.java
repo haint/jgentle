@@ -21,7 +21,7 @@ import org.aopalliance.intercept.Interceptor;
 import org.jgentleframework.core.reflection.metadata.Definition;
 
 /**
- * Represents runtime loading status of an {@link Interceptor}
+ * Represents <code>runtime loading</code> status of an {@link Interceptor}
  * 
  * @author Quoc Chung - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>

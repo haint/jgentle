@@ -23,10 +23,10 @@ import java.util.Collection;
 import org.jgentleframework.core.JGentleException;
 
 /**
- * This implementation is responsible for {@link Domain} management. It provides
- * some methods to create, remove ... and control <b>domain</b>. A domain is
- * specified by a unique string name and all services in system must be executed
- * in the specified domain.
+ * This implementation is responsible for {@link Domain domain} management. It
+ * provides some methods to create, remove ... and manage <b>domain</b>. A
+ * domain is specified by a unique string name and all services in system must
+ * be executed in the specified domain.
  * 
  * @author LE QUOC CHUNG - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>

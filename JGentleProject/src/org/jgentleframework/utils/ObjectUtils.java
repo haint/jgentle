@@ -37,7 +37,7 @@ import org.apache.commons.logging.LogFactory;
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
  * @date Jan 22, 2008
  */
-public class ObjectUtils {
+public final class ObjectUtils {
 	/** The Constant DONTKNOW. */
 	public static final Integer	DONTKNOW		= 5;
 

@@ -28,7 +28,7 @@ import org.jgentleframework.core.reflection.MethodIdentification;
 import org.jgentleframework.core.reflection.SingleClassIdentification;
 
 /**
- * This enum represents the information of all object type. This information
+ * This enum represents the information of all object types. This information
  * will be used to recognize the type of objects or bean instances before they
  * are performed.
  * 

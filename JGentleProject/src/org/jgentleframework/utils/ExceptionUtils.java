@@ -34,7 +34,7 @@ import org.jgentleframework.integration.remoting.RemoteFailingConnectionExceptio
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
  * @date Mar 2, 2009
  */
-public abstract class ExceptionUtils {
+public final class ExceptionUtils {
 	private static final Log	log	= LogFactory.getLog(ExceptionUtils.class);
 
 	/**

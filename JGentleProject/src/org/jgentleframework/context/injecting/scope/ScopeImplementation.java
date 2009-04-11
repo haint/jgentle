@@ -23,6 +23,19 @@ import org.jgentleframework.context.support.Selector;
 import org.jgentleframework.core.InvalidOperationException;
 
 /**
+ * {@link ScopeImplementation} specifies an interface for the installation of
+ * customized scope. All custom scopes are specified in use of container in the
+ * JGentle necessarily need to implement this interface settings.
+ * <p>
+ * Note that object implements {@link ScopeImplementation} when enforcement
+ * called (invoked) necessarily <b>thread-safe</b>. This needs to be strictly in
+ * compliance with to ensure that the return and creation of object beans on
+ * different threads of the same implementation scope are done properly. In
+ * other words, invoking <code>callback methods</code> of the {@link ScopeImplementation}
+ * instance needs to ensure the <b>thread-safe</b> and this is dependant on
+ * scope implementation and the invoking of caller.
+ * <p> *******************************************
+ * <p>
  * {@link ScopeImplementation} chỉ định một interface cho các cài đặt của các
  * <b>custom scope</b> tự tạo. Các <code>custom scope</code> chỉ định muốn được
  * sử dụng bên trong lòng JGentle <i>container</i> nhất thiết cần phải thực thi

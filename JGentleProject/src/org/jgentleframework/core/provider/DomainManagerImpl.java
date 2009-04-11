@@ -35,24 +35,25 @@ import org.jgentleframework.core.handling.DefinitionManager;
 public class DomainManagerImpl implements DomainManager {
 	/** The domain list. */
 	HashMap<String, Domain>	domainList	= new HashMap<String, Domain>();
+
 	/** The def manager. */
-	DefinitionManager		defManager;
+	DefinitionManager		definitionManager;
 
 	/**
 	 * Instantiates a new domain manager impl.
 	 * 
-	 * @param defManager
+	 * @param definitionManager
 	 *            the def manager
 	 */
-	public DomainManagerImpl(DefinitionManager defManager) {
+	public DomainManagerImpl(DefinitionManager definitionManager) {
 
-		this.defManager = defManager;
+		this.definitionManager = definitionManager;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.aohhandling.provider.ServiceProviderManager#newDomain(java.lang.String)
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.provider.
+	 * ServiceProviderManager#newDomain(java.lang.String)
 	 */
 	public synchronized void newDomain(String domain,
 			BeanContextSupport domainContext) throws JGentleException {
@@ -63,7 +64,7 @@ public class DomainManagerImpl implements DomainManager {
 						+ " is existed !");
 			}
 			else {
-				Domain obj = new DomainImpl(domain, this.defManager);
+				Domain obj = new DomainImpl(domain, this.definitionManager);
 				domainContext.add(obj);
 				this.domainList.put(domain, obj);
 			}
@@ -72,8 +73,8 @@ public class DomainManagerImpl implements DomainManager {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.aohhandling.provider.ServiceProviderManager#getDomain(java.lang.String)
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.provider.
+	 * ServiceProviderManager#getDomain(java.lang.String)
 	 */
 	public Domain getDomain(String domain) {
 
@@ -82,8 +83,8 @@ public class DomainManagerImpl implements DomainManager {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.aohhandling.provider.ServiceProviderManager#removeDomain(java.lang.String)
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.provider.
+	 * ServiceProviderManager#removeDomain(java.lang.String)
 	 */
 	public Domain removeDomain(String domain, BeanContextSupport domainContext) {
 
@@ -95,8 +96,8 @@ public class DomainManagerImpl implements DomainManager {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.aohhandling.provider.ServiceProviderManager#containsDomain(java.lang.String)
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.provider.
+	 * ServiceProviderManager#containsDomain(java.lang.String)
 	 */
 	public boolean containsDomain(String domain) {
 
@@ -105,8 +106,10 @@ public class DomainManagerImpl implements DomainManager {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.aohhandling.provider.ServiceProviderManager#containsDomain(org.jgentleframework.core.metadatahandling.aohhandling.provider.ServiceProvider)
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.provider.
+	 * ServiceProviderManager
+	 * #containsDomain(org.jgentleframework.core.metadatahandling
+	 * .aohhandling.provider.ServiceProvider)
 	 */
 	public boolean containsDomain(Domain domain) {
 
@@ -115,8 +118,8 @@ public class DomainManagerImpl implements DomainManager {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.aohhandling.provider.ServiceProviderManager#getDomainValues()
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.provider.
+	 * ServiceProviderManager#getDomainValues()
 	 */
 	@Override
 	public Collection<Domain> getDomainValues() {
@@ -126,8 +129,9 @@ public class DomainManagerImpl implements DomainManager {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.provider.DomainManager#getServiceClass(java.lang.String)
+	 * @see
+	 * org.jgentleframework.core.provider.DomainManager#getServiceClass(java
+	 * .lang.String)
 	 */
 	@Override
 	public Class<? extends ServiceClass> getServiceClass(String alias) {

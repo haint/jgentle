@@ -24,18 +24,20 @@ import java.util.Set;
 import org.aopalliance.reflect.Metadata;
 
 /**
- * This class represents {@link AnnoMeta} is created in JGentle system. An
- * {@link AnnoMeta} will have a holding list of {@link Metadata metadatas} which
- * may be another {@link AnnoMeta} or also may be basic datas (values of
- * attributes of an annotation) which is interpreted.
+ * Represents {@link AnnoMeta annometa} is created in JGentle system. An
+ * {@link AnnoMeta annometa} will have a holding list of {@link Metadata
+ * metadatas} which may be another {@link AnnoMeta annometas} or also may be
+ * basic datas (values of attributes of an annotation) which is interpreted.
  * <p>
- * If {@link AnnoMeta} is interpreted of annotation, key of {@link AnnoMeta}
- * will be the instance which is annotated with that <code>annotation</code>,
- * and value of {@link AnnoMeta} will be the <code>annotation instance</code>.
+ * If {@link AnnoMeta annometa} is interpreted of annotation, key of
+ * {@link AnnoMeta} will be the instance which is annotated with that
+ * <code>annotation</code>, and value of {@link AnnoMeta annometa} will be the
+ * <code>annotation instance</code>.
  * 
  * @author LE QUOC CHUNG - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
  * @date Sep 5, 2007
+ * @see Metadata
  */
 public interface AnnoMeta extends Metadata {
 	/**
@@ -121,7 +123,7 @@ public interface AnnoMeta extends Metadata {
 	public Set<Object> keySet();
 
 	/**
-	 * Put a {@link Metadata} into current {@link AnnoMeta}.
+	 * Puts a {@link Metadata} into current {@link AnnoMeta}.
 	 * 
 	 * @param data
 	 *            desired metadata.

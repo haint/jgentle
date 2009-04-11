@@ -50,7 +50,7 @@ import org.jgentleframework.core.reflection.metadata.MetaDataFactory;
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
  * @date Aug 29, 2007
  */
-public abstract class ReflectUtils {
+public final class ReflectUtils {
 	/** The Constant log. */
 	private final static Log	log	= LogFactory.getLog(ReflectUtils.class);
 

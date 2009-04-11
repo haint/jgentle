@@ -20,7 +20,7 @@ package org.jgentleframework.context;
 import org.jgentleframework.context.injecting.Provider;
 
 /**
- * This interface represents a context.
+ * Represents a context.
  * 
  * @author LE QUOC CHUNG - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>

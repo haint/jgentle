@@ -35,7 +35,7 @@ import java.util.HashMap;
  */
 public interface DefinitionCore extends MetadataControl {
 	/**
-	 * Create AnnoMeta content of current {@link Definition}.
+	 * Create {@link AnnoMeta} content.
 	 */
 	public void buildAnnoMeta();
 

@@ -44,7 +44,7 @@ import java.util.Set;
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
  * @date Feb 10, 2009
  */
-public abstract class ObjectClassUtils {
+public final class ObjectClassUtils {
 	/** Suffix for array class names: "[]". */
 	public static final String						ARRAY_SUFFIX			= "[]";
 
@@ -99,8 +99,8 @@ public abstract class ObjectClassUtils {
 
 	/**
 	 * Return the default ClassLoader to use: typically the thread context
-	 * ClassLoader, if available; the ClassLoader that loaded the ObjectClassUtils
-	 * class will be used as fallback.
+	 * ClassLoader, if available; the ClassLoader that loaded the
+	 * ObjectClassUtils class will be used as fallback.
 	 * <p>
 	 * Call this method if you intend to use the thread context ClassLoader in a
 	 * scenario where you absolutely need a non-null ClassLoader reference: for
@@ -160,8 +160,8 @@ public abstract class ObjectClassUtils {
 	 * "String[]").
 	 * <p>
 	 * Always uses the default class loader: that is, preferably the thread
-	 * context class loader, or the ClassLoader that loaded the ObjectClassUtils class
-	 * as fallback.
+	 * context class loader, or the ClassLoader that loaded the ObjectClassUtils
+	 * class as fallback.
 	 * 
 	 * @param name
 	 *            the name of the Class

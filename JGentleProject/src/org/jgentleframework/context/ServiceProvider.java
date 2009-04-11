@@ -24,10 +24,10 @@ import org.jgentleframework.configure.Configurable;
 import org.jgentleframework.context.injecting.Provider;
 
 /**
- * This interface represents an {@link ServiceProvider}, an extension of core
- * {@link Provider}. This container supports all features which are supported by
- * {@link Provider} besides some features such as AOP, Interceptors, ... and all
- * services, framework integrations such as (JMX, JMS, Hibernate, ...).
+ * Represents a {@link ServiceProvider}, an extension of core {@link Provider}.
+ * This container supports all features which are supported by {@link Provider}
+ * besides some features such as AOP, Interceptors, ... and all services,
+ * framework integrations such as (JMX, JMS, Hibernate, ...).
  * 
  * @author LE QUOC CHUNG - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>

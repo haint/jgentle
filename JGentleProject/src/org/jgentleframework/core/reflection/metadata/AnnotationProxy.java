@@ -42,7 +42,7 @@ import org.jgentleframework.utils.ReflectUtils;
  */
 class AnnotationProxy implements InvocationHandler, SetValueOfAnnotation {
 	/**
-	 * Create proxied annotation.
+	 * Creates proxied annotation.
 	 * 
 	 * @param obj
 	 *            desired original annotation instance.

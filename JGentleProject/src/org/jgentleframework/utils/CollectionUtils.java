@@ -34,7 +34,7 @@ import java.util.Properties;
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
  * @date Feb 14, 2009
  */
-public abstract class CollectionUtils {
+public final class CollectionUtils {
 	/**
 	 * Return <code>true</code> if the supplied Collection is <code>null</code>
 	 * or empty. Otherwise, return <code>false</code>.

@@ -31,8 +31,8 @@ import org.jgentleframework.utils.Assertor;
 /**
  * This class is an implementation of {@link ServiceProvider} interface. It's
  * responsible for a container which manages all of services of system.
- * Moreover, because of {@link ServiceProvider} is an extension of
- * {@link Provider} so it has all features as same as an {@link Provider}.
+ * Moreover, because {@link ServiceProvider} is an extension of {@link Provider}
+ * so it has all features as same as an {@link Provider}.
  * 
  * @author LE QUOC CHUNG - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
@@ -65,8 +65,8 @@ public class ServiceProviderImpl extends AbstractServiceManagement implements
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.jgentleframework.context.ServiceProvider#addCSContext(java.lang.Class,
-	 * org.jgentleframework.context.ComponentServiceContext)
+	 * org.jgentleframework.context.ServiceProvider#addCSContext(java.lang.Class
+	 * , org.jgentleframework.context.ComponentServiceContext)
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
@@ -118,7 +118,8 @@ public class ServiceProviderImpl extends AbstractServiceManagement implements
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.jgentleframework.context.ServiceProvider#getCSContext(java.lang.Class)
+	 * org.jgentleframework.context.ServiceProvider#getCSContext(java.lang.Class
+	 * )
 	 */
 	@SuppressWarnings("unchecked")
 	@Override

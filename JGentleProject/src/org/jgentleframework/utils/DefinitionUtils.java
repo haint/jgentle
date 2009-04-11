@@ -35,7 +35,7 @@ import org.jgentleframework.utils.data.Pair;
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
  * @date Apr 1, 2009
  */
-public abstract class DefinitionUtils {
+public final class DefinitionUtils {
 	/**
 	 * Finds args of default constructor.
 	 * 

@@ -41,7 +41,7 @@ import java.io.Writer;
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
  * @date Feb 13, 2008
  */
-public abstract class FileObjectUtils {
+public final class FileObjectUtils {
 	public static final int	BUFFER_SIZE	= 4096;
 
 	/**

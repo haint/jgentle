@@ -22,8 +22,9 @@ import java.lang.annotation.Annotation;
 import org.jgentleframework.core.handling.DefinitionManager;
 
 /**
- * Chỉ định một annotation validator, kiểm tra thông tin annotation và bắt các
- * ngoại lệ (exception) được ném ra bởi quá trình validate.
+ * Represents the {@link AnnotationValidator annotation validator} that
+ * validates annotation information, catch any exceptions thrown by validating
+ * process.
  * 
  * @author LE QUOC CHUNG - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
@@ -42,7 +43,7 @@ public interface AnnotationValidator<T extends Annotation> {
 	 *            danh sách annotation gốc chỉ định trong đối tượng gốc object.
 	 * @param object
 	 *            đối tượng gốc được chỉ định annotation. <br>
-	 *            <br>
+	 * <br>
 	 *            <b>Lưu ý:</b> trong trường hợp annotation được validate lại
 	 *            đính thông tin chính nó lên một parameter của một method nào
 	 *            đó thì đối tượng gốc object lúc đó sẽ chính là method có chứa

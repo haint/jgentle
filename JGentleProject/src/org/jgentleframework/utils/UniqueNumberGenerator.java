@@ -26,9 +26,10 @@ import java.security.SecureRandom;
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
  * @date Oct 24, 2007
  */
-public abstract class UniqueNumberGenerator {
+public final class UniqueNumberGenerator {
 	/** The Constant random. */
 	static final SecureRandom	random	= new SecureRandom();
+
 	/** The current. */
 	static long					current	= System.currentTimeMillis();
 	static {

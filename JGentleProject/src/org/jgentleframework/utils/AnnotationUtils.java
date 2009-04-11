@@ -34,7 +34,7 @@ import org.jgentleframework.configure.enums.Types;
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
  * @date Sep 15, 2008
  */
-public abstract class AnnotationUtils {
+public final class AnnotationUtils {
 	/** The attribute name for annotations with a single element. */
 	static final String	VALUE	= "value";
 

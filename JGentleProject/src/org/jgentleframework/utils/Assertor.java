@@ -33,7 +33,7 @@ import org.jgentleframework.core.JGentleRuntimeException;
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
  * @date Mar 9, 2008
  */
-public abstract class Assertor {
+public final class Assertor {
 	/**
 	 * Hàm <b>throwRunTimeException</b> ném ra một ngoại lệ lúc runtime. *
 	 */
@@ -239,11 +239,8 @@ public abstract class Assertor {
 	/**
 	 * Xác nhận một biểu thức trả về kiểu boolean, ném ra ngoại lệ
 	 * <code>JGentleRuntimeException</code> nếu kết quả kiểm tra là
-	 * <code>false</code>.
-	 * 
-	 * <pre class="code">
-	 * Assert.isTrue(i &gt; 0, &quot;Giá trị phải lớn hơn 0&quot;);
-	 * </pre>
+	 * <code>false</code>. <pre class="code"> Assert.isTrue(i &gt; 0, &quot;Giá
+	 * trị phải lớn hơn 0&quot;); </pre>
 	 * 
 	 * @param expression
 	 *            biểu thức boolean cần kiểm tra
@@ -263,11 +260,7 @@ public abstract class Assertor {
 	/**
 	 * Xác nhận một biểu thức trả về kiểu boolean, ném ra ngoại lệ
 	 * <code>JGentleRuntimeException</code> nếu kết quả kiểm tra là
-	 * <code>false</code>.
-	 * 
-	 * <pre class="code">
-	 * Assert.isTrue(i &gt; 0);
-	 * </pre>
+	 * <code>false</code>. <pre class="code"> Assert.isTrue(i &gt; 0); </pre>
 	 * 
 	 * @param expression
 	 *            biểu thức boolean cần kiểm tra
@@ -281,11 +274,8 @@ public abstract class Assertor {
 	}
 
 	/**
-	 * Xác nhận một object là <code>null</code> .
-	 * 
-	 * <pre class="code">
-	 * Assert.isNull(value, &quot;giá trị value phải là null&quot;);
-	 * </pre>
+	 * Xác nhận một object là <code>null</code> . <pre class="code">
+	 * Assert.isNull(value, &quot;giá trị value phải là null&quot;); </pre>
 	 * 
 	 * @param object
 	 *            đối tượng cần kiểm tra
@@ -303,11 +293,8 @@ public abstract class Assertor {
 	}
 
 	/**
-	 * Xác nhận một object là <code>null</code> .
-	 * 
-	 * <pre class="code">
-	 * Assert.isNull(value);
-	 * </pre>
+	 * Xác nhận một object là <code>null</code> . <pre class="code">
+	 * Assert.isNull(value); </pre>
 	 * 
 	 * @param object
 	 *            đối tượng cần kiểm tra
@@ -321,11 +308,8 @@ public abstract class Assertor {
 	}
 
 	/**
-	 * Xác nhận một object không phải là <code>null</code> .
-	 * 
-	 * <pre class="code">
-	 * Assert.notNull(clazz, &quot;Class không được phép là null&quot;);
-	 * </pre>
+	 * Xác nhận một object không phải là <code>null</code> . <pre class="code">
+	 * Assert.notNull(clazz, &quot;Class không được phép là null&quot;); </pre>
 	 * 
 	 * @param object
 	 *            đối tượng cần kiểm tra
@@ -343,11 +327,8 @@ public abstract class Assertor {
 	}
 
 	/**
-	 * Xác nhận một object không phải là <code>null</code> .
-	 * 
-	 * <pre class="code">
-	 * Assert.notNull(clazz);
-	 * </pre>
+	 * Xác nhận một object không phải là <code>null</code> . <pre class="code">
+	 * Assert.notNull(clazz); </pre>
 	 * 
 	 * @param object
 	 *            đối tượng cần kiểm tra
@@ -362,11 +343,8 @@ public abstract class Assertor {
 
 	/**
 	 * Xác nhận một String không rỗng; có nghĩa là String không được phép empty
-	 * và không được phép <code>null</code>.
-	 * 
-	 * <pre class="code">
-	 * Assert.hasLength(name, &quot;Name không được phép rỗng&quot;);
-	 * </pre>
+	 * và không được phép <code>null</code>. <pre class="code">
+	 * Assert.hasLength(name, &quot;Name không được phép rỗng&quot;); </pre>
 	 * 
 	 * @param text
 	 *            Chuỗi cần xác nhận
@@ -383,11 +361,8 @@ public abstract class Assertor {
 
 	/**
 	 * Xác nhận một String không rỗng; có nghĩa là String không được phép empty
-	 * và không được phép <code>null</code>.
-	 * 
-	 * <pre class="code">
-	 * Assert.hasLength(name);
-	 * </pre>
+	 * và không được phép <code>null</code>. <pre class="code">
+	 * Assert.hasLength(name); </pre>
 	 * 
 	 * @param text
 	 *            Chuỗi cần xác nhận
@@ -402,11 +377,8 @@ public abstract class Assertor {
 	/**
 	 * Xác nhận một String có nội dung hợp lệ; có nghĩa là String không được
 	 * phép là <code>null</code> và phải có ít nhất một kí tự không phải là
-	 * khoảng trắng.
-	 * 
-	 * <pre class="code">
-	 * Assert.hasText(name, &quot;Name không được phép rỗng&quot;);
-	 * </pre>
+	 * khoảng trắng. <pre class="code"> Assert.hasText(name, &quot;Name không
+	 * được phép rỗng&quot;); </pre>
 	 * 
 	 * @param text
 	 *            Chuỗi cần xác nhận
@@ -435,11 +407,8 @@ public abstract class Assertor {
 	/**
 	 * Xác nhận một String có nội dung hợp lệ; có nghĩa là String không được
 	 * phép là <code>null</code> và phải có ít nhất một kí tự không phải là
-	 * khoảng trắng.
-	 * 
-	 * <pre class="code">
-	 * Assert.hasText(name, &quot;Name không được phép rỗng&quot;);
-	 * </pre>
+	 * khoảng trắng. <pre class="code"> Assert.hasText(name, &quot;Name không
+	 * được phép rỗng&quot;); </pre>
 	 * 
 	 * @param text
 	 *            Chuỗi cần xác nhận
@@ -452,11 +421,9 @@ public abstract class Assertor {
 	}
 
 	/**
-	 * Assert that the given text does not contain the given substring.
-	 * 
-	 * <pre class="code">
-	 * Assert.doesNotContain(name, &quot;rod&quot;, &quot;Name must not contain 'rod'&quot;);
-	 * </pre>
+	 * Assert that the given text does not contain the given substring. <pre
+	 * class="code"> Assert.doesNotContain(name, &quot;rod&quot;, &quot;Name
+	 * must not contain 'rod'&quot;); </pre>
 	 * 
 	 * @param textToSearch
 	 *            the text to search
@@ -476,11 +443,8 @@ public abstract class Assertor {
 	}
 
 	/**
-	 * Assert that the given text does not contain the given substring.
-	 * 
-	 * <pre class="code">
-	 * Assert.doesNotContain(name, &quot;rod&quot;);
-	 * </pre>
+	 * Assert that the given text does not contain the given substring. <pre
+	 * class="code"> Assert.doesNotContain(name, &quot;rod&quot;); </pre>
 	 * 
 	 * @param textToSearch
 	 *            the text to search
@@ -496,11 +460,8 @@ public abstract class Assertor {
 
 	/**
 	 * Assert that an array has elements; that is, it must not be
-	 * <code>null</code> and must have at least one element.
-	 * 
-	 * <pre class="code">
-	 * Assert.notEmpty(array, &quot;The array must have elements&quot;);
-	 * </pre>
+	 * <code>null</code> and must have at least one element. <pre class="code">
+	 * Assert.notEmpty(array, &quot;The array must have elements&quot;); </pre>
 	 * 
 	 * @param array
 	 *            the array to check
@@ -518,11 +479,8 @@ public abstract class Assertor {
 
 	/**
 	 * Assert that an array has elements; that is, it must not be
-	 * <code>null</code> and must have at least one element.
-	 * 
-	 * <pre class="code">
-	 * Assert.notEmpty(array);
-	 * </pre>
+	 * <code>null</code> and must have at least one element. <pre class="code">
+	 * Assert.notEmpty(array); </pre>
 	 * 
 	 * @param array
 	 *            the array to check
@@ -538,9 +496,7 @@ public abstract class Assertor {
 
 	/**
 	 * Assert that a collection has elements; that is, it must not be
-	 * <code>null</code> and must have at least one element.
-	 * 
-	 * <pre class="code">
+	 * <code>null</code> and must have at least one element. <pre class="code">
 	 * Assert.notEmpty(collection, &quot;Collection must have elements&quot;);
 	 * </pre>
 	 * 
@@ -560,9 +516,7 @@ public abstract class Assertor {
 
 	/**
 	 * Assert that a collection has elements; that is, it must not be
-	 * <code>null</code> and must have at least one element.
-	 * 
-	 * <pre class="code">
+	 * <code>null</code> and must have at least one element. <pre class="code">
 	 * Assert.notEmpty(collection, &quot;Collection must have elements&quot;);
 	 * </pre>
 	 * 
@@ -580,11 +534,8 @@ public abstract class Assertor {
 
 	/**
 	 * Assert that a Map has entries; that is, it must not be <code>null</code>
-	 * and must have at least one entry.
-	 * 
-	 * <pre class="code">
-	 * Assert.notEmpty(map, &quot;Map must have entries&quot;);
-	 * </pre>
+	 * and must have at least one entry. <pre class="code"> Assert.notEmpty(map,
+	 * &quot;Map must have entries&quot;); </pre>
 	 * 
 	 * @param map
 	 *            the map to check
@@ -602,11 +553,8 @@ public abstract class Assertor {
 
 	/**
 	 * Assert that a Map has entries; that is, it must not be <code>null</code>
-	 * and must have at least one entry.
-	 * 
-	 * <pre class="code">
-	 * Assert.notEmpty(map);
-	 * </pre>
+	 * and must have at least one entry. <pre class="code">
+	 * Assert.notEmpty(map); </pre>
 	 * 
 	 * @param map
 	 *            the map to check
@@ -622,10 +570,7 @@ public abstract class Assertor {
 
 	/**
 	 * Assert that the provided object is an instance of the provided class.
-	 * 
-	 * <pre class="code">
-	 * Assert.instanceOf(Foo.class, foo);
-	 * </pre>
+	 * <pre class="code"> Assert.instanceOf(Foo.class, foo); </pre>
 	 * 
 	 * @param clazz
 	 *            the required class
@@ -642,10 +587,7 @@ public abstract class Assertor {
 
 	/**
 	 * Assert that the provided object is an instance of the provided class.
-	 * 
-	 * <pre class="code">
-	 * Assert.instanceOf(Foo.class, foo);
-	 * </pre>
+	 * <pre class="code"> Assert.instanceOf(Foo.class, foo); </pre>
 	 * 
 	 * @param clazz
 	 *            the required class
@@ -671,11 +613,8 @@ public abstract class Assertor {
 
 	/**
 	 * Assert that <code>superType.isAssignableFrom(subType)</code> is
-	 * <code>true</code>.
-	 * 
-	 * <pre class="code">
-	 * Assert.isAssignable(Number.class, myClass);
-	 * </pre>
+	 * <code>true</code>. <pre class="code"> Assert.isAssignable(Number.class,
+	 * myClass); </pre>
 	 * 
 	 * @param superType
 	 *            the super type to check
@@ -691,11 +630,8 @@ public abstract class Assertor {
 
 	/**
 	 * Assert that <code>superType.isAssignableFrom(subType)</code> is
-	 * <code>true</code>.
-	 * 
-	 * <pre class="code">
-	 * Assert.isAssignable(Number.class, myClass);
-	 * </pre>
+	 * <code>true</code>. <pre class="code"> Assert.isAssignable(Number.class,
+	 * myClass); </pre>
 	 * 
 	 * @param superType
 	 *            the super type to check
@@ -722,11 +658,9 @@ public abstract class Assertor {
 	/**
 	 * Assert a boolean expression, throwing <code>IllegalStateException</code>
 	 * if the test result is <code>false</code>. Call isTrue if you wish to
-	 * throw JGentleRuntimeException on an assertion failure.
-	 * 
-	 * <pre class="code">
-	 * Assert.state(id == null, &quot;The id property must not already be initialized&quot;);
-	 * </pre>
+	 * throw JGentleRuntimeException on an assertion failure. <pre class="code">
+	 * Assert.state(id == null, &quot;The id property must not already be
+	 * initialized&quot;); </pre>
 	 * 
 	 * @param expression
 	 *            a boolean expression
@@ -747,11 +681,8 @@ public abstract class Assertor {
 	 * the test result is <code>false</code>.
 	 * <p>
 	 * Call {@link #isTrue(boolean)} if you wish to throw
-	 * {@link JGentleRuntimeException} on an assertion failure.
-	 * 
-	 * <pre class="code">
-	 * Assert.state(id == null);
-	 * </pre>
+	 * {@link JGentleRuntimeException} on an assertion failure. <pre
+	 * class="code"> Assert.state(id == null); </pre>
 	 * 
 	 * @param expression
 	 *            a boolean expression

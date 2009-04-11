@@ -837,7 +837,7 @@ class DefinitionImpl extends DefinitionCoreImpl implements Metadata, Definition 
 	}
 
 	/**
-	 * Overrides default readObject method.
+	 * Overrides default <code>readObject method</code>.
 	 * 
 	 * @param stream
 	 *            the stream

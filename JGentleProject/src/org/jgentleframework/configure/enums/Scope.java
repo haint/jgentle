@@ -68,24 +68,16 @@ public enum Scope implements ScopeImplementation {
 	 * request for that specific bean is made.
 	 */
 	PROTOTYPE,
-	/**
-	 * The request scope.
-	 */
+	/** The request scope. */
 	REQUEST,
-	/**
-	 * The session scope.
-	 */
+	/** The session scope. */
 	SESSION,
-	/**
-	 * The application scope (Servlet context)
-	 */
+	/** The application scope (Servlet context). */
 	APPLICATION,
-	/**
-	 * 
-	 */
+	/** The UNSPECIFIED. */
 	UNSPECIFIED;
 	/**
-	 * Constructor
+	 * Constructor.
 	 */
 	Scope() {
 
@@ -97,9 +89,9 @@ public enum Scope implements ScopeImplementation {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.context.injecting.scope.ScopeImplementation#putBean
+	 * org.jgentleframework.context.injecting.scope.ScopeImplementation#putBean
 	 * (java.lang.String, java.lang.Object,
-	 * org.exxlabs.jgentle.context.injecting.ObjectBeanFactory)
+	 * org.jgentleframework.context.injecting.ObjectBeanFactory)
 	 */
 	@Override
 	public Object putBean(String scopeName, Object bean,
@@ -145,9 +137,9 @@ public enum Scope implements ScopeImplementation {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.context.injecting.scope.ScopeImplementation#getBean
-	 * (org.exxlabs.jgentle.context.support.Selector, java.lang.String,
-	 * org.exxlabs.jgentle.context.injecting.ObjectBeanFactory)
+	 * org.jgentleframework.context.injecting.scope.ScopeImplementation#getBean
+	 * (org.jgentleframework.context.support.Selector, java.lang.String,
+	 * org.jgentleframework.context.injecting.ObjectBeanFactory)
 	 */
 	@Override
 	public Object getBean(Selector selector, String scopeName,
@@ -158,47 +150,49 @@ public enum Scope implements ScopeImplementation {
 		Map<String, ScopeInstance> scopeList = objFactory.getScopeList();
 		Map<String, Object> mapDirectList = objFactory.getMapDirectList();
 		// If is Singleton scope
-		Scope scope;
+		Scope scope = null;
 		synchronized (scopeList) {
 			scope = (Scope) scopeList.get(scopeName);
 		}
 		if (scope.equals(Scope.SINGLETON)) {
-			synchronized (mapDirectList) {
-				if (mapDirectList.containsKey(scopeName)) {
-					return mapDirectList.get(scopeName);
+			synchronized (scopeName) {
+				synchronized (mapDirectList) {
+					if (mapDirectList.containsKey(scopeName)) {
+						return mapDirectList.get(scopeName);
+					}
 				}
-			}
-			if (selector instanceof CoreInstantiationSelectorImpl) {
-				CoreInstantiationSelector coreSelector = (CoreInstantiationSelector) selector;
-				String mappingName = coreSelector.getMappingName();
-				if (mappingName != null && !mappingName.isEmpty()) {
-					if (mappingName.indexOf(":") != -1) {
-						synchronized (mapDirectList) {
-							if (mapDirectList.containsKey(mappingName.replace(
-									":", "_"))) {
-								return mapDirectList.get(mappingName.replace(
-										":", "_"));
+				if (selector instanceof CoreInstantiationSelectorImpl) {
+					CoreInstantiationSelector coreSelector = (CoreInstantiationSelector) selector;
+					String mappingName = coreSelector.getMappingName();
+					if (mappingName != null && !mappingName.isEmpty()) {
+						if (mappingName.indexOf(":") != -1) {
+							synchronized (mapDirectList) {
+								if (mapDirectList.containsKey(mappingName
+										.replace(":", "_"))) {
+									return mapDirectList.get(mappingName
+											.replace(":", "_"));
+								}
 							}
 						}
-					}
-					result = provider.getRefInstance(mappingName);
-				}
-			}
-			if (result == null) {
-				try {
-					result = provider.getServiceHandler().getService(this,
-							BeanCreationProcessor.class, selector);
-				}
-				catch (TooManyListenersException e) {
-					if (log.isErrorEnabled()) {
-						log.error(e.getMessage(), e);
+						result = provider.getRefInstance(mappingName);
 					}
 				}
-				if (result == NullClass.class)
-					result = null;
-				// Đưa object vừa khởi tạo vào danh sách singleton cache
-				synchronized (mapDirectList) {
-					mapDirectList.put(scopeName, result);
+				if (result == null) {
+					try {
+						result = provider.getServiceHandler().getService(this,
+								BeanCreationProcessor.class, selector);
+					}
+					catch (TooManyListenersException e) {
+						if (log.isErrorEnabled()) {
+							log.error(e.getMessage(), e);
+						}
+					}
+					if (result == NullClass.class)
+						result = null;
+					// Đưa object vừa khởi tạo vào danh sách singleton cache
+					synchronized (mapDirectList) {
+						mapDirectList.put(scopeName, result);
+					}
 				}
 			}
 		}
@@ -235,9 +229,9 @@ public enum Scope implements ScopeImplementation {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.exxlabs.jgentle.context.injecting.scope.ScopeImplementation#remove
+	 * org.jgentleframework.context.injecting.scope.ScopeImplementation#remove
 	 * (java.lang.String,
-	 * org.exxlabs.jgentle.context.injecting.ObjectBeanFactory)
+	 * org.jgentleframework.context.injecting.ObjectBeanFactory)
 	 */
 	@Override
 	public Object remove(String scopeName, ObjectBeanFactory objFactory)
@@ -255,24 +249,32 @@ public enum Scope implements ScopeImplementation {
 			}
 		}
 		// If is Prototype scope
-		if (scope.equals(Scope.PROTOTYPE)) {
-			throw new InvalidRemovingOperationException(
-					"Removing Operation does not support prototype-scoped bean !");
-		}
-		// If is Singleton scope
-		else if (scope.equals(Scope.SINGLETON)) {
-			synchronized (mapDirectList) {
-				result = mapDirectList.remove(scopeName);
-			}
-			return result;
-		}
-		else if (scope.equals(Scope.REQUEST) || scope.equals(Scope.SESSION)
-				|| scope.equals(Scope.APPLICATION)) {
-			if (!ReflectUtils.isCast(WebProvider.class, provider)) {
+		if (scope != null) {
+			if (scope.equals(Scope.PROTOTYPE)) {
 				throw new InvalidRemovingOperationException(
-						"This container does not support REQUEST, SESSION or APPLICATION scope.");
+						"Removing Operation does not support prototype-scoped bean !");
 			}
-			// TODO Thực thi trên các scope khác.
+			// If is Singleton scope
+			else if (scope.equals(Scope.SINGLETON)) {
+				synchronized (mapDirectList) {
+					result = mapDirectList.remove(scopeName);
+				}
+				return result;
+			}
+			else if (scope.equals(Scope.REQUEST) || scope.equals(Scope.SESSION)
+					|| scope.equals(Scope.APPLICATION)) {
+				if (!ReflectUtils.isCast(WebProvider.class, provider)) {
+					throw new InvalidRemovingOperationException(
+							"This container does not support REQUEST, SESSION or APPLICATION scope.");
+				}
+				// TODO Thực thi trên các scope khác.
+			}
+		}
+		else {
+			if (log.isErrorEnabled()) {
+				log.error("The specified scope is invalid !",
+						new InvalidOperationException());
+			}
 		}
 		return result;
 	}
