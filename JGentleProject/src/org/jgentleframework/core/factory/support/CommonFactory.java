@@ -19,7 +19,7 @@ package org.jgentleframework.core.factory.support;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -31,7 +31,6 @@ import org.jgentleframework.context.beans.ProviderAware;
 import org.jgentleframework.context.beans.TargetClassesAware;
 import org.jgentleframework.context.beans.annotation.InitializingMethod;
 import org.jgentleframework.context.injecting.Provider;
-import org.jgentleframework.core.factory.InOutDependencyException;
 import org.jgentleframework.core.factory.InOutExecutor;
 import org.jgentleframework.core.reflection.metadata.Definition;
 import org.jgentleframework.utils.ReflectUtils;
@@ -91,18 +90,12 @@ public class CommonFactory {
 			InvocationTargetException, SecurityException, NoSuchMethodException {
 
 		if (ReflectUtils.isCast(Initializing.class, obj)) {
-			((Initializing) obj).afterBeanCreated();
+			((Initializing) obj).activate();
 		}
 		else if (def.isAnnotationPresentAtAnyMethods(InitializingMethod.class)) {
-			ArrayList<Method> methods = def
+			List<Method> methods = def
 					.getMethodsAnnotatedWith(InitializingMethod.class);
-			if (methods.size() > 1 || methods.size() == 0) {
-				throw new InOutDependencyException(
-						"There are more than one method annotated with "
-								+ InitializingMethod.class);
-			}
-			else {
-				Method method = methods.get(0);
+			for (Method method : methods) {
 				method.setAccessible(true);
 				method.invoke(obj);
 				method.setAccessible(false);

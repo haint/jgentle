@@ -197,10 +197,10 @@ public class RmiExporterImpl extends RmiWrapperExporter implements
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.jgentleframework.context.beans.Initializing#afterBeanCreated()
+	 * @see org.jgentleframework.context.beans.Initializing#activate()
 	 */
 	@Override
-	public void afterBeanCreated() {
+	public void activate() {
 
 		if (this.isAutorun()) {
 			try {

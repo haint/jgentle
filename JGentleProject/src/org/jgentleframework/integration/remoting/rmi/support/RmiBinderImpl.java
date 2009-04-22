@@ -93,10 +93,10 @@ public class RmiBinderImpl extends RmiAbstractBinder implements Initializing,
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.jgentleframework.context.bean.Initializing#afterBeanCreate()
+	 * @see org.jgentleframework.context.bean.Initializing#activate()
 	 */
 	@Override
-	public void afterBeanCreated() {
+	public void activate() {
 
 		prepare();
 		if (this.lookupStubOnStartup) {

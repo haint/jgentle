@@ -32,8 +32,8 @@ import org.jgentleframework.configure.annotation.Inject;
 import org.jgentleframework.configure.annotation.Outject;
 import org.jgentleframework.configure.enums.Scope;
 import org.jgentleframework.configure.enums.WrapperPrimitiveTypeList;
-import org.jgentleframework.context.beans.FactoryBuilder;
-import org.jgentleframework.context.beans.FactoryFilter;
+import org.jgentleframework.context.beans.Builder;
+import org.jgentleframework.context.beans.Filter;
 import org.jgentleframework.context.injecting.Provider;
 import org.jgentleframework.context.injecting.scope.InvalidAddingOperationException;
 import org.jgentleframework.context.injecting.scope.ScopeImplementation;
@@ -106,8 +106,8 @@ public abstract class InOutExecutor {
 						continue;
 				}
 				// Executes filtering
-				if (ReflectUtils.isCast(FactoryFilter.class, target)) {
-					FactoryFilter filter = (FactoryFilter) target;
+				if (ReflectUtils.isCast(Filter.class, target)) {
+					Filter filter = (Filter) target;
 					filter.filters(result);
 				}
 			}
@@ -152,8 +152,8 @@ public abstract class InOutExecutor {
 						/*
 						 * Executes builder
 						 */
-						if (ReflectUtils.isCast(FactoryBuilder.class, target)) {
-							FactoryBuilder builder = (FactoryBuilder) target;
+						if (ReflectUtils.isCast(Builder.class, target)) {
+							Builder builder = (Builder) target;
 							if (builder.getOutjectValue(field) != null)
 								outjectObj = builder.getOutjectValue(field);
 						}
@@ -226,8 +226,8 @@ public abstract class InOutExecutor {
 					}
 				}
 				// Executes filtering
-				if (ReflectUtils.isCast(FactoryFilter.class, target)) {
-					FactoryFilter filter = (FactoryFilter) target;
+				if (ReflectUtils.isCast(Filter.class, target)) {
+					Filter filter = (Filter) target;
 					filter.filters(result);
 				}
 			}
@@ -321,8 +321,8 @@ public abstract class InOutExecutor {
 						/*
 						 * Executes builder
 						 */
-						if (ReflectUtils.isCast(FactoryBuilder.class, target)) {
-							FactoryBuilder builder = (FactoryBuilder) target;
+						if (ReflectUtils.isCast(Builder.class, target)) {
+							Builder builder = (Builder) target;
 							if (builder.getOutjectValue(field) != null)
 								outjectObj = builder.getOutjectValue(field);
 						}

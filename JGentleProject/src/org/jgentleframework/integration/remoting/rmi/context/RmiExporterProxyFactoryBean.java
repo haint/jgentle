@@ -352,10 +352,10 @@ public class RmiExporterProxyFactoryBean implements FactoryBean, ProviderAware,
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.jgentleframework.context.beans.Initializing#afterBeanCreated()
+	 * @see org.jgentleframework.context.beans.Initializing#activate()
 	 */
 	@Override
-	public void afterBeanCreated() {
+	public void activate() {
 
 		Object objService = null;
 		Definition definition = null;

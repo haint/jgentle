@@ -67,7 +67,7 @@ public interface ObjectQueue<T> {
 	/**
 	 * Inserts the specified element at the tail of this queue if it is possible
 	 * to do so immediately without exceeding the queue's capacity, returning
-	 * <tt>true</tt> upon success. If this queue is full, wait until an position
+	 * <tt>true</tt> upon success.If this queue is full, wait until a position
 	 * becomes available.
 	 * 
 	 * @param obj

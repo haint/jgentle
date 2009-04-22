@@ -18,32 +18,34 @@
 package org.jgentleframework.context.beans;
 
 import java.lang.reflect.Field;
+import java.util.Map;
 
-import org.jgentleframework.configure.annotation.Outject;
+import org.jgentleframework.configure.annotation.Inject;
 
 /**
- * Interface to be implemented by beans that wish to build owning outjected
- * instance.
+ * Interface to be implemented by beans that wish to filter owning injected
+ * properties. After bean properties injection, container will be automatically
+ * invoke {@link #filters(Map)} method and pass all of injected properties to
+ * the argument of method. The implementation of this method is responsible for
+ * filter of all values according to fields which has been injected.
  * <p>
  * <b>Note:</b> the implementation of this interface will be only effected to
- * fields which is annotated with {@link Outject} and not effected to others
- * (includes all setters of fields).
+ * fields and their setters which are annotated with {@link Inject} and not
+ * effected to others such as injected methods.
  * 
  * @author LE QUOC CHUNG - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
  * @date Aug 24, 2008
- * @see FactoryFilter
+ * @see Builder
  */
-public interface FactoryBuilder {
+public interface Filter {
 	/**
-	 * Invoked by the container before it outject an instance of current bean
-	 * property back to container. This method allows the bean instance to
-	 * customize the outjected instance when the specified property need to be
-	 * outjected.
+	 * Callback that supplies all the owning injected fields. Invoked after all
+	 * the properties were injected.
 	 * 
-	 * @param field
-	 *            the specified field is outjecting.
-	 * @return returns the outjected instance according to the specified field.
+	 * @param map
+	 *            a map containing all specified injected fields corresponding
+	 *            to their previous values before injecting .
 	 */
-	public Object getOutjectValue(Field field);
+	public void filters(Map<Field, Object> map);
 }

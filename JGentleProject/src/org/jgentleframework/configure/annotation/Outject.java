@@ -54,20 +54,20 @@ public @interface Outject {
 
 	/**
 	 * Mặc định khi <code>outject</code> một dependency vào context thì
-	 * container sẽ tự động khởi tạo và <code>outject</code> tại thời điểm
-	 * khởi tạo đối tượng, tương ứng <code>invocation</code> chỉ định là
+	 * container sẽ tự động khởi tạo và <code>outject</code> tại thời điểm khởi
+	 * tạo đối tượng, tương ứng <code>invocation</code> chỉ định là
 	 * <b>false</b>. Nếu thuộc tính <code>invocation</code> được chỉ định là
 	 * <b>true</b>, thì khi <code>outject</code> một dependency vào context,
-	 * container sẽ lựa chọn thời điểm <b>invocation</b> của instance để
-	 * outject dependency chỉ định.
+	 * container sẽ lựa chọn thời điểm <b>invocation</b> của instance để outject
+	 * dependency chỉ định.
 	 * <p>
 	 * Hay nói cách khác <code>dependency</code> sẽ được <code>outject</code>
-	 * vào <code>context</code> tại thời điểm instance được
-	 * <code>invoke</code>.<br>
+	 * vào <code>context</code> tại thời điểm instance được <code>invoke</code>.
 	 * <br>
-	 * <b>Lưu ý:</b> bất kì method nào khi được invoke đều <i>kích hoạt</i>
-	 * điều kiện hoạt động của <b>outjection</b> ngoại trừ các method có prefix
-	 * là "<b>set</b>" hoặc "<b>get</b>". Hay nói cách khác tất cả các
+	 * <br>
+	 * <b>Lưu ý:</b> bất kì method nào khi được invoke đều <i>kích hoạt</i> điều
+	 * kiện hoạt động của <b>outjection</b> ngoại trừ các method có prefix là
+	 * "<b>set</b>" hoặc "<b>get</b>". Hay nói cách khác tất cả các
 	 * <code>setter và getter method</code> khi được invoke đều không làm thực
 	 * thi tiến trình <b>outjection</b>.
 	 */
@@ -76,8 +76,8 @@ public @interface Outject {
 	/**
 	 * Specifies the scope to outject to. If no scope is explicitly specified,
 	 * the default scope depends upon the scope value of reference instance
-	 * according to <code>'value'</code> attribute if it was existed. In case
-	 * there is no existed reference instance, the default scope will be
+	 * according to <code>'value'</code> attribute if it was existed. In case there is no
+	 * existed reference instance, the default scope will be
 	 * {@link Scope#SINGLETON}.
 	 * 
 	 * @return {@link Scope}

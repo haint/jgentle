@@ -29,7 +29,8 @@ import org.jgentleframework.context.beans.Initializing;
  * This annotation is responsible for method designating in order to allow
  * container to identify one method as disposable method. A
  * <code>disposable method</code> is a method that is designated to be
- * automatically invoked by JGentle container when that container is destroyed.
+ * automatically invoked by JGentle container when the corresponding bean is
+ * destroyed.
  * 
  * @author LE QUOC CHUNG - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>

@@ -39,9 +39,9 @@ import org.jgentleframework.context.beans.annotation.InitializingMethod;
 public interface Initializing {
 	/**
 	 * Invoked by the container after it has set all bean properties supplied
-	 * (and satisfied {@link ProviderAware} and {@link DefinitionAware}).
-	 * This method allows the bean instance to perform initialization only
-	 * possible when all bean properties have been set.
+	 * (and satisfied {@link ProviderAware} and {@link DefinitionAware}). This
+	 * method allows the bean instance to perform initialization only possible
+	 * when all bean properties have been set.
 	 */
-	public void afterBeanCreated();
+	public void activate();
 }

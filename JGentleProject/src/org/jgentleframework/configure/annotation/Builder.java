@@ -43,5 +43,5 @@ public @interface Builder {
 	/**
 	 * Thuộc tính chỉ định tên định danh của outject tương ứng với builder.
 	 */
-	String value() default "";
+	String value();
 }

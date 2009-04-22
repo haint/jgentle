@@ -33,10 +33,10 @@ import org.jgentleframework.configure.aopweaving.annotation.Before;
 import org.jgentleframework.configure.aopweaving.annotation.Throws;
 
 /**
- * <code>Template class</code> là một <code>abstract class</code> chứa đựng
- * các thể hiện của các <code>annotation</code> sẽ được <code>generate</code>
- * động khi cấu hình một <code>dynamic defnition</code> nhưng không có thông
- * tin cấu hình cụ thể bằng <code>annotation</code> đi kèm.
+ * <code>Template class</code> là một <code>abstract class</code> chứa đựng các
+ * thể hiện của các <code>annotation</code> sẽ được <code>generate</code> động
+ * khi cấu hình một <code>dynamic defnition</code> nhưng không có thông tin cấu
+ * hình cụ thể bằng <code>annotation</code> đi kèm.
  * 
  * @author LE QUOC CHUNG - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
@@ -75,6 +75,7 @@ public abstract class TemplateClass {
 			}
 		}
 	}
+
 	@Annotate("")
 	@Inject
 	@Outject
@@ -85,7 +86,7 @@ public abstract class TemplateClass {
 	@Throws("")
 	@Around("")
 	@Filter
-	@Builder
+	@Builder("")
 	public void templateMethod() {
 
 	}

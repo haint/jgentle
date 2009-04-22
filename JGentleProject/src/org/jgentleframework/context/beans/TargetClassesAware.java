@@ -24,10 +24,12 @@ package org.jgentleframework.context.beans;
  * to the method.
  * <p>
  * <b>Note:</b>
- * <p>- The {@link #setTargetClasses(Class[])} method will be invoked before
- * the {@link Initializing#afterBeanCreated()} method is invoked.
- * <p> - For a list of all bean lifecycle methods, see the {@link Initializing}
- * and {@link Disposable}.
+ * <p>
+ * - The {@link #setTargetClasses(Class[])} method will be invoked before the
+ * {@link Initializing#activate()} method is invoked.
+ * <p>
+ * - For a list of all bean lifecycle methods, see the {@link Initializing} and
+ * {@link Disposable}.
  * 
  * @author LE QUOC CHUNG - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
@@ -37,8 +39,8 @@ public interface TargetClassesAware {
 	/**
 	 * Callback that supplies the owning target classes to a bean instance.
 	 * Invoked after the population of normal bean properties but before an
-	 * initialization callback such as {@link Initializing#afterBeanCreated()}
-	 * or a custom init-method.
+	 * initialization callback such as {@link Initializing#activate()} or a
+	 * custom init-method.
 	 * 
 	 * @param classes
 	 */

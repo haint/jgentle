@@ -41,7 +41,7 @@ import org.jgentleframework.context.injecting.Provider;
  * <b>Note:</b>
  * <p>
  * - The {@link #setProvider(Provider)} method will be invoked before the
- * {@link Initializing#afterBeanCreated()} method is invoked.
+ * {@link Initializing#activate()} method is invoked.
  * <p>
  * - For a list of all bean lifecycle methods, see the {@link Initializing} and
  * {@link Disposable}.
@@ -56,8 +56,8 @@ public interface ProviderAware {
 	/**
 	 * Callback that supplies the owning factory to a bean instance. Invoked
 	 * after the population of normal bean properties but before an
-	 * initialization callback such as {@link Initializing#afterBeanCreated()}
-	 * or a custom init-method.
+	 * initialization callback such as {@link Initializing#activate()} or a
+	 * custom init-method.
 	 * 
 	 * @param provider
 	 *            owning {@link Provider} (never <code>null</code>).

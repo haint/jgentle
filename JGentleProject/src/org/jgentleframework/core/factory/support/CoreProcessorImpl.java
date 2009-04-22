@@ -137,8 +137,8 @@ public class CoreProcessorImpl extends AbstractProcesserChecker implements
 				MetaDefObject metaObj = new MetaDefObject();
 				findInOutNonRuntime(metaObj, definition);
 				prepareSingletonBean(selector, provider, result);
-				CommonFactory.singleton().executeProcessAfterBeanCreated(
-						targetClass, metaObj, provider, result, definition);
+				CommonFactory.singleton().executeProcessAfterBeanCreated(targetClass,
+						metaObj, provider, result, definition);
 				return result;
 			}
 		}
@@ -244,8 +244,8 @@ public class CoreProcessorImpl extends AbstractProcesserChecker implements
 				MetaDefObject metaObj = new MetaDefObject();
 				findInOutNonRuntime(metaObj, definition);
 				prepareSingletonBean(selector, provider, result);
-				CommonFactory.singleton().executeProcessAfterBeanCreated(
-						targetClass, metaObj, provider, result, definition);
+				CommonFactory.singleton().executeProcessAfterBeanCreated(targetClass,
+						metaObj, provider, result, definition);
 			}
 		}
 		else if (targetSelector instanceof CoreInstantiationSelectorImpl
