@@ -27,7 +27,7 @@ import org.jgentleframework.configure.objectmeta.ObjectBindingInterceptor;
 import org.jgentleframework.configure.objectmeta.ObjectConstant;
 
 /**
- * An implementation of {@link BindingConfig}.
+ * An implementation of {@link BindingConfig} interface.
  * 
  * @author LE QUOC CHUNG - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
@@ -50,9 +50,8 @@ public class BindingConfigImpl extends AbstractBindingConfig implements
 
 	/*
 	 * (non-Javadoc)
-	 * @see
-	 * org.jgentleframework.configure.jgentle.BindingConfig#getObjBindingConstantList
-	 * ()
+	 * @seeorg.jgentleframework.configure.jgentle.BindingConfig#
+	 * getObjBindingConstantList ()
 	 */
 	@Override
 	public ArrayList<ObjectBindingConstant> getObjBindingConstantList() {
@@ -63,7 +62,8 @@ public class BindingConfigImpl extends AbstractBindingConfig implements
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.jgentleframework.configure.jgentle.BindingConfig#getObjectAttachList()
+	 * org.jgentleframework.configure.jgentle.BindingConfig#getObjectAttachList
+	 * ()
 	 */
 	@Override
 	public ArrayList<ObjectAttach<?>> getObjectAttachList() {
@@ -96,7 +96,8 @@ public class BindingConfigImpl extends AbstractBindingConfig implements
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.jgentleframework.configure.jgentle.BindingConfig#ref(java.lang.String)
+	 * org.jgentleframework.configure.jgentle.BindingConfig#ref(java.lang.String
+	 * )
 	 */
 	@Override
 	public String ref(String ID) {

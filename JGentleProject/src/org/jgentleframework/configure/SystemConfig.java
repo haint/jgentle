@@ -32,7 +32,7 @@ import org.jgentleframework.core.reflection.annohandler.AnnotationBeanProcessor;
 /**
  * Provides some system methods in order to execute some system configurations
  * including {@link DefinitionPostProcessor}, {@link AnnotationBeanProcessor},
- * ... {@link ComponentServiceContextType} and ... some others.
+ * ... {@link ComponentServiceContextType} and ... others.
  * 
  * @author LE QUOC CHUNG - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
@@ -179,8 +179,8 @@ public interface SystemConfig {
 			ClassNotFoundException;
 
 	/**
-	 * Sets the given {@link DefinitionManager} to current configurable
-	 * instance. The invoking of this method will also execute the
+	 * Sets the given {@link DefinitionManager definition manager} to current
+	 * configurable instance. The invoking of this method will also execute the
 	 * {@link AnnotationRegister} setting to current configurable instance.
 	 * 
 	 * @param definitionManager
