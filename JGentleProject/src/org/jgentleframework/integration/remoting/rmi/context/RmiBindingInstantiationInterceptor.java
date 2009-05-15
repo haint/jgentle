@@ -1,5 +1,5 @@
 /*
- * Copyright 2007-2008 the original author or authors.
+ * Copyright 2007-2009 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -45,9 +45,11 @@ import org.jgentleframework.integration.remoting.rmi.support.RmiBinderIntercepto
  */
 public class RmiBindingInstantiationInterceptor implements
 		BeanInstantiationInterceptor, ProviderAware {
+	/** The log. */
 	private final Log			log					= LogFactory
 															.getLog(getClass());
 
+	/** The definition manager. */
 	private DefinitionManager	definitionManager	= null;
 
 	/*
@@ -119,6 +121,7 @@ public class RmiBindingInstantiationInterceptor implements
 	 *            the {@link ObjectInstantiation}
 	 * @return the object
 	 * @throws Throwable
+	 *             the throwable
 	 */
 	protected Object instantiate(Definition definition, Class<?> target,
 			RmiBinding rmiBinding, ObjectInstantiation oi) throws Throwable {
