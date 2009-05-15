@@ -15,6 +15,7 @@
  * 
  * Project: JGentleFramework
  */
+
 package org.jgentleframework.services.datalocator.data;
 
 import java.util.Date;
