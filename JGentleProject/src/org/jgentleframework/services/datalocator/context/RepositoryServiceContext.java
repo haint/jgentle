@@ -17,7 +17,7 @@
  */
 package org.jgentleframework.services.datalocator.context;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.jgentleframework.configure.Configurable;
 import org.jgentleframework.context.ServiceProvider;
@@ -36,12 +36,10 @@ public interface RepositoryServiceContext<T extends Configurable> {
 	public ServiceProvider getServiceProvider();
 
 	/**
-	 * Trả về danh sách config instances hiện hành của
-	 * RegistryServiceContextImpl.
-	 * 
-	 * @return the configInstances
+	 * Returns the {@link List list} containing all config instance of current
+	 * {@link RepositoryServiceContext}.
 	 */
-	public ArrayList<T> getConfigInstances();
+	public List<T> getConfigInstances();
 
 	/**
 	 * Returns the {@link Manager}
@@ -50,5 +48,5 @@ public interface RepositoryServiceContext<T extends Configurable> {
 	 *            the enum configuration class.
 	 * @return {@link Manager}
 	 */
-	public Manager getRegistryManager(Class<?> enumConfig);
+	public Manager getManager(Class<?> enumConfig);
 }
