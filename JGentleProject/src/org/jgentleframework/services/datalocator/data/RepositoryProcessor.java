@@ -26,6 +26,7 @@ import java.util.Map;
 
 import org.jgentleframework.configure.enums.PathType;
 import org.jgentleframework.services.datalocator.RepositoryRuntimeException;
+import org.jgentleframework.services.datalocator.annotation.Repository;
 import org.jgentleframework.services.datalocator.enums.ComparatorKeySortedBy;
 import org.jgentleframework.services.datalocator.enums.ComparatorValueSortedBy;
 import org.jgentleframework.services.datalocator.enums.DataType;
@@ -271,76 +272,72 @@ public interface RepositoryProcessor {
 	public void previousChange();
 
 	/**
-	 * Hàm removeKey xóa một key ra khỏi Key chứa nó. Nếu keyParents bằng NULL
-	 * thì key muốn xóa sẽ được tìm tại ROOT của mbRegistry.
+	 * Rmoves a {@link Key key}
 	 * 
 	 * @param keyName
-	 *            tên key muốn remove
+	 *            the given key name
 	 * @param keyParents
-	 *            key cha chứa key muốn remove
-	 * @return Trả về Key vừa xoá bỏ.
+	 *            the parents key of {@link Key key} need to be removed. In case
+	 *            the parents key is <code>null</code>, container will find the
+	 *            removing key in root of Repository.
+	 * @return returns the removed {@link Key key}.
 	 */
 	public Key<?> removeKey(String keyName, Key<?> keyParents);
 
 	/**
-	 * Hàm removeValue xóa một value ra khỏi một Key chứa nó
+	 * Removes a {@link Value value}.
 	 * 
 	 * @param valueName
-	 *            tên của value muốn remove
-	 * @param keyParents
-	 *            tên của Key chứa value muốn remove
-	 * @return Trả về value vừa bị xoá bỏ.
+	 *            the given value name
+	 * @param parentsKey
+	 *            the {@link Key key} holding the {@link Value value} need to be
+	 *            removed.
+	 * @return returns the removed {@link Value value}.
 	 */
-	public <T> Value<T> removeValue(String valueName, Key<T> keyParents);
+	public <T> Value<T> removeValue(String valueName, Key<T> parentsKey);
 
 	/**
-	 * Hàm restoreBackup nạp lại thông tin registry được backup từ một
-	 * FileInputStream
+	 * Restores the current Repository from the given backup file.
 	 * 
 	 * @param fileBackup
-	 *            FileInputStream sẽ được nạp thông tin vào
+	 *            the {@link FileInputStream}
 	 */
 	public void restoreBackup(FileInputStream fileBackup) throws IOException;
 
 	/**
-	 * Hàm saveBackup backup lại thông tin registry vào một FileOutputStream quy
-	 * định.
+	 * Creates the backup file of the current Repository
 	 * 
 	 * @param fileBackup
-	 *            FileOutputStream sẽ được ghi thông tin xuống.
+	 *            the {@link FileOutputStream}
 	 * @throws IOException
-	 *             ném ra ngoại lệ nếu quá trình backup không thực hiện thành
-	 *             công.
+	 *             Signals that an I/O exception has occurred.
 	 */
 	public void saveBackup(FileOutputStream fileBackup) throws IOException;
 
 	/**
-	 * Llưu lại các thay đổi của repository vào file hệ thống dưới tên file chỉ
-	 * định mặc định. Trước khi ghi thông tin thay đổi thật sự xuống thành file
-	 * hệ thống hàm saveRepository sẽ tự động cập nhật lại thông tin repository
-	 * từ temporary repository bằng hàm flush.
+	 * Back up all information of Repository to default file name which is
+	 * specified in {@link Repository#saveFile()}. This method will automate
+	 * invoke {@link #flush()} method before it process back-up task.
 	 */
 	public void saveRepository() throws FileNotFoundException, IOException;
 
 	/**
-	 * Trả về đường dẫn path của file chỉ định lưu trữ thông tin của registry.
+	 * Gets the file path.
 	 * 
 	 * @return the filePath
 	 */
 	public String getFilePath();
 
 	/**
-	 * Thiết lập đường dẫn path của file chỉ định lưu trữ thông tin của
-	 * registry.
+	 * Sets the file path.
 	 * 
 	 * @param filePath
-	 *            đường dẫn chỉ định cần thiết lập.
+	 *            the file path
 	 */
 	public void setFilePath(String filePath);
 
 	/**
-	 * Trả về kiểu path prefix chỉ định của filePath. Thông tin về path type
-	 * được chỉ định trong enum PathType.
+	 * Gets the path type.
 	 * 
 	 * @return PathType
 	 * @see PathType
@@ -348,11 +345,11 @@ public interface RepositoryProcessor {
 	public PathType getPathType();
 
 	/**
-	 * Thiết lập kiểu path prefix chỉ định của filePath. Thông tin về path type
-	 * được chỉ định trong enum PathType.
+	 * Sets the path type.
 	 * 
 	 * @param pathType
-	 *            kiểu path type cần chỉ định.
+	 *            the path type
+	 * @see PathType
 	 */
 	public void setPathType(PathType pathType);
 
@@ -367,7 +364,7 @@ public interface RepositoryProcessor {
 	public Map<String, Key<?>> getTemporaryRepository();
 
 	/**
-	 * Trả về object class của enum cấu hình registry.
+	 * Gets the configurable enum object class.
 	 * 
 	 * @return the enumConfig
 	 */
@@ -377,7 +374,7 @@ public interface RepositoryProcessor {
 	 * Restores the current key from the given backup file.
 	 * 
 	 * @param fileInput
-	 *            the file input
+	 *            the {@link FileInputStream}
 	 * @return the key<?>
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.

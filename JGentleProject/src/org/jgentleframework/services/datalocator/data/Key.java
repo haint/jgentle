@@ -72,7 +72,7 @@ public interface Key<T> {
 	 * Creates the backup file of the current {@link Key key}.
 	 * 
 	 * @param fileOutput
-	 *            the file output
+	 *            the {@link FileOutputStream}
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
 	 */
