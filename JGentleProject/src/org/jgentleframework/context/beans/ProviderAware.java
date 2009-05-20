@@ -22,21 +22,23 @@ import org.jgentleframework.context.injecting.Provider;
 
 /**
  * Interface to be implemented by beans that wish to be aware of their owning
- * {@link Provider}. After bean instantiation, container will automate invoke
- * {@link #setProvider(Provider)} method and pass the current {@link Provider}
- * to the argument of method.
+ * {@link Provider provider}. After bean instantiation, container will automate
+ * invoke {@link #setProvider(Provider)} method and pass the current
+ * {@link Provider provider} to the argument of method.
  * <p>
  * Generally, beans don’t know (or even need to know) their names, how they are
- * instantiated or even that they are running within a JGentle container. This
- * is usually a good thing because if a bean is aware of the container, then it
- * becomes coupled with JGentle and may not be able to exist outside of the
- * container. But sometimes, beans need to know more. Sometimes they need to
- * know the truth who they are and where they are running.
+ * instantiated or even that they are running within a
+ * <code>JGentle container</code>. This is usually a good thing because if a
+ * bean is aware of the container, then it becomes coupled with JGentle and may
+ * not be able to exist outside of the container. But sometimes, beans need to
+ * know more. Sometimes they need to know the truth who they are and where they
+ * are running.
  * <p>
  * For example, beans can look up collaborating beans, or definitions via the
- * {@link Provider} (Dependency Lookup). Note that most beans will choose to
- * receive references to collaborating beans via corresponding bean properties
- * or constructor arguments (Dependency Injection).
+ * {@link Provider provider} <code>(Dependency Lookup)</code>. Note that most
+ * beans will choose to receive references to collaborating beans via
+ * corresponding bean properties or constructor arguments
+ * <code>(Dependency Injection)</code>.
  * <p>
  * <b>Note:</b>
  * <p>

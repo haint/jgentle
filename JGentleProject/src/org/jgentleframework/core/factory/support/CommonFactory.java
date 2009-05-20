@@ -224,9 +224,8 @@ public class CommonFactory {
 		 * Xử lý thông tin các inject non-invocation
 		 */
 		if (!targetClass.isAnnotation()) {
-			InOutExecutor.executesFieldInject(metaObj.getInjectedFields(),
-					provider, result, definition);
-			InOutExecutor.executesMethodInject(metaObj.getSetters(), provider,
+			InOutExecutor.executesInjectingAndFiltering(metaObj
+					.getInjectedFields(), metaObj.getSetters(), provider,
 					result, definition);
 		}
 		// embed
@@ -242,9 +241,9 @@ public class CommonFactory {
 		/*
 		 * Xử lý thông tin các outject non-invocation
 		 */
-		InOutExecutor.executesFieldOutject(metaObj.getOutjectedFields(),
+		InOutExecutor.executesFieldOutjecting(metaObj.getOutjectedFields(),
 				provider, result, definition);
-		InOutExecutor.executesMethodOutject(metaObj.getGetters(), provider,
+		InOutExecutor.executesMethodOutjecting(metaObj.getGetters(), provider,
 				result, definition);
 	}
 }

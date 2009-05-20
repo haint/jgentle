@@ -22,33 +22,41 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 /**
+ * The Class CompressionOutputStream.
+ * 
  * @author Quoc Chung - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
  * @date Feb 19, 2009
  */
 public class CompressionOutputStream extends FilterOutputStream implements
 		CompressionConstants {
-	/*
+	/**
+	 * Instantiates a new compression output stream.
+	 * <p>
 	 * Constructor calls constructor of superclass.
+	 * 
+	 * @param out
+	 *            the {@link OutputStream}
 	 */
 	public CompressionOutputStream(OutputStream out) {
 
 		super(out);
 	}
 
-	/*
+	/**
 	 * Buffer of 6-bit codes to pack into next 32-bit word Five 6-bit codes fit
 	 * into 4 words.
 	 */
 	int	buf[]	= new int[5];
 
-	/*
+	/**
 	 * Index of valid codes waiting in buf.
 	 */
 	int	bufPos	= 0;
 
 	/*
 	 * This method writes one byte to the socket stream.
+	 * @see java.io.FilterOutputStream#write(int)
 	 */
 	public void write(int b) throws IOException {
 
@@ -79,6 +87,7 @@ public class CompressionOutputStream extends FilterOutputStream implements
 
 	/*
 	 * This method writes up to len bytes to the socket stream.
+	 * @see java.io.FilterOutputStream#write(byte[], int, int)
 	 */
 	public void write(byte b[], int off, int len) throws IOException {
 
@@ -93,6 +102,7 @@ public class CompressionOutputStream extends FilterOutputStream implements
 
 	/*
 	 * Clears buffer of all data (zeroes it out).
+	 * @see java.io.FilterOutputStream#flush()
 	 */
 	public void flush() throws IOException {
 
@@ -100,10 +110,15 @@ public class CompressionOutputStream extends FilterOutputStream implements
 			writeCode(NOP);
 	}
 
-	/*
+	/**
 	 * This method actually puts the data into the output stream after packing
 	 * the data from all 5 bytes in buf into one word. Remember, each byte has,
 	 * at most, 6 significant bits.
+	 * 
+	 * @param c
+	 *            the c
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
 	private void writeCode(int c) throws IOException {
 

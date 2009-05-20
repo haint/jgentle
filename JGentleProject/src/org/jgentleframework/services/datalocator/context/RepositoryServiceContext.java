@@ -24,25 +24,31 @@ import org.jgentleframework.context.ServiceProvider;
 import org.jgentleframework.services.datalocator.data.Manager;
 
 /**
+ * The Interface RepositoryServiceContext.
+ * 
+ * @param <T>  *
  * @author LE QUOC CHUNG - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
  * @date Nov 26, 2007
- * @param <T>
  */
 public interface RepositoryServiceContext<T extends Configurable> {
 	/**
-	 * Returns the current {@link ServiceProvider}
+	 * Returns the current {@link ServiceProvider}.
+	 * 
+	 * @return the service provider
 	 */
 	public ServiceProvider getServiceProvider();
 
 	/**
 	 * Returns the {@link List list} containing all config instance of current
 	 * {@link RepositoryServiceContext}.
+	 * 
+	 * @return the config instances
 	 */
 	public List<T> getConfigInstances();
 
 	/**
-	 * Returns the {@link Manager}
+	 * Returns the {@link Manager}.
 	 * 
 	 * @param enumConfig
 	 *            the enum configuration class.

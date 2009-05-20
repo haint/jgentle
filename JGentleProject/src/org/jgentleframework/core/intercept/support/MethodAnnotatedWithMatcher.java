@@ -38,6 +38,7 @@ import org.jgentleframework.context.aop.support.MethodConstructorMatching;
 public class MethodAnnotatedWithMatcher extends
 		AbstractDefinitionMatcherPointcut<MethodConstructorMatching<Method>>
 		implements PointcutOfMethodFilter<MethodConstructorMatching<Method>> {
+	/** The filter. */
 	MethodFilter	filter	= new DefinitionMatcherMethodFilter() {
 								@Override
 								public boolean matches(
@@ -70,8 +71,8 @@ public class MethodAnnotatedWithMatcher extends
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.context.aop.PointcutOfMethodFilter#getMethodFilter()
+	 * @see
+	 * org.jgentleframework.context.aop.PointcutOfMethodFilter#getMethodFilter()
 	 */
 	@Override
 	public MethodFilter getMethodFilter() {
@@ -84,7 +85,6 @@ public class MethodAnnotatedWithMatcher extends
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.jgentleframework.context.aop.Pointcut#getFilter()
 	 */
 	@Override

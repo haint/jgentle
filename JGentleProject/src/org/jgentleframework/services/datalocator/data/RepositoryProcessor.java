@@ -21,6 +21,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -37,7 +38,8 @@ import org.jgentleframework.services.datalocator.enums.DataType;
  * trong việc quản lý <code>Repository</code>, bao gồm việc khởi tạo, thêm bớt
  * từ khóa <code>key, value, backup</code> thông tin, ...
  * 
- * @author LE QUOC CHUNG
+ * @author Quoc Chung - mailto: <a
+ *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
  * @date Aug 3, 2006
  * @see Key
  * @see Value
@@ -47,7 +49,7 @@ public interface RepositoryProcessor {
 	 * Creates brand new Repository.
 	 * 
 	 * @throws RepositoryRuntimeException
-	 *             ném ra ngoại lệ nếu việc khởi tạo Registry không thành công.
+	 *             throws this exception if can not create brand new repository
 	 */
 	public void createBrandNew();
 
@@ -64,6 +66,8 @@ public interface RepositoryProcessor {
 	 *            the parrents key
 	 * @param subKeys
 	 *            an array containing all sub keys of creating {@link Key key}.
+	 * @param keyType
+	 *            the key type
 	 * @see DataType
 	 */
 	public <T> void createKey(Class<T> clazz, String keyName, Key<?>[] subKeys,
@@ -108,171 +112,165 @@ public interface RepositoryProcessor {
 			DataType valueType, T... valueData);
 
 	/**
-	 * Hàm flush lưu lại tất cả thông tin thay đổi hiện tại vào trong registry.
-	 * Khi thay đổi dữ liệu của registry tại thời điểm run-time, registry
-	 * context sẽ không thực sự thao tác trên registry mà chỉ thay đổi thông tin
-	 * dữ liệu trên một bản copy của registry. Nếu muốn các thay đổi có hiệu lực
-	 * trên registry cần phải gọi method flush để thông tin thay đổi được cập
-	 * nhật thật sự vào trong registry.
-	 * <p>
-	 * - Khuyến cáo nên gọi method flush trước khi gọi saveRegistry method.
+	 * Flushes the Repository. This will write any changes to current
+	 * repository.
 	 */
 	public void flush();
 
 	/**
-	 * Hàm getAllSubKeys dò tìm trả về danh sách các Key có trong một Key cho
-	 * trước, tính từ đầu nhánh là Key cung cấp cho đến tất cả các nhánh con
-	 * theo chiều dài phả hệ.
-	 * <p>
+	 * Returns the {@link List list} containing all sub {@link Key keys} of the
+	 * given {@link Key key} and all keys of all sub keys existing in whole its
+	 * hierarchical system.
 	 * 
 	 * @param sortedBy
-	 *            là comparator chỉ định nguyên tắc việc sắp xếp các Key, nếu
-	 *            sortedBy không được chỉ định (equals null) thì danh sách các
-	 *            keys sẽ tự động được sắp xếp theo tên.
-	 * @param keyFindFrom
-	 *            Key sẽ dò tìm các Key child tính từ nó.
-	 * @return trả về một danh sách {@link List} nếu có, nếu không có phần tử
-	 *         nào trả về NULL.
+	 *            the {@link Comparator} represents sorting rule corresponding
+	 *            to all sub keys in returned {@link List list}. The
+	 *            <code>null</code> value equals to
+	 *            {@link ComparatorKeySortedBy#NAME_ORDER_KEY}
+	 * @param key
+	 *            the given key
+	 * @return returns the {@link List list} containing all sub keys of the
+	 *         given {@link Key key} if they exist, otherwise returns
+	 *         <code>null</code>.
+	 * @see ComparatorKeySortedBy
 	 */
-	public List<Key<?>> getAllSubKeys(ComparatorKeySortedBy sortedBy,
-			Key<?> keyFindFrom);
+	public List<Key<?>> getAllSubKeys(ComparatorKeySortedBy sortedBy, Key<?> key);
 
 	/**
-	 * Hàm getAllValues dò tìm trả về danh sách các Value có trong một Key cho
-	 * trước, tính từ đầu nhánh là Key cung cấp cho đến tất cả các nhánh con
-	 * theo chiều dài phả hệ.
+	 * Returns the {@link List list} containing all {@link Value values} of the
+	 * given {@link Key key} and all values of all sub keys existing in whole
+	 * its hierarchical system.
 	 * 
 	 * @param sortedBy
-	 *            là comparator chỉ định nguyên tắc việc sắp xếp các Value, nếu
-	 *            sortedBy không được chỉ định (equals null) thì danh sách các
-	 *            values sẽ tự động được sắp xếp theo tên.
-	 * @param keyFindFrom
-	 *            Key sẽ dò tìm các value child tính từ nó.
-	 * @return trả về một danh sách {@link List} nếu có, nếu không có phần tử
-	 *         nào trả về NULL.
+	 *            the {@link Comparator} represents sorting rule corresponding
+	 *            to all {@link Value values} in returned {@link List list}. The
+	 *            <code>null</code> value equals to
+	 *            {@link ComparatorKeySortedBy#NAME_ORDER_KEY}
+	 * @param key
+	 *            the given key
+	 * @return returns the {@link List list} containing all {@link Value values}
+	 *         of current {@link Key key} if they exist, otherwise returns null.
+	 * @see ComparatorValueSortedBy
 	 */
 	public List<Value<?>> getAllValues(ComparatorValueSortedBy sortedBy,
-			Key<?> keyFindFrom);
+			Key<?> key);
 
 	/**
-	 * Hàm getKeyFromName trả về một Key dựa trên keyName và Key chứa nó, nếu
-	 * keyParents bằng NULL có nghĩa Key cần lấy nằm tại vị trí Root của
-	 * repository.
+	 * Returns the sub {@link Key key} of current {@link Key key} appropriate to
+	 * the given key name.
 	 * 
 	 * @param keyName
-	 *            tên của Key cần lấy
-	 * @param keyParents
-	 *            Key chứa Key cần lấy
-	 * @return trả về một Key
+	 *            the given key name
+	 * @param parentsKey
+	 *            the given paretns {@link Key key}
+	 * @return returns the {@link Key key} appropriate to the given name if it
+	 *         existed, otherwise returns <code>null</code>
 	 */
-	public Key<?> getKeyFromName(String keyName, Key<?> keyParents);
+	public Key<?> getKeyFromName(String keyName, Key<?> parentsKey);
 
 	/**
-	 * Hàm getKeyFromPath trả về một Key dựa trên đường dẫn path cung cấp tính
-	 * từ vị trí Root đến vị trí Key cần lấy.
+	 * Returns the {@link Key key} appropriate to the given key path.
 	 * 
 	 * @param keyPath
-	 *            đường dẫn chỉ định vị trí Key.
+	 *            the given key path.
 	 *            <p>
-	 *            Ex: "HKEY_CURRENT_CONFIG/System_Information/RMI_Port" các rẽ
-	 *            nhánh key phân chia bằng dấu "/", nhánh cuối cùng phải là tên
-	 *            Key chỉ định cần truy xuất.
-	 * @return trả về key chỉ định muốn truy xuất.
+	 *            Ex: "HKEY_CURRENT_CONFIG/System_Information/RMI_Port"
+	 * @return the key from path
 	 */
 	public Key<?> getKeyFromPath(String keyPath);
 
 	/**
-	 * Hàm getKeyNames trả về danh sách các tên keys có trong một Key cho trước
+	 * Returns all key names of all sub keys existing in the given {@link Key
+	 * key}.
 	 * 
-	 * @param fromKey
-	 *            Key chứa danh sách tên các keys cần lấy
-	 * @return trả về danh sách các tên keys có trong key chỉ định.
+	 * @param key
+	 *            the given {@link Key key}
+	 * @return the key names
 	 */
-	public List<String> getKeyNames(Key<?> fromKey);
+	public List<String> getKeyNames(Key<?> key);
 
 	/**
-	 * Hàm getKeys trả về một HashMap các Keys có trong một Key đã cho
+	 * Returns the {@link Map map} containing all sub keys existing in the given
+	 * {@link Key key}.
 	 * 
-	 * @param fromKey
-	 *            đối tượng Key chứa các keys cần lấy
-	 * @return trả về đối tượng chứa danh sách các keys nếu có, nếu không sẽ trả
-	 *         về một HashMap rỗng.
+	 * @param Key
+	 *            the given {@link Key key}.
+	 * @return the keys
 	 */
-	public Map<String, Key<?>> getKeys(Key<?> fromKey);
+	public Map<String, Key<?>> getKeys(Key<?> Key);
 
 	/**
-	 * Hàm getValueData trả về một danh sách các giá trị của một value cụ thể
-	 * dựa trên đường dẫn path tính từ Root đến vị trí value chỉ định.
+	 * Returns the {@link List list} containing all value data existing in a
+	 * {@link Value value} appropriate to the given value path.
 	 * 
 	 * @param valuePath
-	 *            đường dẫn cụ thể đến ValueType.VD: <br>
-	 * <br>
-	 *            "HKEY_CURRENT_CONFIG/System_Information/RMI_Port" các rẽ nhánh
-	 *            key phân chia bằng dấu "/", nhánh cuối cùng phải là tên Value.
-	 * @return trả về danh sách các giá trị của một value
+	 *            the value path.
+	 *            <p>
+	 *            <b>ex:</b> "HKEY_CURRENT_CONFIG/System_Information/RMI_Port"
+	 *            các rẽ nhánh key phân chia bằng dấu "/", nhánh cuối cùng phải
+	 *            là tên Value.
+	 * @return the value data from path
 	 */
 	public List<?> getValueDataFromPath(String valuePath);
 
 	/**
-	 * Hàm getValueFromName trả về một Value dựa trên valueName và keyParents
+	 * Returns a {@link Value value} appropriate to the given value name.
 	 * 
 	 * @param valueName
-	 *            tên value cần lấy
-	 * @param keyParents
-	 *            Key chứa value cần lấy
-	 * @return trả về một Value
+	 *            the given value name.
+	 * @param parentsKey
+	 *            the given parents {@link Key key}
+	 * @return the value from name
 	 */
-	public <T> Value<T> getValueFromName(String valueName, Key<T> keyParents);
+	public <T> Value<T> getValueFromName(String valueName, Key<T> parentsKey);
 
 	/**
-	 * Hàm getValueData trả về một Value cụ thể dựa trên đường dẫn path tính từ
-	 * Root đến vị trí của Value chỉ định.
+	 * Returns a {@link Key value} appropriate to the given value path.
 	 * 
 	 * @param valuePath
-	 *            đường dẫn cụ thể đến Value.VD: <br>
-	 * <br>
-	 *            "HKEY_CURRENT_CONFIG/System_Information/RMI_Port" các rẽ nhánh
-	 *            key phân chia bằng dấu "/", nhánh cuối cùng phải là tên Value.
-	 * @return trả về value chỉ định trong đường dẫn valuePath.
+	 *            the given value path.
+	 *            <p>
+	 *            <b>ex:</b> "HKEY_CURRENT_CONFIG/System_Information/RMI_Port"
+	 * @return the value from path
 	 */
 	public Value<?> getValueFromPath(String valuePath);
 
 	/**
-	 * Hàm getValueNames trả về 1 danh sách các tên values có trong một Key cho
-	 * trước
+	 * Returns the {@link List list} containing all {@link Value values}
+	 * existing in the given {@link Key key}.
 	 * 
-	 * @param fromKey
-	 *            đối tượng Key chứa các tên values cần lấy
-	 * @return {@code ArrayList<String>}
+	 * @param key
+	 *            the given {@link Key key}
+	 * @return the value names
 	 */
-	public <T> List<String> getValueNames(Key<T> fromKey);
+	public <T> List<String> getValueNames(Key<T> key);
 
 	/**
-	 * Hàm getValues trả về một HashMap chứa các values có trong một Key đã cho
+	 * Returns the {@link Map map} containing all {@link Value values} existing
+	 * in the given {@link Key key}.
 	 * 
-	 * @param fromKey
-	 *            đối tượng Key chứa các values cần lấy
-	 * @return trả về đối tượng chứa danh sách các values nếu có, nếu không sẽ
-	 *         trả về một HashMap rỗng.
+	 * @param key
+	 *            the given {@link Key key}
+	 * @return returns the {@link Map map} containing all {@link Value values}
+	 *         if they exist, if not returns an empty {@link Map map}.
 	 */
-	public <T> Map<String, Value<T>> getValues(Key<T> fromKey);
+	public <T> Map<String, Value<T>> getValues(Key<T> key);
 
 	/**
-	 * Hàm loadRepository nạp thông tin dữ liệu của repository được cất giữ
-	 * trong file lưu trữ mặc định.
+	 * Reloads all repository information basing on the default backup file.
 	 * 
 	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
 	public void loadRepository() throws IOException;
 
 	/**
-	 * Hàm previousChange trả về registry ở dạng lần thay đổi gần nhất (lần gọi
-	 * hàm flush gần nhất).
+	 * Previous change.
 	 */
 	public void previousChange();
 
 	/**
-	 * Rmoves a {@link Key key}
+	 * Rmoves a {@link Key key}.
 	 * 
 	 * @param keyName
 	 *            the given key name
@@ -301,11 +299,13 @@ public interface RepositoryProcessor {
 	 * 
 	 * @param fileBackup
 	 *            the {@link FileInputStream}
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
 	public void restoreBackup(FileInputStream fileBackup) throws IOException;
 
 	/**
-	 * Creates the backup file of the current Repository
+	 * Creates the backup file of the current Repository.
 	 * 
 	 * @param fileBackup
 	 *            the {@link FileOutputStream}
@@ -318,6 +318,11 @@ public interface RepositoryProcessor {
 	 * Back up all information of Repository to default file name which is
 	 * specified in {@link Repository#saveFile()}. This method will automate
 	 * invoke {@link #flush()} method before it process back-up task.
+	 * 
+	 * @throws FileNotFoundException
+	 *             the file not found exception
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
 	public void saveRepository() throws FileNotFoundException, IOException;
 
@@ -355,11 +360,15 @@ public interface RepositoryProcessor {
 
 	/**
 	 * Returns the repository.
+	 * 
+	 * @return the repository
 	 */
 	public Map<String, Key<?>> getRepository();
 
 	/**
 	 * Returns the temporary repository.
+	 * 
+	 * @return the temporary repository
 	 */
 	public Map<String, Key<?>> getTemporaryRepository();
 
@@ -371,7 +380,7 @@ public interface RepositoryProcessor {
 	public Class<?> getEnumConfig();
 
 	/**
-	 * Restores the current key from the given backup file.
+	 * Restores the current {@link Key key} from the given backup file.
 	 * 
 	 * @param fileInput
 	 *            the {@link FileInputStream}

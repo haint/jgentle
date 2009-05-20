@@ -42,18 +42,18 @@ public class CompressionInputStream extends FilterInputStream implements
 		super(in);
 	}
 
-	/**
-	 * Buffer of unpacked 6-bit codes from last 32 bits read.
-	 */
+	/** Buffer of unpacked 6-bit codes from last 32 bits read. */
 	int	buf[]	= new int[5];
 
-	/**
-	 * Position of next code to read in buffer (5 signifies end).
-	 */
+	/** Position of next code to read in buffer (5 signifies end). */
 	int	bufPos	= 5;
 
 	/**
 	 * Reads in format code and decompresses character accordingly.
+	 * 
+	 * @return the int
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
 	public int read() throws IOException {
 

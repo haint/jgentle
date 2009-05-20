@@ -49,18 +49,25 @@ class InvocationInOutjectionMethodInterceptor implements MethodInterceptor,
 		RuntimeLoading {
 	/** The definition. */
 	private Definition		definition;
+
 	/** The flag. */
 	private int				flag			= 0;
+
 	/** The fields. */
 	private Field[]			injectedFields;
+
 	/** The setters. */
 	private Method[]		injectedSetters;
+
 	/** The outjected fields. */
 	private Field[]			outjectedFields;
+
 	/** The getters. */
 	private Method[]		outjectedGetters;
+
 	/** The provider. */
 	private final Provider	provider;
+
 	/** The runtime loading. */
 	private boolean			runtimeLoading	= false;
 
@@ -76,8 +83,8 @@ class InvocationInOutjectionMethodInterceptor implements MethodInterceptor,
 	 *            if specifies <code>true</code>, the intercepter will always
 	 *            reload the in/out elements depend upon the given
 	 *            {@link Definition} before every invoking, otherwise, if
-	 *            sepecifies <code>false</code>, the interceptor will only
-	 *            load the in/out elements at instantiation time.
+	 *            sepecifies <code>false</code>, the interceptor will only load
+	 *            the in/out elements at instantiation time.
 	 */
 	public InvocationInOutjectionMethodInterceptor(Definition definition,
 			Provider provider, boolean runtimeLoading) {
@@ -176,8 +183,9 @@ class InvocationInOutjectionMethodInterceptor implements MethodInterceptor,
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.aopalliance.intercept.MethodInterceptor#invoke(org.aopalliance.intercept.MethodInvocation)
+	 * @see
+	 * org.aopalliance.intercept.MethodInterceptor#invoke(org.aopalliance.intercept
+	 * .MethodInvocation)
 	 */
 	@Override
 	public Object invoke(MethodInvocation invocation) throws Throwable {
@@ -211,8 +219,8 @@ class InvocationInOutjectionMethodInterceptor implements MethodInterceptor,
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.interceptor.RuntimeLoading#isRuntimeLoading()
+	 * @see
+	 * org.jgentleframework.core.interceptor.RuntimeLoading#isRuntimeLoading()
 	 */
 	@Override
 	public boolean isRuntimeLoading() {
@@ -235,9 +243,9 @@ class InvocationInOutjectionMethodInterceptor implements MethodInterceptor,
 
 		this.flag--;
 		if (flag == 0) {
-			InOutExecutor.executesFieldOutject(outjectedFields, provider,
+			InOutExecutor.executesFieldOutjecting(outjectedFields, provider,
 					proxy, definition);
-			InOutExecutor.executesMethodOutject(outjectedGetters, provider,
+			InOutExecutor.executesMethodOutjecting(outjectedGetters, provider,
 					proxy, definition);
 			InOutExecutor.executesDisinjection(map, proxy);
 		}
@@ -245,8 +253,9 @@ class InvocationInOutjectionMethodInterceptor implements MethodInterceptor,
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.interceptor.RuntimeLoading#setRuntimeLoading(boolean)
+	 * @see
+	 * org.jgentleframework.core.interceptor.RuntimeLoading#setRuntimeLoading
+	 * (boolean)
 	 */
 	@Override
 	public void setRuntimeLoading(boolean runtimeLoading) {
@@ -270,10 +279,9 @@ class InvocationInOutjectionMethodInterceptor implements MethodInterceptor,
 		flag++;
 		if (flag == 1
 				&& !this.definition.isAnnotationPresent(DisablesInOut.class)) {
-			map.putAll(InOutExecutor.executesFieldInject(injectedFields,
-					provider, proxy, definition));
-			map.putAll(InOutExecutor.executesMethodInject(injectedSetters,
-					provider, proxy, definition));
+			map.putAll(InOutExecutor.executesInjectingAndFiltering(
+					injectedFields, injectedSetters, provider, proxy,
+					definition));
 		}
 	}
 }

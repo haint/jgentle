@@ -47,21 +47,19 @@ import org.jgentleframework.utils.ObjectUtils;
  * @date May 12, 2007
  */
 class RepositoryProcessorImpl implements RepositoryProcessor {
-	/** Object class chỉ định cấu hình cấu trúc của repository. */
+	/** The enum config. */
 	private Class<?>			enumConfig	= null;
 
-	/** Đường dẫn file path chỉ định được dùng để cất trữ thông tin repository. */
+	/** The file path. */
 	private String				filePath	= "";
 
-	/** Chỉ định kiểu đường path prefix của filePath. */
+	/** The path type. */
 	private PathType			pathType	= null;
 
-	/** Đối tượng lưu trữ thông tin dữ liệu trong repository. */
+	/** The repository. */
 	private Map<String, Key<?>>	repository;
 
-	/**
-	 * Đối tượng lưu trữ thông tin dữ liệu trong temporary repository hiện hành.
-	 */
+	/** The temporary repository. */
 	private Map<String, Key<?>>	temporaryRepository;
 
 	/**
@@ -214,6 +212,13 @@ class RepositoryProcessorImpl implements RepositoryProcessor {
 				.deepCopy(this.temporaryRepository);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @seeorg.jgentleframework.services.datalocator.data.RepositoryProcessor#
+	 * getAllSubKeys
+	 * (org.jgentleframework.services.datalocator.enums.ComparatorKeySortedBy,
+	 * org.jgentleframework.services.datalocator.data.Key)
+	 */
 	@Override
 	public List<Key<?>> getAllSubKeys(ComparatorKeySortedBy sortedBy,
 			Key<?> keyFindFrom) {
@@ -264,6 +269,13 @@ class RepositoryProcessorImpl implements RepositoryProcessor {
 		return listKeyIN;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @seeorg.jgentleframework.services.datalocator.data.RepositoryProcessor#
+	 * getAllValues
+	 * (org.jgentleframework.services.datalocator.enums.ComparatorValueSortedBy,
+	 * org.jgentleframework.services.datalocator.data.Key)
+	 */
 	@Override
 	public List<Value<?>> getAllValues(ComparatorValueSortedBy sortedBy,
 			Key<?> keyFindFrom) {
@@ -404,7 +416,7 @@ class RepositoryProcessorImpl implements RepositoryProcessor {
 	 * getKeyNames(org.jgentleframework.services.datalocator.data.Key)
 	 */
 	@Override
-	public ArrayList<String> getKeyNames(Key<?> fromKey) {
+	public List<String> getKeyNames(Key<?> fromKey) {
 
 		Assertor.notNull(fromKey, "fromKey must not be null.");
 		ArrayList<String> results = new ArrayList<String>();
@@ -571,7 +583,7 @@ class RepositoryProcessorImpl implements RepositoryProcessor {
 		}
 		in.close();
 		/*
-		 * Nạp lại thông tin backup vào registryCurrent
+		 * Nạp lại thông tin backup vào repository
 		 */
 		this.temporaryRepository.clear();
 		this.temporaryRepository = (HashMap<String, Key<?>>) ObjectUtils
@@ -672,7 +684,7 @@ class RepositoryProcessorImpl implements RepositoryProcessor {
 		}
 		in.close();
 		/*
-		 * Nạp lại thông tin backup vào registryCurrent
+		 * Nạp lại thông tin backup vào repository
 		 */
 		this.temporaryRepository.clear();
 		this.temporaryRepository = (HashMap<String, Key<?>>) ObjectUtils

@@ -73,7 +73,7 @@ public abstract class InOutExecutor {
 	 * @throws IllegalAccessException
 	 *             the illegal access exception
 	 */
-	public static Map<Field, Object> executesFieldInject(Field[] fields,
+	public static Map<Field, Object> executesFieldInjecting(Field[] fields,
 			Provider provider, Object target, Definition definition)
 			throws IllegalArgumentException, IllegalAccessException {
 
@@ -105,11 +105,6 @@ public abstract class InOutExecutor {
 					else
 						continue;
 				}
-				// Executes filtering
-				if (ReflectUtils.isCast(Filter.class, target)) {
-					Filter filter = (Filter) target;
-					filter.filters(result);
-				}
 			}
 		}
 		return result;
@@ -131,7 +126,7 @@ public abstract class InOutExecutor {
 	 * @throws IllegalAccessException
 	 *             the illegal access exception
 	 */
-	public static void executesFieldOutject(Field[] fields, Provider provider,
+	public static void executesFieldOutjecting(Field[] fields, Provider provider,
 			Object target, Definition definition)
 			throws IllegalArgumentException, IllegalAccessException {
 
@@ -187,7 +182,7 @@ public abstract class InOutExecutor {
 	 * @return returns the {@link HashMap} containing all previous values of all
 	 *         injected fields.
 	 */
-	public static Map<Field, Object> executesMethodInject(Method[] setters,
+	public static Map<Field, Object> executesMethodInjecting(Method[] setters,
 			Provider provider, Object target, Definition definition)
 			throws IllegalArgumentException, IllegalAccessException,
 			InvocationTargetException {
@@ -225,14 +220,28 @@ public abstract class InOutExecutor {
 						method.setAccessible(false);
 					}
 				}
-				// Executes filtering
-				if (ReflectUtils.isCast(Filter.class, target)) {
-					Filter filter = (Filter) target;
-					filter.filters(result);
-				}
 			}
 		}
 		return result;
+	}
+
+	public static Map<Field, Object> executesInjectingAndFiltering(Field[] fields,
+			Method[] setters, Provider provider, Object target,
+			Definition definition) throws IllegalArgumentException,
+			IllegalAccessException, InvocationTargetException {
+
+		Map<Field, Object> map = new HashMap<Field, Object>();
+		map
+				.putAll(executesFieldInjecting(fields, provider, target,
+						definition));
+		map.putAll(executesMethodInjecting(setters, provider, target,
+				definition));
+		// Executes filtering
+		if (ReflectUtils.isCast(Filter.class, target)) {
+			Filter filter = (Filter) target;
+			filter.filters(map);
+		}
+		return map;
 	}
 
 	/**
@@ -282,7 +291,7 @@ public abstract class InOutExecutor {
 	 * @throws InvocationTargetException
 	 *             the invocation target exception
 	 */
-	public static void executesMethodOutject(Method[] getters,
+	public static void executesMethodOutjecting(Method[] getters,
 			Provider provider, Object target, Definition definition)
 			throws IllegalArgumentException, IllegalAccessException,
 			InvocationTargetException {

@@ -20,6 +20,8 @@ package org.jgentleframework.core.intercept.support;
 import org.jgentleframework.core.reflection.metadata.Definition;
 
 /**
+ * The Class AbstractDefinitionMatcher.
+ * 
  * @author LE QUOC CHUNG - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
  * @date Aug 16, 2008
@@ -28,8 +30,9 @@ public abstract class AbstractDefinitionMatcher extends
 		AbstractMatcher<Definition> {
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.intercept.AbstractMatcher#and(org.jgentleframework.core.intercept.Matcher)
+	 * @see
+	 * org.jgentleframework.core.intercept.AbstractMatcher#and(org.jgentleframework
+	 * .core.intercept.Matcher)
 	 */
 	@Override
 	public Matcher<Definition> and(final Matcher<Definition> other) {
@@ -39,8 +42,9 @@ public abstract class AbstractDefinitionMatcher extends
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.intercept.AbstractMatcher#or(org.jgentleframework.core.intercept.Matcher)
+	 * @see
+	 * org.jgentleframework.core.intercept.AbstractMatcher#or(org.jgentleframework
+	 * .core.intercept.Matcher)
 	 */
 	public Matcher<Definition> or(Matcher<Definition> other) {
 

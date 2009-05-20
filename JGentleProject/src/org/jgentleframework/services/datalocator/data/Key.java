@@ -244,28 +244,30 @@ public interface Key<T> {
 
 	/**
 	 * Returns the {@link List list} containing all sub {@link Key keys} of
-	 * current {@link Key key} and all keys of all sub keys existing in all
-	 * hierarchical system of current {@link Key key}.
+	 * current {@link Key key} and all keys of all sub keys existing in whole
+	 * its hierarchical system.
 	 * 
 	 * @param sortedBy
 	 *            the {@link Comparator} represents sorting rule corresponding
 	 *            to all sub keys in returned {@link List list}
 	 * @return returns the {@link List list} containing all sub keys of current
-	 *         {@link Key key} if they exist, otherwise returns null.
+	 *         {@link Key key} if they exist, otherwise returns
+	 *         <code>null</code>.
 	 * @see ComparatorKeySortedBy
 	 */
 	public List<Key<?>> getAllSubKeys(ComparatorKeySortedBy sortedBy);
 
 	/**
 	 * Returns the {@link List list} containing all {@link Value values} of
-	 * current {@link Key key} and all values of all sub keys existing in all
-	 * hierarchical system of current {@link Key key}.
+	 * current {@link Key key} and all values of all sub keys existing in whole
+	 * its hierarchical system.
 	 * 
 	 * @param sortedBy
 	 *            the {@link Comparator} represents sorting rule corresponding
 	 *            to all {@link Value values} in returned {@link List list}.
 	 * @return returns the {@link List list} containing all {@link Value values}
-	 *         of current {@link Key key} if they exist, otherwise returns null.
+	 *         of current {@link Key key} if they exist, otherwise returns
+	 *         <code>null</code>.
 	 * @see ComparatorValueSortedBy
 	 */
 	public List<Value<?>> getAllValues(ComparatorValueSortedBy sortedBy);
@@ -282,7 +284,7 @@ public interface Key<T> {
 	 * @param keyName
 	 *            the given key name
 	 * @return returns the {@link Key key} appropriate to the given name if it
-	 *         existed, otherwise returns null.
+	 *         existed, otherwise returns <code>null</code>.
 	 */
 	public Key<?> getKeyFromName(String keyName);
 
