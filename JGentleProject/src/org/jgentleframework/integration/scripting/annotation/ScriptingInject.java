@@ -41,12 +41,6 @@ public @interface ScriptingInject {
 
 	/**
 	 * 
-	 * @return chỉ định nội dung của scripting ngay trong code
-	 */
-	String inlineScript() default "";
-
-	/**
-	 * 
 	 * @return Ngôn ngữ scripting sử dụng để nạp bean.
 	 */
 	String lang();
