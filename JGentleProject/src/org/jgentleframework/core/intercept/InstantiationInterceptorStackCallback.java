@@ -218,7 +218,8 @@ public class InstantiationInterceptorStackCallback {
 		/*
 		 * (non-Javadoc)
 		 * @see
-		 * org.jgentleframework.core.intercept.ObjectInstantiation#getRequestor()
+		 * org.jgentleframework.core.intercept.ObjectInstantiation#getRequestor
+		 * ()
 		 */
 		@Override
 		public Object getRequestor() {
@@ -300,20 +301,23 @@ public class InstantiationInterceptorStackCallback {
 		@Override
 		public Object proceed() throws Throwable {
 
+			Object result = null;
 			try {
 				index++;
 				if (index == interceptors.length) {
-					return previousResult;
+					result = previousResult;
+					// return previousResult;
 				}
 				else {
 					previousResult = interceptors[index].instantiate(this);
-					return previousResult;
+					result = previousResult;
 				}
 			}
 			finally {
 				index--;
 				previousResult = null;
 			}
+			return result;
 		}
 
 		/*

@@ -259,7 +259,9 @@ public abstract class RmiAbstractBinder extends RemoteAbstractBinder implements
 	 */
 	public void prepare() {
 
-		if (this.getServiceName() == null || this.getServiceName().isEmpty()) {
+		if (this.getServiceName() == null
+				|| (this.getServiceName() != null && this.getServiceName()
+						.isEmpty())) {
 			throw new RemotingException(
 					"The property 'serviceName' is required !");
 		}

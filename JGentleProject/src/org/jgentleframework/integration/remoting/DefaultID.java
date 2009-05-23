@@ -39,4 +39,8 @@ public interface DefaultID {
 	public static final String	DEFAULT_RMI_EXPORTER_PROXY_FACTORY	= "b51763ca11f893806e212ac9821234957764029"
 																			+ "_"
 																			+ "DEFAULT_RMI_EXPORTER_PROXY_FACTORY";
+
+	public static final String	DEFAULT_RMIBINDER_ID				= "e8a451fc1216be1ab398633991243055499998"
+																			+ "_"
+																			+ "DEFAULT_RMIBINDER_ID";
 }

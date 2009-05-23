@@ -91,6 +91,10 @@ public class RmiBinderImpl extends RmiAbstractBinder implements Initializing,
 		this.registryClientSocketFactory = registryClientSocketFactory;
 	}
 
+	public RmiBinderImpl() {
+
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * @see org.jgentleframework.context.bean.Initializing#activate()

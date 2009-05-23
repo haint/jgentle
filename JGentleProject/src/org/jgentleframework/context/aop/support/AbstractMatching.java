@@ -17,6 +17,10 @@
  */
 package org.jgentleframework.context.aop.support;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
 import org.jgentleframework.core.reflection.metadata.MetadataController;
 
 /**
@@ -44,5 +48,38 @@ public abstract class AbstractMatching extends MetadataController implements
 	public AbstractMatching(Object key, Object value) {
 
 		super(key, value);
+	}
+
+	/**
+	 * Write object.
+	 * 
+	 * @param stream
+	 *            the stream
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
+	private void writeObject(ObjectOutputStream stream) throws IOException {
+
+		stream.defaultWriteObject();
+	}
+
+	/**
+	 * Read object.
+	 * 
+	 * @param stream
+	 *            the stream
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
+	private void readObject(ObjectInputStream stream) throws IOException {
+
+		try {
+			stream.defaultReadObject();
+			this.key = null;
+			this.value = null;
+		}
+		catch (ClassNotFoundException e) {
+			throw new IOException(e.getMessage());
+		}
 	}
 }

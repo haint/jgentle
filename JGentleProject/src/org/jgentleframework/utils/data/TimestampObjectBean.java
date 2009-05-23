@@ -70,10 +70,11 @@ public class TimestampObjectBean<T> implements Comparable<T> {
 	 * (non-Javadoc)
 	 * @see java.lang.Comparable#compareTo(java.lang.Object)
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public int compareTo(T other) {
 
-		return compareTo(other);
+		return compareTo((TimestampObjectBean<T>) other);
 	}
 
 	/**
@@ -83,6 +84,7 @@ public class TimestampObjectBean<T> implements Comparable<T> {
 	 *            the other
 	 * @return the int
 	 */
+	
 	public int compareTo(TimestampObjectBean<T> other) {
 
 		final long tstampdiff = this.tstamp - other.tstamp;

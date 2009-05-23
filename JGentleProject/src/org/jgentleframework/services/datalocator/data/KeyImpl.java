@@ -571,12 +571,12 @@ class KeyImpl<T> implements Serializable, Key<T> {
 
 		List<Value<?>> result = new ArrayList<Value<?>>();
 		List<Value<?>> list = getAllValues(ComparatorValueSortedBy.PATH_ORDER_VALUE);
-		for (Object obj : list.toArray()) {
+		for (Value<?> obj : list) {
 			Date date = null;
 			if (dateType)
 				date = ((Value<?>) obj).getCreatedDate();
 			else
-				date = ((Value<?>) obj).getCreatedDate();
+				date = ((Value<?>) obj).getModifiedDate();
 			switch (comparator) {
 			case AFTER:
 				if (date.after(dateFind))
@@ -607,10 +607,8 @@ class KeyImpl<T> implements Serializable, Key<T> {
 	@Override
 	public List<Value<?>> findValue(String... valueName) {
 
-		synchronized (this.keyName) {
-			if (this.keyName == null || valueName.length == 0) {
-				throw new RepositoryRuntimeException("keyName is invalid !!");
-			}
+		if (this.keyName == null || valueName.length == 0) {
+			throw new RepositoryRuntimeException("keyName is invalid !!");
 		}
 		List<Value<?>> result = new ArrayList<Value<?>>();
 		List<Value<?>> list = getAllValues(ComparatorValueSortedBy.PATH_ORDER_VALUE);

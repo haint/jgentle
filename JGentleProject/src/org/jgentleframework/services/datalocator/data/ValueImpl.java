@@ -191,7 +191,8 @@ class ValueImpl<T> implements Serializable, Value<T> {
 	public T getValueData(int index) {
 
 		if (index < 0 || index > this.valueData.size()) {
-			throw new RepositoryRuntimeException("index number is invalid.");
+			throw new RepositoryRuntimeException(
+					"The index number is invalid !");
 		}
 		return this.valueData.get(index);
 	}

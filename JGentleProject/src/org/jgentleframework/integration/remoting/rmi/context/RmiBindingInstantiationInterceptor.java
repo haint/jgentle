@@ -22,12 +22,15 @@ import net.sf.cglib.proxy.Enhancer;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jgentleframework.configure.enums.Scope;
+import org.jgentleframework.configure.objectmeta.Binder;
 import org.jgentleframework.context.beans.ProviderAware;
 import org.jgentleframework.context.injecting.Provider;
 import org.jgentleframework.core.handling.DefinitionManager;
 import org.jgentleframework.core.intercept.BeanInstantiationInterceptor;
 import org.jgentleframework.core.intercept.ObjectInstantiation;
 import org.jgentleframework.core.reflection.metadata.Definition;
+import org.jgentleframework.integration.remoting.DefaultID;
 import org.jgentleframework.integration.remoting.annotation.Remote;
 import org.jgentleframework.integration.remoting.enums.RemoteType;
 import org.jgentleframework.integration.remoting.rmi.RmiBindingException;
@@ -51,6 +54,9 @@ public class RmiBindingInstantiationInterceptor implements
 
 	/** The definition manager. */
 	private DefinitionManager	definitionManager	= null;
+
+	/** The provider. */
+	private Provider			provider			= null;
 
 	/*
 	 * (non-Javadoc)
@@ -126,15 +132,25 @@ public class RmiBindingInstantiationInterceptor implements
 	protected Object instantiate(Definition definition, Class<?> target,
 			RmiBinding rmiBinding, ObjectInstantiation oi) throws Throwable {
 
+		
+		Binder binder = new Binder(this.provider);
+		binder.bind("serviceName", "registryHost", "registryPort",
+				"refreshStubOnConnectFailure", "lookupStubOnStartup",
+				"cacheStub").to(
+				rmiBinding.serviceName(), rmiBinding.registryHost(),
+				rmiBinding.registryPort(),
+				rmiBinding.refreshStubOnConnectFailure(),
+				rmiBinding.lookupStubOnStartup(), rmiBinding.cacheStub())
+				.in(RmiBinderImpl.class).id(
+						DefaultID.DEFAULT_RMIBINDER_ID).scope(Scope.SINGLETON);
+		binder.flush();
+		RmiBinder rmibinder = (RmiBinder) provider
+				.getBeanBoundToDefinition(DefaultID.DEFAULT_RMIBINDER_ID);
 		Object result = null;
 		Object previous = oi.getPreviousResult();
 		Enhancer enhancer = new Enhancer();
 		enhancer.setInterfaces(new Class<?>[] { target });
-		RmiBinder binder = new RmiBinderImpl(rmiBinding.serviceName(),
-				rmiBinding.registryHost(), rmiBinding.registryPort(),
-				rmiBinding.refreshStubOnConnectFailure(), rmiBinding
-						.lookupStubOnStartup(), rmiBinding.cacheStub(), null);
-		Callback callback = new RmiBinderInterceptor(binder);
+		Callback callback = new RmiBinderInterceptor(rmibinder);
 		enhancer.setCallback(callback);
 		if (oi.args() != null && oi.argTypes() != null)
 			result = enhancer.create(oi.argTypes(), oi.args());
@@ -162,6 +178,7 @@ public class RmiBindingInstantiationInterceptor implements
 	@Override
 	public void setProvider(Provider provider) {
 
+		this.provider = provider;
 		this.definitionManager = provider.getDefinitionManager();
 	}
 }

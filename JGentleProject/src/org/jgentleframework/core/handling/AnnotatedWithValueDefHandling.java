@@ -167,12 +167,9 @@ public class AnnotatedWithValueDefHandling implements
 	/**
 	 * Kiểm tra thông tin các cặp giá trị trong một annotation chỉ định.
 	 * 
-	 * @param object_value_pair
-	 *            các cặp giá trị
-	 * @param exception
-	 *            ngoại lệ sẽ được ném ra
-	 * @param annotation
-	 *            annotation chỉ định kiểm tra.
+	 * @param object_value_pair các cặp giá trị
+	 * @param exception ngoại lệ sẽ được ném ra
+	 * @param annotation annotation chỉ định kiểm tra.
 	 */
 	private void checkValuePair(String[] object_value_pair,
 			RuntimeException exception, Annotation annotation) {
@@ -229,8 +226,7 @@ public class AnnotatedWithValueDefHandling implements
 					valuePair[1] = valuePair[1].substring(1, valuePair[1]
 							.length() - 1);
 					String[] compare = valuePair[1].split(",");
-					ArrayList<String> compareList = (ArrayList<String>) Arrays
-							.asList(compare);
+					List<String> compareList = Arrays.asList(compare);
 					if (Array.getLength(objName) != compare.length) {
 						throw exception;
 					}

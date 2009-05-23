@@ -115,6 +115,8 @@ class ElementAspectFactory {
 						/** The Constant serialVersionUID. */
 						private static final long	serialVersionUID	= 5215996796974023709L;
 
+						transient Method			thisMethod			= method;
+
 						/*
 						 * (non-Javadoc)
 						 * @see
@@ -124,7 +126,7 @@ class ElementAspectFactory {
 						@Override
 						public Object getTargetObject() {
 
-							return method;
+							return thisMethod;
 						}
 					};
 					if (filter != null && filter.matches(matching)
@@ -211,6 +213,8 @@ class ElementAspectFactory {
 						/** The Constant serialVersionUID. */
 						private static final long	serialVersionUID	= -2875018354099111517L;
 
+						transient Field				thisField			= field;
+
 						/*
 						 * (non-Javadoc)
 						 * @see
@@ -220,7 +224,7 @@ class ElementAspectFactory {
 						@Override
 						public Object getTargetObject() {
 
-							return field;
+							return thisField;
 						}
 					};
 					if (filter != null && filter.matches(matching)

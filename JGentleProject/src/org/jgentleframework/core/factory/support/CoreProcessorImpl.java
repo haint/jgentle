@@ -34,6 +34,8 @@ import net.sf.cglib.reflect.FastConstructor;
 
 import org.aopalliance.intercept.Interceptor;
 import org.aopalliance.intercept.MethodInterceptor;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.jgentleframework.context.beans.annotation.AlwaysReload;
 import org.jgentleframework.context.injecting.Provider;
 import org.jgentleframework.context.support.CoreInstantiationSelector;
@@ -71,6 +73,9 @@ public class CoreProcessorImpl extends AbstractProcesserChecker implements
 
 	/** The current {@link Provider}. */
 	private final Provider		provider;
+
+	private final Log			log					= LogFactory.getLog(this
+															.getClass());
 
 	/**
 	 * Constructor.
@@ -137,8 +142,8 @@ public class CoreProcessorImpl extends AbstractProcesserChecker implements
 				MetaDefObject metaObj = new MetaDefObject();
 				findInOutNonRuntime(metaObj, definition);
 				prepareSingletonBean(selector, provider, result);
-				CommonFactory.singleton().executeProcessAfterBeanCreated(targetClass,
-						metaObj, provider, result, definition);
+				CommonFactory.singleton().executeProcessAfterBeanCreated(
+						targetClass, metaObj, provider, result, definition);
 				return result;
 			}
 		}
@@ -244,8 +249,8 @@ public class CoreProcessorImpl extends AbstractProcesserChecker implements
 				MetaDefObject metaObj = new MetaDefObject();
 				findInOutNonRuntime(metaObj, definition);
 				prepareSingletonBean(selector, provider, result);
-				CommonFactory.singleton().executeProcessAfterBeanCreated(targetClass,
-						metaObj, provider, result, definition);
+				CommonFactory.singleton().executeProcessAfterBeanCreated(
+						targetClass, metaObj, provider, result, definition);
 			}
 		}
 		else if (targetSelector instanceof CoreInstantiationSelectorImpl
@@ -262,9 +267,37 @@ public class CoreProcessorImpl extends AbstractProcesserChecker implements
 	CachedConstructor createConstructionProxy(final Definition definition,
 			Class<?> clazz, Class<?>[] parameterTypes) {
 
-		FastClass fastClass = JGentleFastClass.create(clazz);
-		final FastConstructor fastConstructor = fastClass
-				.getConstructor(parameterTypes);
+		FastConstructor constructor = null;
+		try {
+			FastClass fastClass = JGentleFastClass.create(clazz);
+			constructor = fastClass.getConstructor(parameterTypes);
+		}
+		catch (NoSuchMethodError e) {
+			if (parameterTypes == null) {
+				if (log.isErrorEnabled()) {
+					log.error(clazz
+							+ " does not declare public default constructor !");
+					e.printStackTrace();
+				}
+			}
+			else {
+				if (log.isErrorEnabled()) {
+					StringBuffer buffer = new StringBuffer();
+					for (int i = 0; i < parameterTypes.length; i++) {
+						buffer.append(parameterTypes[i].getName());
+						if (!(i + 1 >= parameterTypes.length))
+							buffer.append(",");
+					}
+					log
+							.error(
+									"Class ["
+											+ clazz
+											+ "] does not declare constructor appropriate to these parameter types ["
+											+ buffer.toString() + "]!", e);
+				}
+			}
+		}
+		final FastConstructor fastConstructor = constructor;
 		return new CachedConstructor() {
 			public Object newInstance(Object... arguments)
 					throws InvocationTargetException {
