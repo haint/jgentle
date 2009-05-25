@@ -27,10 +27,6 @@ package org.jgentleframework.configure.enums;
 public enum MetadataKey {
 	/** The DEFINITION. */
 	DEFINITION,
-	/** The MAPPINGNAME. */
-	MAPPINGNAME,
-	/** The IS_SUPPORTED_BY_CORE. */
-	IS_SUPPORTED_BY_CORE,
 	/** The PREVIOUS_RESULT. */
 	PREVIOUS_RESULT
 }

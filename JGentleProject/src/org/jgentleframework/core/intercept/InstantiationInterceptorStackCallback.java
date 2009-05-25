@@ -188,8 +188,6 @@ public class InstantiationInterceptorStackCallback {
 				Object key, Object value) {
 
 			super(key, value);
-			this.addMetadata(new MetadataImpl(MetadataKey.PREVIOUS_RESULT,
-					previousResult));
 			this.addMetadata(new MetadataImpl(MetadataKey.DEFINITION,
 					definition));
 		}
