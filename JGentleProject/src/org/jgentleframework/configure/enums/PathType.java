@@ -64,6 +64,9 @@ public enum PathType {
 	 */
 	public String getType() {
 
-		return System.getProperty(type);
+		if (type != null && !type.isEmpty())
+			return System.getProperty(type);
+		else
+			return type;
 	}
 }
