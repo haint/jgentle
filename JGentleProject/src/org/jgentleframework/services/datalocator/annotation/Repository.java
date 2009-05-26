@@ -54,6 +54,8 @@ public @interface Repository {
 	 * method will not be able to invoke. In this case, if
 	 * {@link RepositoryProcessor#saveRepository() saveRepository} is invoked by
 	 * client, one exception will be thrown at runtime.
+	 * <p>
+	 * Default value is {@link PathType#USERHOME}
 	 */
 	PathType pathType() default PathType.USERHOME;
 }

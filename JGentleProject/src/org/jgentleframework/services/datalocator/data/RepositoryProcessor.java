@@ -327,19 +327,17 @@ public interface RepositoryProcessor {
 	public void saveRepository() throws FileNotFoundException, IOException;
 
 	/**
-	 * Gets the file path.
-	 * 
-	 * @return the filePath
+	 * Gets the save file name.
 	 */
-	public String getFilePath();
+	public String getSaveFile();
 
 	/**
-	 * Sets the file path.
+	 * Sets the save file.
 	 * 
-	 * @param filePath
-	 *            the file path
+	 * @param saveFile
+	 *            the save file name.
 	 */
-	public void setFilePath(String filePath);
+	public void setSaveFile(String saveFile);
 
 	/**
 	 * Gets the path type.

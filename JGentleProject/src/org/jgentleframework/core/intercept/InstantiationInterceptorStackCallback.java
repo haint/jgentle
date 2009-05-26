@@ -41,14 +41,213 @@ import org.jgentleframework.utils.Assertor;
  * @see Interceptor
  */
 public class InstantiationInterceptorStackCallback {
-	/** The interceptors. */
-	final InstantiationInterceptor[]	interceptors;
+	/**
+	 * The Class InterceptedObjectInstantiation.
+	 */
+	class InterceptedObjectInstantiation extends MetadataController implements
+			ObjectInstantiation {
+		/** The Constant serialVersionUID. */
+		private static final long	serialVersionUID	= -3650610523177070593L;
+
+		/** The index. */
+		int	index	= -1;
+
+		private final Log	log	= LogFactory.getLog(getClass());
+
+		/**
+		 * Instantiates a new intercepted object instantiation.
+		 * 
+		 * @param definition
+		 *            the definition
+		 * @param key
+		 *            the key
+		 * @param value
+		 *            the value
+		 */
+		public InterceptedObjectInstantiation(Definition definition,
+				Object key, Object value) {
+
+			super(key, value);
+			this.addMetadata(new MetadataImpl(MetadataKey.DEFINITION,
+					definition));
+		}
+
+		/**
+		 * The Constructor.
+		 * 
+		 * @param key
+		 *            the key
+		 * @param value
+		 *            the value
+		 */
+		public InterceptedObjectInstantiation(Object key, Object value) {
+
+			super(key, value);
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * @see org.jgentleframework.core.intercept.ObjectInstantiation#args()
+		 */
+		@Override
+		public Object[] args() {
+
+			return args;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * @see
+		 * org.jgentleframework.core.intercept.ObjectInstantiation#argTypes()
+		 */
+		@Override
+		public Class<?>[] argTypes() {
+
+			return argTypes;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * @see
+		 * org.jgentleframework.core.intercept.ObjectInstantiation#getInterfaces
+		 * ()
+		 */
+		@Override
+		public Class<?>[] getInterfaces() {
+
+			return targetInterface;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * @see
+		 * org.jgentleframework.core.intercept.ObjectInstantiation#getPreviousResult
+		 * ()
+		 */
+		@Override
+		public synchronized Object getPreviousResult() {
+
+			return previousResult;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * @see
+		 * org.jgentleframework.core.intercept.ObjectInstantiation#getRequestor
+		 * ()
+		 */
+		@Override
+		public Object getRequestor() {
+
+			return requestor;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * @see org.aopalliance.intercept.Joinpoint#getStaticPart()
+		 */
+		@Override
+		public AccessibleObject getStaticPart() {
+
+			Constructor<?> constructor = null;
+			if (argTypes != null && argTypes.length != 0) {
+				try {
+					constructor = getTargetClass().getConstructor(argTypes);
+				}
+				catch (SecurityException e) {
+					if (log.isWarnEnabled()) {
+						log.warn("Could not access to constructor !", e);
+					}
+					return null;
+				}
+				catch (NoSuchMethodException e) {
+					if (log.isWarnEnabled()) {
+						log.warn("Could not found specified constructor !", e);
+					}
+					return null;
+				}
+			}
+			return constructor;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * @see
+		 * org.jgentleframework.core.intercept.ObjectInstantiation#getTargetClass
+		 * ()
+		 */
+		@Override
+		public Class<?> getTargetClass() {
+
+			return targetClass;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * @see org.aopalliance.intercept.Joinpoint#getThis()
+		 */
+		@Override
+		public Object getThis() {
+
+			return this;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * @see org.aopalliance.intercept.Joinpoint#proceed()
+		 */
+		@Override
+		public Object proceed() throws Throwable {
+
+			Object result = null;
+			try {
+				index++;
+				if (index == interceptors.length) {
+					result = previousResult;
+					// return previousResult;
+				}
+				else {
+					previousResult = interceptors[index].instantiate(this);
+					result = previousResult;
+				}
+			}
+			finally {
+				index--;
+				previousResult = null;
+			}
+			return result;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * @see
+		 * org.jgentleframework.core.intercept.ObjectInstantiation#setPreviousResult
+		 * (java.lang.Object)
+		 */
+		@Override
+		public synchronized void setPreviousResult(Object pResult) {
+
+			previousResult = pResult;
+		}
+	}
+
+	/** The args. */
+	final Object[]						args;
 
 	/** The arg types. */
 	final Class<?>[]					argTypes;
 
-	/** The args. */
-	final Object[]						args;
+	/** The definition. */
+	final Definition					definition;
+
+	/** The interceptors. */
+	final InstantiationInterceptor[]	interceptors;
+
+	/** The previous result. */
+	Object								previousResult	= null;
+
+	/** The service handler. */
+	final Provider						provider;
 
 	/** The requestor. */
 	final Object						requestor;
@@ -58,15 +257,6 @@ public class InstantiationInterceptorStackCallback {
 
 	/** The target interface. */
 	final Class<?>[]					targetInterface;
-
-	/** The definition. */
-	final Definition					definition;
-
-	/** The previous result. */
-	Object								previousResult	= null;
-
-	/** The service handler. */
-	final Provider						provider;
 
 	/**
 	 * Instantiates a new instantiation interceptor stack callback.
@@ -151,197 +341,5 @@ public class InstantiationInterceptorStackCallback {
 
 		return new InterceptedObjectInstantiation(this.definition, null, null)
 				.proceed();
-	}
-
-	/**
-	 * The Class InterceptedObjectInstantiation.
-	 */
-	class InterceptedObjectInstantiation extends MetadataController implements
-			ObjectInstantiation {
-		/** The Constant serialVersionUID. */
-		private static final long	serialVersionUID	= -3650610523177070593L;
-
-		/**
-		 * The Constructor.
-		 * 
-		 * @param key
-		 *            the key
-		 * @param value
-		 *            the value
-		 */
-		public InterceptedObjectInstantiation(Object key, Object value) {
-
-			super(key, value);
-		}
-
-		/**
-		 * Instantiates a new intercepted object instantiation.
-		 * 
-		 * @param definition
-		 *            the definition
-		 * @param key
-		 *            the key
-		 * @param value
-		 *            the value
-		 */
-		public InterceptedObjectInstantiation(Definition definition,
-				Object key, Object value) {
-
-			super(key, value);
-			this.addMetadata(new MetadataImpl(MetadataKey.DEFINITION,
-					definition));
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * @see
-		 * org.jgentleframework.core.intercept.ObjectInstantiation#argTypes()
-		 */
-		@Override
-		public Class<?>[] argTypes() {
-
-			return argTypes;
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * @see org.jgentleframework.core.intercept.ObjectInstantiation#args()
-		 */
-		@Override
-		public Object[] args() {
-
-			return args;
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * @see
-		 * org.jgentleframework.core.intercept.ObjectInstantiation#getRequestor
-		 * ()
-		 */
-		@Override
-		public Object getRequestor() {
-
-			return requestor;
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * @see
-		 * org.jgentleframework.core.intercept.ObjectInstantiation#getTargetClass
-		 * ()
-		 */
-		@Override
-		public Class<?> getTargetClass() {
-
-			return targetClass;
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * @see
-		 * org.jgentleframework.core.intercept.ObjectInstantiation#getInterfaces
-		 * ()
-		 */
-		@Override
-		public Class<?>[] getInterfaces() {
-
-			return targetInterface;
-		}
-
-		private final Log	log	= LogFactory.getLog(getClass());
-
-		/*
-		 * (non-Javadoc)
-		 * @see org.aopalliance.intercept.Joinpoint#getStaticPart()
-		 */
-		@Override
-		public AccessibleObject getStaticPart() {
-
-			Constructor<?> constructor = null;
-			if (argTypes != null && argTypes.length != 0) {
-				try {
-					constructor = getTargetClass().getConstructor(argTypes);
-				}
-				catch (SecurityException e) {
-					if (log.isWarnEnabled()) {
-						log.warn("Could not access to constructor !", e);
-					}
-					return null;
-				}
-				catch (NoSuchMethodException e) {
-					if (log.isWarnEnabled()) {
-						log.warn("Could not found specified constructor !", e);
-					}
-					return null;
-				}
-			}
-			return constructor;
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * @see org.aopalliance.intercept.Joinpoint#getThis()
-		 */
-		@Override
-		public Object getThis() {
-
-			return this;
-		}
-
-		/** The index. */
-		int	index	= -1;
-
-		/*
-		 * (non-Javadoc)
-		 * @see org.aopalliance.intercept.Joinpoint#proceed()
-		 */
-		@Override
-		public Object proceed() throws Throwable {
-
-			Object result = null;
-			try {
-				index++;
-				if (index == interceptors.length) {
-					result = previousResult;
-					// return previousResult;
-				}
-				else {
-					previousResult = interceptors[index].instantiate(this);
-					result = previousResult;
-				}
-			}
-			finally {
-				index--;
-				previousResult = null;
-			}
-			return result;
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * @see
-		 * org.jgentleframework.core.intercept.ObjectInstantiation#getPreviousResult
-		 * ()
-		 */
-		@Override
-		public synchronized Object getPreviousResult() {
-
-			return previousResult;
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * @see
-		 * org.jgentleframework.core.intercept.ObjectInstantiation#setPreviousResult
-		 * (java.lang.Object)
-		 */
-		@Override
-		public synchronized void setPreviousResult(Object pResult) {
-
-			previousResult = pResult;
-			this.addMetadata(new MetadataImpl(MetadataKey.PREVIOUS_RESULT,
-					previousResult));
-		}
 	}
 }

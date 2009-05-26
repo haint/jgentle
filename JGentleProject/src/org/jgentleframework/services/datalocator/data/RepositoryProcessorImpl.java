@@ -51,7 +51,7 @@ class RepositoryProcessorImpl implements RepositoryProcessor {
 	private Class<?>			enumConfig	= null;
 
 	/** The file path. */
-	private String				filePath	= "";
+	private String				saveFile	= Repository.DEFAULT_SAVE_FILE;
 
 	/** The path type. */
 	private PathType			pathType	= null;
@@ -81,7 +81,7 @@ class RepositoryProcessorImpl implements RepositoryProcessor {
 		}
 		else {
 			this.enumConfig = config;
-			this.filePath = enumConfig.getAnnotation(Repository.class)
+			this.saveFile = enumConfig.getAnnotation(Repository.class)
 					.saveFile();
 			this.pathType = enumConfig.getAnnotation(Repository.class)
 					.pathType();
@@ -190,7 +190,7 @@ class RepositoryProcessorImpl implements RepositoryProcessor {
 	public <T> void createValue(String valueName, Key<T> keyParents,
 			DataType valueType, T... valueData) {
 
-		ArrayList<T> valueList = new ArrayList<T>();
+		List<T> valueList = new ArrayList<T>();
 		for (T value : valueData) {
 			valueList.add(value);
 		}
@@ -224,8 +224,8 @@ class RepositoryProcessorImpl implements RepositoryProcessor {
 			Key<?> keyFindFrom) {
 
 		Assertor.notNull(keyFindFrom, "keyFindFrom must not be NULL !");
-		ArrayList<Key<?>> listKeyIN = new ArrayList<Key<?>>();
-		ArrayList<Key<?>> keyTemp = new ArrayList<Key<?>>();
+		List<Key<?>> listKeyIN = new ArrayList<Key<?>>();
+		List<Key<?>> keyTemp = new ArrayList<Key<?>>();
 		boolean flag = false;
 		for (Key<?> obj : keyFindFrom.getKeyList().values()) {
 			if (obj.getKeyList().isEmpty() == false) {
@@ -283,8 +283,8 @@ class RepositoryProcessorImpl implements RepositoryProcessor {
 		if (keyFindFrom == null || sortedBy == null) {
 			throw new RuntimeException("KeyType must not be NULL !");
 		}
-		ArrayList<Value<?>> listValueIN = new ArrayList<Value<?>>();
-		ArrayList<Key<?>> keyTemp = new ArrayList<Key<?>>();
+		List<Value<?>> listValueIN = new ArrayList<Value<?>>();
+		List<Key<?>> keyTemp = new ArrayList<Key<?>>();
 		boolean flag = false;
 		if (keyFindFrom.getValueList().size() > 0)
 			listValueIN.addAll(keyFindFrom.getValueList().values());
@@ -349,12 +349,12 @@ class RepositoryProcessorImpl implements RepositoryProcessor {
 	/*
 	 * (non-Javadoc)
 	 * @seeorg.jgentleframework.services.datalocator.data.RepositoryProcessor#
-	 * getFilePath()
+	 * getSaveFile()
 	 */
 	@Override
-	public synchronized String getFilePath() {
+	public synchronized String getSaveFile() {
 
-		return this.filePath;
+		return this.saveFile;
 	}
 
 	/*
@@ -387,7 +387,7 @@ class RepositoryProcessorImpl implements RepositoryProcessor {
 		if (pathSplit.length < 1) {
 			throw new RepositoryRuntimeException("Path string is invalid.");
 		}
-		ArrayList<Key<?>> keysList = new ArrayList<Key<?>>();
+		List<Key<?>> keysList = new ArrayList<Key<?>>();
 		for (int i = 0; i < pathSplit.length; i++) {
 			Key<?> keyCurrent = null;
 			if (i == 0) {
@@ -419,7 +419,7 @@ class RepositoryProcessorImpl implements RepositoryProcessor {
 	public List<String> getKeyNames(Key<?> fromKey) {
 
 		Assertor.notNull(fromKey, "fromKey must not be null.");
-		ArrayList<String> results = new ArrayList<String>();
+		List<String> results = new ArrayList<String>();
 		for (Key<?> temp : fromKey.getKeyList().values()) {
 			results.add(temp.getKeyName());
 		}
@@ -535,7 +535,7 @@ class RepositoryProcessorImpl implements RepositoryProcessor {
 	public <T> List<String> getValueNames(Key<T> fromKey) {
 
 		Assertor.notNull(fromKey, "fromKey must not be null.");
-		ArrayList<String> results = new ArrayList<String>();
+		List<String> results = new ArrayList<String>();
 		for (Value<T> temp : fromKey.getValueList().values()) {
 			results.add(temp.getValueName());
 		}
@@ -567,11 +567,10 @@ class RepositoryProcessorImpl implements RepositoryProcessor {
 		ObjectInputStream in = null;
 		if (pathType.equals(PathType.CLASSPATH)) {
 			in = new ObjectInputStream(ClassLoader
-					.getSystemResourceAsStream(this.filePath));
+					.getSystemResourceAsStream(this.saveFile));
 		}
 		else {
-			File file = new File(System.getProperty(pathType.getType()),
-					filePath);
+			File file = new File(pathType.getType(), saveFile);
 			FileInputStream fis = new FileInputStream(file);
 			in = new ObjectInputStream(fis);
 		}
@@ -586,7 +585,7 @@ class RepositoryProcessorImpl implements RepositoryProcessor {
 		 * Nạp lại thông tin backup vào repository
 		 */
 		this.temporaryRepository.clear();
-		this.temporaryRepository = (HashMap<String, Key<?>>) ObjectUtils
+		this.temporaryRepository = (Map<String, Key<?>>) ObjectUtils
 				.deepCopy(this.repository);
 	}
 
@@ -600,7 +599,7 @@ class RepositoryProcessorImpl implements RepositoryProcessor {
 	public synchronized void previousChange() {
 
 		this.temporaryRepository.clear();
-		this.temporaryRepository = (HashMap<String, Key<?>>) ObjectUtils
+		this.temporaryRepository = (Map<String, Key<?>>) ObjectUtils
 				.deepCopy(this.repository);
 	}
 
@@ -677,7 +676,7 @@ class RepositoryProcessorImpl implements RepositoryProcessor {
 		ObjectInputStream in = null;
 		in = new ObjectInputStream(fileBackup);
 		try {
-			this.repository = (HashMap<String, Key<?>>) in.readObject();
+			this.repository = (Map<String, Key<?>>) in.readObject();
 		}
 		catch (ClassNotFoundException e) {
 			e.printStackTrace();
@@ -687,7 +686,7 @@ class RepositoryProcessorImpl implements RepositoryProcessor {
 		 * Nạp lại thông tin backup vào repository
 		 */
 		this.temporaryRepository.clear();
-		this.temporaryRepository = (HashMap<String, Key<?>>) ObjectUtils
+		this.temporaryRepository = (Map<String, Key<?>>) ObjectUtils
 				.deepCopy(this.repository);
 	}
 
@@ -726,7 +725,7 @@ class RepositoryProcessorImpl implements RepositoryProcessor {
 					"Could not save registry if path type equals ClassPath.");
 		}
 		else {
-			file = new File(System.getProperty(pathType.getType()), filePath);
+			file = new File(pathType.getType(), saveFile);
 			fis = new FileOutputStream(file, true);
 			out = new ObjectOutputStream(fis);
 		}
@@ -745,12 +744,12 @@ class RepositoryProcessorImpl implements RepositoryProcessor {
 	/*
 	 * (non-Javadoc)
 	 * @seeorg.jgentleframework.services.datalocator.data.RepositoryProcessor#
-	 * setFilePath(java.lang.String)
+	 * setSaveFile(java.lang.String)
 	 */
 	@Override
-	public synchronized void setFilePath(String filePath) {
+	public synchronized void setSaveFile(String saveFile) {
 
-		this.filePath = filePath;
+		this.saveFile = saveFile;
 	}
 
 	/*

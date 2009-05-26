@@ -18,7 +18,7 @@
 package org.jgentleframework.configure.enums;
 
 /**
- * Chỉ định thông tin các kiểu đường dẫn <code>prefix</code>.
+ * Represents the <code>prefix</code> type of path.
  * 
  * @author LE QUOC CHUNG - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
@@ -26,28 +26,24 @@ package org.jgentleframework.configure.enums;
  */
 public enum PathType {
 	/**
-	 * Tương đương vị trí đường dẫn tại
-	 * <code>System.getProperty("user.dir")</code>
+	 * equals <code>System.getProperty("user.dir")</code>
 	 */
-	USERDIR ("user.dir"),
+	USERDIR (System.getProperty("user.dir")),
 	/**
-	 * Tương đương vị trí đường dẫn tại
-	 * <code>System.getProperty("user.home")</code>
+	 * equals <code>System.getProperty("user.home")</code>
 	 */
-	USERHOME ("user.home"),
+	USERHOME (System.getProperty("user.home")),
 	/**
-	 * Tương đương vị trí đường dẫn tại
-	 * <code>System.getProperty("java.io.tmpdir")</code>
+	 * equals <code>System.getProperty("java.io.tmpdir")</code>
 	 */
-	TEMPDIR ("java.io.tmpdir"),
+	TEMPDIR (System.getProperty("java.io.tmpdir")),
 	/**
-	 * Tương đương vị trí đường dẫn tại
-	 * <code>System.getProperty("java.home")</code>
+	 * equals <code>System.getProperty("java.home")</code>
 	 */
-	JAVAHOME ("java.home"),
-	/** Chỉ định đường dẫn là đường dẫn tuyệt đối. */
+	JAVAHOME (System.getProperty("java.home")),
+	/** The absolute path. */
 	ABSOLUTEPATH (""),
-	/** Chỉ định đường dẫn sẽ được tìm trong classpath. */
+	/** The class path. */
 	CLASSPATH ("");
 	/** The type. */
 	String	type;
@@ -64,14 +60,7 @@ public enum PathType {
 	}
 
 	/**
-	 * Trả về tên thuộc tính của kiểu type prefix.
-	 * <p>
-	 * Ex: với <code><b>USERDIR</b></code> sẽ trả về <code>"user.dir"</code>
-	 * <p>
-	 * - Để có thể lấy ra đường dẫn chỉ định từ name cần sử dụng static method
-	 * System.getProperty
-	 * 
-	 * @return the type
+	 * Returns the "prefix" of path.
 	 */
 	public String getType() {
 

@@ -27,6 +27,4 @@ package org.jgentleframework.configure.enums;
 public enum MetadataKey {
 	/** The DEFINITION. */
 	DEFINITION,
-	/** The PREVIOUS_RESULT. */
-	PREVIOUS_RESULT
 }
