@@ -26,7 +26,7 @@ import org.jgentleframework.configure.enums.PathType;
 import org.jgentleframework.services.datalocator.data.RepositoryProcessor;
 
 /**
- * This annotation provides configuration information of repository.
+ * This annotation provides configuration information for repository.
  * 
  * @author Quoc Chung - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
@@ -41,7 +41,7 @@ public @interface Repository {
 	/**
 	 * The name of specified file which is saved.
 	 * <p>
-	 * Default value is <code>repository.rps</code>
+	 * Default value is {@link Repository#DEFAULT_SAVE_FILE} ("repository.rps")
 	 */
 	String saveFile() default DEFAULT_SAVE_FILE;
 

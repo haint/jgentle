@@ -18,7 +18,7 @@
 package org.jgentleframework.integration.remoting.rmi.context;
 
 import org.jgentleframework.context.injecting.Provider;
-import org.jgentleframework.integration.remoting.DefaultID;
+import org.jgentleframework.integration.remoting.RemoteDefaultID;
 import org.jgentleframework.integration.remoting.rmi.support.RmiExporter;
 
 /**
@@ -28,7 +28,7 @@ import org.jgentleframework.integration.remoting.rmi.support.RmiExporter;
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
  * @date Feb 12, 2009
  */
-public interface IRmiExporterProxyFactoryBean extends DefaultID {
+public interface IRmiExporterProxyFactoryBean extends RemoteDefaultID {
 	/**
 	 * Gets the service class.
 	 * 

@@ -26,26 +26,29 @@ import org.jgentleframework.configure.enums.PathType;
 import org.jgentleframework.integration.scripting.enums.ScriptingType;
 
 /**
- * Chứa thông tin cấu hình cho phép inject thông tin của bean từ một scripting
- * langue
+ * This annotation provides configuration information for Scripting services.
  * 
  * @author gnut
- * 
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 public @interface ScriptingInject {
 	/**
-	 * 
-	 * @return vị trí chứa tập tin sctipt được tính từ classpath
+	 * The specified scripting file
 	 */
-	String scriptFile() default "";
+	String scriptFile();
 
+	/**
+	 * The specified path type of {@link #scriptFile()} attribute.
+	 * <p>
+	 * Default value is {@link PathType#CLASSPATH}
+	 */
 	PathType pathType() default PathType.CLASSPATH;
 
 	/**
+	 * The scripting language
 	 * 
-	 * @return Ngôn ngữ scripting sử dụng để nạp bean.
+	 * @see ScriptingType
 	 */
 	ScriptingType lang();
 }

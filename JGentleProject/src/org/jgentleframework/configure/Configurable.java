@@ -39,11 +39,11 @@ public interface Configurable extends SystemConfig, BindingConfig {
 	public void configure();
 
 	/** The Constant REF_MAPPING. */
-	public final static String	REF_MAPPING		= "REF_MAPPING";
+	public final static String	REF_MAPPING		= "REF_MAPPING_6b5a7e671217be3f85c141d6831243324086280";
 
 	/** The Constant REF_ID. */
-	public final static String	REF_ID			= "REF_ID";
+	public final static String	REF_ID			= "REF_ID_cb64b2271217be45c268633991243324111810";
 
 	/** The Constant REF_CONSTANT. */
-	public final static String	REF_CONSTANT	= "REF_CONSTANT";
+	public final static String	REF_CONSTANT	= "REF_CONSTANT_226f4261217be4846da596981243324122121";
 }

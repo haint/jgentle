@@ -24,7 +24,7 @@ package org.jgentleframework.integration.remoting;
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
  * @date Feb 12, 2009
  */
-public interface DefaultID {
+public interface RemoteDefaultID {
 	/** The Constant DEFAULT_RMIEXPORTER_ID. */
 	public static final String	DEFAULT_RMIEXPORTER_ID				= "a1fcb6b911f635150b0e0e1c61234321887147"
 																			+ "_"

@@ -1,5 +1,19 @@
-/**
+/*
+ * Copyright 2007-2009 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License. 
  * 
+ * Project: JGentleFramework
  */
 package org.jgentleframework.integration.scripting;
 
@@ -32,20 +46,21 @@ import org.jgentleframework.integration.scripting.annotation.ScriptingInject;
 import org.jgentleframework.utils.ReflectUtils;
 
 /**
- * @author Administrator
+ * The Class ScriptingInstantiationInterceptor.
  * 
+ * @author gnut
  */
 public class ScriptingInstantiationInterceptor implements
 		BeanInstantiationInterceptor, ProviderAware {
 	/** The log. */
-	private final Log log = LogFactory.getLog(getClass());
+	private final Log			log					= LogFactory
+															.getLog(getClass());
 
 	/** The definition manager. */
-	private DefinitionManager definitionManager = null;
+	private DefinitionManager	definitionManager	= null;
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @seeorg.jgentleframework.core.intercept.BeanInstantiationInterceptor#
 	 * isSupportedByCore()
 	 */
@@ -57,13 +72,13 @@ public class ScriptingInstantiationInterceptor implements
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * org.jgentleframework.core.intercept.InstantiationInterceptor#instantiate
 	 * (org.jgentleframework.core.intercept.ObjectInstantiation)
 	 */
 	@Override
 	public Object instantiate(ObjectInstantiation oi) throws Throwable {
+
 		Object result = null;
 		Class<?> target = oi.getTargetClass();
 		Definition definition = this.definitionManager.getDefinition(target);
@@ -84,22 +99,17 @@ public class ScriptingInstantiationInterceptor implements
 						.getEngineByName(scriptingInject.lang().getType());
 				if (engine == null) {
 					if (log.isFatalEnabled()) {
-						log
-								.fatal(
-										"Script engine with name : "
-												+ scriptingInject.lang()
-														.getType() +" is not found!",
-										new ScriptException(
-												"Script engine with name : "
-												+ scriptingInject.lang()
-														.getType() +" is not found!"));
+						log.fatal("Script engine with name : "
+								+ scriptingInject.lang().getType()
+								+ " is not found!", new ScriptException(
+								"Script engine with name : "
+										+ scriptingInject.lang().getType()
+										+ " is not found!"));
 					}
-					throw new ScriptException(
-							"Script engine with name : "
-							+ scriptingInject.lang()
-									.getType() +" is not found!");
+					throw new ScriptException("Script engine with name : "
+							+ scriptingInject.lang().getType()
+							+ " is not found!");
 				}
-
 				File parentFile = null;
 				if (!(PathType.CLASSPATH.equals(scriptingInject.pathType()) || PathType.CLASSPATH
 						.equals(scriptingInject.pathType()))) {
@@ -109,14 +119,16 @@ public class ScriptingInstantiationInterceptor implements
 				if (parentFile != null) {
 					sourceFile = new File(parentFile, scriptingInject
 							.scriptFile());
-				} else {
+				}
+				else {
 					if (PathType.CLASSPATH.equals(scriptingInject.pathType())) {
 						sourceFile = new File(
 								ScriptingInstantiationInterceptor.class
 										.getResource(
 												scriptingInject.scriptFile())
 										.toURI());
-					} else {
+					}
+					else {
 						sourceFile = new File(scriptingInject.scriptFile());
 					}
 				}
@@ -130,14 +142,15 @@ public class ScriptingInstantiationInterceptor implements
 					@Override
 					public Object intercept(Object obj, Method method,
 							Object[] args, MethodProxy proxy) throws Throwable {
+
 						if (method.getName().equals("hashCode")) {
 							final int prime = 31;
 							int result = 1;
 							result = prime * result + super.hashCode();
 							result = prime * result + enhancer.hashCode();
-
 							return result;
-						} else {
+						}
+						else {
 							MethodInvocation invocation = new BasicMethodInvocation(
 									obj, method, args);
 							return invoke(invocation, scriptObject);
@@ -166,7 +179,8 @@ public class ScriptingInstantiationInterceptor implements
 				else
 					result = enhancer.create();
 				oi.setPreviousResult(result);
-			} else {
+			}
+			else {
 				if (log.isFatalEnabled()) {
 					log
 							.fatal(
@@ -177,7 +191,8 @@ public class ScriptingInstantiationInterceptor implements
 				}
 			}
 			return oi.proceed();
-		} else {
+		}
+		else {
 			if (log.isWarnEnabled()) {
 				log.warn("The target interface is not annotated with ["
 						+ ScriptingInject.class + "]");
@@ -188,12 +203,12 @@ public class ScriptingInstantiationInterceptor implements
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @seeorg.jgentleframework.context.beans.ProviderAware#setProvider(org.
 	 * jgentleframework.context.injecting.Provider)
 	 */
 	@Override
 	public void setProvider(Provider provider) {
+
 		this.definitionManager = provider.getDefinitionManager();
 	}
 }

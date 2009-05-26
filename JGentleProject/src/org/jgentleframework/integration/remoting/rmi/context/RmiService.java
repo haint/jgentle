@@ -38,8 +38,6 @@ public abstract class RmiService implements Configurable {
 
 		bind().in(RmiServiceExporterProcessor.class).id(
 				RmiServiceExporterProcessor.class.getName());
-		attach(RmiBindingInstantiationInterceptor.class).to(
-				RmiBindingInstantiationInterceptor.class);
 		intercept(refMapping(RmiBindingInstantiationInterceptor.class),
 				annotatedWith(Location.TYPE, RmiBinding.class));
 	}

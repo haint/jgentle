@@ -30,7 +30,7 @@ import org.jgentleframework.core.handling.DefinitionManager;
 import org.jgentleframework.core.intercept.BeanInstantiationInterceptor;
 import org.jgentleframework.core.intercept.ObjectInstantiation;
 import org.jgentleframework.core.reflection.metadata.Definition;
-import org.jgentleframework.integration.remoting.DefaultID;
+import org.jgentleframework.integration.remoting.RemoteDefaultID;
 import org.jgentleframework.integration.remoting.annotation.Remote;
 import org.jgentleframework.integration.remoting.enums.RemoteType;
 import org.jgentleframework.integration.remoting.rmi.RmiBindingException;
@@ -142,10 +142,10 @@ public class RmiBindingInstantiationInterceptor implements
 				rmiBinding.refreshStubOnConnectFailure(),
 				rmiBinding.lookupStubOnStartup(), rmiBinding.cacheStub())
 				.in(RmiBinderImpl.class).id(
-						DefaultID.DEFAULT_RMIBINDER_ID).scope(Scope.SINGLETON);
+						RemoteDefaultID.DEFAULT_RMIBINDER_ID).scope(Scope.SINGLETON);
 		binder.flush();
 		RmiBinder rmibinder = (RmiBinder) provider
-				.getBeanBoundToDefinition(DefaultID.DEFAULT_RMIBINDER_ID);
+				.getBeanBoundToDefinition(RemoteDefaultID.DEFAULT_RMIBINDER_ID);
 		Object result = null;
 		Object previous = oi.getPreviousResult();
 		Enhancer enhancer = new Enhancer();

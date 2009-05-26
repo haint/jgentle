@@ -29,7 +29,7 @@ import org.jgentleframework.core.reflection.AnnotationBeanException;
 import org.jgentleframework.core.reflection.annohandler.AnnotationPostProcessor;
 import org.jgentleframework.core.reflection.annohandler.PointStatus;
 import org.jgentleframework.core.reflection.metadata.AnnoMeta;
-import org.jgentleframework.integration.remoting.DefaultID;
+import org.jgentleframework.integration.remoting.RemoteDefaultID;
 import org.jgentleframework.integration.remoting.rmi.RmiExportingException;
 import org.jgentleframework.integration.remoting.rmi.annotation.RmiExporting;
 import org.jgentleframework.utils.ReflectUtils;
@@ -102,10 +102,10 @@ public class RmiServiceExporterProcessor implements
 			Binder binder = new Binder(this.provider);
 			binder.bind("serviceClass").to(objectClass).lazyInit(false).in(
 					RmiExporterProxyFactoryBean.class).id(
-					DefaultID.DEFAULT_RMI_EXPORTER_PROXY_FACTORY).scope(
+					RemoteDefaultID.DEFAULT_RMI_EXPORTER_PROXY_FACTORY).scope(
 					Scope.SINGLETON);
 			binder.flush();
-			provider.getBean(DefaultID.DEFAULT_RMI_EXPORTER_PROXY_FACTORY);
+			provider.getBean(RemoteDefaultID.DEFAULT_RMI_EXPORTER_PROXY_FACTORY);
 			this.enable = true;
 		}
 	}
