@@ -410,7 +410,7 @@ public abstract class InOutExecutor {
 			if (!ReflectUtils.isCast(type, result)) {
 				throw new InOutDependencyException(
 						"The injected dependency instance can not be cast to '"
-								+ type + "'"+result);
+								+ type + "'");
 			}
 		}
 		return result;
