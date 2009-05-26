@@ -28,19 +28,19 @@ public enum PathType {
 	/**
 	 * equals <code>System.getProperty("user.dir")</code>
 	 */
-	USERDIR (System.getProperty("user.dir")),
+	USERDIR ("user.dir"),
 	/**
 	 * equals <code>System.getProperty("user.home")</code>
 	 */
-	USERHOME (System.getProperty("user.home")),
+	USERHOME ("user.home"),
 	/**
 	 * equals <code>System.getProperty("java.io.tmpdir")</code>
 	 */
-	TEMPDIR (System.getProperty("java.io.tmpdir")),
+	TEMPDIR ("java.io.tmpdir"),
 	/**
 	 * equals <code>System.getProperty("java.home")</code>
 	 */
-	JAVAHOME (System.getProperty("java.home")),
+	JAVAHOME ("java.home"),
 	/** The absolute path. */
 	ABSOLUTEPATH (""),
 	/** The class path. */
@@ -64,6 +64,6 @@ public enum PathType {
 	 */
 	public String getType() {
 
-		return type;
+		return System.getProperty(type);
 	}
 }
