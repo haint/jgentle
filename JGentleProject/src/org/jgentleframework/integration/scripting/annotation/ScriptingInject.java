@@ -17,6 +17,14 @@
  */
 package org.jgentleframework.integration.scripting.annotation;
 
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+import org.jgentleframework.configure.enums.PathType;
+import org.jgentleframework.integration.scripting.enums.ScriptingType;
+
 /**
  * Chứa thông tin cấu hình cho phép inject thông tin của bean từ một scripting
  * langue
@@ -24,24 +32,20 @@ package org.jgentleframework.integration.scripting.annotation;
  * @author gnut
  * 
  */
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.TYPE)
 public @interface ScriptingInject {
 	/**
 	 * 
 	 * @return vị trí chứa tập tin sctipt được tính từ classpath
 	 */
-	String scriptSource() default "";
+	String scriptFile() default "";
 
-	/**
-	 * 
-	 * @return thời gian tiến hành kiểm nội dung scriptSource khi có một sự thay
-	 *         đổi của scriptSource nội dung của của bean trong scriptSource sẽ
-	 *         được nạp lên lại.
-	 */
-	long refreshCheckDelay() default -1;
+	PathType pathType() default PathType.CLASSPATH;
 
 	/**
 	 * 
 	 * @return Ngôn ngữ scripting sử dụng để nạp bean.
 	 */
-	String lang();
+	ScriptingType lang();
 }
