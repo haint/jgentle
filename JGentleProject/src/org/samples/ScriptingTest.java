@@ -27,7 +27,7 @@ public class ScriptingTest {
 		System.out.println(a.ia.doSomeThing());
 		System.out.println(a.ia.hashCode());
 		System.out.println(a.ib.doSomeThing());
-		System.out.println(a.ib.toString());
+		System.out.println(a.ib.hashCode());
 
 	}
 
@@ -41,9 +41,10 @@ abstract class ConfigSrcipting implements Configurable {
 	 */
 	@Override
 	public void configure() {
-		bind().in(ScriptingInstantiationInterceptor.class).lazyInit(false);
+		//bind().in(ScriptingInstantiationInterceptor.class).lazyInit(false);
 		intercept(refMapping(ScriptingInstantiationInterceptor.class),
 				annotatedWith(Location.TYPE, ScriptingInject.class));
+		attach(IA.class).named("ia").to(IA.class);
 		// intercept(refMapping(ScriptingInstantiationInterceptor.class),
 		// annotatedWith(Location.TYPE, ScriptingInject.class));
 
@@ -52,7 +53,7 @@ abstract class ConfigSrcipting implements Configurable {
 }
 
 class ScriptTest {
-	@Inject
+	@Inject("ia")
 	public IA ia;
 	@Inject
 	public IB ib;
