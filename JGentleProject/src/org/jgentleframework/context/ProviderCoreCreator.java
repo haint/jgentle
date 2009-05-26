@@ -178,9 +178,9 @@ class ProviderCoreCreator extends AbstractBeanFactory implements Provider {
 		if ((result != null && result == refer) || result == null) {
 			result = getBeanBoundToDefinition(refer);
 			if (result == null)
-				result = getBeanBoundToName(refer);
-			if (result == null)
 				result = getBeanBoundToMapping(refer);
+			if (result == null)
+				result = getBeanBoundToName(refer);
 			// if (result == null)
 			// result = refer;
 		}

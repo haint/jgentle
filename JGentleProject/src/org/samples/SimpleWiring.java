@@ -90,12 +90,12 @@ class KnightElf implements Filter {
 	@Override
 	public void filters(Map<Field, Object> map) {
 
-		for (Field field : map.keySet()) {
-			if (field.getName().equals("level")
-					&& ((Integer) map.get(field)).intValue() == 0) {
-				this.level = 60;
-			}
-		}
+//		for (Field field : map.keySet()) {
+//			if (field.getName().equals("level")
+//					&& ((Integer) map.get(field)).intValue() == 0) {
+//				this.level = 60;
+//			}
+//		}
 	}
 }
 

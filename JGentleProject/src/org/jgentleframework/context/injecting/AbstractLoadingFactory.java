@@ -31,6 +31,8 @@ import org.jgentleframework.core.reflection.DefinitionPostProcessor;
 import org.jgentleframework.core.reflection.annohandler.AnnotationBeanProcessor;
 
 /**
+ * The Class AbstractLoadingFactory.
+ * 
  * @author Quoc Chung - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
  * @date Feb 12, 2009

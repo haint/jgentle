@@ -126,8 +126,8 @@ public abstract class InOutExecutor {
 	 * @throws IllegalAccessException
 	 *             the illegal access exception
 	 */
-	public static void executesFieldOutjecting(Field[] fields, Provider provider,
-			Object target, Definition definition)
+	public static void executesFieldOutjecting(Field[] fields,
+			Provider provider, Object target, Definition definition)
 			throws IllegalArgumentException, IllegalAccessException {
 
 		Assertor.notNull(definition, "The given definition must not be null!");
@@ -225,8 +225,8 @@ public abstract class InOutExecutor {
 		return result;
 	}
 
-	public static Map<Field, Object> executesInjectingAndFiltering(Field[] fields,
-			Method[] setters, Provider provider, Object target,
+	public static Map<Field, Object> executesInjectingAndFiltering(
+			Field[] fields, Method[] setters, Provider provider, Object target,
 			Definition definition) throws IllegalArgumentException,
 			IllegalAccessException, InvocationTargetException {
 
@@ -410,7 +410,7 @@ public abstract class InOutExecutor {
 			if (!ReflectUtils.isCast(type, result)) {
 				throw new InOutDependencyException(
 						"The injected dependency instance can not be cast to '"
-								+ type + "'");
+								+ type + "'"+result);
 			}
 		}
 		return result;
