@@ -27,4 +27,8 @@ package org.jgentleframework.configure.enums;
 public enum MetadataKey {
 	/** The DEFINITION. */
 	DEFINITION,
+	/** The METHOD. */
+	METHOD,
+	/** The FIELD. */
+	FIELD
 }

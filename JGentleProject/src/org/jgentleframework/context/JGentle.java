@@ -377,7 +377,7 @@ public abstract class JGentle {
 	 * @return the provider
 	 */
 	@SuppressWarnings("unchecked")
-	public static Provider buildProvider(Class<?>... configClasses) {
+	public static Provider buildProvider(Class... configClasses) {
 
 		try {
 			return (Provider) buildContext(false, null, null,
@@ -427,8 +427,7 @@ public abstract class JGentle {
 	 * @return the service provider
 	 */
 	@SuppressWarnings("unchecked")
-	public static ServiceProvider buildServiceProvider(
-			Class<?>... configClasses) {
+	public static ServiceProvider buildServiceProvider(Class... configClasses) {
 
 		try {
 			return JGentle.buildServiceProvider(null, null,

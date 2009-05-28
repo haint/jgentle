@@ -24,7 +24,7 @@ import org.jgentleframework.configure.Configurable;
 import org.jgentleframework.configure.annotation.Inject;
 import org.jgentleframework.context.JGentle;
 import org.jgentleframework.context.injecting.Provider;
-import org.jgentleframework.core.reflection.Reflect;
+import org.jgentleframework.core.reflection.ReflectIdentification;
 import org.jgentleframework.core.reflection.metadata.Definition;
 
 /**
@@ -56,7 +56,7 @@ abstract class ConfigAnnotating implements Configurable {
 	public void configure() {
 
 		attachConstant("name").to("Le Quoc Chung 1234");
-		bind().annotate(Reflect.fields("*b"), refMapping(MYANNOTATION2.class))
+		bind().annotate(ReflectIdentification.fields("*b"), refMapping(MYANNOTATION2.class))
 				.in(AClass.class).id("AClassID");
 	}
 }

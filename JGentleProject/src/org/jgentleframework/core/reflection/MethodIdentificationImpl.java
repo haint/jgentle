@@ -19,6 +19,7 @@ package org.jgentleframework.core.reflection;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.jgentleframework.utils.ReflectUtils;
 
@@ -55,34 +56,6 @@ class MethodIdentificationImpl implements MethodIdentification {
 	 */
 	public MethodIdentificationImpl() {
 
-	}
-
-	/**
-	 * The Constructor.
-	 * 
-	 * @param name
-	 *            the name
-	 * @param declaringClass
-	 *            the declaring class
-	 * @param foundOnSuperclass
-	 *            the found on superclass
-	 * @param modifiers
-	 *            the modifiers
-	 * @param argsType
-	 *            the args type
-	 * @param throwableClasses
-	 *            the throwable classes
-	 */
-	public MethodIdentificationImpl(String name, Class<?> declaringClass,
-			boolean foundOnSuperclass, int modifiers, Class<?>[] argsType,
-			Class<? extends Throwable>[] throwableClasses) {
-
-		this.name = name;
-		this.declaringClass = declaringClass;
-		this.foundOnSuperclass = foundOnSuperclass;
-		this.modifiers = modifiers;
-		this.argsType = argsType;
-		this.throwableClasses = throwableClasses;
 	}
 
 	/**
@@ -132,7 +105,7 @@ class MethodIdentificationImpl implements MethodIdentification {
 	 * @param argsType
 	 *            the args type
 	 * @param modifiers
-	 *            the modifiers
+	 *            the int representing the modifiers for corresponding methods.
 	 */
 	public MethodIdentificationImpl(String name, Class<?>[] argsType,
 			int modifiers) {
@@ -264,6 +237,59 @@ class MethodIdentificationImpl implements MethodIdentification {
 		this.declaringClass = declaringClass;
 	}
 
+	/**
+	 * Instantiates a new method identification impl.
+	 * 
+	 * @param name
+	 *            the name
+	 * @param argsType
+	 *            the args type
+	 * @param throwableClasses
+	 *            the throwable classes
+	 * @param declaringClass
+	 *            the declaring class
+	 * @param foundOnSuperclass
+	 *            the found on superclass
+	 */
+	public MethodIdentificationImpl(String name, Class<?>[] argsType,
+			Class<? extends Throwable>[] throwableClasses,
+			Class<?> declaringClass, boolean foundOnSuperclass) {
+
+		this.name = name;
+		this.argsType = argsType;
+		this.throwableClasses = throwableClasses;
+		this.declaringClass = declaringClass;
+		this.foundOnSuperclass = foundOnSuperclass;
+	}
+
+	/**
+	 * Instantiates a new method identification impl.
+	 * 
+	 * @param name
+	 *            the name
+	 * @param argsType
+	 *            the args type
+	 * @param throwableClasses
+	 *            the throwable classes
+	 * @param declaringClass
+	 *            the declaring class
+	 * @param foundOnSuperclass
+	 *            the found on superclass
+	 * @param modifiers
+	 *            the modifiers
+	 */
+	public MethodIdentificationImpl(String name, Class<?>[] argsType,
+			Class<? extends Throwable>[] throwableClasses,
+			Class<?> declaringClass, boolean foundOnSuperclass, int modifiers) {
+
+		this.name = name;
+		this.argsType = argsType;
+		this.throwableClasses = throwableClasses;
+		this.declaringClass = declaringClass;
+		this.foundOnSuperclass = foundOnSuperclass;
+		this.modifiers = modifiers;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * @see org.jgentleframework.general.reflection.Identification#getMember()
@@ -278,10 +304,11 @@ class MethodIdentificationImpl implements MethodIdentification {
 		}
 		Method[] lst = ReflectUtils.methods(this.name, this.declaringClass,
 				foundOnSuperclass);
-		ArrayList<Method> result = new ArrayList<Method>();
+		List<Method> result = new ArrayList<Method>();
 		for (Method method : lst) {
+			// check modifiers
 			if (method.getModifiers() == this.modifiers
-					|| method.getModifiers() == Identification.NO_MODIFIERS) {
+					|| this.modifiers == Identification.NO_MODIFIERS) {
 				// Checking argsType
 				if (this.argsType != null && this.argsType.length != 0) {
 					if (this.argsType.length != method.getParameterTypes().length)
@@ -290,9 +317,10 @@ class MethodIdentificationImpl implements MethodIdentification {
 						int error = 0;
 						for (int i = 0; i < this.argsType.length; i++) {
 							if (!this.argsType[i].equals(method
-									.getParameterTypes()[i]))
+									.getParameterTypes()[i])) {
 								error++;
-							break;
+								break;
+							}
 						}
 						if (error != 0)
 							continue;

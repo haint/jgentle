@@ -328,8 +328,8 @@ public abstract class AbstractProcesserChecker {
 	protected boolean executesFieldInterceptor(Class<?> targetClass,
 			InstantiationSelector selector, Definition definition,
 			ElementAspectFactory elementAspectFactory, boolean invocationINOUT,
-			HashMap<Interceptor, Matcher<Definition>> map,
-			HashMap<Method, MethodAspectPair> methodAspectList) {
+			Map<Interceptor, Matcher<Definition>> map,
+			Map<Method, MethodAspectPair> methodAspectList) {
 
 		if (!targetClass.isAnnotation()) {
 			FieldInterceptor[] fieldIcpLst = selector.getFieldInterceptors();
@@ -390,7 +390,7 @@ public abstract class AbstractProcesserChecker {
 	@SuppressWarnings("unchecked")
 	protected void executesInOut(Class<?> targetClass, Definition definition,
 			Provider provider, boolean runtimeLoading,
-			HashMap<Method, MethodAspectPair> methodAspectList,
+			Map<Method, MethodAspectPair> methodAspectList,
 			boolean invocationINOUT) {
 
 		// if target class is annotation type

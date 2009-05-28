@@ -18,9 +18,12 @@
 package org.jgentleframework.configure;
 
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Map;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.jgentleframework.configure.enums.AND_OR;
 import org.jgentleframework.configure.objectmeta.Binder;
 import org.jgentleframework.configure.objectmeta.InClass;
@@ -33,13 +36,18 @@ import org.jgentleframework.context.aop.support.MatcherPointcut;
 import org.jgentleframework.context.aop.support.Matching;
 import org.jgentleframework.core.intercept.support.AnnotatedWithMatcher;
 import org.jgentleframework.core.intercept.support.ConstructorAnnotatedWithMatcher;
+import org.jgentleframework.core.intercept.support.CoreIdentification;
 import org.jgentleframework.core.intercept.support.FieldAnnotatedWithMatcher;
 import org.jgentleframework.core.intercept.support.Matcher;
 import org.jgentleframework.core.intercept.support.MethodAnnotatedWithMatcher;
 import org.jgentleframework.core.intercept.support.ParameterAnnotatedWithMatcher;
 import org.jgentleframework.core.intercept.support.TypeAnnotatedWithMatcher;
+import org.jgentleframework.core.reflection.FieldIdentification;
+import org.jgentleframework.core.reflection.Identification;
+import org.jgentleframework.core.reflection.MethodIdentification;
 import org.jgentleframework.core.reflection.metadata.Definition;
 import org.jgentleframework.utils.Assertor;
+import org.jgentleframework.utils.ReflectUtils;
 import org.jgentleframework.utils.data.Pair;
 
 /**
@@ -66,6 +74,11 @@ public abstract class AbstractBindingConfig extends AbstractConfigModule
 	/** The object constant list. */
 	protected ArrayList<ObjectConstant>				objectConstantList			= null;
 
+	/** The log. */
+	protected final Log								log							= LogFactory
+																						.getLog(this
+																								.getClass());
+
 	/*
 	 * (non-Javadoc)
 	 * @see org.jgentleframework.configure.CoreBinding#annotatedWith(int,
@@ -78,9 +91,9 @@ public abstract class AbstractBindingConfig extends AbstractConfigModule
 
 		Assertor.notNull(andor);
 		MatcherPointcut<Definition, ? extends Matching> result = null;
-		if (classes == null || classes.length == 0) {
+		if (classes == null || (classes != null && classes.length == 0)) {
 			throw new IllegalArgumentException(
-					"The list of object classes of annotations must not be null or empty");
+					"The list containing object classes must not be null or empty !");
 		}
 		try {
 			switch (location) {
@@ -282,17 +295,115 @@ public abstract class AbstractBindingConfig extends AbstractConfigModule
 	/*
 	 * (non-Javadoc)
 	 * @see
+	 * org.jgentleframework.configure.CoreBinding#interceptMethod(java.lang.
+	 * Object, org.jgentleframework.core.reflection.MethodIdentification,
+	 * org.jgentleframework.context.aop.support.MatcherPointcut[])
+	 */
+	@Override
+	public void interceptMethod(Object interceptor,
+			MethodIdentification identification,
+			MatcherPointcut<Definition, ? extends Matching>... matcherPointcuts) {
+
+		Assertor.notNull(identification,
+				"The identification must not be null !!");
+		Assertor.notNull(matcherPointcuts,
+				"The 'matcherPointcuts' argument must not be null !!");
+		Assertor.notEmpty(matcherPointcuts,
+				"The 'matcherPointcuts' argument must not be empty !");
+		for (MatcherPointcut<Definition, ? extends Matching> mp : matcherPointcuts) {
+			if (!ReflectUtils.isCast(CoreIdentification.class, mp)) {
+				if (log.isFatalEnabled()) {
+					log.fatal("The matcher pointcut can not be cast to ["
+							+ CoreIdentification.class + "]",
+							new BindingException());
+				}
+			}
+			((CoreIdentification) mp)
+					.setIdentification((Identification<Method>) identification);
+		}
+		intercept(interceptor, matcherPointcuts);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * org.jgentleframework.configure.CoreBinding#interceptMethod(java.lang.
+	 * Object, org.jgentleframework.core.reflection.MethodIdentification,
+	 * org.jgentleframework.context.aop.support.MatcherPointcut)
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public void interceptMethod(Object interceptor,
+			MethodIdentification identification,
+			MatcherPointcut<Definition, ? extends Matching> matcherPointcut) {
+
+		interceptMethod(interceptor, identification,
+				new MatcherPointcut[] { matcherPointcut });
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * org.jgentleframework.configure.CoreBinding#interceptField(java.lang.Object
+	 * , org.jgentleframework.core.reflection.FieldIdentification,
+	 * org.jgentleframework.context.aop.support.MatcherPointcut[])
+	 */
+	@Override
+	public void interceptField(Object interceptor,
+			FieldIdentification identification,
+			MatcherPointcut<Definition, ? extends Matching>... matcherPointcuts) {
+
+		Assertor.notNull(identification,
+				"The identification must not be null !!");
+		Assertor.notNull(matcherPointcuts,
+				"The 'matcherPointcuts' argument must not be null !!");
+		Assertor.notEmpty(matcherPointcuts,
+				"The 'matcherPointcuts' argument must not be empty !");
+		for (MatcherPointcut<Definition, ? extends Matching> mp : matcherPointcuts) {
+			if (!ReflectUtils.isCast(CoreIdentification.class, mp)) {
+				if (log.isFatalEnabled()) {
+					log.fatal("The matcher pointcut can not be cast to ["
+							+ CoreIdentification.class + "]",
+							new BindingException());
+				}
+			}
+			((CoreIdentification) mp).setIdentification(identification);
+		}
+		intercept(interceptor, matcherPointcuts);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * org.jgentleframework.configure.CoreBinding#interceptField(java.lang.Object
+	 * , org.jgentleframework.core.reflection.FieldIdentification,
+	 * org.jgentleframework.context.aop.support.MatcherPointcut)
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public void interceptField(Object interceptor,
+			FieldIdentification identification,
+			MatcherPointcut<Definition, ? extends Matching> matcherPointcut) {
+
+		interceptField(interceptor, identification,
+				new MatcherPointcut[] { matcherPointcut });
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
 	 * org.jgentleframework.configure.CoreBinding#intercept(java.lang.Object,
 	 * org.jgentleframework.context.aop.support.MatcherPointcut<?,? extends
 	 * org.jgentleframework.context.aop.support.Matching>[])
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public void intercept(Object interceptor,
-			MatcherPointcut<?, ? extends Matching>... matcherPointcuts) {
+			MatcherPointcut<Definition, ? extends Matching>... matcherPointcuts) {
 
 		Assertor.notNull(matcherPointcuts,
-				"The matchers argument must not be null !");
+				"The 'matcherPointcuts' argument must not be null !");
+		Assertor.notEmpty(matcherPointcuts,
+				"The 'matcherPointcuts' argument must not be empty !");
 		try {
 			this.objBindingInterceptorList.add(Binder
 					.createObjectBindingInterceptor(interceptor,
@@ -300,7 +411,7 @@ public abstract class AbstractBindingConfig extends AbstractConfigModule
 		}
 		catch (ClassCastException e) {
 			throw new ClassCastException(
-					"The matcher must be 'Matcher<Definition>'");
+					"The 'matcherPointcuts' must be 'Matcher<Definition>'");
 		}
 	}
 
@@ -313,19 +424,9 @@ public abstract class AbstractBindingConfig extends AbstractConfigModule
 	@SuppressWarnings("unchecked")
 	@Override
 	public void intercept(Object interceptor,
-			MatcherPointcut<?, ? extends Matching> matcherPointcut) {
+			MatcherPointcut<Definition, ? extends Matching> matcherPointcut) {
 
-		Assertor.notNull(matcherPointcut,
-				"The matchers argument must not be null !");
-		try {
-			this.objBindingInterceptorList.add(Binder
-					.createObjectBindingInterceptor(interceptor,
-							(Matcher<Definition>) matcherPointcut));
-		}
-		catch (ClassCastException e) {
-			throw new ClassCastException(
-					"The matcher must be 'Matcher<Definition>'");
-		}
+		intercept(interceptor, new MatcherPointcut[] { matcherPointcut });
 	}
 
 	/*

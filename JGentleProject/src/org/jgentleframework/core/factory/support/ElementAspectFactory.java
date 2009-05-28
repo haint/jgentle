@@ -20,12 +20,13 @@ package org.jgentleframework.core.factory.support;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.aopalliance.intercept.FieldInterceptor;
 import org.aopalliance.intercept.Interceptor;
 import org.aopalliance.intercept.MethodInterceptor;
+import org.jgentleframework.context.aop.ClassFilter;
 import org.jgentleframework.context.aop.FieldFilter;
 import org.jgentleframework.context.aop.Filter;
 import org.jgentleframework.context.aop.MethodFilter;
@@ -36,6 +37,7 @@ import org.jgentleframework.context.aop.support.Matching;
 import org.jgentleframework.core.factory.BasicFieldMatchingAspectPair;
 import org.jgentleframework.core.factory.BasicMethodConstructorMatchingAspectPair;
 import org.jgentleframework.core.factory.BasicParameterMatchingAspectPair;
+import org.jgentleframework.core.factory.BasicTypeMatchingAspectPair;
 import org.jgentleframework.core.intercept.support.AbstractDefinitionMatcherPointcut;
 import org.jgentleframework.core.intercept.support.ConstructorAnnotatedWithMatcher;
 import org.jgentleframework.core.intercept.support.FieldAnnotatedWithMatcher;
@@ -84,10 +86,10 @@ class ElementAspectFactory {
 	 *         according to given method are existed, if not returns
 	 *         <code>null</code>.
 	 */
-	@SuppressWarnings("unchecked")
+	// @SuppressWarnings("unchecked")
 	public MethodAspectPair analysesMethod(MethodInterceptor[] interceptors,
-			HashMap<Interceptor, Matcher<Definition>> map,
-			Definition definition, final Method method) {
+			Map<Interceptor, Matcher<Definition>> map, Definition definition,
+			final Method method) {
 
 		Assertor.notNull(interceptors, "The interceptor must not be null !!");
 		Assertor.notNull(map, "The map must not be null !!");
@@ -107,31 +109,37 @@ class ElementAspectFactory {
 				ParameterAnnotatedWithMatcher pointcutPar = (ReflectUtils
 						.isCast(ParameterAnnotatedWithMatcher.class, matcher) ? (ParameterAnnotatedWithMatcher) matcher
 						: null);
-				if (pointcut == null && pointcutPar == null
-						&& ReflectUtils.isCast(MatcherPointcut.class, matcher)) {
-					Filter<Matching> filter = (Filter<Matching>) ((MatcherPointcut<Definition, Matching>) matcher)
-							.getFilter();
-					Matching matching = new AbstractMatching(null, null) {
-						/** The Constant serialVersionUID. */
-						private static final long	serialVersionUID	= 5215996796974023709L;
-
-						transient Method			thisMethod			= method;
-
-						/*
-						 * (non-Javadoc)
-						 * @see
-						 * org.jgentleframework.context.aop.support.Matching#
-						 * getTargetObject()
-						 */
-						@Override
-						public Object getTargetObject() {
-
-							return thisMethod;
-						}
-					};
-					if (filter != null && filter.matches(matching)
-							&& !list.contains(interceptor))
+				TypeAnnotatedWithMatcher pointcutType = (ReflectUtils.isCast(
+						TypeAnnotatedWithMatcher.class, matcher) ? (TypeAnnotatedWithMatcher) matcher
+						: null);
+				/*
+				 * if (pointcut == null && pointcutPar == null &&
+				 * ReflectUtils.isCast(MatcherPointcut.class, matcher)) {
+				 * Filter<Matching> filter = (Filter<Matching>)
+				 * ((MatcherPointcut<Definition, Matching>) matcher)
+				 * .getFilter(); Matching matching = new AbstractMatching(null,
+				 * null) {
+				 *//** The Constant serialVersionUID. */
+				/*
+				 * private static final long serialVersionUID =
+				 * 5215996796974023709L; transient Method thisMethod = method;
+				 * (non-Javadoc)
+				 * @see org.jgentleframework.context.aop.support.Matching#
+				 * getTargetObject()
+				 * @Override public Object getTargetObject() { return
+				 * thisMethod; } }; if (filter != null &&
+				 * filter.matches(matching) && !list.contains(interceptor))
+				 * list.add(interceptor); } else
+				 */if (pointcutType != null) {
+					ClassFilter classFilter = pointcutType.getClassFilter();
+					if (classFilter != null
+							&& classFilter
+									.matches(new BasicTypeMatchingAspectPair(
+											method.getDeclaringClass(), method,
+											definition))
+							&& !list.contains(interceptor)) {
 						list.add(interceptor);
+					}
 				}
 				else if (pointcut != null) {
 					MethodFilter methodFilter = pointcut.getMethodFilter();
@@ -186,8 +194,8 @@ class ElementAspectFactory {
 	 */
 	@SuppressWarnings("unchecked")
 	public FieldAspectPair analysesField(FieldInterceptor[] interceptors,
-			HashMap<Interceptor, Matcher<Definition>> map,
-			Definition definition, final Field field) {
+			Map<Interceptor, Matcher<Definition>> map, Definition definition,
+			final Field field) {
 
 		Assertor.notNull(interceptors,
 				"The given interceptor must not be null !!");

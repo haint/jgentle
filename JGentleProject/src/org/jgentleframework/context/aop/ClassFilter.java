@@ -27,8 +27,7 @@ import org.jgentleframework.context.aop.support.ClassMatching;
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
  * @date Aug 14, 2008
  */
-public interface ClassFilter extends 
-		Filter<ClassMatching> {
+public interface ClassFilter extends Filter<ClassMatching> {
 	/**
 	 * Should the pointcut apply to the given interface, target class or
 	 * annotation?

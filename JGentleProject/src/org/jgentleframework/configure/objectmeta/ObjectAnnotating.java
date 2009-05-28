@@ -19,7 +19,7 @@ package org.jgentleframework.configure.objectmeta;
 
 import org.jgentleframework.configure.enums.Types;
 import org.jgentleframework.core.reflection.Identification;
-import org.jgentleframework.core.reflection.Reflect;
+import org.jgentleframework.core.reflection.ReflectIdentification;
 import org.jgentleframework.core.reflection.metadata.Definition;
 import org.jgentleframework.utils.data.Pair;
 
@@ -48,7 +48,7 @@ public interface ObjectAnnotating {
 	 *            key is the member need to be annotated. Key could be field,
 	 *            method or Class of current specified class in
 	 *            {@link ObjectBindingConstant}. To specify key, use static
-	 *            methods of {@link Reflect} class.
+	 *            methods of {@link ReflectIdentification} class.
 	 * @param values
 	 *            the annotation instance list specified to annotated with key.
 	 * @return {@link InClass}
@@ -66,7 +66,7 @@ public interface ObjectAnnotating {
 	 *            key is the member need to be annotated. Key could be field,
 	 *            method or Class of current specified class in
 	 *            {@link ObjectBindingConstant}. To specify key, use static
-	 *            methods of {@link Reflect} class.
+	 *            methods of {@link ReflectIdentification} class.
 	 * @param value
 	 *            the annotation instance specified to annotated with key.
 	 * @return {@link InClass}
@@ -91,7 +91,7 @@ public interface ObjectAnnotating {
 	 *            mapping pair is the member need to be annotated. Key could be
 	 *            field, method or Class of current specified class in
 	 *            {@link ObjectBindingConstant}. To specify key, use static
-	 *            methods of {@link Reflect} class.
+	 *            methods of {@link ReflectIdentification} class.
 	 * @return {@link InClass}
 	 * @See {@link #annotate(Types, Object[][])}
 	 */
@@ -130,7 +130,7 @@ public interface ObjectAnnotating {
 	 *            mapping pair is the member need to be annotated. Key could be
 	 *            field, method or Class of current specified class in
 	 *            {@link ObjectBindingConstant}. To specify key, use static
-	 *            methods of {@link Reflect} class.
+	 *            methods of {@link ReflectIdentification} class.
 	 *            <p>
 	 *            - Note: <i> In case mapping pairs have variety types, type
 	 *            argument must be {@link Types#DEFAULT}.</i>

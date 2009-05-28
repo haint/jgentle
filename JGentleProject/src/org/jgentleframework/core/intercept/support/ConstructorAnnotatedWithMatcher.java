@@ -39,21 +39,8 @@ public class ConstructorAnnotatedWithMatcher
 		AbstractDefinitionMatcherPointcut<MethodConstructorMatching<Constructor<?>>>
 		implements
 		PointcutOfConstructorFilter<MethodConstructorMatching<Constructor<?>>> {
-	ConstructorFilter	filter	= new DefinitionMatcherConstructorFilter() {
-									@Override
-									public boolean matches(
-											MethodConstructorMatching<Constructor<?>> matching) {
-
-										return ConstructorAnnotatedWithMatcher.this
-												.matchesMember(matching);
-									}
-
-									@Override
-									public boolean isRuntime() {
-
-										return false;
-									}
-								};
+	/** The filter. */
+	ConstructorFilter	filter	= new DefinitionMatcherConstructorFilterClass();
 
 	/**
 	 * The Constructor.
@@ -71,7 +58,6 @@ public class ConstructorAnnotatedWithMatcher
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.jgentleframework.context.aop.Pointcut#getConstructorFilter()
 	 */
 	@Override
@@ -85,7 +71,6 @@ public class ConstructorAnnotatedWithMatcher
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.jgentleframework.context.aop.Pointcut#getFilter()
 	 */
 	@Override

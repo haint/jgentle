@@ -1019,7 +1019,8 @@ public final class ReflectUtils {
 	public static boolean isDeclaredException(Method method,
 			Class<? extends Throwable> exceptionType) {
 
-		Assertor.notNull(method, "Method must not be null.");
+		Assertor.notNull(method, "Method [" +
+				method+"] must not be null.");
 		Class<? extends Throwable>[] declaredExceptions = (Class<? extends Throwable>[]) method
 				.getExceptionTypes();
 		for (int i = 0; i < declaredExceptions.length; i++) {
@@ -1224,33 +1225,31 @@ public final class ReflectUtils {
 	}
 
 	/**
-	 * Thực thi trả về các {@link Method} tương ứng với
-	 * <code>object class</code> được chỉ định tương ứng. Để Phương thức này
-	 * thực thi chỉ cần cung cấp tên định <b>'name'</b> của method cần truy vấn,
-	 * không cần cung cấp <code>class type</code> của tham số truyền.
+	 * Returns an array containing method objects that corresponds to the given
+	 * name (or regular expression pattern of name)
 	 * <p>
-	 * <i>Method này thực thi tương đương
-	 * {@link #methods(String, Class, boolean)} với</i> giá trị boolean (<code>'superClass'</code>)
-	 * <i>chỉ định là <b>false</b></i>. Điều này có nghĩa rằng danh sách tìm
-	 * kiếm sẽ chỉ bao gồm các <code>methods</code> được khai báo trong phạm vi
-	 * <code>Class</code> tương ứng không bao gồm superClass của Class chỉ định.
+	 * <b>Note:</b>
 	 * <p>
-	 * Lưu ý rằng phương thức này sẽ chỉ trả về các
-	 * <code>non-static methods</code>.
+	 * - This method only returns <code>non-static methods</code>.<br>
+	 * - This method result is the same as
+	 * {@link #methods(String, Class, boolean)} according to
+	 * <code>superClass</code> argument is <code>false</code>
 	 * <p>
-	 * - Có thể sử dụng <code>Regular Expression</code> để chỉ định tên
-	 * {@link Method} trả về.
+	 * - <code>Regular expression</code> can be used in order to specify a set
+	 * of returned methods.
 	 * <p>
 	 * <b>EX:</b>
 	 * <p>
-	 * <code>method("set*")</code> sẽ chỉ định trả về tất cả các setter method.
+	 * <code>methods("set*")</code> shall specify to return all of setter
+	 * methods.
 	 * 
 	 * @param name
-	 *            tên định danh method cần truy vấn trả về.
+	 *            the name (or regular expression pattern) of method or a set of
+	 *            methods.
 	 * @param clazz
-	 *            the clazz
-	 * @return trả về một mảng các {@link Method} tương ứng tìm được nếu có, nếu
-	 *         không trả về một danh sách rỗng.
+	 *            the declaring class
+	 * @return an array containing method objects if they exist, if not, return
+	 *         an empty array.
 	 */
 	public static Method[] methods(String name, Class<?> clazz) {
 
@@ -1258,36 +1257,35 @@ public final class ReflectUtils {
 	}
 
 	/**
-	 * Thực thi trả về {@link Method} tương ứng với <code>object class</code>
-	 * được chỉ định tương ứng. Để Phương thức này thực thi chỉ cần cung cấp tên
-	 * định <b>'name'</b> của method cần truy vấn, không cần cung cấp
-	 * <code>class type</code> của tham số truyền.
+	 * Returns an array containing method objects that corresponds to the given
+	 * name (or regular expression pattern of name)
 	 * <p>
-	 * Lưu ý rằng phương thức này sẽ chỉ trả về các
-	 * <code>non-static methods</code>.
+	 * <b>Note:</b>
 	 * <p>
-	 * - Có thể sử dụng <code>Regular Expression</code> để chỉ định tên
-	 * {@link Method} trả về.
+	 * - This method only returns <code>non-static methods</code>.
+	 * <p>
+	 * - <code>Regular expression</code> can be used in order to specify a set
+	 * of returned methods.
 	 * <p>
 	 * <b>EX:</b>
 	 * <p>
-	 * <code>method("set*")</code> sẽ chỉ định trả về tất cả các
-	 * <code>setter method</code>.
+	 * <code>method("set*")</code> shall specify to return all of setter
+	 * methods.
 	 * 
 	 * @param name
-	 *            tên định danh method cần truy vấn trả về.
+	 *            the name (or regular expression pattern) of method or a set of
+	 *            methods.
 	 * @param clazz
-	 *            object class tương ứng.
+	 *            the declaring class
 	 * @param superClass
-	 *            nếu chỉ định là <b>true</b>, danh sách các
-	 *            <code>methods</code> tìm kiếm sẽ bao gồm cả các
-	 *            <code>methods</code> được khai báo bởi <code>superClass</code>
-	 *            của Class hiện hành. Ngược lại, nếu chỉ định là <b>false</b>,
-	 *            danh sách tìm kiếm chỉ nằm trong phạm vi các
-	 *            <code>methods</code> được khai báo trong <code>Class</code>
-	 *            tương ứng.
-	 * @return trả về một mảng các {@link Method} tương ứng tìm được nếu có, nếu
-	 *         không trả về một danh sách rỗng.
+	 *            if is specified to be <b>true</b>, the returned method list
+	 *            includes method objects are declared in current derived class
+	 *            and also in super class of it. Otherwise, if is specified to
+	 *            be <b>false</b>, the returned method list only includes method
+	 *            objects are declared in current derived class, exclude super
+	 *            classes of it.
+	 * @return an array containing method objects if they exist, if not, return
+	 *         an empty array.
 	 */
 	public static Method[] methods(String name, Class<?> clazz,
 			boolean superClass) {

@@ -15,22 +15,30 @@
  * 
  * Project: JGentleFramework
  */
-package org.jgentleframework.context.aop.support;
+package org.jgentleframework.core.intercept.support;
 
-import org.jgentleframework.context.aop.Pointcut;
-import org.jgentleframework.core.intercept.support.CoreIdentification;
-import org.jgentleframework.core.intercept.support.Matcher;
+import org.jgentleframework.core.reflection.Identification;
 
 /**
- * Represents an MatcherPointcut which is an combination of a {@link Matcher}
- * and a {@link Pointcut}
+ * The Interface CoreIdentification.
  * 
- * @author LE QUOC CHUNG - mailto: <a
+ * @author Quoc Chung - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
- * @date Aug 16, 2008
- * @see Matcher
- * @see Pointcut
+ * @date May 28, 2009
  */
-public interface MatcherPointcut<T, V extends Matching> extends Matcher<T>,
-		Pointcut<V>, CoreIdentification {
+public interface CoreIdentification {
+	/**
+	 * Gets the identification.
+	 * 
+	 * @return the identification
+	 */
+	public Identification<?> getIdentification();
+
+	/**
+	 * Sets the identification.
+	 * 
+	 * @param identification
+	 *            the identification to set
+	 */
+	public void setIdentification(Identification<?> identification);
 }

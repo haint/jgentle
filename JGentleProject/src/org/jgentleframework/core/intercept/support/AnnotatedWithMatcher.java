@@ -18,8 +18,6 @@
 package org.jgentleframework.core.intercept.support;
 
 import java.lang.annotation.Annotation;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Method;
 
 import org.jgentleframework.configure.enums.AND_OR;
 import org.jgentleframework.context.aop.ClassFilter;
@@ -30,11 +28,8 @@ import org.jgentleframework.context.aop.MethodFilter;
 import org.jgentleframework.context.aop.ParameterFilter;
 import org.jgentleframework.context.aop.PointcutOfAll;
 import org.jgentleframework.context.aop.StaticallySupportFilter;
-import org.jgentleframework.context.aop.support.ClassMatching;
-import org.jgentleframework.context.aop.support.FieldMatching;
 import org.jgentleframework.context.aop.support.Matching;
-import org.jgentleframework.context.aop.support.MethodConstructorMatching;
-import org.jgentleframework.context.aop.support.ParameterMatching;
+import org.jgentleframework.core.reflection.Identification;
 
 /**
  * The Class AnnotatedWithMatcher.
@@ -45,6 +40,9 @@ import org.jgentleframework.context.aop.support.ParameterMatching;
  */
 public class AnnotatedWithMatcher extends
 		AbstractDefinitionMatcherPointcut<Matching> implements PointcutOfAll {
+	/** The identification. */
+	Identification<?>	identification	= null;
+
 	/**
 	 * The Constructor.
 	 * 
@@ -66,13 +64,7 @@ public class AnnotatedWithMatcher extends
 	@Override
 	public ClassFilter getClassFilter() {
 
-		return new DefinitionMatcherClassFilter() {
-			@Override
-			public boolean matches(ClassMatching matching) {
-
-				return AnnotatedWithMatcher.this.matchesMember(matching);
-			}
-		};
+		return AnnotatedWithMatcher.this.new DefinitionMatcherClassFilterClass();
 	}
 
 	/*
@@ -85,20 +77,7 @@ public class AnnotatedWithMatcher extends
 		/*
 		 * Returns a statically constructor filter
 		 */
-		return new DefinitionMatcherConstructorFilter() {
-			@Override
-			public boolean matches(
-					MethodConstructorMatching<Constructor<?>> matching) {
-
-				return AnnotatedWithMatcher.this.matchesMember(matching);
-			}
-
-			@Override
-			public boolean isRuntime() {
-
-				return false;
-			}
-		};
+		return AnnotatedWithMatcher.this.new DefinitionMatcherConstructorFilterClass();
 	}
 
 	/*
@@ -111,19 +90,7 @@ public class AnnotatedWithMatcher extends
 		/*
 		 * Returns a statically field filter
 		 */
-		return new DefinitionMatcherFieldFilter() {
-			@Override
-			public boolean isRuntime() {
-
-				return false;
-			}
-
-			@Override
-			public boolean matches(FieldMatching matching) {
-
-				return AnnotatedWithMatcher.this.matchesMember(matching);
-			}
-		};
+		return AnnotatedWithMatcher.this.new DefinitionMatcherFieldFilterClass();
 	}
 
 	/*
@@ -136,19 +103,7 @@ public class AnnotatedWithMatcher extends
 		/*
 		 * Returns a statically method filter
 		 */
-		return new DefinitionMatcherMethodFilter() {
-			@Override
-			public boolean matches(MethodConstructorMatching<Method> matching) {
-
-				return AnnotatedWithMatcher.this.matchesMember(matching);
-			}
-
-			@Override
-			public boolean isRuntime() {
-
-				return false;
-			}
-		};
+		return AnnotatedWithMatcher.this.new DefinitionMatcherMethodFilterClass();
 	}
 
 	/*
@@ -163,19 +118,7 @@ public class AnnotatedWithMatcher extends
 		/*
 		 * Returns a statically parameter filter
 		 */
-		return new DefinitionMatcherParameterFilter<Object>() {
-			@Override
-			public boolean matches(ParameterMatching<Object> matching) {
-
-				return AnnotatedWithMatcher.this.matchesMember(matching);
-			}
-
-			@Override
-			public boolean isRuntime() {
-
-				return false;
-			}
-		};
+		return AnnotatedWithMatcher.this.new DefinitionMatcherParameterFilterClass();
 	}
 
 	/*
@@ -192,5 +135,27 @@ public class AnnotatedWithMatcher extends
 				return AnnotatedWithMatcher.this.matchesMember(matching);
 			}
 		};
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @seeorg.jgentleframework.core.intercept.support.CoreIdentification#
+	 * getIdentification()
+	 */
+	@Override
+	public Identification<?> getIdentification() {
+
+		return this.identification;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @seeorg.jgentleframework.core.intercept.support.CoreIdentification#
+	 * setIdentification(org.jgentleframework.core.reflection.Identification)
+	 */
+	@Override
+	public void setIdentification(Identification<?> identification) {
+
+		this.identification = identification;
 	}
 }

@@ -35,20 +35,7 @@ import org.jgentleframework.context.aop.support.FieldMatching;
 public class FieldAnnotatedWithMatcher extends
 		AbstractDefinitionMatcherPointcut<FieldMatching> implements
 		PointcutOfFieldFilter<FieldMatching> {
-	FieldFilter	filter	= new DefinitionMatcherFieldFilter() {
-							@Override
-							public boolean matches(FieldMatching matching) {
-
-								return FieldAnnotatedWithMatcher.this
-										.matchesMember(matching);
-							}
-
-							@Override
-							public boolean isRuntime() {
-
-								return false;
-							}
-						};
+	FieldFilter	filter	= new DefinitionMatcherFieldFilterClass();
 
 	/**
 	 * The Constructor.
@@ -66,8 +53,8 @@ public class FieldAnnotatedWithMatcher extends
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.context.aop.PointcutOfFieldFilter#getFieldFilter()
+	 * @see
+	 * org.jgentleframework.context.aop.PointcutOfFieldFilter#getFieldFilter()
 	 */
 	@Override
 	public FieldFilter getFieldFilter() {
@@ -80,7 +67,6 @@ public class FieldAnnotatedWithMatcher extends
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.jgentleframework.context.aop.Pointcut#getFilter()
 	 */
 	@Override

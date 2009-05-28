@@ -19,6 +19,8 @@ package org.jgentleframework.integration.remoting.rmi.context;
 
 import org.jgentleframework.configure.Configurable;
 import org.jgentleframework.configure.Location;
+import org.jgentleframework.configure.enums.AND_OR;
+import org.jgentleframework.integration.remoting.annotation.Remote;
 import org.jgentleframework.integration.remoting.rmi.annotation.RmiBinding;
 
 /**
@@ -39,6 +41,7 @@ public abstract class RmiService implements Configurable {
 		bind().in(RmiServiceExporterProcessor.class).id(
 				RmiServiceExporterProcessor.class.getName());
 		intercept(refMapping(RmiBindingInstantiationInterceptor.class),
-				annotatedWith(Location.TYPE, RmiBinding.class));
+				annotatedWith(Location.TYPE, AND_OR.AND, RmiBinding.class,
+						Remote.class));
 	}
 }

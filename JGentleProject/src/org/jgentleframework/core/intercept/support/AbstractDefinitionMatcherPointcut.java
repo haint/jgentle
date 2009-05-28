@@ -36,6 +36,9 @@ import org.jgentleframework.context.aop.support.Matching;
 import org.jgentleframework.context.aop.support.MethodConstructorMatching;
 import org.jgentleframework.context.aop.support.ParameterMatching;
 import org.jgentleframework.core.intercept.InterceptionException;
+import org.jgentleframework.core.reflection.FieldIdentification;
+import org.jgentleframework.core.reflection.Identification;
+import org.jgentleframework.core.reflection.MethodIdentification;
 import org.jgentleframework.core.reflection.metadata.Definition;
 import org.jgentleframework.utils.Assertor;
 import org.jgentleframework.utils.ReflectUtils;
@@ -56,6 +59,9 @@ import org.jgentleframework.utils.ReflectUtils;
 public abstract class AbstractDefinitionMatcherPointcut<T extends Matching>
 		extends AbstractDefinitionMatcher implements
 		MatcherPointcut<Definition, T> {
+	/** The identification. */
+	Identification<?>					identification	= null;
+
 	/** The andor. */
 	final AND_OR						andor;
 
@@ -63,10 +69,10 @@ public abstract class AbstractDefinitionMatcherPointcut<T extends Matching>
 	final Class<? extends Annotation>[]	annotationList;
 
 	/** The Constant thisMatcher. */
-	public final static int				thisMatcher	= 1;
+	public final static int				thisMatcher		= 1;
 
 	/** The Constant classFilter. */
-	public final static int				typeFilter	= 2;
+	public final static int				typeFilter		= 2;
 
 	/**
 	 * Instantiates a new annotated with matcher.
@@ -238,24 +244,26 @@ public abstract class AbstractDefinitionMatcherPointcut<T extends Matching>
 	 */
 	protected boolean matches(Definition definition, int requestor) {
 
-		boolean result = true;
-		for (Class<? extends Annotation> clazz : annotationList) {
-			if (andor.equals(AND_OR.OR)) {
-				if (checkingDefCondition(definition, clazz, requestor)) {
-					return true;
+		boolean result = false;
+		if (definition != null) {
+			for (Class<? extends Annotation> clazz : annotationList) {
+				if (andor.equals(AND_OR.OR)) {
+					if (checkingDefCondition(definition, clazz, requestor)) {
+						return true;
+					}
+					else
+						result = false;
 				}
-				else
-					result = false;
-			}
-			else if (andor.equals(AND_OR.AND)) {
-				if (!checkingDefCondition(definition, clazz, requestor)) {
-					return false;
+				else if (andor.equals(AND_OR.AND)) {
+					if (!checkingDefCondition(definition, clazz, requestor)) {
+						return false;
+					}
+					else
+						result = true;
 				}
-				else
-					result = true;
-			}
-			else {
-				throw new InterceptionException();
+				else {
+					throw new InterceptionException();
+				}
 			}
 		}
 		return result;
@@ -273,6 +281,39 @@ public abstract class AbstractDefinitionMatcherPointcut<T extends Matching>
 	}
 
 	/**
+	 * The Class DefinitionMatcherClassFilterClass.
+	 * 
+	 * @author Quoc Chung - mailto: <a
+	 *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
+	 * @date May 28, 2009
+	 */
+	public class DefinitionMatcherClassFilterClass extends
+			DefinitionMatcherClassFilter {
+		/*
+		 * (non-Javadoc)
+		 * @see
+		 * org.jgentleframework.core.intercept.support.Matcher#matches(java.
+		 * lang.Object)
+		 */
+		@Override
+		public boolean matches(ClassMatching matching) {
+
+			if (identification == null)
+				return AbstractDefinitionMatcherPointcut.this
+						.matchesMember(matching);
+			else {
+				boolean result = false;
+				result = StaticMatcher.staticMethodFieldMatching(
+						identification, matching);
+				
+				return AbstractDefinitionMatcherPointcut.this
+						.matchesMember(matching)
+						&& result;
+			}
+		}
+	}
+
+	/**
 	 * The Class DefinitionMatcherMethodFilter.
 	 * 
 	 * @author LE QUOC CHUNG - mailto: <a
@@ -285,6 +326,48 @@ public abstract class AbstractDefinitionMatcherPointcut<T extends Matching>
 	}
 
 	/**
+	 * The Class DefinitionMatcherMethodFilterClass.
+	 * 
+	 * @author Quoc Chung - mailto: <a
+	 *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
+	 * @date May 28, 2009
+	 */
+	public class DefinitionMatcherMethodFilterClass extends
+			DefinitionMatcherMethodFilter {
+		/*
+		 * (non-Javadoc)
+		 * @see
+		 * org.jgentleframework.core.intercept.support.Matcher#matches(java.
+		 * lang.Object)
+		 */
+		@Override
+		public boolean matches(MethodConstructorMatching<Method> matching) {
+
+			if (identification == null)
+				return AbstractDefinitionMatcherPointcut.this
+						.matchesMember(matching);
+			else {
+				boolean result = StaticMatcher.staticMethodFieldMatching(
+						identification, MethodIdentification.class, matching);
+				return AbstractDefinitionMatcherPointcut.this
+						.matchesMember(matching)
+						|| result;
+			}
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * @see
+		 * org.jgentleframework.context.aop.RuntimeSupportFilter#isRuntime()
+		 */
+		@Override
+		public boolean isRuntime() {
+
+			return false;
+		}
+	}
+
+	/**
 	 * The Class DefinitionMatcherFieldFilter.
 	 * 
 	 * @author LE QUOC CHUNG - mailto: <a
@@ -293,6 +376,48 @@ public abstract class AbstractDefinitionMatcherPointcut<T extends Matching>
 	 */
 	public abstract class DefinitionMatcherFieldFilter extends
 			AbstractMatcher<FieldMatching> implements FieldFilter {
+	}
+
+	/**
+	 * The Class DefinitionMatcherFieldFilterClass.
+	 * 
+	 * @author Quoc Chung - mailto: <a
+	 *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
+	 * @date May 28, 2009
+	 */
+	public class DefinitionMatcherFieldFilterClass extends
+			DefinitionMatcherFieldFilter {
+		/*
+		 * (non-Javadoc)
+		 * @see
+		 * org.jgentleframework.core.intercept.support.Matcher#matches(java.
+		 * lang.Object)
+		 */
+		@Override
+		public boolean matches(FieldMatching matching) {
+
+			if (identification == null)
+				return AbstractDefinitionMatcherPointcut.this
+						.matchesMember(matching);
+			else {
+				boolean result = StaticMatcher.staticMethodFieldMatching(
+						identification, FieldIdentification.class, matching);
+				return AbstractDefinitionMatcherPointcut.this
+						.matchesMember(matching)
+						|| result;
+			}
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * @see
+		 * org.jgentleframework.context.aop.RuntimeSupportFilter#isRuntime()
+		 */
+		@Override
+		public boolean isRuntime() {
+
+			return false;
+		}
 	}
 
 	/**
@@ -308,15 +433,124 @@ public abstract class AbstractDefinitionMatcherPointcut<T extends Matching>
 	}
 
 	/**
+	 * The Class DefinitionMatcherConstructorFilterClass.
+	 * 
+	 * @author Quoc Chung - mailto: <a
+	 *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
+	 * @date May 28, 2009
+	 */
+	public class DefinitionMatcherConstructorFilterClass extends
+			DefinitionMatcherConstructorFilter {
+		/*
+		 * (non-Javadoc)
+		 * @see
+		 * org.jgentleframework.core.intercept.support.Matcher#matches(java.
+		 * lang.Object)
+		 */
+		@Override
+		public boolean matches(
+				MethodConstructorMatching<Constructor<?>> matching) {
+
+			if (identification == null)
+				return AbstractDefinitionMatcherPointcut.this
+						.matchesMember(matching);
+			else {
+				boolean result = false;
+				result = StaticMatcher.staticMethodFieldMatching(
+						identification, matching);
+				return AbstractDefinitionMatcherPointcut.this
+						.matchesMember(matching)
+						|| result;
+			}
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * @see
+		 * org.jgentleframework.context.aop.RuntimeSupportFilter#isRuntime()
+		 */
+		@Override
+		public boolean isRuntime() {
+
+			return false;
+		}
+	}
+
+	/**
 	 * The Class DefinitionMatcherParameterFilter.
 	 * 
+	 * @param <T> 	 *
 	 * @author LE QUOC CHUNG - mailto: <a
 	 *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
 	 * @date Aug 17, 2008
-	 * @param <T>
 	 */
 	@SuppressWarnings("hiding")
 	public abstract class DefinitionMatcherParameterFilter<T> extends
 			AbstractMatcher<ParameterMatching<T>> implements ParameterFilter<T> {
+	}
+
+	/**
+	 * The Class DefinitionMatcherParameterFilterClass.
+	 * 
+	 * @author Quoc Chung - mailto: <a
+	 *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
+	 * @date May 28, 2009
+	 */
+	public class DefinitionMatcherParameterFilterClass extends
+			DefinitionMatcherParameterFilter<Method> {
+		/*
+		 * (non-Javadoc)
+		 * @see
+		 * org.jgentleframework.core.intercept.support.Matcher#matches(java.
+		 * lang.Object)
+		 */
+		@Override
+		public boolean matches(ParameterMatching<Method> matching) {
+
+			if (identification == null)
+				return AbstractDefinitionMatcherPointcut.this
+						.matchesMember(matching);
+			else {
+				boolean result = false;
+				result = StaticMatcher.staticMethodFieldMatching(
+						identification, matching);
+				return AbstractDefinitionMatcherPointcut.this
+						.matchesMember(matching)
+						|| result;
+			}
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * @see
+		 * org.jgentleframework.context.aop.RuntimeSupportFilter#isRuntime()
+		 */
+		@Override
+		public boolean isRuntime() {
+
+			return false;
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @seeorg.jgentleframework.core.intercept.support.CoreIdentification#
+	 * getIdentification()
+	 */
+	@Override
+	public Identification<?> getIdentification() {
+
+		return this.identification;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @seeorg.jgentleframework.core.intercept.support.CoreIdentification#
+	 * setIdentification(org.jgentleframework.core.reflection.Identification)
+	 */
+	@Override
+	public void setIdentification(Identification<?> identification) {
+
+		this.identification = identification;
 	}
 }

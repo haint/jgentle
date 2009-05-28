@@ -66,13 +66,10 @@ public class BeanCreationProcessor implements ServiceClass,
 	/** The bpt lst. */
 	List<Object>				bptLst		= new LinkedList<Object>();
 
-	/**
-	 * The processor.
-	 * 
-	 * @see CoreProcessor
-	 */
+	/** The processor. */
 	CoreProcessor				processor	= null;
 
+	/** The log. */
 	private final Log			log			= LogFactory.getLog(getClass());
 
 	/**
@@ -316,8 +313,8 @@ public class BeanCreationProcessor implements ServiceClass,
 	 * 
 	 * @param interceptors
 	 *            an interceptor or a set of interceptors need to be validated.
-	 * @return <b>true</b> if a set of {@link Interceptor}s is supported by
-	 *         core, <b>false</b> otherwise.
+	 * @return <b>true</b> if a set of {@link Interceptor}s is supported by core,
+	 *         <b>false</b> otherwise.
 	 */
 	protected boolean validatesInterceptor(Interceptor... interceptors) {
 

@@ -23,7 +23,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
 
 import net.sf.cglib.proxy.Callback;
 import net.sf.cglib.proxy.CallbackFilter;
@@ -159,9 +159,11 @@ public class CoreProcessorImpl extends AbstractProcesserChecker implements
 								+ "has instantiated the corresponding 'object bean'");
 			}
 			else {
-				HashMap<Method, MethodAspectPair> methodAspectList = new HashMap<Method, MethodAspectPair>();
-				HashMap<Interceptor, Matcher<Definition>> map = instSelector
+				Map<Method, MethodAspectPair> methodAspectList = new HashMap<Method, MethodAspectPair>();
+				Map<Interceptor, Matcher<Definition>> map = instSelector
 						.getMapMatcherInterceptor();
+				final List<Method> methodList = new ArrayList<Method>();
+				Enhancer.getMethods(targetClass, null, methodList);
 				boolean invocationINOUT = false;
 				ElementAspectFactory elementAspectFactory = new ElementAspectFactory();
 				/*
@@ -169,35 +171,34 @@ public class CoreProcessorImpl extends AbstractProcesserChecker implements
 				 */
 				MethodInterceptor[] methodIcptLst = instSelector
 						.getMethodInterceptors();
-				Set<Method> methods = definition.getAllAnnotatedMethods();
-				if (methods != null) {
-					for (Method method : methods) {
-						invocationINOUT = invocationINOUT == false ? InterceptorUtils
-								.isInvocation(definition, method)
-								: invocationINOUT;
-						// creates Aspect Pair
-						MethodAspectPair aspectPair = elementAspectFactory
-								.analysesMethod(methodIcptLst, map, definition,
-										method);
-						// performs advice
-						executesAdvice(definition, method, provider,
-								runtimeLoading, aspectPair);
-						if (aspectPair.hasInterceptors())
-							methodAspectList.put(method, aspectPair);
-					}
+				for (Method method : methodList) {
+					invocationINOUT = invocationINOUT == false ? InterceptorUtils
+							.isInvocation(definition, method)
+							: invocationINOUT;
+					// creates Aspect Pair
+					MethodAspectPair aspectPair = elementAspectFactory
+							.analysesMethod(methodIcptLst, map, definition,
+									method);
+					// performs advice
+					executesAdvice(definition, method, provider,
+							runtimeLoading, aspectPair);
+					if (aspectPair.hasInterceptors())
+						methodAspectList.put(method, aspectPair);
 				}
-				// Perform field interceptor
+				/*
+				 * perform field interceptor
+				 */
 				boolean bool = executesFieldInterceptor(targetClass,
 						instSelector, definition, elementAspectFactory,
 						invocationINOUT, map, methodAspectList);
 				if (bool == true)
 					invocationINOUT = true;
-				// perform invocation in/out or annotation attributes injection
+				/*
+				 * perform invocation in/out or annotation attributes injection
+				 */
 				executesInOut(targetClass, definition, provider,
 						runtimeLoading, methodAspectList, invocationINOUT);
 				// Create callbacks.
-				final List<Method> methodList = new ArrayList<Method>();
-				Enhancer.getMethods(targetClass, null, methodList);
 				Callback[] callbacks = new Callback[methodList.size()];
 				Class<? extends Callback>[] callbackTypes = new Class[methodList
 						.size()];

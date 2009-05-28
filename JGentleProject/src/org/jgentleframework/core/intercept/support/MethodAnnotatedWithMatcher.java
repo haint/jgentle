@@ -39,21 +39,7 @@ public class MethodAnnotatedWithMatcher extends
 		AbstractDefinitionMatcherPointcut<MethodConstructorMatching<Method>>
 		implements PointcutOfMethodFilter<MethodConstructorMatching<Method>> {
 	/** The filter. */
-	MethodFilter	filter	= new DefinitionMatcherMethodFilter() {
-								@Override
-								public boolean matches(
-										MethodConstructorMatching<Method> matching) {
-
-									return MethodAnnotatedWithMatcher.this
-											.matchesMember(matching);
-								}
-
-								@Override
-								public boolean isRuntime() {
-
-									return false;
-								}
-							};
+	MethodFilter	filter	= new DefinitionMatcherMethodFilterClass();
 
 	/**
 	 * The Constructor.

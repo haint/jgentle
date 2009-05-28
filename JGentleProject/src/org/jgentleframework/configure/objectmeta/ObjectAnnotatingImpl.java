@@ -30,8 +30,8 @@ import org.jgentleframework.utils.ReflectUtils;
 import org.jgentleframework.utils.data.Pair;
 
 /**
- * This is an abstract class is an implementation of {@link ObjectAnnotating}
- * interface.
+ * This class is an abstract class which is an implementation of
+ * {@link ObjectAnnotating} interface.
  * 
  * @author LE QUOC CHUNG - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
@@ -49,8 +49,9 @@ abstract class ObjectAnnotatingImpl implements InClass, ObjectAnnotating {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.jgentleframework.configure.injecting.objectmeta.ObjectAnnotating#annotate
-	 * (org.jgentleframework.general.reflection.Identification, java.lang.Object)
+	 * org.jgentleframework.configure.injecting.objectmeta.ObjectAnnotating#
+	 * annotate (org.jgentleframework.general.reflection.Identification,
+	 * java.lang.Object)
 	 */
 	@Override
 	public InClass annotate(Identification<?> key, Object value) {
@@ -61,8 +62,8 @@ abstract class ObjectAnnotatingImpl implements InClass, ObjectAnnotating {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.jgentleframework.configure.injecting.objectmeta.ObjectAnnotating#annotate
-	 * (org.jgentleframework.general.reflection.Identification,
+	 * org.jgentleframework.configure.injecting.objectmeta.ObjectAnnotating#
+	 * annotate (org.jgentleframework.general.reflection.Identification,
 	 * java.lang.Object[])
 	 */
 	@Override
@@ -79,8 +80,8 @@ abstract class ObjectAnnotatingImpl implements InClass, ObjectAnnotating {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.jgentleframework.configure.injecting.objectmeta.ObjectAnnotating#annotate
-	 * (java.lang.Object[][])
+	 * org.jgentleframework.configure.injecting.objectmeta.ObjectAnnotating#
+	 * annotate (java.lang.Object[][])
 	 */
 	@Override
 	public InClass annotate(Object[]... pairs) {
@@ -91,10 +92,10 @@ abstract class ObjectAnnotatingImpl implements InClass, ObjectAnnotating {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.jgentleframework.configure.injecting.objectmeta.ObjectAnnotating#annotate
-	 * (
-	 * org.jgentleframework.utils.data.Pair<org.jgentleframework.general.reflection
-	 * .Identification<?>,java.lang.Object>[])
+	 * org.jgentleframework.configure.injecting.objectmeta.ObjectAnnotating#
+	 * annotate (
+	 * org.jgentleframework.utils.data.Pair<org.jgentleframework.general
+	 * .reflection .Identification<?>,java.lang.Object>[])
 	 */
 	@Override
 	public InClass annotate(Pair<Identification<?>, Object>... pairs) {
@@ -113,8 +114,8 @@ abstract class ObjectAnnotatingImpl implements InClass, ObjectAnnotating {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.jgentleframework.configure.injecting.objectmeta.ObjectAnnotating#annotate
-	 * (org.jgentleframework.configure.injecting.enums.Types,
+	 * org.jgentleframework.configure.injecting.objectmeta.ObjectAnnotating#
+	 * annotate (org.jgentleframework.configure.injecting.enums.Types,
 	 * java.lang.Object[][])
 	 */
 	@Override

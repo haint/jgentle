@@ -41,21 +41,8 @@ import org.jgentleframework.context.aop.support.ParameterMatching;
 public class ParameterAnnotatedWithMatcher extends
 		AbstractDefinitionMatcherPointcut<ParameterMatching<Method>> implements
 		PointcutOfParameterFilter<ParameterMatching<Method>> {
-	ParameterFilter<Method>	filter	= new DefinitionMatcherParameterFilter<Method>() {
-										@Override
-										public boolean matches(
-												ParameterMatching<Method> matching) {
-
-											return ParameterAnnotatedWithMatcher.this
-													.matchesMember(matching);
-										}
-
-										@Override
-										public boolean isRuntime() {
-
-											return false;
-										}
-									};
+	/** The filter. */
+	ParameterFilter<Method>	filter	= new DefinitionMatcherParameterFilterClass();
 
 	/**
 	 * The Constructor.
@@ -73,8 +60,9 @@ public class ParameterAnnotatedWithMatcher extends
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.context.aop.PointcutOfParameterFilter#getParameterFilter()
+	 * @see
+	 * org.jgentleframework.context.aop.PointcutOfParameterFilter#getParameterFilter
+	 * ()
 	 */
 	@Override
 	public ParameterFilter<Method> getParameterFilter() {
@@ -87,7 +75,6 @@ public class ParameterAnnotatedWithMatcher extends
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.jgentleframework.context.aop.Pointcut#getFilter()
 	 */
 	@Override

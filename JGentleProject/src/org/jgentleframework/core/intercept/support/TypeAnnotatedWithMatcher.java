@@ -37,14 +37,8 @@ import org.jgentleframework.context.aop.support.ClassMatching;
 public class TypeAnnotatedWithMatcher extends
 		AbstractDefinitionMatcherPointcut<ClassMatching> implements
 		PointcutOfClassFilter<ClassMatching> {
-	ClassFilter	filter	= new DefinitionMatcherClassFilter() {
-							@Override
-							public boolean matches(ClassMatching matching) {
-
-								return TypeAnnotatedWithMatcher.this
-										.matchesMember(matching);
-							}
-						};
+	/** The filter. */
+	ClassFilter	filter	= new DefinitionMatcherClassFilterClass();
 
 	/**
 	 * The Constructor.
@@ -62,8 +56,8 @@ public class TypeAnnotatedWithMatcher extends
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.context.aop.PointcutOfClassFilter#getClassFilter()
+	 * @see
+	 * org.jgentleframework.context.aop.PointcutOfClassFilter#getClassFilter()
 	 */
 	@Override
 	public ClassFilter getClassFilter() {
@@ -73,7 +67,6 @@ public class TypeAnnotatedWithMatcher extends
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.jgentleframework.context.aop.Pointcut#getFilter()
 	 */
 	@Override

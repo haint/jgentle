@@ -20,7 +20,9 @@ package org.jgentleframework.configure;
 import java.lang.annotation.Annotation;
 import java.util.Map;
 
+import org.aopalliance.intercept.FieldInterceptor;
 import org.aopalliance.intercept.Interceptor;
+import org.aopalliance.intercept.MethodInterceptor;
 import org.jgentleframework.configure.annotation.Bean;
 import org.jgentleframework.configure.enums.AND_OR;
 import org.jgentleframework.configure.objectmeta.InClass;
@@ -31,6 +33,10 @@ import org.jgentleframework.context.aop.support.MatcherPointcut;
 import org.jgentleframework.context.aop.support.Matching;
 import org.jgentleframework.context.injecting.Provider;
 import org.jgentleframework.core.intercept.support.Matcher;
+import org.jgentleframework.core.reflection.FieldIdentification;
+import org.jgentleframework.core.reflection.Identification;
+import org.jgentleframework.core.reflection.MethodIdentification;
+import org.jgentleframework.core.reflection.ReflectIdentification;
 import org.jgentleframework.core.reflection.metadata.Definition;
 import org.jgentleframework.utils.data.Pair;
 
@@ -64,7 +70,7 @@ public interface CoreBinding {
 	/**
 	 * Creates a {@link MatcherPointcut}.
 	 * <p>
-	 * This method performance is the same as
+	 * This method result is the same as
 	 * {@link #annotatedWith(int, AND_OR, Class...)} according to
 	 * <code>AND_OR</code> argument is {@link AND_OR#AND}
 	 * 
@@ -182,8 +188,7 @@ public interface CoreBinding {
 	public void clearObjectConstantList();
 
 	/**
-	 * Creates a binding to an {@link Interceptor} or a group of
-	 * {@link Interceptor}.
+	 * Creates a binding to an {@link Interceptor}.
 	 * 
 	 * @param matcherPointcuts
 	 *            a {@link MatcherPointcut} or a list of matchers of given
@@ -192,18 +197,80 @@ public interface CoreBinding {
 	 *            the interceptor.
 	 */
 	public void intercept(Object interceptor,
-			MatcherPointcut<?, ? extends Matching>... matcherPointcuts);
+			MatcherPointcut<Definition, ? extends Matching>... matcherPointcuts);
 
 	/**
 	 * Creates a binding to an {@link Interceptor}.
 	 * 
-	 * @param interceptor
-	 *            the given interceptor.
 	 * @param matcherPointcut
-	 *            a {@link MatcherPointcut} of given {@link Interceptor}
+	 *            a {@link MatcherPointcut} of given interceptor
+	 * @param interceptor
+	 *            the interceptor.
 	 */
 	public void intercept(Object interceptor,
-			MatcherPointcut<?, ? extends Matching> matcherPointcut);
+			MatcherPointcut<Definition, ? extends Matching> matcherPointcut);
+
+	/**
+	 * Creates a binding to a {@link MethodInterceptor method interceptor}.
+	 * 
+	 * @param interceptor
+	 *            the {@link MethodInterceptor method interceptor}
+	 * @param identification
+	 *            use static methods of {@link ReflectIdentification} class in
+	 *            order to specify {@link Identification identification}.
+	 * @param matcherPointcuts
+	 *            a {@link MatcherPointcut} or a list of matchers of given
+	 *            interceptor
+	 */
+	public void interceptMethod(Object interceptor,
+			MethodIdentification identification,
+			MatcherPointcut<Definition, ? extends Matching>... matcherPointcuts);
+
+	/**
+	 * Creates a binding to a {@link MethodInterceptor method interceptor}.
+	 * 
+	 * @param interceptor
+	 *            the {@link MethodInterceptor method interceptor}
+	 * @param identification
+	 *            use static methods of {@link ReflectIdentification} class in
+	 *            order to specify {@link Identification identification}.
+	 * @param matcherPointcut
+	 *            a {@link MatcherPointcut} of given interceptor
+	 */
+	public void interceptMethod(Object interceptor,
+			MethodIdentification identification,
+			MatcherPointcut<Definition, ? extends Matching> matcherPointcut);
+
+	/**
+	 * Creates a binding to a {@link FieldInterceptor field interceptor}.
+	 * 
+	 * @param interceptor
+	 *            the {@link FieldInterceptor field interceptor}
+	 * @param identification
+	 *            use static methods of {@link ReflectIdentification} class in
+	 *            order to specify {@link Identification identification}.
+	 * @param matcherPointcuts
+	 *            a {@link MatcherPointcut} or a list of matchers of given
+	 *            interceptor
+	 */
+	public void interceptField(Object interceptor,
+			FieldIdentification identification,
+			MatcherPointcut<Definition, ? extends Matching>... matcherPointcuts);
+
+	/**
+	 * Creates a binding to a {@link FieldInterceptor field interceptor}.
+	 * 
+	 * @param interceptor
+	 *            the {@link FieldInterceptor field interceptor}
+	 * @param identification
+	 *            use static methods of {@link ReflectIdentification} class in
+	 *            order to specify {@link Identification identification}.
+	 * @param matcherPointcut
+	 *            a {@link MatcherPointcut} of given interceptor
+	 */
+	public void interceptField(Object interceptor,
+			FieldIdentification identification,
+			MatcherPointcut<Definition, ? extends Matching> matcherPointcut);
 
 	/**
 	 * Creates a mapping bean to a given type or a set of types. These classes
