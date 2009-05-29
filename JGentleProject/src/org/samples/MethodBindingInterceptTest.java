@@ -1,15 +1,3 @@
-package org.samples;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-
-import org.aopalliance.intercept.MethodInterceptor;
-import org.aopalliance.intercept.MethodInvocation;
-import org.jgentleframework.configure.Configurable;
-import org.jgentleframework.configure.Location;
-import org.jgentleframework.context.JGentle;
-import org.jgentleframework.context.injecting.Provider;
-import org.jgentleframework.core.reflection.ReflectIdentification;
-
 /*
  * Copyright 2007-2009 the original author or authors.
  *
@@ -27,6 +15,19 @@ import org.jgentleframework.core.reflection.ReflectIdentification;
  * 
  * Project: JGentleFrameworkExample
  */
+package org.samples;
+
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
+import org.aopalliance.intercept.MethodInterceptor;
+import org.aopalliance.intercept.MethodInvocation;
+import org.jgentleframework.configure.Configurable;
+import org.jgentleframework.configure.Location;
+import org.jgentleframework.context.JGentle;
+import org.jgentleframework.context.injecting.Provider;
+import org.jgentleframework.core.reflection.ReflectIdentification;
+
 /**
  * @author Quoc Chung - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
@@ -52,7 +53,7 @@ abstract class ConfigInterceptMethod implements Configurable {
 	public void configure() {
 
 		interceptMethod(refMapping(InterceptorMethod.class),
-				ReflectIdentification.methods("run"), annotatedWith(
+				ReflectIdentification.methods("*"), annotatedWith(
 						Location.TYPE, methodIntercept.class));
 	}
 }
