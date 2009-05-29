@@ -34,7 +34,7 @@ import org.jgentleframework.configure.objectmeta.ObjectBindingConstant;
 public abstract class ReflectIdentification {
 	/**
 	 * Returns a class identification that corresponds to configuration data of
-	 * current {@link ObjectBindingConstant}.
+	 * configuration data.
 	 * 
 	 * @return {@link Identification}
 	 */
@@ -45,7 +45,7 @@ public abstract class ReflectIdentification {
 
 	/**
 	 * Returns a {@link FieldIdentification} that corresponds to the object
-	 * class which is specified in current {@link ObjectBindingConstant}.
+	 * class which is specified in configuration data.
 	 * <p>
 	 * Performance of this method is the same as
 	 * {@link #fields(String, boolean)} with boolean value of
@@ -82,7 +82,7 @@ public abstract class ReflectIdentification {
 
 	/**
 	 * Returns a {@link FieldIdentification} that corresponds to the object
-	 * class which is specified in current {@link ObjectBindingConstant}.
+	 * class which is specified in current configuration data.
 	 * <p>
 	 * <b>Note:</b>
 	 * <p>
@@ -121,7 +121,7 @@ public abstract class ReflectIdentification {
 
 	/**
 	 * Returns a {@link MethodIdentification} that corresponds to the object
-	 * class which is specified in current {@link ObjectBindingConstant}.
+	 * class which is specified in configuration data.
 	 * <p>
 	 * This method performance is the same as {@link #methods(String, boolean)}
 	 * with boolean value of 'foundOnSuperclass' is specified to be
@@ -154,7 +154,7 @@ public abstract class ReflectIdentification {
 
 	/**
 	 * Returns a {@link MethodIdentification} that corresponds to the object
-	 * class which is specified in current {@link ObjectBindingConstant}.
+	 * class which is specified in configuration data.
 	 * <p>
 	 * <b>Note:</b>
 	 * <p>
@@ -189,7 +189,7 @@ public abstract class ReflectIdentification {
 
 	/**
 	 * Returns a {@link MethodIdentification} that corresponds to the object
-	 * class which is specified in current {@link ObjectBindingConstant}.
+	 * class which is specified in configuration data.
 	 * <p>
 	 * <b>Note:</b>
 	 * <p>
@@ -218,7 +218,7 @@ public abstract class ReflectIdentification {
 
 	/**
 	 * Returns a {@link MethodIdentification} that corresponds to the object
-	 * class which is specified in current {@link ObjectBindingConstant}.
+	 * class which is specified in configuration data.
 	 * <p>
 	 * <b>Note:</b>
 	 * <p>
@@ -255,7 +255,7 @@ public abstract class ReflectIdentification {
 
 	/**
 	 * Returns a {@link MethodIdentification} that corresponds to the object
-	 * class which is specified in current {@link ObjectBindingConstant}.
+	 * class which is specified in configuration data.
 	 * <p>
 	 * <b>Note:</b>
 	 * <p>
@@ -295,7 +295,7 @@ public abstract class ReflectIdentification {
 
 	/**
 	 * Returns a {@link MethodIdentification} that corresponds to the object
-	 * class which is specified in current {@link ObjectBindingConstant}.
+	 * class which is specified in configuration data.
 	 * <p>
 	 * <b>Note:</b>
 	 * <p>
@@ -327,7 +327,7 @@ public abstract class ReflectIdentification {
 
 	/**
 	 * Returns a {@link MethodIdentification} that corresponds to the object
-	 * class which is specified in current {@link ObjectBindingConstant}.
+	 * class which is specified in configuration data.
 	 * <p>
 	 * <b>Note:</b>
 	 * <p>
@@ -368,7 +368,7 @@ public abstract class ReflectIdentification {
 
 	/**
 	 * Returns a {@link MethodIdentification} that corresponds to the object
-	 * class which is specified in current {@link ObjectBindingConstant}.
+	 * class which is specified in configuration data.
 	 * <p>
 	 * <b>Note:</b>
 	 * <p>
@@ -404,7 +404,7 @@ public abstract class ReflectIdentification {
 
 	/**
 	 * Returns a {@link MethodIdentification} that corresponds to the object
-	 * class which is specified in current {@link ObjectBindingConstant}.
+	 * class which is specified in configuration data.
 	 * <p>
 	 * <b>Note:</b>
 	 * <p>
@@ -447,7 +447,7 @@ public abstract class ReflectIdentification {
 
 	/**
 	 * Returns a {@link MethodIdentification} that corresponds to the object
-	 * class which is specified in current {@link ObjectBindingConstant}.
+	 * class which is specified in configuration data.
 	 * <p>
 	 * <b>Note:</b>
 	 * <p>
@@ -492,7 +492,7 @@ public abstract class ReflectIdentification {
 
 	/**
 	 * Returns a {@link MethodIdentification} that corresponds to the object
-	 * class which is specified in current {@link ObjectBindingConstant}.
+	 * class which is specified in configuration data.
 	 * <p>
 	 * <b>Note:</b>
 	 * <p>
@@ -528,7 +528,7 @@ public abstract class ReflectIdentification {
 
 	/**
 	 * Returns a {@link MethodIdentification} that corresponds to the object
-	 * class which is specified in current {@link ObjectBindingConstant}.
+	 * class which is specified in configuration data.
 	 * <p>
 	 * <b>Note:</b>
 	 * <p>
