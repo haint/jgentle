@@ -305,7 +305,6 @@ public abstract class AbstractDefinitionMatcherPointcut<T extends Matching>
 				boolean result = false;
 				result = StaticMatcher.staticMethodFieldMatching(
 						identification, matching);
-				
 				return AbstractDefinitionMatcherPointcut.this
 						.matchesMember(matching)
 						&& result;
@@ -347,8 +346,13 @@ public abstract class AbstractDefinitionMatcherPointcut<T extends Matching>
 				return AbstractDefinitionMatcherPointcut.this
 						.matchesMember(matching);
 			else {
-				boolean result = StaticMatcher.staticMethodFieldMatching(
-						identification, MethodIdentification.class, matching);
+				boolean result = false;
+				if (matching.getMetadata(MetadataKey.METHOD).getValue() == null)
+					result = true;
+				else
+					result = StaticMatcher.staticMethodFieldMatching(
+							identification, MethodIdentification.class,
+							matching);
 				return AbstractDefinitionMatcherPointcut.this
 						.matchesMember(matching)
 						|| result;
@@ -400,8 +404,13 @@ public abstract class AbstractDefinitionMatcherPointcut<T extends Matching>
 				return AbstractDefinitionMatcherPointcut.this
 						.matchesMember(matching);
 			else {
-				boolean result = StaticMatcher.staticMethodFieldMatching(
-						identification, FieldIdentification.class, matching);
+				boolean result = false;
+				if (matching.getMetadata(MetadataKey.FIELD).getValue() == null)
+					result = true;
+				else
+					result = StaticMatcher
+							.staticMethodFieldMatching(identification,
+									FieldIdentification.class, matching);
 				return AbstractDefinitionMatcherPointcut.this
 						.matchesMember(matching)
 						|| result;

@@ -17,6 +17,7 @@
  */
 package org.jgentleframework.core.factory;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 import org.jgentleframework.configure.enums.MetadataKey;
@@ -59,9 +60,12 @@ public class BasicTypeMatchingAspectPair extends MetadataController implements
 	/**
 	 * Instantiates a new basic type matching aspect pair.
 	 * 
-	 * @param targetClass the target class
-	 * @param method the method
-	 * @param definition the definition
+	 * @param targetClass
+	 *            the target class
+	 * @param method
+	 *            the method
+	 * @param definition
+	 *            the definition
 	 */
 	public BasicTypeMatchingAspectPair(Class<?> targetClass, Method method,
 			Definition definition) {
@@ -70,6 +74,25 @@ public class BasicTypeMatchingAspectPair extends MetadataController implements
 		this.targetClass = targetClass;
 		addMetadata(new MetadataImpl(MetadataKey.DEFINITION, definition));
 		addMetadata(new MetadataImpl(MetadataKey.METHOD, method));
+	}
+
+	/**
+	 * Instantiates a new basic type matching aspect pair.
+	 * 
+	 * @param targetClass
+	 *            the target class
+	 * @param field
+	 *            the field
+	 * @param definition
+	 *            the definition
+	 */
+	public BasicTypeMatchingAspectPair(Class<?> targetClass, Field field,
+			Definition definition) {
+
+		super(null, null);
+		this.targetClass = targetClass;
+		addMetadata(new MetadataImpl(MetadataKey.DEFINITION, definition));
+		addMetadata(new MetadataImpl(MetadataKey.FIELD, field));
 	}
 
 	/*

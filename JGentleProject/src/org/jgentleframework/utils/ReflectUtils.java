@@ -582,7 +582,8 @@ public final class ReflectUtils {
 	 * 
 	 * @param clazz
 	 *            the given class
-	 * @return an array containing all desired fields.
+	 * @return an array containing all desired fields if they exist, if not
+	 *         return an empty array.
 	 */
 	public static Field[] getDeclaredFields(Class<?> clazz) {
 
@@ -603,7 +604,8 @@ public final class ReflectUtils {
 	 *            if specifies <b>true</b>, each field signature will only occur
 	 *            once, even if it occurs in multiple classes, otherwise,
 	 *            specifies <b>false</b>.
-	 * @return an array containing all desired fields.
+	 * @return an array containing all desired fields if they exist, if not
+	 *         return an empty array.
 	 */
 	public static Field[] getDeclaredFields(Class<?> clazz,
 			boolean includeStatic, boolean non_multiple) {
@@ -643,7 +645,8 @@ public final class ReflectUtils {
 	 * 
 	 * @param clazz
 	 *            the given class
-	 * @return an array containing all desired methods
+	 * @return an array containing all desired methods if they exist, if not
+	 *         return an empty array.
 	 */
 	public static Method[] getDeclaredMethods(Class<?> clazz) {
 
@@ -664,7 +667,8 @@ public final class ReflectUtils {
 	 *            if specifies <b>true</b>, each method signature will only
 	 *            occur once, even if it occurs in multiple classes, otherwise,
 	 *            specifies <b>false</b>.
-	 * @return an array containing all desired methods
+	 * @return an array containing all desired methods if they exist, if not
+	 *         return an empty array.
 	 */
 	public static Method[] getDeclaredMethods(Class<?> clazz,
 			boolean includeStatic, boolean non_multiple) {
@@ -1019,8 +1023,7 @@ public final class ReflectUtils {
 	public static boolean isDeclaredException(Method method,
 			Class<? extends Throwable> exceptionType) {
 
-		Assertor.notNull(method, "Method [" +
-				method+"] must not be null.");
+		Assertor.notNull(method, "Method [" + method + "] must not be null.");
 		Class<? extends Throwable>[] declaredExceptions = (Class<? extends Throwable>[]) method
 				.getExceptionTypes();
 		for (int i = 0; i < declaredExceptions.length; i++) {

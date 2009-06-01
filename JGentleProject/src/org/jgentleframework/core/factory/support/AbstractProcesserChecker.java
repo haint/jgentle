@@ -25,12 +25,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import net.sf.cglib.proxy.Enhancer;
 
-import org.aopalliance.intercept.FieldInterceptor;
-import org.aopalliance.intercept.Interceptor;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.jgentleframework.configure.annotation.Inject;
 import org.jgentleframework.configure.annotation.Outject;
@@ -38,12 +35,9 @@ import org.jgentleframework.configure.enums.Scope;
 import org.jgentleframework.context.injecting.Provider;
 import org.jgentleframework.context.injecting.scope.ScopeInstance;
 import org.jgentleframework.context.support.CoreInstantiationSelector;
-import org.jgentleframework.context.support.InstantiationSelector;
 import org.jgentleframework.context.support.Selector;
 import org.jgentleframework.core.factory.InOutDependencyException;
-import org.jgentleframework.core.intercept.InterceptionException;
 import org.jgentleframework.core.intercept.MethodInterceptorCallback;
-import org.jgentleframework.core.intercept.support.Matcher;
 import org.jgentleframework.core.interceptor.InterceptorUtils;
 import org.jgentleframework.core.reflection.metadata.Definition;
 import org.jgentleframework.utils.ReflectUtils;
@@ -305,70 +299,6 @@ public abstract class AbstractProcesserChecker {
 							runtimeLoading);
 			aspectPair.add(0, throwz);
 		}
-	}
-
-	/**
-	 * Executes field interceptor.
-	 * 
-	 * @param targetClass
-	 *            the target class
-	 * @param selector
-	 *            the selector
-	 * @param definition
-	 *            the definition
-	 * @param elementAspectFactory
-	 *            the element aspect factory
-	 * @param invocationINOUT
-	 *            the invocation inout
-	 * @param map
-	 *            the map
-	 * @param methodAspectList
-	 *            the method aspect list
-	 */
-	protected boolean executesFieldInterceptor(Class<?> targetClass,
-			InstantiationSelector selector, Definition definition,
-			ElementAspectFactory elementAspectFactory, boolean invocationINOUT,
-			Map<Interceptor, Matcher<Definition>> map,
-			Map<Method, MethodAspectPair> methodAspectList) {
-
-		if (!targetClass.isAnnotation()) {
-			FieldInterceptor[] fieldIcpLst = selector.getFieldInterceptors();
-			Set<Field> fields = definition.getAllAnnotatedFields();
-			if (fields != null) {
-				for (Field field : fields) {
-					invocationINOUT = invocationINOUT == false ? InterceptorUtils
-							.isInvocation(definition, field)
-							: invocationINOUT;
-					// creates Aspect Pair
-					FieldAspectPair fieldAspectPair = elementAspectFactory
-							.analysesField(fieldIcpLst, map, definition, field);
-					if (fieldAspectPair.hasInterceptors()) {
-						Method setter = Utils.getDefaultSetter(targetClass,
-								field.getName());
-						Method getter = Utils.getDefaultGetter(targetClass,
-								field.getName());
-						if (getter == null || setter == null) {
-							throw new InterceptionException(
-									"Does not found setter or getter of field '"
-											+ field.getName() + "'");
-						}
-						MethodInterceptor interceptor = InterceptorUtils
-								.createsFieldStackMethodInterceptor(field);
-						if (methodAspectList.containsKey(setter))
-							methodAspectList.get(setter).add(interceptor);
-						else
-							methodAspectList.put(setter, new MethodAspectPair(
-									setter, interceptor));
-						if (methodAspectList.containsKey(getter))
-							methodAspectList.get(getter).add(interceptor);
-						else
-							methodAspectList.put(getter, new MethodAspectPair(
-									getter, interceptor));
-					}
-				}
-			}
-		}
-		return invocationINOUT;
 	}
 
 	/**

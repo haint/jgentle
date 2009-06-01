@@ -18,11 +18,13 @@
 package org.jgentleframework.configure;
 
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Constructor;
 import java.util.Map;
 
 import org.aopalliance.intercept.FieldInterceptor;
 import org.aopalliance.intercept.Interceptor;
 import org.aopalliance.intercept.MethodInterceptor;
+import org.jgentleframework.configure.annotation.AnnotatedWith;
 import org.jgentleframework.configure.annotation.Bean;
 import org.jgentleframework.configure.enums.AND_OR;
 import org.jgentleframework.configure.objectmeta.InClass;
@@ -212,6 +214,10 @@ public interface CoreBinding {
 
 	/**
 	 * Creates a binding to a {@link MethodInterceptor method interceptor}.
+	 * <p>
+	 * <b>Note:</b> This method does not support {@link Location#ALL} and
+	 * {@link Location#CONSTRUCTOR} declaring on {@link AnnotatedWith} method or
+	 * any parameters of {@link Constructor constructor}.
 	 * 
 	 * @param interceptor
 	 *            the {@link MethodInterceptor method interceptor}
@@ -228,6 +234,10 @@ public interface CoreBinding {
 
 	/**
 	 * Creates a binding to a {@link MethodInterceptor method interceptor}.
+	 * <p>
+	 * <b>Note:</b> This method does not support {@link Location#ALL} and
+	 * {@link Location#CONSTRUCTOR} declaring on {@link AnnotatedWith} method or
+	 * any parameters of {@link Constructor constructor}.
 	 * 
 	 * @param interceptor
 	 *            the {@link MethodInterceptor method interceptor}
@@ -243,6 +253,10 @@ public interface CoreBinding {
 
 	/**
 	 * Creates a binding to a {@link FieldInterceptor field interceptor}.
+	 * <p>
+	 * <b>Note:</b> This method does not support {@link Location#ALL},
+	 * {@link Location#CONSTRUCTOR} and {@link Location#PARAMETER} declaring on
+	 * {@link AnnotatedWith} method
 	 * 
 	 * @param interceptor
 	 *            the {@link FieldInterceptor field interceptor}
@@ -259,6 +273,10 @@ public interface CoreBinding {
 
 	/**
 	 * Creates a binding to a {@link FieldInterceptor field interceptor}.
+	 * <p>
+	 * <b>Note:</b> This method does not support {@link Location#ALL},
+	 * {@link Location#CONSTRUCTOR} and {@link Location#PARAMETER} declaring on
+	 * {@link AnnotatedWith} method
 	 * 
 	 * @param interceptor
 	 *            the {@link FieldInterceptor field interceptor}
@@ -277,11 +295,11 @@ public interface CoreBinding {
 	 * should be annotated with {@link Bean} annotation in order to provides
 	 * some additional information to {@link Provider} to instantiate bean. If
 	 * be not annotated with {@link Bean}, these info will be
-	 * <code>default</code>.
+	 * <code>default</code> value.
 	 * 
-	 * @see Bean
 	 * @param clazz
 	 *            a given type or set of types
+	 * @see Bean
 	 */
 	public void mappingBean(Class<?>... clazz);
 }

@@ -19,25 +19,24 @@ package org.jgentleframework.core.factory.support;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
 import org.aopalliance.intercept.FieldInterceptor;
 import org.aopalliance.intercept.Interceptor;
 import org.aopalliance.intercept.MethodInterceptor;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.jgentleframework.context.aop.ClassFilter;
 import org.jgentleframework.context.aop.FieldFilter;
-import org.jgentleframework.context.aop.Filter;
 import org.jgentleframework.context.aop.MethodFilter;
 import org.jgentleframework.context.aop.ParameterFilter;
-import org.jgentleframework.context.aop.support.AbstractMatching;
-import org.jgentleframework.context.aop.support.MatcherPointcut;
-import org.jgentleframework.context.aop.support.Matching;
 import org.jgentleframework.core.factory.BasicFieldMatchingAspectPair;
 import org.jgentleframework.core.factory.BasicMethodConstructorMatchingAspectPair;
 import org.jgentleframework.core.factory.BasicParameterMatchingAspectPair;
 import org.jgentleframework.core.factory.BasicTypeMatchingAspectPair;
+import org.jgentleframework.core.intercept.MatchingException;
 import org.jgentleframework.core.intercept.support.AbstractDefinitionMatcherPointcut;
 import org.jgentleframework.core.intercept.support.ConstructorAnnotatedWithMatcher;
 import org.jgentleframework.core.intercept.support.FieldAnnotatedWithMatcher;
@@ -63,6 +62,8 @@ import org.jgentleframework.utils.ReflectUtils;
  * @see AbstractDefinitionMatcherPointcut
  */
 class ElementAspectFactory {
+	private final Log	log	= LogFactory.getLog(getClass());
+
 	/**
 	 * Instantiates a new element aspect factory.
 	 */
@@ -76,7 +77,7 @@ class ElementAspectFactory {
 	 * @param interceptors
 	 *            the given array containing all interceptors
 	 * @param map
-	 *            the given map containing the interceptors according to their
+	 *            the given map containing all interceptors according to their
 	 *            matchers.
 	 * @param definition
 	 *            the definition of target class declaring the given method.
@@ -96,41 +97,26 @@ class ElementAspectFactory {
 		Assertor.notNull(definition, "The definition must not be null !!");
 		Assertor.notNull(method, "The method must not be null !!");
 		MethodAspectPair result = new MethodAspectPair(method);
-		List<MethodInterceptor> list = new ArrayList<MethodInterceptor>();
+		List<MethodInterceptor> list = new LinkedList<MethodInterceptor>();
 		/*
 		 * Search on given interceptor array.
 		 */
 		for (MethodInterceptor interceptor : interceptors) {
 			Matcher<Definition> matcher = map.get(interceptor);
 			if (matcher != null && matcher.matches(definition)) {
-				MethodAnnotatedWithMatcher pointcut = (ReflectUtils.isCast(
-						MethodAnnotatedWithMatcher.class, matcher) ? (MethodAnnotatedWithMatcher) matcher
+				TypeAnnotatedWithMatcher pointcutType = (ReflectUtils.isCast(
+						TypeAnnotatedWithMatcher.class, matcher) ? (TypeAnnotatedWithMatcher) matcher
+						: null);
+				MethodAnnotatedWithMatcher pointcutMethod = (ReflectUtils
+						.isCast(MethodAnnotatedWithMatcher.class, matcher) ? (MethodAnnotatedWithMatcher) matcher
 						: null);
 				ParameterAnnotatedWithMatcher pointcutPar = (ReflectUtils
 						.isCast(ParameterAnnotatedWithMatcher.class, matcher) ? (ParameterAnnotatedWithMatcher) matcher
 						: null);
-				TypeAnnotatedWithMatcher pointcutType = (ReflectUtils.isCast(
-						TypeAnnotatedWithMatcher.class, matcher) ? (TypeAnnotatedWithMatcher) matcher
+				FieldAnnotatedWithMatcher pointcutField = (ReflectUtils.isCast(
+						FieldAnnotatedWithMatcher.class, matcher) ? (FieldAnnotatedWithMatcher) matcher
 						: null);
-				/*
-				 * if (pointcut == null && pointcutPar == null &&
-				 * ReflectUtils.isCast(MatcherPointcut.class, matcher)) {
-				 * Filter<Matching> filter = (Filter<Matching>)
-				 * ((MatcherPointcut<Definition, Matching>) matcher)
-				 * .getFilter(); Matching matching = new AbstractMatching(null,
-				 * null) {
-				 *//** The Constant serialVersionUID. */
-				/*
-				 * private static final long serialVersionUID =
-				 * 5215996796974023709L; transient Method thisMethod = method;
-				 * (non-Javadoc)
-				 * @see org.jgentleframework.context.aop.support.Matching#
-				 * getTargetObject()
-				 * @Override public Object getTargetObject() { return
-				 * thisMethod; } }; if (filter != null &&
-				 * filter.matches(matching) && !list.contains(interceptor))
-				 * list.add(interceptor); } else
-				 */if (pointcutType != null) {
+				if (pointcutType != null) {
 					ClassFilter classFilter = pointcutType.getClassFilter();
 					if (classFilter != null
 							&& classFilter
@@ -141,8 +127,9 @@ class ElementAspectFactory {
 						list.add(interceptor);
 					}
 				}
-				else if (pointcut != null) {
-					MethodFilter methodFilter = pointcut.getMethodFilter();
+				else if (pointcutMethod != null) {
+					MethodFilter methodFilter = pointcutMethod
+							.getMethodFilter();
 					if (methodFilter != null
 							&& methodFilter
 									.matches(new BasicMethodConstructorMatchingAspectPair(
@@ -164,6 +151,23 @@ class ElementAspectFactory {
 							break;
 						}
 					}
+				}
+				else if (pointcutField != null) {
+					FieldFilter fieldFilter = pointcutField.getFieldFilter();
+					if (fieldFilter != null
+							&& fieldFilter
+									.matches(new BasicFieldMatchingAspectPair(
+											null, definition))
+							&& !list.contains(interceptor)) {
+						list.add(interceptor);
+					}
+				}
+				else {
+					if (log.isFatalEnabled())
+						log
+								.fatal(
+										"Could not intercept the given interceptor !! The declared matcher is not supported !",
+										new MatchingException());
 				}
 			}
 		}
@@ -192,7 +196,6 @@ class ElementAspectFactory {
 	 *         according to the given field are existed, if not, returns
 	 *         <code>null</code>.
 	 */
-	@SuppressWarnings("unchecked")
 	public FieldAspectPair analysesField(FieldInterceptor[] interceptors,
 			Map<Interceptor, Matcher<Definition>> map, Definition definition,
 			final Field field) {
@@ -204,43 +207,24 @@ class ElementAspectFactory {
 				.notNull(definition, "The given definition must not be null !!");
 		Assertor.notNull(field, "The given field must not be null !!");
 		FieldAspectPair result = new FieldAspectPair(field);
-		List<FieldInterceptor> list = new ArrayList<FieldInterceptor>();
+		List<FieldInterceptor> list = new LinkedList<FieldInterceptor>();
 		/*
 		 * Search on given interceptor array.
 		 */
 		for (FieldInterceptor interceptor : interceptors) {
 			Matcher<Definition> matcher = map.get(interceptor);
 			if (matcher != null && matcher.matches(definition)) {
-				FieldAnnotatedWithMatcher pointcut = (ReflectUtils.isCast(
+				FieldAnnotatedWithMatcher pointcutField = (ReflectUtils.isCast(
 						FieldAnnotatedWithMatcher.class, matcher) ? (FieldAnnotatedWithMatcher) matcher
 						: null);
-				if (pointcut == null) {
-					Filter<Matching> filter = (Filter<Matching>) ((MatcherPointcut<Definition, Matching>) matcher)
-							.getFilter();
-					Matching matching = new AbstractMatching(null, null) {
-						/** The Constant serialVersionUID. */
-						private static final long	serialVersionUID	= -2875018354099111517L;
-
-						transient Field				thisField			= field;
-
-						/*
-						 * (non-Javadoc)
-						 * @see
-						 * org.jgentleframework.context.aop.support.Matching#
-						 * getTargetObject()
-						 */
-						@Override
-						public Object getTargetObject() {
-
-							return thisField;
-						}
-					};
-					if (filter != null && filter.matches(matching)
-							&& !list.contains(interceptor))
-						list.add(interceptor);
-				}
-				else {
-					FieldFilter fieldFilter = pointcut.getFieldFilter();
+				TypeAnnotatedWithMatcher pointcutType = (ReflectUtils.isCast(
+						TypeAnnotatedWithMatcher.class, matcher) ? (TypeAnnotatedWithMatcher) matcher
+						: null);
+				MethodAnnotatedWithMatcher pointcutMethod = (ReflectUtils
+						.isCast(MethodAnnotatedWithMatcher.class, matcher) ? (MethodAnnotatedWithMatcher) matcher
+						: null);
+				if (pointcutField != null) {
+					FieldFilter fieldFilter = pointcutField.getFieldFilter();
 					if (fieldFilter != null
 							&& fieldFilter
 									.matches(new BasicFieldMatchingAspectPair(
@@ -248,6 +232,35 @@ class ElementAspectFactory {
 							&& !list.contains(interceptor)) {
 						list.add(interceptor);
 					}
+				}
+				else if (pointcutType != null) {
+					ClassFilter classFilter = pointcutType.getClassFilter();
+					if (classFilter != null
+							&& classFilter
+									.matches(new BasicTypeMatchingAspectPair(
+											field.getDeclaringClass(), field,
+											definition))
+							&& !list.contains(interceptor)) {
+						list.add(interceptor);
+					}
+				}
+				else if (pointcutMethod != null) {
+					MethodFilter methodFilter = pointcutMethod
+							.getMethodFilter();
+					if (methodFilter != null
+							&& methodFilter
+									.matches(new BasicMethodConstructorMatchingAspectPair(
+											null, definition))
+							&& !list.contains(interceptor)) {
+						list.add(interceptor);
+					}
+				}
+				else {
+					if (log.isFatalEnabled())
+						log
+								.fatal(
+										"Could not intercept the given interceptor !! The declared matcher is not supported !",
+										new MatchingException());
 				}
 			}
 		}

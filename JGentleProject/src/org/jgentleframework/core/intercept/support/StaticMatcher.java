@@ -68,7 +68,7 @@ public class StaticMatcher {
 		Definition def = (Definition) matching.getMetadata(
 				MetadataKey.DEFINITION).getValue();
 		/*
-		 * Xử lý kiểm tra identification
+		 * Xử lý kiểm tra identification trên method identification
 		 */
 		if (MethodIdentification.class == clazz) {
 			MethodIdentification mi = (MethodIdentification) identification;
@@ -87,7 +87,6 @@ public class StaticMatcher {
 					if (method.equals(matching.getMetadata(MetadataKey.METHOD)
 							.getValue())) {
 						result = true;
-						// System.out.println(result);
 						break;
 					}
 				}
@@ -99,19 +98,32 @@ public class StaticMatcher {
 				}
 			}
 		}
+		/*
+		 * Xử lý kiểm tra identification trên field identification
+		 */
 		else if (FieldIdentification.class == clazz) {
 			FieldIdentification mi = (FieldIdentification) identification;
 			if (mi.getDeclaringClass() == null)
 				mi.setDeclaringClass(def.getOwnerClass());
 			for (Field field : mi.getMember()) {
-				if (!ReflectUtils.isCast(FieldMatching.class, matching))
+				if (ReflectUtils.isCast(FieldMatching.class, matching)) {
+					if (field.equals(((FieldMatching) matching).getField())) {
+						result = true;
+						break;
+					}
+				}
+				else if (ReflectUtils.isCast(ClassMatching.class, matching)) {
+					if (field.equals(matching.getMetadata(MetadataKey.FIELD)
+							.getValue())) {
+						result = true;
+						break;
+					}
+				}
+				else {
 					if (log.isErrorEnabled())
 						log.error("The 'matching' can not be cast to ["
 								+ FieldMatching.class + "]",
 								new MatchingException());
-				if (field.equals(((FieldMatching) matching).getField())) {
-					result = true;
-					break;
 				}
 			}
 		}

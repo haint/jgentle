@@ -41,11 +41,12 @@ public class BasicMethodConstructorMatchingAspectPair extends
 	/** The method. */
 	final transient Method		method;
 
+	
 	/**
-	 * The Constructor.
+	 * Instantiates a new basic method constructor matching aspect pair.
 	 * 
-	 * @param method
-	 *            the method
+	 * @param method the method
+	 * @param definition the definition
 	 */
 	public BasicMethodConstructorMatchingAspectPair(Method method,
 			Definition definition) {

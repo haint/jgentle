@@ -18,10 +18,11 @@
 package org.jgentleframework.core.factory.support;
 
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -32,6 +33,7 @@ import net.sf.cglib.proxy.NoOp;
 import net.sf.cglib.reflect.FastClass;
 import net.sf.cglib.reflect.FastConstructor;
 
+import org.aopalliance.intercept.FieldInterceptor;
 import org.aopalliance.intercept.Interceptor;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.apache.commons.logging.Log;
@@ -53,12 +55,14 @@ import org.jgentleframework.core.interceptor.InterceptorUtils;
 import org.jgentleframework.core.provider.ServiceClass;
 import org.jgentleframework.core.reflection.metadata.Definition;
 import org.jgentleframework.utils.Assertor;
+import org.jgentleframework.utils.ReflectUtils;
+import org.jgentleframework.utils.Utils;
 import org.jgentleframework.utils.data.NullClass;
 
 /**
  * This is core processor of JGentle system which is a part of JGentle kernel,
  * is responsible for bean instantiation. All core services of JGentle are
- * deployed in {@link CoreProcessorImpl}, includes IoC, AOH, AOP ...
+ * deployed in {@link CoreProcessorImpl}, includes IoC, Interceptor, AOP ...
  * {@link CoreProcessorImpl}
  * 
  * @author LE QUOC CHUNG - mailto: <a
@@ -162,7 +166,9 @@ public class CoreProcessorImpl extends AbstractProcesserChecker implements
 				Map<Method, MethodAspectPair> methodAspectList = new HashMap<Method, MethodAspectPair>();
 				Map<Interceptor, Matcher<Definition>> map = instSelector
 						.getMapMatcherInterceptor();
-				final List<Method> methodList = new ArrayList<Method>();
+				final List<Method> methodList = new LinkedList<Method>();
+				final Field[] fieldList = ReflectUtils.getDeclaredFields(
+						targetClass, false, true);
 				Enhancer.getMethods(targetClass, null, methodList);
 				boolean invocationINOUT = false;
 				ElementAspectFactory elementAspectFactory = new ElementAspectFactory();
@@ -188,23 +194,59 @@ public class CoreProcessorImpl extends AbstractProcesserChecker implements
 				/*
 				 * perform field interceptor
 				 */
-				boolean bool = executesFieldInterceptor(targetClass,
-						instSelector, definition, elementAspectFactory,
-						invocationINOUT, map, methodAspectList);
-				if (bool == true)
-					invocationINOUT = true;
+				FieldInterceptor[] fieldIcpLst = instSelector
+						.getFieldInterceptors();
+				if (!targetClass.isAnnotation()) {
+					for (Field field : fieldList) {
+						invocationINOUT = invocationINOUT == false ? InterceptorUtils
+								.isInvocation(definition, field)
+								: invocationINOUT;
+						// creates Aspect Pair
+						FieldAspectPair fieldAspectPair = elementAspectFactory
+								.analysesField(fieldIcpLst, map, definition,
+										field);
+						if (fieldAspectPair.hasInterceptors()) {
+							Method setter = Utils.getDefaultSetter(targetClass,
+									field.getName());
+							Method getter = Utils.getDefaultGetter(targetClass,
+									field.getName());
+							if (getter == null || setter == null) {
+								throw new InterceptionException(
+										"Does not found setter or getter of field '"
+												+ field.getName() + "'");
+							}
+							MethodInterceptor interceptor = InterceptorUtils
+									.createsFieldStackMethodInterceptor(field);
+							if (methodAspectList.containsKey(setter))
+								methodAspectList.get(setter).add(interceptor);
+							else
+								methodAspectList.put(setter,
+										new MethodAspectPair(setter,
+												interceptor));
+							if (methodAspectList.containsKey(getter))
+								methodAspectList.get(getter).add(interceptor);
+							else
+								methodAspectList.put(getter,
+										new MethodAspectPair(getter,
+												interceptor));
+						}
+					}
+				}
+				// boolean bool = executesFieldInterceptor(targetClass,
+				// instSelector, definition, elementAspectFactory,
+				// invocationINOUT, map, methodAspectList);
+				// if (bool == true)
+				// invocationINOUT = true;
 				/*
 				 * perform invocation in/out or annotation attributes injection
 				 */
 				executesInOut(targetClass, definition, provider,
 						runtimeLoading, methodAspectList, invocationINOUT);
-				// Create callbacks.
+				// Creates callbacks.
 				Callback[] callbacks = new Callback[methodList.size()];
-				Class<? extends Callback>[] callbackTypes = new Class[methodList
-						.size()];
+				Class<? extends Callback>[] callbackTypes = new Class[methodList.size()];
 				for (int i = 0; i < methodList.size(); i++) {
-					MethodAspectPair pair = methodAspectList.get(methodList
-							.get(i));
+					MethodAspectPair pair = methodAspectList.get(methodList.get(i));
 					if (pair == null) {
 						callbacks[i] = NoOp.INSTANCE;
 						callbackTypes[i] = NoOp.class;
