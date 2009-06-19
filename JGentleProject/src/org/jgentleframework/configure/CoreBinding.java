@@ -34,6 +34,7 @@ import org.jgentleframework.configure.objectmeta.ObjectConstant;
 import org.jgentleframework.context.aop.support.MatcherPointcut;
 import org.jgentleframework.context.aop.support.Matching;
 import org.jgentleframework.context.injecting.Provider;
+import org.jgentleframework.core.intercept.support.InterceptConditioner;
 import org.jgentleframework.core.intercept.support.Matcher;
 import org.jgentleframework.core.reflection.FieldIdentification;
 import org.jgentleframework.core.reflection.Identification;
@@ -213,6 +214,20 @@ public interface CoreBinding {
 			MatcherPointcut<Definition, ? extends Matching> matcherPointcut);
 
 	/**
+	 * Creates a binding to an {@link Interceptor}.
+	 * 
+	 * @param interceptor
+	 *            the interceptor
+	 * @param matcherPointcut
+	 *            a {@link MatcherPointcut} of given interceptor
+	 * @param interceptConditioner
+	 *            the intercept conditioner
+	 */
+	public void intercept(Object interceptor,
+			InterceptConditioner interceptConditioner,
+			MatcherPointcut<Definition, ? extends Matching> matcherPointcut);
+
+	/**
 	 * Creates a binding to a {@link MethodInterceptor method interceptor}.
 	 * <p>
 	 * <b>Note:</b> This method does not support {@link Location#ALL} and
@@ -231,6 +246,28 @@ public interface CoreBinding {
 	public void interceptMethod(Object interceptor,
 			MethodIdentification identification,
 			MatcherPointcut<Definition, ? extends Matching>... matcherPointcuts);
+
+	/**
+	 * Creates a binding to a {@link MethodInterceptor method interceptor}.
+	 * <p>
+	 * <b>Note:</b> This method does not support {@link Location#ALL} and
+	 * {@link Location#CONSTRUCTOR} declaring on {@link AnnotatedWith} method or
+	 * any parameters of {@link Constructor constructor}.
+	 * 
+	 * @param interceptor
+	 *            the {@link MethodInterceptor method interceptor}
+	 * @param identification
+	 *            use static methods of {@link ReflectIdentification} class in
+	 *            order to specify {@link Identification identification}.
+	 * @param interceptConditioner
+	 *            the intercept conditioner
+	 * @param matcherPointcut
+	 *            a {@link MatcherPointcut} of given interceptor
+	 */
+	public void interceptMethod(Object interceptor,
+			MethodIdentification identification,
+			InterceptConditioner interceptConditioner,
+			MatcherPointcut<Definition, ? extends Matching> matcherPointcut);
 
 	/**
 	 * Creates a binding to a {@link MethodInterceptor method interceptor}.
@@ -288,6 +325,28 @@ public interface CoreBinding {
 	 */
 	public void interceptField(Object interceptor,
 			FieldIdentification identification,
+			MatcherPointcut<Definition, ? extends Matching> matcherPointcut);
+
+	/**
+	 * Creates a binding to a {@link FieldInterceptor field interceptor}.
+	 * <p>
+	 * <b>Note:</b> This method does not support {@link Location#ALL},
+	 * {@link Location#CONSTRUCTOR} and {@link Location#PARAMETER} declaring on
+	 * {@link AnnotatedWith} method
+	 * 
+	 * @param interceptor
+	 *            the {@link FieldInterceptor field interceptor}
+	 * @param identification
+	 *            use static methods of {@link ReflectIdentification} class in
+	 *            order to specify {@link Identification identification}.
+	 * @param interceptConditioner
+	 *            the intercept conditioner
+	 * @param matcherPointcut
+	 *            a {@link MatcherPointcut} of given interceptor
+	 */
+	public void interceptField(Object interceptor,
+			FieldIdentification identification,
+			InterceptConditioner interceptConditioner,
 			MatcherPointcut<Definition, ? extends Matching> matcherPointcut);
 
 	/**

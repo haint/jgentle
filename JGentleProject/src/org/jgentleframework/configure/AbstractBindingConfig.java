@@ -38,6 +38,7 @@ import org.jgentleframework.core.intercept.support.AnnotatedWithMatcher;
 import org.jgentleframework.core.intercept.support.ConstructorAnnotatedWithMatcher;
 import org.jgentleframework.core.intercept.support.CoreIdentification;
 import org.jgentleframework.core.intercept.support.FieldAnnotatedWithMatcher;
+import org.jgentleframework.core.intercept.support.InterceptConditioner;
 import org.jgentleframework.core.intercept.support.Matcher;
 import org.jgentleframework.core.intercept.support.MethodAnnotatedWithMatcher;
 import org.jgentleframework.core.intercept.support.ParameterAnnotatedWithMatcher;
@@ -47,7 +48,6 @@ import org.jgentleframework.core.reflection.Identification;
 import org.jgentleframework.core.reflection.MethodIdentification;
 import org.jgentleframework.core.reflection.metadata.Definition;
 import org.jgentleframework.utils.Assertor;
-import org.jgentleframework.utils.ReflectUtils;
 import org.jgentleframework.utils.data.Pair;
 
 /**
@@ -305,19 +305,14 @@ public abstract class AbstractBindingConfig extends AbstractConfigModule
 			MatcherPointcut<Definition, ? extends Matching>... matcherPointcuts) {
 
 		Assertor.notNull(identification,
-				"The identification must not be null !!");
-		Assertor.notNull(matcherPointcuts,
-				"The 'matcherPointcuts' argument must not be null !!");
-		Assertor.notEmpty(matcherPointcuts,
-				"The 'matcherPointcuts' argument must not be empty !");
+				"Configuration Error: The identification must not be null !!");
+		Assertor
+				.notNull(matcherPointcuts,
+						"Configuration Error: The 'matcherPointcuts' argument must not be null !!");
+		Assertor
+				.notEmpty(matcherPointcuts,
+						"Configuration Error: The 'matcherPointcuts' argument must not be empty !");
 		for (MatcherPointcut<Definition, ? extends Matching> mp : matcherPointcuts) {
-			if (!ReflectUtils.isCast(CoreIdentification.class, mp)) {
-				if (log.isFatalEnabled()) {
-					log.fatal("The matcher pointcut can not be cast to ["
-							+ CoreIdentification.class + "]",
-							new BindingException());
-				}
-			}
 			((CoreIdentification) mp)
 					.setIdentification((Identification<Method>) identification);
 		}
@@ -354,19 +349,14 @@ public abstract class AbstractBindingConfig extends AbstractConfigModule
 			MatcherPointcut<Definition, ? extends Matching>... matcherPointcuts) {
 
 		Assertor.notNull(identification,
-				"The identification must not be null !!");
-		Assertor.notNull(matcherPointcuts,
-				"The 'matcherPointcuts' argument must not be null !!");
-		Assertor.notEmpty(matcherPointcuts,
-				"The 'matcherPointcuts' argument must not be empty !");
+				"Configuration Error: The identification must not be null !!");
+		Assertor
+				.notNull(matcherPointcuts,
+						"Configuration Error: The 'matcherPointcuts' argument must not be null !!");
+		Assertor
+				.notEmpty(matcherPointcuts,
+						"Configuration Error: The 'matcherPointcuts' argument must not be empty !");
 		for (MatcherPointcut<Definition, ? extends Matching> mp : matcherPointcuts) {
-			if (!ReflectUtils.isCast(CoreIdentification.class, mp)) {
-				if (log.isFatalEnabled()) {
-					log.fatal("The matcher pointcut can not be cast to ["
-							+ CoreIdentification.class + "]",
-							new BindingException());
-				}
-			}
 			((CoreIdentification) mp).setIdentification(identification);
 		}
 		intercept(interceptor, matcherPointcuts);
@@ -400,10 +390,12 @@ public abstract class AbstractBindingConfig extends AbstractConfigModule
 	public void intercept(Object interceptor,
 			MatcherPointcut<Definition, ? extends Matching>... matcherPointcuts) {
 
-		Assertor.notNull(matcherPointcuts,
-				"The 'matcherPointcuts' argument must not be null !");
-		Assertor.notEmpty(matcherPointcuts,
-				"The 'matcherPointcuts' argument must not be empty !");
+		Assertor
+				.notNull(matcherPointcuts,
+						"Configuration Error: The 'matcherPointcuts' argument must not be null !");
+		Assertor
+				.notEmpty(matcherPointcuts,
+						"Configuration Error: The 'matcherPointcuts' argument must not be empty !");
 		try {
 			this.objBindingInterceptorList.add(Binder
 					.createObjectBindingInterceptor(interceptor,
@@ -411,7 +403,7 @@ public abstract class AbstractBindingConfig extends AbstractConfigModule
 		}
 		catch (ClassCastException e) {
 			throw new ClassCastException(
-					"The 'matcherPointcuts' must be 'Matcher<Definition>'");
+					"Configuration Error: The 'matcherPointcuts' must be 'Matcher<Definition>'");
 		}
 	}
 
@@ -427,6 +419,79 @@ public abstract class AbstractBindingConfig extends AbstractConfigModule
 			MatcherPointcut<Definition, ? extends Matching> matcherPointcut) {
 
 		intercept(interceptor, new MatcherPointcut[] { matcherPointcut });
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * org.jgentleframework.configure.CoreBinding#intercept(java.lang.Object,
+	 * org.jgentleframework.core.intercept.support.InterceptConditioner,
+	 * org.jgentleframework.context.aop.support.MatcherPointcut)
+	 */
+	@Override
+	public void intercept(Object interceptor,
+			InterceptConditioner interceptConditioner,
+			MatcherPointcut<Definition, ? extends Matching> matcherPointcut) {
+
+		Assertor
+				.notNull(interceptConditioner,
+						"Configuration Error: The 'intercept conditioner' must not be null !!");
+		Assertor
+				.notNull(matcherPointcut,
+						"Configuration Error: The 'matcherPointcuts' must not be null !!");
+		((CoreIdentification) matcherPointcut)
+				.serInterceptConditioner(interceptConditioner);
+		intercept(interceptor, matcherPointcut);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * org.jgentleframework.configure.CoreBinding#interceptMethod(java.lang.
+	 * Object, org.jgentleframework.core.reflection.MethodIdentification,
+	 * org.jgentleframework.core.intercept.support.InterceptConditioner,
+	 * org.jgentleframework.context.aop.support.MatcherPointcut)
+	 */
+	@Override
+	public void interceptMethod(Object interceptor,
+			MethodIdentification identification,
+			InterceptConditioner interceptConditioner,
+			MatcherPointcut<Definition, ? extends Matching> matcherPointcut) {
+
+		Assertor
+				.notNull(interceptConditioner,
+						"Configuration Error: The 'intercept conditioner' must not be null !!");
+		Assertor
+				.notNull(matcherPointcut,
+						"Configuration Error: The 'matcherPointcut' must not be null !!");
+		((CoreIdentification) matcherPointcut)
+				.setIdentification(identification);
+		interceptMethod(interceptor, identification, matcherPointcut);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * org.jgentleframework.configure.CoreBinding#interceptField(java.lang.Object
+	 * , org.jgentleframework.core.reflection.FieldIdentification,
+	 * org.jgentleframework.core.intercept.support.InterceptConditioner,
+	 * org.jgentleframework.context.aop.support.MatcherPointcut)
+	 */
+	@Override
+	public void interceptField(Object interceptor,
+			FieldIdentification identification,
+			InterceptConditioner interceptConditioner,
+			MatcherPointcut<Definition, ? extends Matching> matcherPointcut) {
+
+		Assertor
+				.notNull(interceptConditioner,
+						"Configuration Error: The 'intercept conditioner' must not be null !!");
+		Assertor
+				.notNull(matcherPointcut,
+						"Configuration Error: The 'matcherPointcut' must not be null !!");
+		((CoreIdentification) matcherPointcut)
+				.setIdentification(identification);
+		interceptField(interceptor, identification, matcherPointcut);
 	}
 
 	/*

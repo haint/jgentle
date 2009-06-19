@@ -11,26 +11,30 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.
+ * limitations under the License. 
  * 
- * Project: JGentleFrameworkExample
+ * Project: JGentleFramework
  */
-package org.samples.utiltest;
+package org.jgentleframework.core.intercept.support;
 
-import org.jgentleframework.utils.SystemPropertiesUtils;
-import org.jgentleframework.utils.enums.SystemPropertyKeys;
+import org.jgentleframework.core.reflection.metadata.Definition;
 
 /**
+ * The Interface InterceptConditioner.
+ * 
  * @author Quoc Chung - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
- * @date May 26, 2009
+ * @date Jun 19, 2009
  */
-public class SystemPropertiesTest {
-	public static void main(String[] args) {
-
-		for (SystemPropertyKeys key : SystemPropertyKeys.values()) {
-			System.out.println(key + "::"
-					+ SystemPropertiesUtils.getProperty(key));
-		}
-	}
+public interface InterceptConditioner {
+	
+	/**
+	 * Checks if is valid definition.
+	 * 
+	 * @param definition the definition
+	 * 
+	 * @return <code>true</code> if the corresponding {@link Definition
+	 * definition} is valid otherwise returns <code>false</code>.
+	 */
+	public boolean isValidDefinition(Definition definition);
 }

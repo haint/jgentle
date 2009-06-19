@@ -15,7 +15,7 @@
  * 
  * Project: JGentleFramework
  */
-package org.samples;
+package org.samples.unittest;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

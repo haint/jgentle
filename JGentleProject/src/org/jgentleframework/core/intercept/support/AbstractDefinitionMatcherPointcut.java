@@ -60,7 +60,10 @@ public abstract class AbstractDefinitionMatcherPointcut<T extends Matching>
 		extends AbstractDefinitionMatcher implements
 		MatcherPointcut<Definition, T> {
 	/** The identification. */
-	Identification<?>					identification	= null;
+	Identification<?>					identification			= null;
+
+	/** The intercept conditioner. */
+	InterceptConditioner				interceptConditioner	= null;
 
 	/** The andor. */
 	final AND_OR						andor;
@@ -69,10 +72,10 @@ public abstract class AbstractDefinitionMatcherPointcut<T extends Matching>
 	final Class<? extends Annotation>[]	annotationList;
 
 	/** The Constant thisMatcher. */
-	public final static int				thisMatcher		= 1;
+	public final static int				thisMatcher				= 1;
 
 	/** The Constant classFilter. */
-	public final static int				typeFilter		= 2;
+	public final static int				typeFilter				= 2;
 
 	/**
 	 * Instantiates a new annotated with matcher.
@@ -561,5 +564,29 @@ public abstract class AbstractDefinitionMatcherPointcut<T extends Matching>
 	public void setIdentification(Identification<?> identification) {
 
 		this.identification = identification;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @seeorg.jgentleframework.core.intercept.support.CoreIdentification#
+	 * getInterceptConditioner()
+	 */
+	@Override
+	public InterceptConditioner getInterceptConditioner() {
+
+		return this.interceptConditioner;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @seeorg.jgentleframework.core.intercept.support.CoreIdentification#
+	 * serInterceptConditioner
+	 * (org.jgentleframework.core.intercept.support.InterceptConditioner)
+	 */
+	@Override
+	public void serInterceptConditioner(
+			InterceptConditioner interceptConditioner) {
+
+		this.interceptConditioner = interceptConditioner;
 	}
 }

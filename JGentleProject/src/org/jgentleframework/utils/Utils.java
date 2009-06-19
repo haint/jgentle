@@ -27,15 +27,21 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map.Entry;
 
+import org.aopalliance.intercept.Interceptor;
 import org.jgentleframework.configure.Configurable;
 import org.jgentleframework.configure.REF;
 import org.jgentleframework.configure.annotation.DefaultConstructor;
 import org.jgentleframework.configure.annotation.Inject;
+import org.jgentleframework.context.aop.support.MatcherPointcut;
 import org.jgentleframework.context.injecting.Provider;
+import org.jgentleframework.context.support.InstantiationSelector;
 import org.jgentleframework.core.GenericException;
 import org.jgentleframework.core.InvalidOperationException;
 import org.jgentleframework.core.factory.InOutDependencyException;
 import org.jgentleframework.core.factory.InOutExecutor;
+import org.jgentleframework.core.intercept.support.CoreIdentification;
+import org.jgentleframework.core.intercept.support.InterceptConditioner;
+import org.jgentleframework.core.intercept.support.Matcher;
 import org.jgentleframework.core.reflection.metadata.Definition;
 
 /**
@@ -106,6 +112,71 @@ public final class Utils {
 			}
 		}
 		return REF.refConstant(referString);
+	}
+
+	/**
+	 * Gets the bean from object identification.
+	 * 
+	 * @param object
+	 *            the object
+	 * @param provider
+	 *            the provider
+	 * @return the bean from object identification
+	 */
+	public static Object getBeanFromObjectIdentification(Object object,
+			Provider provider) {
+
+		Object result = null;
+		if (ReflectUtils.isCast(String.class, object)) {
+			result = provider.getBean((String) object);
+		}
+		else {
+			result = object;
+		}
+		return result;
+	}
+
+	/**
+	 * Validates intercept conditioner.
+	 * 
+	 * @param selector the selector
+	 * @param definition the definition
+	 * @param interceptor the interceptor
+	 * 
+	 * @return true, if successful
+	 */
+	public static boolean validatesInterceptConditioner(
+			InstantiationSelector selector, Definition definition,
+			Interceptor interceptor) {
+
+		Matcher<Definition> matcher = selector.getMapMatcherInterceptor().get(
+				interceptor);
+		return validatesInterceptConditioner(matcher, definition, interceptor);
+	}
+
+	/**
+	 * Validates intercept conditioner.
+	 * 
+	 * @param matcher the matcher
+	 * @param definition the definition
+	 * @param interceptor the interceptor
+	 * 
+	 * @return true, if successful
+	 */
+	public static boolean validatesInterceptConditioner(
+			Matcher<Definition> matcher, Definition definition,
+			Interceptor interceptor) {
+
+		if (matcher != null
+				&& (ReflectUtils.isCast(MatcherPointcut.class, matcher) || ReflectUtils
+						.isCast(CoreIdentification.class, interceptor))) {
+			CoreIdentification coreIden = (CoreIdentification) matcher;
+			InterceptConditioner ic = coreIden.getInterceptConditioner();
+			if (ic != null && !ic.isValidDefinition(definition)) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	/**

@@ -44,6 +44,7 @@ import org.jgentleframework.core.intercept.InterceptionException;
 import org.jgentleframework.core.provider.ServiceClass;
 import org.jgentleframework.utils.Assertor;
 import org.jgentleframework.utils.ReflectUtils;
+import org.jgentleframework.utils.Utils;
 
 /**
  * This <code>processor</code> is responsible for custom configured bean
@@ -202,21 +203,16 @@ public class BeanCreationProcessor implements ServiceClass,
 		Assertor.notNull(bp, "The '" + BeanPostInstantiation.class.getName()
 				+ "' instance must not be null!");
 		BeanPostInstantiation beanPost = null;
-		if (ReflectUtils.isCast(String.class, bp)) {
-			Object obj = this.provider.getBean((String) bp);
-			if (obj != null
-					&& ReflectUtils.isCast(BeanPostInstantiation.class, obj))
-				beanPost = (BeanPostInstantiation) obj;
-			else
-				throw new InterceptionException(
-						"The registered '"
-								+ BeanPostInstantiation.class.getName()
-								+ "' instance could not be found or it is not an instance of '"
-								+ BeanPostInstantiation.class + "'!");
-		}
-		else {
-			beanPost = (BeanPostInstantiation) bp;
-		}
+		Object obj = Utils.getBeanFromObjectIdentification(bp, this.provider);
+		if (obj != null
+				&& ReflectUtils.isCast(BeanPostInstantiation.class, obj))
+			beanPost = (BeanPostInstantiation) obj;
+		else
+			throw new InterceptionException(
+					"The registered '"
+							+ BeanPostInstantiation.class.getName()
+							+ "' instance could not be found or it is not an instance of '"
+							+ BeanPostInstantiation.class + "'!");
 		return beanPost;
 	}
 
@@ -313,8 +309,8 @@ public class BeanCreationProcessor implements ServiceClass,
 	 * 
 	 * @param interceptors
 	 *            an interceptor or a set of interceptors need to be validated.
-	 * @return <b>true</b> if a set of {@link Interceptor}s is supported by core,
-	 *         <b>false</b> otherwise.
+	 * @return <b>true</b> if a set of {@link Interceptor}s is supported by
+	 *         core, <b>false</b> otherwise.
 	 */
 	protected boolean validatesInterceptor(Interceptor... interceptors) {
 

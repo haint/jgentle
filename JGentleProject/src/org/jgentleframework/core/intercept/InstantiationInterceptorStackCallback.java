@@ -19,6 +19,8 @@ package org.jgentleframework.core.intercept;
 
 import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Constructor;
+import java.util.LinkedList;
+import java.util.List;
 
 import org.aopalliance.intercept.Interceptor;
 import org.apache.commons.logging.Log;
@@ -30,6 +32,7 @@ import org.jgentleframework.core.reflection.metadata.Definition;
 import org.jgentleframework.core.reflection.metadata.MetadataController;
 import org.jgentleframework.core.reflection.metadata.MetadataImpl;
 import org.jgentleframework.utils.Assertor;
+import org.jgentleframework.utils.Utils;
 
 /**
  * The Class InstantiationInterceptorStackCallback.
@@ -50,9 +53,10 @@ public class InstantiationInterceptorStackCallback {
 		private static final long	serialVersionUID	= -3650610523177070593L;
 
 		/** The index. */
-		int	index	= -1;
+		int							index				= -1;
 
-		private final Log	log	= LogFactory.getLog(getClass());
+		private final Log			log					= LogFactory
+																.getLog(getClass());
 
 		/**
 		 * Instantiates a new intercepted object instantiation.
@@ -326,7 +330,18 @@ public class InstantiationInterceptorStackCallback {
 		}
 		else
 			this.targetInterface = null;
-		this.interceptors = selector.getInstantiationInterceptors();
+		List<InstantiationInterceptor> list = new LinkedList<InstantiationInterceptor>();
+		if (selector.getInstantiationInterceptors() != null) {
+			for (InstantiationInterceptor icpt : selector
+					.getInstantiationInterceptors()) {
+				if (Utils.validatesInterceptConditioner(selector, selector
+						.getDefinition(), icpt)) {
+					list.add(icpt);
+				}
+			}
+		}
+		this.interceptors = list.toArray(new InstantiationInterceptor[list
+				.size()]);
 		this.definition = selector.getDefinition();
 		this.provider = provider;
 	}

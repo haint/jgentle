@@ -17,7 +17,7 @@
  */
 package org.jgentleframework.utils;
 
-import org.jgentleframework.utils.enums.PropertyKeys;
+import org.jgentleframework.utils.enums.SystemPropertyKeys;
 
 /**
  * Miscellaneous System Properties ({@link System#getProperty(String)}) utility
@@ -36,7 +36,7 @@ public abstract class SystemPropertiesUtils {
 	 * @param propertyKey
 	 *            the specified key
 	 */
-	public static String getProperty(PropertyKeys propertyKey) {
+	public static String getProperty(SystemPropertyKeys propertyKey) {
 
 		return System.getProperty(propertyKey.getKey());
 	}
@@ -56,7 +56,7 @@ public abstract class SystemPropertiesUtils {
 	 *         or {@link System#getProperty(String)} method returns
 	 *         <code>null</code>.
 	 */
-	public static String getProperty(PropertyKeys propertyKey,
+	public static String getProperty(SystemPropertyKeys propertyKey,
 			String defaultValue) {
 
 		String result = System.getProperty(propertyKey.getKey());

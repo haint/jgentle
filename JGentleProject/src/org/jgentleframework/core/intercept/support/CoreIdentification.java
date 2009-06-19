@@ -41,4 +41,20 @@ public interface CoreIdentification {
 	 *            the identification to set
 	 */
 	public void setIdentification(Identification<?> identification);
+
+	/**
+	 * Gets the intercept conditioner.
+	 * 
+	 * @return the intercept conditioner
+	 */
+	public InterceptConditioner getInterceptConditioner();
+
+	/**
+	 * Ser intercept conditioner.
+	 * 
+	 * @param interceptConditioner
+	 *            the intercept conditioner
+	 */
+	public void serInterceptConditioner(
+			InterceptConditioner interceptConditioner);
 }

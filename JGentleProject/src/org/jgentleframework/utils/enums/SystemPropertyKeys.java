@@ -18,13 +18,13 @@
 package org.jgentleframework.utils.enums;
 
 /**
- * The Enum PropertyKeys.
+ * The Enum SystemPropertyKeys.
  * 
  * @author Quoc Chung - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
  * @date May 26, 2009
  */
-public enum PropertyKeys {
+public enum SystemPropertyKeys {
 	/** Java Runtime Environment version. */
 	JAVA_VERSION ("java.version"),
 	/** Java Runtime Environment vendor. */
@@ -90,7 +90,7 @@ public enum PropertyKeys {
 	 * @param key
 	 *            the key
 	 */
-	PropertyKeys(String key) {
+	SystemPropertyKeys(String key) {
 
 		this.key = key;
 	}

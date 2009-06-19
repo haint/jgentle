@@ -78,6 +78,7 @@ public class CoreProcessorImpl extends AbstractProcesserChecker implements
 	/** The current {@link Provider}. */
 	private final Provider		provider;
 
+	/** The log. */
 	private final Log			log					= LogFactory.getLog(this
 															.getClass());
 
@@ -244,9 +245,11 @@ public class CoreProcessorImpl extends AbstractProcesserChecker implements
 						runtimeLoading, methodAspectList, invocationINOUT);
 				// Creates callbacks.
 				Callback[] callbacks = new Callback[methodList.size()];
-				Class<? extends Callback>[] callbackTypes = new Class[methodList.size()];
+				Class<? extends Callback>[] callbackTypes = new Class[methodList
+						.size()];
 				for (int i = 0; i < methodList.size(); i++) {
-					MethodAspectPair pair = methodAspectList.get(methodList.get(i));
+					MethodAspectPair pair = methodAspectList.get(methodList
+							.get(i));
 					if (pair == null) {
 						callbacks[i] = NoOp.INSTANCE;
 						callbackTypes[i] = NoOp.class;
@@ -306,6 +309,14 @@ public class CoreProcessorImpl extends AbstractProcesserChecker implements
 
 	/**
 	 * Creates a construction proxy given a class and parameter types.
+	 * 
+	 * @param definition
+	 *            the definition
+	 * @param clazz
+	 *            the clazz
+	 * @param parameterTypes
+	 *            the parameter types
+	 * @return the cached constructor
 	 */
 	CachedConstructor createConstructionProxy(final Definition definition,
 			Class<?> clazz, Class<?>[] parameterTypes) {

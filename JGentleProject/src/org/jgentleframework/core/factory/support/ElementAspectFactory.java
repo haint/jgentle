@@ -47,6 +47,7 @@ import org.jgentleframework.core.intercept.support.TypeAnnotatedWithMatcher;
 import org.jgentleframework.core.reflection.metadata.Definition;
 import org.jgentleframework.utils.Assertor;
 import org.jgentleframework.utils.ReflectUtils;
+import org.jgentleframework.utils.Utils;
 
 /**
  * The Class ElementAspectFactory.
@@ -87,7 +88,6 @@ class ElementAspectFactory {
 	 *         according to given method are existed, if not returns
 	 *         <code>null</code>.
 	 */
-	// @SuppressWarnings("unchecked")
 	public MethodAspectPair analysesMethod(MethodInterceptor[] interceptors,
 			Map<Interceptor, Matcher<Definition>> map, Definition definition,
 			final Method method) {
@@ -104,70 +104,79 @@ class ElementAspectFactory {
 		for (MethodInterceptor interceptor : interceptors) {
 			Matcher<Definition> matcher = map.get(interceptor);
 			if (matcher != null && matcher.matches(definition)) {
-				TypeAnnotatedWithMatcher pointcutType = (ReflectUtils.isCast(
-						TypeAnnotatedWithMatcher.class, matcher) ? (TypeAnnotatedWithMatcher) matcher
-						: null);
-				MethodAnnotatedWithMatcher pointcutMethod = (ReflectUtils
-						.isCast(MethodAnnotatedWithMatcher.class, matcher) ? (MethodAnnotatedWithMatcher) matcher
-						: null);
-				ParameterAnnotatedWithMatcher pointcutPar = (ReflectUtils
-						.isCast(ParameterAnnotatedWithMatcher.class, matcher) ? (ParameterAnnotatedWithMatcher) matcher
-						: null);
-				FieldAnnotatedWithMatcher pointcutField = (ReflectUtils.isCast(
-						FieldAnnotatedWithMatcher.class, matcher) ? (FieldAnnotatedWithMatcher) matcher
-						: null);
-				if (pointcutType != null) {
-					ClassFilter classFilter = pointcutType.getClassFilter();
-					if (classFilter != null
-							&& classFilter
-									.matches(new BasicTypeMatchingAspectPair(
-											method.getDeclaringClass(), method,
-											definition))
-							&& !list.contains(interceptor)) {
-						list.add(interceptor);
-					}
-				}
-				else if (pointcutMethod != null) {
-					MethodFilter methodFilter = pointcutMethod
-							.getMethodFilter();
-					if (methodFilter != null
-							&& methodFilter
-									.matches(new BasicMethodConstructorMatchingAspectPair(
-											method, definition))
-							&& !list.contains(interceptor)) {
-						list.add(interceptor);
-					}
-				}
-				else if (pointcutPar != null) {
-					for (int i = 0; i < method.getParameterTypes().length; i++) {
-						ParameterFilter<Method> parameterFilter = pointcutPar
-								.getParameterFilter();
-						if (parameterFilter != null
-								&& parameterFilter
-										.matches(new BasicParameterMatchingAspectPair(
-												method, i))
-								&& list.add(interceptor)) {
-							list.add(interceptor);
-							break;
-						}
-					}
-				}
-				else if (pointcutField != null) {
-					FieldFilter fieldFilter = pointcutField.getFieldFilter();
-					if (fieldFilter != null
-							&& fieldFilter
-									.matches(new BasicFieldMatchingAspectPair(
-											null, definition))
-							&& !list.contains(interceptor)) {
-						list.add(interceptor);
-					}
+				if (!Utils.validatesInterceptConditioner(matcher, definition,
+						interceptor)) {
+					continue;
 				}
 				else {
-					if (log.isFatalEnabled())
-						log
-								.fatal(
-										"Could not intercept the given interceptor !! The declared matcher is not supported !",
-										new MatchingException());
+					TypeAnnotatedWithMatcher pointcutType = (ReflectUtils
+							.isCast(TypeAnnotatedWithMatcher.class, matcher) ? (TypeAnnotatedWithMatcher) matcher
+							: null);
+					MethodAnnotatedWithMatcher pointcutMethod = (ReflectUtils
+							.isCast(MethodAnnotatedWithMatcher.class, matcher) ? (MethodAnnotatedWithMatcher) matcher
+							: null);
+					ParameterAnnotatedWithMatcher pointcutPar = (ReflectUtils
+							.isCast(ParameterAnnotatedWithMatcher.class,
+									matcher) ? (ParameterAnnotatedWithMatcher) matcher
+							: null);
+					FieldAnnotatedWithMatcher pointcutField = (ReflectUtils
+							.isCast(FieldAnnotatedWithMatcher.class, matcher) ? (FieldAnnotatedWithMatcher) matcher
+							: null);
+					if (pointcutType != null) {
+						ClassFilter classFilter = pointcutType.getClassFilter();
+						if (classFilter != null
+								&& classFilter
+										.matches(new BasicTypeMatchingAspectPair(
+												method.getDeclaringClass(),
+												method, definition))
+								&& !list.contains(interceptor)) {
+							list.add(interceptor);
+						}
+					}
+					else if (pointcutMethod != null) {
+						MethodFilter methodFilter = pointcutMethod
+								.getMethodFilter();
+						if (methodFilter != null
+								&& methodFilter
+										.matches(new BasicMethodConstructorMatchingAspectPair(
+												method, definition))
+								&& !list.contains(interceptor)) {
+							list.add(interceptor);
+						}
+					}
+					else if (pointcutPar != null) {
+						for (int i = 0; i < method.getParameterTypes().length; i++) {
+							ParameterFilter<Method> parameterFilter = pointcutPar
+									.getParameterFilter();
+							if (parameterFilter != null
+									&& parameterFilter
+											.matches(new BasicParameterMatchingAspectPair(
+													method, i))
+									&& list.add(interceptor)) {
+								list.add(interceptor);
+								break;
+							}
+						}
+					}
+					else if (pointcutField != null) {
+						FieldFilter fieldFilter = pointcutField
+								.getFieldFilter();
+						if (fieldFilter != null
+								&& fieldFilter
+										.matches(new BasicFieldMatchingAspectPair(
+												null, definition))
+								&& !list.contains(interceptor)) {
+							list.add(interceptor);
+						}
+					}
+					else {
+						if (log.isFatalEnabled())
+							log
+									.fatal(
+											"Could not intercept the given interceptor !!"
+													+ " The declared matcher is not supported !",
+											new MatchingException());
+					}
 				}
 			}
 		}
@@ -214,53 +223,60 @@ class ElementAspectFactory {
 		for (FieldInterceptor interceptor : interceptors) {
 			Matcher<Definition> matcher = map.get(interceptor);
 			if (matcher != null && matcher.matches(definition)) {
-				FieldAnnotatedWithMatcher pointcutField = (ReflectUtils.isCast(
-						FieldAnnotatedWithMatcher.class, matcher) ? (FieldAnnotatedWithMatcher) matcher
-						: null);
-				TypeAnnotatedWithMatcher pointcutType = (ReflectUtils.isCast(
-						TypeAnnotatedWithMatcher.class, matcher) ? (TypeAnnotatedWithMatcher) matcher
-						: null);
-				MethodAnnotatedWithMatcher pointcutMethod = (ReflectUtils
-						.isCast(MethodAnnotatedWithMatcher.class, matcher) ? (MethodAnnotatedWithMatcher) matcher
-						: null);
-				if (pointcutField != null) {
-					FieldFilter fieldFilter = pointcutField.getFieldFilter();
-					if (fieldFilter != null
-							&& fieldFilter
-									.matches(new BasicFieldMatchingAspectPair(
-											field, definition))
-							&& !list.contains(interceptor)) {
-						list.add(interceptor);
-					}
-				}
-				else if (pointcutType != null) {
-					ClassFilter classFilter = pointcutType.getClassFilter();
-					if (classFilter != null
-							&& classFilter
-									.matches(new BasicTypeMatchingAspectPair(
-											field.getDeclaringClass(), field,
-											definition))
-							&& !list.contains(interceptor)) {
-						list.add(interceptor);
-					}
-				}
-				else if (pointcutMethod != null) {
-					MethodFilter methodFilter = pointcutMethod
-							.getMethodFilter();
-					if (methodFilter != null
-							&& methodFilter
-									.matches(new BasicMethodConstructorMatchingAspectPair(
-											null, definition))
-							&& !list.contains(interceptor)) {
-						list.add(interceptor);
-					}
+				if (!Utils.validatesInterceptConditioner(matcher, definition,
+						interceptor)) {
+					continue;
 				}
 				else {
-					if (log.isFatalEnabled())
-						log
-								.fatal(
-										"Could not intercept the given interceptor !! The declared matcher is not supported !",
-										new MatchingException());
+					FieldAnnotatedWithMatcher pointcutField = (ReflectUtils
+							.isCast(FieldAnnotatedWithMatcher.class, matcher) ? (FieldAnnotatedWithMatcher) matcher
+							: null);
+					TypeAnnotatedWithMatcher pointcutType = (ReflectUtils
+							.isCast(TypeAnnotatedWithMatcher.class, matcher) ? (TypeAnnotatedWithMatcher) matcher
+							: null);
+					MethodAnnotatedWithMatcher pointcutMethod = (ReflectUtils
+							.isCast(MethodAnnotatedWithMatcher.class, matcher) ? (MethodAnnotatedWithMatcher) matcher
+							: null);
+					if (pointcutField != null) {
+						FieldFilter fieldFilter = pointcutField
+								.getFieldFilter();
+						if (fieldFilter != null
+								&& fieldFilter
+										.matches(new BasicFieldMatchingAspectPair(
+												field, definition))
+								&& !list.contains(interceptor)) {
+							list.add(interceptor);
+						}
+					}
+					else if (pointcutType != null) {
+						ClassFilter classFilter = pointcutType.getClassFilter();
+						if (classFilter != null
+								&& classFilter
+										.matches(new BasicTypeMatchingAspectPair(
+												field.getDeclaringClass(),
+												field, definition))
+								&& !list.contains(interceptor)) {
+							list.add(interceptor);
+						}
+					}
+					else if (pointcutMethod != null) {
+						MethodFilter methodFilter = pointcutMethod
+								.getMethodFilter();
+						if (methodFilter != null
+								&& methodFilter
+										.matches(new BasicMethodConstructorMatchingAspectPair(
+												null, definition))
+								&& !list.contains(interceptor)) {
+							list.add(interceptor);
+						}
+					}
+					else {
+						if (log.isFatalEnabled())
+							log
+									.fatal(
+											"Could not intercept the given interceptor !! The declared matcher is not supported !",
+											new MatchingException());
+					}
 				}
 			}
 		}

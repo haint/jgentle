@@ -55,16 +55,16 @@ public @interface Outject {
 	/**
 	 * Mặc định khi <code>outject</code> một dependency vào context thì
 	 * container sẽ tự động khởi tạo và <code>outject</code> tại thời điểm khởi
-	 * tạo đối tượng, tương ứng <code>invocation</code> chỉ định là
+	 * tạo đối tượng bean, tương ứng <code>invocation</code> chỉ định là
 	 * <b>false</b>. Nếu thuộc tính <code>invocation</code> được chỉ định là
 	 * <b>true</b>, thì khi <code>outject</code> một dependency vào context,
 	 * container sẽ lựa chọn thời điểm <b>invocation</b> của instance để outject
 	 * dependency chỉ định.
 	 * <p>
 	 * Hay nói cách khác <code>dependency</code> sẽ được <code>outject</code>
-	 * vào <code>context</code> tại thời điểm instance được <code>invoke</code>.
-	 * <br>
-	 * <br>
+	 * vào <code>context</code> tại thời điểm bean instance được
+	 * <code>invoke</code>.
+	 * <p>
 	 * <b>Lưu ý:</b> bất kì method nào khi được invoke đều <i>kích hoạt</i> điều
 	 * kiện hoạt động của <b>outjection</b> ngoại trừ các method có prefix là
 	 * "<b>set</b>" hoặc "<b>get</b>". Hay nói cách khác tất cả các
@@ -80,7 +80,7 @@ public @interface Outject {
 	 * existed reference instance, the default scope will be
 	 * {@link Scope#SINGLETON}.
 	 * 
-	 * @return {@link Scope}
+	 * @see {@link Scope}
 	 */
 	Scope scope() default Scope.UNSPECIFIED;
 }
