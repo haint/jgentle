@@ -27,7 +27,12 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map.Entry;
 
+import net.sf.cglib.reflect.FastClass;
+import net.sf.cglib.reflect.FastConstructor;
+
 import org.aopalliance.intercept.Interceptor;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.jgentleframework.configure.Configurable;
 import org.jgentleframework.configure.REF;
 import org.jgentleframework.configure.annotation.DefaultConstructor;
@@ -39,6 +44,8 @@ import org.jgentleframework.core.GenericException;
 import org.jgentleframework.core.InvalidOperationException;
 import org.jgentleframework.core.factory.InOutDependencyException;
 import org.jgentleframework.core.factory.InOutExecutor;
+import org.jgentleframework.core.factory.support.CachedConstructor;
+import org.jgentleframework.core.intercept.JGentleFastClass;
 import org.jgentleframework.core.intercept.support.CoreIdentification;
 import org.jgentleframework.core.intercept.support.InterceptConditioner;
 import org.jgentleframework.core.intercept.support.Matcher;
@@ -52,6 +59,70 @@ import org.jgentleframework.core.reflection.metadata.Definition;
  * @date Aug 20, 2007
  */
 public final class Utils {
+	/** The log. */
+	private static final Log	log	= LogFactory.getLog(Utils.class);
+
+	/**
+	 * Creates a construction proxy given a class and parameter types.
+	 * 
+	 * @param definition
+	 *            the definition
+	 * @param clazz
+	 *            the clazz
+	 * @param parameterTypes
+	 *            the parameter types
+	 * @return the cached constructor
+	 */
+	public static CachedConstructor createConstructionProxy(
+			final Definition definition, Class<?> clazz,
+			Class<?>[] parameterTypes) {
+
+		FastConstructor constructor = null;
+		try {
+			FastClass fastClass = JGentleFastClass.create(clazz);
+			constructor = fastClass.getConstructor(parameterTypes);
+		}
+		catch (NoSuchMethodError e) {
+			if (parameterTypes == null) {
+				if (log.isErrorEnabled()) {
+					log.error(clazz
+							+ " does not declare public default constructor !");
+					e.printStackTrace();
+				}
+			}
+			else {
+				if (log.isErrorEnabled()) {
+					StringBuffer buffer = new StringBuffer();
+					for (int i = 0; i < parameterTypes.length; i++) {
+						buffer.append(parameterTypes[i].getName());
+						if (!(i + 1 >= parameterTypes.length))
+							buffer.append(",");
+					}
+					log
+							.error(
+									"Class ["
+											+ clazz
+											+ "] does not declare constructor appropriate to these parameter types ["
+											+ buffer.toString() + "]!", e);
+				}
+			}
+		}
+		final FastConstructor fastConstructor = constructor;
+		return new CachedConstructor() {
+			public Object newInstance(Object... arguments)
+					throws InvocationTargetException {
+
+				return fastConstructor.newInstance(arguments);
+			}
+
+			@Override
+			public int hashcodeID() {
+
+				return definition.hashCode() ^ this.hashCode();
+			}
+		};
+	}
+
 	/**
 	 * Creates the scope name.
 	 * 
@@ -139,10 +210,12 @@ public final class Utils {
 	/**
 	 * Validates intercept conditioner.
 	 * 
-	 * @param selector the selector
-	 * @param definition the definition
-	 * @param interceptor the interceptor
-	 * 
+	 * @param selector
+	 *            the selector
+	 * @param definition
+	 *            the definition
+	 * @param interceptor
+	 *            the interceptor
 	 * @return true, if successful
 	 */
 	public static boolean validatesInterceptConditioner(
@@ -157,10 +230,12 @@ public final class Utils {
 	/**
 	 * Validates intercept conditioner.
 	 * 
-	 * @param matcher the matcher
-	 * @param definition the definition
-	 * @param interceptor the interceptor
-	 * 
+	 * @param matcher
+	 *            the matcher
+	 * @param definition
+	 *            the definition
+	 * @param interceptor
+	 *            the interceptor
 	 * @return true, if successful
 	 */
 	public static boolean validatesInterceptConditioner(

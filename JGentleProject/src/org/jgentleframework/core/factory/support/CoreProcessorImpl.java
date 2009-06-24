@@ -30,14 +30,10 @@ import net.sf.cglib.proxy.Callback;
 import net.sf.cglib.proxy.CallbackFilter;
 import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.NoOp;
-import net.sf.cglib.reflect.FastClass;
-import net.sf.cglib.reflect.FastConstructor;
 
 import org.aopalliance.intercept.FieldInterceptor;
 import org.aopalliance.intercept.Interceptor;
 import org.aopalliance.intercept.MethodInterceptor;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.jgentleframework.context.beans.annotation.AlwaysReload;
 import org.jgentleframework.context.injecting.Provider;
 import org.jgentleframework.context.support.CoreInstantiationSelector;
@@ -47,7 +43,6 @@ import org.jgentleframework.context.support.InstantiationSelectorImpl;
 import org.jgentleframework.context.support.Selector;
 import org.jgentleframework.core.handling.DefinitionManager;
 import org.jgentleframework.core.intercept.InterceptionException;
-import org.jgentleframework.core.intercept.JGentleFastClass;
 import org.jgentleframework.core.intercept.JGentleNamingPolicy;
 import org.jgentleframework.core.intercept.MethodInterceptorStackCallback;
 import org.jgentleframework.core.intercept.support.Matcher;
@@ -79,8 +74,8 @@ public class CoreProcessorImpl extends AbstractProcesserChecker implements
 	private final Provider		provider;
 
 	/** The log. */
-	private final Log			log					= LogFactory.getLog(this
-															.getClass());
+	// private final Log log = LogFactory.getLog(this
+	// .getClass());
 
 	/**
 	 * Constructor.
@@ -233,11 +228,6 @@ public class CoreProcessorImpl extends AbstractProcesserChecker implements
 						}
 					}
 				}
-				// boolean bool = executesFieldInterceptor(targetClass,
-				// instSelector, definition, elementAspectFactory,
-				// invocationINOUT, map, methodAspectList);
-				// if (bool == true)
-				// invocationINOUT = true;
 				/*
 				 * perform invocation in/out or annotation attributes injection
 				 */
@@ -287,8 +277,8 @@ public class CoreProcessorImpl extends AbstractProcesserChecker implements
 				enhancer.setNamingPolicy(new JGentleNamingPolicy());
 				Class<?> proxied = enhancer.createClass();
 				Enhancer.registerStaticCallbacks(proxied, callbacks);
-				CachedConstructor cons = createConstructionProxy(definition,
-						proxied, instSelector.getArgTypes());
+				CachedConstructor cons = Utils.createConstructionProxy(
+						definition, proxied, instSelector.getArgTypes());
 				this.cachingList.put(definition, cons);
 				result = cons.newInstance(instSelector.getArgs());
 				// executes process after bean is created
@@ -305,66 +295,6 @@ public class CoreProcessorImpl extends AbstractProcesserChecker implements
 					definition, provider, runtimeLoading);
 		}
 		return result;
-	}
-
-	/**
-	 * Creates a construction proxy given a class and parameter types.
-	 * 
-	 * @param definition
-	 *            the definition
-	 * @param clazz
-	 *            the clazz
-	 * @param parameterTypes
-	 *            the parameter types
-	 * @return the cached constructor
-	 */
-	CachedConstructor createConstructionProxy(final Definition definition,
-			Class<?> clazz, Class<?>[] parameterTypes) {
-
-		FastConstructor constructor = null;
-		try {
-			FastClass fastClass = JGentleFastClass.create(clazz);
-			constructor = fastClass.getConstructor(parameterTypes);
-		}
-		catch (NoSuchMethodError e) {
-			if (parameterTypes == null) {
-				if (log.isErrorEnabled()) {
-					log.error(clazz
-							+ " does not declare public default constructor !");
-					e.printStackTrace();
-				}
-			}
-			else {
-				if (log.isErrorEnabled()) {
-					StringBuffer buffer = new StringBuffer();
-					for (int i = 0; i < parameterTypes.length; i++) {
-						buffer.append(parameterTypes[i].getName());
-						if (!(i + 1 >= parameterTypes.length))
-							buffer.append(",");
-					}
-					log
-							.error(
-									"Class ["
-											+ clazz
-											+ "] does not declare constructor appropriate to these parameter types ["
-											+ buffer.toString() + "]!", e);
-				}
-			}
-		}
-		final FastConstructor fastConstructor = constructor;
-		return new CachedConstructor() {
-			public Object newInstance(Object... arguments)
-					throws InvocationTargetException {
-
-				return fastConstructor.newInstance(arguments);
-			}
-
-			@Override
-			public int hashcodeID() {
-
-				return definition.hashCode() ^ this.hashCode();
-			}
-		};
 	}
 
 	/*
@@ -400,7 +330,7 @@ public class CoreProcessorImpl extends AbstractProcesserChecker implements
 		Class<?> proxied = enhancer.createClass();
 		// Store callbacks.
 		Enhancer.registerStaticCallbacks(proxied, callbacks);
-		CachedConstructor cons = createConstructionProxy(selector
+		CachedConstructor cons = Utils.createConstructionProxy(selector
 				.getDefinition(), proxied, selector.getArgTypes());
 		return cons;
 	}
@@ -454,7 +384,7 @@ public class CoreProcessorImpl extends AbstractProcesserChecker implements
 		Class<?> proxied = enhancer.createClass();
 		// Store callbacks.
 		Enhancer.registerStaticCallbacks(proxied, callbacks);
-		CachedConstructor cons = createConstructionProxy(selector
+		CachedConstructor cons = Utils.createConstructionProxy(selector
 				.getDefinition(), proxied, selector.getArgTypes());
 		return cons;
 	}
