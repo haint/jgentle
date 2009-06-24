@@ -30,6 +30,7 @@ public class Evictor extends TimerTask {
 	/** The base pool. */
 	private final AbstractBaseFactory	basePool;
 
+	/** The lifo. */
 	private final boolean				lifo;
 
 	/**
@@ -37,6 +38,8 @@ public class Evictor extends TimerTask {
 	 * 
 	 * @param basePool
 	 *            the base pool
+	 * @param lifo
+	 *            the lifo
 	 */
 	public Evictor(AbstractBaseFactory basePool, boolean lifo) {
 

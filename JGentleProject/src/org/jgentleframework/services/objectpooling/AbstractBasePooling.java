@@ -517,6 +517,5 @@ public abstract class AbstractBasePooling implements PoolType, Initializing,
 		this.timeBetweenEvictionRuns = systemConfig.timeBetweenEvictionRuns();
 		this.softMinEvictableIdleTime = systemConfig.softMinEvictableIdleTime();
 		this.lifo = systemConfig.LIFO();
-		// this.evictor = new Evictor();
 	}
 }

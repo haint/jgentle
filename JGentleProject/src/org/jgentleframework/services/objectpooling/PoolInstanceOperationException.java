@@ -18,6 +18,7 @@
 package org.jgentleframework.services.objectpooling;
 
 import org.jgentleframework.core.JGentleRuntimeException;
+import org.jgentleframework.services.ServiceRunningException;
 
 /**
  * The Class PoolInstanceOperationException.
@@ -27,7 +28,7 @@ import org.jgentleframework.core.JGentleRuntimeException;
  * @date Jun 22, 2009
  * @see JGentleRuntimeException
  */
-public class PoolInstanceOperationException extends JGentleRuntimeException {
+public class PoolInstanceOperationException extends ServiceRunningException {
 	/** The Constant serialVersionUID. */
 	private static final long	serialVersionUID	= -6864730311259949370L;
 

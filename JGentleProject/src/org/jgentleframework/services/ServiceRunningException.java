@@ -15,59 +15,60 @@
  * 
  * Project: JGentleFramework
  */
-package org.jgentleframework.services.datalocator;
+package org.jgentleframework.services;
 
-import org.jgentleframework.services.ServiceRunningException;
+import org.jgentleframework.core.JGentleRuntimeException;
 
 /**
- * The Class RepositoryRuntimeException.
+ * The Class ServiceRunningException.
  * 
- * @author LE QUOC CHUNG
- * @date Aug 31, 2007
+ * @author Quoc Chung - mailto: <a
+ *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
+ * @date Jun 24, 2009
  */
-public class RepositoryRuntimeException extends ServiceRunningException {
+public class ServiceRunningException extends JGentleRuntimeException {
 	/** The Constant serialVersionUID. */
-	private static final long	serialVersionUID	= 6466813120146858129L;
+	private static final long	serialVersionUID	= -2375175311495592636L;
 
 	/**
-	 * Instantiates a new repository runtime exception.
+	 * Instantiates a new service running exception.
 	 */
-	public RepositoryRuntimeException() {
+	public ServiceRunningException() {
 
 		super();
 	}
 
 	/**
-	 * Instantiates a new repository runtime exception.
+	 * Instantiates a new service running exception.
 	 * 
 	 * @param strEx
 	 *            the str ex
 	 */
-	public RepositoryRuntimeException(String strEx) {
+	public ServiceRunningException(String strEx) {
 
 		super(strEx);
 	}
 
 	/**
-	 * Instantiates a new repository runtime exception.
+	 * Instantiates a new service running exception.
 	 * 
 	 * @param message
 	 *            the message
 	 * @param cause
 	 *            the cause
 	 */
-	public RepositoryRuntimeException(String message, Throwable cause) {
+	public ServiceRunningException(String message, Throwable cause) {
 
 		super(message, cause);
 	}
 
 	/**
-	 * Instantiates a new repository runtime exception.
+	 * Instantiates a new service running exception.
 	 * 
 	 * @param cause
 	 *            the cause
 	 */
-	public RepositoryRuntimeException(Throwable cause) {
+	public ServiceRunningException(Throwable cause) {
 
 		super(cause);
 	}

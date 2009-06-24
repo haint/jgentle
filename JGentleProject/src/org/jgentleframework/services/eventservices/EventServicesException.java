@@ -17,6 +17,8 @@
  */
 package org.jgentleframework.services.eventservices;
 
+import org.jgentleframework.services.ServiceRunningException;
+
 /**
  * The Class EventServicesException.
  * 
@@ -24,7 +26,7 @@ package org.jgentleframework.services.eventservices;
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
  * @date Oct 27, 2007
  */
-public class EventServicesException extends RuntimeException {
+public class EventServicesException extends ServiceRunningException {
 	/** The Constant serialVersionUID. */
 	private static final long	serialVersionUID	= -9153303414282403904L;
 

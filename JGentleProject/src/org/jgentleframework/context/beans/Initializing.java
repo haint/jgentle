@@ -26,7 +26,7 @@ import org.jgentleframework.context.beans.annotation.InitializingMethod;
  * initialization, or merely to check that all mandatory properties have been
  * set.
  * <p>
- * An alternative to implementing InitializingBean is specifying a custom
+ * An alternative to implementing Initializing is specifying a custom
  * init-method.
  * 
  * @author LE QUOC CHUNG - mailto: <a
