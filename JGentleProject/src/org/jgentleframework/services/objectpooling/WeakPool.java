@@ -38,7 +38,7 @@ public class WeakPool extends AbstractBaseController implements ProviderAware {
 	/** The pool. */
 	Queue<SoftReference<Object>>			pool		= null;
 
-	/**
+	/*
 	 * Queue of broken references that might be able to be removed from
 	 * <code>_pool</code>. This is used to help {@link #getNumIdle()} be more
 	 * accurate with minimial performance overhead.
