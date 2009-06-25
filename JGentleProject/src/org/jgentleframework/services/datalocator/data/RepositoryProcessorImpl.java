@@ -381,7 +381,7 @@ class RepositoryProcessorImpl implements RepositoryProcessor {
 	 * getKeyFromPath(java.lang.String)
 	 */
 	@Override
-	public Key<?> getKeyFromPath(String keyPath) {
+	public synchronized Key<?> getKeyFromPath(String keyPath) {
 
 		String[] pathSplit = keyPath.split("/");
 		if (pathSplit.length < 1) {
@@ -726,7 +726,7 @@ class RepositoryProcessorImpl implements RepositoryProcessor {
 		}
 		else {
 			file = new File(pathType.getType(), saveFile);
-			fis = new FileOutputStream(file, true);
+			fis = new FileOutputStream(file, false);
 			out = new ObjectOutputStream(fis);
 		}
 		boolean resultCreate = false;

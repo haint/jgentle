@@ -177,7 +177,7 @@ class ValueImpl<T> implements Serializable, Value<T> {
 	 * @see org.jgentleframework.services.datalocator.data.Value#getValueData()
 	 */
 	@Override
-	public List<T> getValueData() {
+	public synchronized List<T> getValueData() {
 
 		return valueData;
 	}
@@ -188,7 +188,7 @@ class ValueImpl<T> implements Serializable, Value<T> {
 	 * org.jgentleframework.services.datalocator.data.Value#getValueData(int)
 	 */
 	@Override
-	public T getValueData(int index) {
+	public synchronized T getValueData(int index) {
 
 		if (index < 0 || index > this.valueData.size()) {
 			throw new RepositoryRuntimeException(

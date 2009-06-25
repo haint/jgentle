@@ -84,7 +84,6 @@ public class TimestampObjectBean<T> implements Comparable<T> {
 	 *            the other
 	 * @return the int
 	 */
-	
 	public int compareTo(TimestampObjectBean<T> other) {
 
 		final long tstampdiff = this.tstamp - other.tstamp;
@@ -99,6 +98,46 @@ public class TimestampObjectBean<T> implements Comparable<T> {
 			return (int) Math.min(Math.max(tstampdiff, Integer.MIN_VALUE),
 					Integer.MAX_VALUE);
 		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) (tstamp ^ (tstamp >>> 32));
+		result = prime * result + ((value == null) ? 0 : value.hashCode());
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public boolean equals(Object obj) {
+
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof TimestampObjectBean))
+			return false;
+		TimestampObjectBean other = (TimestampObjectBean) obj;
+		if (tstamp != other.tstamp)
+			return false;
+		if (value == null) {
+			if (other.value != null)
+				return false;
+		}
+		else if (!value.equals(other.value))
+			return false;
+		return true;
 	}
 
 	/**

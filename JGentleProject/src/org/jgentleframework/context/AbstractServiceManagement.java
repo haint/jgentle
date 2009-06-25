@@ -88,10 +88,12 @@ public abstract class AbstractServiceManagement extends ProviderCoreCreator
 		targetClass = targetClass == null ? type : targetClass;
 		definition = definition == null ? definitionManager
 				.getDefinition(targetClass) : definition;
-		matcherCache = this.matcherCache == null ? new ConcurrentHashMap<Definition, Matcher<Definition>>()
-				: matcherCache;
-		interceptorList = this.interceptorList == null ? new HashMap<Matcher<Definition>, ArrayList<Object>>()
-				: interceptorList;
+		synchronized (this) {
+			matcherCache = this.matcherCache == null ? new ConcurrentHashMap<Definition, Matcher<Definition>>()
+					: matcherCache;
+			interceptorList = this.interceptorList == null ? new HashMap<Matcher<Definition>, ArrayList<Object>>()
+					: interceptorList;
+		}
 		/*
 		 * find matcher in cache
 		 */

@@ -141,14 +141,16 @@ public class WeakPool extends AbstractBaseController implements ProviderAware {
 		Object obj = null;
 		try {
 			while (null == obj) {
-				if (this.pool.isEmpty()) {
-					obj = this.createsBean();
-				}
-				else {
-					SoftReference<Object> ref = (SoftReference<Object>) (this.pool
-							.poll());
-					obj = ref.get();
-					ref.clear();
+				synchronized (this) {
+					if (this.pool.isEmpty()) {
+						obj = this.createsBean();
+					}
+					else {
+						SoftReference<Object> ref;
+						ref = (SoftReference<Object>) (this.pool.poll());
+						obj = ref.get();
+						ref.clear();
+					}
 				}
 				if (obj != null) {
 					this.activatesObject(obj);
@@ -158,7 +160,9 @@ public class WeakPool extends AbstractBaseController implements ProviderAware {
 		catch (Throwable e) {
 			obj = null;
 		}
-		numActive++;
+		synchronized (this) {
+			numActive++;
+		}
 		return obj;
 	}
 
@@ -195,11 +199,13 @@ public class WeakPool extends AbstractBaseController implements ProviderAware {
 		else {
 			this.deactivateObject(obj);
 		}
-		numActive--;
-		if (success) {
-			this.pool.add(new SoftReference<Object>(obj, refQueue));
+		synchronized (this) {
+			numActive--;
+			if (success) {
+				this.pool.add(new SoftReference<Object>(obj, refQueue));
+			}
+			notifyAll();
 		}
-		notifyAll();
 	}
 
 	/*
@@ -209,6 +215,8 @@ public class WeakPool extends AbstractBaseController implements ProviderAware {
 	@Override
 	public boolean isEmpty() {
 
-		return pool.isEmpty();
+		synchronized (this) {
+			return pool.isEmpty();
+		}
 	}
 }

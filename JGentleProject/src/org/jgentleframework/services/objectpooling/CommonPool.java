@@ -48,10 +48,12 @@ public class CommonPool extends AbstractBaseFactory {
 	public void activate() {
 
 		super.activate();
-		this.pool = new ArrayBlockingQueue<TimestampObjectBean<Object>>(
-				this.maxPoolSize, true);
-		PoolStaticUtils.startEvictor(evictor, this.timeBetweenEvictionRuns,
-				this, false);
+		synchronized (this) {
+			this.pool = new ArrayBlockingQueue<TimestampObjectBean<Object>>(
+					this.maxPoolSize, true);
+		}
+		PoolStaticUtils.startEvictor(this.getEvictor(), this
+				.getTimeBetweenEvictionRuns(), this, false);
 	}
 
 	/*

@@ -43,7 +43,8 @@ import org.jgentleframework.utils.ObjectUtils;
 /**
  * The Class KeyImpl.
  * 
- * @param <T>  *
+ * @param <T>
+ *            *
  * @author Quoc Chung - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
  * @date Aug 29, 2006
@@ -729,7 +730,7 @@ class KeyImpl<T> implements Serializable, Key<T> {
 	 * @see org.jgentleframework.services.datalocator.data.Key#getKeyType()
 	 */
 	@Override
-	public DataType getKeyType() {
+	public synchronized DataType getKeyType() {
 
 		return keyType;
 	}
@@ -739,7 +740,7 @@ class KeyImpl<T> implements Serializable, Key<T> {
 	 * @see org.jgentleframework.services.datalocator.data.Key#getModifiedDate()
 	 */
 	@Override
-	public Date getModifiedDate() {
+	public synchronized Date getModifiedDate() {
 
 		return (Date) ObjectUtils.deepCopy(this.modifiedDate);
 	}
@@ -911,7 +912,10 @@ class KeyImpl<T> implements Serializable, Key<T> {
 	public void setKeyName(String keyName) {
 
 		this.keyName = keyName;
-		this.modifiedDate = Calendar.getInstance(Locale.getDefault()).getTime();
+		synchronized (this) {
+			this.modifiedDate = Calendar.getInstance(Locale.getDefault())
+					.getTime();
+		}
 	}
 
 	/*
@@ -920,7 +924,7 @@ class KeyImpl<T> implements Serializable, Key<T> {
 	 * jgentleframework.services.datalocator.enums.DataType)
 	 */
 	@Override
-	public void setKeyType(DataType keyType) {
+	public synchronized void setKeyType(DataType keyType) {
 
 		this.keyType = keyType;
 		this.modifiedDate = Calendar.getInstance(Locale.getDefault()).getTime();
@@ -933,7 +937,7 @@ class KeyImpl<T> implements Serializable, Key<T> {
 	 * .util.Date)
 	 */
 	@Override
-	public void setModifiedDate(Date modifiedDate) {
+	public synchronized void setModifiedDate(Date modifiedDate) {
 
 		this.modifiedDate = modifiedDate;
 	}

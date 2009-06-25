@@ -42,8 +42,8 @@ public class StackPool extends AbstractBaseFactory {
 
 		super.activate();
 		this.pool = new Stack<TimestampObjectBean<Object>>();
-		PoolStaticUtils.startEvictor(evictor, this.timeBetweenEvictionRuns,
-				this, true);
+		PoolStaticUtils.startEvictor(this.getEvictor(), this
+				.getTimeBetweenEvictionRuns(), this, true);
 	}
 
 	/*

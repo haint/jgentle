@@ -39,7 +39,7 @@ public class BasicTypeMatchingAspectPair extends MetadataController implements
 	private static final long	serialVersionUID	= -4341067904383965149L;
 
 	/** The target class. */
-	final transient Class<?>	targetClass;
+	final Class<?>				targetClass;
 
 	/**
 	 * Instantiates a new basic type matching aspect pair.

@@ -83,7 +83,8 @@ public abstract class AbstractBaseController extends AbstractBasePooling
 	protected boolean canBePooled(Object obj) throws Throwable {
 
 		try {
-			if (this.canBePooled && ReflectUtils.isCast(CanBePooled.class, obj)) {
+			if (this.isCanBePooled()
+					&& ReflectUtils.isCast(CanBePooled.class, obj)) {
 				return ((CanBePooled) obj).canBePooled();
 			}
 			else if (this.definition
@@ -251,7 +252,8 @@ public abstract class AbstractBaseController extends AbstractBasePooling
 	protected void validatesObject(Object obj) throws Throwable {
 
 		try {
-			if (this.testOnObtain && ReflectUtils.isCast(Validate.class, obj)) {
+			if (this.isTestOnObtain()
+					&& ReflectUtils.isCast(Validate.class, obj)) {
 				if (!((Validate) obj).validate())
 					throw new Exception("Validate failed !!");
 			}
