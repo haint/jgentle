@@ -56,8 +56,9 @@ abstract class ConfigAnnotating implements Configurable {
 	public void configure() {
 
 		attachConstant("name").to("Le Quoc Chung 1234");
-		bind().annotate(ReflectIdentification.fields("*b"), refMapping(MYANNOTATION2.class))
-				.in(AClass.class).id("AClassID");
+		bind().annotate(ReflectIdentification.fields("*b"),
+				refMapping(MYANNOTATION2.class)).in(AClass.class)
+				.id("AClassID");
 	}
 }
 
