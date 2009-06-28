@@ -38,12 +38,12 @@ import org.jgentleframework.utils.data.Pair;
  * <p>
  * On the other hand, it looks like similar to abstract configurable class
  * (extension of {@link Configurable} interface or {@link AbstractConfig}) class
- * which provide a few methods in order to configure bean instance, however
+ * which provide a few methods in order to configure bean instance. However,
  * there is a difference that the configurable class is only runable at startup
- * time (configuration time) while {@link Binder} is only used at run-time.
+ * time (configuration-time) while {@link Binder} is only used at run-time.
  * <p>
- * In addition, it provides some static method in order to create object metas (
- * {@link ObjectAttach}, {@link ObjectConstant}, {@link ObjectBindingConstant},
+ * In addition, it provides some static methods in order to create object metas
+ * ({@link ObjectAttach}, {@link ObjectConstant}, {@link ObjectBindingConstant},
  * {@link ObjectBindingConstant}, ...)
  * 
  * @author LE QUOC CHUNG - mailto: <a

@@ -38,6 +38,8 @@ public interface IAbstractDefinitionExceptionCatcher {
 	public void clearRegistryCatchList();
 
 	/**
+	 * Gets the registered catch exception list.
+	 * 
 	 * @return the registeredCatchExceptionList
 	 */
 	public HashMap<Class<? extends Annotation>, ArrayList<AnnotationValidator<? extends Annotation>>> getRegisteredCatchExceptionList();
@@ -46,9 +48,10 @@ public interface IAbstractDefinitionExceptionCatcher {
 	 * Returns <b>true</b> if given annotation is registered in order to catch
 	 * exception of any annotation validating, <b>false</b> otherwise.
 	 * 
-	 * @see AnnotationValidator
 	 * @param annotation
 	 *            the object class of annotation.
+	 * @return true, if checks if is catch exception registered
+	 * @see AnnotationValidator
 	 */
 	public boolean isCatchExceptionRegistered(
 			Class<? extends Annotation> annotation);
@@ -61,6 +64,7 @@ public interface IAbstractDefinitionExceptionCatcher {
 	 *            the object class of annotation.
 	 * @param validator
 	 *            the {@link AnnotationValidator}
+	 * @return true, if checks if is catch exception registered
 	 */
 	public boolean isCatchExceptionRegistered(
 			Class<? extends Annotation> annotation,
@@ -74,8 +78,8 @@ public interface IAbstractDefinitionExceptionCatcher {
 	 *            the object class of annotation
 	 * @param validator
 	 *            the {@link AnnotationValidator}
-	 * @return returns <b>true</b> if register process is successful, <b>false</b>
-	 *         otherwise.
+	 * @return returns <b>true</b> if register process is successful,
+	 *         <b>false</b> otherwise.
 	 */
 	public boolean registerCatchException(
 			Class<? extends Annotation> annotation,
@@ -89,8 +93,8 @@ public interface IAbstractDefinitionExceptionCatcher {
 	 *            the object class of annotation
 	 * @param validator
 	 *            the {@link AnnotationValidator} need to be unregistered.
-	 * @return returns <b>true</b> if register process is successful, <b>false</b>
-	 *         otherwise.
+	 * @return returns <b>true</b> if register process is successful,
+	 *         <b>false</b> otherwise.
 	 */
 	public <T extends Annotation> boolean unregisteredCatchException(
 			Class<T> annotation, AnnotationValidator<T> validator);

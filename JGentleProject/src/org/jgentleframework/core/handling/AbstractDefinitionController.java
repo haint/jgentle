@@ -35,8 +35,8 @@ import org.jgentleframework.utils.ReflectUtils;
 
 /**
  * Quản lý các phương thức điều khiển các <i>module</i> là các
- * <i>extension-point</i> trong khi thực thi xử lý annotation, bao gồm việc
- * diễn dịch <code>annotation</code> thành {@link AnnoMeta}, quản lý
+ * <i>extension-point</i> trong khi thực thi xử lý annotation, bao gồm việc diễn
+ * dịch <code>annotation</code> thành {@link AnnoMeta}, quản lý
  * {@link DefinitionPostProcessor}, {@link AnnotationBeanProcessor}, ...
  * 
  * @author LE QUOC CHUNG - mailto: <a
@@ -45,10 +45,10 @@ import org.jgentleframework.utils.ReflectUtils;
  */
 public abstract class AbstractDefinitionController extends
 		AbstractDefinitionExceptionCatcher implements DefinitionManager {
+	/** The annotation register. */
 	protected AnnotationRegister	annotationRegister	= null;
-	/**
-	 * Đối tượng visitorHandler
-	 */
+
+	/** The visitor handler. */
 	protected IAnnotationVisitor	visitorHandler		= new AbstractVisitorHandler(
 																this) {
 															@Override
@@ -68,8 +68,10 @@ public abstract class AbstractDefinitionController extends
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.reflection.aohreflect.IAnnotationVisitor#addAnnotationBeanProcessor(org.jgentleframework.core.reflection.annohandler.AnnotationBeanProcessor)
+	 * @seeorg.jgentleframework.core.reflection.aohreflect.IAnnotationVisitor#
+	 * addAnnotationBeanProcessor
+	 * (org.jgentleframework.core.reflection.annohandler
+	 * .AnnotationBeanProcessor)
 	 */
 	@Override
 	@SuppressWarnings("unchecked")
@@ -78,8 +80,8 @@ public abstract class AbstractDefinitionController extends
 
 		Assertor.notNull(handler);
 		Class<?> clazz = handler.getClass();
-		ArrayList<Type> typeList = ReflectUtils.getAllGenericInterfaces(
-				clazz, true);
+		ArrayList<Type> typeList = ReflectUtils.getAllGenericInterfaces(clazz,
+				true);
 		for (Type type : typeList) {
 			if (ReflectUtils.isCast(ParameterizedType.class, type)) {
 				ParameterizedType pType = (ParameterizedType) type;
@@ -101,9 +103,9 @@ public abstract class AbstractDefinitionController extends
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.reflection.aohreflect.IAnnotationVisitor#addAnnotationBeanProcessor(java.lang.Class,
-	 *      org.jgentleframework.core.reflection.annohandler.AnnotationBeanProcessor)
+	 * @seeorg.jgentleframework.core.reflection.aohreflect.IAnnotationVisitor#
+	 * addAnnotationBeanProcessor(java.lang.Class,
+	 * org.jgentleframework.core.reflection.annohandler.AnnotationBeanProcessor)
 	 */
 	@Override
 	public <T extends Annotation> AnnotationBeanProcessor<?> addAnnotationBeanProcessor(
@@ -114,8 +116,8 @@ public abstract class AbstractDefinitionController extends
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.reflection.aohreflect.IAnnotationVisitor#addDefinitionPostProcessor(java.lang.Class)
+	 * @seeorg.jgentleframework.core.reflection.aohreflect.IAnnotationVisitor#
+	 * addDefinitionPostProcessor(java.lang.Class)
 	 */
 	@Override
 	public void addDefinitionPostProcessor(
@@ -126,8 +128,9 @@ public abstract class AbstractDefinitionController extends
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.reflection.aohreflect.IAnnotationVisitor#addDefinitionPostProcessor(org.jgentleframework.core.reflection.aohreflect.DefinitionPostProcessor)
+	 * @seeorg.jgentleframework.core.reflection.aohreflect.IAnnotationVisitor#
+	 * addDefinitionPostProcessor
+	 * (org.jgentleframework.core.reflection.aohreflect.DefinitionPostProcessor)
 	 */
 	@Override
 	public void addDefinitionPostProcessor(DefinitionPostProcessor dpp) {
@@ -137,8 +140,8 @@ public abstract class AbstractDefinitionController extends
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.aohhandling.defhandling.DefinitionManager#getAnnotationRegister()
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
+	 * DefinitionManager#getAnnotationRegister()
 	 */
 	@Override
 	public AnnotationRegister getAnnotationRegister() {
@@ -148,8 +151,8 @@ public abstract class AbstractDefinitionController extends
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.reflection.aohreflect.IAnnotationVisitor#getDefinitionPostProcessor(int)
+	 * @seeorg.jgentleframework.core.reflection.aohreflect.IAnnotationVisitor#
+	 * getDefinitionPostProcessor(int)
 	 */
 	@Override
 	public DefinitionPostProcessor getDefinitionPostProcessor(int index) {
@@ -159,8 +162,8 @@ public abstract class AbstractDefinitionController extends
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.aohhandling.defhandling.DefinitionManager#getVisitorHandler()
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
+	 * DefinitionManager#getVisitorHandler()
 	 */
 	@Override
 	public IAnnotationVisitor getVisitorHandler() {
@@ -170,8 +173,8 @@ public abstract class AbstractDefinitionController extends
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.reflection.aohreflect.IAnnotationVisitor#removeAnnotationBeanProcessor(java.lang.Class)
+	 * @seeorg.jgentleframework.core.reflection.aohreflect.IAnnotationVisitor#
+	 * removeAnnotationBeanProcessor(java.lang.Class)
 	 */
 	@Override
 	public <T extends Annotation> AnnotationBeanProcessor<?> removeAnnotationBeanProcessor(
@@ -182,8 +185,9 @@ public abstract class AbstractDefinitionController extends
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.reflection.aohreflect.IAnnotationVisitor#removeDefinitionPostProcessor(org.jgentleframework.core.reflection.aohreflect.DefinitionPostProcessor)
+	 * @seeorg.jgentleframework.core.reflection.aohreflect.IAnnotationVisitor#
+	 * removeDefinitionPostProcessor
+	 * (org.jgentleframework.core.reflection.aohreflect.DefinitionPostProcessor)
 	 */
 	@Override
 	public boolean removeDefinitionPostProcessor(DefinitionPostProcessor dpp) {
@@ -193,8 +197,8 @@ public abstract class AbstractDefinitionController extends
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.reflection.aohreflect.IAnnotationVisitor#removeDefinitionPostProcessor(int)
+	 * @seeorg.jgentleframework.core.reflection.aohreflect.IAnnotationVisitor#
+	 * removeDefinitionPostProcessor(int)
 	 */
 	@Override
 	public DefinitionPostProcessor removeDefinitionPostProcessor(int index) {
@@ -204,9 +208,11 @@ public abstract class AbstractDefinitionController extends
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.reflection.aohreflect.IAnnotationVisitor#replaceAnnotationBeanProcessor(org.jgentleframework.core.reflection.annohandler.AnnotationBeanProcessor,
-	 *      org.jgentleframework.core.reflection.annohandler.AnnotationBeanProcessor)
+	 * @seeorg.jgentleframework.core.reflection.aohreflect.IAnnotationVisitor#
+	 * replaceAnnotationBeanProcessor
+	 * (org.jgentleframework.core.reflection.annohandler
+	 * .AnnotationBeanProcessor,
+	 * org.jgentleframework.core.reflection.annohandler.AnnotationBeanProcessor)
 	 */
 	@Override
 	public <T extends Annotation> void replaceAnnotationBeanProcessor(
@@ -219,8 +225,10 @@ public abstract class AbstractDefinitionController extends
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.aohhandling.defhandling.IDefinitionManager#setVisitorHandler(org.jgentleframework.core.reflection.aohreflect.AbsVisitorHandler)
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
+	 * IDefinitionManager
+	 * #setVisitorHandler(org.jgentleframework.core.reflection.
+	 * aohreflect.AbsVisitorHandler)
 	 */
 	@Override
 	public void setVisitorHandler(AbstractVisitorHandler visitorHandler) {
@@ -230,9 +238,10 @@ public abstract class AbstractDefinitionController extends
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.reflection.aohreflect.IAnnotationVisitor#visit(java.lang.annotation.Annotation[],
-	 *      org.jgentleframework.core.reflection.metadata.AnnoMeta)
+	 * @see
+	 * org.jgentleframework.core.reflection.aohreflect.IAnnotationVisitor#visit
+	 * (java.lang.annotation.Annotation[],
+	 * org.jgentleframework.core.reflection.metadata.AnnoMeta)
 	 */
 	@Override
 	public void visit(Annotation[] annoArray, AnnoMeta rootAnnoMeta) {

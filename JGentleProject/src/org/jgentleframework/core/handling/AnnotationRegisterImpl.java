@@ -36,15 +36,14 @@ import org.jgentleframework.utils.Assertor;
  * @see AnnotationRegister
  */
 public class AnnotationRegisterImpl implements AnnotationRegister {
+	/** The annotation registered. */
 	private ArrayList<Class<? extends Annotation>>											annotationRegistered	= new ArrayList<Class<? extends Annotation>>();
 
-	/**
-	 * Danh sách các annotation validator được đăng kí.
-	 */
+	/** The validatorlist. */
 	private HashMap<Class<? extends Annotation>, AnnotationValidator<? extends Annotation>>	validatorlist			= new HashMap<Class<? extends Annotation>, AnnotationValidator<? extends Annotation>>();
 
 	/**
-	 * Constructor
+	 * Constructor.
 	 */
 	public AnnotationRegisterImpl() {
 

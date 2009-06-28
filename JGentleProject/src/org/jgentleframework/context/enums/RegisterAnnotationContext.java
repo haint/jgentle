@@ -30,7 +30,9 @@ import org.jgentleframework.context.annotation.ComponentServiceContext;
  * @date Nov 27, 2007
  */
 public enum RegisterAnnotationContext {
+	/** The CS context. */
 	CSContext (ComponentServiceContext.class);
+	/** The annotation class. */
 	Class<? extends Annotation>	annotationClass;
 
 	/**
@@ -44,9 +46,8 @@ public enum RegisterAnnotationContext {
 		this.annotationClass = clazz;
 	}
 
-	
 	/**
-	 * Gets the annotation class.
+	 * Gets the annotation object class.
 	 * 
 	 * @return the annotation class
 	 */

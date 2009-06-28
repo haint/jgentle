@@ -35,8 +35,9 @@ import org.jgentleframework.utils.AnnotationUtils;
 import org.jgentleframework.utils.Assertor;
 import org.jgentleframework.utils.ReflectUtils;
 
+// TODO: Auto-generated Javadoc
 /**
- * An implementation of {@link DefinitionManager}
+ * An implementation of {@link DefinitionManager}.
  * 
  * @author LE QUOC CHUNG - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
@@ -55,9 +56,20 @@ public class DefinitionManagerImpl extends AbstractDefinitionController
 	 * @date Sep 28, 2007
 	 */
 	static class ObjectAnno {
+		/** The object. */
 		Object		object		= null;
+
+		/** The raw object. */
 		Class<?>	rawObject	= null;
 
+		/**
+		 * Instantiates a new object anno.
+		 * 
+		 * @param object
+		 *            the object
+		 * @param rawObject
+		 *            the raw object
+		 */
 		public ObjectAnno(Object object, Class<?> rawObject) {
 
 			this.object = object;
@@ -65,6 +77,8 @@ public class DefinitionManagerImpl extends AbstractDefinitionController
 		}
 
 		/**
+		 * Gets the object.
+		 * 
 		 * @return the object
 		 */
 		public Object getObject() {
@@ -73,6 +87,8 @@ public class DefinitionManagerImpl extends AbstractDefinitionController
 		}
 
 		/**
+		 * Gets the raw object.
+		 * 
 		 * @return the rawObject
 		 */
 		public Class<?> getRawObject() {
@@ -81,6 +97,8 @@ public class DefinitionManagerImpl extends AbstractDefinitionController
 		}
 
 		/**
+		 * Sets the object.
+		 * 
 		 * @param object
 		 *            the object to set
 		 */
@@ -90,6 +108,8 @@ public class DefinitionManagerImpl extends AbstractDefinitionController
 		}
 
 		/**
+		 * Sets the raw object.
+		 * 
 		 * @param rawObject
 		 *            the rawObject to set
 		 */
@@ -99,20 +119,20 @@ public class DefinitionManagerImpl extends AbstractDefinitionController
 		}
 	}
 
-	/**
-	 * contains all created {@link Definition}
-	 */
+	/** contains all created {@link Definition}. */
 	private HashMap<Object, Definition>	defList		= new HashMap<Object, Definition>();
+
 	/**
 	 * The {@link HashMap} containing all created {@link Definition}s according
-	 * to ID
+	 * to ID.
 	 */
 	private HashMap<String, Definition>	defListSub	= new HashMap<String, Definition>();
 
 	/**
-	 * Constructor
+	 * Constructor.
 	 * 
 	 * @param annotationRegister
+	 *            the annotation register
 	 */
 	public DefinitionManagerImpl(AnnotationRegister annotationRegister) {
 
@@ -121,9 +141,9 @@ public class DefinitionManagerImpl extends AbstractDefinitionController
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.aohhandling.defhandling.DefinitionManager#buildDefinition(java.lang.annotation.Annotation[],
-	 *      java.lang.Object)
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
+	 * DefinitionManager#buildDefinition(java.lang.annotation.Annotation[],
+	 * java.lang.Object)
 	 */
 	@Override
 	public Definition buildDefinition(Annotation[] list, Object obj) {
@@ -151,8 +171,12 @@ public class DefinitionManagerImpl extends AbstractDefinitionController
 	}
 
 	/**
+	 * Check loop validation.
+	 * 
 	 * @param object
+	 *            the object
 	 * @param lists
+	 *            the lists
 	 */
 	private void checkLoopValidation(Object object, Annotation[] lists) {
 
@@ -257,8 +281,8 @@ public class DefinitionManagerImpl extends AbstractDefinitionController
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.aohhandling.defhandling.IDefinitionManager#containsDefinition(java.lang.Class)
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
+	 * IDefinitionManager#containsDefinition(java.lang.Class)
 	 */
 	@Override
 	public boolean containsDefinition(Class<?> clazz) {
@@ -269,8 +293,8 @@ public class DefinitionManagerImpl extends AbstractDefinitionController
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.aohhandling.defhandling.DefinitionManager#containsDefinition(java.lang.String)
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
+	 * DefinitionManager#containsDefinition(java.lang.String)
 	 */
 	@Override
 	public boolean containsDefinition(String ID) {
@@ -281,8 +305,8 @@ public class DefinitionManagerImpl extends AbstractDefinitionController
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.aohhandling.defhandling.IDefinitionManager#getDefinition(java.lang.Object)
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
+	 * IDefinitionManager#getDefinition(java.lang.Object)
 	 */
 	@Override
 	public Definition getDefinition(Object obj) {
@@ -306,8 +330,8 @@ public class DefinitionManagerImpl extends AbstractDefinitionController
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.aohhandling.defhandling.DefinitionManager#getDefinition(java.lang.String)
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
+	 * DefinitionManager#getDefinition(java.lang.String)
 	 */
 	@Override
 	public Definition getDefinition(String ID) {
@@ -317,8 +341,8 @@ public class DefinitionManagerImpl extends AbstractDefinitionController
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.aohhandling.defhandling.IDefinitionManager#getDefList()
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
+	 * IDefinitionManager#getDefList()
 	 */
 	@Override
 	public HashMap<Object, Definition> getDefList() {
@@ -328,8 +352,8 @@ public class DefinitionManagerImpl extends AbstractDefinitionController
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.aohhandling.defhandling.DefinitionManager#getDefListSub()
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
+	 * DefinitionManager#getDefListSub()
 	 */
 	@Override
 	public HashMap<String, Definition> getDefListSub() {
@@ -339,8 +363,8 @@ public class DefinitionManagerImpl extends AbstractDefinitionController
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.aohhandling.defhandling.IDefinitionManager#loadDefinition(java.lang.Class)
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
+	 * IDefinitionManager#loadDefinition(java.lang.Class)
 	 */
 	@Override
 	public void loadDefinition(Class<?> clazz) {
@@ -352,9 +376,8 @@ public class DefinitionManagerImpl extends AbstractDefinitionController
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.aohhandling.defhandling.DefinitionManager#loadDefinition(java.lang.Class,
-	 *      java.lang.String)
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
+	 * DefinitionManager#loadDefinition(java.lang.Class, java.lang.String)
 	 */
 	@Override
 	public void loadDefinition(Class<?> clazz, String ID) {
@@ -366,8 +389,8 @@ public class DefinitionManagerImpl extends AbstractDefinitionController
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.aohhandling.defhandling.IDefinitionManager#loadDefinition(java.lang.reflect.Field)
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
+	 * IDefinitionManager#loadDefinition(java.lang.reflect.Field)
 	 */
 	@Override
 	public void loadDefinition(Field field) {
@@ -379,8 +402,8 @@ public class DefinitionManagerImpl extends AbstractDefinitionController
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.aohhandling.defhandling.IDefinitionManager#loadDefinition(java.lang.reflect.Method)
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
+	 * IDefinitionManager#loadDefinition(java.lang.reflect.Method)
 	 */
 	@Override
 	public void loadDefinition(Method method) {
@@ -392,8 +415,9 @@ public class DefinitionManagerImpl extends AbstractDefinitionController
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.defhandling.DefinitionManager#loadDefinition(java.lang.reflect.Constructor)
+	 * @see
+	 * org.jgentleframework.core.metadatahandling.defhandling.DefinitionManager
+	 * #loadDefinition(java.lang.reflect.Constructor)
 	 */
 	@Override
 	public void loadDefinition(Constructor<?> constructor) {
@@ -404,9 +428,11 @@ public class DefinitionManagerImpl extends AbstractDefinitionController
 	}
 
 	/**
-	 * Creates {@link Definition}
+	 * Creates {@link Definition}.
 	 * 
 	 * @param object
+	 *            the object
+	 * @return the definition
 	 */
 	private synchronized Definition loadDefinition(Object object) {
 
@@ -504,9 +530,9 @@ public class DefinitionManagerImpl extends AbstractDefinitionController
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.aohhandling.defhandling.DefinitionManager#loadCustomizedDefinition(java.lang.Class,
-	 *      java.lang.annotation.Annotation)
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
+	 * DefinitionManager#loadCustomizedDefinition(java.lang.Class,
+	 * java.lang.annotation.Annotation)
 	 */
 	@Override
 	public synchronized void loadCustomizedDefinition(Class<?> clazz,
@@ -518,9 +544,9 @@ public class DefinitionManagerImpl extends AbstractDefinitionController
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.aohhandling.defhandling.DefinitionManager#loadDefinition(java.lang.String,
-	 *      java.lang.Class, java.lang.annotation.Annotation[])
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
+	 * DefinitionManager#loadDefinition(java.lang.String, java.lang.Class,
+	 * java.lang.annotation.Annotation[])
 	 */
 	@Override
 	public synchronized void loadCustomizedDefinition(Class<?> clazz,
@@ -580,9 +606,9 @@ public class DefinitionManagerImpl extends AbstractDefinitionController
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.aohhandling.defhandling.DefinitionManager#loadDefinition(java.lang.String,
-	 *      java.lang.Object, java.lang.Class, java.lang.annotation.Annotation)
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
+	 * DefinitionManager#loadDefinition(java.lang.String, java.lang.Object,
+	 * java.lang.Class, java.lang.annotation.Annotation)
 	 */
 	@Override
 	public Definition loadCustomizedDefinition(String ID, Object obj,
@@ -606,9 +632,9 @@ public class DefinitionManagerImpl extends AbstractDefinitionController
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.aohhandling.defhandling.DefinitionManager#loadCustomizedDefinition(java.lang.reflect.Field,
-	 *      java.lang.Class, java.lang.annotation.Annotation)
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
+	 * DefinitionManager#loadCustomizedDefinition(java.lang.reflect.Field,
+	 * java.lang.Class, java.lang.annotation.Annotation)
 	 */
 	@Override
 	public synchronized Definition loadCustomizedDefinition(Field field,
@@ -619,9 +645,9 @@ public class DefinitionManagerImpl extends AbstractDefinitionController
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.aohhandling.defhandling.DefinitionManager#loadDefinition(java.lang.String,
-	 *      java.lang.reflect.Field, java.lang.annotation.Annotation[])
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
+	 * DefinitionManager#loadDefinition(java.lang.String,
+	 * java.lang.reflect.Field, java.lang.annotation.Annotation[])
 	 */
 	@Override
 	public synchronized Definition loadCustomizedDefinition(String ID,
@@ -668,9 +694,9 @@ public class DefinitionManagerImpl extends AbstractDefinitionController
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.aohhandling.defhandling.DefinitionManager#loadCustomizedDefinition(java.lang.reflect.Method,
-	 *      java.lang.Class, java.lang.annotation.Annotation)
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
+	 * DefinitionManager#loadCustomizedDefinition(java.lang.reflect.Method,
+	 * java.lang.Class, java.lang.annotation.Annotation)
 	 */
 	@Override
 	public synchronized Definition loadCustomizedDefinition(Method method,
@@ -681,9 +707,9 @@ public class DefinitionManagerImpl extends AbstractDefinitionController
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.aohhandling.defhandling.DefinitionManager#loadDefinition(java.lang.String,
-	 *      java.lang.reflect.Method, java.lang.annotation.Annotation[])
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
+	 * DefinitionManager#loadDefinition(java.lang.String,
+	 * java.lang.reflect.Method, java.lang.annotation.Annotation[])
 	 */
 	@Override
 	public synchronized Definition loadCustomizedDefinition(String ID,
@@ -729,8 +755,12 @@ public class DefinitionManagerImpl extends AbstractDefinitionController
 	}
 
 	/**
+	 * Put definition.
+	 * 
 	 * @param sourceObject
+	 *            the source object
 	 * @param definition
+	 *            the definition
 	 */
 	private synchronized void putDefinition(Object sourceObject,
 			Definition definition) {
@@ -739,8 +769,12 @@ public class DefinitionManagerImpl extends AbstractDefinitionController
 	}
 
 	/**
+	 * Put definition.
+	 * 
 	 * @param ID
+	 *            the iD
 	 * @param definition
+	 *            the definition
 	 */
 	private synchronized void putDefinition(String ID, Definition definition) {
 
@@ -749,8 +783,8 @@ public class DefinitionManagerImpl extends AbstractDefinitionController
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.aohhandling.defhandling.IDefinitionManager#removeDefinition(java.lang.Class)
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
+	 * IDefinitionManager#removeDefinition(java.lang.Class)
 	 */
 	@Override
 	public Definition removeDefinition(Class<?> clazz) {
@@ -760,8 +794,8 @@ public class DefinitionManagerImpl extends AbstractDefinitionController
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.aohhandling.defhandling.IDefinitionManager#removeDefinition(java.lang.reflect.Field)
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
+	 * IDefinitionManager#removeDefinition(java.lang.reflect.Field)
 	 */
 	@Override
 	public Definition removeDefinition(Field field) {
@@ -771,8 +805,8 @@ public class DefinitionManagerImpl extends AbstractDefinitionController
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.aohhandling.defhandling.IDefinitionManager#removeDefinition(java.lang.reflect.Method)
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
+	 * IDefinitionManager#removeDefinition(java.lang.reflect.Method)
 	 */
 	@Override
 	public Definition removeDefinition(Method method) {
@@ -782,8 +816,9 @@ public class DefinitionManagerImpl extends AbstractDefinitionController
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.defhandling.DefinitionManager#removeDefinition(java.lang.reflect.Constructor)
+	 * @see
+	 * org.jgentleframework.core.metadatahandling.defhandling.DefinitionManager
+	 * #removeDefinition(java.lang.reflect.Constructor)
 	 */
 	@Override
 	public Definition removeDefinition(Constructor<?> constructor) {
@@ -793,8 +828,8 @@ public class DefinitionManagerImpl extends AbstractDefinitionController
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.aohhandling.defhandling.IDefinitionManager#removeDefinition(java.lang.Object)
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
+	 * IDefinitionManager#removeDefinition(java.lang.Object)
 	 */
 	public Definition removeDefinition(Object obj) {
 
@@ -803,10 +838,9 @@ public class DefinitionManagerImpl extends AbstractDefinitionController
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.aohhandling.defhandling.DefinitionManager#validateAnnnotation(java.lang.annotation.Annotation,
-	 *      java.lang.annotation.Annotation[], java.lang.Object,
-	 *      java.lang.Class)
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
+	 * DefinitionManager#validateAnnnotation(java.lang.annotation.Annotation,
+	 * java.lang.annotation.Annotation[], java.lang.Object, java.lang.Class)
 	 */
 	@Override
 	@SuppressWarnings("unchecked")

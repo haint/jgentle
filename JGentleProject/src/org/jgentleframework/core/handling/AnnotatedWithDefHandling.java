@@ -26,8 +26,7 @@ import org.jgentleframework.core.provider.AnnotationValidator;
 import org.jgentleframework.utils.data.NullAnno;
 
 /**
- * Class validator này được implements từ interface {@link AnnotationValidator}
- * thực thi việc validate cho annotation {@link AnnotatedWith}.
+ * The validator of {@link AnnotatedWith} annotation.
  * 
  * @author LE QUOC CHUNG - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
@@ -35,6 +34,12 @@ import org.jgentleframework.utils.data.NullAnno;
  */
 public class AnnotatedWithDefHandling implements
 		AnnotationValidator<AnnotatedWith> {
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * org.jgentleframework.core.provider.AnnotationValidator#catchException
+	 * (java.lang.RuntimeException, java.lang.annotation.Annotation)
+	 */
 	@Override
 	public <V extends RuntimeException, U extends Annotation> boolean catchException(
 			V exception, U annotation) {
@@ -42,6 +47,14 @@ public class AnnotatedWithDefHandling implements
 		return false;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * org.jgentleframework.core.provider.AnnotationValidator#validate(java.
+	 * lang.annotation.Annotation, java.lang.annotation.Annotation[],
+	 * java.lang.Object, java.lang.Class,
+	 * org.jgentleframework.core.handling.DefinitionManager)
+	 */
 	@Override
 	public void validate(AnnotatedWith annotation, Annotation[] annoList,
 			Object object, Class<?> clazz, DefinitionManager definitionManager) {
@@ -85,6 +98,8 @@ public class AnnotatedWithDefHandling implements
 	}
 
 	/**
+	 * Check str list.
+	 * 
 	 * @param strList
 	 *            danh sách mảng chuỗi các object class của annotation
 	 * @param exception

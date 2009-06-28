@@ -59,7 +59,7 @@ public @interface Bean {
 	 * Lưu ý rằng đối với các bean được chỉ định khởi tạo dựa trên thông tin cấu
 	 * hình bởi thuộc tính này sẽ không thể chỉ định các Scope nằm ngoài sự hỗ
 	 * trợ của JGentle container. Hay nói cách khác, các JGentle bean này không
-	 * thể chỉ định <code>custom scope</code>. Thông tin về việc khởi tạo và
+	 * thể chỉ định <code>customized scope</code>. Thông tin về việc khởi tạo và
 	 * định nghĩa <code>custom scope</code> vui lòng xem tại phần mô tả của
 	 * {@link ScopeImplementation} <code>interface</code>.
 	 * 

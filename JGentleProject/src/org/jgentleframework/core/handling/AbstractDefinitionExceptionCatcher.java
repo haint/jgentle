@@ -25,8 +25,7 @@ import org.jgentleframework.core.provider.AnnotationValidator;
 import org.jgentleframework.utils.Assertor;
 
 /**
- * Quản lý các phương thức xử lý catch exception trong khi thực thi validate các
- * annotation.
+ * The Class AbstractDefinitionExceptionCatcher.
  * 
  * @author LE QUOC CHUNG - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
@@ -34,16 +33,13 @@ import org.jgentleframework.utils.Assertor;
  */
 public abstract class AbstractDefinitionExceptionCatcher implements
 		IAbstractDefinitionExceptionCatcher {
-	/**
-	 * Danh sách các AnnotationValidator đăng kí bắt exception cho các
-	 * annotation chỉ định.
-	 */
+	/** The registered catch exception list. */
 	protected HashMap<Class<? extends Annotation>, ArrayList<AnnotationValidator<? extends Annotation>>>	registeredCatchExceptionList	= new HashMap<Class<? extends Annotation>, ArrayList<AnnotationValidator<? extends Annotation>>>();
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.aohhandling.defhandling.IAbstractDefinitionExceptionCatcher#clearRegistryCatchList()
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
+	 * IAbstractDefinitionExceptionCatcher#clearRegistryCatchList()
 	 */
 	@Override
 	public void clearRegistryCatchList() {
@@ -53,8 +49,8 @@ public abstract class AbstractDefinitionExceptionCatcher implements
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.aohhandling.defhandling.IAbstractDefinitionExceptionCatcher#getRegisteredCatchExceptionList()
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
+	 * IAbstractDefinitionExceptionCatcher#getRegisteredCatchExceptionList()
 	 */
 	@Override
 	public HashMap<Class<? extends Annotation>, ArrayList<AnnotationValidator<? extends Annotation>>> getRegisteredCatchExceptionList() {
@@ -64,8 +60,9 @@ public abstract class AbstractDefinitionExceptionCatcher implements
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.aohhandling.defhandling.IAbstractDefinitionExceptionCatcher#isCatchExceptionRegistered(java.lang.Class)
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
+	 * IAbstractDefinitionExceptionCatcher
+	 * #isCatchExceptionRegistered(java.lang.Class)
 	 */
 	@Override
 	public boolean isCatchExceptionRegistered(
@@ -91,9 +88,11 @@ public abstract class AbstractDefinitionExceptionCatcher implements
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.aohhandling.defhandling.IAbstractDefinitionExceptionCatcher#isCatchExceptionRegistered(java.lang.Class,
-	 *      org.jgentleframework.core.metadatahandling.aohhandling.pvdhandler.AnnotationValidator)
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
+	 * IAbstractDefinitionExceptionCatcher
+	 * #isCatchExceptionRegistered(java.lang.Class,
+	 * org.jgentleframework.core.metadatahandling
+	 * .aohhandling.pvdhandler.AnnotationValidator)
 	 */
 	@Override
 	public boolean isCatchExceptionRegistered(
@@ -119,9 +118,11 @@ public abstract class AbstractDefinitionExceptionCatcher implements
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.aohhandling.defhandling.IAbstractDefinitionExceptionCatcher#unregisteredCatchException(java.lang.Class,
-	 *      org.jgentleframework.core.metadatahandling.aohhandling.pvdhandler.AnnotationValidator)
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
+	 * IAbstractDefinitionExceptionCatcher
+	 * #unregisteredCatchException(java.lang.Class,
+	 * org.jgentleframework.core.metadatahandling
+	 * .aohhandling.pvdhandler.AnnotationValidator)
 	 */
 	@Override
 	public <T extends Annotation> boolean unregisteredCatchException(
@@ -150,9 +151,11 @@ public abstract class AbstractDefinitionExceptionCatcher implements
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.metadatahandling.aohhandling.defhandling.IAbstractDefinitionExceptionCatcher#registerCatchException(java.lang.Class,
-	 *      org.jgentleframework.core.metadatahandling.aohhandling.pvdhandler.AnnotationValidator)
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
+	 * IAbstractDefinitionExceptionCatcher
+	 * #registerCatchException(java.lang.Class,
+	 * org.jgentleframework.core.metadatahandling
+	 * .aohhandling.pvdhandler.AnnotationValidator)
 	 */
 	@Override
 	public boolean registerCatchException(

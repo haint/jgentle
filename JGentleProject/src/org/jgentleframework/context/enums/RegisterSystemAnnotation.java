@@ -34,13 +34,14 @@ import org.jgentleframework.core.handling.MustBeImplementedByDefHandling;
 import org.jgentleframework.core.handling.UniqueDefHandling;
 import org.jgentleframework.core.provider.AnnotationValidator;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Enum RegisterSystemAnnotation.
  * 
  * @author LE QUOC CHUNG - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
  * @date Oct 19, 2007
+ * @see RegisterAnnotationInjecting
+ * @see RegisterAnnotationContext
  */
 public enum RegisterSystemAnnotation {
 	/** The Unique. */

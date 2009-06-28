@@ -47,9 +47,9 @@ public class UniqueDefHandling implements AnnotationValidator<Unique> {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.provider.AnnotationValidator#catchException(java.lang.RuntimeException,
-	 *      java.lang.annotation.Annotation)
+	 * @see
+	 * org.jgentleframework.core.provider.AnnotationValidator#catchException
+	 * (java.lang.RuntimeException, java.lang.annotation.Annotation)
 	 */
 	@Override
 	public <V extends RuntimeException, U extends Annotation> boolean catchException(
@@ -60,11 +60,11 @@ public class UniqueDefHandling implements AnnotationValidator<Unique> {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.provider.AnnotationValidator#validate(java.lang.annotation.Annotation,
-	 *      java.lang.annotation.Annotation[], java.lang.Object,
-	 *      java.lang.Class,
-	 *      org.jgentleframework.core.metadatahandling.defhandling.DefinitionManager)
+	 * @see
+	 * org.jgentleframework.core.provider.AnnotationValidator#validate(java.
+	 * lang.annotation.Annotation, java.lang.annotation.Annotation[],
+	 * java.lang.Object, java.lang.Class,
+	 * org.jgentleframework.core.metadatahandling.defhandling.DefinitionManager)
 	 */
 	@Override
 	public void validate(Unique annotation, Annotation[] annoList,

@@ -37,17 +37,21 @@ import org.jgentleframework.core.reflection.metadata.Definition;
  * cả các object class có chỉ định trong khi cấu hình trong
  * <code>configurable class</code>, tìm và nhận dạng các
  * <code>object class</code>, sau đó tự động diễn dịch thông tin
- * <code>annotation</code> trên <code>object class</code> chỉ định thành
+ * <code>annotation</code> trên các <code>object classes</code> chỉ định thành
  * {@link Definition}.
  * 
  * @author LE QUOC CHUNG - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
  * @date Mar 5, 2008
  * @see AbstractDetector
+ * @see Provider
  */
 public class AutoLoadingDefinitionDetector extends AbstractDetector {
 	/**
+	 * The Constructor.
+	 * 
 	 * @param provider
+	 *            the provider
 	 */
 	public AutoLoadingDefinitionDetector(Provider provider) {
 
