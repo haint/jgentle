@@ -17,7 +17,7 @@
  */
 package org.jgentleframework.services.datalocator.data;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 import org.jgentleframework.services.datalocator.enums.DataType;
 
@@ -69,64 +69,85 @@ public enum EKeySystemType {
 	 **************************************************************************/
 	HKEY_SYSTEM_MACHINE (
 			new Key[] {
-					new KeyImpl<Object>("System_Information", DataType.SYSTEM,
-							new Key[] { new KeyImpl("Command_Services_Files",
-									DataType.USER) }, new Value[] {
-									new ValueImpl("RMI_Port",
-											new ArrayList<String>(),
+					new KeyImpl<String>("System_Information", DataType.SYSTEM,
+							new Key[] { new KeyImpl<String>(
+									"Command_Services_Files", DataType.USER) },
+							new Value[] {
+									new ValueImpl<String>("RMI_Port",
+											new LinkedList<String>(),
 											DataType.SYSTEM),
-									new ValueImpl("COMMAND_Port",
-											new ArrayList<String>(),
+									new ValueImpl<String>("COMMAND_Port",
+											new LinkedList<String>(),
 											DataType.SYSTEM),
-									new ValueImpl(
+									new ValueImpl<String>(
 											"UserName_Authentication_Remote",
-											new ArrayList<String>(),
+											new LinkedList<String>(),
 											DataType.SYSTEM),
-									new ValueImpl(
+									new ValueImpl<String>(
 											"Password_Authetication_Remote",
-											new ArrayList<String>(),
+											new LinkedList<String>(),
 											DataType.SYSTEM),
-									new ValueImpl("Authentication_Active",
-											new ArrayList<String>(),
+									new ValueImpl<String>(
+											"Authentication_Active",
+											new LinkedList<String>(),
 											DataType.SYSTEM),
-									new ValueImpl(
+									new ValueImpl<String>(
 											"Max_Connection_CommandServer",
-											new ArrayList<String>(),
+											new LinkedList<String>(),
 											DataType.SYSTEM),
-									new ValueImpl("Max_Connection_RMIServer",
-											new ArrayList<String>(),
+									new ValueImpl<String>(
+											"Max_Connection_RMIServer",
+											new LinkedList<String>(),
 											DataType.SYSTEM),
-									new ValueImpl("Services_Port",
-											new ArrayList<String>(),
+									new ValueImpl<String>("Services_Port",
+											new LinkedList<String>(),
 											DataType.SYSTEM) }),
-					new KeyImpl("Scripting_File", DataType.SYSTEM, new Value[] {
-							new ValueImpl("Service_Startup",
-									new ArrayList<String>(), DataType.SYSTEM),
-							new ValueImpl("Service_Stop",
-									new ArrayList<String>(), DataType.SYSTEM),
-							new ValueImpl("Chatbot_Startup",
-									new ArrayList<String>(), DataType.SYSTEM),
-							new ValueImpl("Chatbot_Stop",
-									new ArrayList<String>(), DataType.SYSTEM),
-							new ValueImpl("Server_Startup",
-									new ArrayList<String>(), DataType.SYSTEM),
-							new ValueImpl("Server_Stop",
-									new ArrayList<String>(), DataType.SYSTEM) }),
-					new KeyImpl("Database_Information", DataType.SYSTEM,
+					new KeyImpl<String>("Scripting_File", DataType.SYSTEM,
+							new Value[] {
+									new ValueImpl<String>("Service_Startup",
+											new LinkedList<String>(),
+											DataType.SYSTEM),
+									new ValueImpl<String>("Service_Stop",
+											new LinkedList<String>(),
+											DataType.SYSTEM),
+									new ValueImpl<String>("Chatbot_Startup",
+											new LinkedList<String>(),
+											DataType.SYSTEM),
+									new ValueImpl<String>("Chatbot_Stop",
+											new LinkedList<String>(),
+											DataType.SYSTEM),
+									new ValueImpl<String>("Server_Startup",
+											new LinkedList<String>(),
+											DataType.SYSTEM),
+									new ValueImpl<String>("Server_Stop",
+											new LinkedList<String>(),
+											DataType.SYSTEM) }),
+					new KeyImpl<String>(
+							"Database_Information",
+							DataType.SYSTEM,
 							new Key[] {
-									new KeyImpl("SAPDB", DataType.SYSTEM),
-									new KeyImpl("MySQL", DataType.SYSTEM),
-									new KeyImpl("Microsoft SQL Server",
+									new KeyImpl<String>("SAPDB",
 											DataType.SYSTEM),
-									new KeyImpl("Microsoft SQL Server 2005",
+									new KeyImpl<String>("MySQL",
 											DataType.SYSTEM),
-									new KeyImpl("PostgreSQL", DataType.SYSTEM),
-									new KeyImpl("Oracle", DataType.SYSTEM),
-									new KeyImpl("Firebird", DataType.SYSTEM),
-									new KeyImpl("DB2", DataType.SYSTEM),
-									new KeyImpl("Derby", DataType.SYSTEM),
-									new KeyImpl("ThinkSQL", DataType.SYSTEM),
-									new KeyImpl("Sybase", DataType.SYSTEM) }) }),
+									new KeyImpl<String>("Microsoft SQL Server",
+											DataType.SYSTEM),
+									new KeyImpl<String>(
+											"Microsoft SQL Server 2005",
+											DataType.SYSTEM),
+									new KeyImpl<String>("PostgreSQL",
+											DataType.SYSTEM),
+									new KeyImpl<String>("Oracle",
+											DataType.SYSTEM),
+									new KeyImpl<String>("Firebird",
+											DataType.SYSTEM),
+									new KeyImpl<String>("DB2", DataType.SYSTEM),
+									new KeyImpl<String>("Derby",
+											DataType.SYSTEM),
+									new KeyImpl<String>("ThinkSQL",
+											DataType.SYSTEM),
+									new KeyImpl<String>("Sybase",
+											DataType.SYSTEM) }) }),
 	/***************************************************************************
 	 * KHỞI TẠO HKEY_CURRENT_CONFIG <br>
 	 * <br>
@@ -134,76 +155,96 @@ public enum EKeySystemType {
 	 * hiện tại đang thực thi. Các thông tin tương tự HKEY_SYSTEM_MACHINE nhưng
 	 * chỉ lưu các thông tin đang thực sự thực thi trong thời điểm hiện tại.
 	 **************************************************************************/
-	HKEY_CURRENT_CONFIG (
+	HKEY_CURRENT_CONFIGURATION (
 			new Key[] {
 					new KeyImpl("System_Information", DataType.SYSTEM,
 							new Key[] { new KeyImpl(
 									"Service_Status_Information",
 									DataType.SYSTEM) }, new Value[] {
 									new ValueImpl("RMI_Port",
-											new ArrayList<String>(),
+											new LinkedList<String>(),
 											DataType.SYSTEM),
 									new ValueImpl("COMMAND_Port",
-											new ArrayList<String>(),
+											new LinkedList<String>(),
 											DataType.SYSTEM),
 									new ValueImpl(
 											"UserName_Authentication_Remote",
-											new ArrayList<String>(),
+											new LinkedList<String>(),
 											DataType.SYSTEM),
 									new ValueImpl(
 											"Password_Authetication_Remote",
-											new ArrayList<String>(),
+											new LinkedList<String>(),
 											DataType.SYSTEM),
 									new ValueImpl(
 											"Max_Connection_CommandServer",
-											new ArrayList<String>(),
+											new LinkedList<String>(),
 											DataType.SYSTEM),
 									new ValueImpl("Max_Connection_RMIServer",
-											new ArrayList<String>(),
+											new LinkedList<String>(),
 											DataType.SYSTEM),
 									new ValueImpl("Authentication_Active",
-											new ArrayList<String>(),
+											new LinkedList<String>(),
 											DataType.SYSTEM),
 									new ValueImpl("Services_Port",
-											new ArrayList<String>(),
+											new LinkedList<String>(),
 											DataType.SYSTEM) }),
-					new KeyImpl("Scripting_File", DataType.SYSTEM, new Value[] {
-							new ValueImpl("Service_Startup",
-									new ArrayList<String>(), DataType.SYSTEM),
-							new ValueImpl("Service_Stop",
-									new ArrayList<String>(), DataType.SYSTEM),
-							new ValueImpl("Chatbot_Startup",
-									new ArrayList<String>(), DataType.SYSTEM),
-							new ValueImpl("Chatbot_Stop",
-									new ArrayList<String>(), DataType.SYSTEM),
-							new ValueImpl("Server_Startup",
-									new ArrayList<String>(), DataType.SYSTEM),
-							new ValueImpl("Server_Stop",
-									new ArrayList<String>(), DataType.SYSTEM) }),
-					new KeyImpl("Database_Information", DataType.SYSTEM,
+					new KeyImpl<String>("Scripting_File", DataType.SYSTEM,
+							new Value[] {
+									new ValueImpl<String>("Service_Startup",
+											new LinkedList<String>(),
+											DataType.SYSTEM),
+									new ValueImpl<String>("Service_Stop",
+											new LinkedList<String>(),
+											DataType.SYSTEM),
+									new ValueImpl<String>("Chatbot_Startup",
+											new LinkedList<String>(),
+											DataType.SYSTEM),
+									new ValueImpl<String>("Chatbot_Stop",
+											new LinkedList<String>(),
+											DataType.SYSTEM),
+									new ValueImpl<String>("Server_Startup",
+											new LinkedList<String>(),
+											DataType.SYSTEM),
+									new ValueImpl<String>("Server_Stop",
+											new LinkedList<String>(),
+											DataType.SYSTEM) }),
+					new KeyImpl<Object>(
+							"Database_Information",
+							DataType.SYSTEM,
 							new Key[] {
-									new KeyImpl("SAPDB", DataType.SYSTEM),
-									new KeyImpl("MySQL", DataType.SYSTEM),
-									new KeyImpl("Microsoft SQL Server",
+									new KeyImpl<Object>("SAPDB",
 											DataType.SYSTEM),
-									new KeyImpl("Microsoft SQL Server 2005",
+									new KeyImpl<Object>("MySQL",
 											DataType.SYSTEM),
-									new KeyImpl("PostgreSQL", DataType.SYSTEM),
-									new KeyImpl("Oracle", DataType.SYSTEM),
-									new KeyImpl("Firebird", DataType.SYSTEM),
-									new KeyImpl("DB2", DataType.SYSTEM),
-									new KeyImpl("Derby", DataType.SYSTEM),
-									new KeyImpl("ThinkSQL", DataType.SYSTEM),
-									new KeyImpl("Sybase", DataType.SYSTEM) }) }),
+									new KeyImpl<Object>("Microsoft SQL Server",
+											DataType.SYSTEM),
+									new KeyImpl<Object>(
+											"Microsoft SQL Server 2005",
+											DataType.SYSTEM),
+									new KeyImpl<Object>("PostgreSQL",
+											DataType.SYSTEM),
+									new KeyImpl<Object>("Oracle",
+											DataType.SYSTEM),
+									new KeyImpl<Object>("Firebird",
+											DataType.SYSTEM),
+									new KeyImpl<Object>("DB2", DataType.SYSTEM),
+									new KeyImpl<Object>("Derby",
+											DataType.SYSTEM),
+									new KeyImpl<Object>("ThinkSQL",
+											DataType.SYSTEM),
+									new KeyImpl<Object>("Sybase",
+											DataType.SYSTEM) }) }),
 	/***************************************************************************
 	 * KHỞI TẠO HKEY_PERFORMANCE_DATA <br>
 	 * <br>
 	 * HKEY_PERFORMANCE_DATA chứa tất cả các thông tin về hiệu năng của hệ
 	 * thống, được ghi nhận trong quá trình hệ thống thực thi.
 	 **************************************************************************/
-	HKEY_PERFORMANCE_DATA (new Key[] {
-			new KeyImpl("Current_Microbot_Server ...", DataType.SYSTEM),
-			new KeyImpl("Modules_Performance", DataType.SYSTEM) }),
+	HKEY_PERFORMANCE_DATA (
+			new Key[] {
+					new KeyImpl<Object>("Current_Microbot_Server ...",
+							DataType.SYSTEM),
+					new KeyImpl<Object>("Modules_Performance", DataType.SYSTEM) }),
 	/***************************************************************************
 	 * KHỞI TẠO HKEY_VOLATILE_DATA <br>
 	 * <br>
