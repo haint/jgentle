@@ -40,6 +40,9 @@ import org.jgentleframework.core.handling.DefinitionManager;
 import org.jgentleframework.core.reflection.metadata.AnnoMeta;
 import org.jgentleframework.core.reflection.metadata.MetaDataFactory;
 
+import sun.reflect.FieldAccessor;
+import sun.reflect.ReflectionFactory;
+
 /**
  * Provides some of static methods in order to execute common reflect
  * operations.
@@ -1307,5 +1310,37 @@ public final class ReflectUtils {
 			}
 		}
 		return lst.toArray(new Method[lst.size()]);
+	}
+
+	/** The Constant MODIFIERS_FIELD. */
+	private static final String				MODIFIERS_FIELD	= "modifiers";
+
+	/** The Constant reflection. */
+	private static final ReflectionFactory	reflection		= ReflectionFactory
+																	.getReflectionFactory();
+
+	/**
+	 * Sets new value to static final field.
+	 * 
+	 * @param field
+	 *            the field
+	 * @param value
+	 *            the new value
+	 * @throws NoSuchFieldException
+	 *             the no such field exception
+	 * @throws IllegalAccessException
+	 *             the illegal access exception
+	 */
+	public static void setStaticFinalField(Field field, Object value)
+			throws NoSuchFieldException, IllegalAccessException {
+
+		field.setAccessible(true);
+		Field modifiersField = Field.class.getDeclaredField(MODIFIERS_FIELD);
+		modifiersField.setAccessible(true);
+		int modifiers = modifiersField.getInt(field);
+		modifiers &= ~Modifier.FINAL;
+		modifiersField.setInt(field, modifiers);
+		FieldAccessor fa = reflection.newFieldAccessor(field, false);
+		fa.set(null, value);
 	}
 }

@@ -145,6 +145,12 @@ public class CommonPool extends AbstractBaseFactory {
 						}
 					}
 				}
+				else {
+					Object result = pair.getValue();
+					activatesObject(result);
+					validatesObject(result);
+					return result;
+				}
 			}
 		}
 	}

@@ -55,16 +55,16 @@ public abstract class AbstractBaseFactory extends AbstractBaseController {
 		else {
 			deactivateObject(obj);
 		}
-		synchronized (this) {
-			if (isEnable() && success) {
-				pool.add(new TimestampObjectBean<Object>(obj));
-			}
-		}
 		if (!success
 				|| !isEnable()
 				|| ((this.getMaxIdle() >= 0) && (pool.size() >= this
 						.getMaxIdle()))) {
 			destroyObject(obj);
+		}
+		synchronized (this) {
+			if (isEnable() && success) {
+				pool.add(new TimestampObjectBean<Object>(obj));
+			}
 		}
 		if (decrementNumActive) {
 			synchronized (this) {
@@ -101,16 +101,7 @@ public abstract class AbstractBaseFactory extends AbstractBaseController {
 	@Override
 	public void returnObject(Object obj) throws Throwable {
 
-		try {
-			addObjectToPool(obj, true);
-		}
-		catch (Exception e) {
-			destroyObject(obj);
-			synchronized (this) {
-				this.numActive--;
-				notifyAll();
-			}
-		}
+		addObjectToPool(obj, true);
 	}
 
 	/*

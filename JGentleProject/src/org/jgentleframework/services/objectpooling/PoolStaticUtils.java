@@ -17,18 +17,13 @@
  */
 package org.jgentleframework.services.objectpooling;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.Iterator;
-import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Queue;
 import java.util.Stack;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import org.jgentleframework.context.beans.Initializing;
-import org.jgentleframework.context.beans.annotation.InitializingMethod;
 import org.jgentleframework.utils.ReflectUtils;
 import org.jgentleframework.utils.data.TimestampObjectBean;
 
@@ -243,48 +238,27 @@ public final class PoolStaticUtils {
 			AbstractBaseFactory pool) {
 
 		if (pair != null) {
-			boolean removeObject = false;
+			boolean remove = false;
 			final long idleTimeMilis = System.currentTimeMillis()
 					- pair.getTstamp();
 			// check minimum evictable idle time
 			if ((pool.getMinEvictableIdleTime() > 0)
 					&& (idleTimeMilis > pool.getMinEvictableIdleTime())) {
-				removeObject = true;
+				remove = true;
 			}
 			else if ((pool.getSoftMinEvictableIdleTime() > 0)
 					&& (idleTimeMilis > pool.getSoftMinEvictableIdleTime())
 					&& (pool.getNumIdle() > pool.getMinIdle())) {
-				removeObject = true;
+				remove = true;
 			}
-			if (pool.isTestWhileIdle() && !removeObject) {
+			if (pool.isTestWhileIdle() && !remove) {
 				boolean active = false;
 				try {
-					if (ReflectUtils
-							.isCast(Initializing.class, pair.getValue())) {
-						((Initializing) pair.getValue()).activate();
-					}
-					else if (pool.definition
-							.isAnnotationPresentAtAnyMethods(InitializingMethod.class)) {
-						List<Method> methods = pool.definition
-								.getMethodsAnnotatedWith(InitializingMethod.class);
-						for (Method method : methods) {
-							method.setAccessible(true);
-							method.invoke(pair.getValue());
-						}
-					}
+					pool.activatesObject(pair.getValue());
 					active = true;
 				}
-				catch (SecurityException e1) {
-					removeObject = true;
-				}
-				catch (IllegalArgumentException e1) {
-					removeObject = true;
-				}
-				catch (IllegalAccessException e1) {
-					removeObject = true;
-				}
-				catch (InvocationTargetException e1) {
-					removeObject = true;
+				catch (Exception e) {
+					remove = true;
 				}
 				if (active) {
 					try {
@@ -292,11 +266,11 @@ public final class PoolStaticUtils {
 						pool.deactivateObject(pair.getValue());
 					}
 					catch (Throwable e) {
-						removeObject = true;
+						remove = true;
 					}
 				}
 			}
-			if (removeObject) {
+			if (remove) {
 				pool.pool.remove(pair);
 				try {
 					pool.destroyObject(pair.getValue());

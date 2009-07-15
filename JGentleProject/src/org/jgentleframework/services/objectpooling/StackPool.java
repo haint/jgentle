@@ -29,6 +29,9 @@ import org.jgentleframework.utils.data.TimestampObjectBean;
  * @author Quoc Chung - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
  * @date Apr 10, 2009
+ * @see AbstractBaseFactory
+ * @see AbstractBaseController
+ * @see AbstractBasePooling
  */
 public class StackPool extends AbstractBaseFactory {
 	/*

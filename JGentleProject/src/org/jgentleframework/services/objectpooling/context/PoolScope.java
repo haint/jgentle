@@ -181,7 +181,9 @@ public enum PoolScope implements ScopeImplementation {
 					result = pool.obtainObject();
 				}
 				catch (NoSuchElementException e) {
-					// ignore
+					if (log.isErrorEnabled()) {
+						log.error(e.getMessage(), e);
+					}
 				}
 				catch (Throwable e) {
 					if (log.isErrorEnabled()) {

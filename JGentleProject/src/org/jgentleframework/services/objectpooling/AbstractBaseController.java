@@ -28,6 +28,7 @@ import org.jgentleframework.context.beans.annotation.InitializingMethod;
 import org.jgentleframework.context.injecting.Provider;
 import org.jgentleframework.services.objectpooling.annotation.CanBePooledMethod;
 import org.jgentleframework.services.objectpooling.annotation.DeactivateMethod;
+import org.jgentleframework.services.objectpooling.annotation.SystemPooling;
 import org.jgentleframework.services.objectpooling.annotation.ValidateMethod;
 import org.jgentleframework.services.objectpooling.context.CanBePooled;
 import org.jgentleframework.services.objectpooling.context.Deactivate;
@@ -60,15 +61,17 @@ public abstract class AbstractBaseController extends AbstractBasePooling
 	 */
 	protected void activatesObject(Object obj) throws Exception {
 
-		if (ReflectUtils.isCast(Initializing.class, obj))
-			((Initializing) obj).activate();
-		else if (this.definition
-				.isAnnotationPresentAtAnyMethods(InitializingMethod.class)) {
-			List<Method> methods = this.definition
-					.getMethodsAnnotatedWith(InitializingMethod.class);
-			for (Method method : methods) {
-				method.setAccessible(true);
-				method.invoke(obj);
+		if (obj != null) {
+			if (ReflectUtils.isCast(Initializing.class, obj))
+				((Initializing) obj).activate();
+			else if (this.definition
+					.isAnnotationPresentAtAnyMethods(InitializingMethod.class)) {
+				List<Method> methods = this.definition
+						.getMethodsAnnotatedWith(InitializingMethod.class);
+				for (Method method : methods) {
+					method.setAccessible(true);
+					method.invoke(obj);
+				}
 			}
 		}
 	}
@@ -83,26 +86,29 @@ public abstract class AbstractBaseController extends AbstractBasePooling
 	protected boolean canBePooled(Object obj) throws Throwable {
 
 		try {
-			if (this.isCanBePooled()
-					&& ReflectUtils.isCast(CanBePooled.class, obj)) {
-				return ((CanBePooled) obj).canBePooled();
-			}
-			else if (this.definition
-					.isAnnotationPresentAtAnyMethods(CanBePooledMethod.class)) {
-				List<Method> methods = this.definition
-						.getMethodsAnnotatedWith(CanBePooledMethod.class);
-				for (Method method : methods) {
-					if (method.getReturnType() == Boolean.class
-							|| method.getReturnType() == boolean.class) {
-						method.setAccessible(true);
-						return (Boolean) method.invoke(obj);
-					}
-					else {
-						if (log.isErrorEnabled()) {
-							log.error(
-									"The 'return type' of canBePooled method ["
-											+ method + "] must be boolean !!",
-									new UnsupportedOperationException());
+			if (obj != null) {
+				if (this.isCanBePooled()
+						&& ReflectUtils.isCast(CanBePooled.class, obj)) {
+					return ((CanBePooled) obj).canBePooled();
+				}
+				else if (this.definition
+						.isAnnotationPresentAtAnyMethods(CanBePooledMethod.class)) {
+					List<Method> methods = this.definition
+							.getMethodsAnnotatedWith(CanBePooledMethod.class);
+					for (Method method : methods) {
+						if (method.getReturnType() == Boolean.class
+								|| method.getReturnType() == boolean.class) {
+							method.setAccessible(true);
+							return (Boolean) method.invoke(obj);
+						}
+						else {
+							if (log.isErrorEnabled()) {
+								log.error(
+										"The 'return type' of canBePooled method ["
+												+ method
+												+ "] must be boolean !!",
+										new UnsupportedOperationException());
+							}
 						}
 					}
 				}
@@ -116,7 +122,8 @@ public abstract class AbstractBaseController extends AbstractBasePooling
 				notifyAll();
 			}
 		}
-		return true;
+		// return default value of CanBePooled attribute.
+		return SystemPooling.DEFAULT_CAN_BE_POOLED;
 	}
 
 	/**
@@ -171,16 +178,18 @@ public abstract class AbstractBaseController extends AbstractBasePooling
 	protected void deactivateObject(Object obj) throws Throwable {
 
 		try {
-			if (ReflectUtils.isCast(Deactivate.class, obj)) {
-				((Deactivate) obj).deactivate();
-			}
-			else if (this.definition
-					.isAnnotationPresentAtAnyMethods(DeactivateMethod.class)) {
-				List<Method> methods = this.definition
-						.getMethodsAnnotatedWith(DeactivateMethod.class);
-				for (Method method : methods) {
-					method.setAccessible(true);
-					method.invoke(obj);
+			if (obj != null) {
+				if (ReflectUtils.isCast(Deactivate.class, obj)) {
+					((Deactivate) obj).deactivate();
+				}
+				else if (this.definition
+						.isAnnotationPresentAtAnyMethods(DeactivateMethod.class)) {
+					List<Method> methods = this.definition
+							.getMethodsAnnotatedWith(DeactivateMethod.class);
+					for (Method method : methods) {
+						method.setAccessible(true);
+						method.invoke(obj);
+					}
 				}
 			}
 		}
@@ -223,15 +232,17 @@ public abstract class AbstractBaseController extends AbstractBasePooling
 	protected void destroyObject(Object obj) throws Throwable {
 
 		try {
-			if (ReflectUtils.isCast(Disposable.class, obj))
-				((Disposable) obj).destroy();
-			else if (this.definition
-					.isAnnotationPresentAtAnyMethods(DisposableMethod.class)) {
-				List<Method> methods = this.definition
-						.getMethodsAnnotatedWith(DisposableMethod.class);
-				for (Method method : methods) {
-					method.setAccessible(true);
-					method.invoke(obj);
+			if (obj != null) {
+				if (ReflectUtils.isCast(Disposable.class, obj))
+					((Disposable) obj).destroy();
+				else if (this.definition
+						.isAnnotationPresentAtAnyMethods(DisposableMethod.class)) {
+					List<Method> methods = this.definition
+							.getMethodsAnnotatedWith(DisposableMethod.class);
+					for (Method method : methods) {
+						method.setAccessible(true);
+						method.invoke(obj);
+					}
 				}
 			}
 		}
@@ -252,27 +263,31 @@ public abstract class AbstractBaseController extends AbstractBasePooling
 	protected void validatesObject(Object obj) throws Throwable {
 
 		try {
-			if (this.isTestOnObtain()
-					&& ReflectUtils.isCast(Validate.class, obj)) {
-				if (!((Validate) obj).validate())
-					throw new Exception("Validate failed !!");
-			}
-			else if (this.definition
-					.isAnnotationPresentAtAnyMethods(ValidateMethod.class)) {
-				List<Method> methods = this.definition
-						.getMethodsAnnotatedWith(ValidateMethod.class);
-				for (Method method : methods) {
-					if (method.getReturnType() == Boolean.class
-							|| method.getReturnType() == boolean.class) {
-						method.setAccessible(true);
-						if (!(Boolean) method.invoke(obj))
-							throw new Exception("Validate failed !!");
-					}
-					else {
-						if (log.isErrorEnabled()) {
-							log.error("The 'return type' of validate method ["
-									+ method + "] must be boolean !!",
-									new UnsupportedOperationException());
+			if (obj != null) {
+				if (this.isTestOnObtain()
+						&& ReflectUtils.isCast(Validate.class, obj)) {
+					if (!((Validate) obj).validate())
+						throw new Exception("Validate failed !!");
+				}
+				else if (this.definition
+						.isAnnotationPresentAtAnyMethods(ValidateMethod.class)) {
+					List<Method> methods = this.definition
+							.getMethodsAnnotatedWith(ValidateMethod.class);
+					for (Method method : methods) {
+						if (method.getReturnType() == Boolean.class
+								|| method.getReturnType() == boolean.class) {
+							method.setAccessible(true);
+							if (!(Boolean) method.invoke(obj))
+								throw new Exception("Validate failed !!");
+						}
+						else {
+							if (log.isErrorEnabled()) {
+								log.error(
+										"The 'return type' of validate method ["
+												+ method
+												+ "] must be boolean !!",
+										new UnsupportedOperationException());
+							}
 						}
 					}
 				}
