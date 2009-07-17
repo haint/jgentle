@@ -466,7 +466,7 @@ public abstract class JGentle {
 		/*
 		 * Thực thi các xử lý trước khi khởi tạo CSC
 		 */
-		ArrayList<Configurable> configInstances = result.getConfigInstances();
+		List<Configurable> configInstances = result.getConfigInstances();
 		for (BeforeInitContext obj : JGentle.beforeInitContextList) {
 			obj.beforeInitContext(result, configInstances
 					.toArray(new Configurable[configInstances.size()]));
@@ -656,10 +656,10 @@ public abstract class JGentle {
 	 */
 	protected static void invokeCSCInit(ServiceProvider provider,
 			ComponentServiceContextType<Configurable> csc,
-			ArrayList<Configurable> configInstances) {
+			List<Configurable> configInstances) {
 
 		Class<? extends Configurable> rct = csc.returnClassType();
-		ArrayList<Configurable> configList = new ArrayList<Configurable>();
+		List<Configurable> configList = new ArrayList<Configurable>();
 		// Thực thi lọc các config instances phù hợp.
 		for (Configurable config : configInstances) {
 			if (ReflectUtils.isCast(rct, config)) {

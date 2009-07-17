@@ -273,13 +273,20 @@ public final class Utils {
 		Assertor.notNull(type);
 		Assertor.notNull(targetClass);
 		Assertor.notNull(definition);
-		String nameScope = null;
-		nameScope = type.toString() + ":" + targetClass.toString() + ":"
-				+ definition.toString();
+		StringBuffer buffer = new StringBuffer();
 		if (mappingName != null && !mappingName.isEmpty()) {
-			nameScope = type.toString() + ":" + nameScope + ":" + mappingName;
+			buffer.append(type.toString());
+			buffer.append(":");
+			buffer.append(mappingName);
 		}
-		return nameScope;
+		else {
+			buffer.append(type.toString());
+			buffer.append(":");
+			buffer.append(targetClass.toString());
+			buffer.append(":");
+			buffer.append(definition.toString());
+		}
+		return buffer.toString();
 	}
 
 	/**

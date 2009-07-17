@@ -35,7 +35,6 @@ import org.jgentleframework.utils.AnnotationUtils;
 import org.jgentleframework.utils.Assertor;
 import org.jgentleframework.utils.ReflectUtils;
 
-// TODO: Auto-generated Javadoc
 /**
  * An implementation of {@link DefinitionManager}.
  * 
@@ -171,6 +170,26 @@ public class DefinitionManagerImpl extends AbstractDefinitionController
 	}
 
 	/**
+	 * Kiểm tra loop validate thông qua hệ thống cây annotation.
+	 * 
+	 * @param object
+	 *            đối tượng cần kiểm tra loop validate annotation.
+	 * @return Trả về <b>true</b> nếu object có chứa annotation đính kèm, ngược
+	 *         lại trả về <b>false</b>.
+	 */
+	private boolean checkLoopValidation(Object object) {
+
+		// validate dữ liệu thông tin annotation trước khi diễn dịch thành
+		// definition.
+		if (AnnotationUtils.getAnnotations(object, Types.DEFAULT).length > 0) {
+			checkLoopValidation(object, AnnotationUtils.getAnnotations(object,
+					Types.DEFAULT));
+			return true;
+		}
+		return false;
+	}
+
+	/**
 	 * Check loop validation.
 	 * 
 	 * @param object
@@ -259,26 +278,6 @@ public class DefinitionManagerImpl extends AbstractDefinitionController
 		while (temp.size() != 0);
 	}
 
-	/**
-	 * Kiểm tra loop validate thông qua hệ thống cây annotation.
-	 * 
-	 * @param object
-	 *            đối tượng cần kiểm tra loop validate annotation.
-	 * @return Trả về <b>true</b> nếu object có chứa annotation đính kèm, ngược
-	 *         lại trả về <b>false</b>.
-	 */
-	private boolean checkLoopValidation(Object object) {
-
-		// validate dữ liệu thông tin annotation trước khi diễn dịch thành
-		// definition.
-		if (AnnotationUtils.getAnnotations(object, Types.DEFAULT).length > 0) {
-			checkLoopValidation(object, AnnotationUtils.getAnnotations(object,
-					Types.DEFAULT));
-			return true;
-		}
-		return false;
-	}
-
 	/*
 	 * (non-Javadoc)
 	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
@@ -330,6 +329,20 @@ public class DefinitionManagerImpl extends AbstractDefinitionController
 
 	/*
 	 * (non-Javadoc)
+	 * @see
+	 * org.jgentleframework.core.handling.DefinitionManager#getDefinition(java
+	 * .lang.Class)
+	 */
+	@Override
+	public Definition getDefinition(Class<?> clazz) {
+
+		if (!containsDefinition(clazz))
+			this.loadDefinition(clazz);
+		return this.defList.get(clazz);
+	}
+
+	/*
+	 * (non-Javadoc)
 	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
 	 * DefinitionManager#getDefinition(java.lang.String)
 	 */
@@ -364,6 +377,232 @@ public class DefinitionManagerImpl extends AbstractDefinitionController
 	/*
 	 * (non-Javadoc)
 	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
+	 * DefinitionManager#loadCustomizedDefinition(java.lang.Class,
+	 * java.lang.annotation.Annotation)
+	 */
+	@Override
+	public synchronized void loadCustomizedDefinition(Class<?> clazz,
+			Annotation annotation) {
+
+		String IDNULL = null;
+		loadCustomizedDefinition(clazz, annotation, IDNULL);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
+	 * DefinitionManager#loadDefinition(java.lang.String, java.lang.Class,
+	 * java.lang.annotation.Annotation[])
+	 */
+	@Override
+	public synchronized void loadCustomizedDefinition(Class<?> clazz,
+			Annotation annotation, String ID) {
+
+		Definition def = null;
+		List<Annotation> annotationList = new LinkedList<Annotation>();
+		// Kiểm tra điều kiện các annotation
+		if (annotation != null) {
+			Definition current = ID != null ? this.getDefinition(ID) : this
+					.getDefinition(clazz);
+			Annotation[] rawList;
+			if (current != null)
+				rawList = current.getOriginalAnnotations();
+			else
+				throw new InOutDependencyException(
+						"Does not found Definition with ID '" + ID + "'");
+			for (Annotation anno : rawList) {
+				if (anno.annotationType().equals(annotation.annotationType())) {
+					annotationList.add(annotation);
+				}
+				else {
+					annotationList.add(anno);
+				}
+			}
+			// checks target
+			if (!ReflectUtils.isValidTarget(annotation, clazz)) {
+				throw new InOutDependencyException("Annotation "
+						+ annotation.toString() + " has invalid target.");
+			}
+			if (!annotationList.contains(annotation))
+				annotationList.add(annotation);
+			checkLoopValidation(clazz, annotationList
+					.toArray(new Annotation[annotationList.size()]));
+			// creates definition
+			def = this.buildDefinition(annotationList
+					.toArray(new Annotation[annotationList.size()]), clazz);
+			if (ID != null)
+				this.putDefinition(ID, def);
+			else
+				this.putDefinition(clazz, def);
+		}
+		else {
+			if (ID != null
+					&& (!this.containsDefinition(ID) || this.getDefinition(ID) == null)) {
+				def = this.buildDefinition(annotationList
+						.toArray(new Annotation[annotationList.size()]), clazz);
+				this.putDefinition(ID, def);
+			}
+			else {
+				throw new InOutDependencyException(
+						"Annotation need to be loaded is null but ID '" + ID
+								+ "' is existed !");
+			}
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
+	 * DefinitionManager#loadCustomizedDefinition(java.lang.reflect.Field,
+	 * java.lang.Class, java.lang.annotation.Annotation)
+	 */
+	@Override
+	public synchronized Definition loadCustomizedDefinition(Field field,
+			Class<?> clazz, Annotation annotation) {
+
+		return loadCustomizedDefinition(null, field, clazz, annotation);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
+	 * DefinitionManager#loadCustomizedDefinition(java.lang.reflect.Method,
+	 * java.lang.Class, java.lang.annotation.Annotation)
+	 */
+	@Override
+	public synchronized Definition loadCustomizedDefinition(Method method,
+			Class<?> clazz, Annotation annotation) {
+
+		return loadCustomizedDefinition(null, method, clazz, annotation);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
+	 * DefinitionManager#loadDefinition(java.lang.String,
+	 * java.lang.reflect.Field, java.lang.annotation.Annotation[])
+	 */
+	@Override
+	public synchronized Definition loadCustomizedDefinition(String ID,
+			Field field, Class<?> clazz, Annotation annotation) {
+
+		if (ID != null && this.getDefinition(ID) == null)
+			this.loadCustomizedDefinition(clazz, null, ID);
+		else
+			this.loadDefinition(clazz);
+		if (!ReflectUtils.isValidTarget(annotation, field)) {
+			throw new InOutDependencyException("Annotation "
+					+ annotation.toString() + " has invalid target.");
+		}
+		List<Annotation> annotationList = new LinkedList<Annotation>();
+		// Kiểm tra điều kiện các annotation
+		Definition classDef = ID != null ? this.getDefinition(ID) : this
+				.getDefinition(clazz);
+		Definition result = null;
+		synchronized (classDef.getFieldDefList()) {
+			if (classDef.getFieldDefList().containsKey(field)) {
+				Annotation[] rawList = classDef.getFieldDefList().get(field)
+						.getOriginalAnnotations();
+				for (Annotation anno : rawList) {
+					if (anno.annotationType().equals(
+							annotation.annotationType())) {
+						annotationList.add(annotation);
+					}
+					else {
+						annotationList.add(anno);
+					}
+				}
+			}
+			if (!annotationList.contains(annotation))
+				annotationList.add(annotation);
+			checkLoopValidation(field, annotationList
+					.toArray(new Annotation[annotationList.size()]));
+			// creates definition
+			Definition def = this.buildDefinition(annotationList
+					.toArray(new Annotation[annotationList.size()]), field);
+			result = classDef.getFieldDefList().put(field, def);
+		}
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
+	 * DefinitionManager#loadDefinition(java.lang.String,
+	 * java.lang.reflect.Method, java.lang.annotation.Annotation[])
+	 */
+	@Override
+	public synchronized Definition loadCustomizedDefinition(String ID,
+			Method method, Class<?> clazz, Annotation annotation) {
+
+		if (ID != null)
+			this.loadCustomizedDefinition(clazz, null, ID);
+		else
+			this.loadDefinition(clazz);
+		if (!ReflectUtils.isValidTarget(annotation, method)) {
+			throw new InOutDependencyException("Annotation "
+					+ annotation.toString() + " has invalid target.");
+		}
+		List<Annotation> annotationList = new LinkedList<Annotation>();
+		// Kiểm tra điều kiện các annotation
+		Definition classDef = ID != null ? this.getDefinition(ID) : this
+				.getDefinition(clazz);
+		Definition result = null;
+		synchronized (classDef.getMethodDefList()) {
+			if (classDef.getMethodDefList().containsKey(method)) {
+				Annotation[] rawList = classDef.getMethodDefList().get(method)
+						.getOriginalAnnotations();
+				for (Annotation anno : rawList) {
+					if (anno.annotationType().equals(
+							annotation.annotationType())) {
+						annotationList.add(annotation);
+					}
+					else {
+						annotationList.add(anno);
+					}
+				}
+			}
+			if (!annotationList.contains(annotation))
+				annotationList.add(annotation);
+			// Khởi tạo definition
+			checkLoopValidation(method, annotationList
+					.toArray(new Annotation[annotationList.size()]));
+			Definition def = this.buildDefinition(annotationList
+					.toArray(new Annotation[annotationList.size()]), method);
+			result = classDef.getMethodDefList().put(method, def);
+		}
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
+	 * DefinitionManager#loadDefinition(java.lang.String, java.lang.Object,
+	 * java.lang.Class, java.lang.annotation.Annotation)
+	 */
+	@Override
+	public Definition loadCustomizedDefinition(String ID, Object obj,
+			Class<?> clazz, Annotation annotation) {
+
+		if (ReflectUtils.isCast(Field.class, obj)) {
+			return loadCustomizedDefinition(ID, (Field) obj, clazz, annotation);
+		}
+		else if (ReflectUtils.isCast(Method.class, obj)) {
+			return loadCustomizedDefinition(ID, (Method) obj, clazz, annotation);
+		}
+		else {
+			throw new InOutDependencyException(
+					"Invalid type '"
+							+ obj.getClass()
+							+ "' for arguments 'obj' of loadDefinition method! Only Field '"
+							+ Field.class + "' or Method '" + Method.class
+							+ "' are permitted !");
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
 	 * IDefinitionManager#loadDefinition(java.lang.Class)
 	 */
 	@Override
@@ -385,6 +624,20 @@ public class DefinitionManagerImpl extends AbstractDefinitionController
 		Assertor.notNull(clazz);
 		Definition definition = loadDefinition((Object) clazz);
 		this.putDefinition(ID, definition);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * org.jgentleframework.core.metadatahandling.defhandling.DefinitionManager
+	 * #loadDefinition(java.lang.reflect.Constructor)
+	 */
+	@Override
+	public void loadDefinition(Constructor<?> constructor) {
+
+		Assertor.notNull(constructor);
+		Definition definition = loadDefinition((Object) constructor);
+		this.putDefinition(constructor, definition);
 	}
 
 	/*
@@ -411,20 +664,6 @@ public class DefinitionManagerImpl extends AbstractDefinitionController
 		Assertor.notNull(method);
 		Definition definition = loadDefinition((Object) method);
 		this.putDefinition(method, definition);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * org.jgentleframework.core.metadatahandling.defhandling.DefinitionManager
-	 * #loadDefinition(java.lang.reflect.Constructor)
-	 */
-	@Override
-	public void loadDefinition(Constructor<?> constructor) {
-
-		Assertor.notNull(constructor);
-		Definition definition = loadDefinition((Object) constructor);
-		this.putDefinition(constructor, definition);
 	}
 
 	/**
@@ -528,232 +767,6 @@ public class DefinitionManagerImpl extends AbstractDefinitionController
 		return result;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
-	 * DefinitionManager#loadCustomizedDefinition(java.lang.Class,
-	 * java.lang.annotation.Annotation)
-	 */
-	@Override
-	public synchronized void loadCustomizedDefinition(Class<?> clazz,
-			Annotation annotation) {
-
-		String IDNULL = null;
-		loadCustomizedDefinition(clazz, annotation, IDNULL);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
-	 * DefinitionManager#loadDefinition(java.lang.String, java.lang.Class,
-	 * java.lang.annotation.Annotation[])
-	 */
-	@Override
-	public synchronized void loadCustomizedDefinition(Class<?> clazz,
-			Annotation annotation, String ID) {
-
-		Definition def = null;
-		List<Annotation> annotationList = new LinkedList<Annotation>();
-		// Kiểm tra điều kiện các annotation
-		if (annotation != null) {
-			Definition current = ID != null ? this.getDefinition(ID) : this
-					.getDefinition(clazz);
-			Annotation[] rawList;
-			if (current != null)
-				rawList = current.getOriginalAnnotations();
-			else
-				throw new InOutDependencyException(
-						"Does not found Definition with ID '" + ID + "'");
-			for (Annotation anno : rawList) {
-				if (anno.annotationType().equals(annotation.annotationType())) {
-					annotationList.add(annotation);
-				}
-				else {
-					annotationList.add(anno);
-				}
-			}
-			// checks target
-			if (!ReflectUtils.isValidTarget(annotation, clazz)) {
-				throw new InOutDependencyException("Annotation "
-						+ annotation.toString() + " has invalid target.");
-			}
-			if (!annotationList.contains(annotation))
-				annotationList.add(annotation);
-			checkLoopValidation(clazz, annotationList
-					.toArray(new Annotation[annotationList.size()]));
-			// creates definition
-			def = this.buildDefinition(annotationList
-					.toArray(new Annotation[annotationList.size()]), clazz);
-			if (ID != null)
-				this.putDefinition(ID, def);
-			else
-				this.putDefinition(clazz, def);
-		}
-		else {
-			if (ID != null
-					&& (!this.containsDefinition(ID) || this.getDefinition(ID) == null)) {
-				def = this.buildDefinition(annotationList
-						.toArray(new Annotation[annotationList.size()]), clazz);
-				this.putDefinition(ID, def);
-			}
-			else {
-				throw new InOutDependencyException(
-						"Annotation need to be loaded is null but ID '" + ID
-								+ "' is existed !");
-			}
-		}
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
-	 * DefinitionManager#loadDefinition(java.lang.String, java.lang.Object,
-	 * java.lang.Class, java.lang.annotation.Annotation)
-	 */
-	@Override
-	public Definition loadCustomizedDefinition(String ID, Object obj,
-			Class<?> clazz, Annotation annotation) {
-
-		if (ReflectUtils.isCast(Field.class, obj)) {
-			return loadCustomizedDefinition(ID, (Field) obj, clazz, annotation);
-		}
-		else if (ReflectUtils.isCast(Method.class, obj)) {
-			return loadCustomizedDefinition(ID, (Method) obj, clazz, annotation);
-		}
-		else {
-			throw new InOutDependencyException(
-					"Invalid type '"
-							+ obj.getClass()
-							+ "' for arguments 'obj' of loadDefinition method! Only Field '"
-							+ Field.class + "' or Method '" + Method.class
-							+ "' are permitted !");
-		}
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
-	 * DefinitionManager#loadCustomizedDefinition(java.lang.reflect.Field,
-	 * java.lang.Class, java.lang.annotation.Annotation)
-	 */
-	@Override
-	public synchronized Definition loadCustomizedDefinition(Field field,
-			Class<?> clazz, Annotation annotation) {
-
-		return loadCustomizedDefinition(null, field, clazz, annotation);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
-	 * DefinitionManager#loadDefinition(java.lang.String,
-	 * java.lang.reflect.Field, java.lang.annotation.Annotation[])
-	 */
-	@Override
-	public synchronized Definition loadCustomizedDefinition(String ID,
-			Field field, Class<?> clazz, Annotation annotation) {
-
-		if (ID != null && this.getDefinition(ID) == null)
-			this.loadCustomizedDefinition(clazz, null, ID);
-		else
-			this.loadDefinition(clazz);
-		if (!ReflectUtils.isValidTarget(annotation, field)) {
-			throw new InOutDependencyException("Annotation "
-					+ annotation.toString() + " has invalid target.");
-		}
-		List<Annotation> annotationList = new LinkedList<Annotation>();
-		// Kiểm tra điều kiện các annotation
-		Definition classDef = ID != null ? this.getDefinition(ID) : this
-				.getDefinition(clazz);
-		Definition result = null;
-		synchronized (classDef.getFieldDefList()) {
-			if (classDef.getFieldDefList().containsKey(field)) {
-				Annotation[] rawList = classDef.getFieldDefList().get(field)
-						.getOriginalAnnotations();
-				for (Annotation anno : rawList) {
-					if (anno.annotationType().equals(
-							annotation.annotationType())) {
-						annotationList.add(annotation);
-					}
-					else {
-						annotationList.add(anno);
-					}
-				}
-			}
-			if (!annotationList.contains(annotation))
-				annotationList.add(annotation);
-			checkLoopValidation(field, annotationList
-					.toArray(new Annotation[annotationList.size()]));
-			// creates definition
-			Definition def = this.buildDefinition(annotationList
-					.toArray(new Annotation[annotationList.size()]), field);
-			result = classDef.getFieldDefList().put(field, def);
-		}
-		return result;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
-	 * DefinitionManager#loadCustomizedDefinition(java.lang.reflect.Method,
-	 * java.lang.Class, java.lang.annotation.Annotation)
-	 */
-	@Override
-	public synchronized Definition loadCustomizedDefinition(Method method,
-			Class<?> clazz, Annotation annotation) {
-
-		return loadCustomizedDefinition(null, method, clazz, annotation);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
-	 * DefinitionManager#loadDefinition(java.lang.String,
-	 * java.lang.reflect.Method, java.lang.annotation.Annotation[])
-	 */
-	@Override
-	public synchronized Definition loadCustomizedDefinition(String ID,
-			Method method, Class<?> clazz, Annotation annotation) {
-
-		if (ID != null)
-			this.loadCustomizedDefinition(clazz, null, ID);
-		else
-			this.loadDefinition(clazz);
-		if (!ReflectUtils.isValidTarget(annotation, method)) {
-			throw new InOutDependencyException("Annotation "
-					+ annotation.toString() + " has invalid target.");
-		}
-		List<Annotation> annotationList = new LinkedList<Annotation>();
-		// Kiểm tra điều kiện các annotation
-		Definition classDef = ID != null ? this.getDefinition(ID) : this
-				.getDefinition(clazz);
-		Definition result = null;
-		synchronized (classDef.getMethodDefList()) {
-			if (classDef.getMethodDefList().containsKey(method)) {
-				Annotation[] rawList = classDef.getMethodDefList().get(method)
-						.getOriginalAnnotations();
-				for (Annotation anno : rawList) {
-					if (anno.annotationType().equals(
-							annotation.annotationType())) {
-						annotationList.add(annotation);
-					}
-					else {
-						annotationList.add(anno);
-					}
-				}
-			}
-			if (!annotationList.contains(annotation))
-				annotationList.add(annotation);
-			// Khởi tạo definition
-			checkLoopValidation(method, annotationList
-					.toArray(new Annotation[annotationList.size()]));
-			Definition def = this.buildDefinition(annotationList
-					.toArray(new Annotation[annotationList.size()]), method);
-			result = classDef.getMethodDefList().put(method, def);
-		}
-		return result;
-	}
-
 	/**
 	 * Put definition.
 	 * 
@@ -794,6 +807,18 @@ public class DefinitionManagerImpl extends AbstractDefinitionController
 
 	/*
 	 * (non-Javadoc)
+	 * @see
+	 * org.jgentleframework.core.metadatahandling.defhandling.DefinitionManager
+	 * #removeDefinition(java.lang.reflect.Constructor)
+	 */
+	@Override
+	public Definition removeDefinition(Constructor<?> constructor) {
+
+		return this.defList.remove((Object) constructor);
+	}
+
+	/*
+	 * (non-Javadoc)
 	 * @seeorg.jgentleframework.core.metadatahandling.aohhandling.defhandling.
 	 * IDefinitionManager#removeDefinition(java.lang.reflect.Field)
 	 */
@@ -812,18 +837,6 @@ public class DefinitionManagerImpl extends AbstractDefinitionController
 	public Definition removeDefinition(Method method) {
 
 		return this.defList.remove((Object) method);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * org.jgentleframework.core.metadatahandling.defhandling.DefinitionManager
-	 * #removeDefinition(java.lang.reflect.Constructor)
-	 */
-	@Override
-	public Definition removeDefinition(Constructor<?> constructor) {
-
-		return this.defList.remove((Object) constructor);
 	}
 
 	/*

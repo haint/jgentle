@@ -18,6 +18,8 @@
 package org.jgentleframework.context.injecting;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import org.jgentleframework.configure.Configurable;
 import org.jgentleframework.context.Context;
@@ -58,6 +60,13 @@ public interface Provider extends IAbstractBeanFactory, Context {
 	 * @return an instance of the bean
 	 */
 	public <T> T getBean(Class<T> type);
+
+	/**
+	 * Gets the root scope name {@link Map map}.
+	 * 
+	 * @return the singletonScopeName
+	 */
+	public Map<Object, String> getRootScopeName();
 
 	/**
 	 * Returns an instance bound to the given {@link Definition}
@@ -107,10 +116,8 @@ public interface Provider extends IAbstractBeanFactory, Context {
 
 	/**
 	 * Returns the list of configurable instances of this container.
-	 * 
-	 * @return {@link ArrayList}
 	 */
-	public ArrayList<Configurable> getConfigInstances();
+	public List<Configurable> getConfigInstances();
 
 	/**
 	 * Returns the detector controller of this container.

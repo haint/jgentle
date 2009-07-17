@@ -43,6 +43,7 @@ import org.jgentleframework.core.reflection.metadata.Definition;
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
  * @date Oct 10, 2007
  * @see IAbstractDefinitionExceptionCatcher
+ * @see DefinitionManagerImpl
  */
 public interface DefinitionManager extends IAnnotationVisitor,
 		IAbstractDefinitionExceptionCatcher {
@@ -113,9 +114,20 @@ public interface DefinitionManager extends IAnnotationVisitor,
 	public Definition getDefinition(Object obj);
 
 	/**
-	 * Returns the interpreted {@link Definition} of given object. In case the
-	 * corresponding {@link Definition} is not existed, returned value will be
-	 * <b>null</b>.
+	 * Returns the interpreted {@link Definition} of given object class. In case
+	 * the corresponding {@link Definition} is not existed, returned value will
+	 * be <b>null</b>.
+	 * 
+	 * @param clazz
+	 *            the given object class
+	 * @return a {@link Definition} is it exists, if not, return <b>null</b>.
+	 */
+	public Definition getDefinition(Class<?> clazz);
+
+	/**
+	 * Returns the interpreted {@link Definition} of given string ID. In case
+	 * the corresponding {@link Definition} is not existed, returned value will
+	 * be <b>null</b>.
 	 * 
 	 * @param ID
 	 *            the given ID of {@link Definition}

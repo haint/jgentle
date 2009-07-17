@@ -53,8 +53,8 @@ public class ObjectAttachImpl<T> implements ObjectAttach<T> {
 	/** The type list. */
 	private ArrayList<Class<?>>									typeList	= new ArrayList<Class<?>>();
 
-	/** lazy_init property, default setting is <b>true</b>. */
-	private boolean												lazyInit	= true;
+	/** lazy_init property, default setting is <b>false</b>. */
+	private boolean												lazyInit	= false;
 
 	/**
 	 * The Constructor.

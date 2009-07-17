@@ -35,8 +35,10 @@ import org.jgentleframework.context.support.Selector;
 import org.jgentleframework.core.InvalidOperationException;
 import org.jgentleframework.core.factory.BeanCreationProcessor;
 import org.jgentleframework.core.reflection.metadata.Definition;
+import org.jgentleframework.utils.DefinitionUtils;
 import org.jgentleframework.utils.ReflectUtils;
 import org.jgentleframework.utils.data.NullClass;
+import org.jgentleframework.utils.data.Pair;
 import org.jgentleframework.web.WebProvider;
 
 /**
@@ -84,7 +86,19 @@ public enum Scope implements ScopeImplementation {
 	}
 
 	/** The log. */
-	private final Log	log	= LogFactory.getLog(getClass());
+	private final Log			log				= LogFactory.getLog(getClass());
+
+	/** The obj factory. */
+	ObjectBeanFactory			objFactory		= null;
+
+	/** The provider. */
+	Provider					provider		= null;
+
+	/** The scope list. */
+	Map<String, ScopeInstance>	scopeList		= null;
+
+	/** The map direct list. */
+	Map<String, Object>			mapDirectList	= null;
 
 	/*
 	 * (non-Javadoc)
@@ -146,9 +160,16 @@ public enum Scope implements ScopeImplementation {
 			ObjectBeanFactory objFactory) {
 
 		Object result = null;
-		Provider provider = objFactory.getProvider();
-		Map<String, ScopeInstance> scopeList = objFactory.getScopeList();
-		Map<String, Object> mapDirectList = objFactory.getMapDirectList();
+		this.objFactory = objFactory == null ? objFactory : this.objFactory;
+		this.provider = provider == null
+				|| provider != objFactory.getProvider() ? objFactory
+				.getProvider() : this.provider;
+		this.scopeList = this.scopeList == null
+				|| scopeList != objFactory.getScopeList() ? objFactory
+				.getScopeList() : this.scopeList;
+		this.mapDirectList = this.mapDirectList == null
+				|| mapDirectList != objFactory.getMapDirectList() ? objFactory
+				.getMapDirectList() : this.mapDirectList;
 		// If is Singleton scope
 		Scope scope = null;
 		synchronized (scopeList) {
@@ -162,7 +183,14 @@ public enum Scope implements ScopeImplementation {
 					}
 				}
 				if (selector instanceof CoreInstantiationSelectorImpl) {
+					Pair<Class<?>[], Object[]> pairCons = DefinitionUtils
+							.findArgsOfDefaultConstructor(selector
+									.getDefinition(), this.provider);
+					Class<?>[] argTypes = pairCons.getKeyPair();
+					Object[] args = pairCons.getValuePair();
 					CoreInstantiationSelector coreSelector = (CoreInstantiationSelector) selector;
+					coreSelector.setArgTypes(argTypes);
+					coreSelector.setArgs(args);
 					String mappingName = coreSelector.getMappingName();
 					if (mappingName != null && !mappingName.isEmpty()) {
 						if (mappingName.indexOf(":") != -1) {
@@ -189,10 +217,10 @@ public enum Scope implements ScopeImplementation {
 					}
 					if (result == NullClass.class)
 						result = null;
-					// Đưa object vừa khởi tạo vào danh sách singleton cache
-					synchronized (mapDirectList) {
-						mapDirectList.put(scopeName, result);
-					}
+				}
+				// Đưa object vừa khởi tạo vào danh sách singleton cache
+				synchronized (mapDirectList) {
+					mapDirectList.put(scopeName, result);
 				}
 			}
 		}

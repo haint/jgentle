@@ -21,8 +21,10 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.Map.Entry;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -64,12 +66,19 @@ import org.jgentleframework.utils.data.Pair;
  */
 public abstract class AbstractBeanFactory extends AbstractLoadingFactory
 		implements IAbstractBeanFactory, Provider {
-	/** The log. */
-	protected final Log			log			= LogFactory.getLog(getClass());
-
 	/** The Constant staticLog. */
 	private final static Log	staticLog	= LogFactory
 													.getLog(AbstractBeanFactory.class);
+
+	/*
+	 * (non-Javadoc)
+	 * @see org.jgentleframework.context.injecting.Provider#getRootScopeName()
+	 */
+	@Override
+	public Map<Object, String> getRootScopeName() {
+
+		return rootScopeName;
+	}
 
 	/**
 	 * This method is responsible for annotating {@link Definition}
@@ -249,11 +258,30 @@ public abstract class AbstractBeanFactory extends AbstractLoadingFactory
 		}
 	}
 
+	/** The alias map. */
+	protected Map<String, Entry<Class<?>, Class<?>>>	aliasMap		= null;
+
+	/** The log. */
+	protected final Log									log				= LogFactory
+																				.getLog(getClass());
+
+	/** The map direct list. */
+	protected Map<String, Object>						mapDirectList	= null;
+
+	/** The mapping list. */
+	protected Map<Class<?>, Class<?>>					mappingList		= null;
+
 	/** The {@link ScopeController}. */
-	protected ScopeController	scopeController	= new ScopeController();
+	protected ScopeController							scopeController	= new ScopeController();
+
+	/** The scope list. */
+	protected Map<String, ScopeInstance>				scopeList		= null;
 
 	/** The {@link ServiceHandler}. */
-	protected ServiceHandler	serviceHandler	= null;
+	protected ServiceHandler							serviceHandler	= null;
+
+	/** The root scope name. */
+	protected Map<Object, String>						rootScopeName	= new Hashtable<Object, String>();
 
 	/**
 	 * Finds args of default constructor.
@@ -313,17 +341,8 @@ public abstract class AbstractBeanFactory extends AbstractLoadingFactory
 			String mappingName, Definition definition) {
 
 		Assertor.notNull(type);
-		targetClass = targetClass == null ? this.objectBeanFactory
-				.getMappingList().get(type) : targetClass;
-		targetClass = targetClass == null ? type : targetClass;
-		if (definition == null) {
-			definition = this.defManager.getDefinition(targetClass);
-		}
-		Pair<Class<?>[], Object[]> pairCons = findArgsOfDefaultConstructor(definition);
-		Class<?>[] argTypes = pairCons.getKeyPair();
-		Object[] args = pairCons.getValuePair();
 		CoreInstantiationSelector coreSelector = new CoreInstantiationSelectorImpl(
-				type, targetClass, mappingName, argTypes, args, definition);
+				type, targetClass, mappingName, null, null, definition);
 		return getBeanInstance(coreSelector);
 	}
 
