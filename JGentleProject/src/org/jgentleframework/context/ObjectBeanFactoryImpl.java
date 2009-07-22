@@ -139,7 +139,7 @@ abstract class ObjectBeanFactoryImpl implements ObjectBeanFactory {
 	}
 
 	/**
-	 * Builds the {@link Definition} of an instance of
+	 * Builds the {@link Definition} of an instance based on
 	 * {@link ObjectBindingConstant}.
 	 * 
 	 * @param inClass
@@ -184,7 +184,7 @@ abstract class ObjectBeanFactoryImpl implements ObjectBeanFactory {
 		else {
 			list = Arrays.asList(ReflectUtils.getDeclaredFields(inClass));
 		}
-		HashMap<String, Object> result = new HashMap<String, Object>();
+		Map<String, Object> result = new HashMap<String, Object>();
 		for (String name : injectedValueList.keySet()) {
 			for (Object obj : list) {
 				String objName = (String) ReflectUtils.invokeMethod(obj,
@@ -195,8 +195,9 @@ abstract class ObjectBeanFactoryImpl implements ObjectBeanFactory {
 			}
 		}
 		if (result.size() != injectedValueList.size()) {
-			throw new InOutDependencyException("Property was configured in '"
-					+ inClass + "' is invalid.");
+			throw new InOutDependencyException(
+					"Properties were configured in '" + inClass
+							+ "' is invalid!");
 		}
 		// Thiết lập thông tin dữ liệu definition từ dữ liệu inject
 		for (Entry<String, Object> entry : injectedValueList.entrySet()) {
@@ -206,6 +207,7 @@ abstract class ObjectBeanFactoryImpl implements ObjectBeanFactory {
 			if (value != null && value.getClass().equals(String.class)) {
 				String valueStr = (String) value;
 				Definition def = null;
+				// create definition
 				if (bool) {
 					this.definitionManager.loadCustomizedDefinition(ID,
 							(Method) result.get(name), inClass, TemplateClass
@@ -220,28 +222,21 @@ abstract class ObjectBeanFactoryImpl implements ObjectBeanFactory {
 					def = this.definitionManager.getDefinition(ID)
 							.getFieldDefList().get(result.get(name));
 				}
-				if (value.equals(Configurable.REF_MAPPING)) {
+				// identify string value
+				if (valueStr.equals(Configurable.REF_MAPPING)) {
 					String unique = UniqueNumberGenerator.getNextUID();
 					def.setValueOfAnnotation(Inject.class, "value", unique);
 				}
-				else if (valueStr.indexOf(":") != -1) {
-					String[] values = valueStr.split(":");
-					// Nếu value reference đến một instance
-					if (values[0].equals(Configurable.REF_CONSTANT)
-							|| values[0].equals(Configurable.REF_MAPPING)
-							|| values[0].equals(Configurable.REF_ID)) {
-						def.setValueOfAnnotation(Inject.class, "value", value);
-					}
+				else if (valueStr.startsWith(REF.REF_CONSTANT)
+						|| valueStr.startsWith(REF.REF_MAPPING)
+						|| valueStr.startsWith(REF.REF_ID)) {
+					def.setValueOfAnnotation(Inject.class, "value", valueStr);
 				}
 				else {
-					synchronized (this.mapDirectList) {
-						String unique = UniqueNumberGenerator.getNextUID();
-						this.mapDirectList.put(REF.REF_CONSTANT.substring(0,
-								REF.REF_CONSTANT.length() - 1)
-								+ "_" + unique, value);
-						def.setValueOfAnnotation(Inject.class, "value", REF
-								.refConstant(unique));
-					}
+					String unique = UniqueNumberGenerator.getNextUID();
+					this.mapDirectList.put(REF.refConstant(unique), value);
+					def.setValueOfAnnotation(Inject.class, "value", REF
+							.refConstant(unique));
 				}
 			}
 			// nếu khác String (object)
@@ -262,11 +257,7 @@ abstract class ObjectBeanFactoryImpl implements ObjectBeanFactory {
 				String unique = UniqueNumberGenerator.getNextUID();
 				def.setValueOfAnnotation(Inject.class, "value", REF
 						.refConstant(unique));
-				synchronized (this.mapDirectList) {
-					this.mapDirectList.put(REF.REF_CONSTANT.substring(0,
-							REF.REF_CONSTANT.length() - 1)
-							+ "_" + unique, value);
-				}
+				this.mapDirectList.put(REF.refConstant(unique), value);
 			}
 		}
 		// Creates Definition from annotating information
@@ -274,7 +265,7 @@ abstract class ObjectBeanFactoryImpl implements ObjectBeanFactory {
 		// Creates object bean if lazy_init attribute is false
 		if (lazy_init == false) {
 			if (notLazyList != null && !scope.equals(Scope.PROTOTYPE)) {
-				notLazyList.add(Configurable.REF_ID + ":" + ID);
+				notLazyList.add(REF.ref(ID));
 			}
 			else if (!scope.equals(Scope.PROTOTYPE)) {
 				this.provider.getBeanBoundToDefinition(ID);
@@ -475,8 +466,8 @@ abstract class ObjectBeanFactoryImpl implements ObjectBeanFactory {
 			Set<Entry<Class<?>, Class<?>>> entryList = objAth
 					.getMappingEntrySet();
 			for (Entry<Class<?>, Class<?>> entry : entryList) {
-				if ((type != Types.ALL && type != Types.NON_ANNOTATION && type
-						.getClassType().isAssignableFrom(entry.getValue()))
+				if ((type != Types.ALL && type != Types.NON_ANNOTATION && (type != null && type
+						.getClassType().isAssignableFrom(entry.getValue())))
 						|| type.equals(Types.ALL)
 						|| (type.equals(Types.NON_ANNOTATION) && !Annotation.class
 								.isAssignableFrom(entry.getValue()))) {
@@ -502,41 +493,36 @@ abstract class ObjectBeanFactoryImpl implements ObjectBeanFactory {
 			String scopeName = null;
 			Class<?> typeClass = enScope.getKey().getKey();
 			Class<?> targetClass = enScope.getKey().getValue();
-			if ((type != Types.ALL && type != Types.NON_ANNOTATION && type
-					.getClassType().isAssignableFrom(targetClass))
+			if ((type != Types.ALL && type != Types.NON_ANNOTATION && (type != null && type
+					.getClassType().isAssignableFrom(targetClass)))
 					|| type.equals(Types.ALL)
 					|| (type.equals(Types.NON_ANNOTATION) && !Annotation.class
 							.isAssignableFrom(targetClass))) {
-				Definition def = definitionManager.getDefinition(targetClass);
-				scopeName = Utils.createScopeName(typeClass, targetClass, def,
-						objAth.getName());
-				this.scopeList.put(scopeName, enScope.getValue());
-				// Instantiates bean instance if lazy-init attribute is false.
+				Definition definition = definitionManager
+						.getDefinition(targetClass);
+				scopeName = Utils.createScopeName(typeClass, targetClass,
+						definition, objAth.getName());
 				ScopeInstance scopeIns = enScope.getValue();
+				this.scopeList.put(scopeName, scopeIns);
+				// Instantiates bean instance if lazy-init attribute is false.
 				if (!objAth.isLazyInit() && !scopeIns.equals(Scope.PROTOTYPE)) {
 					if (notLazyList != null) {
-						if (scopeIns.equals(Scope.SINGLETON)) {
-							if (objAth.isNameBool() == true
-									&& !objAth.getName().isEmpty()) {
-								notLazyList.add(Configurable.REF_MAPPING + ":"
-										+ objAth.getName());
-							}
-							else {
-								notLazyList.add(enScope.getKey().getKey());
-							}
+						if (objAth.isNameBool() == true
+								&& !objAth.getName().isEmpty()) {
+							notLazyList.add(REF.refMapping(objAth.getName()));
+						}
+						else {
+							notLazyList.add(typeClass);
 						}
 					}
 					else {
-						if (scopeIns.equals(Scope.SINGLETON)) {
-							if (objAth.isNameBool() == true
-									&& !objAth.getName().isEmpty()) {
-								this.provider.getBeanBoundToDefinition(objAth
-										.getName());
-							}
-							else {
-								this.provider
-										.getBean(enScope.getKey().getKey());
-							}
+						if (objAth.isNameBool() == true
+								&& !objAth.getName().isEmpty()) {
+							this.provider.getBeanBoundToMapping(objAth
+									.getName());
+						}
+						else {
+							this.provider.getBean(typeClass);
 						}
 					}
 				}
@@ -627,9 +613,7 @@ abstract class ObjectBeanFactoryImpl implements ObjectBeanFactory {
 			ScopeInstance scope = objCst.getScope();
 			for (Entry<String, Object> obj : objCst.getHashDirectSet()) {
 				try {
-					String scopeName = REF.REF_CONSTANT.substring(0,
-							REF.REF_CONSTANT.length() - 1)
-							+ "_" + obj.getKey();
+					String scopeName = Utils.createScopeName(obj.getKey());
 					this.scopeList.put(scopeName, scope);
 					ScopeImplementation scopeImpl = createScopeInstance(scopeName);
 					scopeImpl.putBean(scopeName, obj.getValue(), this);
@@ -656,20 +640,22 @@ abstract class ObjectBeanFactoryImpl implements ObjectBeanFactory {
 			ScopeInstance scopeInstance = this.scopeList.get(scopeName);
 			if (scopeInstance == null) {
 				throw new InOutDependencyException(
-						"Does not found the scope instnace !");
-			}
-			/*
-			 * Nếu scopeInstance chưa thật sự được khởi tạo.
-			 */
-			if (ReflectUtils.isCast(ScopeInstanceImpl.class, scopeInstance)) {
-				ScopeInstanceImpl scopeImpl = (ScopeInstanceImpl) scopeInstance;
-				result = (ScopeImplementation) getBean(scopeImpl.getScope());
-				// Đưa đối tượng scope Implementation vừa khởi tạo vào trong
-				// scopeList.
-				this.scopeList.put(scopeName, result);
+						"Does not found the scope instance !");
 			}
 			else {
-				result = (ScopeImplementation) scopeInstance;
+				/*
+				 * Nếu scopeInstance chưa thật sự được khởi tạo.
+				 */
+				if (ReflectUtils.isCast(ScopeInstanceImpl.class, scopeInstance)) {
+					ScopeInstanceImpl scopeImpl = (ScopeInstanceImpl) scopeInstance;
+					result = (ScopeImplementation) getBean(scopeImpl.getScope());
+					// Đưa đối tượng scope Implementation vừa khởi tạo vào trong
+					// scopeList.
+					this.scopeList.put(scopeName, result);
+				}
+				else {
+					result = (ScopeImplementation) scopeInstance;
+				}
 			}
 		}
 		return result;

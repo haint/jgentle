@@ -225,6 +225,27 @@ public abstract class InOutExecutor {
 		return result;
 	}
 
+	/**
+	 * Executes injecting and filtering.
+	 * 
+	 * @param fields
+	 *            the fields
+	 * @param setters
+	 *            the setters
+	 * @param provider
+	 *            the provider
+	 * @param target
+	 *            the target
+	 * @param definition
+	 *            the definition
+	 * @return the map< field, object>
+	 * @throws IllegalArgumentException
+	 *             the illegal argument exception
+	 * @throws IllegalAccessException
+	 *             the illegal access exception
+	 * @throws InvocationTargetException
+	 *             the invocation target exception
+	 */
 	public static Map<Field, Object> executesInjectingAndFiltering(
 			Field[] fields, Method[] setters, Provider provider, Object target,
 			Definition definition) throws IllegalArgumentException,
@@ -407,7 +428,9 @@ public abstract class InOutExecutor {
 			}
 		}
 		else if (result != null && result != NullClass.class) {
+			
 			if (!ReflectUtils.isCast(type, result)) {
+				System.out.println(result);
 				throw new InOutDependencyException(
 						"The injected dependency instance can not be cast to '"
 								+ type + "'");

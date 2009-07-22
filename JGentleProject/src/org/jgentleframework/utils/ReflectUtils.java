@@ -936,15 +936,14 @@ public final class ReflectUtils {
 	 */
 	public static boolean isCast(Class<?> clazz, Object obj) {
 
-		Assertor.notNull(clazz);
-		Assertor.notNull(obj);
-		try {
-			clazz.cast(obj);
-		}
-		catch (ClassCastException e) {
-			return false;
-		}
-		return true;
+		return clazz.isInstance(obj);
+		// try {
+		// clazz.cast(obj);
+		// }
+		// catch (ClassCastException e) {
+		// return false;
+		// }
+		// return true;
 	}
 
 	/**
@@ -961,20 +960,17 @@ public final class ReflectUtils {
 	public static boolean isCast(Object obj, Class<?>... classes) {
 
 		Assertor.notNull((Object[]) classes);
-		Assertor.notNull(obj);
 		if (classes.length == 0) {
 			Assertor
 					.throwRunTimeException("The list of classes need to be casted must not be empty!");
 		}
-		try {
-			for (Class<?> clazz : classes) {
-				clazz.cast(obj);
-			}
+		boolean result = true;
+		for (Class<?> clazz : classes) {
+			result = clazz.isInstance(obj);
+			if (result == false)
+				break;
 		}
-		catch (ClassCastException e) {
-			return false;
-		}
-		return true;
+		return result;
 	}
 
 	/**
@@ -987,14 +983,7 @@ public final class ReflectUtils {
 	 */
 	public static boolean isClass(Object obj) {
 
-		Assertor.notNull(obj);
-		try {
-			Class.class.cast(obj);
-		}
-		catch (ClassCastException e) {
-			return false;
-		}
-		return true;
+		return Class.class.isInstance(obj);
 	}
 
 	/**
@@ -1006,7 +995,7 @@ public final class ReflectUtils {
 	 * @return true, if checks if is constructor
 	 */
 	public static boolean isConstructor(Object obj) {
-
+		
 		return isCast(Constructor.class, obj);
 	}
 
@@ -1047,7 +1036,7 @@ public final class ReflectUtils {
 	 * @return true, if checks if is field
 	 */
 	public static boolean isField(Object obj) {
-
+		Assertor.notNull(obj);
 		if (obj.getClass().equals(Field.class)) {
 			return true;
 		}
@@ -1077,7 +1066,7 @@ public final class ReflectUtils {
 	 * @return true, if checks if is method
 	 */
 	public static boolean isMethod(Object obj) {
-
+		Assertor.notNull(obj);
 		if (obj.getClass().equals(Method.class)) {
 			return true;
 		}

@@ -105,7 +105,7 @@ public interface DefinitionManager extends IAnnotationVisitor,
 	/**
 	 * Returns the interpreted {@link Definition} of given object. In case the
 	 * corresponding {@link Definition} is not existed, this method will
-	 * automatically create {@link Definition} according to given object.
+	 * automatically create {@link Definition} basing on the given object.
 	 * 
 	 * @param obj
 	 *            the given object
@@ -115,12 +115,14 @@ public interface DefinitionManager extends IAnnotationVisitor,
 
 	/**
 	 * Returns the interpreted {@link Definition} of given object class. In case
-	 * the corresponding {@link Definition} is not existed, returned value will
-	 * be <b>null</b>.
+	 * the corresponding {@link Definition} is not existed, this method will
+	 * automatically create {@link Definition} basing on the given object.
 	 * 
 	 * @param clazz
 	 *            the given object class
-	 * @return a {@link Definition} is it exists, if not, return <b>null</b>.
+	 * @return a {@link Definition} is it exists, if not, this method will
+	 *         automatically create {@link Definition} basing on the given
+	 *         object and return it.
 	 */
 	public Definition getDefinition(Class<?> clazz);
 

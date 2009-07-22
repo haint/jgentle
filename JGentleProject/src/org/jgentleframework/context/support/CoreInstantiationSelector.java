@@ -17,6 +17,11 @@
  */
 package org.jgentleframework.context.support;
 
+import java.util.Map;
+
+import org.jgentleframework.core.factory.support.CachedConstructor;
+import org.jgentleframework.core.reflection.metadata.Definition;
+
 /**
  * The Interface CoreInstantiationSelector.
  * 
@@ -27,9 +32,20 @@ package org.jgentleframework.context.support;
  */
 public interface CoreInstantiationSelector extends Selector {
 	/**
-	 * Gets the type.
+	 * Gets the caching list.
+	 */
+	public Map<Definition, CachedConstructor> getCachingList();
+
+	/**
+	 * Sets the caching list.
 	 * 
-	 * @return the type
+	 * @param cachingList
+	 *            the cachingList to set
+	 */
+	public void setCachingList(Map<Definition, CachedConstructor> cachingList);
+
+	/**
+	 * Gets the type.
 	 */
 	public Class<?> getType();
 
@@ -42,19 +58,17 @@ public interface CoreInstantiationSelector extends Selector {
 	public void setType(Class<?> type);
 
 	/**
-	 * Gets the mapping name.
-	 * 
-	 * @return the mappingName
+	 * Gets the reference name.
 	 */
-	public String getMappingName();
+	public String getReferenceName();
 
 	/**
-	 * Sets the mapping name.
+	 * Sets the reference name.
 	 * 
-	 * @param mappingName
-	 *            the mappingName to set
+	 * @param referenceName
+	 *            the new reference name
 	 */
-	public void setMappingName(String mappingName);
+	public void setReferenceName(String referenceName);
 
 	/**
 	 * Returns an array containing the class objects in order to identify the

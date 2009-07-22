@@ -31,15 +31,16 @@ import org.jgentleframework.core.InvalidOperationException;
  * called (invoked) necessarily <b>thread-safe</b>. This needs to be strictly in
  * compliance with to ensure that the return and creation of object beans on
  * different threads of the same implementation scope are done properly. In
- * other words, invoking <code>callback methods</code> of the {@link ScopeImplementation}
- * instance needs to ensure the <b>thread-safe</b> and this is dependant on
- * scope implementation and the invoking of caller.
- * <p> *******************************************
+ * other words, invoking <code>callback methods</code> of the
+ * {@link ScopeImplementation} instance needs to ensure the <b>thread-safe</b>
+ * and this is dependant on scope implementation and the invoking of caller.
+ * <p>
+ * *******************************************
  * <p>
  * {@link ScopeImplementation} chỉ định một interface cho các cài đặt của các
- * <b>custom scope</b> tự tạo. Các <code>custom scope</code> chỉ định muốn được
- * sử dụng bên trong lòng JGentle <i>container</i> nhất thiết cần phải thực thi
- * cài đặt <code>interface</code> này.
+ * <b>customized scope</b> tự tạo. Các <code>custom scope</code> chỉ định muốn
+ * được sử dụng bên trong lòng JGentle <i>container</i> nhất thiết cần phải thực
+ * thi cài đặt <code>interface</code> này.
  * <p>
  * Lưu ý rằng đối tượng thực thi cài đặt thể hiện {@link ScopeImplementation}
  * khi được thực thi triệu gọi <code>(invoke)</code> nhất thiết phải
@@ -82,7 +83,7 @@ public interface ScopeImplementation extends ScopeInstance {
 	 * @return {@link Object}.
 	 */
 	Object getBean(Selector selector, String scopeName,
-			ObjectBeanFactory objFactory);
+			ObjectBeanFactory objFactory) throws Exception;
 
 	/**
 	 * Gỡ bỏ một <code>object Bean</code> ứng với tên định danh

@@ -25,10 +25,10 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 import org.jgentleframework.configure.Configurable;
-import org.jgentleframework.configure.REF;
 import org.jgentleframework.configure.annotation.BeanServices;
 import org.jgentleframework.configure.enums.Scope;
 import org.jgentleframework.context.injecting.AbstractBeanFactory;
+import org.jgentleframework.context.injecting.AppropriateScopeNameClass;
 import org.jgentleframework.context.injecting.ObjectBeanFactory;
 import org.jgentleframework.context.injecting.Provider;
 import org.jgentleframework.context.injecting.autodetect.AutoLoadingDefinitionDetector;
@@ -45,7 +45,7 @@ import org.jgentleframework.core.factory.BeanCreationProcessor;
 import org.jgentleframework.core.factory.InOutDependencyException;
 import org.jgentleframework.core.intercept.support.Matcher;
 import org.jgentleframework.core.reflection.metadata.Definition;
-import org.jgentleframework.utils.ReflectUtils;
+import org.jgentleframework.utils.Assertor;
 import org.jgentleframework.utils.Utils;
 
 /**
@@ -120,64 +120,6 @@ class ProviderCoreCreator extends AbstractBeanFactory implements Provider {
 		init(OLArray);
 	}
 
-	/** The NUL l_ sharedobject. */
-	static Object	NULL_SHAREDOBJECT	= new Object();
-
-	/**
-	 * Return shared object.
-	 * 
-	 * @param scopeName
-	 *            the scope name
-	 * @return the object
-	 */
-	protected Object returnSharedObject(String scopeName) {
-
-		if (null != scopeName) {
-			synchronized (mapDirectList) {
-				if (mapDirectList.containsKey(scopeName)) {
-					return mapDirectList.get(scopeName);
-				}
-			}
-		}
-		return NULL_SHAREDOBJECT;
-	}
-
-	/**
-	 * The Class AppropriateScopeNameClass.
-	 * 
-	 * @author Quoc Chung - mailto: <a
-	 *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
-	 * @date Jul 17, 2009
-	 */
-	static class AppropriateScopeNameClass {
-		/**
-		 * Instantiates a new appropriate scope name class.
-		 * 
-		 * @param clazz
-		 *            the clazz
-		 * @param targetClass
-		 *            the target class
-		 * @param defininition
-		 *            the defininition
-		 */
-		public AppropriateScopeNameClass(Class<?> clazz, Class<?> targetClass,
-				Definition defininition) {
-
-			this.clazz = clazz;
-			this.targetClass = targetClass;
-			this.definition = defininition;
-		}
-
-		/** The clazz. */
-		Class<?>	clazz		= null;
-
-		/** The target class. */
-		Class<?>	targetClass	= null;
-
-		/** The definition. */
-		Definition	definition	= null;
-	}
-
 	/*
 	 * (non-Javadoc)
 	 * @see
@@ -187,52 +129,12 @@ class ProviderCoreCreator extends AbstractBeanFactory implements Provider {
 	@Override
 	public <T> T getBean(Class<T> clazz) {
 
-		String scopeName = this.rootScopeName.get(clazz);
-		Object result = returnSharedObject(scopeName);
-		if (result != ProviderCoreCreator.NULL_SHAREDOBJECT)
-			return (T) result;
-		AppropriateScopeNameClass asc = doAppropriateScopeName(clazz);
-		return (T) getBeanInstance(clazz, asc.targetClass, null, asc.definition);
-	}
-
-	/**
-	 * Do appropriate scope name.
-	 * 
-	 * @param obj
-	 *            the obj
-	 * @return the appropriate scope name class
-	 */
-	protected AppropriateScopeNameClass doAppropriateScopeName(Object obj) {
-
-		Class<?> clazz = null;
-		Class<?> targetClass = null;
-		Definition definition = null;
-		String mappingName = null;
-		if (ReflectUtils.isClass(obj)) {
-			clazz = (Class<?>) obj;
-			targetClass = this.mappingList.get(obj);
-			targetClass = null == targetClass ? clazz : targetClass;
-			definition = this.defManager.getDefinition(targetClass);
+		Object result = returnSharedObject(rootScopeName.get(clazz));
+		if (result == NULL_SHAREDOBJECT) {
+			AppropriateScopeNameClass asc = doAppropriateScopeName(clazz);
+			return (T) getBeanInstance(asc);
 		}
-		else if (ReflectUtils.isCast(Definition.class, obj)) {
-			definition = (Definition) obj;
-			clazz = (Class<?>) definition.getKey();
-			targetClass = (Class<?>) definition.getKey();
-		}
-		else if (ReflectUtils.isCast(String.class, obj)) {
-			String str = (String) obj;
-			mappingName = str.replaceAll(Configurable.REF_MAPPING, "").trim();
-			if (str.startsWith(Configurable.REF_MAPPING)) {
-				clazz = aliasMap.get(mappingName).getKey();
-				targetClass = aliasMap.get(mappingName).getValue();
-				definition = this.getDefinitionManager().getDefinition(
-						aliasMap.get(mappingName).getValue());
-			}
-		}
-		if (clazz != null && targetClass != null && definition != null)
-			this.rootScopeName.put(clazz, Utils.createScopeName(clazz,
-					targetClass, definition, mappingName));
-		return new AppropriateScopeNameClass(clazz, targetClass, definition);
+		return (T) result;
 	}
 
 	/*
@@ -244,29 +146,20 @@ class ProviderCoreCreator extends AbstractBeanFactory implements Provider {
 	@Override
 	public Object getBean(Definition def) {
 
-		if (null != def) {
-			String scopeName = this.rootScopeName.get(def);
-			Object result = returnSharedObject(scopeName);
-			if (result != ProviderCoreCreator.NULL_SHAREDOBJECT)
-				return result;
-			AppropriateScopeNameClass asc = doAppropriateScopeName(def);
-			if (def.isInterpretedOfClass()) {
-				return this.getBeanInstance(asc.clazz, asc.targetClass, null,
-						def);
-			}
-			else {
-				if (log.isErrorEnabled()) {
-					log
-							.error(
-									"The specified definition instance is not object-class definition !",
-									new JGentleRuntimeException());
-				}
-			}
+		Assertor.notNull(def, "The given definition must not be null!");
+		Object result = returnSharedObject(this.rootScopeName.get(def));
+		if (result != NULL_SHAREDOBJECT)
+			return result;
+		AppropriateScopeNameClass asc = doAppropriateScopeName(def);
+		if (def.isInterpretedOfClass()) {
+			return this.getBeanInstance(asc);
 		}
 		else {
 			if (log.isErrorEnabled()) {
-				log.error("The given definition must not be null!",
-						new JGentleRuntimeException());
+				log
+						.error(
+								"The specified definition instance is not object-class definition !",
+								new JGentleRuntimeException());
 			}
 		}
 		return null;
@@ -303,13 +196,12 @@ class ProviderCoreCreator extends AbstractBeanFactory implements Provider {
 
 		Definition def = this.defManager.getDefinition(ID);
 		if (def != null) {
-			String scopeName = this.rootScopeName.get(def);
-			Object result = returnSharedObject(scopeName);
-			if (result != ProviderCoreCreator.NULL_SHAREDOBJECT)
+			Object result = returnSharedObject(this.rootScopeName.get(def));
+			if (result != NULL_SHAREDOBJECT)
 				return result;
 			AppropriateScopeNameClass asc = doAppropriateScopeName(def);
 			if (def.isInterpretedOfClass()) {
-				return getBeanInstance(asc.clazz, asc.targetClass, null, def);
+				return getBeanInstance(asc);
 			}
 			else {
 				if (log.isErrorEnabled()) {
@@ -332,15 +224,13 @@ class ProviderCoreCreator extends AbstractBeanFactory implements Provider {
 	public Object getBeanBoundToMapping(String mappingName) {
 
 		if (this.aliasMap.containsKey(mappingName)) {
-			String scopeName = this.rootScopeName.get(Configurable.REF_MAPPING
-					+ mappingName);
-			Object result = returnSharedObject(scopeName);
-			if (result != ProviderCoreCreator.NULL_SHAREDOBJECT)
+			Object result = returnSharedObject(this.rootScopeName
+					.get(Configurable.REF_MAPPING + mappingName));
+			if (result != NULL_SHAREDOBJECT)
 				return result;
 			AppropriateScopeNameClass asc = doAppropriateScopeName(Configurable.REF_MAPPING
 					+ mappingName);
-			return getBeanInstance(asc.clazz, asc.targetClass, null,
-					asc.definition);
+			return getBeanInstance(asc);
 		}
 		return null;
 	}
@@ -356,10 +246,13 @@ class ProviderCoreCreator extends AbstractBeanFactory implements Provider {
 
 		Object result = null;
 		Object obj = null;
-		String ref = !instanceName.startsWith(REF.REF_CONSTANT) ? REF.REF_CONSTANT
-				.substring(0, REF.REF_CONSTANT.length() - 1)
-				+ "_" + instanceName
-				: instanceName;
+		result = returnSharedObject(this.rootScopeName
+				.get(Configurable.REF_CONSTANT + instanceName));
+		if (result != NULL_SHAREDOBJECT)
+			return result;
+		AppropriateScopeNameClass asc = doAppropriateScopeName(Configurable.REF_CONSTANT
+				+ instanceName);
+		String ref = asc.ref;
 		CoreInstantiationSelector coreSelector = new CoreInstantiationSelectorImpl(
 				ref);
 		// creates scope info, default is SINGLETON
@@ -370,7 +263,14 @@ class ProviderCoreCreator extends AbstractBeanFactory implements Provider {
 		}
 		ScopeImplementation scopeImple = this.objectBeanFactory
 				.createScopeInstance(ref);
-		obj = getBeanFromScope(scopeImple, coreSelector, ref);
+		try {
+			obj = getBeanFromScope(scopeImple, coreSelector, ref);
+		}
+		catch (Exception e) {
+			if (log.isFatalEnabled()) {
+				log.fatal("Could not instantiate bean instance!", e);
+			}
+		}
 		if (obj != null && obj.getClass().equals(String.class)) {
 			String objStr = (String) obj;
 			// if the returned value is refered to the instance.
@@ -432,7 +332,13 @@ class ProviderCoreCreator extends AbstractBeanFactory implements Provider {
 		else if (refInstance.indexOf(":") != -1) {
 			String[] values = refInstance.split(":");
 			if (values[0].equals(Configurable.REF_CONSTANT)) {
-				result = getBeanBoundToName(values[1]);
+				if (values[1].indexOf(":") != -1) {
+					result = getRefInstance(values[1]);
+				}
+				else {
+					String scopeName = Utils.createScopeName(values[1]);
+					result = this.mapDirectList.get(scopeName);
+				}
 			}
 			// TODO fix other Configurable.REF_MAPPING
 			else if (values[0].equals(Configurable.REF_MAPPING)) {
@@ -450,7 +356,7 @@ class ProviderCoreCreator extends AbstractBeanFactory implements Provider {
 				else
 					result = this.getBeanBoundToMapping(values[1]);
 			}
-			else if (values[0].equals(Configurable.REF_ID)) {
+			else if (values[0].startsWith(Configurable.REF_ID)) {
 				result = this.getBeanBoundToDefinition(values[1]);
 			}
 			else {

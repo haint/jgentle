@@ -17,6 +17,9 @@
  */
 package org.jgentleframework.context.support;
 
+import java.util.Map;
+
+import org.jgentleframework.core.factory.support.CachedConstructor;
 import org.jgentleframework.core.reflection.metadata.Definition;
 
 /**
@@ -28,90 +31,120 @@ import org.jgentleframework.core.reflection.metadata.Definition;
  */
 public class CoreInstantiationSelectorImpl extends SelectorImpl implements
 		CoreInstantiationSelector {
-	/** The mapping name. */
-	String		mappingName	= null;
+	/** The reference name. */
+	String		referenceName	= null;
+
 	/** The type. */
-	Class<?>	type		= null;
+	Class<?>	type			= null;
+
 	/** The arg types. */
-	Class<?>[]	argTypes	= null;
+	Class<?>[]	argTypes		= null;
+
 	/** The args. */
-	Object[]	args		= null;
+	Object[]	args			= null;
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * org.jgentleframework.context.support.CoreInstantiationSelector#getCachingList
+	 * ()
+	 */
+	@Override
+	public Map<Definition, CachedConstructor> getCachingList() {
+
+		return cachingList;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * org.jgentleframework.context.support.CoreInstantiationSelector#setCachingList
+	 * (java.util.Map)
+	 */
+	@Override
+	public void setCachingList(Map<Definition, CachedConstructor> cachingList) {
+
+		this.cachingList = cachingList;
+	}
+
+	/** The caching list. */
+	Map<Definition, CachedConstructor>	cachingList	= null;
 
 	/**
-	 * Instantiates a new core selector.
+	 * Instantiates a new core instantiation selector impl.
 	 * 
-	 * @param targetClass
-	 *            the target class
-	 * @param definition
-	 *            the definition
 	 * @param type
 	 *            the type
-	 * @param mappingName
-	 *            the mapping name
+	 * @param targetClass
+	 *            the target class
+	 * @param referenceName
+	 *            the reference name
 	 * @param argTypes
 	 *            the arg types
 	 * @param args
 	 *            the args
+	 * @param definition
+	 *            the definition
 	 */
 	public CoreInstantiationSelectorImpl(Class<?> type, Class<?> targetClass,
-			String mappingName, Class<?>[] argTypes, Object[] args,
+			String referenceName, Class<?>[] argTypes, Object[] args,
 			Definition definition) {
 
 		this.targetClass = targetClass;
 		this.definition = definition;
 		this.type = type;
-		this.mappingName = mappingName;
+		this.referenceName = referenceName;
 		this.argTypes = argTypes != null ? argTypes.clone() : this.argTypes;
 		this.args = args != null ? args.clone() : this.args;
 	}
 
 	/**
-	 * Instantiates a new core selector.
+	 * Instantiates a new core instantiation selector impl.
 	 * 
-	 * @param mappingName
-	 *            the mapping name
+	 * @param referenceName
+	 *            the reference name
 	 */
-	public CoreInstantiationSelectorImpl(String mappingName) {
+	public CoreInstantiationSelectorImpl(String referenceName) {
 
-		this.mappingName = mappingName;
+		this.referenceName = referenceName;
 	}
 
 	/**
-	 * Instantiates a new core selector.
+	 * Instantiates a new core instantiation selector impl.
 	 * 
-	 * @param targetClass
-	 *            the target class
-	 * @param definition
-	 *            the definition
 	 * @param type
 	 *            the type
-	 * @param mappingName
-	 *            the mapping name
+	 * @param targetClass
+	 *            the target class
+	 * @param referenceName
+	 *            the reference name
+	 * @param definition
+	 *            the definition
 	 */
 	public CoreInstantiationSelectorImpl(Class<?> type, Class<?> targetClass,
-			String mappingName, Definition definition) {
+			String referenceName, Definition definition) {
 
 		this.targetClass = targetClass;
 		this.definition = definition;
 		this.type = type;
-		this.mappingName = mappingName;
+		this.referenceName = referenceName;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.context.support.CoreInstantiationSelector#getMappingName()
+	 * @seeorg.jgentleframework.context.support.CoreInstantiationSelector#
+	 * getReferenceName()
 	 */
 	@Override
-	public String getMappingName() {
+	public String getReferenceName() {
 
-		return this.mappingName;
+		return this.referenceName;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.context.support.CoreInstantiationSelector#getType()
+	 * @see
+	 * org.jgentleframework.context.support.CoreInstantiationSelector#getType()
 	 */
 	@Override
 	public Class<?> getType() {
@@ -121,19 +154,21 @@ public class CoreInstantiationSelectorImpl extends SelectorImpl implements
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.context.support.CoreInstantiationSelector#setMappingName(java.lang.String)
+	 * @see
+	 * org.jgentleframework.context.support.CoreInstantiationSelector#setMappingName
+	 * (java.lang.String)
 	 */
 	@Override
-	public void setMappingName(String mappingName) {
+	public void setReferenceName(String referenceName) {
 
-		this.mappingName = mappingName;
+		this.referenceName = referenceName;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.context.support.CoreInstantiationSelector#setType(java.lang.Class)
+	 * @see
+	 * org.jgentleframework.context.support.CoreInstantiationSelector#setType
+	 * (java.lang.Class)
 	 */
 	@Override
 	public void setType(Class<?> type) {
@@ -143,8 +178,9 @@ public class CoreInstantiationSelectorImpl extends SelectorImpl implements
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.context.support.CoreInstantiationSelector#getArgTypes()
+	 * @see
+	 * org.jgentleframework.context.support.CoreInstantiationSelector#getArgTypes
+	 * ()
 	 */
 	@Override
 	public Class<?>[] getArgTypes() {
@@ -154,8 +190,9 @@ public class CoreInstantiationSelectorImpl extends SelectorImpl implements
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.context.support.CoreInstantiationSelector#setArgTypes(java.lang.Class<?>[])
+	 * @see
+	 * org.jgentleframework.context.support.CoreInstantiationSelector#setArgTypes
+	 * (java.lang.Class<?>[])
 	 */
 	@Override
 	public void setArgTypes(Class<?>[] argTypes) {
@@ -165,8 +202,8 @@ public class CoreInstantiationSelectorImpl extends SelectorImpl implements
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.context.support.CoreInstantiationSelector#getArgs()
+	 * @see
+	 * org.jgentleframework.context.support.CoreInstantiationSelector#getArgs()
 	 */
 	@Override
 	public Object[] getArgs() {
@@ -176,8 +213,9 @@ public class CoreInstantiationSelectorImpl extends SelectorImpl implements
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.context.support.CoreInstantiationSelector#setArgs(java.lang.Object[])
+	 * @see
+	 * org.jgentleframework.context.support.CoreInstantiationSelector#setArgs
+	 * (java.lang.Object[])
 	 */
 	@Override
 	public void setArgs(Object[] args) {

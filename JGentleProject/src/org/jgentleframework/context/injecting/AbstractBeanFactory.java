@@ -21,10 +21,9 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.Hashtable;
+import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
-import java.util.Map.Entry;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -40,6 +39,7 @@ import org.jgentleframework.context.services.ServiceHandler;
 import org.jgentleframework.context.support.CoreInstantiationSelector;
 import org.jgentleframework.context.support.CoreInstantiationSelectorImpl;
 import org.jgentleframework.context.support.Selector;
+import org.jgentleframework.core.CouldNotInstantiateException;
 import org.jgentleframework.core.factory.InOutDependencyException;
 import org.jgentleframework.core.factory.support.CommonFactory;
 import org.jgentleframework.core.handling.DefinitionManager;
@@ -64,8 +64,8 @@ import org.jgentleframework.utils.data.Pair;
  * @see ObjectBeanFactory
  * @see Provider
  */
-public abstract class AbstractBeanFactory extends AbstractLoadingFactory
-		implements IAbstractBeanFactory, Provider {
+public abstract class AbstractBeanFactory extends AbstractBeanCacher implements
+		IAbstractBeanFactory, Provider {
 	/** The Constant staticLog. */
 	private final static Log	staticLog	= LogFactory
 													.getLog(AbstractBeanFactory.class);
@@ -90,7 +90,7 @@ public abstract class AbstractBeanFactory extends AbstractLoadingFactory
 	 *            the annotate id list
 	 */
 	public static void buildDefBeanAnnotate(Provider provider,
-			ArrayList<Object> annotateIDList) {
+			List<Object> annotateIDList) {
 
 		DefinitionManager defManager = provider.getDefinitionManager();
 		for (Object obj : annotateIDList) {
@@ -215,7 +215,7 @@ public abstract class AbstractBeanFactory extends AbstractLoadingFactory
 	 *            the reference string of beans.
 	 */
 	public static void buildObjectBeanFromInfo(Provider provider,
-			ArrayList<Object> beanList) {
+			List<Object> beanList) {
 
 		for (Object obj : beanList) {
 			if (ReflectUtils.isCast(String.class, obj)) {
@@ -227,11 +227,12 @@ public abstract class AbstractBeanFactory extends AbstractLoadingFactory
 				}
 				else {
 					String[] infoArray = info.split(":");
-					if (infoArray[0].equals(Configurable.REF_MAPPING)) {
-						provider.getBeanBoundToMapping(infoArray[1]);
-					}
-					else if (infoArray[0].equals(Configurable.REF_ID)) {
+					if (infoArray[0].equals(Configurable.REF_ID)) {
 						provider.getBeanBoundToDefinition(infoArray[1]);
+					}
+					else if (infoArray[0].equals(Configurable.REF_MAPPING)
+							&& ReflectUtils.isCast(String.class, infoArray[1])) {
+						provider.getBeanBoundToMapping(infoArray[1]);
 					}
 					else {
 						if (staticLog.isErrorEnabled()) {
@@ -257,31 +258,6 @@ public abstract class AbstractBeanFactory extends AbstractLoadingFactory
 			}
 		}
 	}
-
-	/** The alias map. */
-	protected Map<String, Entry<Class<?>, Class<?>>>	aliasMap		= null;
-
-	/** The log. */
-	protected final Log									log				= LogFactory
-																				.getLog(getClass());
-
-	/** The map direct list. */
-	protected Map<String, Object>						mapDirectList	= null;
-
-	/** The mapping list. */
-	protected Map<Class<?>, Class<?>>					mappingList		= null;
-
-	/** The {@link ScopeController}. */
-	protected ScopeController							scopeController	= new ScopeController();
-
-	/** The scope list. */
-	protected Map<String, ScopeInstance>				scopeList		= null;
-
-	/** The {@link ServiceHandler}. */
-	protected ServiceHandler							serviceHandler	= null;
-
-	/** The root scope name. */
-	protected Map<Object, String>						rootScopeName	= new Hashtable<Object, String>();
 
 	/**
 	 * Finds args of default constructor.
@@ -315,9 +291,10 @@ public abstract class AbstractBeanFactory extends AbstractLoadingFactory
 	 * @param selector
 	 *            the selector
 	 * @return the bean from scope
+	 * @throws Throwable
 	 */
 	protected Object getBeanFromScope(ScopeImplementation scopeImple,
-			Selector selector, String nameScope) {
+			Selector selector, String nameScope) throws Exception {
 
 		synchronized (this.scopeController) {
 			if (!this.scopeController.containsScope(scopeImple)) {
@@ -334,7 +311,8 @@ public abstract class AbstractBeanFactory extends AbstractLoadingFactory
 	 * (non-Javadoc)
 	 * @see
 	 * org.jgentleframework.context.injecting.IAbstractBeanFactory#getBeanInstance
-	 * (java.lang.Class, java.lang.Class, java.lang.String, java.lang.String)
+	 * (java.lang.Class, java.lang.Class, java.lang.String,
+	 * org.jgentleframework.core.reflection.metadata.Definition)
 	 */
 	@Override
 	public Object getBeanInstance(Class<?> type, Class<?> targetClass,
@@ -343,7 +321,56 @@ public abstract class AbstractBeanFactory extends AbstractLoadingFactory
 		Assertor.notNull(type);
 		CoreInstantiationSelector coreSelector = new CoreInstantiationSelectorImpl(
 				type, targetClass, mappingName, null, null, definition);
-		return getBeanInstance(coreSelector);
+		coreSelector.setCachingList(cachingList);
+		Object result = null;
+		try {
+			result = getBeanInstance(coreSelector);
+		}
+		catch (Exception e) {
+			CouldNotInstantiateException ex = new CouldNotInstantiateException();
+			ex.initCause(e);
+			if (log.isErrorEnabled()) {
+				log.error("Could not instantiate bean instance!", ex);
+			}
+		}
+		return result;
+	}
+
+	/**
+	 * Gets the bean instance.
+	 * 
+	 * @param asc
+	 *            the asc
+	 * @return the bean instance
+	 */
+	protected Object getBeanInstance(AppropriateScopeNameClass asc) {
+
+		Object result = null;
+		CoreInstantiationSelector coreSelector = new CoreInstantiationSelectorImpl(
+				asc.clazz, asc.targetClass, asc.mappingName, null, null,
+				asc.definition);
+		coreSelector.setCachingList(cachingList);
+		ScopeInstance scope = null;
+		synchronized (scopeList) {
+			scope = scopeList.get(asc.scopeName);
+		}
+		// If not Singleton scope
+		try {
+			if (scope != null && !scope.equals(Scope.SINGLETON)) {
+				result = returnsCachingResult(coreSelector);
+				if (result == NULL_SHAREDOBJECT) {
+					return getBeanInstance(coreSelector);
+				}
+			}
+			else
+				result = getBeanInstance(coreSelector);
+		}
+		catch (Throwable e) {
+			if (log.isFatalEnabled()) {
+				log.fatal("Could not instantiate bean instance!", e);
+			}
+		}
+		return result;
 	}
 
 	/*
@@ -365,8 +392,9 @@ public abstract class AbstractBeanFactory extends AbstractLoadingFactory
 	 * @param selector
 	 *            the selector
 	 * @return the bean instance
+	 * @throws Throwable
 	 */
-	protected Object getBeanInstance(Selector selector) {
+	protected Object getBeanInstance(Selector selector) throws Exception {
 
 		Object result = null;
 		if (ReflectUtils.isCast(CoreInstantiationSelector.class, selector)) {
@@ -374,7 +402,7 @@ public abstract class AbstractBeanFactory extends AbstractLoadingFactory
 			Class<?> type = coreSelector.getType();
 			Class<?> targetClass = coreSelector.getTargetClass();
 			Definition definition = coreSelector.getDefinition();
-			String mappingName = coreSelector.getMappingName();
+			String mappingName = coreSelector.getReferenceName();
 			String scopeName = null;
 			// validate
 			definition = definition == null ? this.defManager
@@ -391,8 +419,6 @@ public abstract class AbstractBeanFactory extends AbstractLoadingFactory
 			scopeName = Utils.createScopeName(type, targetClass, definition,
 					mappingName);
 			// creates scope info, default is SINGLETON
-			Map<String, ScopeInstance> scopeList = this.objectBeanFactory
-					.getScopeList();
 			synchronized (scopeList) {
 				if (!scopeList.containsKey(scopeName)) {
 					scopeList.put(scopeName, Scope.SINGLETON);
@@ -407,9 +433,8 @@ public abstract class AbstractBeanFactory extends AbstractLoadingFactory
 				String nameScopeFac = scopeName + ":"
 						+ FactoryBean.class.toString();
 				if (factoryBean.isSingleton()) {
-					synchronized (this.objectBeanFactory.getMapDirectList()) {
-						if (this.objectBeanFactory.getMapDirectList()
-								.containsKey(nameScopeFac)) {
+					synchronized (mapDirectList) {
+						if (mapDirectList.containsKey(nameScopeFac)) {
 							return this.objectBeanFactory.getMapDirectList()
 									.get(nameScopeFac);
 						}
@@ -417,8 +442,7 @@ public abstract class AbstractBeanFactory extends AbstractLoadingFactory
 							Object resultFac = CommonFactory.singleton()
 									.executeFactoryBean(factoryBean,
 											targetClass);
-							this.objectBeanFactory.getMapDirectList().put(
-									nameScopeFac, resultFac);
+							mapDirectList.put(nameScopeFac, resultFac);
 							return resultFac;
 						}
 					}

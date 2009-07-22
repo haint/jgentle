@@ -22,6 +22,7 @@ import java.util.TooManyListenersException;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jgentleframework.configure.REF;
 import org.jgentleframework.context.injecting.ObjectBeanFactory;
 import org.jgentleframework.context.injecting.Provider;
 import org.jgentleframework.context.injecting.scope.InvalidAddingOperationException;
@@ -29,6 +30,7 @@ import org.jgentleframework.context.injecting.scope.InvalidRemovingOperationExce
 import org.jgentleframework.context.injecting.scope.ScopeImplementation;
 import org.jgentleframework.context.injecting.scope.ScopeInstance;
 import org.jgentleframework.context.injecting.scope.ScopeInstanceImpl;
+import org.jgentleframework.context.services.ServiceHandler;
 import org.jgentleframework.context.support.CoreInstantiationSelector;
 import org.jgentleframework.context.support.CoreInstantiationSelectorImpl;
 import org.jgentleframework.context.support.Selector;
@@ -100,6 +102,9 @@ public enum Scope implements ScopeImplementation {
 	/** The map direct list. */
 	Map<String, Object>			mapDirectList	= null;
 
+	/** The service handler. */
+	ServiceHandler				serviceHandler	= null;
+
 	/*
 	 * (non-Javadoc)
 	 * @see
@@ -113,28 +118,33 @@ public enum Scope implements ScopeImplementation {
 			throws InvalidAddingOperationException {
 
 		Object result = null;
-		Provider provider = objFactory.getProvider();
-		Map<String, ScopeInstance> scopeList = objFactory.getScopeList();
-		Map<String, Object> mapDirectList = objFactory.getMapDirectList();
-		Scope scope = null;
+		if (this.objFactory == null)
+			this.objFactory = objFactory;
+		if (this.provider == null)
+			this.provider = this.objFactory.getProvider();
+		if (this.scopeList == null)
+			this.scopeList = this.objFactory.getScopeList();
+		if (this.mapDirectList == null)
+			this.mapDirectList = this.objFactory.getMapDirectList();
+		if (this.serviceHandler == null)
+			this.serviceHandler = provider.getServiceHandler();
 		synchronized (scopeList) {
 			if (!scopeList.containsKey(scopeName)) {
 				scopeList.put(scopeName, this);
 			}
-			scope = (Scope) scopeList.get(scopeName);
 		}
 		// If is Singleton scope
-		if (scope.equals(Scope.SINGLETON)) {
+		if (this.equals(Scope.SINGLETON)) {
 			synchronized (mapDirectList) {
 				result = mapDirectList.put(scopeName, bean);
 			}
 		}
-		else if (scope.equals(Scope.PROTOTYPE)) {
+		else if (this.equals(Scope.PROTOTYPE)) {
 			throw new InvalidAddingOperationException(
 					"Adding Operation does not support prototype-scoped bean !");
 		}
-		else if (scope.equals(Scope.REQUEST) || scope.equals(Scope.SESSION)
-				|| scope.equals(Scope.APPLICATION)) {
+		else if (this.equals(Scope.REQUEST) || this.equals(Scope.SESSION)
+				|| this.equals(Scope.APPLICATION)) {
 			if (!ReflectUtils.isCast(WebProvider.class, provider)) {
 				throw new InvalidAddingOperationException(
 						"This container does not support REQUEST, SESSION or APPLICATION scope.");
@@ -160,64 +170,52 @@ public enum Scope implements ScopeImplementation {
 			ObjectBeanFactory objFactory) {
 
 		Object result = null;
-		this.objFactory = objFactory == null ? objFactory : this.objFactory;
-		this.provider = provider == null
-				|| provider != objFactory.getProvider() ? objFactory
-				.getProvider() : this.provider;
-		this.scopeList = this.scopeList == null
-				|| scopeList != objFactory.getScopeList() ? objFactory
-				.getScopeList() : this.scopeList;
-		this.mapDirectList = this.mapDirectList == null
-				|| mapDirectList != objFactory.getMapDirectList() ? objFactory
-				.getMapDirectList() : this.mapDirectList;
+		if (this.objFactory == null)
+			this.objFactory = objFactory;
+		if (this.provider == null)
+			this.provider = this.objFactory.getProvider();
+		if (this.scopeList == null)
+			this.scopeList = this.objFactory.getScopeList();
+		if (this.mapDirectList == null)
+			this.mapDirectList = this.objFactory.getMapDirectList();
+		if (this.serviceHandler == null)
+			this.serviceHandler = provider.getServiceHandler();
 		// If is Singleton scope
-		Scope scope = null;
-		synchronized (scopeList) {
-			scope = (Scope) scopeList.get(scopeName);
-		}
-		if (scope.equals(Scope.SINGLETON)) {
+		if (this.equals(Scope.SINGLETON)) {
 			synchronized (scopeName) {
 				synchronized (mapDirectList) {
 					if (mapDirectList.containsKey(scopeName)) {
 						return mapDirectList.get(scopeName);
 					}
 				}
+				CoreInstantiationSelector coreSelector = null;
 				if (selector instanceof CoreInstantiationSelectorImpl) {
 					Pair<Class<?>[], Object[]> pairCons = DefinitionUtils
 							.findArgsOfDefaultConstructor(selector
 									.getDefinition(), this.provider);
 					Class<?>[] argTypes = pairCons.getKeyPair();
 					Object[] args = pairCons.getValuePair();
-					CoreInstantiationSelector coreSelector = (CoreInstantiationSelector) selector;
+					coreSelector = (CoreInstantiationSelector) selector;
 					coreSelector.setArgTypes(argTypes);
 					coreSelector.setArgs(args);
-					String mappingName = coreSelector.getMappingName();
-					if (mappingName != null && !mappingName.isEmpty()) {
-						if (mappingName.indexOf(":") != -1) {
-							synchronized (mapDirectList) {
-								if (mapDirectList.containsKey(mappingName
-										.replace(":", "_"))) {
-									return mapDirectList.get(mappingName
-											.replace(":", "_"));
-								}
-							}
-						}
-						result = provider.getRefInstance(mappingName);
+				}
+				String referenceName = coreSelector.getReferenceName();
+				if (referenceName != null && !referenceName.isEmpty()) {
+					if (referenceName.startsWith(REF.REF_CONSTANT)) {
+						return referenceName;
 					}
 				}
-				if (result == null) {
-					try {
-						result = provider.getServiceHandler().getService(this,
-								BeanCreationProcessor.class, selector);
-					}
-					catch (TooManyListenersException e) {
-						if (log.isErrorEnabled()) {
-							log.error(e.getMessage(), e);
-						}
-					}
-					if (result == NullClass.class)
-						result = null;
+				try {
+					result = this.serviceHandler.getService(this,
+							BeanCreationProcessor.class, selector);
 				}
+				catch (TooManyListenersException e) {
+					if (log.isFatalEnabled()) {
+						log.fatal("Could not get service !", e);
+					}
+				}
+				if (result == NullClass.class)
+					result = null;
 				// Đưa object vừa khởi tạo vào danh sách singleton cache
 				synchronized (mapDirectList) {
 					mapDirectList.put(scopeName, result);
@@ -225,22 +223,22 @@ public enum Scope implements ScopeImplementation {
 			}
 		}
 		// if prototype
-		else if (scope.equals(Scope.PROTOTYPE)) {
+		else if (this.equals(Scope.PROTOTYPE)) {
 			try {
-				result = provider.getServiceHandler().getService(this,
+				result = this.serviceHandler.getService(this,
 						BeanCreationProcessor.class, selector);
 			}
 			catch (TooManyListenersException e) {
-				if (log.isErrorEnabled()) {
-					log.error(e.getMessage(), e);
+				if (log.isFatalEnabled()) {
+					log.fatal("Could not get service !", e);
 				}
 			}
 			if (result == NullClass.class)
 				result = null;
 			return result;
 		}
-		else if (scope.equals(Scope.REQUEST) || scope.equals(Scope.SESSION)
-				|| scope.equals(Scope.APPLICATION)) {
+		else if (this.equals(Scope.REQUEST) || this.equals(Scope.SESSION)
+				|| this.equals(Scope.APPLICATION)) {
 			if (!ReflectUtils.isCast(WebProvider.class, provider)) {
 				throw new InvalidOperationException(
 						"This container does not support REQUEST, SESSION or APPLICATION scope.");
@@ -266,9 +264,16 @@ public enum Scope implements ScopeImplementation {
 			throws InvalidRemovingOperationException {
 
 		Object result = null;
-		Provider provider = objFactory.getProvider();
-		Map<String, ScopeInstance> scopeList = objFactory.getScopeList();
-		Map<String, Object> mapDirectList = objFactory.getMapDirectList();
+		if (this.objFactory == null)
+			this.objFactory = objFactory;
+		if (this.provider == null)
+			this.provider = this.objFactory.getProvider();
+		if (this.scopeList == null)
+			this.scopeList = this.objFactory.getScopeList();
+		if (this.mapDirectList == null)
+			this.mapDirectList = this.objFactory.getMapDirectList();
+		if (this.serviceHandler == null)
+			this.serviceHandler = provider.getServiceHandler();
 		Scope scope = null;
 		synchronized (scopeList) {
 			if (scopeList.containsKey(scopeName)) {

@@ -22,7 +22,6 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -51,9 +50,6 @@ import org.jgentleframework.utils.Utils;
  * @date Jun 26, 2008
  */
 public abstract class AbstractProcesserChecker {
-	/** The caching list. */
-	Map<Definition, CachedConstructor>	cachingList	= new HashMap<Definition, CachedConstructor>();
-
 	/**
 	 * Find in out non runtime.
 	 * 
@@ -63,7 +59,7 @@ public abstract class AbstractProcesserChecker {
 	 *            the definition
 	 * @return true, if is invocation.
 	 */
-	protected boolean findInOutNonRuntime(MetaDefObject metaObj,
+	public static boolean findInOutNonRuntime(MetaDefObject metaObj,
 			Definition definition) {
 
 		// find all injected fields
@@ -239,12 +235,14 @@ public abstract class AbstractProcesserChecker {
 			}
 			else if (targetClass.isInterface())
 				throw new InOutDependencyException(
-						"The target class is an interface and is not intercepted, "
+						"The ["
+								+ targetClass
+								+ "] is an interface and is not intercepted, "
 								+ "or current provider does not support this kind of bean instantiation!"
 								+ " Can not build bean instance from this interface! ");
 		}
 		if (cons != null) {
-			this.cachingList.put(definition, cons);
+			selector.getCachingList().put(definition, cons);
 			result = cons.newInstance(selector.getArgs());
 		}
 		prepareSingletonBean(selector, provider, result);
@@ -372,12 +370,12 @@ public abstract class AbstractProcesserChecker {
 	 * @param result
 	 *            the result
 	 */
-	protected void prepareSingletonBean(CoreInstantiationSelector selector,
+	public static void prepareSingletonBean(CoreInstantiationSelector selector,
 			Provider provider, Object result) {
 
 		String scopeName = Utils.createScopeName(selector.getType(), selector
 				.getTargetClass(), selector.getDefinition(), selector
-				.getMappingName());
+				.getReferenceName());
 		Map<String, ScopeInstance> scopeList = provider.getObjectBeanFactory()
 				.getScopeList();
 		Scope scope;

@@ -188,7 +188,7 @@ public class ObjectConstantImpl implements ObjectConstant {
 	 * java.lang.Object[])
 	 */
 	@Override
-	public ScopeObjectConstant to(Object... objectValues) {
+	public void to(Object... objectValues) {
 
 		// Kiểm tra tính hợp lệ
 		if (this.strNameList.size() == 0) {
@@ -210,7 +210,6 @@ public class ObjectConstantImpl implements ObjectConstant {
 						objectValues[i]);
 			}
 		}
-		return new ScopeObjectConstant(this);
 	}
 
 	/*
@@ -259,17 +258,5 @@ public class ObjectConstantImpl implements ObjectConstant {
 	public ScopeInstance getScope() {
 
 		return this.scope;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * org.jgentleframework.configure.objectmeta.ObjectConstant#setScope(org.
-	 * exxlabs.jgentle.context.injecting.scope.ScopeInstance)
-	 */
-	@Override
-	public void setScope(ScopeInstance scope) {
-
-		this.scope = scope;
 	}
 }

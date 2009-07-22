@@ -18,6 +18,7 @@
 package org.jgentleframework.core.intercept.support;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.jgentleframework.core.intercept.InterceptionException;
 import org.jgentleframework.utils.Assertor;
@@ -34,8 +35,9 @@ import org.jgentleframework.utils.ReflectUtils;
 public abstract class AbstractMatcher<T> implements Matcher<T> {
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.intercept.Matcher#and(org.jgentleframework.core.intercept.Matcher)
+	 * @see
+	 * org.jgentleframework.core.intercept.Matcher#and(org.jgentleframework.
+	 * core.intercept.Matcher)
 	 */
 	public Matcher<T> and(final Matcher<T> other) {
 
@@ -44,8 +46,9 @@ public abstract class AbstractMatcher<T> implements Matcher<T> {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.core.intercept.Matcher#or(org.jgentleframework.core.intercept.Matcher)
+	 * @see
+	 * org.jgentleframework.core.intercept.Matcher#or(org.jgentleframework.core
+	 * .intercept.Matcher)
 	 */
 	public Matcher<T> or(Matcher<T> other) {
 
@@ -83,8 +86,8 @@ public abstract class AbstractMatcher<T> implements Matcher<T> {
 
 		/*
 		 * (non-Javadoc)
-		 * 
-		 * @see org.jgentleframework.core.intercept.Matcher#matches(java.lang.Object)
+		 * @see
+		 * org.jgentleframework.core.intercept.Matcher#matches(java.lang.Object)
 		 */
 		public boolean matches(T t) {
 
@@ -109,7 +112,7 @@ public abstract class AbstractMatcher<T> implements Matcher<T> {
 	 */
 	@SuppressWarnings("unchecked")
 	public static <T> void getSuperMatcher(Matcher<T> matcher,
-			ArrayList<Matcher<T>> matcherList) {
+			List<Matcher<T>> matcherList) {
 
 		Assertor.notNull(matcherList);
 		Assertor.notNull(matcher);
@@ -165,8 +168,8 @@ public abstract class AbstractMatcher<T> implements Matcher<T> {
 
 		/*
 		 * (non-Javadoc)
-		 * 
-		 * @see org.jgentleframework.core.intercept.Matcher#matches(java.lang.Object)
+		 * @see
+		 * org.jgentleframework.core.intercept.Matcher#matches(java.lang.Object)
 		 */
 		public boolean matches(T t) {
 

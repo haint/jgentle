@@ -63,40 +63,40 @@ public abstract class AbstractInitLoading {
 				.isCast(AbstractLoadingFactory.class, provider) ? provider
 				: null);
 		// query option list
-		ArrayList<DefinitionPostProcessor> dppList = new ArrayList<DefinitionPostProcessor>();
+		List<DefinitionPostProcessor> dppList = new ArrayList<DefinitionPostProcessor>();
 		HashMap<Class, AnnotationBeanProcessor> abpHash = new HashMap<Class, AnnotationBeanProcessor>();
-		ArrayList<ObjectAttach<?>> oaList = new ArrayList<ObjectAttach<?>>();
-		ArrayList<Class<?>> beanClassList = new ArrayList<Class<?>>();
-		ArrayList<ObjectBindingConstant> obcList = new ArrayList<ObjectBindingConstant>();
-		ArrayList<ObjectConstant> ocList = new ArrayList<ObjectConstant>();
+		List<ObjectAttach<?>> oaList = new ArrayList<ObjectAttach<?>>();
+		List<Class<?>> beanClassList = new ArrayList<Class<?>>();
+		List<ObjectBindingConstant> obcList = new ArrayList<ObjectBindingConstant>();
+		List<ObjectConstant> ocList = new ArrayList<ObjectConstant>();
 		for (Map<String, Object> optionsList : OLArray) {
 			/***************/
-			ArrayList<DefinitionPostProcessor> dpp = (ArrayList<DefinitionPostProcessor>) optionsList
+			List<DefinitionPostProcessor> dpp = (ArrayList<DefinitionPostProcessor>) optionsList
 					.get(AbstractConfig.DEFINITION_POST_PROCESSOR);
 			if (dpp != null)
 				dppList.addAll(dpp);
 			/***************/
-			HashMap<Class, AnnotationBeanProcessor> abp = (HashMap<Class, AnnotationBeanProcessor>) optionsList
+			Map<Class, AnnotationBeanProcessor> abp = (HashMap<Class, AnnotationBeanProcessor>) optionsList
 					.get(AbstractConfig.ANNOTATION_BEAN_PROCESSOR_LIST);
 			if (abp != null)
 				abpHash.putAll(abp);
 			/***************/
-			ArrayList<ObjectAttach<?>> oa = (ArrayList<ObjectAttach<?>>) optionsList
+			List<ObjectAttach<?>> oa = (ArrayList<ObjectAttach<?>>) optionsList
 					.get(AbstractConfig.OBJECT_ATTACH_LIST);
 			if (oa != null)
 				oaList.addAll(oa);
 			/***************/
-			ArrayList<Class<?>> bc = (ArrayList<Class<?>>) optionsList
+			List<Class<?>> bc = (ArrayList<Class<?>>) optionsList
 					.get(AbstractConfig.BEAN_CLASS_LIST);
 			if (bc != null)
 				beanClassList.addAll(bc);
 			/***************/
-			ArrayList<ObjectBindingConstant> obc = (ArrayList<ObjectBindingConstant>) optionsList
+			List<ObjectBindingConstant> obc = (ArrayList<ObjectBindingConstant>) optionsList
 					.get(AbstractConfig.OBJECT_BINDING_CONSTANT_LIST);
 			if (obc != null)
 				obcList.addAll(obc);
 			/***************/
-			ArrayList<ObjectConstant> oc = (ArrayList<ObjectConstant>) optionsList
+			List<ObjectConstant> oc = (ArrayList<ObjectConstant>) optionsList
 					.get(AbstractConfig.OBJECT_CONSTANT_LIST);
 			if (oc != null)
 				ocList.addAll(oc);
@@ -110,8 +110,8 @@ public abstract class AbstractInitLoading {
 			/*
 			 * configured annotation bean loading
 			 */
-			ArrayList<Object> notLazyList = new ArrayList<Object>();
-			ArrayList<Object> annotateIDList = new ArrayList<Object>();
+			List<Object> notLazyList = new ArrayList<Object>();
+			List<Object> annotateIDList = new ArrayList<Object>();
 			loadingFactory.load_ObjectAttachList(oaList, notLazyList,
 					Types.ANNOTATION, annotateIDList);
 			loadingFactory.load_BeanClassList(beanClassList, notLazyList,

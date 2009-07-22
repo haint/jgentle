@@ -34,7 +34,6 @@ import org.jgentleframework.context.support.CoreInstantiationSelectorImpl;
 import org.jgentleframework.context.support.InstantiationSelector;
 import org.jgentleframework.context.support.InstantiationSelectorImpl;
 import org.jgentleframework.context.support.Selector;
-import org.jgentleframework.core.IllegalPropertyException;
 import org.jgentleframework.core.factory.support.CoreProcessor;
 import org.jgentleframework.core.factory.support.CoreProcessorImpl;
 import org.jgentleframework.core.intercept.BeanInstantiationInterceptor;
@@ -54,6 +53,8 @@ import org.jgentleframework.utils.Utils;
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
  * @date Feb 23, 2008
  * @see ServiceClass
+ * @see BeanPostInstantiationSupportInterface
+ * @see BeanPostInstantiation
  */
 @BeanServices(alias = BeanCreationProcessor.ALIAS, lazy_init = false)
 public class BeanCreationProcessor implements ServiceClass,
@@ -63,9 +64,6 @@ public class BeanCreationProcessor implements ServiceClass,
 
 	/** The current {@link Provider}. */
 	Provider					provider	= null;
-
-	/** The bpt lst. */
-	List<Object>				bptLst		= new LinkedList<Object>();
 
 	/** The processor. */
 	CoreProcessor				processor	= null;
@@ -95,22 +93,7 @@ public class BeanCreationProcessor implements ServiceClass,
 	@Override
 	public Object handle(Selector targetSelector, Object requestor) {
 
-		if (!ReflectUtils.isCast(CoreInstantiationSelector.class,
-				targetSelector)) {
-			if (log.isFatalEnabled()) {
-				log.fatal("Target selector can not be casted to '"
-						+ CoreInstantiationSelector.class.toString() + "'");
-			}
-			throw new IllegalPropertyException(
-					"Target selector can not be casted to '"
-							+ CoreInstantiationSelector.class.toString() + "'");
-		}
-		// executes before BeanPostInstantiation
-		for (Object bpt : bptLst) {
-			BeanPostInstantiation beanPost = this.getBeanPostInstantiation(bpt);
-			beanPost.BeforeInstantiation(targetSelector.getDefinition(),
-					(CoreInstantiationSelector) targetSelector);
-		}
+		doBeforeBeanPost(targetSelector);
 		// creates bean
 		Object result = null;
 		try {
@@ -180,13 +163,31 @@ public class BeanCreationProcessor implements ServiceClass,
 				log.error("Could not instantiate object bean !", e);
 			}
 		}
+		doAfterBeanPost(targetSelector, result);
+		return result;
+	}
+
+	/** The bpt lst. */
+	List<Object>	bptLst	= new LinkedList<Object>();
+
+	private void doBeforeBeanPost(Selector targetSelector) {
+
+		// executes before BeanPostInstantiation
+		for (Object bpt : bptLst) {
+			BeanPostInstantiation beanPost = this.getBeanPostInstantiation(bpt);
+			beanPost.BeforeInstantiation(targetSelector.getDefinition(),
+					(CoreInstantiationSelector) targetSelector);
+		}
+	}
+
+	private void doAfterBeanPost(Selector targetSelector, Object result) {
+
 		// Execute after BeanPostInstantiation
 		for (Object bpt : bptLst) {
 			BeanPostInstantiation beanPost = this.getBeanPostInstantiation(bpt);
 			beanPost.AfterInstantiation(result, targetSelector.getDefinition(),
 					(CoreInstantiationSelector) targetSelector);
 		}
-		return result;
 	}
 
 	/**

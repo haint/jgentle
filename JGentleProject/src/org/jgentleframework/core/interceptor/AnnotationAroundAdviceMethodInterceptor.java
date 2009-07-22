@@ -335,6 +335,7 @@ class AnnotationAroundAdviceMethodInterceptor extends AbstractBeforeAdvice
 		for (Method method : lst) {
 			Object oResult;
 			Object thisResult;
+			method.setAccessible(true);
 			oResult = method.invoke(o);
 			thisResult = (Object) this.attributesMapping.get(method);
 			if (thisResult == null)

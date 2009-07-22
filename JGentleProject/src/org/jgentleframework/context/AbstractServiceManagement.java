@@ -27,12 +27,16 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import org.aopalliance.intercept.Interceptor;
 import org.jgentleframework.configure.AbstractConfig;
+import org.jgentleframework.configure.enums.Scope;
 import org.jgentleframework.configure.objectmeta.ObjectBindingInterceptor;
+import org.jgentleframework.context.injecting.AppropriateScopeNameClass;
 import org.jgentleframework.context.injecting.Provider;
+import org.jgentleframework.context.injecting.scope.ScopeInstance;
 import org.jgentleframework.context.services.ServiceHandler;
+import org.jgentleframework.context.support.CoreInstantiationSelector;
+import org.jgentleframework.context.support.CoreInstantiationSelectorImpl;
 import org.jgentleframework.context.support.InstantiationSelector;
 import org.jgentleframework.context.support.InstantiationSelectorImpl;
-import org.jgentleframework.core.handling.DefinitionManager;
 import org.jgentleframework.core.intercept.InterceptionException;
 import org.jgentleframework.core.intercept.support.AbstractMatcher;
 import org.jgentleframework.core.intercept.support.Matcher;
@@ -78,21 +82,36 @@ public abstract class AbstractServiceManagement extends ProviderCoreCreator
 	 * (java.lang.Class, java.lang.Class, java.lang.String, java.lang.String)
 	 */
 	@Override
-	public Object getBeanInstance(Class<?> type, Class<?> targetClass,
-			String mappingName, Definition definition) {
+	public Object getBeanInstance(AppropriateScopeNameClass asc) {
 
-		Assertor.notNull(type);
-		DefinitionManager definitionManager = this.getDefinitionManager();
-		targetClass = targetClass == null ? this.objectBeanFactory
-				.getMappingList().get(type) : targetClass;
-		targetClass = targetClass == null ? type : targetClass;
-		definition = definition == null ? definitionManager
-				.getDefinition(targetClass) : definition;
+		Class<?> type = asc.clazz;
+		Class<?> targetClass = asc.targetClass;
+		Definition definition = asc.definition;
+		String mappingName = asc.ref;
 		synchronized (this) {
 			matcherCache = this.matcherCache == null ? new ConcurrentHashMap<Definition, Matcher<Definition>>()
 					: matcherCache;
 			interceptorList = this.interceptorList == null ? new HashMap<Matcher<Definition>, ArrayList<Object>>()
 					: interceptorList;
+		}
+		CoreInstantiationSelector coreSelector = new CoreInstantiationSelectorImpl(
+				type, targetClass, asc.ref, definition);
+		ScopeInstance scope = null;
+		synchronized (scopeList) {
+			scope = scopeList.get(asc.scopeName);
+		}
+		try {
+			if (scope != null && !scope.equals(Scope.SINGLETON)) {
+				Object result = returnsCachingResult(coreSelector);
+				if (result != NULL_SHAREDOBJECT) {
+					return result;
+				}
+			}
+		}
+		catch (Throwable e) {
+			if (log.isFatalEnabled()) {
+				log.fatal("Could not instantiate bean instance!", e);
+			}
 		}
 		/*
 		 * find matcher in cache
@@ -110,7 +129,7 @@ public abstract class AbstractServiceManagement extends ProviderCoreCreator
 		HashMap<Interceptor, Matcher<Definition>> mapMatcherInterceptor;
 		mapMatcherInterceptor = new HashMap<Interceptor, Matcher<Definition>>();
 		if (matcher != null && matcher.matches(definition)) {
-			ArrayList<Matcher<Definition>> mList = new ArrayList<Matcher<Definition>>();
+			List<Matcher<Definition>> mList = new ArrayList<Matcher<Definition>>();
 			AbstractMatcher.getSuperMatcher(matcher, mList);
 			for (Matcher<Definition> obj : mList) {
 				List<Interceptor> icptList = new LinkedList<Interceptor>();
@@ -130,7 +149,15 @@ public abstract class AbstractServiceManagement extends ProviderCoreCreator
 				InstantiationSelector selector = new InstantiationSelectorImpl(
 						type, targetClass, mappingName, definition, argTypes,
 						args, mapMatcherInterceptor);
-				result = super.getBeanInstance(selector);
+				selector.setCachingList(cachingList);
+				try {
+					return super.getBeanInstance(selector);
+				}
+				catch (Throwable e) {
+					if (log.isFatalEnabled()) {
+						log.fatal("Could not instantiate bean instance!", e);
+					}
+				}
 			}
 			else {
 				result = super.getBeanInstance(type, targetClass, mappingName,
@@ -142,7 +169,15 @@ public abstract class AbstractServiceManagement extends ProviderCoreCreator
 			InstantiationSelector selector = new InstantiationSelectorImpl(
 					type, targetClass, mappingName, definition, null, null,
 					mapMatcherInterceptor);
-			result = super.getBeanInstance(selector);
+			selector.setCachingList(cachingList);
+			try {
+				return super.getBeanInstance(selector);
+			}
+			catch (Throwable e) {
+				if (log.isFatalEnabled()) {
+					log.fatal("Could not instantiate bean instance!", e);
+				}
+			}
 		}
 		return result;
 	}
@@ -204,10 +239,11 @@ public abstract class AbstractServiceManagement extends ProviderCoreCreator
 						if (obj != null
 								&& ReflectUtils.isCast(Interceptor.class, obj))
 							interceptor = (Interceptor) obj;
-						else
+						else {
 							throw new InterceptionException(
 									"The registered object is not an instance of '"
 											+ Interceptor.class + "'!");
+						}
 					}
 					else {
 						interceptor = (Interceptor) icpt;

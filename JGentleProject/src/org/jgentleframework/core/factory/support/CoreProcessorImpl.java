@@ -34,6 +34,8 @@ import net.sf.cglib.proxy.NoOp;
 import org.aopalliance.intercept.FieldInterceptor;
 import org.aopalliance.intercept.Interceptor;
 import org.aopalliance.intercept.MethodInterceptor;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.jgentleframework.context.beans.annotation.AlwaysReload;
 import org.jgentleframework.context.injecting.Provider;
 import org.jgentleframework.context.support.CoreInstantiationSelector;
@@ -41,6 +43,7 @@ import org.jgentleframework.context.support.CoreInstantiationSelectorImpl;
 import org.jgentleframework.context.support.InstantiationSelector;
 import org.jgentleframework.context.support.InstantiationSelectorImpl;
 import org.jgentleframework.context.support.Selector;
+import org.jgentleframework.core.IllegalPropertyException;
 import org.jgentleframework.core.handling.DefinitionManager;
 import org.jgentleframework.core.intercept.InterceptionException;
 import org.jgentleframework.core.intercept.JGentleNamingPolicy;
@@ -74,8 +77,8 @@ public class CoreProcessorImpl extends AbstractProcesserChecker implements
 	private final Provider		provider;
 
 	/** The log. */
-	// private final Log log = LogFactory.getLog(this
-	// .getClass());
+	protected final Log			log					= LogFactory
+															.getLog(getClass());
 
 	/**
 	 * Constructor.
@@ -120,10 +123,20 @@ public class CoreProcessorImpl extends AbstractProcesserChecker implements
 	@SuppressWarnings("unchecked")
 	@Override
 	public Object handle(Selector targetSelector, Object previousResult)
-			throws SecurityException, IllegalArgumentException,
-			NoSuchMethodException, InstantiationException,
-			IllegalAccessException, InvocationTargetException {
+			throws InvocationTargetException, IllegalArgumentException,
+			SecurityException, InstantiationException, IllegalAccessException,
+			NoSuchMethodException {
 
+		if (!ReflectUtils.isCast(CoreInstantiationSelector.class,
+				targetSelector)) {
+			if (log.isFatalEnabled()) {
+				log.fatal("Target selector can not be casted to '"
+						+ CoreInstantiationSelector.class.toString() + "'");
+			}
+			throw new IllegalPropertyException(
+					"Target selector can not be casted to '"
+							+ CoreInstantiationSelector.class.toString() + "'");
+		}
 		Object result = null;
 		Definition definition = targetSelector.getDefinition();
 		Class<?> targetClass = targetSelector.getTargetClass();
@@ -132,21 +145,6 @@ public class CoreProcessorImpl extends AbstractProcesserChecker implements
 				&& definition.isAnnotationPresent(AlwaysReload.class) ? definition
 				.getAnnotation(AlwaysReload.class).value()
 				: false;
-		// find in cache
-		if (cachingList.containsKey(definition)) {
-			CachedConstructor cons = cachingList.get(definition);
-			int hashcodeID = cons.hashcodeID();
-			if (hashcodeID == (definition.hashCode() ^ cons.hashCode())) {
-				result = cons.newInstance(selector.getArgs());
-				// executes process after bean is created
-				MetaDefObject metaObj = new MetaDefObject();
-				findInOutNonRuntime(metaObj, definition);
-				prepareSingletonBean(selector, provider, result);
-				CommonFactory.singleton().executeProcessAfterBeanCreated(
-						targetClass, metaObj, provider, result, definition);
-				return result;
-			}
-		}
 		// create bean instance
 		if (targetSelector instanceof InstantiationSelectorImpl) {
 			InstantiationSelector instSelector = (InstantiationSelector) targetSelector;
@@ -279,7 +277,7 @@ public class CoreProcessorImpl extends AbstractProcesserChecker implements
 				Enhancer.registerStaticCallbacks(proxied, callbacks);
 				CachedConstructor cons = Utils.createConstructionProxy(
 						definition, proxied, instSelector.getArgTypes());
-				this.cachingList.put(definition, cons);
+				selector.getCachingList().put(definition, cons);
 				result = cons.newInstance(instSelector.getArgs());
 				// executes process after bean is created
 				MetaDefObject metaObj = new MetaDefObject();

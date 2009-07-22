@@ -18,7 +18,7 @@
 package org.jgentleframework.utils;
 
 import java.lang.reflect.Constructor;
-import java.util.HashMap;
+import java.util.Map;
 
 import org.jgentleframework.configure.annotation.Inject;
 import org.jgentleframework.context.injecting.Provider;
@@ -50,8 +50,8 @@ public final class DefinitionUtils {
 		Class<?>[] argTypes = null;
 		Object[] args = null;
 		// find default constructor.
-		if (definition.isInterpretedOfClass()) {
-			HashMap<Constructor<?>, Definition> hash = definition
+		if (definition != null && definition.isInterpretedOfClass()) {
+			Map<Constructor<?>, Definition> hash = definition
 					.getConstructorDefList();
 			Constructor<?> constructor = null;
 			if (hash.size() != 0) {

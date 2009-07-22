@@ -85,9 +85,12 @@ public final class Utils {
 		catch (NoSuchMethodError e) {
 			if (parameterTypes == null) {
 				if (log.isErrorEnabled()) {
-					log.error(clazz
-							+ " does not declare public default constructor !");
-					e.printStackTrace();
+					log
+							.error(
+									"["
+											+ clazz
+											+ "] does not declare public default constructor !",
+									e);
 				}
 			}
 			else {
@@ -100,7 +103,7 @@ public final class Utils {
 					}
 					log
 							.error(
-									"Class ["
+									"["
 											+ clazz
 											+ "] does not declare constructor appropriate to these parameter types ["
 											+ buffer.toString() + "]!", e);
@@ -109,18 +112,112 @@ public final class Utils {
 		}
 		final FastConstructor fastConstructor = constructor;
 		return new CachedConstructor() {
-			public Object newInstance(Object... arguments)
-					throws InvocationTargetException {
-
-				return fastConstructor.newInstance(arguments);
-			}
-
 			@Override
 			public int hashcodeID() {
 
 				return definition.hashCode() ^ this.hashCode();
 			}
+
+			public Object newInstance(Object... arguments)
+					throws InvocationTargetException {
+
+				return fastConstructor.newInstance(arguments);
+			}
 		};
+	}
+
+	/**
+	 * Creates the instance object from the given {@link Constructor}.
+	 * 
+	 * @param provider
+	 *            the current {@link Provider}
+	 * @param constructor
+	 *            the given {@link Constructor}
+	 * @return Object
+	 */
+	public static Object createInstanceFromInjectedConstructor(
+			Provider provider, Constructor<?> constructor) {
+
+		Object result = null;
+		// Khởi tạo và inject dependency cho parameter
+		Object[] args = new Object[constructor.getParameterTypes().length];
+		for (int i = 0; i < constructor.getParameterAnnotations().length; i++) {
+			HashMap<Class<? extends Annotation>, Annotation> annoList = new HashMap<Class<? extends Annotation>, Annotation>();
+			List<Class<? extends Annotation>> clazzlist = new LinkedList<Class<? extends Annotation>>();
+			for (Annotation anno : constructor.getParameterAnnotations()[i]) {
+				annoList.put(anno.annotationType(), anno);
+				clazzlist.add(anno.annotationType());
+			}
+			if (!clazzlist.contains(Inject.class)) {
+				args[i] = null;
+			}
+			else {
+				args[i] = InOutExecutor.getInjectedDependency((Inject) annoList
+						.get(Inject.class), constructor.getParameterTypes()[i],
+						provider);
+			}
+		}
+		try {
+			constructor.setAccessible(true);
+			result = constructor.newInstance(args);
+		}
+		catch (Exception e) {
+			if (log.isFatalEnabled()) {
+				log.fatal("Could not new instance on this constructor ["
+						+ constructor + "]", e);
+			}
+		}
+		return result;
+	}
+
+	/**
+	 * Creates the scope name.
+	 * 
+	 * @param type
+	 *            the type
+	 * @param targetClass
+	 *            the target class
+	 * @param definition
+	 *            the definition
+	 * @param mappingName
+	 *            the mapping name
+	 * @return the string
+	 */
+	public static String createScopeName(Class<?> type, Class<?> targetClass,
+			Definition definition, String mappingName) {
+
+		Assertor.notNull(type);
+		Assertor.notNull(targetClass);
+		Assertor.notNull(definition);
+		String scopeName = type.toString() + ":" + targetClass.toString() + ":"
+				+ definition.toString();
+		if (mappingName != null && !mappingName.isEmpty()) {
+			scopeName = scopeName + ":" + mappingName;
+		}
+		return scopeName;
+		// StringBuffer buffer = new StringBuffer();
+		// buffer.append(type.toString());
+		// buffer.append(":");
+		// buffer.append(targetClass.toString());
+		// buffer.append(":");
+		// buffer.append(definition.toString());
+		// if (mappingName != null && !mappingName.isEmpty()) {
+		// buffer.append(":");
+		// buffer.append(mappingName);
+		// }
+		// return buffer.toString();
+	}
+
+	/**
+	 * Creates the scope name.
+	 * 
+	 * @param constantStr
+	 *            the constant string
+	 * @return the string
+	 */
+	public static String createScopeName(String constantStr) {
+
+		return REF.refConstant(constantStr);
 	}
 
 	/**
@@ -130,7 +227,7 @@ public final class Utils {
 	 *            the refer string
 	 * @param provider
 	 *            the provider
-	 * @return the string
+	 * @return the scope name
 	 * @throws GenericException
 	 *             the generic exception
 	 */
@@ -205,192 +302,6 @@ public final class Utils {
 			result = object;
 		}
 		return result;
-	}
-
-	/**
-	 * Validates intercept conditioner.
-	 * 
-	 * @param selector
-	 *            the selector
-	 * @param definition
-	 *            the definition
-	 * @param interceptor
-	 *            the interceptor
-	 * @return true, if successful
-	 */
-	public static boolean validatesInterceptConditioner(
-			InstantiationSelector selector, Definition definition,
-			Interceptor interceptor) {
-
-		Matcher<Definition> matcher = selector.getMapMatcherInterceptor().get(
-				interceptor);
-		return validatesInterceptConditioner(matcher, definition, interceptor);
-	}
-
-	/**
-	 * Validates intercept conditioner.
-	 * 
-	 * @param matcher
-	 *            the matcher
-	 * @param definition
-	 *            the definition
-	 * @param interceptor
-	 *            the interceptor
-	 * @return true, if successful
-	 */
-	public static boolean validatesInterceptConditioner(
-			Matcher<Definition> matcher, Definition definition,
-			Interceptor interceptor) {
-
-		if (matcher != null
-				&& (ReflectUtils.isCast(MatcherPointcut.class, matcher) || ReflectUtils
-						.isCast(CoreIdentification.class, interceptor))) {
-			CoreIdentification coreIden = (CoreIdentification) matcher;
-			InterceptConditioner ic = coreIden.getInterceptConditioner();
-			if (ic != null && !ic.isValidDefinition(definition)) {
-				return false;
-			}
-		}
-		return true;
-	}
-
-	/**
-	 * Creates the scope name.
-	 * 
-	 * @param type
-	 *            the type
-	 * @param targetClass
-	 *            the target class
-	 * @param definition
-	 *            the definition
-	 * @param mappingName
-	 *            the mapping name
-	 * @return the string
-	 */
-	public static String createScopeName(Class<?> type, Class<?> targetClass,
-			Definition definition, String mappingName) {
-
-		Assertor.notNull(type);
-		Assertor.notNull(targetClass);
-		Assertor.notNull(definition);
-		StringBuffer buffer = new StringBuffer();
-		if (mappingName != null && !mappingName.isEmpty()) {
-			buffer.append(type.toString());
-			buffer.append(":");
-			buffer.append(mappingName);
-		}
-		else {
-			buffer.append(type.toString());
-			buffer.append(":");
-			buffer.append(targetClass.toString());
-			buffer.append(":");
-			buffer.append(definition.toString());
-		}
-		return buffer.toString();
-	}
-
-	/**
-	 * Creates the instance object from the given {@link Constructor}.
-	 * 
-	 * @param provider
-	 *            the current {@link Provider}
-	 * @param constructor
-	 *            the given {@link Constructor}
-	 * @return Object
-	 */
-	public static Object createInstanceFromInjectedConstructor(
-			Provider provider, Constructor<?> constructor) {
-
-		Object result = null;
-		// Khởi tạo và inject dependency cho parameter
-		Object[] args = new Object[constructor.getParameterTypes().length];
-		for (int i = 0; i < constructor.getParameterAnnotations().length; i++) {
-			HashMap<Class<? extends Annotation>, Annotation> annoList = new HashMap<Class<? extends Annotation>, Annotation>();
-			List<Class<? extends Annotation>> clazzlist = new LinkedList<Class<? extends Annotation>>();
-			for (Annotation anno : constructor.getParameterAnnotations()[i]) {
-				annoList.put(anno.annotationType(), anno);
-				clazzlist.add(anno.annotationType());
-			}
-			if (!clazzlist.contains(Inject.class)) {
-				args[i] = null;
-			}
-			else {
-				args[i] = InOutExecutor.getInjectedDependency((Inject) annoList
-						.get(Inject.class), constructor.getParameterTypes()[i],
-						provider);
-			}
-		}
-		try {
-			constructor.setAccessible(true);
-			result = constructor.newInstance(args);
-		}
-		catch (IllegalArgumentException e) {
-			e.printStackTrace();
-		}
-		catch (InstantiationException e) {
-			e.printStackTrace();
-		}
-		catch (IllegalAccessException e) {
-			e.printStackTrace();
-		}
-		catch (InvocationTargetException e) {
-			e.printStackTrace();
-		}
-		return result;
-	}
-
-	/**
-	 * Gets the injected parameters of the given method.
-	 * 
-	 * @param method
-	 *            the method
-	 * @param defMethod
-	 *            the definition according to given method.
-	 * @param provider
-	 *            the specified provider.
-	 * @return returns an array containing the injected arguments if they exist,
-	 *         if not, returns an empty array.
-	 */
-	public static Object[] getInjectedParametersOf(Method method,
-			Definition defMethod, Provider provider) {
-
-		Assertor.notNull(method, "The method must not be null.");
-		Assertor.notNull(defMethod,
-				"The definition of method must not be null.");
-		Assertor.notNull(provider, "The provider must not be null");
-		if (defMethod.getKey() != method) {
-			Assertor
-					.throwRunTimeException("The given definition is not corresponding to the given method!");
-		}
-		Class<?>[] argTypes = method.getParameterTypes();
-		Object[] args = new Object[argTypes.length];
-		if (argTypes.length == 0)
-			throw new InOutDependencyException(
-					"Invalid setter! The setter method has no any parameter!");
-		if (defMethod.isAnnotationPresent(Inject.class)) {
-			Inject anno = defMethod.getAnnotation(Inject.class);
-			args = new Object[argTypes.length];
-			for (int i = 0; i < argTypes.length; i++) {
-				args[i] = InOutExecutor.getInjectedDependency(anno,
-						argTypes[i], provider);
-			}
-		}
-		if (defMethod.isAnnotationPresentAtAnyParameters(Inject.class)) {
-			Definition[] defLst = defMethod.getParameterDefList();
-			if (argTypes.length != defLst.length)
-				throw new InOutDependencyException(
-						"Invalid definition! Could not execute the injecting !");
-			for (int i = 0; i < argTypes.length; i++) {
-				if (defLst[i] != null
-						&& defLst[i].isAnnotationPresent(Inject.class)) {
-					args[i] = InOutExecutor
-							.getInjectedDependency(defLst[i]
-									.getAnnotation(Inject.class), argTypes[i],
-									provider);
-				}
-			}
-		}
-		return args;
 	}
 
 	/**
@@ -514,20 +425,57 @@ public final class Utils {
 	}
 
 	/**
-	 * Returns <code>true</code> if the given method is a setter method.
+	 * Gets the injected parameters of the given method.
 	 * 
 	 * @param method
-	 *            the given method.
-	 * @return <code>true</code> if the given method is a setter method,
-	 *         otherwise, returns <code>false</code>.
+	 *            the method
+	 * @param defMethod
+	 *            the definition according to given method.
+	 * @param provider
+	 *            the specified provider.
+	 * @return returns an array containing the injected arguments if they exist,
+	 *         if not, returns an empty array.
 	 */
-	public static boolean isSetter(Method method) {
+	public static Object[] getInjectedParametersOf(Method method,
+			Definition defMethod, Provider provider) {
 
-		Assertor.notNull(method, "The given method must not be null !");
-		String name = method.getName();
-		if (name.startsWith("set"))
-			return true;
-		return false;
+		Assertor.notNull(method, "The method must not be null.");
+		Assertor.notNull(defMethod,
+				"The definition of method must not be null.");
+		Assertor.notNull(provider, "The provider must not be null");
+		if (defMethod.getKey() != method) {
+			Assertor
+					.throwRunTimeException("The given definition is not corresponding to the given method!");
+		}
+		Class<?>[] argTypes = method.getParameterTypes();
+		Object[] args = new Object[argTypes.length];
+		if (argTypes.length == 0)
+			throw new InOutDependencyException(
+					"Invalid setter! The setter method has no any parameter!");
+		if (defMethod.isAnnotationPresent(Inject.class)) {
+			Inject anno = defMethod.getAnnotation(Inject.class);
+			args = new Object[argTypes.length];
+			for (int i = 0; i < argTypes.length; i++) {
+				args[i] = InOutExecutor.getInjectedDependency(anno,
+						argTypes[i], provider);
+			}
+		}
+		if (defMethod.isAnnotationPresentAtAnyParameters(Inject.class)) {
+			Definition[] defLst = defMethod.getParameterDefList();
+			if (argTypes.length != defLst.length)
+				throw new InOutDependencyException(
+						"Invalid definition! Could not execute the injecting !");
+			for (int i = 0; i < argTypes.length; i++) {
+				if (defLst[i] != null
+						&& defLst[i].isAnnotationPresent(Inject.class)) {
+					args[i] = InOutExecutor
+							.getInjectedDependency(defLst[i]
+									.getAnnotation(Inject.class), argTypes[i],
+									provider);
+				}
+			}
+		}
+		return args;
 	}
 
 	/**
@@ -545,5 +493,69 @@ public final class Utils {
 		if (name.startsWith("get") || name.startsWith("is"))
 			return true;
 		return false;
+	}
+
+	/**
+	 * Returns <code>true</code> if the given method is a setter method.
+	 * 
+	 * @param method
+	 *            the given method.
+	 * @return <code>true</code> if the given method is a setter method,
+	 *         otherwise, returns <code>false</code>.
+	 */
+	public static boolean isSetter(Method method) {
+
+		Assertor.notNull(method, "The given method must not be null !");
+		String name = method.getName();
+		if (name.startsWith("set"))
+			return true;
+		return false;
+	}
+
+	/**
+	 * Validates intercept conditioner.
+	 * 
+	 * @param selector
+	 *            the selector
+	 * @param definition
+	 *            the definition
+	 * @param interceptor
+	 *            the interceptor
+	 * @return true, if successful
+	 */
+	public static boolean validatesInterceptConditioner(
+			InstantiationSelector selector, Definition definition,
+			Interceptor interceptor) {
+
+		Matcher<Definition> matcher = selector.getMapMatcherInterceptor().get(
+				interceptor);
+		return validatesInterceptConditioner(matcher, definition, interceptor);
+	}
+
+	/**
+	 * Validates intercept conditioner.
+	 * 
+	 * @param matcher
+	 *            the matcher
+	 * @param definition
+	 *            the definition
+	 * @param interceptor
+	 *            the interceptor
+	 * @return true, if successful
+	 */
+	public static boolean validatesInterceptConditioner(
+			Matcher<Definition> matcher, Definition definition,
+			Interceptor interceptor) {
+
+		if (matcher != null
+				&& (ReflectUtils.isCast(MatcherPointcut.class, matcher) || ReflectUtils
+						.isCast(CoreIdentification.class, interceptor))) {
+			CoreIdentification coreIden = (CoreIdentification) matcher;
+			InterceptConditioner ic = coreIden.getInterceptConditioner();
+			if (ic != null && !ic.isValidDefinition(definition)) {
+				return false;
+			}
+		}
+		return true;
 	}
 }

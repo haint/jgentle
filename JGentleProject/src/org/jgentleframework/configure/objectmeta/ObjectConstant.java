@@ -44,40 +44,6 @@ import org.jgentleframework.context.injecting.scope.ScopeInstance;
  */
 public interface ObjectConstant extends IPresentLoadingClass {
 	/**
-	 * The Class ScopeObjectConstant.
-	 * 
-	 * @author LE QUOC CHUNG - mailto: <a
-	 *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
-	 * @date Oct 30, 2007
-	 */
-	class ScopeObjectConstant {
-		/** The constant. */
-		private ObjectConstant	constant;
-
-		/**
-		 * The Constructor.
-		 * 
-		 * @param constant
-		 *            the constant
-		 */
-		public ScopeObjectConstant(ObjectConstant constant) {
-
-			this.constant = constant;
-		}
-
-		/**
-		 * Scope.
-		 * 
-		 * @param scope
-		 *            the specified scope.
-		 */
-		public void scope(ScopeInstance scope) {
-
-			this.constant.setScope(scope);
-		}
-	}
-
-	/**
 	 * Adds a source name to current {@link ObjectConstant}
 	 * 
 	 * @param name
@@ -142,7 +108,7 @@ public interface ObjectConstant extends IPresentLoadingClass {
 	 * @param values
 	 *            the values
 	 */
-	ScopeObjectConstant to(Object... values);
+	void to(Object... values);
 
 	/**
 	 * Binds a specified source name to an object value
@@ -162,14 +128,4 @@ public interface ObjectConstant extends IPresentLoadingClass {
 	 * @see ScopeImplementation
 	 */
 	public ScopeInstance getScope();
-
-	/**
-	 * Set the scope to this {@link ObjectConstant}
-	 * 
-	 * @param scope
-	 *            the specified scope.
-	 * @see ScopeImplementation
-	 * @see Scope
-	 */
-	public void setScope(ScopeInstance scope);
 }
