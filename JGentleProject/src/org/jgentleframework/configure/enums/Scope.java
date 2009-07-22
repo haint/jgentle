@@ -88,22 +88,7 @@ public enum Scope implements ScopeImplementation {
 	}
 
 	/** The log. */
-	private final Log			log				= LogFactory.getLog(getClass());
-
-	/** The obj factory. */
-	ObjectBeanFactory			objFactory		= null;
-
-	/** The provider. */
-	Provider					provider		= null;
-
-	/** The scope list. */
-	Map<String, ScopeInstance>	scopeList		= null;
-
-	/** The map direct list. */
-	Map<String, Object>			mapDirectList	= null;
-
-	/** The service handler. */
-	ServiceHandler				serviceHandler	= null;
+	private final Log	log	= LogFactory.getLog(getClass());
 
 	/*
 	 * (non-Javadoc)
@@ -118,16 +103,9 @@ public enum Scope implements ScopeImplementation {
 			throws InvalidAddingOperationException {
 
 		Object result = null;
-		if (this.objFactory == null)
-			this.objFactory = objFactory;
-		if (this.provider == null)
-			this.provider = this.objFactory.getProvider();
-		if (this.scopeList == null)
-			this.scopeList = this.objFactory.getScopeList();
-		if (this.mapDirectList == null)
-			this.mapDirectList = this.objFactory.getMapDirectList();
-		if (this.serviceHandler == null)
-			this.serviceHandler = provider.getServiceHandler();
+		Provider provider = objFactory.getProvider();
+		Map<String, ScopeInstance> scopeList = objFactory.getScopeList();
+		Map<String, Object> mapDirectList = objFactory.getMapDirectList();
 		synchronized (scopeList) {
 			if (!scopeList.containsKey(scopeName)) {
 				scopeList.put(scopeName, this);
@@ -170,16 +148,9 @@ public enum Scope implements ScopeImplementation {
 			ObjectBeanFactory objFactory) {
 
 		Object result = null;
-		if (this.objFactory == null)
-			this.objFactory = objFactory;
-		if (this.provider == null)
-			this.provider = this.objFactory.getProvider();
-		if (this.scopeList == null)
-			this.scopeList = this.objFactory.getScopeList();
-		if (this.mapDirectList == null)
-			this.mapDirectList = this.objFactory.getMapDirectList();
-		if (this.serviceHandler == null)
-			this.serviceHandler = provider.getServiceHandler();
+		Provider provider = objFactory.getProvider();
+		Map<String, Object> mapDirectList = objFactory.getMapDirectList();
+		ServiceHandler serviceHandler = provider.getServiceHandler();
 		// If is Singleton scope
 		if (this.equals(Scope.SINGLETON)) {
 			synchronized (scopeName) {
@@ -192,7 +163,7 @@ public enum Scope implements ScopeImplementation {
 				if (selector instanceof CoreInstantiationSelectorImpl) {
 					Pair<Class<?>[], Object[]> pairCons = DefinitionUtils
 							.findArgsOfDefaultConstructor(selector
-									.getDefinition(), this.provider);
+									.getDefinition(), provider);
 					Class<?>[] argTypes = pairCons.getKeyPair();
 					Object[] args = pairCons.getValuePair();
 					coreSelector = (CoreInstantiationSelector) selector;
@@ -206,7 +177,7 @@ public enum Scope implements ScopeImplementation {
 					}
 				}
 				try {
-					result = this.serviceHandler.getService(this,
+					result = serviceHandler.getService(this,
 							BeanCreationProcessor.class, selector);
 				}
 				catch (TooManyListenersException e) {
@@ -225,7 +196,7 @@ public enum Scope implements ScopeImplementation {
 		// if prototype
 		else if (this.equals(Scope.PROTOTYPE)) {
 			try {
-				result = this.serviceHandler.getService(this,
+				result = serviceHandler.getService(this,
 						BeanCreationProcessor.class, selector);
 			}
 			catch (TooManyListenersException e) {
@@ -264,16 +235,9 @@ public enum Scope implements ScopeImplementation {
 			throws InvalidRemovingOperationException {
 
 		Object result = null;
-		if (this.objFactory == null)
-			this.objFactory = objFactory;
-		if (this.provider == null)
-			this.provider = this.objFactory.getProvider();
-		if (this.scopeList == null)
-			this.scopeList = this.objFactory.getScopeList();
-		if (this.mapDirectList == null)
-			this.mapDirectList = this.objFactory.getMapDirectList();
-		if (this.serviceHandler == null)
-			this.serviceHandler = provider.getServiceHandler();
+		Provider provider = objFactory.getProvider();
+		Map<String, ScopeInstance> scopeList = objFactory.getScopeList();
+		Map<String, Object> mapDirectList = objFactory.getMapDirectList();
 		Scope scope = null;
 		synchronized (scopeList) {
 			if (scopeList.containsKey(scopeName)) {

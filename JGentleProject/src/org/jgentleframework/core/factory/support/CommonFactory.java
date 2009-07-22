@@ -22,8 +22,6 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.List;
 
-import net.sf.cglib.reflect.FastClass;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jgentleframework.context.beans.DefinitionAware;
