@@ -275,13 +275,14 @@ public class CoreProcessorImpl extends AbstractProcesserChecker implements
 				enhancer.setNamingPolicy(new JGentleNamingPolicy());
 				Class<?> proxied = enhancer.createClass();
 				Enhancer.registerStaticCallbacks(proxied, callbacks);
+				MetaDefObject metaObj = new MetaDefObject();
+				findInOutNonRuntime(metaObj, definition);
 				CachedConstructor cons = Utils.createConstructionProxy(
-						definition, proxied, instSelector.getArgTypes());
+						definition, proxied, instSelector.getArgTypes(),
+						metaObj);
 				selector.getCachingList().put(definition, cons);
 				result = cons.newInstance(instSelector.getArgs());
 				// executes process after bean is created
-				MetaDefObject metaObj = new MetaDefObject();
-				findInOutNonRuntime(metaObj, definition);
 				prepareSingletonBean(selector, provider, result);
 				CommonFactory.singleton().executeProcessAfterBeanCreated(
 						targetClass, metaObj, provider, result, definition);
@@ -304,7 +305,7 @@ public class CoreProcessorImpl extends AbstractProcesserChecker implements
 	@SuppressWarnings("unchecked")
 	@Override
 	protected CachedConstructor createConstructionProxy(
-			CoreInstantiationSelector selector) {
+			CoreInstantiationSelector selector, MetaDefObject mdo) {
 
 		Assertor.notNull(selector, "The selector ["
 				+ CoreInstantiationSelector.class.toString()
@@ -329,7 +330,7 @@ public class CoreProcessorImpl extends AbstractProcesserChecker implements
 		// Store callbacks.
 		Enhancer.registerStaticCallbacks(proxied, callbacks);
 		CachedConstructor cons = Utils.createConstructionProxy(selector
-				.getDefinition(), proxied, selector.getArgTypes());
+				.getDefinition(), proxied, selector.getArgTypes(), mdo);
 		return cons;
 	}
 
@@ -345,7 +346,7 @@ public class CoreProcessorImpl extends AbstractProcesserChecker implements
 	protected CachedConstructor createConstructionProxy(
 			final CoreInstantiationSelector selector, Class<?> interfaze,
 			net.sf.cglib.proxy.MethodInterceptor interceptor,
-			final List<Method> methodList) {
+			final List<Method> methodList, MetaDefObject mdo) {
 
 		Assertor.notNull(interceptor,
 				"The given interceptor must not be null !");
@@ -383,7 +384,7 @@ public class CoreProcessorImpl extends AbstractProcesserChecker implements
 		// Store callbacks.
 		Enhancer.registerStaticCallbacks(proxied, callbacks);
 		CachedConstructor cons = Utils.createConstructionProxy(selector
-				.getDefinition(), proxied, selector.getArgTypes());
+				.getDefinition(), proxied, selector.getArgTypes(), mdo);
 		return cons;
 	}
 }

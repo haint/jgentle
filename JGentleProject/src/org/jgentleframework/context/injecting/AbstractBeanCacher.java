@@ -31,12 +31,9 @@ import org.jgentleframework.context.injecting.scope.ScopeController;
 import org.jgentleframework.context.injecting.scope.ScopeInstance;
 import org.jgentleframework.context.services.ServiceHandler;
 import org.jgentleframework.context.support.CoreInstantiationSelector;
-import org.jgentleframework.context.support.Selector;
 import org.jgentleframework.core.AmbiguousException;
-import org.jgentleframework.core.factory.support.AbstractProcesserChecker;
 import org.jgentleframework.core.factory.support.CachedConstructor;
 import org.jgentleframework.core.factory.support.CommonFactory;
-import org.jgentleframework.core.factory.support.MetaDefObject;
 import org.jgentleframework.core.reflection.metadata.Definition;
 import org.jgentleframework.utils.ReflectUtils;
 import org.jgentleframework.utils.Utils;
@@ -173,13 +170,13 @@ public abstract class AbstractBeanCacher extends AbstractLoadingFactory
 	 * @throws NoSuchMethodException
 	 *             the no such method exception
 	 */
-	protected Object returnsCachingResult(Selector selector)
+	protected Object returnsCachingResult(
+			CoreInstantiationSelector targetSelector)
 			throws InvocationTargetException, IllegalArgumentException,
 			SecurityException, InstantiationException, IllegalAccessException,
 			NoSuchMethodException {
 
 		Object result = NULL_SHAREDOBJECT;
-		CoreInstantiationSelector targetSelector = (CoreInstantiationSelector) selector;
 		Definition definition = targetSelector.getDefinition();
 		// find in cache
 		if (cachingList.containsKey(definition)) {
@@ -188,14 +185,14 @@ public abstract class AbstractBeanCacher extends AbstractLoadingFactory
 			if (hashcodeID == (definition.hashCode() ^ cons.hashCode())) {
 				result = cons.newInstance(targetSelector.getArgs());
 				// executes process after bean is created
-				MetaDefObject metaObj = new MetaDefObject();
-				AbstractProcesserChecker.findInOutNonRuntime(metaObj,
-						definition);
-				AbstractProcesserChecker.prepareSingletonBean(targetSelector,
-						this, result);
+				// MetaDefObject metaObj = new MetaDefObject();
+				// AbstractProcesserChecker.findInOutNonRuntime(metaObj,
+				// definition);
+				// AbstractProcesserChecker.prepareSingletonBean(targetSelector,
+				// this, result);
 				CommonFactory.singleton().executeProcessAfterBeanCreated(
-						targetSelector.getTargetClass(), metaObj, this, result,
-						definition);
+						targetSelector.getTargetClass(),
+						cons.getMetaDefObject(), this, result, definition);
 				return result;
 			}
 		}

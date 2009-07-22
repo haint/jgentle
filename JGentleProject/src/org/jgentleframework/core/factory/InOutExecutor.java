@@ -22,6 +22,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -77,34 +78,28 @@ public abstract class InOutExecutor {
 			Provider provider, Object target, Definition definition)
 			throws IllegalArgumentException, IllegalAccessException {
 
-		Assertor.notNull(definition, "The given definition must not be null!");
-		Assertor.notNull(provider, "The current provider must not be null!");
-		Assertor.notNull(target, "The current target must not be null!");
 		Map<Field, Object> result = new HashMap<Field, Object>();
-		synchronized (target) {
-			if (fields != null) {
-				ArrayList<Field> fieldList = new ArrayList<Field>();
-				for (Field field : fields) {
-					Definition defField = definition.getMemberDefinition(field);
-					if (defField != null
-							&& defField.isAnnotationPresent(Inject.class)) {
-						Inject inject = defField.getAnnotation(Inject.class);
-						Object injected = InOutExecutor.getInjectedDependency(
-								inject, field.getType(), provider);
-						field.setAccessible(true);
-						Object current = field.get(target);
-						if (inject.alwaysInject() == false && current != null) {
-							continue;
-						}
-						result.put(field, current);
-						field.set(target, injected);
-						if (!fieldList.contains(field))
-							fieldList.add(field);
-						field.setAccessible(false);
-					}
-					else
+		if (fields != null) {
+			List<Field> fieldList = new ArrayList<Field>();
+			for (Field field : fields) {
+				Definition defField = definition.getMemberDefinition(field);
+				if (defField != null
+						&& defField.isAnnotationPresent(Inject.class)) {
+					Inject inject = defField.getAnnotation(Inject.class);
+					Object injected = InOutExecutor.getInjectedDependency(
+							inject, field.getType(), provider);
+					field.setAccessible(true);
+					Object current = field.get(target);
+					if (inject.alwaysInject() == false && current != null) {
 						continue;
+					}
+					result.put(field, current);
+					field.set(target, injected);
+					if (!fieldList.contains(field))
+						fieldList.add(field);
 				}
+				else
+					continue;
 			}
 		}
 		return result;
@@ -130,34 +125,28 @@ public abstract class InOutExecutor {
 			Provider provider, Object target, Definition definition)
 			throws IllegalArgumentException, IllegalAccessException {
 
-		Assertor.notNull(definition, "The given definition must not be null!");
-		Assertor.notNull(provider, "The current provider must not be null!");
-		Assertor.notNull(target, "The current target must not be null!");
-		synchronized (target) {
-			if (fields != null) {
-				for (Field field : fields) {
-					Object outjectObj = null;
-					Definition defField = definition.getMemberDefinition(field);
-					if (defField != null
-							&& defField.isAnnotationPresent(Outject.class)) {
-						Outject outject = defField.getAnnotation(Outject.class);
-						field.setAccessible(true);
-						outjectObj = field.get(target);
-						field.setAccessible(false);
-						/*
-						 * Executes builder
-						 */
-						if (ReflectUtils.isCast(Builder.class, target)) {
-							Builder builder = (Builder) target;
-							if (builder.getOutjectValue(field) != null)
-								outjectObj = builder.getOutjectValue(field);
-						}
-						InOutExecutor.setOutjectedDependency(outject,
-								outjectObj, provider, field.getClass());
+		if (fields != null) {
+			for (Field field : fields) {
+				Object outjectObj = null;
+				Definition defField = definition.getMemberDefinition(field);
+				if (defField != null
+						&& defField.isAnnotationPresent(Outject.class)) {
+					Outject outject = defField.getAnnotation(Outject.class);
+					field.setAccessible(true);
+					outjectObj = field.get(target);
+					/*
+					 * Executes builder
+					 */
+					if (ReflectUtils.isCast(Builder.class, target)) {
+						Builder builder = (Builder) target;
+						if (builder.getOutjectValue(field) != null)
+							outjectObj = builder.getOutjectValue(field);
 					}
-					else
-						continue;
+					InOutExecutor.setOutjectedDependency(outject, outjectObj,
+							provider, field.getClass());
 				}
+				else
+					continue;
 			}
 		}
 	}
@@ -187,38 +176,30 @@ public abstract class InOutExecutor {
 			throws IllegalArgumentException, IllegalAccessException,
 			InvocationTargetException {
 
-		Assertor.notNull(definition, "The given definition must not be null!");
-		Assertor.notNull(provider, "The current provider must not be null!");
-		Assertor.notNull(target, "The current target must not be null!");
-		HashMap<Field, Object> result = new HashMap<Field, Object>();
-		synchronized (target) {
-			if (setters != null) {
-				for (Method method : setters) {
-					Definition defMethod = definition
-							.getMemberDefinition(method);
-					if (defMethod == null)
-						continue;
-					else {
-						Object[] args = Utils.getInjectedParametersOf(method,
-								defMethod, provider);
-						method.setAccessible(true);
-						// Find field corresponding to setter method.
-						Field field = null;
-						try {
-							field = Utils.getFieldOfDefaultSetGetter(method,
-									(Class<?>) definition.getKey());
-							field.setAccessible(true);
-							result.put(field, field.get(target));
-							field.setAccessible(false);
-						}
-						catch (InvalidOperationException e) {
-							throw new InOutDependencyException(e.getMessage());
-						}
-						catch (NoSuchFieldException e) {
-						}
-						method.invoke(target, args);
-						method.setAccessible(false);
+		Map<Field, Object> result = new HashMap<Field, Object>();
+		if (setters != null) {
+			for (Method method : setters) {
+				Definition defMethod = definition.getMemberDefinition(method);
+				if (defMethod == null)
+					continue;
+				else {
+					Object[] args = Utils.getInjectedParametersOf(method,
+							defMethod, provider);
+					method.setAccessible(true);
+					// Find field corresponding to setter method.
+					Field field = null;
+					try {
+						field = Utils.getFieldOfDefaultSetGetter(method,
+								(Class<?>) definition.getKey());
+						field.setAccessible(true);
+						result.put(field, field.get(target));
 					}
+					catch (InvalidOperationException e) {
+						throw new InOutDependencyException(e.getMessage());
+					}
+					catch (NoSuchFieldException e) {
+					}
+					method.invoke(target, args);
 				}
 			}
 		}
@@ -317,51 +298,43 @@ public abstract class InOutExecutor {
 			throws IllegalArgumentException, IllegalAccessException,
 			InvocationTargetException {
 
-		Assertor.notNull(definition, "The given definition must not be null!");
-		Assertor.notNull(provider, "The current provider must not be null!");
-		Assertor.notNull(target, "The current target must not be null!");
-		synchronized (target) {
-			if (getters != null) {
-				for (Method method : getters) {
-					Definition defMethod = definition
-							.getMemberDefinition(method);
-					if (defMethod == null)
-						continue;
-					else {
-						Class<?> returnType = method.getReturnType();
-						Object[] args = Utils.getInjectedParametersOf(method,
-								defMethod, provider);
-						Object outjectObj = null;
-						method.setAccessible(true);
-						outjectObj = args.length == 0 ? method.invoke(target)
-								: method.invoke(target, args);
-						method.setAccessible(false);
-						Outject outject = defMethod
-								.getAnnotation(Outject.class);
-						Field field = null;
-						try {
-							field = Utils.getFieldOfDefaultSetGetter(method,
-									(Class<?>) definition.getKey());
-						}
-						catch (InvalidOperationException e) {
-							throw new InOutDependencyException(e.getMessage());
-						}
-						catch (NoSuchFieldException e) {
-						}
-						/*
-						 * Executes builder
-						 */
-						if (ReflectUtils.isCast(Builder.class, target)) {
-							Builder builder = (Builder) target;
-							if (builder.getOutjectValue(field) != null)
-								outjectObj = builder.getOutjectValue(field);
-						}
-						// executes outjection
-						Class<?> type = field != null ? field.getClass()
-								: returnType;
-						InOutExecutor.setOutjectedDependency(outject,
-								outjectObj, provider, type);
+		if (getters != null) {
+			for (Method method : getters) {
+				Definition defMethod = definition.getMemberDefinition(method);
+				if (defMethod == null)
+					continue;
+				else {
+					Class<?> returnType = method.getReturnType();
+					Object[] args = Utils.getInjectedParametersOf(method,
+							defMethod, provider);
+					Object outjectObj = null;
+					method.setAccessible(true);
+					outjectObj = args.length == 0 ? method.invoke(target)
+							: method.invoke(target, args);
+					Outject outject = defMethod.getAnnotation(Outject.class);
+					Field field = null;
+					try {
+						field = Utils.getFieldOfDefaultSetGetter(method,
+								(Class<?>) definition.getKey());
 					}
+					catch (InvalidOperationException e) {
+						throw new InOutDependencyException(e.getMessage());
+					}
+					catch (NoSuchFieldException e) {
+					}
+					/*
+					 * Executes builder
+					 */
+					if (ReflectUtils.isCast(Builder.class, target)) {
+						Builder builder = (Builder) target;
+						if (builder.getOutjectValue(field) != null)
+							outjectObj = builder.getOutjectValue(field);
+					}
+					// executes outjection
+					Class<?> type = field != null ? field.getClass()
+							: returnType;
+					InOutExecutor.setOutjectedDependency(outject, outjectObj,
+							provider, type);
 				}
 			}
 		}
@@ -428,7 +401,6 @@ public abstract class InOutExecutor {
 			}
 		}
 		else if (result != null && result != NullClass.class) {
-			
 			if (!ReflectUtils.isCast(type, result)) {
 				System.out.println(result);
 				throw new InOutDependencyException(

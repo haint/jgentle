@@ -45,6 +45,7 @@ import org.jgentleframework.core.InvalidOperationException;
 import org.jgentleframework.core.factory.InOutDependencyException;
 import org.jgentleframework.core.factory.InOutExecutor;
 import org.jgentleframework.core.factory.support.CachedConstructor;
+import org.jgentleframework.core.factory.support.MetaDefObject;
 import org.jgentleframework.core.intercept.JGentleFastClass;
 import org.jgentleframework.core.intercept.support.CoreIdentification;
 import org.jgentleframework.core.intercept.support.InterceptConditioner;
@@ -75,7 +76,7 @@ public final class Utils {
 	 */
 	public static CachedConstructor createConstructionProxy(
 			final Definition definition, Class<?> clazz,
-			Class<?>[] parameterTypes) {
+			Class<?>[] parameterTypes, final MetaDefObject mdo) {
 
 		FastConstructor constructor = null;
 		try {
@@ -112,6 +113,8 @@ public final class Utils {
 		}
 		final FastConstructor fastConstructor = constructor;
 		return new CachedConstructor() {
+			MetaDefObject	mdoInner	= mdo;
+
 			@Override
 			public int hashcodeID() {
 
@@ -122,6 +125,18 @@ public final class Utils {
 					throws InvocationTargetException {
 
 				return fastConstructor.newInstance(arguments);
+			}
+
+			@Override
+			public MetaDefObject getMetaDefObject() {
+
+				return this.mdoInner;
+			}
+
+			@Override
+			public void setMetaDefObject(MetaDefObject mdo) {
+
+				this.mdoInner = mdo;
 			}
 		};
 	}

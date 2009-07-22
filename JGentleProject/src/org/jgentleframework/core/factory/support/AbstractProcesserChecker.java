@@ -80,7 +80,7 @@ public abstract class AbstractProcesserChecker {
 					.toArray(new Field[injectedFields.size()]));
 		}
 		// find all outjected fields
-		ArrayList<Field> outjectedFields = definition != null ? definition
+		List<Field> outjectedFields = definition != null ? definition
 				.getFieldsAnnotatedWith(Outject.class) : null;
 		if (outjectedFields != null) {
 			for (int i = 0; i < outjectedFields.size(); i++) {
@@ -96,7 +96,7 @@ public abstract class AbstractProcesserChecker {
 					.toArray(new Field[outjectedFields.size()]));
 		}
 		// find all injected methods (setter)
-		ArrayList<Method> injectedMethods = definition != null ? definition
+		List<Method> injectedMethods = definition != null ? definition
 				.getMethodsAnnotatedWith(Inject.class) : null;
 		if (injectedMethods != null) {
 			for (int i = 0; i < injectedMethods.size(); i++) {
@@ -114,7 +114,7 @@ public abstract class AbstractProcesserChecker {
 					.toArray(new Method[injectedMethods.size()]));
 		}
 		// find all outjected methods (getter)
-		ArrayList<Method> outjectedMethods = definition != null ? definition
+		List<Method> outjectedMethods = definition != null ? definition
 				.getMethodsAnnotatedWith(Outject.class) : null;
 		if (outjectedMethods != null) {
 			for (int i = 0; i < outjectedMethods.size(); i++) {
@@ -142,7 +142,7 @@ public abstract class AbstractProcesserChecker {
 	 * @return the cached constructor
 	 */
 	abstract protected CachedConstructor createConstructionProxy(
-			CoreInstantiationSelector selector);
+			CoreInstantiationSelector selector, MetaDefObject mdo);
 
 	/**
 	 * Creates the construction proxy.
@@ -160,7 +160,7 @@ public abstract class AbstractProcesserChecker {
 	abstract protected CachedConstructor createConstructionProxy(
 			CoreInstantiationSelector selector, Class<?> interfaze,
 			net.sf.cglib.proxy.MethodInterceptor interceptor,
-			final List<Method> methodList);
+			final List<Method> methodList, MetaDefObject mdo);
 
 	/**
 	 * Creates the pure bean instance.
@@ -214,10 +214,10 @@ public abstract class AbstractProcesserChecker {
 				final List<Method> methodList = new ArrayList<Method>();
 				Enhancer.getMethods(targetClass, null, methodList);
 				cons = createConstructionProxy(selector, null, intercept,
-						methodList);
+						methodList, metaObj);
 			}
 			else {
-				cons = createConstructionProxy(selector);
+				cons = createConstructionProxy(selector, metaObj);
 			}
 		}
 		else {
@@ -231,7 +231,7 @@ public abstract class AbstractProcesserChecker {
 				List<Method> methodList = definition.getMethodsAnnotatedWith(
 						Inject.class, Outject.class);
 				cons = createConstructionProxy(selector, targetClass,
-						intercept, methodList);
+						intercept, methodList, metaObj);
 			}
 			else if (targetClass.isInterface())
 				throw new InOutDependencyException(

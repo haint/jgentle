@@ -55,7 +55,7 @@ public class JGentleWiring extends TestCase {
 	/**
 	 * Rigourous Test :-)
 	 */
-	public void testSingtonLoopInner() {
+	public void testSingtonLoop0() {
 
 		Provider provider = JGentle.buildProvider(Config.class);
 		A2 a = (A2) provider.getBean(A2.class);

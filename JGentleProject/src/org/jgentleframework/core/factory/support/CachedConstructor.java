@@ -38,6 +38,18 @@ public interface CachedConstructor {
 	Object newInstance(Object... arguments) throws InvocationTargetException;
 
 	/**
+	 * Gets the meta def object.
+	 */
+	MetaDefObject getMetaDefObject();
+
+	/**
+	 * Sets the meta def object.
+	 * 
+	 * @param mdo
+	 */
+	void setMetaDefObject(MetaDefObject mdo);
+
+	/**
 	 * Returns the hashcodeID of this {@link CachedConstructor}
 	 * 
 	 * @return int

@@ -88,12 +88,6 @@ public abstract class AbstractServiceManagement extends ProviderCoreCreator
 		Class<?> targetClass = asc.targetClass;
 		Definition definition = asc.definition;
 		String mappingName = asc.ref;
-		synchronized (this) {
-			matcherCache = this.matcherCache == null ? new ConcurrentHashMap<Definition, Matcher<Definition>>()
-					: matcherCache;
-			interceptorList = this.interceptorList == null ? new HashMap<Matcher<Definition>, ArrayList<Object>>()
-					: interceptorList;
-		}
 		CoreInstantiationSelector coreSelector = new CoreInstantiationSelectorImpl(
 				type, targetClass, asc.ref, definition);
 		ScopeInstance scope = null;
@@ -112,6 +106,12 @@ public abstract class AbstractServiceManagement extends ProviderCoreCreator
 			if (log.isFatalEnabled()) {
 				log.fatal("Could not instantiate bean instance!", e);
 			}
+		}
+		synchronized (this) {
+			matcherCache = this.matcherCache == null ? new ConcurrentHashMap<Definition, Matcher<Definition>>()
+					: matcherCache;
+			interceptorList = this.interceptorList == null ? new HashMap<Matcher<Definition>, ArrayList<Object>>()
+					: interceptorList;
 		}
 		/*
 		 * find matcher in cache

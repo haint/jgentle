@@ -14,6 +14,7 @@
 	<classpathentry kind="lib" path="lib/JavaEE5/jsf-impl.jar"/>
 	<classpathentry kind="lib" path="lib/JavaEE5/jstl-1.2.jar"/>
 	<classpathentry kind="lib" path="lib/cglib-docs-2.1_3/cglib-nodep-2.1_3.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JRE6"/>
+	<classpathentry kind="lib" path="D:/DANH-MUC/FOR PROGRAMMER/Java plus/jakarta-commons/commons-collections-3.2.1/commons-collections-3.2.1.jar" sourcepath="D:/DANH-MUC/FOR PROGRAMMER/Java plus/jakarta-commons/commons-collections-3.2.1/commons-collections-3.2.1-sources.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -19,7 +19,10 @@ package org.jgentleframework.core.factory.support;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.List;
+
+import net.sf.cglib.reflect.FastClass;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -46,6 +49,7 @@ public class CommonFactory {
 	/** Singleton object. */
 	private static CommonFactory	objInstance	= new CommonFactory();
 
+	/** The log. */
 	private final Log				log			= LogFactory.getLog(getClass());
 
 	/**
@@ -92,18 +96,28 @@ public class CommonFactory {
 		if (ReflectUtils.isCast(Initializing.class, obj)) {
 			((Initializing) obj).activate();
 		}
-		else if (def.isAnnotationPresentAtAnyMethods(InitializingMethod.class)) {
+		else {
 			List<Method> methods = def
 					.getMethodsAnnotatedWith(InitializingMethod.class);
-			for (Method method : methods) {
-				method.setAccessible(true);
-				method.invoke(obj);
-				method.setAccessible(false);
+			if (methods != null && methods.size() != 0) {
+				for (Method method : methods) {
+					if (Modifier.isPublic(method.getModifiers())) {
+						method.setAccessible(true);
+						method.invoke(obj);
+					}
+					else {
+						if (log.isErrorEnabled()) {
+							log
+									.error("The initializing method must be public !");
+						}
+					}
+				}
 			}
 		}
-		else {
-			ReflectUtils.invokeMethod(obj, "init", null, null, true, true);
-		}
+		// else {
+		//			
+		// ReflectUtils.invokeMethod(obj, "init", null, null, true, true);
+		// }
 	}
 
 	/**
@@ -220,30 +234,26 @@ public class CommonFactory {
 			SecurityException, InstantiationException, IllegalAccessException,
 			InvocationTargetException, NoSuchMethodException {
 
-		/*
-		 * Xử lý thông tin các inject non-invocation
-		 */
 		if (!targetClass.isAnnotation()) {
+			/*
+			 * Xử lý thông tin các inject non-invocation
+			 */
 			InOutExecutor.executesInjectingAndFiltering(metaObj
 					.getInjectedFields(), metaObj.getSetters(), provider,
 					result, definition);
-		}
-		// embed
-		embedProvider(provider, result);
-		embedDefinition(definition, result);
-		embedTargetClasses(new Class<?>[] { targetClass }, result);
-		/*
-		 * Chỉ định thực thi init
-		 */
-		if (!targetClass.isAnnotation()) {
+			// embed
+			embedProvider(provider, result);
+			embedDefinition(definition, result);
+			embedTargetClasses(new Class<?>[] { targetClass }, result);
+			// thực thi init
 			doInit(definition, result, targetClass);
+			/*
+			 * Xử lý thông tin các outject non-invocation
+			 */
+			InOutExecutor.executesFieldOutjecting(metaObj.getOutjectedFields(),
+					provider, result, definition);
+			InOutExecutor.executesMethodOutjecting(metaObj.getGetters(),
+					provider, result, definition);
 		}
-		/*
-		 * Xử lý thông tin các outject non-invocation
-		 */
-		InOutExecutor.executesFieldOutjecting(metaObj.getOutjectedFields(),
-				provider, result, definition);
-		InOutExecutor.executesMethodOutjecting(metaObj.getGetters(), provider,
-				result, definition);
 	}
 }
