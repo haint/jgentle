@@ -99,7 +99,7 @@ public abstract class AbstractBeanCacher extends AbstractLoadingFactory
 			clazz = (Class<?>) obj;
 			targetClass = this.mappingList.get(obj);
 			targetClass = null == targetClass ? clazz : targetClass;
-			definition = this.defManager.getDefinition(targetClass);
+			definition = this.definitionManager.getDefinition(targetClass);
 			root = clazz;
 			scopeName = Utils.createScopeName(clazz, targetClass, definition,
 					mappingName);

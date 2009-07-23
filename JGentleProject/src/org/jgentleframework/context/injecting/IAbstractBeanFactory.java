@@ -60,7 +60,7 @@ public interface IAbstractBeanFactory {
 	public Object getBeanInstance(Class<?> targetClass, Definition definition);
 
 	/**
-	 * Returns {@link DefinitionManager}.
+	 * Returns current {@link DefinitionManager definition manager}.
 	 */
 	public DefinitionManager getDefinitionManager();
 
@@ -72,16 +72,13 @@ public interface IAbstractBeanFactory {
 	public ObjectBeanFactory getObjectBeanFactory();
 
 	/**
-	 * Returns the {@link ScopeController}.
-	 * 
-	 * @return the scope controller
+	 * Returns the {@link ScopeController scope controller}.
 	 */
 	public ScopeController getScopeController();
 
 	/**
-	 * Returns current {@link ServiceHandler} of this {@link Provider}.
-	 * 
-	 * @return the {@link ServiceHandler}
+	 * Returns current {@link ServiceHandler service handler} of this
+	 * {@link Provider provider}.
 	 */
 	public ServiceHandler getServiceHandler();
 

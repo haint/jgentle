@@ -23,7 +23,7 @@ import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import org.aopalliance.reflect.Metadata;
@@ -60,57 +60,58 @@ public interface Definition extends DefinitionCore, Metadata, AnnotatedElement,
 	public Class<?> getOwnerClass();
 
 	/**
-	 * Returns an array containing {@link Field} objects representing all the
-	 * fields that are annotated with any annotation.
+	 * Returns a {@link Set set} containing all {@link Field} objects
+	 * representing all the fields that are annotated with any annotation.
 	 * 
-	 * @return Returns an array containing {@link Field} objects if it exists,
+	 * @return Returns an array containing {@link Field} objects if they exist,
 	 *         otherwise returns <b>null</b>.
 	 */
 	public Set<Field> getAllAnnotatedFields();
 
 	/**
-	 * Returns an array containing {@link Method} objects representing all the
-	 * methods that are annotated with any annotation.
+	 * Returns a {@link Set set} containing {@link Method} objects representing
+	 * all the methods that are annotated with any annotation.
 	 * 
-	 * @return Returns an array containing {@link Method} objects if it exists,
-	 *         otherwise returns <b>null</b>.
+	 * @return Returns a {@link Set set} containing all {@link Method} objects
+	 *         if they exist, otherwise returns <b>null</b>.
 	 */
 	public Set<Method> getAllAnnotatedMethods();
 
 	/**
-	 * Returns an array containing {@link Constructor} objects representing all
-	 * the constructors that are annotated with any annotation.
+	 * Returns a {@link Set set} containing all {@link Constructor} objects
+	 * representing all the constructors that are annotated with any annotation.
 	 */
 	public Set<Constructor<?>> getAllAnnotatedConstructors();
 
 	/**
-	 * Returns an array containing {@link Method} objects representing all the
-	 * methods that have at least one parameter annotated with any annotation.
+	 * Returns a {@link List list} containing {@link Method} objects
+	 * representing all the methods that have at least one parameter annotated
+	 * with any annotation.
 	 * <p>
 	 * <b>Note:</b> in case of non-object-class Definition (Definition is
 	 * interpreted of {@link Method} or {@link Field} or {@link Constructor},
 	 * and is <i>not</i> interpreted of object class), the returned value is
 	 * <b>null</b>.
 	 * 
-	 * @return Returns an array containing {@link Method} objects if it exists,
-	 *         otherwise returns <b>null</b>.
+	 * @return Returns a {@link List list} containing {@link Method} objects if
+	 *         they exist, otherwise returns <b>null</b>.
 	 */
-	public ArrayList<Method> getAllMethodsAnnotatedParameter();
+	public List<Method> getAllMethodsAnnotatedParameter();
 
 	/**
-	 * Returns an array containing {@link Constructor} objects representing all
-	 * the methods that have at least one parameter annotated with any
-	 * annotation.
+	 * Returns a {@link List list} containing all {@link Constructor} objects
+	 * representing all the methods that have at least one parameter annotated
+	 * with any annotation.
 	 * <p>
 	 * <b>Note:</b> in case of non-object-class Definition (Definition is
 	 * interpreted of {@link Method} or {@link Field} or {@link Constructor},
 	 * and is <i>not</i> interpreted of object class), the returned value is
 	 * <b>null</b>.
 	 * 
-	 * @return Returns an array containing {@link Constructor} objects if it
-	 *         exists, otherwise returns <b>null</b>.
+	 * @return Returns a {@link List list} containing all {@link Constructor}
+	 *         objects if they exist, otherwise returns <b>null</b>.
 	 */
-	public ArrayList<Constructor<?>> getAllConstructorsAnnotatedParameter();
+	public List<Constructor<?>> getAllConstructorsAnnotatedParameter();
 
 	/**
 	 * Returns an array containing all member definitions of current
@@ -122,8 +123,8 @@ public interface Definition extends DefinitionCore, Metadata, AnnotatedElement,
 	 * 
 	 * @param method
 	 *            given <code>method</code> corresponds to current definition.
-	 * @return returns an {@link ArrayList} containing definitions if it exists,
-	 *         otherwise returns an empty {@link ArrayList}.
+	 * @return returns an array containing definitions if they exist, otherwise
+	 *         returns an empty array.
 	 */
 	public Definition[] getArgsMemberDefinitions(Method method);
 
@@ -138,11 +139,11 @@ public interface Definition extends DefinitionCore, Metadata, AnnotatedElement,
 	 * 
 	 * @param annotationClass
 	 *            the object class of given annotation.
-	 * @return returns an array containing all {@link Field} objects are
-	 *         annotated with given annotation if it exists, <b>null</b>
+	 * @return returns a {@link List list} containing all {@link Field} objects
+	 *         are annotated with given annotation if they exist, <b>null</b>
 	 *         otherwise.
 	 */
-	public ArrayList<Field> getFieldsAnnotatedWith(
+	public List<Field> getFieldsAnnotatedWith(
 			Class<? extends Annotation> annotationClass);
 
 	/**
@@ -156,16 +157,16 @@ public interface Definition extends DefinitionCore, Metadata, AnnotatedElement,
 	 * 
 	 * @param annotationClasses
 	 *            the object classes corresponding to given annotations.
-	 * @return returns an array containing all {@link Field} objects are
-	 *         annotated with given coressponding annotations if they exist,
+	 * @return returns a {@link List list} containing all {@link Field} objects
+	 *         are annotated with given coressponding annotations if they exist,
 	 *         <b>null</b> otherwise.
 	 */
-	public ArrayList<Field> getFieldsAnnotatedWith(
+	public List<Field> getFieldsAnnotatedWith(
 			Class<? extends Annotation>... annotationClasses);
 
 	/**
-	 * Returns all {@link Constructor} objects are annotated with given
-	 * annotation.
+	 * Returns all {@link Constructor constructor} objects are annotated with
+	 * given annotation.
 	 * <p>
 	 * <b>Note:</b> this <code>method</code> always returns <b>null</b> in case
 	 * current {@link Definition} is <b><i>not</i></b> interpreted of object
@@ -175,11 +176,11 @@ public interface Definition extends DefinitionCore, Metadata, AnnotatedElement,
 	 * 
 	 * @param annotationClass
 	 *            the object class of given annotation.
-	 * @return returns an array containing all {@link Constructor} objects are
-	 *         annotated with given annotation if it exists, <b>null</b>
-	 *         otherwise.
+	 * @return returns a {@link List list} containing all {@link Constructor}
+	 *         objects are annotated with given annotation if they exist,
+	 *         <b>null</b> otherwise.
 	 */
-	public ArrayList<Constructor<?>> getConstructorsAnnotatedWith(
+	public List<Constructor<?>> getConstructorsAnnotatedWith(
 			Class<? extends Annotation> annotationClass);
 
 	/**
@@ -194,11 +195,11 @@ public interface Definition extends DefinitionCore, Metadata, AnnotatedElement,
 	 * 
 	 * @param annotationClasses
 	 *            the object classes corresponding to given annotations.
-	 * @return returns an array containing all {@link Constructor} objects are
-	 *         annotated with given coressponding annotations if they exist,
-	 *         <b>null</b> otherwise.
+	 * @return returns a {@link List list} containing all {@link Constructor}
+	 *         objects are annotated with given coressponding annotations if
+	 *         they exist, <b>null</b> otherwise.
 	 */
-	public ArrayList<Constructor<?>> getConstructorsAnnotatedWith(
+	public List<Constructor<?>> getConstructorsAnnotatedWith(
 			Class<? extends Annotation>... annotationClasses);
 
 	/**
@@ -305,11 +306,11 @@ public interface Definition extends DefinitionCore, Metadata, AnnotatedElement,
 	 * 
 	 * @param annotationClass
 	 *            the object class of given annotation.
-	 * @return returns an array containing all {@link Method} objects are
-	 *         annotated with given annotation if it exists, <b>null</b>
+	 * @return returns a {@link List list} containing all {@link Method} objects
+	 *         are annotated with given annotation if they exist, <b>null</b>
 	 *         otherwise.
 	 */
-	public ArrayList<Method> getMethodsAnnotatedWith(
+	public List<Method> getMethodsAnnotatedWith(
 			Class<? extends Annotation> annotationClass);
 
 	/**
@@ -323,11 +324,11 @@ public interface Definition extends DefinitionCore, Metadata, AnnotatedElement,
 	 * 
 	 * @param annotationClasses
 	 *            the object classes corresponding to given annotations.
-	 * @return returns an array containing all {@link Method} objects are
-	 *         annotated with given corresponding annotations if they exist,
+	 * @return returns a {@link List list} containing all {@link Method} objects
+	 *         are annotated with given corresponding annotations if they exist,
 	 *         <b>null</b> otherwise.
 	 */
-	public ArrayList<Method> getMethodsAnnotatedWith(
+	public List<Method> getMethodsAnnotatedWith(
 			Class<? extends Annotation>... annotationClasses);
 
 	/**

@@ -22,8 +22,7 @@ import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Map;
 
 /**
  * This interface represents all methods that are responsible for
@@ -40,53 +39,53 @@ public interface DefinitionCore extends MetadataControl {
 	public void buildAnnoMeta();
 
 	/**
-	 * Returns <b>true</b> if this {@link Definition} contains given
+	 * Returns <b>true</b> if this {@link Definition definition} contains given
 	 * {@link AnnoMeta}.
 	 * 
 	 * @param annoMeta
-	 *            the {@link AnnoMeta} whose presence in this {@link Definition}
-	 *            is to be tested.
-	 * @return <b>true</b> if this {@link Definition} contains a specified
-	 *         {@link AnnoMeta}, <b>false</b> otherwise.
+	 *            the {@link AnnoMeta annotation metadata} whose presence in
+	 *            this {@link Definition definition} is to be tested.
+	 * @return <b>true</b> if this {@link Definition definition} contains a
+	 *         specified {@link AnnoMeta annotation metada}, <b>false</b>
+	 *         otherwise.
 	 */
 	public boolean containsMeta(AnnoMeta annoMeta);
 
 	/**
-	 * Returns current {@link AnnoMeta} of this {@link Definition}
-	 * 
-	 * @return the annoMeta
+	 * Returns current {@link AnnoMeta annotation metadata} of this
+	 * {@link Definition definition}
 	 */
 	public AnnoMeta getAnnoMeta();
 
 	/**
-	 * Returns a {@link HashMap} containing all member {@link Definition}s
-	 * corresponding to {@link Constructor} objects specified in the object
-	 * class which this {@link Definition} is interpreted of.
+	 * Returns a {@link Map map} containing all member {@link Definition
+	 * definition} corresponding to {@link Constructor} objects specified in the
+	 * object class which this {@link Definition} is interpreted of.
 	 * <p>
 	 * <b>Note:</b> this method is only performed if current {@link Definition}
 	 * is interpreted of object class.
 	 */
-	public HashMap<Constructor<?>, Definition> getConstructorDefList();
+	public Map<Constructor<?>, Definition> getConstructorDefList();
 
 	/**
-	 * Returns a {@link HashMap} containing all member {@link Definition}s
-	 * corresponding to {@link Field} objects specified in the object class
-	 * which this {@link Definition} is interpreted of.
+	 * Returns a {@link Map map} containing all member {@link Definition
+	 * definition} corresponding to {@link Field} objects specified in the
+	 * object class which this {@link Definition} is interpreted of.
 	 * <p>
-	 * <b>Note:</b> this method is only performed if current {@link Definition}
+	 * <b>Note:</b> this method is only executed if current {@link Definition}
 	 * is interpreted of object class.
 	 */
-	public HashMap<Field, Definition> getFieldDefList();
+	public Map<Field, Definition> getFieldDefList();
 
 	/**
-	 * Returns a {@link HashMap} containing all member {@link Definition}s
-	 * corresponding to {@link Method} objects specified in the object class
-	 * which this {@link Definition} is interpreted of.
+	 * Returns a {@link Map map} containing all member {@link Definition
+	 * definition} corresponding to {@link Method} objects specified in the
+	 * object class which this {@link Definition} is interpreted of.
 	 * <p>
-	 * <b>Note:</b> this method is only performed if current {@link Definition}
-	 * is interpreted of object class.
+	 * <b>Note:</b> this method is only performed if current {@link Definition
+	 * definition} is interpreted of object class.
 	 */
-	public HashMap<Method, Definition> getMethodDefList();
+	public Map<Method, Definition> getMethodDefList();
 
 	/**
 	 * Returns an instance of original annotation according as its given object
@@ -108,7 +107,7 @@ public interface DefinitionCore extends MetadataControl {
 	 * Returns an array containing all original annotations of this
 	 * {@link Definition}
 	 * 
-	 * @return returns an array containing alloriginal annotation, if not
+	 * @return returns an array containing all original annotations, if not
 	 *         exists, returns an empty array.
 	 */
 	public Annotation[] getOriginalAnnotations();
@@ -121,11 +120,10 @@ public interface DefinitionCore extends MetadataControl {
 	 * <b>Note:</b> this method is only performed if current {@link Definition}
 	 * is interpreted of the {@link Method} object.
 	 * 
-	 * @return an {@link ArrayList} of member {@link Definition}s, if does not
+	 * @return an array of member {@link Definition definition}, if does not
 	 *         find any corresponding {@link Definition}, returns an empty
-	 *         {@link ArrayList}. In case this {@link Definition} is not
-	 *         interpreted of one {@link Method} object, the returned value will
-	 *         be <b>null</b>.
+	 *         array. In case this {@link Definition} is not interpreted of one
+	 *         {@link Method} object, the returned value will be <b>null</b>.
 	 */
 	public Definition[] getParameterDefList();
 
@@ -166,7 +164,10 @@ public interface DefinitionCore extends MetadataControl {
 	public void setOriginalAnnotations(Annotation[] originalAnnotations);
 
 	/**
+	 * Sets the parameter def list.
+	 * 
 	 * @param parameterDefList
+	 *            the parameter def list
 	 */
 	public void setParameterDefList(Definition[] parameterDefList);
 

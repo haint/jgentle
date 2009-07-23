@@ -150,9 +150,9 @@ class DefinitionImpl extends DefinitionCoreImpl implements Metadata, Definition 
 	 * getAllConstructorsAnnotatedParameter()
 	 */
 	@Override
-	public ArrayList<Constructor<?>> getAllConstructorsAnnotatedParameter() {
+	public List<Constructor<?>> getAllConstructorsAnnotatedParameter() {
 
-		ArrayList<Constructor<?>> result = null;
+		List<Constructor<?>> result = null;
 		if (isInterpretedOfClass()) {
 			result = new ArrayList<Constructor<?>>();
 			for (Entry<Constructor<?>, Definition> entry : this
@@ -172,7 +172,7 @@ class DefinitionImpl extends DefinitionCoreImpl implements Metadata, Definition 
 	 * getAllMethodsAnnotatedParameter()
 	 */
 	@Override
-	public ArrayList<Method> getAllMethodsAnnotatedParameter() {
+	public List<Method> getAllMethodsAnnotatedParameter() {
 
 		ArrayList<Method> result = null;
 		if (isInterpretedOfClass()) {
@@ -246,10 +246,10 @@ class DefinitionImpl extends DefinitionCoreImpl implements Metadata, Definition 
 	 * getConstructorsAnnotatedWith(java.lang.Class)
 	 */
 	@Override
-	public ArrayList<Constructor<?>> getConstructorsAnnotatedWith(
+	public List<Constructor<?>> getConstructorsAnnotatedWith(
 			Class<? extends Annotation> annotationClass) {
 
-		ArrayList<Constructor<?>> result = null;
+		List<Constructor<?>> result = null;
 		if (isInterpretedOfClass()) {
 			for (Entry<Constructor<?>, Definition> entry : getConstructorDefList()
 					.entrySet()) {
@@ -270,14 +270,14 @@ class DefinitionImpl extends DefinitionCoreImpl implements Metadata, Definition 
 	 * java.lang.annotation.Annotation>[])
 	 */
 	@Override
-	public ArrayList<Constructor<?>> getConstructorsAnnotatedWith(
+	public List<Constructor<?>> getConstructorsAnnotatedWith(
 			Class<? extends Annotation>... annotationClasses) {
 
-		ArrayList<Constructor<?>> result = null;
+		List<Constructor<?>> result = null;
 		if (!isInterpretedOfClass())
 			return result;
 		for (Class<? extends Annotation> clazz : annotationClasses) {
-			ArrayList<Constructor<?>> res = getConstructorsAnnotatedWith(clazz);
+			List<Constructor<?>> res = getConstructorsAnnotatedWith(clazz);
 			if (res != null) {
 				if (result == null)
 					result = new ArrayList<Constructor<?>>();
@@ -303,10 +303,10 @@ class DefinitionImpl extends DefinitionCoreImpl implements Metadata, Definition 
 	 * getFieldsAnnotatedWith(java.lang.Class)
 	 */
 	@Override
-	public ArrayList<Field> getFieldsAnnotatedWith(
+	public List<Field> getFieldsAnnotatedWith(
 			Class<? extends Annotation> annotationClass) {
 
-		ArrayList<Field> result = null;
+		List<Field> result = null;
 		if (isInterpretedOfClass()) {
 			for (Entry<Field, Definition> entry : getFieldDefList().entrySet()) {
 				if (entry.getValue().isAnnotationPresent(annotationClass)) {
@@ -326,14 +326,14 @@ class DefinitionImpl extends DefinitionCoreImpl implements Metadata, Definition 
 	 * java.lang.annotation.Annotation>[])
 	 */
 	@Override
-	public ArrayList<Field> getFieldsAnnotatedWith(
+	public List<Field> getFieldsAnnotatedWith(
 			Class<? extends Annotation>... annotationClasses) {
 
-		ArrayList<Field> result = null;
+		List<Field> result = null;
 		if (!isInterpretedOfClass())
 			return result;
 		for (Class<? extends Annotation> clazz : annotationClasses) {
-			ArrayList<Field> res = getFieldsAnnotatedWith(clazz);
+			List<Field> res = getFieldsAnnotatedWith(clazz);
 			if (res != null) {
 				if (result == null)
 					result = new ArrayList<Field>();
@@ -506,7 +506,7 @@ class DefinitionImpl extends DefinitionCoreImpl implements Metadata, Definition 
 	 * getMethodsAnnotatedWith(java.lang.Class)
 	 */
 	@Override
-	public ArrayList<Method> getMethodsAnnotatedWith(
+	public List<Method> getMethodsAnnotatedWith(
 			Class<? extends Annotation> annotationClass) {
 
 		ArrayList<Method> result = null;
@@ -530,14 +530,14 @@ class DefinitionImpl extends DefinitionCoreImpl implements Metadata, Definition 
 	 * java.lang.annotation.Annotation>[])
 	 */
 	@Override
-	public ArrayList<Method> getMethodsAnnotatedWith(
+	public List<Method> getMethodsAnnotatedWith(
 			Class<? extends Annotation>... annotationClasses) {
 
-		ArrayList<Method> result = null;
+		List<Method> result = null;
 		if (!isInterpretedOfClass())
 			return result;
 		for (Class<? extends Annotation> clazz : annotationClasses) {
-			ArrayList<Method> res = getMethodsAnnotatedWith(clazz);
+			List<Method> res = getMethodsAnnotatedWith(clazz);
 			if (res != null) {
 				if (result == null)
 					result = new ArrayList<Method>();

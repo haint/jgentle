@@ -23,6 +23,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Map;
 
 import org.aopalliance.reflect.Metadata;
 import org.jgentleframework.core.reflection.IAnnoVisitable;
@@ -60,19 +61,19 @@ abstract class DefinitionCoreImpl extends MetadataController implements
 	 * containing {@link Definition} of {@link Constructor} objects in case this
 	 * {@link Definition} is interpreted of object class.
 	 */
-	HashMap<Constructor<?>, Definition>	constructorDefList	= new HashMap<Constructor<?>, Definition>();
+	Map<Constructor<?>, Definition>	constructorDefList	= new HashMap<Constructor<?>, Definition>();
 
 	/**
 	 * containing {@link Definition} of {@link Field} objects in case this
 	 * {@link Definition} is interpreted of object class.
 	 */
-	HashMap<Field, Definition>			fieldDefList		= new HashMap<Field, Definition>();
+	Map<Field, Definition>			fieldDefList		= new HashMap<Field, Definition>();
 
 	/**
 	 * containing {@link Definition} of {@link Method} objects in case this
 	 * {@link Definition} is interpreted of object class.
 	 */
-	HashMap<Method, Definition>			methodDefList		= new HashMap<Method, Definition>();
+	Map<Method, Definition>			methodDefList		= new HashMap<Method, Definition>();
 
 	/**
 	 * The array containing all original annotations of this {@link Definition}
@@ -152,7 +153,7 @@ abstract class DefinitionCoreImpl extends MetadataController implements
 	 * getConstructorDefList()
 	 */
 	@Override
-	public HashMap<Constructor<?>, Definition> getConstructorDefList() {
+	public Map<Constructor<?>, Definition> getConstructorDefList() {
 
 		return constructorDefList;
 	}
@@ -164,7 +165,7 @@ abstract class DefinitionCoreImpl extends MetadataController implements
 	 * ()
 	 */
 	@Override
-	public HashMap<Field, Definition> getFieldDefList() {
+	public Map<Field, Definition> getFieldDefList() {
 
 		return fieldDefList;
 	}
@@ -176,7 +177,7 @@ abstract class DefinitionCoreImpl extends MetadataController implements
 	 * ()
 	 */
 	@Override
-	public HashMap<Method, Definition> getMethodDefList() {
+	public Map<Method, Definition> getMethodDefList() {
 
 		return methodDefList;
 	}

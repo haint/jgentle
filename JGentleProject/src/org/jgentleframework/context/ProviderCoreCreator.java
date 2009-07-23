@@ -17,7 +17,6 @@
  */
 package org.jgentleframework.context;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -63,7 +62,7 @@ class ProviderCoreCreator extends AbstractBeanFactory implements Provider {
 	private static final long									serialVersionUID	= 330183329296893472L;
 
 	/**
-	 * The {@link ArrayList} holds a list of config instance of this
+	 * The {@link List list} holds a list of config instance of this
 	 * {@link Provider}.
 	 */
 	private List<Configurable>									configInstances		= null;
@@ -72,7 +71,7 @@ class ProviderCoreCreator extends AbstractBeanFactory implements Provider {
 	private Detector											detectorController	= null;
 
 	/** registered interceptors. */
-	protected HashMap<Matcher<Definition>, ArrayList<Object>>	interceptorList		= null;
+	protected Map<Matcher<Definition>, List<Object>>			interceptorList		= null;
 
 	/** The interceptor cacher. */
 	protected ConcurrentMap<Definition, Matcher<Definition>>	matcherCache		= null;
@@ -89,7 +88,7 @@ class ProviderCoreCreator extends AbstractBeanFactory implements Provider {
 			List<Map<String, Object>> OLArray) {
 
 		this.serviceHandler = serviceHandler;
-		this.defManager = this.serviceHandler.getDefinitionManager();
+		this.definitionManager = this.serviceHandler.getDefinitionManager();
 		this.objectBeanFactory = new ObjectBeanFactoryImpl(this) {
 			@Override
 			public Object getRefInstance(String refInstance) {
@@ -109,7 +108,7 @@ class ProviderCoreCreator extends AbstractBeanFactory implements Provider {
 		this.scopeList = this.objectBeanFactory.getScopeList();
 		this.detectorController = new FirstDetector(this);
 		this.matcherCache = new ConcurrentHashMap<Definition, Matcher<Definition>>();
-		this.interceptorList = new HashMap<Matcher<Definition>, ArrayList<Object>>();
+		this.interceptorList = new HashMap<Matcher<Definition>, List<Object>>();
 		// Creates detector
 		Detector espDetector = new ExtensionPointsDetector(this);
 		Detector aldDetector = new AutoLoadingDefinitionDetector(this);
@@ -194,7 +193,7 @@ class ProviderCoreCreator extends AbstractBeanFactory implements Provider {
 	@Override
 	public Object getBeanBoundToDefinition(String ID) {
 
-		Definition def = this.defManager.getDefinition(ID);
+		Definition def = this.definitionManager.getDefinition(ID);
 		if (def != null) {
 			Object result = returnSharedObject(this.rootScopeName.get(def));
 			if (result != NULL_SHAREDOBJECT)
@@ -427,7 +426,7 @@ class ProviderCoreCreator extends AbstractBeanFactory implements Provider {
 	 * .exxlabs.jgentle.configure.AbstractConfig[])
 	 */
 	@Override
-	public void setConfigInstances(ArrayList<Configurable> configInstances) {
+	public void setConfigInstances(List<Configurable> configInstances) {
 
 		this.configInstances = configInstances;
 	}

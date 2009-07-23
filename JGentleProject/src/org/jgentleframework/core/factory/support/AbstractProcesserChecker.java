@@ -378,11 +378,11 @@ public abstract class AbstractProcesserChecker {
 				.getReferenceName());
 		Map<String, ScopeInstance> scopeList = provider.getObjectBeanFactory()
 				.getScopeList();
-		Scope scope;
+		Scope scope = null;
 		synchronized (scopeList) {
 			scope = (Scope) scopeList.get(scopeName);
 		}
-		if (scope.equals(Scope.SINGLETON)) {
+		if (scope != null && scope.equals(Scope.SINGLETON)) {
 			synchronized (provider.getObjectBeanFactory().getMapDirectList()) {
 				provider.getObjectBeanFactory().getMapDirectList().put(
 						scopeName, result);

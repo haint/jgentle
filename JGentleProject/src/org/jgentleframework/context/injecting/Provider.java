@@ -17,7 +17,6 @@
  */
 package org.jgentleframework.context.injecting;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -87,10 +86,11 @@ public interface Provider extends IAbstractBeanFactory, Context {
 	public Object getBean(String refer);
 
 	/**
-	 * Returns an instance bound to the given ID of {@link Definition}
+	 * Returns an instance bound to the given ID of {@link Definition
+	 * definition}
 	 * 
 	 * @param ID
-	 *            the ID of corresponding {@link Definition} of bean.
+	 *            the ID of corresponding {@link Definition definition}.
 	 * @return an instance of the bean
 	 */
 	public Object getBeanBoundToDefinition(String ID);
@@ -120,7 +120,7 @@ public interface Provider extends IAbstractBeanFactory, Context {
 	public List<Configurable> getConfigInstances();
 
 	/**
-	 * Returns the detector controller of this container.
+	 * Returns the {@link Detector detector controller} of this container.
 	 * 
 	 * @see AbstractDetector
 	 */
@@ -132,5 +132,5 @@ public interface Provider extends IAbstractBeanFactory, Context {
 	 * @param configInstances
 	 *            the list of configurable instances.
 	 */
-	public void setConfigInstances(ArrayList<Configurable> configInstances);
+	public void setConfigInstances(List<Configurable> configInstances);
 }

@@ -110,7 +110,7 @@ public abstract class AbstractServiceManagement extends ProviderCoreCreator
 		synchronized (this) {
 			matcherCache = this.matcherCache == null ? new ConcurrentHashMap<Definition, Matcher<Definition>>()
 					: matcherCache;
-			interceptorList = this.interceptorList == null ? new HashMap<Matcher<Definition>, ArrayList<Object>>()
+			interceptorList = this.interceptorList == null ? new HashMap<Matcher<Definition>, List<Object>>()
 					: interceptorList;
 		}
 		/*
@@ -230,7 +230,7 @@ public abstract class AbstractServiceManagement extends ProviderCoreCreator
 		Assertor.notNull(result);
 		Assertor.notNull(matcher);
 		if (isRegisteredMatcher(matcher)) {
-			ArrayList<Object> list = this.interceptorList.get(matcher);
+			List<Object> list = this.interceptorList.get(matcher);
 			if (list != null) {
 				for (Object icpt : list) {
 					Interceptor interceptor = null;
@@ -298,7 +298,7 @@ public abstract class AbstractServiceManagement extends ProviderCoreCreator
 			Object interceptor) {
 
 		List<Matcher<Definition>> list = new ArrayList<Matcher<Definition>>();
-		for (Entry<Matcher<Definition>, ArrayList<Object>> entry : this.interceptorList
+		for (Entry<Matcher<Definition>, List<Object>> entry : this.interceptorList
 				.entrySet()) {
 			if (entry.getValue().contains(interceptor)) {
 				list.add(entry.getKey());
@@ -323,7 +323,7 @@ public abstract class AbstractServiceManagement extends ProviderCoreCreator
 		if (!this.interceptorList.containsKey(matcher)) {
 			return false;
 		}
-		ArrayList<Object> list = this.interceptorList.get(matcher);
+		List<Object> list = this.interceptorList.get(matcher);
 		if (list == null) {
 			this.interceptorList.remove(matcher);
 			return false;
@@ -434,7 +434,7 @@ public abstract class AbstractServiceManagement extends ProviderCoreCreator
 	public synchronized void unregisters(Object interceptor) {
 
 		Assertor.notNull(interceptor);
-		for (Entry<Matcher<Definition>, ArrayList<Object>> entry : this.interceptorList
+		for (Entry<Matcher<Definition>, List<Object>> entry : this.interceptorList
 				.entrySet()) {
 			if (entry.getValue().contains(interceptor)) {
 				entry.getValue().remove(interceptor);

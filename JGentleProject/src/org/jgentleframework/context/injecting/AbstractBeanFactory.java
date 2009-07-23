@@ -20,7 +20,6 @@ package org.jgentleframework.context.injecting;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
@@ -81,7 +80,7 @@ public abstract class AbstractBeanFactory extends AbstractBeanCacher implements
 	}
 
 	/**
-	 * This method is responsible for annotating {@link Definition}
+	 * This method is responsible for annotating {@link Definition definition}
 	 * instantiation.
 	 * 
 	 * @param provider
@@ -92,11 +91,11 @@ public abstract class AbstractBeanFactory extends AbstractBeanCacher implements
 	public static void buildDefBeanAnnotate(Provider provider,
 			List<Object> annotateIDList) {
 
-		DefinitionManager defManager = provider.getDefinitionManager();
+		DefinitionManager definitionManager = provider.getDefinitionManager();
 		for (Object obj : annotateIDList) {
-			Definition def = ReflectUtils.isCast(String.class, obj) ? defManager
+			Definition def = ReflectUtils.isCast(String.class, obj) ? definitionManager
 					.getDefinition((String) obj)
-					: defManager.getDefinition(obj);
+					: definitionManager.getDefinition(obj);
 			// checking class
 			if (def.isAnnotationPresent(Annotate.class)) {
 				Annotate anno = def.getAnnotation(Annotate.class);
@@ -105,11 +104,12 @@ public abstract class AbstractBeanFactory extends AbstractBeanCacher implements
 					if (bean != null
 							&& ReflectUtils.isCast(Annotation.class, bean)) {
 						if (ReflectUtils.isCast(String.class, obj))
-							defManager.loadCustomizedDefinition((Class<?>) def
-									.getKey(), (Annotation) bean, (String) obj);
+							definitionManager.loadCustomizedDefinition(
+									(Class<?>) def.getKey(), (Annotation) bean,
+									(String) obj);
 						else if (ReflectUtils.isCast(Class.class, obj))
-							defManager.loadCustomizedDefinition((Class<?>) obj,
-									(Annotation) bean, null);
+							definitionManager.loadCustomizedDefinition(
+									(Class<?>) obj, (Annotation) bean, null);
 						else {
 							if (staticLog.isErrorEnabled()) {
 								staticLog
@@ -131,7 +131,7 @@ public abstract class AbstractBeanFactory extends AbstractBeanCacher implements
 			}
 			// checking fields
 			if (def.isAnnotationPresentAtAnyFields(Annotate.class)) {
-				ArrayList<Field> fieldList = def
+				List<Field> fieldList = def
 						.getFieldsAnnotatedWith(Annotate.class);
 				for (Field field : fieldList) {
 					Definition defChild = def.getMemberDefinition(field);
@@ -142,12 +142,13 @@ public abstract class AbstractBeanFactory extends AbstractBeanCacher implements
 						if (bean != null
 								&& ReflectUtils.isCast(Annotation.class, bean)) {
 							if (ReflectUtils.isCast(String.class, obj))
-								defManager.loadCustomizedDefinition(
+								definitionManager.loadCustomizedDefinition(
 										(String) obj, field, (Class<?>) def
 												.getKey(), (Annotation) bean);
 							else if (ReflectUtils.isCast(Class.class, obj))
-								defManager.loadCustomizedDefinition(field,
-										(Class<?>) obj, (Annotation) bean);
+								definitionManager.loadCustomizedDefinition(
+										field, (Class<?>) obj,
+										(Annotation) bean);
 							else if (staticLog.isErrorEnabled()) {
 								staticLog
 										.error(
@@ -168,7 +169,7 @@ public abstract class AbstractBeanFactory extends AbstractBeanCacher implements
 			}
 			// checking methods
 			if (def.isAnnotationPresentAtAnyMethods(Annotate.class)) {
-				ArrayList<Method> methodList = def
+				List<Method> methodList = def
 						.getMethodsAnnotatedWith(Annotate.class);
 				for (Method method : methodList) {
 					Definition defChild = def.getMemberDefinition(method);
@@ -179,12 +180,13 @@ public abstract class AbstractBeanFactory extends AbstractBeanCacher implements
 						if (bean != null
 								&& ReflectUtils.isCast(Annotation.class, bean)) {
 							if (ReflectUtils.isCast(String.class, obj))
-								defManager.loadCustomizedDefinition(
+								definitionManager.loadCustomizedDefinition(
 										(String) obj, method, (Class<?>) def
 												.getKey(), (Annotation) bean);
 							else if (ReflectUtils.isCast(Class.class, obj))
-								defManager.loadCustomizedDefinition(method,
-										(Class<?>) obj, (Annotation) bean);
+								definitionManager.loadCustomizedDefinition(
+										method, (Class<?>) obj,
+										(Annotation) bean);
 							else if (staticLog.isErrorEnabled()) {
 								staticLog
 										.error(
@@ -392,7 +394,7 @@ public abstract class AbstractBeanFactory extends AbstractBeanCacher implements
 	 * @param selector
 	 *            the selector
 	 * @return the bean instance
-	 * @throws Throwable
+	 * @throws Exception
 	 */
 	protected Object getBeanInstance(Selector selector) throws Exception {
 
@@ -405,7 +407,7 @@ public abstract class AbstractBeanFactory extends AbstractBeanCacher implements
 			String mappingName = coreSelector.getReferenceName();
 			String scopeName = null;
 			// validate
-			definition = definition == null ? this.defManager
+			definition = definition == null ? this.definitionManager
 					.getDefinition(targetClass) : definition;
 			Class<?> defClass = (Class<?>) definition.getKey();
 			if (!defClass.equals(targetClass)) {
@@ -466,7 +468,7 @@ public abstract class AbstractBeanFactory extends AbstractBeanCacher implements
 	@Override
 	public DefinitionManager getDefinitionManager() {
 
-		return this.defManager;
+		return this.definitionManager;
 	}
 
 	/*
@@ -500,12 +502,10 @@ public abstract class AbstractBeanFactory extends AbstractBeanCacher implements
 	@Override
 	public boolean isContainsConstant(String name) {
 
-		synchronized (this.objectBeanFactory.getMapDirectList()) {
-			if (this.objectBeanFactory.getMapDirectList().containsKey(name)) {
-				return true;
-			}
-			return false;
+		if (this.mapDirectList.containsKey(name)) {
+			return true;
 		}
+		return false;
 	}
 
 	/*
@@ -516,12 +516,10 @@ public abstract class AbstractBeanFactory extends AbstractBeanCacher implements
 	@Override
 	public boolean isContainsMappingName(String name) {
 
-		synchronized (this.objectBeanFactory.getAliasMap()) {
-			if (this.objectBeanFactory.getAliasMap().containsKey(name)) {
-				return true;
-			}
-			return false;
+		if (this.aliasMap.containsKey(name)) {
+			return true;
 		}
+		return false;
 	}
 
 	/*
@@ -533,10 +531,9 @@ public abstract class AbstractBeanFactory extends AbstractBeanCacher implements
 	@Override
 	public boolean isPrototype(Class<?> clazz) {
 
-		Definition def = this.objectBeanFactory.getMappingList().containsKey(
-				clazz) ? this.defManager.getDefinition(this.objectBeanFactory
-				.getMappingList().get(clazz)) : this.defManager
-				.getDefinition(clazz);
+		Definition def = this.mappingList.containsKey(clazz) ? this.definitionManager
+				.getDefinition(this.mappingList.get(clazz))
+				: this.definitionManager.getDefinition(clazz);
 		return isScope(def, Scope.PROTOTYPE);
 	}
 
@@ -549,7 +546,7 @@ public abstract class AbstractBeanFactory extends AbstractBeanCacher implements
 	@Override
 	public boolean isPrototype(String ID) {
 
-		Definition def = this.getDefinitionManager().getDefinition(ID);
+		Definition def = this.definitionManager.getDefinition(ID);
 		if (def == null) {
 			if (log.isErrorEnabled()) {
 				log.error("The Definition ID '" + ID + "' is not existed !",
@@ -573,8 +570,8 @@ public abstract class AbstractBeanFactory extends AbstractBeanCacher implements
 		if (def != null) {
 			String scopeName = def.getKey().toString() + ":" + def.toString();
 			ScopeInstance scope;
-			synchronized (this.objectBeanFactory.getScopeList()) {
-				scope = this.objectBeanFactory.getScopeList().get(scopeName);
+			synchronized (this.scopeList) {
+				scope = this.scopeList.get(scopeName);
 			}
 			if (ReflectUtils.isCast(sc.getClass(), scope)) {
 				if (scope.equals(sc)) {
@@ -602,10 +599,9 @@ public abstract class AbstractBeanFactory extends AbstractBeanCacher implements
 	@Override
 	public boolean isSingleton(Class<?> clazz) {
 
-		Definition def = this.objectBeanFactory.getMappingList().containsKey(
-				clazz) ? this.defManager.getDefinition(this.objectBeanFactory
-				.getMappingList().get(clazz)) : this.defManager
-				.getDefinition(clazz);
+		Definition def = this.mappingList.containsKey(clazz) ? this.definitionManager
+				.getDefinition(this.mappingList.get(clazz))
+				: this.definitionManager.getDefinition(clazz);
 		return isScope(def, Scope.SINGLETON);
 	}
 
@@ -618,12 +614,9 @@ public abstract class AbstractBeanFactory extends AbstractBeanCacher implements
 	@Override
 	public boolean isSingleton(Object bean) {
 
-		synchronized (this.objectBeanFactory.getMapDirectList()) {
-			for (Object obj : this.objectBeanFactory.getMapDirectList()
-					.values()) {
-				if (bean == obj) {
-					return true;
-				}
+		for (Object obj : this.mapDirectList.values()) {
+			if (bean == obj) {
+				return true;
 			}
 		}
 		return false;
@@ -638,7 +631,7 @@ public abstract class AbstractBeanFactory extends AbstractBeanCacher implements
 	@Override
 	public boolean isSingleton(String ID) {
 
-		Definition def = this.getDefinitionManager().getDefinition(ID);
+		Definition def = this.definitionManager.getDefinition(ID);
 		if (def == null) {
 			if (log.isErrorEnabled()) {
 				log.error("The Definition ID '" + ID + "' is not existed !",
