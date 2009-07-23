@@ -18,7 +18,7 @@
 package org.jgentleframework.context;
 
 import java.util.Collection;
-import java.util.HashMap;
+import java.util.Map;
 
 import org.jgentleframework.configure.Configurable;
 import org.jgentleframework.context.injecting.Provider;
@@ -61,8 +61,8 @@ public interface ServiceProvider extends Provider, IAbstractServiceManagement {
 			ComponentServiceContextType<T> csc);
 
 	/**
-	 * Removes the specified {@link ComponentServiceContextType} corressponding
-	 * to the given class type.
+	 * Removes the specified {@link ComponentServiceContextType} bound to the
+	 * given class type.
 	 * 
 	 * @param clazzType
 	 *            the given class type
@@ -89,5 +89,5 @@ public interface ServiceProvider extends Provider, IAbstractServiceManagement {
 	 * Returns the Map of all current {@link ComponentServiceContextType}
 	 * instances of this {@link ServiceProvider}
 	 */
-	public HashMap<Class<?>, ComponentServiceContextType<Configurable>> getCSCList();
+	public Map<Class<?>, ComponentServiceContextType<Configurable>> getCSCList();
 }

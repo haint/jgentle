@@ -19,6 +19,7 @@ package org.jgentleframework.context;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -63,12 +64,12 @@ public abstract class AbstractInitLoading {
 				.isCast(AbstractLoadingFactory.class, provider) ? provider
 				: null);
 		// query option list
-		List<DefinitionPostProcessor> dppList = new ArrayList<DefinitionPostProcessor>();
+		List<DefinitionPostProcessor> dppList = new LinkedList<DefinitionPostProcessor>();
 		HashMap<Class, AnnotationBeanProcessor> abpHash = new HashMap<Class, AnnotationBeanProcessor>();
-		List<ObjectAttach<?>> oaList = new ArrayList<ObjectAttach<?>>();
-		List<Class<?>> beanClassList = new ArrayList<Class<?>>();
-		List<ObjectBindingConstant> obcList = new ArrayList<ObjectBindingConstant>();
-		List<ObjectConstant> ocList = new ArrayList<ObjectConstant>();
+		List<ObjectAttach<?>> oaList = new LinkedList<ObjectAttach<?>>();
+		List<Class<?>> beanClassList = new LinkedList<Class<?>>();
+		List<ObjectBindingConstant> obcList = new LinkedList<ObjectBindingConstant>();
+		List<ObjectConstant> ocList = new LinkedList<ObjectConstant>();
 		for (Map<String, Object> optionsList : OLArray) {
 			/***************/
 			List<DefinitionPostProcessor> dpp = (ArrayList<DefinitionPostProcessor>) optionsList
@@ -81,17 +82,17 @@ public abstract class AbstractInitLoading {
 			if (abp != null)
 				abpHash.putAll(abp);
 			/***************/
-			List<ObjectAttach<?>> oa = (ArrayList<ObjectAttach<?>>) optionsList
+			List<ObjectAttach<?>> oa = (List<ObjectAttach<?>>) optionsList
 					.get(AbstractConfig.OBJECT_ATTACH_LIST);
 			if (oa != null)
 				oaList.addAll(oa);
 			/***************/
-			List<Class<?>> bc = (ArrayList<Class<?>>) optionsList
+			List<Class<?>> bc = (List<Class<?>>) optionsList
 					.get(AbstractConfig.BEAN_CLASS_LIST);
 			if (bc != null)
 				beanClassList.addAll(bc);
 			/***************/
-			List<ObjectBindingConstant> obc = (ArrayList<ObjectBindingConstant>) optionsList
+			List<ObjectBindingConstant> obc = (List<ObjectBindingConstant>) optionsList
 					.get(AbstractConfig.OBJECT_BINDING_CONSTANT_LIST);
 			if (obc != null)
 				obcList.addAll(obc);

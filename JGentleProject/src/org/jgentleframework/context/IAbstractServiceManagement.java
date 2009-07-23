@@ -17,7 +17,6 @@
  */
 package org.jgentleframework.context;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -133,5 +132,5 @@ public interface IAbstractServiceManagement {
 	 * @return the interceptors from matcher
 	 */
 	public Interceptor[] getInterceptorsFromMatcher(
-			ArrayList<Matcher<Definition>> matchers);
+			List<Matcher<Definition>> matchers);
 }

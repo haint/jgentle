@@ -20,6 +20,7 @@ package org.jgentleframework.utils;
 import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 import org.jgentleframework.core.IllegalPropertyException;
@@ -210,7 +211,7 @@ public final class Assertor {
 	 *            Chuỗi String mô tả message của exception nếu quá trình xác
 	 *            nhận failed
 	 */
-	public static void hasValidIndex(ArrayList<?> arrayList, int index,
+	public static void hasValidIndex(List<?> arrayList, int index,
 			String message) {
 
 		Assertor
@@ -230,7 +231,7 @@ public final class Assertor {
 	 * @param index
 	 *            chỉ số index
 	 */
-	public static void hasValidIndex(ArrayList<?> arrayList, int index) {
+	public static void hasValidIndex(List<?> arrayList, int index) {
 
 		hasValidIndex(arrayList, index,
 				"[Quá trình xác nhận failed] - index nằm ngoài phạm vi của arrayList.");

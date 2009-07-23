@@ -259,7 +259,7 @@ public abstract class InOutExecutor {
 	 * @throws IllegalArgumentException
 	 *             the illegal argument exception
 	 */
-	public static void executesDisinjection(HashMap<Field, Object> map,
+	public static void executesDisinjection(Map<Field, Object> map,
 			Object target) throws IllegalArgumentException,
 			IllegalAccessException {
 

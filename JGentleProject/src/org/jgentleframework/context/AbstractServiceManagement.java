@@ -51,7 +51,7 @@ import org.jgentleframework.utils.data.Pair;
  * {@link #getBeanInstance(Class, Class, String, Definition)} method is
  * overrided in order to customize the bean instantiation according as its
  * configuration data. Moreover, this class provides some methods in order to
- * manage customized {@link Interceptor interceptors}, matcher cache, ...
+ * manage customizing {@link Interceptor interceptors}, matcher cache, ...
  * 
  * @author LE QUOC CHUNG - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
@@ -266,7 +266,7 @@ public abstract class AbstractServiceManagement extends ProviderCoreCreator
 	 */
 	@Override
 	public Interceptor[] getInterceptorsFromMatcher(
-			ArrayList<Matcher<Definition>> matchers) {
+			List<Matcher<Definition>> matchers) {
 
 		Assertor.notNull(matchers);
 		List<Interceptor> result = new LinkedList<Interceptor>();
@@ -403,8 +403,7 @@ public abstract class AbstractServiceManagement extends ProviderCoreCreator
 				}
 			}
 			else {
-				ArrayList<Object> list = null;
-				list = new ArrayList<Object>();
+				List<Object> list = new ArrayList<Object>();
 				list.add(interceptor);
 				this.interceptorList.put(matcher, list);
 			}

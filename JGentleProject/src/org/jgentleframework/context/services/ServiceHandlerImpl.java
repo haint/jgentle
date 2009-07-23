@@ -24,11 +24,10 @@ import java.beans.beancontext.BeanContextSupport;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.TooManyListenersException;
 
 import org.jgentleframework.configure.annotation.AnnotationClass;
@@ -334,7 +333,7 @@ public class ServiceHandlerImpl implements ServiceHandler {
 	 * AnnotationRegister#getAnnotationRegistered()
 	 */
 	@Override
-	public ArrayList<Class<? extends Annotation>> getAnnotationRegistered() {
+	public List<Class<? extends Annotation>> getAnnotationRegistered() {
 
 		return this.annoRegister.getAnnotationRegistered();
 	}
@@ -490,7 +489,7 @@ public class ServiceHandlerImpl implements ServiceHandler {
 	 * AnnotationRegister#getValidatorlist()
 	 */
 	@Override
-	public HashMap<Class<? extends Annotation>, AnnotationValidator<? extends Annotation>> getValidatorlist() {
+	public Map<Class<? extends Annotation>, AnnotationValidator<? extends Annotation>> getValidatorlist() {
 
 		return this.annoRegister.getValidatorlist();
 	}

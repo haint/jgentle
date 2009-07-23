@@ -21,6 +21,9 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import org.jgentleframework.core.handling.DefinitionManager;
@@ -42,13 +45,13 @@ import org.jgentleframework.utils.ReflectUtils;
 public abstract class AbstractVisitorHandler implements IAnnotationVisitor {
 	/** The handler list. */
 	@SuppressWarnings("unchecked")
-	HashMap<Class, AnnotationBeanProcessor>			handlerList;
+	Map<Class, AnnotationBeanProcessor>		handlerList;
 
 	/** The successors. */
-	protected ArrayList<DefinitionPostProcessor>	successors;
+	protected List<DefinitionPostProcessor>	successors;
 
 	/** The def manager. */
-	public DefinitionManager						defManager	= null;
+	public DefinitionManager				defManager	= null;
 
 	/**
 	 * Instantiates a new abstract visitor handler.
@@ -62,7 +65,7 @@ public abstract class AbstractVisitorHandler implements IAnnotationVisitor {
 
 		this.defManager = defManager;
 		this.handlerList = new HashMap<Class, AnnotationBeanProcessor>();
-		this.successors = new ArrayList<DefinitionPostProcessor>();
+		this.successors = new LinkedList<DefinitionPostProcessor>();
 	}
 
 	/**

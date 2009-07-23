@@ -20,6 +20,7 @@ package org.jgentleframework.context.support;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.aopalliance.intercept.FieldInterceptor;
 import org.aopalliance.intercept.Interceptor;
@@ -38,8 +39,8 @@ import org.jgentleframework.utils.ReflectUtils;
  * @date Mar 17, 2008
  * @see InstantiationSelector
  */
-public class InstantiationSelectorImpl extends CoreInstantiationSelectorImpl implements
-		InstantiationSelector {
+public class InstantiationSelectorImpl extends CoreInstantiationSelectorImpl
+		implements InstantiationSelector {
 	/**
 	 * The Constructor.
 	 * 
@@ -74,7 +75,7 @@ public class InstantiationSelectorImpl extends CoreInstantiationSelectorImpl imp
 	 */
 	public InstantiationSelectorImpl(Class<?> type, Class<?> targetClass,
 			String mappingName, Definition definition,
-			HashMap<Interceptor, Matcher<Definition>> mapMatcherInterceptor) {
+			Map<Interceptor, Matcher<Definition>> mapMatcherInterceptor) {
 
 		super(type, targetClass, mappingName, definition);
 		this.mapMatcherInterceptor = mapMatcherInterceptor;
@@ -108,12 +109,13 @@ public class InstantiationSelectorImpl extends CoreInstantiationSelectorImpl imp
 	}
 
 	/** The map matcher interceptor. */
-	HashMap<Interceptor, Matcher<Definition>>	mapMatcherInterceptor	= null;
+	Map<Interceptor, Matcher<Definition>>	mapMatcherInterceptor	= null;
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.context.support.InstantiationSelector#getInterceptors()
+	 * @see
+	 * org.jgentleframework.context.support.InstantiationSelector#getInterceptors
+	 * ()
 	 */
 	@Override
 	public Interceptor[] getInterceptors() {
@@ -126,8 +128,8 @@ public class InstantiationSelectorImpl extends CoreInstantiationSelectorImpl imp
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.context.support.InstantiationSelector#getInstantiationInterceptors()
+	 * @seeorg.jgentleframework.context.support.InstantiationSelector#
+	 * getInstantiationInterceptors()
 	 */
 	@Override
 	public InstantiationInterceptor[] getInstantiationInterceptors() {
@@ -146,8 +148,8 @@ public class InstantiationSelectorImpl extends CoreInstantiationSelectorImpl imp
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.context.support.InstantiationSelector#getMethodInterceptors()
+	 * @seeorg.jgentleframework.context.support.InstantiationSelector#
+	 * getMethodInterceptors()
 	 */
 	@Override
 	public MethodInterceptor[] getMethodInterceptors() {
@@ -166,8 +168,8 @@ public class InstantiationSelectorImpl extends CoreInstantiationSelectorImpl imp
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.context.support.InstantiationSelector#getFieldInterceptors()
+	 * @seeorg.jgentleframework.context.support.InstantiationSelector#
+	 * getFieldInterceptors()
 	 */
 	@Override
 	public FieldInterceptor[] getFieldInterceptors() {
@@ -186,23 +188,23 @@ public class InstantiationSelectorImpl extends CoreInstantiationSelectorImpl imp
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.context.support.InstantiationSelector#getMapMatcherInterceptor()
+	 * @seeorg.jgentleframework.context.support.InstantiationSelector#
+	 * getMapMatcherInterceptor()
 	 */
 	@Override
-	public HashMap<Interceptor, Matcher<Definition>> getMapMatcherInterceptor() {
+	public Map<Interceptor, Matcher<Definition>> getMapMatcherInterceptor() {
 
 		return mapMatcherInterceptor;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.context.support.InstantiationSelector#setMapMatcherInterceptor(java.util.HashMap)
+	 * @seeorg.jgentleframework.context.support.InstantiationSelector#
+	 * setMapMatcherInterceptor(java.util.Map)
 	 */
 	@Override
 	public void setMapMatcherInterceptor(
-			HashMap<Interceptor, Matcher<Definition>> mapMatcherInterceptor) {
+			Map<Interceptor, Matcher<Definition>> mapMatcherInterceptor) {
 
 		Assertor.notNull(mapMatcherInterceptor);
 		this.mapMatcherInterceptor = mapMatcherInterceptor;

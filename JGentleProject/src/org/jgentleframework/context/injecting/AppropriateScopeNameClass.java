@@ -27,23 +27,28 @@ import org.jgentleframework.core.reflection.metadata.Definition;
  * @date Jul 17, 2009
  */
 public class AppropriateScopeNameClass {
-	
 	/**
 	 * Instantiates a new appropriate scope name class.
 	 */
 	public AppropriateScopeNameClass() {
 
-	
 	}
+
 	/**
 	 * Instantiates a new appropriate scope name class.
 	 * 
-	 * @param clazz the clazz
-	 * @param targetClass the target class
-	 * @param defininition the defininition
-	 * @param ref the ref
-	 * @param scopeName the scope name
-	 * @param mappingName the mapping name
+	 * @param clazz
+	 *            the clazz
+	 * @param targetClass
+	 *            the target class
+	 * @param defininition
+	 *            the defininition
+	 * @param ref
+	 *            the ref
+	 * @param scopeName
+	 *            the scope name
+	 * @param mappingName
+	 *            the mapping name
 	 */
 	public AppropriateScopeNameClass(Class<?> clazz, Class<?> targetClass,
 			Definition defininition, String ref, String scopeName,

@@ -65,7 +65,7 @@ public interface Provider extends IAbstractBeanFactory, Context {
 	 * 
 	 * @return the singletonScopeName
 	 */
-	public Map<Object, String> getRootScopeName();
+	public Map<Object, SingletonInstanceScopeName> getRootScopeName();
 
 	/**
 	 * Returns an instance bound to the given {@link Definition}

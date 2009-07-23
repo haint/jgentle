@@ -18,6 +18,7 @@
 package org.jgentleframework.core.reflection;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import org.aopalliance.reflect.Metadata;
 import org.aopalliance.reflect.ProgramUnit;
@@ -33,7 +34,7 @@ import org.jgentleframework.utils.Assertor;
  */
 public abstract class AbstractProgramUnit implements ProgramUnit {
 	/** The metadata list. */
-	HashMap<Object, Metadata>	metadataList	= new HashMap<Object, Metadata>();
+	Map<Object, Metadata>	metadataList	= new HashMap<Object, Metadata>();
 
 	/*
 	 * (non-Javadoc)

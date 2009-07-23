@@ -40,11 +40,11 @@ public interface BeforeConfigure {
 	 * Thực thi tiền xử lý, cấu hình trước khi hàm cấu hình configure method
 	 * được chỉ định trong {@link AbstractConfig} được invoked.
 	 * 
-	 * @param aoh
-	 *            đối tượng <code>Annotation Object Handler</code> sẽ được chỉ
-	 *            định trong {@link Provider} hoặc <code>service context</code>.
+	 * @param serviceHandler
+	 *            đối tượng <code>service handler</code> sẽ được chỉ định trong
+	 *            {@link Provider provider} hoặc <code>service context</code>.
 	 *            <p>
-	 * @param defManager
+	 * @param definitionManager
 	 *            đối tượng <code>Definition Manager</code> sẽ được chỉ định
 	 *            trong {@link Provider} hoặc <code>service context</code>. Đối
 	 *            tượng này tương đương object được get ra từ
@@ -62,7 +62,8 @@ public interface BeforeConfigure {
 	 *            đối tượng {@link List} chứa danh sách các object class
 	 *            configuration ( {@link AbstractConfig})
 	 */
-	public void doProcessing(ServiceHandler aoh, DefinitionManager defManager,
+	public void doProcessing(ServiceHandler serviceHandler,
+			DefinitionManager definitionManager,
 			AnnotationRegister annoRegister,
 			List<Class<? extends Configurable>> configList);
 }

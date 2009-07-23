@@ -74,7 +74,7 @@ public abstract class AbstractBeanFactory extends AbstractBeanCacher implements
 	 * @see org.jgentleframework.context.injecting.Provider#getRootScopeName()
 	 */
 	@Override
-	public Map<Object, String> getRootScopeName() {
+	public Map<Object, SingletonInstanceScopeName> getRootScopeName() {
 
 		return rootScopeName;
 	}
@@ -321,6 +321,8 @@ public abstract class AbstractBeanFactory extends AbstractBeanCacher implements
 			String mappingName, Definition definition) {
 
 		Assertor.notNull(type);
+		Assertor.notNull(targetClass);
+		Assertor.notNull(definition);
 		CoreInstantiationSelector coreSelector = new CoreInstantiationSelectorImpl(
 				type, targetClass, mappingName, null, null, definition);
 		coreSelector.setCachingList(cachingList);
@@ -348,14 +350,14 @@ public abstract class AbstractBeanFactory extends AbstractBeanCacher implements
 	protected Object getBeanInstance(AppropriateScopeNameClass asc) {
 
 		Object result = null;
-		CoreInstantiationSelector coreSelector = new CoreInstantiationSelectorImpl(
-				asc.clazz, asc.targetClass, asc.mappingName, null, null,
-				asc.definition);
-		coreSelector.setCachingList(cachingList);
 		ScopeInstance scope = null;
 		synchronized (scopeList) {
 			scope = scopeList.get(asc.scopeName);
 		}
+		CoreInstantiationSelector coreSelector = new CoreInstantiationSelectorImpl(
+				asc.clazz, asc.targetClass, asc.mappingName, null, null,
+				asc.definition);
+		coreSelector.setCachingList(cachingList);
 		// If not Singleton scope
 		try {
 			if (scope != null && !scope.equals(Scope.SINGLETON)) {

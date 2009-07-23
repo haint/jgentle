@@ -68,18 +68,18 @@ public class AutoLoadingDefinitionDetector extends AbstractDetector {
 	@Override
 	public void handling(List<Map<String, Object>> OLArray) {
 
-		ArrayList<Class<?>> list = new ArrayList<Class<?>>();
+		List<Class<?>> list = new ArrayList<Class<?>>();
 		for (Map<String, Object> optionsList : OLArray) {
 			/*
 			 * Lấy ra danh sách các đối tượng cất trữ thông tin cấu hình.
 			 */
-			ArrayList<ObjectAttach<?>> othList = (ArrayList<ObjectAttach<?>>) optionsList
+			List<ObjectAttach<?>> othList =  (List<ObjectAttach<?>>) optionsList
 					.get(AbstractConfig.OBJECT_ATTACH_LIST);
-			ArrayList<ObjectConstant> ocstList = (ArrayList<ObjectConstant>) optionsList
+			List<ObjectConstant> ocstList =  (List<ObjectConstant>) optionsList
 					.get(AbstractConfig.OBJECT_CONSTANT_LIST);
-			ArrayList<Class<?>> bclist = (ArrayList<Class<?>>) optionsList
+			List<Class<?>> bclist =  (List<Class<?>>) optionsList
 					.get(AbstractConfig.BEAN_CLASS_LIST);
-			ArrayList<ObjectBindingConstant> obcList = (ArrayList<ObjectBindingConstant>) optionsList
+			List<ObjectBindingConstant> obcList = (List<ObjectBindingConstant>) optionsList
 					.get(AbstractConfig.OBJECT_BINDING_CONSTANT_LIST);
 			/*
 			 * Truy vấn thông tin các object class có chỉ định

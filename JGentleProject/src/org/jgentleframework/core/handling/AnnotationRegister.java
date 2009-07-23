@@ -18,10 +18,9 @@
 package org.jgentleframework.core.handling;
 
 import java.lang.annotation.Annotation;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.jgentleframework.core.provider.AnnotationValidator;
 
@@ -35,16 +34,17 @@ import org.jgentleframework.core.provider.AnnotationValidator;
  */
 public interface AnnotationRegister {
 	/**
-	 * Adds an {@link AnnotationValidator} according to specified registered
-	 * annotation
+	 * Adds an {@link AnnotationValidator annotation validator} according to
+	 * specified registered annotation
 	 * <p>
-	 * <b>Note:</b> if previous {@link AnnotationValidator} of annotation is
-	 * existed, it will be replaced by new {@link AnnotationValidator}
+	 * <b>Note:</b> if previous {@link AnnotationValidator validator} of
+	 * annotation is existed, it will be replaced by new
+	 * {@link AnnotationValidator validator}.
 	 * 
 	 * @param anno
-	 *            đối tượng object class của annotation.
+	 *            the object class according to given annotation
 	 * @param validator
-	 *            đối tượng validator tương ứng chỉ định.
+	 *            the validator
 	 */
 	public <T extends Annotation> void addValidator(Class<T> anno,
 			AnnotationValidator<T> validator);
@@ -55,10 +55,10 @@ public interface AnnotationRegister {
 	public void clearAllAnnotationRegistered();
 
 	/**
-	 * Returns a {@link HashMap} containing all registered
-	 * {@link AnnotationValidator}s
+	 * Returns a {@link Map map} containing all registered
+	 * {@link AnnotationValidator annotation validators}
 	 */
-	public HashMap<Class<? extends Annotation>, AnnotationValidator<? extends Annotation>> getValidatorlist();
+	public Map<Class<? extends Annotation>, AnnotationValidator<? extends Annotation>> getValidatorlist();
 
 	/**
 	 * Returns <b>true</b> if registered annotation list is empty, <b>false</b>
@@ -103,16 +103,18 @@ public interface AnnotationRegister {
 			AnnotationValidator<T> validator);
 
 	/**
-	 * Removes a specified {@link AnnotationValidator}
+	 * Removes a specified {@link AnnotationValidator annotation validate}
 	 * 
 	 * @param validator
-	 *            the {@link AnnotationValidator} need to be removed.
+	 *            the {@link AnnotationValidator annotation validator} need to
+	 *            be removed.
 	 */
 	public <T extends Annotation> void removeValidator(
 			AnnotationValidator<T> validator);
 
 	/**
-	 * Removes a specified {@link AnnotationValidator} of given annotation.
+	 * Removes a specified {@link AnnotationValidator annotation validator} of
+	 * given annotation.
 	 * 
 	 * @param anno
 	 *            the object class of annotation.
@@ -155,9 +157,7 @@ public interface AnnotationRegister {
 	public int countValidator();
 
 	/**
-	 * Returns an {@link ArrayList} of registered annotation classes
-	 * 
-	 * @return {@link ArrayList}
+	 * Returns an {@link List list} of registered annotation classes
 	 */
-	public ArrayList<Class<? extends Annotation>> getAnnotationRegistered();
+	public List<Class<? extends Annotation>> getAnnotationRegistered();
 }

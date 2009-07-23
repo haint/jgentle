@@ -99,7 +99,7 @@ public class FirstDetector extends AbstractDetector {
 	 * @return returns an {@link ArrayList} of detector if it exists, if not,
 	 *         returns an empty {@link ArrayList}.
 	 */
-	public ArrayList<Detector> getAllDetectors() {
+	public List<Detector> getAllDetectors() {
 
 		ArrayList<Detector> result = new ArrayList<Detector>();
 		Detector current = getNextDetector();

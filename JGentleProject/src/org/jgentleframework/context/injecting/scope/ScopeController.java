@@ -18,6 +18,7 @@
 package org.jgentleframework.context.injecting.scope;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.jgentleframework.configure.enums.Scope;
 
@@ -32,7 +33,7 @@ import org.jgentleframework.configure.enums.Scope;
  * @see Scope
  */
 public class ScopeController {
-	ArrayList<ScopeImplementation>	scopeImplementationList	= null;
+	List<ScopeImplementation>	scopeImplementationList	= null;
 
 	/**
 	 * Constructor

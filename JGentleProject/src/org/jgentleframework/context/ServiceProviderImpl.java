@@ -60,7 +60,7 @@ public class ServiceProviderImpl extends AbstractServiceManagement implements
 	 * This {@link HashMap} holds all installed
 	 * {@link ComponentServiceContextType} in this ServiceProvider.
 	 */
-	private HashMap<Class<?>, ComponentServiceContextType<Configurable>>	CSCList	= new HashMap<Class<?>, ComponentServiceContextType<Configurable>>();
+	private Map<Class<?>, ComponentServiceContextType<Configurable>>	CSCList	= new HashMap<Class<?>, ComponentServiceContextType<Configurable>>();
 
 	/*
 	 * (non-Javadoc)
@@ -110,7 +110,7 @@ public class ServiceProviderImpl extends AbstractServiceManagement implements
 	 * @see org.jgentleframework.context.ServiceProvider#getCSCList()
 	 */
 	@Override
-	public HashMap<Class<?>, ComponentServiceContextType<Configurable>> getCSCList() {
+	public Map<Class<?>, ComponentServiceContextType<Configurable>> getCSCList() {
 
 		return CSCList;
 	}

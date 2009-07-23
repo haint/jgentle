@@ -17,7 +17,7 @@
  */
 package org.jgentleframework.context.support;
 
-import java.util.HashMap;
+import java.util.Map;
 
 import org.aopalliance.intercept.FieldInterceptor;
 import org.aopalliance.intercept.Interceptor;
@@ -47,8 +47,8 @@ public interface InstantiationSelector extends CoreInstantiationSelector {
 	public Interceptor[] getInterceptors();
 
 	/**
-	 * Returns an array containing all {@link InstantiationInterceptor}s
-	 * present at.
+	 * Returns an array containing all {@link InstantiationInterceptor}s present
+	 * at.
 	 */
 	public InstantiationInterceptor[] getInstantiationInterceptors();
 
@@ -65,14 +65,18 @@ public interface InstantiationSelector extends CoreInstantiationSelector {
 	public FieldInterceptor[] getFieldInterceptors();
 
 	/**
+	 * Gets the map matcher interceptor.
+	 * 
 	 * @return the mapMatcherInterceptor
 	 */
-	public HashMap<Interceptor, Matcher<Definition>> getMapMatcherInterceptor();
+	public Map<Interceptor, Matcher<Definition>> getMapMatcherInterceptor();
 
 	/**
+	 * Sets the map matcher interceptor.
+	 * 
 	 * @param mapMatcherInterceptor
 	 *            the mapMatcherInterceptor to set
 	 */
 	public void setMapMatcherInterceptor(
-			HashMap<Interceptor, Matcher<Definition>> mapMatcherInterceptor);
+			Map<Interceptor, Matcher<Definition>> mapMatcherInterceptor);
 }

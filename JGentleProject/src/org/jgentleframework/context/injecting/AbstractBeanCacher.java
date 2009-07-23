@@ -68,7 +68,7 @@ public abstract class AbstractBeanCacher extends AbstractLoadingFactory
 	protected final Object								NULL_SHAREDOBJECT	= new Object();
 
 	/** The root scope name. */
-	protected Map<Object, String>						rootScopeName		= new HashMap<Object, String>();
+	protected Map<Object, SingletonInstanceScopeName>	rootScopeName		= new HashMap<Object, SingletonInstanceScopeName>();
 
 	/** The {@link ScopeController}. */
 	protected ScopeController							scopeController		= new ScopeController();
@@ -136,7 +136,8 @@ public abstract class AbstractBeanCacher extends AbstractLoadingFactory
 				ref = REF.REF_CONSTANT + instanceName;
 				root = str;
 				scopeName = Utils.createScopeName(instanceName);
-				this.rootScopeName.put(root, scopeName);
+				this.rootScopeName.put(root, new SingletonInstanceScopeName(
+						scopeName, NULL_SHAREDOBJECT));
 			}
 		}
 		ScopeInstance scope = null;
@@ -145,7 +146,8 @@ public abstract class AbstractBeanCacher extends AbstractLoadingFactory
 		}
 		// If is Singleton scope
 		if ((scope != null && scope.equals(Scope.SINGLETON))) {
-			this.rootScopeName.put(root, scopeName);
+			this.rootScopeName.put(root, new SingletonInstanceScopeName(
+					scopeName, NULL_SHAREDOBJECT));
 		}
 		return new AppropriateScopeNameClass(clazz, targetClass, definition,
 				ref, scopeName, mappingName);
@@ -154,8 +156,8 @@ public abstract class AbstractBeanCacher extends AbstractLoadingFactory
 	/**
 	 * Returns caching result.
 	 * 
-	 * @param selector
-	 *            the selector
+	 * @param targetSelector
+	 *            the target selector
 	 * @return the object
 	 * @throws InvocationTargetException
 	 *             the invocation target exception
@@ -179,8 +181,8 @@ public abstract class AbstractBeanCacher extends AbstractLoadingFactory
 		Object result = NULL_SHAREDOBJECT;
 		Definition definition = targetSelector.getDefinition();
 		// find in cache
-		if (cachingList.containsKey(definition)) {
-			CachedConstructor cons = cachingList.get(definition);
+		CachedConstructor cons = cachingList.get(definition);
+		if (cons != null) {
 			int hashcodeID = cons.hashcodeID();
 			if (hashcodeID == (definition.hashCode() ^ cons.hashCode())) {
 				result = cons.newInstance(targetSelector.getArgs());
@@ -206,11 +208,21 @@ public abstract class AbstractBeanCacher extends AbstractLoadingFactory
 	 *            the scope name
 	 * @return the object
 	 */
-	protected Object returnSharedObject(String scopeName) {
+	protected Object returnSharedObject(SingletonInstanceScopeName sisn) {
 
-		if (mapDirectList.containsKey(scopeName)) {
-			return mapDirectList.get(scopeName);
+		Object instance = NULL_SHAREDOBJECT;
+		if (sisn != null) {
+			String scopeName = sisn.scopeName;
+			instance = sisn.sharedSingleton;
+			if (instance == NULL_SHAREDOBJECT) {
+				synchronized (scopeName) {
+					if (mapDirectList.containsKey(scopeName)) {
+						instance = mapDirectList.get(scopeName);
+						sisn.sharedSingleton = instance;
+					}
+				}
+			}
 		}
-		return NULL_SHAREDOBJECT;
+		return instance;
 	}
 }
