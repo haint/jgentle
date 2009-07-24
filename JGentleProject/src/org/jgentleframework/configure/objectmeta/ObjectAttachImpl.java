@@ -19,6 +19,9 @@ package org.jgentleframework.configure.objectmeta;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.Map.Entry;
@@ -39,22 +42,22 @@ import org.jgentleframework.utils.Assertor;
  */
 public class ObjectAttachImpl<T> implements ObjectAttach<T> {
 	/** The hash list. */
-	private HashMap<Class<?>, Class<?>>							hashList	= new HashMap<Class<?>, Class<?>>();
+	private Map<Class<?>, Class<?>>							hashList	= new HashMap<Class<?>, Class<?>>();
 
 	/** The name. */
-	private String												name		= "";
+	private String											name		= "";
 
 	/** The name bool. */
-	private boolean												nameBool	= true;
+	private boolean											nameBool	= true;
 
 	/** The scope list. */
-	private HashMap<Entry<Class<?>, Class<?>>, ScopeInstance>	scopeList	= new HashMap<Entry<Class<?>, Class<?>>, ScopeInstance>();
+	private Map<Entry<Class<?>, Class<?>>, ScopeInstance>	scopeList	= new HashMap<Entry<Class<?>, Class<?>>, ScopeInstance>();
 
 	/** The type list. */
-	private ArrayList<Class<?>>									typeList	= new ArrayList<Class<?>>();
+	private List<Class<?>>									typeList	= new LinkedList<Class<?>>();
 
 	/** lazy_init property, default setting is <b>false</b>. */
-	private boolean												lazyInit	= false;
+	private boolean											lazyInit	= false;
 
 	/**
 	 * The Constructor.
@@ -170,7 +173,7 @@ public class ObjectAttachImpl<T> implements ObjectAttach<T> {
 	 * ()
 	 */
 	@Override
-	public HashMap<Entry<Class<?>, Class<?>>, ScopeInstance> getScopeList() {
+	public Map<Entry<Class<?>, Class<?>>, ScopeInstance> getScopeList() {
 
 		return scopeList;
 	}

@@ -17,7 +17,7 @@
  */
 package org.jgentleframework.configure.objectmeta;
 
-import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
 
@@ -181,7 +181,7 @@ public interface ObjectAttach<U> extends IPresentLoadingClass {
 	 * 
 	 * @return the scopeList
 	 */
-	public HashMap<Entry<Class<?>, Class<?>>, ScopeInstance> getScopeList();
+	public Map<Entry<Class<?>, Class<?>>, ScopeInstance> getScopeList();
 
 	/**
 	 * Returns an array containing all existent class type of current

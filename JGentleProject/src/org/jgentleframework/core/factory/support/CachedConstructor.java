@@ -17,6 +17,7 @@
  */
 package org.jgentleframework.core.factory.support;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
 /**
@@ -48,6 +49,13 @@ public interface CachedConstructor {
 	 * @param mdo
 	 */
 	void setMetaDefObject(MetaDefObject mdo);
+	
+	/**
+	 * Gets the java constructor.
+	 * 
+	 * @return the java constructor
+	 */
+	Constructor<?> getJavaConstructor();
 
 	/**
 	 * Returns the hashcodeID of this {@link CachedConstructor}

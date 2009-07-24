@@ -19,7 +19,7 @@ package org.jgentleframework.configure;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.logging.Log;
@@ -60,24 +60,24 @@ import org.jgentleframework.utils.data.Pair;
 public abstract class AbstractBindingConfig extends AbstractConfigModule
 		implements CoreBinding {
 	/** The bean class list. */
-	protected ArrayList<Class<?>>					beanClassList				= null;
+	protected List<Class<?>>					beanClassList				= null;
 
 	/** The object binding constant list. */
-	protected ArrayList<ObjectBindingConstant>		objBindingConstantList		= null;
+	protected List<ObjectBindingConstant>		objBindingConstantList		= null;
 
 	/** The object binding interceptor list. */
-	protected ArrayList<ObjectBindingInterceptor>	objBindingInterceptorList	= null;
+	protected List<ObjectBindingInterceptor>	objBindingInterceptorList	= null;
 
 	/** The object attach list. */
-	protected ArrayList<ObjectAttach<?>>			objectAttachList			= null;
+	protected List<ObjectAttach<?>>				objectAttachList			= null;
 
 	/** The object constant list. */
-	protected ArrayList<ObjectConstant>				objectConstantList			= null;
+	protected List<ObjectConstant>				objectConstantList			= null;
 
 	/** The log. */
-	protected final Log								log							= LogFactory
-																						.getLog(this
-																								.getClass());
+	protected final Log							log							= LogFactory
+																					.getLog(this
+																							.getClass());
 
 	/*
 	 * (non-Javadoc)

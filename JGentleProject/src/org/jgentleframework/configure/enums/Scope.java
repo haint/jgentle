@@ -238,28 +238,26 @@ public enum Scope implements ScopeImplementation {
 		Provider provider = objFactory.getProvider();
 		Map<String, ScopeInstance> scopeList = objFactory.getScopeList();
 		Map<String, Object> mapDirectList = objFactory.getMapDirectList();
-		Scope scope = null;
 		synchronized (scopeList) {
 			if (scopeList.containsKey(scopeName)) {
-				scope = (Scope) scopeList.get(scopeName);
 				scopeList.remove(scopeName);
 			}
 		}
 		// If is Prototype scope
-		if (scope != null) {
-			if (scope.equals(Scope.PROTOTYPE)) {
+		if (this != null) {
+			if (this.equals(Scope.PROTOTYPE)) {
 				throw new InvalidRemovingOperationException(
 						"Removing Operation does not support prototype-scoped bean !");
 			}
 			// If is Singleton scope
-			else if (scope.equals(Scope.SINGLETON)) {
+			else if (this.equals(Scope.SINGLETON)) {
 				synchronized (mapDirectList) {
 					result = mapDirectList.remove(scopeName);
 				}
 				return result;
 			}
-			else if (scope.equals(Scope.REQUEST) || scope.equals(Scope.SESSION)
-					|| scope.equals(Scope.APPLICATION)) {
+			else if (this.equals(Scope.REQUEST) || this.equals(Scope.SESSION)
+					|| this.equals(Scope.APPLICATION)) {
 				if (!ReflectUtils.isCast(WebProvider.class, provider)) {
 					throw new InvalidRemovingOperationException(
 							"This container does not support REQUEST, SESSION or APPLICATION scope.");

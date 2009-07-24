@@ -19,6 +19,9 @@ package org.jgentleframework.configure.objectmeta;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
 
@@ -41,13 +44,13 @@ import org.jgentleframework.utils.ReflectUtils;
  */
 public class ObjectConstantImpl implements ObjectConstant {
 	/** The hash direct list. */
-	private HashMap<String, Object>	hashDirectList	= new HashMap<String, Object>();
+	private Map<String, Object>	hashDirectList	= new HashMap<String, Object>();
 
 	/** The str name list. */
-	private ArrayList<String>		strNameList		= new ArrayList<String>();
+	private List<String>		strNameList		= new LinkedList<String>();
 
 	/** The scope instance. */
-	private ScopeInstance			scope			= Scope.SINGLETON;
+	private ScopeInstance		scope			= Scope.SINGLETON;
 
 	/**
 	 * Constructor.

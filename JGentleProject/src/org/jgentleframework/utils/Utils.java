@@ -22,6 +22,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -137,6 +138,12 @@ public final class Utils {
 			public void setMetaDefObject(MetaDefObject mdo) {
 
 				this.mdoInner = mdo;
+			}
+
+			@Override
+			public Constructor<?> getJavaConstructor() {
+
+				return fastConstructor.getJavaConstructor();
 			}
 		};
 	}
@@ -379,6 +386,17 @@ public final class Utils {
 				return null;
 			}
 		}
+		if (getter != null && !Modifier.isPublic(getter.getModifiers()))
+			try {
+				throw new IllegalAccessException();
+			}
+			catch (IllegalAccessException e) {
+				if (log.isErrorEnabled()) {
+					log.error("The getter method [" + getter.getName()
+							+ "] declared in [" + declaringClass
+							+ "] must be public", e);
+				}
+			}
 		return getter;
 	}
 
@@ -396,14 +414,30 @@ public final class Utils {
 			String fieldName) {
 
 		Method setter = null;
+		Field field = null;
 		String methodName = "set" + fieldName.substring(0, 1).toUpperCase()
 				+ fieldName.substring(1);
 		try {
+			field = ReflectUtils.getSupportedField(declaringClass, fieldName);
 			setter = ReflectUtils.getSupportedMethod(declaringClass,
-					methodName, null);
+					methodName, new Class<?>[] { field.getType() });
+		}
+		catch (NoSuchFieldException e1) {
+			return null;
 		}
 		catch (NoSuchMethodException e) {
 			return null;
+		}
+		try {
+			if (setter != null && !Modifier.isPublic(setter.getModifiers()))
+				throw new IllegalAccessException();
+		}
+		catch (IllegalAccessException e) {
+			if (log.isErrorEnabled()) {
+				log.error("The setter method [" + methodName
+						+ "] declared in [" + declaringClass
+						+ "] must be public", e);
+			}
 		}
 		return setter;
 	}

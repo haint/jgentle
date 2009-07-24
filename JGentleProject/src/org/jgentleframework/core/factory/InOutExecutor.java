@@ -20,9 +20,7 @@ package org.jgentleframework.core.factory;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -35,6 +33,7 @@ import org.jgentleframework.configure.enums.Scope;
 import org.jgentleframework.configure.enums.WrapperPrimitiveTypeList;
 import org.jgentleframework.context.beans.Builder;
 import org.jgentleframework.context.beans.Filter;
+import org.jgentleframework.context.injecting.AbstractBeanCacher;
 import org.jgentleframework.context.injecting.Provider;
 import org.jgentleframework.context.injecting.scope.InvalidAddingOperationException;
 import org.jgentleframework.context.injecting.scope.ScopeImplementation;
@@ -80,23 +79,20 @@ public abstract class InOutExecutor {
 
 		Map<Field, Object> result = new HashMap<Field, Object>();
 		if (fields != null) {
-			List<Field> fieldList = new ArrayList<Field>();
-			for (Field field : fields) {
-				Definition defField = definition.getMemberDefinition(field);
+			for (int i = 0; i < fields.length; i++) {
+				Definition defField = definition.getMemberDefinition(fields[i]);
 				if (defField != null
 						&& defField.isAnnotationPresent(Inject.class)) {
 					Inject inject = defField.getAnnotation(Inject.class);
 					Object injected = InOutExecutor.getInjectedDependency(
-							inject, field.getType(), provider);
-					field.setAccessible(true);
-					Object current = field.get(target);
+							inject, fields[i].getType(), provider);
+					fields[i].setAccessible(true);
+					Object current = fields[i].get(target);
 					if (inject.alwaysInject() == false && current != null) {
 						continue;
 					}
-					result.put(field, current);
-					field.set(target, injected);
-					if (!fieldList.contains(field))
-						fieldList.add(field);
+					result.put(fields[i], current);
+					fields[i].set(target, injected);
 				}
 				else
 					continue;
@@ -126,24 +122,24 @@ public abstract class InOutExecutor {
 			throws IllegalArgumentException, IllegalAccessException {
 
 		if (fields != null) {
-			for (Field field : fields) {
+			for (int i = 0; i < fields.length; i++) {
 				Object outjectObj = null;
-				Definition defField = definition.getMemberDefinition(field);
+				Definition defField = definition.getMemberDefinition(fields[i]);
 				if (defField != null
 						&& defField.isAnnotationPresent(Outject.class)) {
 					Outject outject = defField.getAnnotation(Outject.class);
-					field.setAccessible(true);
-					outjectObj = field.get(target);
+					fields[i].setAccessible(true);
+					outjectObj = fields[i].get(target);
 					/*
 					 * Executes builder
 					 */
 					if (ReflectUtils.isCast(Builder.class, target)) {
 						Builder builder = (Builder) target;
-						if (builder.getOutjectValue(field) != null)
-							outjectObj = builder.getOutjectValue(field);
+						if (builder.getOutjectValue(fields[i]) != null)
+							outjectObj = builder.getOutjectValue(fields[i]);
 					}
 					InOutExecutor.setOutjectedDependency(outject, outjectObj,
-							provider, field.getClass());
+							provider, fields[i].getClass());
 				}
 				else
 					continue;
@@ -178,18 +174,19 @@ public abstract class InOutExecutor {
 
 		Map<Field, Object> result = new HashMap<Field, Object>();
 		if (setters != null) {
-			for (Method method : setters) {
-				Definition defMethod = definition.getMemberDefinition(method);
+			for (int i = 0; i < setters.length; i++) {
+				Definition defMethod = definition
+						.getMemberDefinition(setters[i]);
 				if (defMethod == null)
 					continue;
 				else {
-					Object[] args = Utils.getInjectedParametersOf(method,
+					Object[] args = Utils.getInjectedParametersOf(setters[i],
 							defMethod, provider);
-					method.setAccessible(true);
+					setters[i].setAccessible(true);
 					// Find field corresponding to setter method.
 					Field field = null;
 					try {
-						field = Utils.getFieldOfDefaultSetGetter(method,
+						field = Utils.getFieldOfDefaultSetGetter(setters[i],
 								(Class<?>) definition.getKey());
 						field.setAccessible(true);
 						result.put(field, field.get(target));
@@ -199,7 +196,7 @@ public abstract class InOutExecutor {
 					}
 					catch (NoSuchFieldException e) {
 					}
-					method.invoke(target, args);
+					setters[i].invoke(target, args);
 				}
 			}
 		}
@@ -270,7 +267,6 @@ public abstract class InOutExecutor {
 				Field field = entry.getKey();
 				field.setAccessible(true);
 				field.set(target, entry.getValue());
-				field.setAccessible(false);
 			}
 		}
 	}
@@ -299,22 +295,23 @@ public abstract class InOutExecutor {
 			InvocationTargetException {
 
 		if (getters != null) {
-			for (Method method : getters) {
-				Definition defMethod = definition.getMemberDefinition(method);
+			for (int i = 0; i < getters.length; i++) {
+				Definition defMethod = definition
+						.getMemberDefinition(getters[i]);
 				if (defMethod == null)
 					continue;
 				else {
-					Class<?> returnType = method.getReturnType();
-					Object[] args = Utils.getInjectedParametersOf(method,
+					Class<?> returnType = getters[i].getReturnType();
+					Object[] args = Utils.getInjectedParametersOf(getters[i],
 							defMethod, provider);
 					Object outjectObj = null;
-					method.setAccessible(true);
-					outjectObj = args.length == 0 ? method.invoke(target)
-							: method.invoke(target, args);
+					getters[i].setAccessible(true);
+					outjectObj = args.length == 0 ? getters[i].invoke(target)
+							: getters[i].invoke(target, args);
 					Outject outject = defMethod.getAnnotation(Outject.class);
 					Field field = null;
 					try {
-						field = Utils.getFieldOfDefaultSetGetter(method,
+						field = Utils.getFieldOfDefaultSetGetter(getters[i],
 								(Class<?>) definition.getKey());
 					}
 					catch (InvalidOperationException e) {
@@ -360,12 +357,12 @@ public abstract class InOutExecutor {
 		if (provider != null) {
 			if (value != null && !value.isEmpty()) {
 				result = provider.getBean(value);
-				result = result == null || result == NullClass.class ? provider
-						.getBean(type) : result;
+				if (result == null || result == NullClass.class
+						|| result == AbstractBeanCacher.NULL_SHAREDOBJECT)
+					result = provider.getBean(type);
 			}
 			else {
-				if (result == null)
-					result = provider.getBean(type);
+				result = provider.getBean(type);
 			}
 		}
 		else {
@@ -376,12 +373,13 @@ public abstract class InOutExecutor {
 			}
 		}
 		// checking constrant
-		if ((result == null || result == NullClass.class)
+		if ((result == null || result == NullClass.class || result == AbstractBeanCacher.NULL_SHAREDOBJECT)
 				&& inject.required() == true) {
 			throw new RequiredException(
 					"Injected dependency object must not be null.");
 		}
-		if (result != null && result != NullClass.class && type.isPrimitive()) {
+		if (result != null && result != NullClass.class && type.isPrimitive()
+				&& result != AbstractBeanCacher.NULL_SHAREDOBJECT) {
 			int i = 0;
 			for (WrapperPrimitiveTypeList wt : WrapperPrimitiveTypeList
 					.values()) {
@@ -400,9 +398,9 @@ public abstract class InOutExecutor {
 						"Can not identify the primitive type '" + type + "'");
 			}
 		}
-		else if (result != null && result != NullClass.class) {
+		else if (result != null && result != NullClass.class
+				&& result != AbstractBeanCacher.NULL_SHAREDOBJECT) {
 			if (!ReflectUtils.isCast(type, result)) {
-				System.out.println(result);
 				throw new InOutDependencyException(
 						"The injected dependency instance can not be cast to '"
 								+ type + "'");

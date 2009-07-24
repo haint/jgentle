@@ -19,11 +19,11 @@ package org.jgentleframework.configure;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import net.sf.cglib.proxy.Enhancer;
@@ -51,10 +51,10 @@ public class ConfigurationProxy implements MethodInterceptor {
 	Class<? extends Configurable>	targetClass		= null;
 
 	/** The options list. */
-	HashMap<String, Object>			optionsList		= null;
+	Map<String, Object>				optionsList		= null;
 
 	/** The config obj list. */
-	HashMap<Class<?>, Object>		configObjList	= null;
+	Map<Class<?>, Object>			configObjList	= null;
 
 	/** The obj block list. */
 	List<ObjectBlock>				objBlockList	= new LinkedList<ObjectBlock>();
@@ -73,8 +73,7 @@ public class ConfigurationProxy implements MethodInterceptor {
 	 *            the config obj list
 	 */
 	public ConfigurationProxy(Class<? extends Configurable> targetClass,
-			HashMap<String, Object> optionsList,
-			HashMap<Class<?>, Object> configObjList) {
+			Map<String, Object> optionsList, Map<Class<?>, Object> configObjList) {
 
 		this.targetClass = targetClass;
 		this.optionsList = optionsList;
@@ -195,7 +194,7 @@ public class ConfigurationProxy implements MethodInterceptor {
 				if (!this.objBlockList.isEmpty()) {
 					ObjectBlock objb = this.objBlockList.get(this.configObjList
 							.size() - 1);
-					ArrayList<Class<?>> clazzList = null;
+					List<Class<?>> clazzList = null;
 					clazzList = objb.getBlockList();
 					for (Class<?> clazz : clazzList) {
 						Object objConfig = this.configObjList.get(clazz);

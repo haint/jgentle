@@ -18,7 +18,8 @@
 package org.jgentleframework.configure.objectmeta;
 
 import java.lang.reflect.Method;
-import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 import org.jgentleframework.utils.Assertor;
 
@@ -31,9 +32,10 @@ import org.jgentleframework.utils.Assertor;
  */
 public class ObjectBlock {
 	/** The block list. */
-	ArrayList<Class<?>>	blockList	= null;
+	List<Class<?>>	blockList	= null;
+
 	/** The method. */
-	Method				method		= null;
+	Method			method		= null;
 
 	/**
 	 * Instantiates a new object block.
@@ -48,7 +50,7 @@ public class ObjectBlock {
 		Assertor.notNull(interfazes);
 		Assertor.notNull(method);
 		this.method = method;
-		this.blockList = new ArrayList<Class<?>>();
+		this.blockList = new LinkedList<Class<?>>();
 		for (Class<?> interfaze : interfazes) {
 			if (!this.blockList.contains(interfaze)) {
 				this.blockList.add(interfaze);
@@ -61,7 +63,7 @@ public class ObjectBlock {
 	 * 
 	 * @return the blockList
 	 */
-	public ArrayList<Class<?>> getBlockList() {
+	public List<Class<?>> getBlockList() {
 
 		return blockList;
 	}
@@ -82,7 +84,7 @@ public class ObjectBlock {
 	 * @param blockList
 	 *            the blockList to set
 	 */
-	public void setBlockList(ArrayList<Class<?>> blockList) {
+	public void setBlockList(List<Class<?>> blockList) {
 
 		this.blockList = blockList;
 	}

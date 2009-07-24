@@ -65,7 +65,7 @@ public abstract class AbstractBeanCacher extends AbstractLoadingFactory
 	protected Map<Class<?>, Class<?>>					mappingList			= null;
 
 	/** The NULL sharedobject. */
-	protected final Object								NULL_SHAREDOBJECT	= new Object();
+	public static final Object							NULL_SHAREDOBJECT	= new Object();
 
 	/** The root scope name. */
 	protected Map<Object, SingletonInstanceScopeName>	rootScopeName		= new HashMap<Object, SingletonInstanceScopeName>();
@@ -137,7 +137,7 @@ public abstract class AbstractBeanCacher extends AbstractLoadingFactory
 				root = str;
 				scopeName = Utils.createScopeName(instanceName);
 				this.rootScopeName.put(root, new SingletonInstanceScopeName(
-						scopeName, NULL_SHAREDOBJECT));
+						scopeName, AbstractBeanCacher.NULL_SHAREDOBJECT));
 			}
 		}
 		ScopeInstance scope = null;
@@ -147,7 +147,7 @@ public abstract class AbstractBeanCacher extends AbstractLoadingFactory
 		// If is Singleton scope
 		if ((scope != null && scope.equals(Scope.SINGLETON))) {
 			this.rootScopeName.put(root, new SingletonInstanceScopeName(
-					scopeName, NULL_SHAREDOBJECT));
+					scopeName, AbstractBeanCacher.NULL_SHAREDOBJECT));
 		}
 		return new AppropriateScopeNameClass(clazz, targetClass, definition,
 				ref, scopeName, mappingName);
@@ -178,7 +178,7 @@ public abstract class AbstractBeanCacher extends AbstractLoadingFactory
 			SecurityException, InstantiationException, IllegalAccessException,
 			NoSuchMethodException {
 
-		Object result = NULL_SHAREDOBJECT;
+		Object result = AbstractBeanCacher.NULL_SHAREDOBJECT;
 		Definition definition = targetSelector.getDefinition();
 		// find in cache
 		CachedConstructor cons = cachingList.get(definition);
@@ -186,12 +186,6 @@ public abstract class AbstractBeanCacher extends AbstractLoadingFactory
 			int hashcodeID = cons.hashcodeID();
 			if (hashcodeID == (definition.hashCode() ^ cons.hashCode())) {
 				result = cons.newInstance(targetSelector.getArgs());
-				// executes process after bean is created
-				// MetaDefObject metaObj = new MetaDefObject();
-				// AbstractProcesserChecker.findInOutNonRuntime(metaObj,
-				// definition);
-				// AbstractProcesserChecker.prepareSingletonBean(targetSelector,
-				// this, result);
 				CommonFactory.singleton().executeProcessAfterBeanCreated(
 						targetSelector.getTargetClass(),
 						cons.getMetaDefObject(), this, result, definition);

@@ -362,8 +362,11 @@ public abstract class AbstractBeanFactory extends AbstractBeanCacher implements
 		try {
 			if (scope != null && !scope.equals(Scope.SINGLETON)) {
 				result = returnsCachingResult(coreSelector);
-				if (result == NULL_SHAREDOBJECT) {
-					return getBeanInstance(coreSelector);
+				if (result != AbstractBeanCacher.NULL_SHAREDOBJECT) {
+					return result;
+				}
+				else {
+					result = getBeanInstance(coreSelector);
 				}
 			}
 			else

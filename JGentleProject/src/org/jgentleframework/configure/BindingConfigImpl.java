@@ -18,7 +18,8 @@
 package org.jgentleframework.configure;
 
 import java.lang.reflect.Method;
-import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 import org.jgentleframework.configure.objectmeta.ObjectAttach;
@@ -43,7 +44,7 @@ public class BindingConfigImpl extends AbstractBindingConfig implements
 	 * org.jgentleframework.configure.jgentle.BindingConfig#getBeanClassList()
 	 */
 	@Override
-	public ArrayList<Class<?>> getBeanClassList() {
+	public List<Class<?>> getBeanClassList() {
 
 		return beanClassList;
 	}
@@ -54,7 +55,7 @@ public class BindingConfigImpl extends AbstractBindingConfig implements
 	 * getObjBindingConstantList ()
 	 */
 	@Override
-	public ArrayList<ObjectBindingConstant> getObjBindingConstantList() {
+	public List<ObjectBindingConstant> getObjBindingConstantList() {
 
 		return objBindingConstantList;
 	}
@@ -66,7 +67,7 @@ public class BindingConfigImpl extends AbstractBindingConfig implements
 	 * ()
 	 */
 	@Override
-	public ArrayList<ObjectAttach<?>> getObjectAttachList() {
+	public List<ObjectAttach<?>> getObjectAttachList() {
 
 		return objectAttachList;
 	}
@@ -78,7 +79,7 @@ public class BindingConfigImpl extends AbstractBindingConfig implements
 	 * ()
 	 */
 	@Override
-	public ArrayList<ObjectConstant> getObjectConstantList() {
+	public List<ObjectConstant> getObjectConstantList() {
 
 		return objectConstantList;
 	}
@@ -164,19 +165,19 @@ public class BindingConfigImpl extends AbstractBindingConfig implements
 		/*
 		 * add các danh sách thông tin cấu hình
 		 */
-		this.beanClassList = new ArrayList<Class<?>>();
+		this.beanClassList = new LinkedList<Class<?>>();
 		this.optionsList
 				.put(AbstractConfig.BEAN_CLASS_LIST, this.beanClassList);
-		this.objectAttachList = new ArrayList<ObjectAttach<?>>();
+		this.objectAttachList = new LinkedList<ObjectAttach<?>>();
 		this.optionsList.put(AbstractConfig.OBJECT_ATTACH_LIST,
 				this.objectAttachList);
-		this.objectConstantList = new ArrayList<ObjectConstant>();
+		this.objectConstantList = new LinkedList<ObjectConstant>();
 		this.optionsList.put(AbstractConfig.OBJECT_CONSTANT_LIST,
 				this.objectConstantList);
-		this.objBindingConstantList = new ArrayList<ObjectBindingConstant>();
+		this.objBindingConstantList = new LinkedList<ObjectBindingConstant>();
 		this.optionsList.put(AbstractConfig.OBJECT_BINDING_CONSTANT_LIST,
 				this.objBindingConstantList);
-		this.objBindingInterceptorList = new ArrayList<ObjectBindingInterceptor>();
+		this.objBindingInterceptorList = new LinkedList<ObjectBindingInterceptor>();
 		this.optionsList.put(AbstractConfig.OBJECT_BINDING_INTERCEPTOR_LIST,
 				this.objBindingInterceptorList);
 	}

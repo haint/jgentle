@@ -377,17 +377,10 @@ public abstract class JGentle {
 	 * @return the provider
 	 */
 	@SuppressWarnings("unchecked")
-	public static Provider buildProvider(Class... configClasses) {
+	public static Provider buildProvider(Class<?>... configClasses) {
 
-		try {
-			return (Provider) buildContext(false, null, null,
-					(Class<? extends Configurable>[]) configClasses);
-		}
-		catch (ClassCastException e) {
-			throw new IllegalArgumentException(
-					"The configurable class is not an implementation of '"
-							+ Configurable.class.toString() + "'");
-		}
+		return (Provider) buildContext(false, null, null,
+				(Class<? extends Configurable>[]) configClasses);
 	}
 
 	/**
@@ -429,15 +422,7 @@ public abstract class JGentle {
 	@SuppressWarnings("unchecked")
 	public static ServiceProvider buildServiceProvider(Class... configClasses) {
 
-		try {
-			return JGentle.buildServiceProvider(null, null,
-					(Class<? extends Configurable>[]) configClasses);
-		}
-		catch (ClassCastException e) {
-			throw new IllegalArgumentException(
-					"The configurable class is not an implementation of '"
-							+ Configurable.class.toString() + "'");
-		}
+		return JGentle.buildServiceProvider(null, null, configClasses);
 	}
 
 	/**

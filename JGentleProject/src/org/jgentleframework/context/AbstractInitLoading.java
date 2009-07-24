@@ -72,12 +72,12 @@ public abstract class AbstractInitLoading {
 		List<ObjectConstant> ocList = new LinkedList<ObjectConstant>();
 		for (Map<String, Object> optionsList : OLArray) {
 			/***************/
-			List<DefinitionPostProcessor> dpp = (ArrayList<DefinitionPostProcessor>) optionsList
+			List<DefinitionPostProcessor> dpp =  (List<DefinitionPostProcessor>) optionsList
 					.get(AbstractConfig.DEFINITION_POST_PROCESSOR);
 			if (dpp != null)
 				dppList.addAll(dpp);
 			/***************/
-			Map<Class, AnnotationBeanProcessor> abp = (HashMap<Class, AnnotationBeanProcessor>) optionsList
+			Map<Class, AnnotationBeanProcessor> abp = (Map<Class, AnnotationBeanProcessor>) optionsList
 					.get(AbstractConfig.ANNOTATION_BEAN_PROCESSOR_LIST);
 			if (abp != null)
 				abpHash.putAll(abp);
@@ -97,7 +97,7 @@ public abstract class AbstractInitLoading {
 			if (obc != null)
 				obcList.addAll(obc);
 			/***************/
-			List<ObjectConstant> oc = (ArrayList<ObjectConstant>) optionsList
+			List<ObjectConstant> oc =  (List<ObjectConstant>) optionsList
 					.get(AbstractConfig.OBJECT_CONSTANT_LIST);
 			if (oc != null)
 				ocList.addAll(oc);

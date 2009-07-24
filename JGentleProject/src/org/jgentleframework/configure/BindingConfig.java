@@ -18,6 +18,7 @@
 package org.jgentleframework.configure;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.jgentleframework.configure.objectmeta.ObjectAttach;
@@ -40,25 +41,25 @@ public interface BindingConfig extends CoreBinding {
 	 * Returns an {@link ArrayList} containing all object classes of mapping
 	 * bean.
 	 */
-	public ArrayList<Class<?>> getBeanClassList();
+	public List<Class<?>> getBeanClassList();
 
 	/**
 	 * Returns an {@link ArrayList} containing all current binding of beans (
 	 * {@link ObjectBindingConstant}).
 	 */
-	public ArrayList<ObjectBindingConstant> getObjBindingConstantList();
+	public List<ObjectBindingConstant> getObjBindingConstantList();
 
 	/**
 	 * Returns an {@link ArrayList} containing all current attach mappings (
 	 * {@link ObjectAttach})
 	 */
-	public ArrayList<ObjectAttach<?>> getObjectAttachList();
+	public List<ObjectAttach<?>> getObjectAttachList();
 
 	/**
 	 * Returns an {@link ArrayList} containing all current attach constant
 	 * mappings ({@link ObjectConstant})
 	 */
-	public ArrayList<ObjectConstant> getObjectConstantList();
+	public List<ObjectConstant> getObjectConstantList();
 
 	/**
 	 * Returns option list

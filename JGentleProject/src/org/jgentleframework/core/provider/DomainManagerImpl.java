@@ -20,6 +20,7 @@ package org.jgentleframework.core.provider;
 import java.beans.beancontext.BeanContextSupport;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Map;
 
 import org.jgentleframework.core.JGentleException;
 import org.jgentleframework.core.handling.DefinitionManager;
@@ -34,10 +35,10 @@ import org.jgentleframework.core.handling.DefinitionManager;
  */
 public class DomainManagerImpl implements DomainManager {
 	/** The domain list. */
-	HashMap<String, Domain>	domainList	= new HashMap<String, Domain>();
+	Map<String, Domain>	domainList	= new HashMap<String, Domain>();
 
 	/** The def manager. */
-	DefinitionManager		definitionManager;
+	DefinitionManager	definitionManager;
 
 	/**
 	 * Instantiates a new domain manager impl.

@@ -18,6 +18,7 @@
 package org.jgentleframework.context;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -192,10 +193,11 @@ public abstract class AbstractServiceManagement extends ProviderCoreCreator
 	@Override
 	protected void init(List<Map<String, Object>> OLArray) {
 
-		ArrayList<ObjectBindingInterceptor> obiList = new ArrayList<ObjectBindingInterceptor>();
+		List<ObjectBindingInterceptor> obiList = new LinkedList<ObjectBindingInterceptor>();
 		for (Map<String, Object> optionsList : OLArray) {
-			obiList.addAll((ArrayList<ObjectBindingInterceptor>) optionsList
-					.get(AbstractConfig.OBJECT_BINDING_INTERCEPTOR_LIST));
+			obiList
+					.addAll((Collection<? extends ObjectBindingInterceptor>) optionsList
+							.get(AbstractConfig.OBJECT_BINDING_INTERCEPTOR_LIST));
 		}
 		for (int i = 0; i < obiList.size(); i++) {
 			ObjectBindingInterceptor obi = obiList.get(i);

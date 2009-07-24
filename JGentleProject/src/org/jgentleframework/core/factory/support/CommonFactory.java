@@ -53,7 +53,7 @@ public class CommonFactory {
 	/**
 	 * Returns a unique instance of {@link CommonFactory}.
 	 * 
-	 * @return {@link CommonFactory}
+	 * @return {@link CommonFactory} instance
 	 */
 	public static CommonFactory singleton() {
 
@@ -70,7 +70,7 @@ public class CommonFactory {
 	/**
 	 * Do init.
 	 * 
-	 * @param def
+	 * @param definition
 	 *            the definition
 	 * @param obj
 	 *            object bean
@@ -87,7 +87,7 @@ public class CommonFactory {
 	 * @throws SecurityException
 	 *             the security exception
 	 */
-	public void doInit(Definition def, Object obj, Class<?> clazz)
+	public void doInit(Definition definition, Object obj, Class<?> clazz)
 			throws IllegalArgumentException, IllegalAccessException,
 			InvocationTargetException, SecurityException, NoSuchMethodException {
 
@@ -95,7 +95,7 @@ public class CommonFactory {
 			((Initializing) obj).activate();
 		}
 		else {
-			List<Method> methods = def
+			List<Method> methods = definition
 					.getMethodsAnnotatedWith(InitializingMethod.class);
 			if (methods != null && methods.size() != 0) {
 				for (Method method : methods) {
