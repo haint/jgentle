@@ -924,6 +924,30 @@ public final class ReflectUtils {
 	}
 
 	/**
+	 * Returns <b>true</b> if given list of objects are annotation
+	 * implementations. If has just any object class can not be casted, returns
+	 * <b>false</b>.
+	 * 
+	 * @param objs
+	 *            the list of objects need to be test.
+	 */
+	public static boolean isAnnotation(Object... objs) {
+
+		Assertor.notNull((Object[]) objs);
+		if (objs.length == 0) {
+			Assertor
+					.throwRunTimeException("The list of annotation instances need to be casted must not be empty!");
+		}
+		boolean result = true;
+		for (Object o : objs) {
+			result = isAnnotation(o);
+			if (result == false)
+				break;
+		}
+		return result;
+	}
+
+	/**
 	 * Returns <b>true</b> if given object can be casted to the class or
 	 * interface type represents by the given Class object. Otherwise returns
 	 * <b>false</b>.
@@ -937,13 +961,6 @@ public final class ReflectUtils {
 	public static boolean isCast(Class<?> clazz, Object obj) {
 
 		return clazz.isInstance(obj);
-		// try {
-		// clazz.cast(obj);
-		// }
-		// catch (ClassCastException e) {
-		// return false;
-		// }
-		// return true;
 	}
 
 	/**
@@ -995,7 +1012,7 @@ public final class ReflectUtils {
 	 * @return true, if checks if is constructor
 	 */
 	public static boolean isConstructor(Object obj) {
-		
+
 		return isCast(Constructor.class, obj);
 	}
 
@@ -1036,6 +1053,7 @@ public final class ReflectUtils {
 	 * @return true, if checks if is field
 	 */
 	public static boolean isField(Object obj) {
+
 		Assertor.notNull(obj);
 		if (obj.getClass().equals(Field.class)) {
 			return true;
@@ -1066,6 +1084,7 @@ public final class ReflectUtils {
 	 * @return true, if checks if is method
 	 */
 	public static boolean isMethod(Object obj) {
+
 		Assertor.notNull(obj);
 		if (obj.getClass().equals(Method.class)) {
 			return true;

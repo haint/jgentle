@@ -37,9 +37,7 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 public @interface Block {
 	/**
-	 * Danh sách các config instance bị ràng buộc trong block.
-	 * 
-	 * @return <code>{@code Class<?>[]}</code>
+	 * A array containing all configurable instances bound to current block
 	 */
 	Class<?>[] value() default {};
 }

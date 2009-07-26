@@ -18,6 +18,7 @@
 package org.jgentleframework.configure.objectmeta;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Lưu ý <code>interface</code> không được cung cấp để sử dụng như là một
@@ -40,5 +41,5 @@ interface IPresentLoadingClass {
 	 * @return trả về một danh sách chứa đựng các <code>object class</code>
 	 *         nếu có, nếu không, trả về một danh sách {@link ArrayList} rỗng.
 	 */
-	ArrayList<Class<?>> getPresentLoadingClasses();
+	List<Class<?>> getPresentLoadingClasses();
 }

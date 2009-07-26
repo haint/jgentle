@@ -22,7 +22,6 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -81,9 +80,8 @@ public class SystemConfigImpl extends AbstractConfigModule implements
 
 	/*
 	 * (non-Javadoc)
-	 * @see
-	 * org.jgentleframework.configure.jgentle.SystemConfig#addAnnotationPostProcessor
-	 * (java.lang.Class,
+	 * @seeorg.jgentleframework.configure.jgentle.SystemConfig#
+	 * addAnnotationPostProcessor (java.lang.Class,
 	 * org.jgentleframework.core.reflection.annohandler.AnnotationPostProcessor)
 	 */
 	@Override
@@ -99,9 +97,8 @@ public class SystemConfigImpl extends AbstractConfigModule implements
 
 	/*
 	 * (non-Javadoc)
-	 * @see
-	 * org.jgentleframework.configure.jgentle.SystemConfig#addAnnotationPostProcessor
-	 * (java.lang.Class, java.lang.Class)
+	 * @seeorg.jgentleframework.configure.jgentle.SystemConfig#
+	 * addAnnotationPostProcessor (java.lang.Class, java.lang.Class)
 	 */
 	@Override
 	@SuppressWarnings("unchecked")
@@ -117,9 +114,8 @@ public class SystemConfigImpl extends AbstractConfigModule implements
 
 	/*
 	 * (non-Javadoc)
-	 * @see
-	 * org.jgentleframework.configure.jgentle.SystemConfig#addDefinitionPostProcessor
-	 * (java.lang.Class<? extends
+	 * @seeorg.jgentleframework.configure.jgentle.SystemConfig#
+	 * addDefinitionPostProcessor (java.lang.Class<? extends
 	 * org.jgentleframework.core.reflection.aohreflect.
 	 * DefinitionPostProcessor>[])
 	 */
@@ -138,10 +134,10 @@ public class SystemConfigImpl extends AbstractConfigModule implements
 
 	/*
 	 * (non-Javadoc)
-	 * @see
-	 * org.jgentleframework.configure.jgentle.SystemConfig#addDefinitionPostProcessor
-	 * (
-	 * org.jgentleframework.core.reflection.aohreflect.DefinitionPostProcessor[])
+	 * @seeorg.jgentleframework.configure.jgentle.SystemConfig#
+	 * addDefinitionPostProcessor (
+	 * org.jgentleframework.core.reflection.aohreflect
+	 * .DefinitionPostProcessor[])
 	 */
 	@Override
 	public void addDefinitionPostProcessor(DefinitionPostProcessor... dpps) {
@@ -334,7 +330,8 @@ public class SystemConfigImpl extends AbstractConfigModule implements
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.jgentleframework.configure.jgentle.SystemConfig#initAnnotationConfig()
+	 * org.jgentleframework.configure.jgentle.SystemConfig#initAnnotationConfig
+	 * ()
 	 */
 	public void initAnnotationConfig() throws IllegalArgumentException,
 			IllegalAccessException, InvocationTargetException,
@@ -391,7 +388,7 @@ public class SystemConfigImpl extends AbstractConfigModule implements
 							}
 							List<Field> fieldList = Arrays.asList(ReflectUtils
 									.getAllDeclaredFields(clazz));
-							HashMap<String, Field> fieldResult = new HashMap<String, Field>();
+							Map<String, Field> fieldResult = new HashMap<String, Field>();
 							for (String name : properties) {
 								for (Field field : fieldList) {
 									if (RegularToolkit.matches(name, field
@@ -471,7 +468,7 @@ public class SystemConfigImpl extends AbstractConfigModule implements
 								List<Method> methodRawList = Arrays
 										.asList(ReflectUtils
 												.getAllDeclaredMethods(clazz));
-								HashMap<String, Method> methodResult = new HashMap<String, Method>();
+								Map<String, Method> methodResult = new HashMap<String, Method>();
 								for (String name : methodList) {
 									for (Method met : methodRawList) {
 										if (RegularToolkit.matches(name, met
@@ -582,11 +579,11 @@ public class SystemConfigImpl extends AbstractConfigModule implements
 	public void setOptionsList(Map<String, Object> optionsList, Method configure) {
 
 		this.optionsList = optionsList;
-		this.DPPList = new ArrayList<DefinitionPostProcessor>();
+		this.DPPList = new LinkedList<DefinitionPostProcessor>();
 		this.optionsList.put(AbstractConfig.DEFINITION_POST_PROCESSOR, DPPList);
-		this.cscClassList = new ArrayList<Class<? extends ComponentServiceContextType<?>>>();
+		this.cscClassList = new LinkedList<Class<? extends ComponentServiceContextType<?>>>();
 		this.optionsList.put(AbstractConfig.CSC_CLASS_LIST, this.cscClassList);
-		this.annotationConfigList = new ArrayList<Annotation>();
+		this.annotationConfigList = new LinkedList<Annotation>();
 		this.optionsList.put(AbstractConfig.ANNOTATION_CONFIG_LIST,
 				this.annotationConfigList);
 		this.annoBeanProcessorList = new HashMap<Class, AnnotationBeanProcessor>();

@@ -302,14 +302,15 @@ class ProviderCoreCreator extends AbstractBeanFactory implements Provider {
 		return detectorController;
 	}
 
-	/**
-	 * Gets the object bean factory.
-	 * 
-	 * @return the objectBeanFactory
+	/*
+	 * (non-Javadoc)
+	 * @seeorg.jgentleframework.context.injecting.IAbstractBeanFactory#
+	 * getObjectBeanFactory()
 	 */
+	@Override
 	public ObjectBeanFactory getObjectBeanFactory() {
 
-		return objectBeanFactory;
+		return this.objectBeanFactory;
 	}
 
 	/*

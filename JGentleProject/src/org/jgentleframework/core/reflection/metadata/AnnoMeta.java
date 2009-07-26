@@ -18,7 +18,7 @@
 package org.jgentleframework.core.reflection.metadata;
 
 import java.util.Collection;
-import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 import org.aopalliance.reflect.Metadata;
@@ -85,7 +85,7 @@ public interface AnnoMeta extends Metadata {
 	/**
 	 * Returns the list of {@link Metadata}s in this {@link AnnoMeta}
 	 */
-	public HashMap<Object, Metadata> getMetaList();
+	public Map<Object, Metadata> getMetaList();
 
 	/**
 	 * Returns the name of this {@link AnnoMeta}, if it is not specified, an

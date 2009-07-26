@@ -392,9 +392,9 @@ public class ObjectAttachImpl<T> implements ObjectAttach<T> {
 	 * #getPresentLoadingClasses()
 	 */
 	@Override
-	public ArrayList<Class<?>> getPresentLoadingClasses() {
+	public List<Class<?>> getPresentLoadingClasses() {
 
-		ArrayList<Class<?>> result = new ArrayList<Class<?>>();
+		List<Class<?>> result = new ArrayList<Class<?>>();
 		for (Entry<Class<?>, Class<?>> entry : this.hashList.entrySet()) {
 			if (entry.getKey() != null && !result.contains(entry.getKey())) {
 				result.add(entry.getKey());

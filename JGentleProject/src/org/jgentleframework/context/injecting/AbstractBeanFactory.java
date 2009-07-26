@@ -51,9 +51,9 @@ import org.jgentleframework.utils.data.Pair;
 
 /**
  * This abstract class is implementation of {@link IAbstractBeanFactory}
- * interface. This class is responsible for configured data management of
- * JGentle container. It provides some methods in order to check, manage and
- * access to configured data.
+ * interface. This class is responsible for configure data management of JGentle
+ * container. It provides some methods in order to check, manage and access to
+ * configured data.
  * 
  * @author LE QUOC CHUNG - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>

@@ -21,6 +21,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 import org.aopalliance.reflect.Metadata;
@@ -273,7 +274,8 @@ class AnnoMetaImpl extends MetadataImpl implements Metadata, AnnoMeta {
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.jgentleframework.core.reflection.metadata.MetadataImpl#getValue()
+	 * @see
+	 * org.jgentleframework.core.reflection.metadata.MetadataImpl#getValue()
 	 */
 	@Override
 	public Object getValue() {
@@ -286,7 +288,7 @@ class AnnoMetaImpl extends MetadataImpl implements Metadata, AnnoMeta {
 	 * @see org.jgentleframework.core.reflection.metadata.AnnoMeta#getMetaList()
 	 */
 	@Override
-	public HashMap<Object, Metadata> getMetaList() {
+	public Map<Object, Metadata> getMetaList() {
 
 		return metaList;
 	}

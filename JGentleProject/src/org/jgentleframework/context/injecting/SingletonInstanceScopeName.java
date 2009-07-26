@@ -26,10 +26,10 @@ package org.jgentleframework.context.injecting;
  */
 public final class SingletonInstanceScopeName {
 	/** The scope name. */
-	public String	scopeName;
+	public String	scopeName		= null;
 
 	/** The shared singleton. */
-	public Object	sharedSingleton;
+	public Object	sharedSingleton	= null;
 
 	/**
 	 * Instantiates a new singleton instance scope name.

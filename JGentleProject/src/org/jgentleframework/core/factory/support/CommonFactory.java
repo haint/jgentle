@@ -52,8 +52,6 @@ public class CommonFactory {
 
 	/**
 	 * Returns a unique instance of {@link CommonFactory}.
-	 * 
-	 * @return {@link CommonFactory} instance
 	 */
 	public static CommonFactory singleton() {
 
