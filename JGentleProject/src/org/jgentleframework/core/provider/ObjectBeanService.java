@@ -38,8 +38,7 @@ public interface ObjectBeanService extends BeanContextMembershipListener {
 	static final String	childrenRemoved	= "childrenRemoved";
 
 	/**
-	 * Returns the corresponding constructor of service class used to create
-	 * service instance.
+	 * Returns the constructor of service class used to create service instance.
 	 * 
 	 * @return the constructor
 	 */

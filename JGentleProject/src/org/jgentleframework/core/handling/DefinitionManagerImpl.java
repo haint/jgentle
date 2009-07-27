@@ -24,6 +24,7 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import org.jgentleframework.configure.enums.Types;
@@ -119,13 +120,13 @@ public class DefinitionManagerImpl extends AbstractDefinitionController
 	}
 
 	/** contains all created {@link Definition}. */
-	private HashMap<Object, Definition>	defList		= new HashMap<Object, Definition>();
+	private Map<Object, Definition>	defList		= new HashMap<Object, Definition>();
 
 	/**
 	 * The {@link HashMap} containing all created {@link Definition}s according
 	 * to ID.
 	 */
-	private HashMap<String, Definition>	defListSub	= new HashMap<String, Definition>();
+	private Map<String, Definition>	defListSub	= new HashMap<String, Definition>();
 
 	/**
 	 * Constructor.
@@ -358,7 +359,7 @@ public class DefinitionManagerImpl extends AbstractDefinitionController
 	 * IDefinitionManager#getDefList()
 	 */
 	@Override
-	public HashMap<Object, Definition> getDefList() {
+	public Map<Object, Definition> getDefList() {
 
 		return defList;
 	}
@@ -369,7 +370,7 @@ public class DefinitionManagerImpl extends AbstractDefinitionController
 	 * DefinitionManager#getDefListSub()
 	 */
 	@Override
-	public HashMap<String, Definition> getDefListSub() {
+	public Map<String, Definition> getDefListSub() {
 
 		return defListSub;
 	}

@@ -84,7 +84,7 @@ class ElementAspectFactory {
 	 *            the definition of target class declaring the given method.
 	 * @param method
 	 *            the given method
-	 * @return returns the corresponding MethodAspectPair if the interceptors
+	 * @return returns the suitable MethodAspectPair if the interceptors
 	 *         according to given method are existed, if not returns
 	 *         <code>null</code>.
 	 */

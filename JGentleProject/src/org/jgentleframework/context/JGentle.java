@@ -386,16 +386,16 @@ public abstract class JGentle {
 	/**
 	 * Instantiates an {@link Provider}.
 	 * 
-	 * @param aoh
-	 *            the corresponding {@link ServiceHandler} instance.
+	 * @param sh
+	 *            the given {@link ServiceHandler} instance.
 	 * @param configurations
 	 *            the list of {@link Configurable} instance.
 	 * @return the provider
 	 */
-	protected static Provider buildProvider(ServiceHandler aoh,
+	protected static Provider buildProvider(ServiceHandler sh,
 			Configurable... configurations) {
 
-		return (Provider) buildContext(aoh, false, configurations);
+		return (Provider) buildContext(sh, false, configurations);
 	}
 
 	/**
@@ -549,12 +549,12 @@ public abstract class JGentle {
 	}
 
 	/**
-	 * Returns <b>true</b> if the config class corresponding to the given
+	 * Returns <b>true</b> if the configurable class bound to the given
 	 * interface type is registered.
 	 * 
 	 * @param interfaze
 	 *            the given interface type
-	 * @return true, if contains config class
+	 * @return true, if contains configurable class
 	 */
 	public static boolean containsConfigClass(Class<?> interfaze) {
 
@@ -607,7 +607,7 @@ public abstract class JGentle {
 	}
 
 	/**
-	 * Returns the config class corresponding to the given interface type.
+	 * Returns the configurable class bound to the given interface type.
 	 * 
 	 * @param interfaze
 	 *            the given interface type
@@ -663,11 +663,10 @@ public abstract class JGentle {
 	 * @param annotation
 	 *            the {@link ComponentServiceContext} annotation.
 	 * @param getProvider
-	 *            if <b>true</b>, the corresponding validator will be gotten
-	 *            from the given {@link Provider}, if <b>false</b>, the instance
-	 *            will be instantiated basing on
-	 *            <code>default constructor</code> specifying in corresponding
-	 *            object class.
+	 *            if <b>true</b>, the suitable validator will be gotten from the
+	 *            given {@link Provider}, if <b>false</b>, the instance will be
+	 *            instantiated basing on <code>default constructor</code>
+	 *            specifying in corresponding object class.
 	 * @param provider
 	 *            the specified {@link Provider} container, if
 	 *            <code>getInject argument</code> is <b>true</b> and provider is

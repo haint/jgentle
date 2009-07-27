@@ -27,14 +27,13 @@ import org.jgentleframework.core.reflection.metadata.Definition;
  * @date Jun 19, 2009
  */
 public interface InterceptConditioner {
-	
 	/**
 	 * Checks if is valid definition.
 	 * 
-	 * @param definition the definition
-	 * 
-	 * @return <code>true</code> if the corresponding {@link Definition
-	 * definition} is valid otherwise returns <code>false</code>.
+	 * @param definition
+	 *            the definition
+	 * @return <code>true</code> if the given {@link Definition definition} is
+	 *         valid otherwise returns <code>false</code>.
 	 */
 	public boolean isValidDefinition(Definition definition);
 }

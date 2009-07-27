@@ -70,7 +70,7 @@ public interface IAbstractServiceManagement {
 	 * Registers an {@link Interceptor} to factory of container
 	 * 
 	 * @param matchers
-	 *            the corresponding matchers of interceptor.
+	 *            given matchers of interceptor.
 	 * @param interceptor
 	 *            the interceptor need to be registered.
 	 */
@@ -81,7 +81,7 @@ public interface IAbstractServiceManagement {
 	 * 
 	 * @param definition
 	 *            the given definition
-	 * @return returns a corresponding {@link Matcher} if it exists, if not,
+	 * @return returns a suitable {@link Matcher matcher} if it exists, if not,
 	 *         returns <b>null</b>.
 	 */
 	public Matcher<Definition> getCachedMatcherOf(Definition definition);
@@ -92,15 +92,15 @@ public interface IAbstractServiceManagement {
 	 * 
 	 * @param interceptor
 	 *            the interceptor
-	 * @return returns a list of corresponding {@link Matcher} if it exists, if
-	 *         not, returns an empty list.
+	 * @return returns a list of suitable {@link Matcher matchers} if they
+	 *         exist, if not, returns an empty list.
 	 */
 	public List<Matcher<Definition>> getMatcherOf(Object interceptor);
 
 	/**
-	 * Refresh matcher cache, if does not found any corresponding matcher
-	 * existed in registered interceptor list, this method will automatically
-	 * remove all current matcher according to given {@link Definition}.
+	 * Refresh matcher cache, if does not found any suitable matcher existed in
+	 * registered interceptor list, this method will automatically remove all
+	 * current matcher according to given {@link Definition}.
 	 * 
 	 * @param definition
 	 *            the definition

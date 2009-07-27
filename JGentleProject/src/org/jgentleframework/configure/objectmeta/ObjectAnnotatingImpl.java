@@ -41,7 +41,7 @@ import org.jgentleframework.utils.data.Pair;
  */
 abstract class ObjectAnnotatingImpl implements InClass, ObjectAnnotating {
 	/**
-	 * {@link ObjectBindingConstant} object corresponding to current
+	 * {@link ObjectBindingConstant} object bound to current
 	 * {@link ObjectAnnotating}
 	 */
 	protected ObjectBindingConstant	constant	= null;

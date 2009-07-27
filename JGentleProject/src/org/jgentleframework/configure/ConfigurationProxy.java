@@ -233,7 +233,7 @@ public class ConfigurationProxy implements MethodInterceptor {
 	}
 
 	/**
-	 * Checks the current block data corresponding to the given method.
+	 * Checks the current block data bound to the given method.
 	 * 
 	 * @param method
 	 *            the given method need to be checked.

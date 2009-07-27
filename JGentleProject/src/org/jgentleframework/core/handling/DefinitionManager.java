@@ -21,7 +21,7 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.util.HashMap;
+import java.util.Map;
 
 import org.jgentleframework.core.reflection.AbstractVisitorHandler;
 import org.jgentleframework.core.reflection.DefinitionPostProcessor;
@@ -138,16 +138,16 @@ public interface DefinitionManager extends IAnnotationVisitor,
 	public Definition getDefinition(String ID);
 
 	/**
-	 * Returns the {@link HashMap} containing all interpreted {@link Definition}
-	 * .
+	 * Returns the {@link Map map} containing all interpreted {@link Definition
+	 * definitions} .
 	 */
-	public HashMap<Object, Definition> getDefList();
+	public Map<Object, Definition> getDefList();
 
 	/**
-	 * Returns the {@link HashMap} containing all interpreted {@link Definition}
-	 * corresponding to their ID
+	 * Returns the {@link Map map} containing all interpreted {@link Definition
+	 * definitions} corresponding to their ID
 	 */
-	public HashMap<String, Definition> getDefListSub();
+	public Map<String, Definition> getDefListSub();
 
 	/**
 	 * @return the visitorHandler
@@ -401,8 +401,7 @@ public interface DefinitionManager extends IAnnotationVisitor,
 	public void setVisitorHandler(AbstractVisitorHandler visitorHandler);
 
 	/**
-	 * Validates the interpreting annotation by corresponding registered
-	 * validator.
+	 * Validates the interpreting annotation by suitable registered validator.
 	 * 
 	 * @param annotation
 	 *            the annotation need to be validated.

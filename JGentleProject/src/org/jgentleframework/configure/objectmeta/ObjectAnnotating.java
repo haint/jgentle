@@ -120,7 +120,7 @@ public interface ObjectAnnotating {
 	 * <p>
 	 * 
 	 * @param type
-	 *            the type of key of mapping pairs, only valid key corresponding
+	 *            the type of key of mapping pairs, only valid key associate
 	 *            to type value is supported when method is performed. If
 	 *            violate, one exception will be thrown at run-time.
 	 * @param pairs

@@ -204,8 +204,7 @@ class DefinitionImpl extends DefinitionCoreImpl implements Metadata, Definition 
 			}
 		}
 		if (obj == null) {
-			throw new NullPointerException("Annotation '"
-					+ annotation.getName() + "' is not annotated .");
+			return null;
 		}
 		return (T) AnnotationProxy.createProxy(obj, this);
 	}

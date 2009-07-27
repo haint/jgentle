@@ -32,7 +32,7 @@ public interface ServiceContextListener {
 	 * service is added.
 	 * 
 	 * @param serviceClass
-	 *            the corresponding service object class.
+	 *            the given service object class.
 	 */
 	public void serviceAvailable(Class<?> serviceClass);
 
@@ -41,7 +41,7 @@ public interface ServiceContextListener {
 	 * service is revoked.
 	 * 
 	 * @param serviceClass
-	 *            the corresponding service object class.
+	 *            the given service object class.
 	 */
 	public void serviceRevoked(Class<?> serviceClass);
 }

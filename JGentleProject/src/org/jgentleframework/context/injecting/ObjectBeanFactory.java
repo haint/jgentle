@@ -117,7 +117,7 @@ public interface ObjectBeanFactory {
 	 *            the not lazy list
 	 * @param type
 	 *            The {@link Types} indicates type of given object class, only
-	 *            object class is corresponding to given type to be in used.
+	 *            object class is appropriate to given type to be in used.
 	 * @param annotateIDList
 	 *            the annotate id list
 	 */
@@ -145,7 +145,7 @@ public interface ObjectBeanFactory {
 	 *            the not lazy list
 	 * @param type
 	 *            The {@link Types} indicates type of given object class, only
-	 *            object class is corresponding to given type to be in used.
+	 *            object class is appopriate to given type to be in used.
 	 * @see ObjectAttach
 	 */
 	public void load_ObjectAttach(ObjectAttach<?> objAth,
@@ -160,7 +160,7 @@ public interface ObjectBeanFactory {
 	 *            the not lazy list
 	 * @param type
 	 *            The {@link Types} indicates type of given object class, only
-	 *            object class is corresponding to given type to be in used.
+	 *            object class is appropriate to given type to be in used.
 	 * @param annotateIDList
 	 *            the annotate id list
 	 * @see ObjectAttach

@@ -90,7 +90,8 @@ public interface Provider extends IAbstractBeanFactory, Context {
 	 * definition}
 	 * 
 	 * @param ID
-	 *            the ID of corresponding {@link Definition definition}.
+	 *            the corresponding ID bound to desired {@link Definition
+	 *            definition}.
 	 * @return an instance of the bean
 	 */
 	public Object getBeanBoundToDefinition(String ID);

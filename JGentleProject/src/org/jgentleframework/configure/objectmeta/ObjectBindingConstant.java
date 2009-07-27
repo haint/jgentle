@@ -34,7 +34,7 @@ import org.jgentleframework.utils.data.Pair;
  * bean appropriate to one unique<b>ID</b>. The configuration data is held in
  * {@link ObjectBindingConstant} shall be used in order to instantiate bean. The
  * configuration includes information of {@link ObjectBindingConstant} ... and
- * all <code>specified wiring bean information</code> corresponding to
+ * all <code>specified wiring bean information</code> bound to
  * <code>bean</code>.
  * 
  * @author LE QUOC CHUNG - mailto: <a

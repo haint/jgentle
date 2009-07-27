@@ -21,6 +21,7 @@ import java.beans.beancontext.BeanContextServiceProvider;
 import java.beans.beancontext.BeanContextServices;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 import org.jgentleframework.context.injecting.Provider;
 import org.jgentleframework.core.handling.DefinitionManager;
@@ -69,11 +70,11 @@ public interface Domain extends BeanContextServiceProvider {
 			Class<? extends ServiceClass> serviceClass);
 
 	/**
-	 * Returns the {@link HashMap} containing all object classes of registered
-	 * {@link ServiceClass}s bound to their alias corresponding to key of the
-	 * {@link HashMap}
+	 * Returns the {@link Map map} containing all object classes of registered
+	 * {@link ServiceClass}s bound to their alias appropriate to key of the
+	 * {@link Map map}
 	 */
-	public HashMap<String, Class<? extends ServiceClass>> getAliasRegistered();
+	public Map<String, Class<? extends ServiceClass>> getAliasRegistered();
 
 	/**
 	 * Returns the current {@link DefinitionManager} of this {@link Domain}
@@ -88,7 +89,7 @@ public interface Domain extends BeanContextServiceProvider {
 	public String getDomainName();
 
 	/**
-	 * Returns the {@link HashMap} containing all {@link ObjectBeanService}s
+	 * Returns the {@link HashMap} containing all {@link ObjectBeanService ObjectBeanServices}
 	 * corresponding to object classes of registered {@link ServiceClass}. Key
 	 * of returned {@link HashMap} is object class type of {@link ServiceClass},
 	 * and its value is corresponding {@link ObjectBeanService} instance.
@@ -231,7 +232,7 @@ public interface Domain extends BeanContextServiceProvider {
 	 *            BeanContextServices
 	 * @param serviceClass
 	 *            the object class type of service.
-	 * @return returns the corresponding {@link ObjectBeanService} of service
+	 * @return returns the {@link ObjectBeanService} of service
 	 *         was removed.
 	 */
 	public <T extends ServiceClass> ObjectBeanService unregisterService(
@@ -244,7 +245,7 @@ public interface Domain extends BeanContextServiceProvider {
 	 *            BeanContextServices
 	 * @param alias
 	 *            the alias name of service need to be unregistered.
-	 * @return returns the corresponding {@link ObjectBeanService} of service
+	 * @return returns the {@link ObjectBeanService} of service
 	 *         was removed.
 	 */
 	public ObjectBeanService unregisterService(BeanContextServices bcs,

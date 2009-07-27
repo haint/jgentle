@@ -34,7 +34,7 @@ import org.jgentleframework.core.provider.ServiceClass;
 /**
  * Represents the service handler, the controller of all services in JGentle
  * system. It contains all core services of container such as IoC service, ...
- * moreover if corresponding provider is the {@link ServiceProvider}, besides
+ * moreover if associated provider is the {@link ServiceProvider}, besides
  * core services such as IoC, AOP, Intercepting service, ... it also holds
  * adscititious services such as RMI support, JDBC wrapper, JMS support, ... or
  * customized service of other third party.
@@ -195,7 +195,7 @@ public interface ServiceHandler extends DomainManager, AnnotationRegister {
 	public BeanContextServicesSupport getContext();
 
 	/**
-	 * Returns the corresponding {@link DefinitionManager} instance of this
+	 * Returns the asscociated {@link DefinitionManager} instance of this
 	 * {@link ServiceHandler}
 	 */
 	public DefinitionManager getDefinitionManager();

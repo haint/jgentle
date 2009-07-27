@@ -85,8 +85,8 @@ public interface CoreInstantiationSelector extends Selector {
 	public void setArgTypes(Class<?>[] argTypes);
 
 	/**
-	 * Returns the arguments used for the corresponding constructor call which
-	 * has given argument types.
+	 * Returns the arguments used for the suitable constructor call which has
+	 * given argument types.
 	 */
 	public Object[] getArgs();
 

@@ -41,7 +41,7 @@ public interface BeanPostInstantiation {
 	 * instantiated.
 	 * 
 	 * @param definition
-	 *            the corresponding {@link Definition} of bean will be
+	 *            the associated {@link Definition} of bean will be
 	 *            instantiated.
 	 * @param selector
 	 *            the instance containing all necessary information need to
@@ -62,7 +62,7 @@ public interface BeanPostInstantiation {
 	 * @param bean
 	 *            the instantiated bean instance.
 	 * @param definition
-	 *            the corresponding {@link Definition} of bean has been
+	 *            the associated {@link Definition} of bean has been
 	 *            instantiated.
 	 * @param selector
 	 *            the instance containing all necessary information need to

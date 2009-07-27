@@ -45,7 +45,7 @@ import org.jgentleframework.web.WebProvider;
 
 /**
  * This enum contains some constants representing all common supported scopes of
- * core JGentle provider. Among of them are only available corresponding to a
+ * core JGentle provider. Among of them are only available to a corresponding
  * specified {@link Provider}, but others are supported by other
  * {@link Provider} type, for example, core {@link Provider} only supports
  * {@link #SINGLETON} and {@link #PROTOTYPE} scope but {@link WebProvider} not

@@ -47,8 +47,8 @@ public interface SystemConfig {
 	 * 
 	 * @param <T>
 	 * @param clazz
-	 *            object class represents the corresponding annotation type
-	 *            appropriate to {@link AnnotationBeanProcessor} instance.
+	 *            object class type of annotation appropriate to
+	 *            {@link AnnotationBeanProcessor} instance.
 	 * @param app
 	 *            the {@link AnnotationBeanProcessor} need to be added.
 	 * @return returns the previous {@link AnnotationBeanProcessor} instance if
@@ -62,8 +62,8 @@ public interface SystemConfig {
 	 * 
 	 * @param <T>
 	 * @param clazz
-	 *            object class represents the corresponding annotation type
-	 *            appropriate to {@link AnnotationBeanProcessor} instance.
+	 *            object class type of annotation appropriate to
+	 *            {@link AnnotationBeanProcessor} instance.
 	 * @param appClass
 	 *            The object class type of {@link AnnotationBeanProcessor} need
 	 *            to be added. object class của APP chỉ định cần add.

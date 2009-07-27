@@ -29,7 +29,7 @@ import org.jgentleframework.utils.data.NullClass;
 
 /**
  * This is an implementation of {@link AnnotationValidator} interface in order
- * to validate an annotation is unique corresponding to target element annotated
+ * to validate an annotation is unique appropriate to target element annotated
  * with {@link Unique} annotation.
  * 
  * @author LE QUOC CHUNG - mailto: <a

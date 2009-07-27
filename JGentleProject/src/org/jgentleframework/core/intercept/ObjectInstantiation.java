@@ -61,8 +61,8 @@ public interface ObjectInstantiation extends Joinpoint, MetadataControl {
 	public Class<?>[] argTypes();
 
 	/**
-	 * Returns the arguments used for the corresponding constructor call which
-	 * has given argument types.
+	 * Returns the arguments used for the suitable constructor call which has
+	 * given argument types.
 	 */
 	public Object[] args();
 
