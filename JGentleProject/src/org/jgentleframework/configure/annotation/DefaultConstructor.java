@@ -24,8 +24,8 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Indicates a constructor to default constructor which is used to create bean
- * instance.
+ * Indicates a constructor to default constructor which is used to instantiate
+ * object bean.
  * 
  * @author LE QUOC CHUNG - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>

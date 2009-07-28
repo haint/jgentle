@@ -160,6 +160,7 @@ public enum Scope implements ScopeImplementation {
 					}
 				}
 				CoreInstantiationSelector coreSelector = null;
+				String referenceName = null;
 				if (selector instanceof CoreInstantiationSelectorImpl) {
 					Pair<Class<?>[], Object[]> pairCons = DefinitionUtils
 							.findArgsOfDefaultConstructor(selector
@@ -169,8 +170,8 @@ public enum Scope implements ScopeImplementation {
 					coreSelector = (CoreInstantiationSelector) selector;
 					coreSelector.setArgTypes(argTypes);
 					coreSelector.setArgs(args);
+					referenceName = coreSelector.getReferenceName();
 				}
-				String referenceName = coreSelector.getReferenceName();
 				if (referenceName != null && !referenceName.isEmpty()) {
 					if (referenceName.startsWith(REF.REF_CONSTANT)) {
 						return referenceName;

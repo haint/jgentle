@@ -26,6 +26,7 @@ import java.lang.reflect.Modifier;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import net.sf.cglib.reflect.FastClass;
@@ -39,6 +40,7 @@ import org.jgentleframework.configure.REF;
 import org.jgentleframework.configure.annotation.DefaultConstructor;
 import org.jgentleframework.configure.annotation.Inject;
 import org.jgentleframework.context.aop.support.MatcherPointcut;
+import org.jgentleframework.context.injecting.ObjectBeanFactory;
 import org.jgentleframework.context.injecting.Provider;
 import org.jgentleframework.context.support.InstantiationSelector;
 import org.jgentleframework.core.GenericException;
@@ -47,6 +49,7 @@ import org.jgentleframework.core.factory.InOutDependencyException;
 import org.jgentleframework.core.factory.InOutExecutor;
 import org.jgentleframework.core.factory.support.CachedConstructor;
 import org.jgentleframework.core.factory.support.MetaDefObject;
+import org.jgentleframework.core.handling.DefinitionManager;
 import org.jgentleframework.core.intercept.JGentleFastClass;
 import org.jgentleframework.core.intercept.support.CoreIdentification;
 import org.jgentleframework.core.intercept.support.InterceptConditioner;
@@ -164,7 +167,7 @@ public final class Utils {
 		// Khởi tạo và inject dependency cho parameter
 		Object[] args = new Object[constructor.getParameterTypes().length];
 		for (int i = 0; i < constructor.getParameterAnnotations().length; i++) {
-			HashMap<Class<? extends Annotation>, Annotation> annoList = new HashMap<Class<? extends Annotation>, Annotation>();
+			Map<Class<? extends Annotation>, Annotation> annoList = new HashMap<Class<? extends Annotation>, Annotation>();
 			List<Class<? extends Annotation>> clazzlist = new LinkedList<Class<? extends Annotation>>();
 			for (Annotation anno : constructor.getParameterAnnotations()[i]) {
 				annoList.put(anno.annotationType(), anno);
@@ -256,6 +259,8 @@ public final class Utils {
 	public static String createScopeName(String referString, Provider provider)
 			throws GenericException {
 
+		DefinitionManager definitionManager = provider.getDefinitionManager();
+		ObjectBeanFactory objectBeanFactory = provider.getObjectBeanFactory();
 		if (referString.indexOf(":") != -1) {
 			String[] values = referString.split(":");
 			if (values[0].equals(Configurable.REF_CONSTANT)) {
@@ -267,30 +272,29 @@ public final class Utils {
 					String[] split = values[1].split(" ");
 					try {
 						clazz = Class.forName(split[1]);
-						Class<?> targetClass = provider.getObjectBeanFactory()
+						Class<?> targetClass = objectBeanFactory
 								.getMappingList().get(clazz);
 						targetClass = targetClass == null ? clazz : targetClass;
-						return createScopeName(clazz, targetClass, provider
-								.getDefinitionManager().getDefinition(
-										targetClass), values[1]);
+						return createScopeName(clazz, targetClass,
+								definitionManager.getDefinition(targetClass),
+								values[1]);
 					}
 					catch (ClassNotFoundException e) {
 					}
 				}
-				Entry<Class<?>, Class<?>> entry = provider
-						.getObjectBeanFactory().getAliasMap().get(values[1]);
+				Entry<Class<?>, Class<?>> entry = objectBeanFactory
+						.getAliasMap().get(values[1]);
 				if (entry == null) {
 					throw new GenericException("Does not found mapping name '"
 							+ values[1] + "'");
 				}
 				Class<?> type = entry.getKey();
 				Class<?> targetClass = entry.getValue();
-				return createScopeName(type, targetClass, provider
-						.getDefinitionManager().getDefinition(targetClass),
-						values[1]);
+				return createScopeName(type, targetClass, definitionManager
+						.getDefinition(targetClass), values[1]);
 			}
 			else if (values[0].equals(Configurable.REF_ID)) {
-				Definition definition = provider.getDefinitionManager()
+				Definition definition = definitionManager
 						.getDefinition(values[1]);
 				if (definition == null) {
 					throw new GenericException(

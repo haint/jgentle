@@ -123,8 +123,8 @@ public abstract class AbstractBeanCacher extends AbstractLoadingFactory
 				}
 				clazz = entry.getKey();
 				targetClass = entry.getValue();
-				definition = this.getDefinitionManager().getDefinition(
-						entry.getValue());
+				definition = this.definitionManager.getDefinition(entry
+						.getValue());
 				mappingName = ref;
 				root = str;
 				scopeName = Utils.createScopeName(clazz, targetClass,

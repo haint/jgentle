@@ -19,6 +19,7 @@ package org.jgentleframework.configure;
 
 import java.lang.annotation.Annotation;
 import java.util.HashMap;
+import java.util.Map;
 
 import org.jgentleframework.configure.annotation.Annotate;
 import org.jgentleframework.configure.annotation.Bean;
@@ -45,7 +46,8 @@ import org.jgentleframework.configure.aopweaving.annotation.Throws;
 @BeanServices(alias = "")
 @Bean(value = "")
 public abstract class TemplateClass {
-	static HashMap<Class<? extends Annotation>, Annotation>	annotationList	= new HashMap<Class<? extends Annotation>, Annotation>();
+	/** The annotation list. */
+	static Map<Class<? extends Annotation>, Annotation>	annotationList	= new HashMap<Class<? extends Annotation>, Annotation>();
 	/**
 	 * static block
 	 */
@@ -76,11 +78,15 @@ public abstract class TemplateClass {
 		}
 	}
 
+	/** The template property. */
 	@Annotate("")
 	@Inject
 	@Outject
-	public String											templateProperty;
+	public String										templateProperty;
 
+	/**
+	 * Template method.
+	 */
 	@Before("")
 	@After("")
 	@Throws("")
@@ -91,6 +97,13 @@ public abstract class TemplateClass {
 
 	}
 
+	/**
+	 * Gets the annotation.
+	 * 
+	 * @param annotation
+	 *            the annotation
+	 * @return the annotation
+	 */
 	@SuppressWarnings("unchecked")
 	public static <T extends Annotation> T getAnnotation(Class<T> annotation) {
 
