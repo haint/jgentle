@@ -65,14 +65,14 @@ public abstract class AbstractInitLoading {
 				: null);
 		// query option list
 		List<DefinitionPostProcessor> dppList = new LinkedList<DefinitionPostProcessor>();
-		HashMap<Class, AnnotationBeanProcessor> abpHash = new HashMap<Class, AnnotationBeanProcessor>();
+		Map<Class, AnnotationBeanProcessor> abpHash = new HashMap<Class, AnnotationBeanProcessor>();
 		List<ObjectAttach<?>> oaList = new LinkedList<ObjectAttach<?>>();
 		List<Class<?>> beanClassList = new LinkedList<Class<?>>();
 		List<ObjectBindingConstant> obcList = new LinkedList<ObjectBindingConstant>();
 		List<ObjectConstant> ocList = new LinkedList<ObjectConstant>();
 		for (Map<String, Object> optionsList : OLArray) {
 			/***************/
-			List<DefinitionPostProcessor> dpp =  (List<DefinitionPostProcessor>) optionsList
+			List<DefinitionPostProcessor> dpp = (List<DefinitionPostProcessor>) optionsList
 					.get(AbstractConfig.DEFINITION_POST_PROCESSOR);
 			if (dpp != null)
 				dppList.addAll(dpp);
@@ -97,7 +97,7 @@ public abstract class AbstractInitLoading {
 			if (obc != null)
 				obcList.addAll(obc);
 			/***************/
-			List<ObjectConstant> oc =  (List<ObjectConstant>) optionsList
+			List<ObjectConstant> oc = (List<ObjectConstant>) optionsList
 					.get(AbstractConfig.OBJECT_CONSTANT_LIST);
 			if (oc != null)
 				ocList.addAll(oc);

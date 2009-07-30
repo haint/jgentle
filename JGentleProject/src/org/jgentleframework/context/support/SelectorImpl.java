@@ -30,8 +30,11 @@ import org.jgentleframework.core.reflection.metadata.Definition;
 public class SelectorImpl implements Selector {
 	/** The definition. */
 	protected Definition	definition	= null;
+
 	/** The target class. */
 	protected Class<?>		targetClass	= null;
+
+	protected String		scopeName	= null;
 
 	/**
 	 * Instantiates a new selector impl.
@@ -48,15 +51,16 @@ public class SelectorImpl implements Selector {
 	 * @param targetClass
 	 *            the target class
 	 */
-	public SelectorImpl(Definition definition, Class<?> targetClass) {
+	public SelectorImpl(Definition definition, Class<?> targetClass,
+			String scopeName) {
 
 		this.definition = definition;
 		this.targetClass = targetClass;
+		this.scopeName = scopeName;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.jgentleframework.context.support.Selector#getDefinition()
 	 */
 	@Override
@@ -67,7 +71,6 @@ public class SelectorImpl implements Selector {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.jgentleframework.context.support.Selector#getTargetClass()
 	 */
 	@Override
@@ -78,8 +81,8 @@ public class SelectorImpl implements Selector {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.context.support.Selector#setDefinition(org.jgentleframework.core.reflection.metadata.Definition)
+	 * @seeorg.jgentleframework.context.support.Selector#setDefinition(org.
+	 * jgentleframework.core.reflection.metadata.Definition)
 	 */
 	@Override
 	public void setDefinition(Definition definition) {
@@ -89,12 +92,35 @@ public class SelectorImpl implements Selector {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.context.support.Selector#setTargetClass(java.lang.Class)
+	 * @see
+	 * org.jgentleframework.context.support.Selector#setTargetClass(java.lang
+	 * .Class)
 	 */
 	@Override
 	public void setTargetClass(Class<?> targetClass) {
 
 		this.targetClass = targetClass;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see org.jgentleframework.context.support.Selector#getScopeName()
+	 */
+	@Override
+	public String getScopeName() {
+
+		return this.scopeName;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * org.jgentleframework.context.support.Selector#setScopeName(java.lang.
+	 * String)
+	 */
+	@Override
+	public void setScopeName(String scopeName) {
+
+		this.scopeName = scopeName;
 	}
 }

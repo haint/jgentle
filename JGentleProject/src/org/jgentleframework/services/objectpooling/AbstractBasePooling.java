@@ -22,6 +22,7 @@ import java.util.TimerTask;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jgentleframework.context.beans.Initializing;
+import org.jgentleframework.context.support.Selector;
 import org.jgentleframework.core.reflection.metadata.Definition;
 import org.jgentleframework.services.objectpooling.annotation.Pooling;
 import org.jgentleframework.services.objectpooling.annotation.SystemPooling;
@@ -92,6 +93,9 @@ public abstract class AbstractBasePooling implements PoolType, Initializing,
 
 	/** The definition. */
 	protected Definition	definition					= null;
+
+	/** The selector. */
+	protected Selector		selector					= null;
 
 	/** The log. */
 	protected final Log		log							= LogFactory

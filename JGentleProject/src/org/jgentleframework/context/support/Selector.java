@@ -58,4 +58,19 @@ public interface Selector {
 	 *            the new target class
 	 */
 	public void setTargetClass(Class<?> targetClass);
+
+	/**
+	 * Sets the scope name.
+	 * 
+	 * @param scopeName
+	 *            the new scope name
+	 */
+	public void setScopeName(String scopeName);
+
+	/**
+	 * Gets the scope name.
+	 * 
+	 * @return the scope name
+	 */
+	public String getScopeName();
 }

@@ -38,10 +38,13 @@ import org.jgentleframework.context.injecting.scope.ScopeImplementation;
 import org.jgentleframework.context.injecting.scope.ScopeInstance;
 import org.jgentleframework.context.support.Selector;
 import org.jgentleframework.core.intercept.JGentleNamingPolicy;
+import org.jgentleframework.core.interceptor.ReturnScopeName;
 import org.jgentleframework.core.reflection.metadata.Definition;
 import org.jgentleframework.services.objectpooling.PoolType;
 import org.jgentleframework.services.objectpooling.annotation.Pooling;
 import org.jgentleframework.services.objectpooling.support.PoolInvocationMethodInterceptor;
+import org.jgentleframework.utils.Assertor;
+import org.jgentleframework.utils.ReflectUtils;
 
 /**
  * This enum contains some constants representing supported pooling scopes of
@@ -135,9 +138,9 @@ public enum PoolScope implements ScopeImplementation {
 				}
 				if (clazz != null) {
 					Binder binder = new Binder(provider);
-					binder.bind("config", "definition").to(poolingConfig,
-							definition).in(clazz).id(clazz.toString()).scope(
-							Scope.SINGLETON);
+					binder.bind("config", "definition", "selector").to(
+							poolingConfig, definition, selector).in(clazz).id(
+							clazz.toString()).scope(Scope.SINGLETON);
 					binder.flush();
 					pool = (PoolType) provider.getBeanBoundToDefinition(clazz
 							.toString());
@@ -145,7 +148,58 @@ public enum PoolScope implements ScopeImplementation {
 					result = this.obtainInstance(pool, poolingConfig,
 							targetClass);
 				}
+				else {
+					if (log.isErrorEnabled()) {
+						log.error("The specified scope is invalid !",
+								new IllegalStateException());
+					}
+				}
 			}
+		}
+		return result;
+	}
+
+	/**
+	 * Return instance to the pool.
+	 * 
+	 * @param instance
+	 *            the instance
+	 * @return true, if successful
+	 */
+	public boolean returnInstance(Object instance) {
+
+		boolean result = true;
+		Assertor.notNull(instance,
+				"The instance need to be returned must not be null !");
+		if (ReflectUtils.isCast(ReturnScopeName.class, instance)) {
+			String scopeName = ((ReturnScopeName) instance).returnsScopeName();
+			PoolType pool = this.poolServices.get(scopeName);
+			if (pool == null) {
+				if (log.isInfoEnabled()) {
+					log
+							.info("The instance bean was not created by this pool !!");
+				}
+				return false;
+			}
+			else {
+				try {
+					pool.returnObject(instance);
+				}
+				catch (Throwable e) {
+					if (log.isErrorEnabled()) {
+						log.error(
+								"Could not return bean instance to the pool !",
+								e);
+					}
+					return false;
+				}
+			}
+		}
+		else {
+			if (log.isInfoEnabled()) {
+				log.info("The instance bean was not created by this pool !!");
+			}
+			return false;
 		}
 		return result;
 	}

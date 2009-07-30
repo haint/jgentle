@@ -19,6 +19,7 @@ package org.jgentleframework.configure.objectmeta;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.jgentleframework.configure.AbstractConfig;
@@ -193,7 +194,7 @@ public class Binder extends BindingConfigImpl {
 	 */
 	public void flush() {
 
-		ArrayList<Map<String, Object>> OLArray = new ArrayList<Map<String, Object>>();
+		List<Map<String, Object>> OLArray = new ArrayList<Map<String, Object>>();
 		OLArray.add(this.getOptionsList());
 		AbstractInitLoading.loading(this.provider, OLArray);
 		clearAllBinding();

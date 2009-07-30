@@ -19,6 +19,7 @@ package org.jgentleframework.services.objectpooling;
 
 import java.lang.reflect.Method;
 import java.util.List;
+import java.util.TooManyListenersException;
 
 import org.jgentleframework.context.beans.Disposable;
 import org.jgentleframework.context.beans.Initializing;
@@ -26,6 +27,9 @@ import org.jgentleframework.context.beans.ProviderAware;
 import org.jgentleframework.context.beans.annotation.DisposableMethod;
 import org.jgentleframework.context.beans.annotation.InitializingMethod;
 import org.jgentleframework.context.injecting.Provider;
+import org.jgentleframework.context.support.CoreInstantiationSelector;
+import org.jgentleframework.context.support.CoreInstantiationSelectorImpl;
+import org.jgentleframework.core.factory.BeanCreationProcessor;
 import org.jgentleframework.services.objectpooling.annotation.CanBePooledMethod;
 import org.jgentleframework.services.objectpooling.annotation.DeactivateMethod;
 import org.jgentleframework.services.objectpooling.annotation.SystemPooling;
@@ -33,7 +37,9 @@ import org.jgentleframework.services.objectpooling.annotation.ValidateMethod;
 import org.jgentleframework.services.objectpooling.context.CanBePooled;
 import org.jgentleframework.services.objectpooling.context.Deactivate;
 import org.jgentleframework.services.objectpooling.context.Validate;
+import org.jgentleframework.utils.DefinitionUtils;
 import org.jgentleframework.utils.ReflectUtils;
+import org.jgentleframework.utils.data.Pair;
 import org.jgentleframework.utils.data.TimestampObjectBean;
 
 /**
@@ -140,12 +146,31 @@ public abstract class AbstractBaseController extends AbstractBasePooling
 		}
 		// create new object when needed
 		boolean newlyCreated = false;
-		Object obj = null;
+		Object result = null;
 		TimestampObjectBean<Object> pair = null;
 		try {
-			obj = this.provider.getBean(this.definition);
-			if (obj != null) {
-				pair = new TimestampObjectBean<Object>(obj);
+			CoreInstantiationSelector coreSelector = null;
+			if (selector instanceof CoreInstantiationSelectorImpl) {
+				coreSelector = (CoreInstantiationSelector) selector;
+				Pair<Class<?>[], Object[]> pairCons = DefinitionUtils
+						.findArgsOfDefaultConstructor(selector.getDefinition(),
+								provider);
+				Class<?>[] argTypes = pairCons.getKeyPair();
+				Object[] args = pairCons.getValuePair();
+				coreSelector.setArgTypes(argTypes);
+				coreSelector.setArgs(args);
+			}
+			try {
+				result = this.provider.getServiceHandler().getService(this,
+						BeanCreationProcessor.class, selector);
+			}
+			catch (TooManyListenersException e) {
+				if (log.isFatalEnabled()) {
+					log.fatal("Could not get service !", e);
+				}
+			}
+			if (result != null) {
+				pair = new TimestampObjectBean<Object>(result);
 				newlyCreated = true;
 			}
 		}
@@ -165,7 +190,7 @@ public abstract class AbstractBaseController extends AbstractBasePooling
 			}
 		}
 		// validate the object bean
-		validatesObject(obj);
+		validatesObject(result);
 		return pair != null ? pair.getValue() : null;
 	}
 

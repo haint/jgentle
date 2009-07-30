@@ -73,11 +73,11 @@ public class AutoLoadingDefinitionDetector extends AbstractDetector {
 			/*
 			 * Lấy ra danh sách các đối tượng cất trữ thông tin cấu hình.
 			 */
-			List<ObjectAttach<?>> othList =  (List<ObjectAttach<?>>) optionsList
+			List<ObjectAttach<?>> othList = (List<ObjectAttach<?>>) optionsList
 					.get(AbstractConfig.OBJECT_ATTACH_LIST);
-			List<ObjectConstant> ocstList =  (List<ObjectConstant>) optionsList
+			List<ObjectConstant> ocstList = (List<ObjectConstant>) optionsList
 					.get(AbstractConfig.OBJECT_CONSTANT_LIST);
-			List<Class<?>> bclist =  (List<Class<?>>) optionsList
+			List<Class<?>> bclist = (List<Class<?>>) optionsList
 					.get(AbstractConfig.BEAN_CLASS_LIST);
 			List<ObjectBindingConstant> obcList = (List<ObjectBindingConstant>) optionsList
 					.get(AbstractConfig.OBJECT_BINDING_CONSTANT_LIST);
@@ -99,7 +99,6 @@ public class AutoLoadingDefinitionDetector extends AbstractDetector {
 			}
 		}
 		// Khởi nạp diễn dịch thông tin Definition
-		Provider provider = (Provider) this.provider;
 		DefinitionManager defManager = provider.getDefinitionManager();
 		synchronized (defManager) {
 			for (Class<?> clazz : list) {

@@ -360,7 +360,8 @@ public abstract class AbstractBeanFactory extends AbstractBeanCacher implements
 		coreSelector.setCachingList(cachingList);
 		// If not Singleton scope
 		try {
-			if (scope != null && !scope.equals(Scope.SINGLETON)) {
+			if (scope != null && !scope.equals(Scope.SINGLETON)
+					&& !isCustomizedScope(scope)) {
 				result = returnsCachingResult(coreSelector);
 				if (result != AbstractBeanCacher.NULL_SHAREDOBJECT) {
 					return result;
@@ -425,6 +426,8 @@ public abstract class AbstractBeanFactory extends AbstractBeanCacher implements
 			}
 			scopeName = Utils.createScopeName(type, targetClass, definition,
 					mappingName);
+			// setup scopeName to selector
+			selector.setScopeName(scopeName);
 			// creates scope info, default is SINGLETON
 			synchronized (scopeList) {
 				if (!scopeList.containsKey(scopeName)) {
@@ -593,6 +596,25 @@ public abstract class AbstractBeanFactory extends AbstractBeanCacher implements
 		else {
 			return false;
 		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * org.jgentleframework.context.injecting.IAbstractBeanFactory#isCustomizedScope
+	 * (org.jgentleframework.context.injecting.scope.ScopeInstance)
+	 */
+	@Override
+	public boolean isCustomizedScope(ScopeInstance scope) {
+
+		boolean result = true;
+		for (ScopeInstance scopeObj : Scope.class.getEnumConstants()) {
+			if (scopeObj == scope) {
+				result = false;
+				break;
+			}
+		}
+		return result;
 	}
 
 	/*

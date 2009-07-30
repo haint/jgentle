@@ -15,24 +15,18 @@
  * 
  * Project: JGentleFramework
  */
-package org.jgentleframework.services.objectpooling.support;
-
-import org.jgentleframework.configure.Configurable;
+package org.jgentleframework.core.interceptor;
 
 /**
- * The Class ObjectPoolService.
+ * The Interface ReturnScopeName.
  * 
  * @author Quoc Chung - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
- * @date Jun 22, 2009
+ * @date Jul 30, 2009
  */
-public abstract class ObjectPoolService implements Configurable {
-	/*
-	 * (non-Javadoc)
-	 * @see org.jgentleframework.configure.Configurable#configure()
+public interface ReturnScopeName {
+	/**
+	 * Returns scope name of current bean instance.
 	 */
-	@Override
-	public void configure() {
-
-	}
+	String returnsScopeName();
 }

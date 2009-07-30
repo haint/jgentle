@@ -21,21 +21,21 @@ import org.jgentleframework.core.JGentleRuntimeException;
 import org.jgentleframework.services.ServiceRunningException;
 
 /**
- * The Class PoolInstanceOperationException.
+ * The Class PoolOperationException.
  * 
  * @author Quoc Chung - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
  * @date Jun 22, 2009
  * @see JGentleRuntimeException
  */
-public class PoolInstanceOperationException extends ServiceRunningException {
+public class PoolOperationException extends ServiceRunningException {
 	/** The Constant serialVersionUID. */
 	private static final long	serialVersionUID	= -6864730311259949370L;
 
 	/**
 	 * Instantiates a new pool instance operation exception.
 	 */
-	public PoolInstanceOperationException() {
+	public PoolOperationException() {
 
 		super();
 	}
@@ -46,7 +46,7 @@ public class PoolInstanceOperationException extends ServiceRunningException {
 	 * @param strEx
 	 *            the str ex
 	 */
-	public PoolInstanceOperationException(String strEx) {
+	public PoolOperationException(String strEx) {
 
 		super(strEx);
 	}
@@ -59,7 +59,7 @@ public class PoolInstanceOperationException extends ServiceRunningException {
 	 * @param cause
 	 *            the cause
 	 */
-	public PoolInstanceOperationException(String message, Throwable cause) {
+	public PoolOperationException(String message, Throwable cause) {
 
 		super(message, cause);
 	}
@@ -70,7 +70,7 @@ public class PoolInstanceOperationException extends ServiceRunningException {
 	 * @param cause
 	 *            the cause
 	 */
-	public PoolInstanceOperationException(Throwable cause) {
+	public PoolOperationException(Throwable cause) {
 
 		super(cause);
 	}

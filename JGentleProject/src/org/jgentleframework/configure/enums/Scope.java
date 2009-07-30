@@ -162,12 +162,12 @@ public enum Scope implements ScopeImplementation {
 				CoreInstantiationSelector coreSelector = null;
 				String referenceName = null;
 				if (selector instanceof CoreInstantiationSelectorImpl) {
+					coreSelector = (CoreInstantiationSelector) selector;
 					Pair<Class<?>[], Object[]> pairCons = DefinitionUtils
 							.findArgsOfDefaultConstructor(selector
 									.getDefinition(), provider);
 					Class<?>[] argTypes = pairCons.getKeyPair();
 					Object[] args = pairCons.getValuePair();
-					coreSelector = (CoreInstantiationSelector) selector;
 					coreSelector.setArgTypes(argTypes);
 					coreSelector.setArgs(args);
 					referenceName = coreSelector.getReferenceName();

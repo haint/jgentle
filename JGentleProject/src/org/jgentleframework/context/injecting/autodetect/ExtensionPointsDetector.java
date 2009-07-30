@@ -75,7 +75,7 @@ public class ExtensionPointsDetector extends AbstractDetector {
 	 */
 	private String getIDFromBeanClass(Class<?> clazz) {
 
-		Definition def = provider.getDefinitionManager().getDefinition(clazz);
+		Definition def = definitionManager.getDefinition(clazz);
 		String ID = "";
 		if (def.isAnnotationPresent(Bean.class)) {
 			String value = def.getAnnotation(Bean.class).value();
@@ -98,8 +98,8 @@ public class ExtensionPointsDetector extends AbstractDetector {
 		// Detects BeanPostInstantiation
 		if (BeanPostInstantiation.class.isAssignableFrom(clazz)) {
 			String ID = getIDFromBeanClass(clazz);
-			Domain domain = this.provider.getServiceHandler().getDomain(
-					BeanServices.DEFAULT_DOMAIN);
+			Domain domain = this.serviceHandler
+					.getDomain(BeanServices.DEFAULT_DOMAIN);
 			BeanPostInstantiationSupportInterface bcp = domain
 					.getServiceInstance(BeanCreationProcessor.class);
 			bcp.addBeanPostInstantiation(REF.ref(ID));
@@ -108,14 +108,14 @@ public class ExtensionPointsDetector extends AbstractDetector {
 		else if (DefinitionPostProcessor.class.isAssignableFrom(clazz)) {
 			DefinitionPostProcessor dpp = (DefinitionPostProcessor) provider
 					.getBeanBoundToDefinition(getIDFromBeanClass(clazz));
-			provider.getDefinitionManager().addDefinitionPostProcessor(dpp);
+			definitionManager.addDefinitionPostProcessor(dpp);
 		}
 		// Detects AnnotationBeanProcessor
 		else if (AnnotationBeanProcessor.class.isAssignableFrom(clazz)) {
 			AnnotationBeanProcessor<?> abp = (AnnotationBeanProcessor<?>) provider
 					.getBeanBoundToDefinition(getIDFromBeanClass(clazz));
 			try {
-				provider.getDefinitionManager().addAnnotationBeanProcessor(abp);
+				definitionManager.addAnnotationBeanProcessor(abp);
 			}
 			catch (ClassNotFoundException e) {
 				throw new AutoDetectException(e.getMessage());
@@ -128,8 +128,7 @@ public class ExtensionPointsDetector extends AbstractDetector {
 						"Does not support enum type to mapping class.");
 			}
 			else {
-				Definition def = provider.getDefinitionManager().getDefinition(
-						clazz);
+				Definition def = definitionManager.getDefinition(clazz);
 				String ID = getIDFromBeanClass(clazz);
 				if (def.getAnnotation(Bean.class).scope().equals(
 						Scope.SINGLETON)) {
@@ -140,8 +139,8 @@ public class ExtensionPointsDetector extends AbstractDetector {
 				}
 				ScopeImplementation scopeInstance = (ScopeImplementation) provider
 						.getBeanBoundToDefinition(ID);
-				synchronized (provider.getScopeController()) {
-					provider.getScopeController().addScope(scopeInstance);
+				synchronized (scopeController) {
+					scopeController.addScope(scopeInstance);
 				}
 			}
 		}
@@ -159,8 +158,8 @@ public class ExtensionPointsDetector extends AbstractDetector {
 		// Detects BeanPostInstantiation
 		if (BeanPostInstantiation.class.isAssignableFrom(clazz)) {
 			String ID = obc.getID();
-			Domain domain = this.provider.getServiceHandler().getDomain(
-					BeanServices.DEFAULT_DOMAIN);
+			Domain domain = serviceHandler
+					.getDomain(BeanServices.DEFAULT_DOMAIN);
 			BeanPostInstantiationSupportInterface bcp = domain
 					.getServiceInstance(BeanCreationProcessor.class);
 			bcp.addBeanPostInstantiation(REF.ref(ID));
@@ -169,14 +168,14 @@ public class ExtensionPointsDetector extends AbstractDetector {
 		else if (DefinitionPostProcessor.class.isAssignableFrom(clazz)) {
 			DefinitionPostProcessor dpp = (DefinitionPostProcessor) provider
 					.getBeanBoundToDefinition(obc.getID());
-			provider.getDefinitionManager().addDefinitionPostProcessor(dpp);
+			definitionManager.addDefinitionPostProcessor(dpp);
 		}
 		// Detects AnnotationBeanProcessor
 		else if (AnnotationBeanProcessor.class.isAssignableFrom(clazz)) {
 			AnnotationBeanProcessor<?> abp = (AnnotationBeanProcessor<?>) provider
 					.getBeanBoundToDefinition(obc.getID());
 			try {
-				provider.getDefinitionManager().addAnnotationBeanProcessor(abp);
+				definitionManager.addAnnotationBeanProcessor(abp);
 			}
 			catch (ClassNotFoundException e) {
 				throw new AutoDetectException(e.getMessage());
@@ -191,10 +190,9 @@ public class ExtensionPointsDetector extends AbstractDetector {
 			}
 			// Nếu class là enum
 			if (clazz.isEnum()) {
-				synchronized (provider.getScopeController()) {
+				synchronized (scopeController) {
 					for (Object scope : clazz.getEnumConstants()) {
-						provider.getScopeController().addScope(
-								(ScopeImplementation) scope);
+						scopeController.addScope((ScopeImplementation) scope);
 					}
 				}
 			}
@@ -202,8 +200,8 @@ public class ExtensionPointsDetector extends AbstractDetector {
 			else {
 				ScopeImplementation scopeInstance = (ScopeImplementation) provider
 						.getBeanBoundToDefinition(obc.getID());
-				synchronized (provider.getScopeController()) {
-					provider.getScopeController().addScope(scopeInstance);
+				synchronized (scopeController) {
+					scopeController.addScope(scopeInstance);
 				}
 			}
 		}
@@ -223,8 +221,8 @@ public class ExtensionPointsDetector extends AbstractDetector {
 			 * Detects BeanPostInstantiation
 			 */
 			if (BeanPostInstantiation.class.isAssignableFrom(entry.getValue())) {
-				Domain domain = this.provider.getServiceHandler().getDomain(
-						BeanServices.DEFAULT_DOMAIN);
+				Domain domain = serviceHandler
+						.getDomain(BeanServices.DEFAULT_DOMAIN);
 				BeanPostInstantiationSupportInterface bcp = domain
 						.getServiceInstance(BeanCreationProcessor.class);
 				if (oa.getName() != null && !oa.getName().isEmpty()
@@ -245,7 +243,7 @@ public class ExtensionPointsDetector extends AbstractDetector {
 						.getBeanBoundToMapping(oa.getName())
 						: (DefinitionPostProcessor) provider.getBean(entry
 								.getKey());
-				provider.getDefinitionManager().addDefinitionPostProcessor(dpp);
+				definitionManager.addDefinitionPostProcessor(dpp);
 			}
 			/*
 			 * Detects AnnotationBeanProcessor
@@ -258,8 +256,7 @@ public class ExtensionPointsDetector extends AbstractDetector {
 						: (AnnotationBeanProcessor<?>) provider.getBean(entry
 								.getKey());
 				try {
-					provider.getDefinitionManager().addAnnotationBeanProcessor(
-							abp);
+					definitionManager.addAnnotationBeanProcessor(abp);
 				}
 				catch (ClassNotFoundException e) {
 					throw new AutoDetectException(e.getMessage());
@@ -279,11 +276,11 @@ public class ExtensionPointsDetector extends AbstractDetector {
 				}
 				// Nếu class là enum
 				if (entry.getValue().isEnum()) {
-					synchronized (provider.getScopeController()) {
+					synchronized (scopeController) {
 						for (Object objScope : entry.getValue()
 								.getEnumConstants()) {
-							provider.getScopeController().addScope(
-									(ScopeImplementation) objScope);
+							scopeController
+									.addScope((ScopeImplementation) objScope);
 						}
 					}
 				}
@@ -294,8 +291,8 @@ public class ExtensionPointsDetector extends AbstractDetector {
 							.getBeanBoundToMapping(oa.getName())
 							: (ScopeImplementation) provider.getBean(entry
 									.getKey());
-					synchronized (provider.getScopeController()) {
-						provider.getScopeController().addScope(scopeInstance);
+					synchronized (scopeController) {
+						scopeController.addScope(scopeInstance);
 					}
 				}
 			}

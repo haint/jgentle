@@ -50,6 +50,8 @@ import org.jgentleframework.core.intercept.JGentleNamingPolicy;
 import org.jgentleframework.core.intercept.MethodInterceptorStackCallback;
 import org.jgentleframework.core.intercept.support.Matcher;
 import org.jgentleframework.core.interceptor.InterceptorUtils;
+import org.jgentleframework.core.interceptor.ReturnScopeName;
+import org.jgentleframework.core.interceptor.ReturnScopeNameMethodInterceptor;
 import org.jgentleframework.core.provider.ServiceClass;
 import org.jgentleframework.core.reflection.metadata.Definition;
 import org.jgentleframework.utils.Assertor;
@@ -232,9 +234,9 @@ public class CoreProcessorImpl extends AbstractProcesserChecker implements
 				executesInOut(targetClass, definition, provider,
 						runtimeLoading, methodAspectList, invocationINOUT);
 				// Creates callbacks.
-				Callback[] callbacks = new Callback[methodList.size()];
+				Callback[] callbacks = new Callback[methodList.size() + 1];
 				Class<? extends Callback>[] callbackTypes = new Class[methodList
-						.size()];
+						.size() + 1];
 				for (int i = 0; i < methodList.size(); i++) {
 					MethodAspectPair pair = methodAspectList.get(methodList
 							.get(i));
@@ -252,20 +254,31 @@ public class CoreProcessorImpl extends AbstractProcesserChecker implements
 						callbackTypes[i] = net.sf.cglib.proxy.MethodInterceptor.class;
 					}
 				}
+				callbacks[methodList.size()] = new ReturnScopeNameMethodInterceptor(
+						selector.getScopeName());
+				callbackTypes[methodList.size()] = net.sf.cglib.proxy.MethodInterceptor.class;
 				// Nếu không tìm thấy bất kì chỉ định khởi tạo interceptor nào
 				// ==> tự động return null.
 				if (methodAspectList.size() == 0 && (targetClass.isInterface())) {
 					return NullClass.class;
 				}
 				// Create the proxied class.
+				final Method returnScopeNameMethod = ReturnScopeName.class
+						.getDeclaredMethod("returnsScopeName");
 				Enhancer enhancer = new Enhancer();
 				if (targetClass.isAnnotation() || targetClass.isInterface())
-					enhancer.setInterfaces(new Class<?>[] { targetClass });
-				else
+					enhancer.setInterfaces(new Class<?>[] { targetClass,
+							ReturnScopeName.class });
+				else {
 					enhancer.setSuperclass(targetClass);
+					enhancer
+							.setInterfaces(new Class<?>[] { ReturnScopeName.class });
+				}
 				enhancer.setCallbackFilter(new CallbackFilter() {
 					public int accept(Method method) {
 
+						if (method.equals(returnScopeNameMethod))
+							return methodList.size();
 						return methodList.indexOf(method);
 					}
 				});
@@ -305,7 +318,8 @@ public class CoreProcessorImpl extends AbstractProcesserChecker implements
 	@SuppressWarnings("unchecked")
 	@Override
 	protected CachedConstructor createConstructionProxy(
-			CoreInstantiationSelector selector, MetaDefObject mdo) {
+			CoreInstantiationSelector selector, MetaDefObject mdo)
+			throws SecurityException, NoSuchMethodException {
 
 		Assertor.notNull(selector, "The selector ["
 				+ CoreInstantiationSelector.class.toString()
@@ -313,12 +327,19 @@ public class CoreProcessorImpl extends AbstractProcesserChecker implements
 		// Create
 		Enhancer enhancer = new Enhancer();
 		enhancer.setSuperclass(selector.getTargetClass());
-		Callback[] callbacks = new Callback[] { NoOp.INSTANCE };
-		Class<? extends Callback>[] callbackTypes = new Class[] { NoOp.class };
+		enhancer.setInterfaces(new Class<?>[] { ReturnScopeName.class });
+		Callback[] callbacks = new Callback[] { NoOp.INSTANCE,
+				new ReturnScopeNameMethodInterceptor(selector.getScopeName()) };
+		final Method returnScopeNameMethod = ReturnScopeName.class
+				.getDeclaredMethod("returnsScopeName");
+		Class<? extends Callback>[] callbackTypes = new Class[] { NoOp.class,
+				net.sf.cglib.proxy.MethodInterceptor.class };
 		enhancer.setCallbackFilter(new CallbackFilter() {
 			@Override
 			public int accept(Method method) {
 
+				if (method.equals(returnScopeNameMethod))
+					return 1;
 				return 0;
 			}
 		});
@@ -346,7 +367,8 @@ public class CoreProcessorImpl extends AbstractProcesserChecker implements
 	protected CachedConstructor createConstructionProxy(
 			final CoreInstantiationSelector selector, Class<?> interfaze,
 			net.sf.cglib.proxy.MethodInterceptor interceptor,
-			final List<Method> methodList, MetaDefObject mdo) {
+			final List<Method> methodList, MetaDefObject mdo)
+			throws SecurityException, NoSuchMethodException {
 
 		Assertor.notNull(interceptor,
 				"The given interceptor must not be null !");
@@ -356,12 +378,20 @@ public class CoreProcessorImpl extends AbstractProcesserChecker implements
 		Enhancer enhancer = new Enhancer();
 		enhancer.setSuperclass(selector.getTargetClass());
 		if (interfaze != null && interfaze.isAnnotation())
-			enhancer
-					.setInterfaces(new Class<?>[] { interfaze, Annotation.class });
+			enhancer.setInterfaces(new Class<?>[] { interfaze,
+					Annotation.class, ReturnScopeName.class });
 		else if (interfaze != null && interfaze.isInterface())
-			enhancer.setInterfaces(new Class<?>[] { interfaze });
-		Callback[] callbacks = new Callback[] { NoOp.INSTANCE, interceptor };
+			enhancer.setInterfaces(new Class<?>[] { interfaze,
+					ReturnScopeName.class });
+		else {
+			enhancer.setInterfaces(new Class<?>[] { ReturnScopeName.class });
+		}
+		final Method returnScopeNameMethod = ReturnScopeName.class
+				.getDeclaredMethod("returnsScopeName");
+		Callback[] callbacks = new Callback[] { NoOp.INSTANCE, interceptor,
+				new ReturnScopeNameMethodInterceptor(selector.getScopeName()) };
 		Class<? extends Callback>[] callbackTypes = new Class[] { NoOp.class,
+				net.sf.cglib.proxy.MethodInterceptor.class,
 				net.sf.cglib.proxy.MethodInterceptor.class };
 		enhancer.setCallbackFilter(new CallbackFilter() {
 			@Override
@@ -372,6 +402,8 @@ public class CoreProcessorImpl extends AbstractProcesserChecker implements
 					return 1;
 				else if (selector.getTargetClass().isAnnotation())
 					return 1;
+				else if (method.equals(returnScopeNameMethod))
+					return 2;
 				else
 					return 0;
 			}

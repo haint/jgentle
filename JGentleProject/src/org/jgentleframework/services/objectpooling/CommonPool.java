@@ -98,7 +98,7 @@ public class CommonPool extends AbstractBaseFactory {
 						.poll());
 				if (pair == null) {
 					if (this.maxPoolSize < 0
-							|| this.getNumActive() < this.maxPoolSize) {
+							|| this.getNumActive() <= this.maxPoolSize) {
 						return createsBean();
 					}
 					else {

@@ -18,6 +18,7 @@
 package org.jgentleframework.context.injecting;
 
 import org.jgentleframework.context.injecting.scope.ScopeController;
+import org.jgentleframework.context.injecting.scope.ScopeInstance;
 import org.jgentleframework.context.services.ServiceHandler;
 import org.jgentleframework.core.handling.DefinitionManager;
 import org.jgentleframework.core.reflection.metadata.Definition;
@@ -156,6 +157,14 @@ public interface IAbstractBeanFactory {
 	 * @return true, if checks if is singleton
 	 */
 	public boolean isSingleton(String ID);
+
+	/**
+	 * Returns <code>true</code> if the given scope is a customized scope.
+	 * 
+	 * @param scope
+	 *            the given scope
+	 */
+	public boolean isCustomizedScope(ScopeInstance scope);
 
 	/**
 	 * Returns the object bean corresponding to represented String.

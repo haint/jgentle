@@ -21,6 +21,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.jgentleframework.context.injecting.Provider;
+import org.jgentleframework.context.injecting.scope.ScopeController;
+import org.jgentleframework.context.services.ServiceHandler;
+import org.jgentleframework.core.handling.DefinitionManager;
 
 /**
  * This abstract class represents the detector in the chain.
@@ -32,12 +35,20 @@ import org.jgentleframework.context.injecting.Provider;
  * @see FirstDetector
  */
 public abstract class AbstractDetector implements Detector {
-	protected Provider	provider		= null;
+	/** The provider. */
+	protected Provider	provider			= null;
 
-	/**
-	 * The next detector of this detector in the chain.
-	 */
-	Detector			detectModule	= null;
+	/** The definition manager. */
+	DefinitionManager	definitionManager	= null;
+
+	/** The service handler. */
+	ServiceHandler		serviceHandler		= null;
+
+	/** The scope controller. */
+	ScopeController		scopeController		= null;
+
+	/** The next detector of this detector in the chain. */
+	Detector			detectModule		= null;
 
 	/**
 	 * The Constructor.
@@ -48,6 +59,9 @@ public abstract class AbstractDetector implements Detector {
 	public AbstractDetector(Provider provider) {
 
 		this.provider = provider;
+		definitionManager = this.provider.getDefinitionManager();
+		this.serviceHandler = this.provider.getServiceHandler();
+		this.scopeController = this.provider.getScopeController();
 	}
 
 	/*

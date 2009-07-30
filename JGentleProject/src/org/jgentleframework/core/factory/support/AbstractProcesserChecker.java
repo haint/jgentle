@@ -142,7 +142,8 @@ public abstract class AbstractProcesserChecker {
 	 * @return the cached constructor
 	 */
 	abstract protected CachedConstructor createConstructionProxy(
-			CoreInstantiationSelector selector, MetaDefObject mdo);
+			CoreInstantiationSelector selector, MetaDefObject mdo)
+			throws SecurityException, NoSuchMethodException;
 
 	/**
 	 * Creates the construction proxy.
@@ -160,7 +161,8 @@ public abstract class AbstractProcesserChecker {
 	abstract protected CachedConstructor createConstructionProxy(
 			CoreInstantiationSelector selector, Class<?> interfaze,
 			net.sf.cglib.proxy.MethodInterceptor interceptor,
-			final List<Method> methodList, MetaDefObject mdo);
+			final List<Method> methodList, MetaDefObject mdo)
+			throws SecurityException, NoSuchMethodException;
 
 	/**
 	 * Creates the pure bean instance.
@@ -213,8 +215,8 @@ public abstract class AbstractProcesserChecker {
 						inoutInterceptor);
 				final List<Method> methodList = new ArrayList<Method>();
 				Enhancer.getMethods(targetClass, null, methodList);
-				cons = createConstructionProxy(selector, null, intercept,
-						methodList, metaObj);
+				cons = createConstructionProxy(selector, selector.getType(),
+						intercept, methodList, metaObj);
 			}
 			else {
 				cons = createConstructionProxy(selector, metaObj);
@@ -378,9 +380,9 @@ public abstract class AbstractProcesserChecker {
 				.getReferenceName());
 		Map<String, ScopeInstance> scopeList = provider.getObjectBeanFactory()
 				.getScopeList();
-		Scope scope = null;
+		ScopeInstance scope = null;
 		synchronized (scopeList) {
-			scope = (Scope) scopeList.get(scopeName);
+			scope = scopeList.get(scopeName);
 		}
 		if (scope != null && scope.equals(Scope.SINGLETON)) {
 			synchronized (provider.getObjectBeanFactory().getMapDirectList()) {
