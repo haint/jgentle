@@ -23,8 +23,52 @@ package org.jgentleframework.core;
  * @author Quoc Chung - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
  * @date Mar 24, 2007
+ * @see AnnotationExtendsException
  */
 public class AnnotatedWithException extends AnnotationExtendsException {
 	/** The Constant serialVersionUID. */
 	private static final long	serialVersionUID	= 5478238979514825276L;
+
+	/**
+	 * Instantiates a new annotated with exception.
+	 */
+	public AnnotatedWithException() {
+
+		super();
+	}
+
+	/**
+	 * Instantiates a new annotated with exception.
+	 * 
+	 * @param strEx
+	 *            the str ex
+	 */
+	public AnnotatedWithException(String strEx) {
+
+		super(strEx);
+	}
+
+	/**
+	 * Instantiates a new annotated with exception.
+	 * 
+	 * @param message
+	 *            the message
+	 * @param cause
+	 *            the cause
+	 */
+	public AnnotatedWithException(String message, Throwable cause) {
+
+		super(message, cause);
+	}
+
+	/**
+	 * Instantiates a new annotated with exception.
+	 * 
+	 * @param cause
+	 *            the cause
+	 */
+	public AnnotatedWithException(Throwable cause) {
+
+		super(cause);
+	}
 }

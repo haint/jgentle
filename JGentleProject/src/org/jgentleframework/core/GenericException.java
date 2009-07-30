@@ -47,4 +47,28 @@ public class GenericException extends JGentleException {
 
 		super(strEx);
 	}
+
+	/**
+	 * Instantiates a new generic exception.
+	 * 
+	 * @param message
+	 *            the message
+	 * @param cause
+	 *            the cause
+	 */
+	public GenericException(String message, Throwable cause) {
+
+		super(message, cause);
+	}
+
+	/**
+	 * Instantiates a new generic exception.
+	 * 
+	 * @param cause
+	 *            the cause
+	 */
+	public GenericException(Throwable cause) {
+
+		super(cause);
+	}
 }

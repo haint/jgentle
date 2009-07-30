@@ -15,54 +15,60 @@
  * 
  * Project: JGentleFramework
  */
-package org.jgentleframework.core;
+package org.jgentleframework.integration;
+
+import org.jgentleframework.core.JGentleException;
 
 /**
- * The Class BeanNotFoundException.
+ * The Class IntegrationException.
  * 
- * @author LE QUOC CHUNG
+ * @author Quoc Chung - mailto: <a
+ *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
+ * @date Jul 30, 2009
  */
-public class BeanNotFoundException extends JGentleException {
+public class IntegrationException extends JGentleException {
 	/** The Constant serialVersionUID. */
-	private static final long	serialVersionUID	= 2321961732932739912L;
+	private static final long	serialVersionUID	= 2098716079678398776L;
 
 	/**
-	 * Instantiates a new bean not found exception.
+	 * Instantiates a new integration exception.
 	 */
-	public BeanNotFoundException() {
+	public IntegrationException() {
 
 		super();
 	}
 
 	/**
-	 * Instantiates a new bean not found exception.
+	 * Instantiates a new integration exception.
 	 * 
 	 * @param strEx
 	 *            the str ex
 	 */
-	public BeanNotFoundException(String strEx) {
+	public IntegrationException(String strEx) {
 
 		super(strEx);
 	}
-	
+
 	/**
-	 * Instantiates a new bean not found exception.
+	 * Instantiates a new integration exception.
 	 * 
-	 * @param message the message
-	 * @param cause the cause
+	 * @param message
+	 *            the message
+	 * @param cause
+	 *            the cause
 	 */
-	public BeanNotFoundException(String message, Throwable cause) {
+	public IntegrationException(String message, Throwable cause) {
 
 		super(message, cause);
 	}
 
-	
 	/**
-	 * Instantiates a new bean not found exception.
+	 * Instantiates a new integration exception.
 	 * 
-	 * @param cause the cause
+	 * @param cause
+	 *            the cause
 	 */
-	public BeanNotFoundException(Throwable cause) {
+	public IntegrationException(Throwable cause) {
 
 		super(cause);
 	}

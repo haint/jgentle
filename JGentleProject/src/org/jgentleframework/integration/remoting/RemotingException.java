@@ -17,7 +17,7 @@
  */
 package org.jgentleframework.integration.remoting;
 
-import org.jgentleframework.core.JGentleRuntimeException;
+import org.jgentleframework.integration.RuntimeIntegrationException;
 
 /**
  * The Class RemotingException.
@@ -26,7 +26,7 @@ import org.jgentleframework.core.JGentleRuntimeException;
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
  * @date Feb 26, 2008
  */
-public class RemotingException extends JGentleRuntimeException {
+public class RemotingException extends RuntimeIntegrationException {
 	/**
 	 * 
 	 */

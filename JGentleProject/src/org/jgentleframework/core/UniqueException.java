@@ -26,7 +26,7 @@ package org.jgentleframework.core;
  */
 public class UniqueException extends JGentleRuntimeException {
 	/** The Constant serialVersionUID. */
-	private static final long	serialVersionUID	= 1L;
+	private static final long	serialVersionUID	= 8801659099484331109L;
 
 	/**
 	 * Instantiates a new unique exception.

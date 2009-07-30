@@ -22,7 +22,7 @@ package org.jgentleframework.core;
  * 
  * @author LE QUOC CHUNG
  */
-public class IllegalPropertyException extends RuntimeException {
+public class IllegalPropertyException extends JGentleRuntimeException {
 	/** The Constant serialVersionUID. */
 	private static final long	serialVersionUID	= 8576136435821861551L;
 
@@ -43,5 +43,29 @@ public class IllegalPropertyException extends RuntimeException {
 	public IllegalPropertyException(String strEx) {
 
 		super(strEx);
+	}
+
+	/**
+	 * Instantiates a new illegal property exception.
+	 * 
+	 * @param message
+	 *            the message
+	 * @param cause
+	 *            the cause
+	 */
+	public IllegalPropertyException(String message, Throwable cause) {
+
+		super(message, cause);
+	}
+
+	/**
+	 * Instantiates a new illegal property exception.
+	 * 
+	 * @param cause
+	 *            the cause
+	 */
+	public IllegalPropertyException(Throwable cause) {
+
+		super(cause);
 	}
 }

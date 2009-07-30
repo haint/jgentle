@@ -48,4 +48,28 @@ public class AnnotationBeanException extends JGentleException {
 
 		super(strEx);
 	}
+
+	/**
+	 * Instantiates a new annotation bean exception.
+	 * 
+	 * @param message
+	 *            the message
+	 * @param cause
+	 *            the cause
+	 */
+	public AnnotationBeanException(String message, Throwable cause) {
+
+		super(message, cause);
+	}
+
+	/**
+	 * Instantiates a new annotation bean exception.
+	 * 
+	 * @param cause
+	 *            the cause
+	 */
+	public AnnotationBeanException(Throwable cause) {
+
+		super(cause);
+	}
 }

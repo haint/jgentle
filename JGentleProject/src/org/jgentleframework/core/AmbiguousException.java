@@ -20,9 +20,11 @@ package org.jgentleframework.core;
 /**
  * The Class AmbiguousException.
  * 
- * @author LE QUOC CHUNG
+ * @author Quoc Chung - mailto: <a
+ *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
+ * @date Jul 30, 2007
  */
-public class AmbiguousException extends RuntimeException {
+public class AmbiguousException extends JGentleRuntimeException {
 	/** The Constant serialVersionUID. */
 	private static final long	serialVersionUID	= -6723998709026784041L;
 
@@ -43,5 +45,29 @@ public class AmbiguousException extends RuntimeException {
 	public AmbiguousException(String strEx) {
 
 		super(strEx);
+	}
+
+	/**
+	 * Instantiates a new ambiguous exception.
+	 * 
+	 * @param message
+	 *            the message
+	 * @param cause
+	 *            the cause
+	 */
+	public AmbiguousException(String message, Throwable cause) {
+
+		super(message, cause);
+	}
+
+	/**
+	 * Instantiates a new ambiguous exception.
+	 * 
+	 * @param cause
+	 *            the cause
+	 */
+	public AmbiguousException(Throwable cause) {
+
+		super(cause);
 	}
 }

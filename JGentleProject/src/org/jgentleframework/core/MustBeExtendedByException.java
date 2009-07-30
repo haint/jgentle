@@ -27,4 +27,47 @@ package org.jgentleframework.core;
 public class MustBeExtendedByException extends JGentleRuntimeException {
 	/** The Constant serialVersionUID. */
 	private static final long	serialVersionUID	= -9080304149422513386L;
+
+	/**
+	 * Instantiates a new must be extended by exception.
+	 */
+	public MustBeExtendedByException() {
+
+		super();
+	}
+
+	/**
+	 * Instantiates a new must be extended by exception.
+	 * 
+	 * @param strEx
+	 *            the str ex
+	 */
+	public MustBeExtendedByException(String strEx) {
+
+		super(strEx);
+	}
+
+	/**
+	 * Instantiates a new must be extended by exception.
+	 * 
+	 * @param message
+	 *            the message
+	 * @param cause
+	 *            the cause
+	 */
+	public MustBeExtendedByException(String message, Throwable cause) {
+
+		super(message, cause);
+	}
+
+	/**
+	 * Instantiates a new must be extended by exception.
+	 * 
+	 * @param cause
+	 *            the cause
+	 */
+	public MustBeExtendedByException(Throwable cause) {
+
+		super(cause);
+	}
 }

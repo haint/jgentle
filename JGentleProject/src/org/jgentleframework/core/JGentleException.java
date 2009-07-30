@@ -47,4 +47,28 @@ public class JGentleException extends Exception {
 
 		super(strEx);
 	}
+
+	/**
+	 * Instantiates a new jgentle exception.
+	 * 
+	 * @param message
+	 *            the message
+	 * @param cause
+	 *            the cause
+	 */
+	public JGentleException(String message, Throwable cause) {
+
+		super(message, cause);
+	}
+
+	/**
+	 * Instantiates a new jgentle exception.
+	 * 
+	 * @param cause
+	 *            the cause
+	 */
+	public JGentleException(Throwable cause) {
+
+		super(cause);
+	}
 }

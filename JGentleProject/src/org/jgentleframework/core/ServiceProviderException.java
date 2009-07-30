@@ -25,7 +25,7 @@ package org.jgentleframework.core;
  */
 public class ServiceProviderException extends JGentleRuntimeException {
 	/** The Constant serialVersionUID. */
-	private static final long	serialVersionUID	= 1L;
+	private static final long	serialVersionUID	= -1204356372677929791L;
 
 	/**
 	 * Instantiates a new service provider exception.

@@ -17,7 +17,7 @@
  */
 package org.jgentleframework.integration.remoting;
 
-import org.jgentleframework.core.JGentleRuntimeException;
+import org.jgentleframework.integration.RuntimeIntegrationException;
 
 /**
  * The Class RemoteAccessException.
@@ -26,7 +26,7 @@ import org.jgentleframework.core.JGentleRuntimeException;
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
  * @date Mar 20, 2008
  */
-public class RemoteAccessException extends JGentleRuntimeException {
+public class RemoteAccessException extends RuntimeIntegrationException {
 	/** The Constant serialVersionUID. */
 	private static final long	serialVersionUID	= -8445599502913048181L;
 

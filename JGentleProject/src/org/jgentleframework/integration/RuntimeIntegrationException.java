@@ -20,20 +20,21 @@ package org.jgentleframework.integration;
 import org.jgentleframework.core.JGentleRuntimeException;
 
 /**
- * The Class RunTimeIntegrationException.
+ * The Class RuntimeIntegrationException.
  * 
  * @author Quoc Chung - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
  * @date Jun 24, 2009
+ * @see JGentleRuntimeException
  */
-public class RunTimeIntegrationException extends JGentleRuntimeException {
+public class RuntimeIntegrationException extends JGentleRuntimeException {
 	/** The Constant serialVersionUID. */
 	private static final long	serialVersionUID	= 4679753723373345428L;
 
 	/**
 	 * Instantiates a new run time integration exception.
 	 */
-	public RunTimeIntegrationException() {
+	public RuntimeIntegrationException() {
 
 		super();
 	}
@@ -44,7 +45,7 @@ public class RunTimeIntegrationException extends JGentleRuntimeException {
 	 * @param strEx
 	 *            the str ex
 	 */
-	public RunTimeIntegrationException(String strEx) {
+	public RuntimeIntegrationException(String strEx) {
 
 		super(strEx);
 	}
@@ -57,7 +58,7 @@ public class RunTimeIntegrationException extends JGentleRuntimeException {
 	 * @param cause
 	 *            the cause
 	 */
-	public RunTimeIntegrationException(String message, Throwable cause) {
+	public RuntimeIntegrationException(String message, Throwable cause) {
 
 		super(message, cause);
 	}
@@ -68,7 +69,7 @@ public class RunTimeIntegrationException extends JGentleRuntimeException {
 	 * @param cause
 	 *            the cause
 	 */
-	public RunTimeIntegrationException(Throwable cause) {
+	public RuntimeIntegrationException(Throwable cause) {
 
 		super(cause);
 	}

@@ -23,8 +23,52 @@ package org.jgentleframework.core;
  * @author Quoc Chung - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
  * @date Mar 24, 2007
+ * @see JGentleRuntimeException
  */
 public class AnnotationExtendsException extends JGentleRuntimeException {
 	/** The Constant serialVersionUID. */
 	private static final long	serialVersionUID	= 8068047221540707967L;
+
+	/**
+	 * Instantiates a new annotation extends exception.
+	 */
+	public AnnotationExtendsException() {
+
+		super();
+	}
+
+	/**
+	 * Instantiates a new annotation extends exception.
+	 * 
+	 * @param strEx
+	 *            the str ex
+	 */
+	public AnnotationExtendsException(String strEx) {
+
+		super(strEx);
+	}
+
+	/**
+	 * Instantiates a new annotation extends exception.
+	 * 
+	 * @param message
+	 *            the message
+	 * @param cause
+	 *            the cause
+	 */
+	public AnnotationExtendsException(String message, Throwable cause) {
+
+		super(message, cause);
+	}
+
+	/**
+	 * Instantiates a new annotation extends exception.
+	 * 
+	 * @param cause
+	 *            the cause
+	 */
+	public AnnotationExtendsException(Throwable cause) {
+
+		super(cause);
+	}
 }

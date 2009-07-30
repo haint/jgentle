@@ -27,4 +27,47 @@ package org.jgentleframework.core;
 public class ConstraintException extends JGentleRuntimeException {
 	/** The Constant serialVersionUID. */
 	private static final long	serialVersionUID	= -5938419793170473346L;
+
+	/**
+	 * Instantiates a new constraint exception.
+	 */
+	public ConstraintException() {
+
+		super();
+	}
+
+	/**
+	 * Instantiates a new constraint exception.
+	 * 
+	 * @param strEx
+	 *            the str ex
+	 */
+	public ConstraintException(String strEx) {
+
+		super(strEx);
+	}
+
+	/**
+	 * Instantiates a new constraint exception.
+	 * 
+	 * @param message
+	 *            the message
+	 * @param cause
+	 *            the cause
+	 */
+	public ConstraintException(String message, Throwable cause) {
+
+		super(message, cause);
+	}
+
+	/**
+	 * Instantiates a new constraint exception.
+	 * 
+	 * @param cause
+	 *            the cause
+	 */
+	public ConstraintException(Throwable cause) {
+
+		super(cause);
+	}
 }

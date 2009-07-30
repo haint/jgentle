@@ -17,6 +17,7 @@
  */
 package org.jgentleframework.core;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class MustBeImplementedByException.
  * 
@@ -25,8 +26,49 @@ package org.jgentleframework.core;
  * @date Sep 27, 2007
  */
 public class MustBeImplementedByException extends JGentleRuntimeException {
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long	serialVersionUID	= -5613334826877167048L;
+
+	/**
+	 * Instantiates a new must be implemented by exception.
+	 */
+	public MustBeImplementedByException() {
+
+		super();
+	}
+
+	/**
+	 * Instantiates a new must be implemented by exception.
+	 * 
+	 * @param strEx
+	 *            the str ex
+	 */
+	public MustBeImplementedByException(String strEx) {
+
+		super(strEx);
+	}
+
+	/**
+	 * Instantiates a new must be implemented by exception.
+	 * 
+	 * @param message
+	 *            the message
+	 * @param cause
+	 *            the cause
+	 */
+	public MustBeImplementedByException(String message, Throwable cause) {
+
+		super(message, cause);
+	}
+
+	/**
+	 * Instantiates a new must be implemented by exception.
+	 * 
+	 * @param cause
+	 *            the cause
+	 */
+	public MustBeImplementedByException(Throwable cause) {
+
+		super(cause);
+	}
 }

@@ -25,7 +25,7 @@ package org.jgentleframework.core;
  */
 public class NoSuchDefinitionException extends JGentleRuntimeException {
 	/** The Constant serialVersionUID. */
-	private static final long	serialVersionUID	= 1L;
+	private static final long	serialVersionUID	= 2695268424424054635L;
 
 	/**
 	 * Instantiates a new no such definition exception.

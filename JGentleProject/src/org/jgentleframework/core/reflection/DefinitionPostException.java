@@ -25,6 +25,7 @@ import org.jgentleframework.core.JGentleException;
  * @author LE QUOC CHUNG - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
  * @date Jan 9, 2008
+ * @see JGentleException
  */
 public class DefinitionPostException extends JGentleException {
 	/** The Constant serialVersionUID. */
@@ -47,5 +48,29 @@ public class DefinitionPostException extends JGentleException {
 	public DefinitionPostException(String strEx) {
 
 		super(strEx);
+	}
+
+	/**
+	 * Instantiates a new definition post exception.
+	 * 
+	 * @param message
+	 *            the message
+	 * @param cause
+	 *            the cause
+	 */
+	public DefinitionPostException(String message, Throwable cause) {
+
+		super(message, cause);
+	}
+
+	/**
+	 * Instantiates a new definition post exception.
+	 * 
+	 * @param cause
+	 *            the cause
+	 */
+	public DefinitionPostException(Throwable cause) {
+
+		super(cause);
 	}
 }
