@@ -1330,7 +1330,7 @@ public final class ReflectUtils {
 	/**
 	 * Sets new value to static final field.
 	 * <p>
-	 * <b>Note</b>: this method only works on Sun JDK
+	 * <b>Note</b>: this method only run on Sun JDK
 	 * 
 	 * @param field
 	 *            the field

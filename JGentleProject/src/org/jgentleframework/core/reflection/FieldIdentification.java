@@ -20,15 +20,17 @@ package org.jgentleframework.core.reflection;
 import java.lang.reflect.Field;
 
 /**
- * This interface represents the <code>field identification</code>,
- * designates a field or a set of fields corresponding to declaring class and
- * one <code>regular expression</code> of name. The
- * <code>identification data</code> shall be used conjointly with reflection
- * tools in order to access specified fields.
+ * This interface represents the <code>field identification</code>, designates a
+ * field or a set of fields corresponding to declaring class and one
+ * <code>regular expression</code> of name. The <code>identification data</code>
+ * shall be used conjointly with reflection tools in order to access specified
+ * fields.
  * 
  * @author LE QUOC CHUNG - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
  * @date Jul 21, 2008
+ * @see MemberIdentification
+ * @see Identification
  */
 public interface FieldIdentification extends MemberIdentification<Field> {
 	/**

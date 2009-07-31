@@ -39,23 +39,23 @@ import org.jgentleframework.utils.ReflectUtils;
  */
 class AnnoMetaImpl extends MetadataImpl implements Metadata, AnnoMeta {
 	/**
-	 * The {@link HashMap} containing all {@link Metadata} objects of this
-	 * {@link AnnoMeta}
+	 * The {@link Map map} containing all {@link Metadata metadata} objects of
+	 * this {@link AnnoMeta annotation metadata}
 	 */
-	HashMap<Object, Metadata>	metaList	= new HashMap<Object, Metadata>();
+	Map<Object, Metadata>	metaList	= new HashMap<Object, Metadata>();
 
 	/** The current name of this {@link AnnoMeta} */
-	String						name		= "";
+	String					name		= "";
 
 	/**
 	 * The {@link AnnoMeta} parents of this {@link AnnoMeta} if it exists, if
 	 * not, this mean current {@link AnnoMeta} is a {@link AnnoMeta} of one
 	 * {@link Definition} and its value will be <code>null</code>.
 	 */
-	AnnoMeta					parents;
+	AnnoMeta				parents;
 
 	/** The type. */
-	Class<?>					type		= null;
+	Class<?>				type		= null;
 
 	/**
 	 * The Constructor.

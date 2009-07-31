@@ -34,14 +34,6 @@ import java.lang.reflect.Method;
  * @see Method
  */
 public interface MethodIdentification extends MemberIdentification<Method> {
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * org.jgentleframework.general.reflection.MemberIdentification#setName(
-	 * java.lang.String)
-	 */
-	public void setName(String name);
-
 	/**
 	 * Gets the declaring class.
 	 */

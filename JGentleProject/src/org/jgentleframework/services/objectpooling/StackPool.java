@@ -17,6 +17,7 @@
  */
 package org.jgentleframework.services.objectpooling;
 
+import java.util.EmptyStackException;
 import java.util.NoSuchElementException;
 import java.util.Stack;
 
@@ -95,8 +96,13 @@ public class StackPool extends AbstractBaseFactory {
 			TimestampObjectBean<Object> pair = null;
 			synchronized (this) {
 				assertDisable();
-				pair = (TimestampObjectBean<Object>) ((Stack<TimestampObjectBean<Object>>) pool)
-						.pop();
+				try {
+					pair = (TimestampObjectBean<Object>) ((Stack<TimestampObjectBean<Object>>) pool)
+							.pop();
+				}
+				catch (EmptyStackException e1) {
+					pair = null;
+				}
 				if (pair == null) {
 					if (this.maxPoolSize < 0
 							|| this.getNumActive() < this.maxPoolSize) {

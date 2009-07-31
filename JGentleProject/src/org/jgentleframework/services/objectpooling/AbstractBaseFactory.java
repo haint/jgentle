@@ -63,7 +63,11 @@ public abstract class AbstractBaseFactory extends AbstractBaseController {
 		}
 		synchronized (this) {
 			if (isEnable() && success) {
-				pool.add(new TimestampObjectBean<Object>(obj));
+//				if (ReflectUtils.isCast(Stack.class, pool))
+//					((Stack<TimestampObjectBean<Object>>) pool)
+//							.push(new TimestampObjectBean<Object>(obj));
+//				else
+					pool.add(new TimestampObjectBean<Object>(obj));
 			}
 		}
 		if (decrementNumActive) {

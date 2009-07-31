@@ -19,6 +19,7 @@ package org.jgentleframework.core.reflection.metadata;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.Map;
 
 import org.aopalliance.reflect.Metadata;
 import org.jgentleframework.core.reflection.ReflectException;
@@ -70,7 +71,7 @@ public class MetadataController extends MetadataImpl implements
 	}
 
 	/** The metadata list. */
-	protected HashMap<Object, Metadata>	metadataList	= new HashMap<Object, Metadata>();
+	protected Map<Object, Metadata>	metadataList	= new HashMap<Object, Metadata>();
 
 	/*
 	 * (non-Javadoc)

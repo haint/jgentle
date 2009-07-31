@@ -34,7 +34,7 @@ import java.util.Map;
  */
 public interface DefinitionCore extends MetadataControl {
 	/**
-	 * Create {@link AnnoMeta} content.
+	 * Create {@link AnnoMeta annotation metadata} content.
 	 */
 	public void buildAnnoMeta();
 

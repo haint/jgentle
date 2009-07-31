@@ -32,14 +32,11 @@ public interface MetadataControl {
 	 * 
 	 * @param key
 	 *            the key
-	 * @return the metadata
 	 */
 	Metadata getMetadata(Object key);
 
 	/**
 	 * Returns all the metadatas that are associated to the current object.
-	 * 
-	 * @return the metadatas
 	 */
 	Metadata[] getMetadatas();
 

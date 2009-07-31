@@ -40,6 +40,7 @@ import org.jgentleframework.context.support.Selector;
 import org.jgentleframework.core.intercept.JGentleNamingPolicy;
 import org.jgentleframework.core.interceptor.ReturnScopeName;
 import org.jgentleframework.core.reflection.metadata.Definition;
+import org.jgentleframework.services.objectpooling.PoolOperationException;
 import org.jgentleframework.services.objectpooling.PoolType;
 import org.jgentleframework.services.objectpooling.annotation.Pooling;
 import org.jgentleframework.services.objectpooling.support.PoolInvocationMethodInterceptor;
@@ -177,7 +178,9 @@ public enum PoolScope implements ScopeImplementation {
 			if (pool == null) {
 				if (log.isInfoEnabled()) {
 					log
-							.info("The instance bean was not created by this pool !!");
+							.info(
+									"The instance bean was not created by this pool !!",
+									new PoolOperationException());
 				}
 				return false;
 			}

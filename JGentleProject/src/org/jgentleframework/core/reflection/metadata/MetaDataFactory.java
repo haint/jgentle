@@ -32,13 +32,12 @@ import org.jgentleframework.core.reflection.IAnnotationVisitor;
  */
 public abstract class MetaDataFactory {
 	/**
-	 * Create a new {@link Definition}
+	 * Create a new {@link Definition definition}
 	 * 
 	 * @param key
-	 *            key of {@link Definition}
+	 *            key of {@link Definition definition}
 	 * @param visitor
-	 *            the visitor
-	 * @return Definition
+	 *            the {@link IAnnotationVisitor visitor}
 	 */
 	public static Definition createDefinition(Object key,
 			IAnnotationVisitor visitor) {
@@ -47,15 +46,15 @@ public abstract class MetaDataFactory {
 	}
 
 	/**
-	 * Create a new {@link Definition}
+	 * Create a new {@link Definition definition}
 	 * 
 	 * @param key
-	 *            key of {@link Definition}
+	 *            key of {@link Definition definition}
 	 * @param annoList
-	 *            an array of original annotations of {@link Definition}
+	 *            an array of original annotations of {@link Definition
+	 *            definition}
 	 * @param visitor
 	 *            the visitor
-	 * @return Definition
 	 */
 	public static Definition createDefinition(Object key,
 			Annotation[] annoList, IAnnotationVisitor visitor) {
@@ -64,13 +63,12 @@ public abstract class MetaDataFactory {
 	}
 
 	/**
-	 * Create a new {@link AnnoMeta}
+	 * Create a new {@link AnnoMeta annotation metadata}
 	 * 
 	 * @param key
-	 *            key of {@link AnnoMeta}
+	 *            key of {@link AnnoMeta annotation metadata}
 	 * @param value
-	 *            value of {@link AnnoMeta}
-	 * @return AnnoMeta
+	 *            value of {@link AnnoMeta annotation metadata}
 	 */
 	public static AnnoMeta createAnnoMeta(Object key, Object value) {
 
@@ -78,15 +76,15 @@ public abstract class MetaDataFactory {
 	}
 
 	/**
-	 * Create a new {@link AnnoMeta}
+	 * Create a new {@link AnnoMeta annotation metadata}
 	 * 
 	 * @param key
-	 *            key of {@link AnnoMeta}
+	 *            key of {@link AnnoMeta annotation metadata}
 	 * @param value
-	 *            value of {@link AnnoMeta}
+	 *            value of {@link AnnoMeta annotation metadata}
 	 * @param annoParents
-	 *            annoMeta parents of {@link AnnoMeta} need to be created.
-	 * @return AnnoMeta
+	 *            annoMeta parents of {@link AnnoMeta annotation metadata} need
+	 *            to be created.
 	 */
 	public static AnnoMeta createAnnoMeta(Object key, Object value,
 			AnnoMeta annoParents) {
@@ -95,17 +93,17 @@ public abstract class MetaDataFactory {
 	}
 
 	/**
-	 * Create a new {@link AnnoMeta}
+	 * Create a new {@link AnnoMeta annotation metadata}
 	 * 
 	 * @param key
-	 *            key of {@link AnnoMeta}
+	 *            key of {@link AnnoMeta annotation metadata}
 	 * @param value
-	 *            value of {@link AnnoMeta}
+	 *            value of {@link AnnoMeta annotation metadata}
 	 * @param annoParents
-	 *            annoMeta parents of {@link AnnoMeta} need to be created.
+	 *            annoMeta parents of {@link AnnoMeta annotation metadata} need
+	 *            to be created.
 	 * @param name
-	 *            name of desired annoMeta.
-	 * @return AnnoMeta
+	 *            name of desired annotation metadata.
 	 */
 	public static AnnoMeta createAnnoMeta(Object key, Object value,
 			AnnoMeta annoParents, String name) {
@@ -114,11 +112,10 @@ public abstract class MetaDataFactory {
 	}
 
 	/**
-	 * Create a new {@link Metadata}
+	 * Create a new {@link Metadata metadata}
 	 * 
 	 * @param key
-	 *            key of {@link AnnoMeta}
-	 * @return MetaData
+	 *            key of {@link AnnoMeta annotation metadata}
 	 */
 	public static Metadata createMetaData(Object key) {
 
@@ -126,13 +123,12 @@ public abstract class MetaDataFactory {
 	}
 
 	/**
-	 * Create a new {@link Metadata}
+	 * Create a new {@link Metadata metadata}
 	 * 
 	 * @param key
-	 *            key of {@link Metadata}
+	 *            key of {@link Metadata metadata}
 	 * @param value
-	 *            value of {@link Metadata}
-	 * @return MetaData
+	 *            value of {@link Metadata metadata}
 	 */
 	public static Metadata createMetaData(Object key, Object value) {
 
