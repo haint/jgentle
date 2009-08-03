@@ -199,7 +199,9 @@ public enum PoolScope implements ScopeImplementation {
 		}
 		else {
 			if (log.isInfoEnabled()) {
-				log.info("The instance bean was not created by this pool !!");
+				log
+						.info(" In case of Just In Time Pool, this method can not be executed !! "
+								+ "Or the instance bean was not created by this pool !!");
 			}
 			return false;
 		}
