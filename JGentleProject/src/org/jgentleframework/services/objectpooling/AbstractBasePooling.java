@@ -35,7 +35,7 @@ import org.jgentleframework.utils.Assertor;
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
  * @date Apr 1, 2009
  */
-public abstract class AbstractBasePooling implements PoolType, Initializing,
+public abstract class AbstractBasePooling implements Pool, Initializing,
 		BasePooling {
 	/** The can be pooled. */
 	protected boolean		canBePooled					= SystemPooling.DEFAULT_CAN_BE_POOLED;

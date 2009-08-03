@@ -22,7 +22,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import org.jgentleframework.services.objectpooling.PoolType;
+import org.jgentleframework.services.objectpooling.Pool;
 
 /**
  * This annotation provides some basic parameters that affect the pooling
@@ -83,16 +83,16 @@ public @interface Pooling {
 
 	/**
 	 * The default maximum amount of time (in milliseconds) the
-	 * {@link PoolType#obtainObject()} method should block before throwing an
+	 * {@link Pool#obtainObject()} method should block before throwing an
 	 * exception when the pool is exhausted and the
 	 * {@link SystemPooling#exhaustedActionType() "when exhausted" action} is
 	 * {@link SystemPooling#EXHAUSTED_BLOCK}.
 	 * <p>
 	 * The values should be greater than <b>0</b>. When less than or equal to 0,
-	 * the {@link PoolType#obtainObject()} method may block indefinitely.
+	 * the {@link Pool#obtainObject()} method may block indefinitely.
 	 * <p>
 	 * The default setting for this parameter is <b>-1</b> (the
-	 * {@link PoolType#obtainObject()} method is blocked indefinitely).
+	 * {@link Pool#obtainObject()} method is blocked indefinitely).
 	 */
 	long creationTimeOut() default SystemPooling.DEFAULT_CREATION_TIME_OUT;
 

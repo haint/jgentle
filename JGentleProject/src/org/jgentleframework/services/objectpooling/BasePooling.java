@@ -26,9 +26,9 @@ import org.jgentleframework.services.objectpooling.context.Validate;
  * @author Quoc Chung - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
  * @date Apr 13, 2009
- * @see PoolType
+ * @see Pool
  */
-public interface BasePooling extends PoolType {
+public interface BasePooling extends Pool {
 	/**
 	 * Throws an <code>IllegalStateException</code> when this pool has been
 	 * disabled.
@@ -41,9 +41,9 @@ public interface BasePooling extends PoolType {
 
 	/**
 	 * Returns the maximum amount of time (in millis) the
-	 * {@link PoolType#obtainObject()} method should block before throwing an
+	 * {@link Pool#obtainObject()} method should block before throwing an
 	 * exception when the pool is exhausted. When less than or equal to 0, the
-	 * {@link PoolType#obtainObject()} method may block indefinitely.
+	 * {@link Pool#obtainObject()} method may block indefinitely.
 	 * 
 	 * @return the creation time out
 	 */
@@ -57,7 +57,7 @@ public interface BasePooling extends PoolType {
 	public Evictor getEvictor();
 
 	/**
-	 * Returns the action to take when the {@link PoolType#obtainObject()}
+	 * Returns the action to take when the {@link Pool#obtainObject()}
 	 * method is invoked when the pool is exhausted (the maximum number of
 	 * "active" objects has been reached).
 	 * 
@@ -130,10 +130,10 @@ public interface BasePooling extends PoolType {
 	/**
 	 * When <b>true</b>, objects will be validated by
 	 * {@link CanBePooled#canBePooled()} before being returned to the pool
-	 * within the {@link PoolType#returnObject}.
+	 * within the {@link Pool#returnObject}.
 	 * 
 	 * @return <code>true</code> when objects will be validated before returned
-	 *         to {@link PoolType#returnObject}.
+	 *         to {@link Pool#returnObject}.
 	 */
 	public boolean isCanBePooled();
 
@@ -151,7 +151,7 @@ public interface BasePooling extends PoolType {
 
 	/**
 	 * Whether or not the idle object pool acts as a LIFO queue. True means that
-	 * {@link PoolType#obtainObject()} returns the most recently used
+	 * {@link Pool#obtainObject()} returns the most recently used
 	 * ("last in") idle object in the pool (if there are idle instances
 	 * available). False means that the pool behaves as a FIFO queue - objects
 	 * are taken from the idle object pool in the order that they are returned
@@ -161,7 +161,7 @@ public interface BasePooling extends PoolType {
 
 	/**
 	 * When <b>true</b>, objects will be {@link Validate#validate() validated}
-	 * before being returned by the {@link PoolType#obtainObject()} method. If
+	 * before being returned by the {@link Pool#obtainObject()} method. If
 	 * the object fails to validate, it will be dropped from the pool, and we
 	 * will attempt to borrow another.
 	 */
@@ -177,20 +177,20 @@ public interface BasePooling extends PoolType {
 	/**
 	 * When <b>true</b>, objects will be validated by
 	 * {@link CanBePooled#canBePooled()} before being returned to the pool
-	 * within the {@link PoolType#returnObject}.
+	 * within the {@link Pool#returnObject}.
 	 * 
 	 * @param canBePooled
 	 *            <code>true</code> so objects will be
 	 *            {@link CanBePooled#canBePooled() validated} after returned to
-	 *            {@link PoolType#returnObject}.
+	 *            {@link Pool#returnObject}.
 	 */
 	public void setCanBePooled(boolean canBePooled);
 
 	/**
 	 * Sets the maximum amount of time (in millis) the
-	 * {@link PoolType#obtainObject()} method should block before throwing an
+	 * {@link Pool#obtainObject()} method should block before throwing an
 	 * exception when the pool is exhausted. When less than or equal to 0, the
-	 * {@link PoolType#obtainObject()} method may block indefinitely.
+	 * {@link Pool#obtainObject()} method may block indefinitely.
 	 * 
 	 * @param creationTimeOut
 	 *            the creation TimeOut to set
@@ -314,7 +314,7 @@ public interface BasePooling extends PoolType {
 
 	/**
 	 * When <b>true</b>, objects will be {@link Validate#validate() validated}
-	 * before being returned by the {@link PoolType#obtainObject()} method. If
+	 * before being returned by the {@link Pool#obtainObject()} method. If
 	 * the object fails to validate, it will be dropped from the pool, and we
 	 * will attempt to borrow another.
 	 * 

@@ -23,7 +23,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import java.util.NoSuchElementException;
 
-import org.jgentleframework.services.objectpooling.PoolType;
+import org.jgentleframework.services.objectpooling.Pool;
 import org.jgentleframework.services.objectpooling.context.Validate;
 
 /**
@@ -188,7 +188,7 @@ public @interface SystemPooling {
 
 	/**
 	 * When <tt>true</tt>, object beans will be {@link Validate#validate()
-	 * validated} before being returned by the {@link PoolType#obtainObject()}
+	 * validated} before being returned by the {@link Pool#obtainObject()}
 	 * method. If the object fails to validate, it will be dropped from the
 	 * pool, and we will attempt to borrow another.
 	 */

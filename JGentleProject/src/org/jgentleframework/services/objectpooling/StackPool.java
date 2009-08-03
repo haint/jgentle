@@ -52,7 +52,7 @@ public class StackPool extends AbstractBaseFactory {
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.jgentleframework.services.objectpooling.PoolType#addObject()
+	 * @see org.jgentleframework.services.objectpooling.Pool#addObject()
 	 */
 	@Override
 	public void addObject() throws UnsupportedOperationException, Throwable {
@@ -72,7 +72,7 @@ public class StackPool extends AbstractBaseFactory {
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.jgentleframework.services.objectpooling.PoolType#close()
+	 * @see org.jgentleframework.services.objectpooling.Pool#close()
 	 */
 	@Override
 	public void close() throws Throwable {
@@ -86,7 +86,7 @@ public class StackPool extends AbstractBaseFactory {
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.jgentleframework.services.objectpooling.PoolType#obtainObject()
+	 * @see org.jgentleframework.services.objectpooling.Pool#obtainObject()
 	 */
 	@Override
 	public Object obtainObject() throws NoSuchElementException, Throwable {

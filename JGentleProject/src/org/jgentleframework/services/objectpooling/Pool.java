@@ -24,13 +24,13 @@ import org.jgentleframework.context.beans.Disposable;
 /**
  * A pooling interface.
  * <p>
- * {@link PoolType} defines a trivially simple pooling interface.
+ * {@link Pool} defines a trivially simple pooling interface.
  * 
  * @author Quoc Chung - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
  * @date Apr 7, 2009
  */
-public interface PoolType {
+public interface Pool {
 	/**
 	 * Creates an object using the implementation dependent mechanism, passivate
 	 * it, and then place it in the idle object pool. <code>addObject</code> is

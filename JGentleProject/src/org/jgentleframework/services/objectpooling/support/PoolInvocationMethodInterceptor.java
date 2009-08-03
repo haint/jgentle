@@ -22,7 +22,7 @@ import java.lang.reflect.Method;
 import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;
 
-import org.jgentleframework.services.objectpooling.PoolType;
+import org.jgentleframework.services.objectpooling.Pool;
 
 /**
  * The Class PoolInvocationMethodInterceptor.
@@ -33,7 +33,7 @@ import org.jgentleframework.services.objectpooling.PoolType;
  */
 public class PoolInvocationMethodInterceptor implements MethodInterceptor {
 	/** The pool. */
-	PoolType	pool	= null;
+	Pool	pool	= null;
 
 	/**
 	 * Instantiates a new pool invocation method interceptor.
@@ -41,7 +41,7 @@ public class PoolInvocationMethodInterceptor implements MethodInterceptor {
 	 * @param pool
 	 *            the pool
 	 */
-	public PoolInvocationMethodInterceptor(PoolType pool) {
+	public PoolInvocationMethodInterceptor(Pool pool) {
 
 		this.pool = pool;
 	}

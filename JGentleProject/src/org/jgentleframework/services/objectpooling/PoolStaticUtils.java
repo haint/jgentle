@@ -126,7 +126,7 @@ public final class PoolStaticUtils {
 	 * @param basePool
 	 *            the base pool
 	 * @throws Exception
-	 *             when {@link PoolType#addObject()} fails.
+	 *             when {@link Pool#addObject()} fails.
 	 */
 	public static void ensureMinIdle(BasePooling basePool) throws Throwable {
 

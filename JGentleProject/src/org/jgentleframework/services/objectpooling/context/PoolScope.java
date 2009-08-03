@@ -41,7 +41,7 @@ import org.jgentleframework.core.intercept.JGentleNamingPolicy;
 import org.jgentleframework.core.interceptor.ReturnScopeName;
 import org.jgentleframework.core.reflection.metadata.Definition;
 import org.jgentleframework.services.objectpooling.PoolOperationException;
-import org.jgentleframework.services.objectpooling.PoolType;
+import org.jgentleframework.services.objectpooling.Pool;
 import org.jgentleframework.services.objectpooling.annotation.Pooling;
 import org.jgentleframework.services.objectpooling.support.PoolInvocationMethodInterceptor;
 import org.jgentleframework.utils.Assertor;
@@ -81,11 +81,10 @@ public enum PoolScope implements ScopeImplementation {
 	 */
 	WeakPool;
 	/** The log. */
-	private final Log				log				= LogFactory
-															.getLog(getClass());
+	private final Log			log				= LogFactory.getLog(getClass());
 
 	/** The pool list */
-	ConcurrentMap<String, PoolType>	poolServices	= new ConcurrentHashMap<String, PoolType>();
+	ConcurrentMap<String, Pool>	poolServices	= new ConcurrentHashMap<String, Pool>();
 
 	/*
 	 * (non-Javadoc)
@@ -112,7 +111,7 @@ public enum PoolScope implements ScopeImplementation {
 			scope = (PoolScope) scopeList.get(scopeName);
 		}
 		synchronized (scopeName) {
-			PoolType pool = this.poolServices.get(scopeName);
+			Pool pool = this.poolServices.get(scopeName);
 			if (pool != null) {
 				synchronized (pool) {
 					result = this.obtainInstance(pool, poolingConfig,
@@ -120,7 +119,7 @@ public enum PoolScope implements ScopeImplementation {
 				}
 			}
 			else {
-				Class<? extends PoolType> clazz = null;
+				Class<? extends Pool> clazz = null;
 				switch (scope) {
 				case CommonPool:
 					clazz = org.jgentleframework.services.objectpooling.CommonPool.class;
@@ -143,7 +142,7 @@ public enum PoolScope implements ScopeImplementation {
 							poolingConfig, definition, selector).in(clazz).id(
 							clazz.toString()).scope(Scope.SINGLETON);
 					binder.flush();
-					pool = (PoolType) provider.getBeanBoundToDefinition(clazz
+					pool = (Pool) provider.getBeanBoundToDefinition(clazz
 							.toString());
 					this.poolServices.put(scopeName, pool);
 					result = this.obtainInstance(pool, poolingConfig,
@@ -174,7 +173,7 @@ public enum PoolScope implements ScopeImplementation {
 				"The instance need to be returned must not be null !");
 		if (ReflectUtils.isCast(ReturnScopeName.class, instance)) {
 			String scopeName = ((ReturnScopeName) instance).returnsScopeName();
-			PoolType pool = this.poolServices.get(scopeName);
+			Pool pool = this.poolServices.get(scopeName);
 			if (pool == null) {
 				if (log.isInfoEnabled()) {
 					log
@@ -208,6 +207,35 @@ public enum PoolScope implements ScopeImplementation {
 	}
 
 	/**
+	 * Returns the pool service according to given object instance.
+	 * 
+	 * @param instance
+	 *            the given instance
+	 */
+	public Pool getPool(Object instance) {
+
+		Pool result = null;
+		Assertor.notNull(instance,
+				"The instance need to be returned must not be null !");
+		if (ReflectUtils.isCast(ReturnScopeName.class, instance)) {
+			String scopeName = ((ReturnScopeName) instance).returnsScopeName();
+			result = this.poolServices.get(scopeName);
+		}
+		else {
+			if (log.isErrorEnabled()) {
+				log.error("The instance bean was not created by this pool !!");
+			}
+		}
+		if (result == null) {
+			if (log.isErrorEnabled()) {
+				log.error("The instance bean was not created by this pool !!",
+						new PoolOperationException());
+			}
+		}
+		return result;
+	}
+
+	/**
 	 * Obtain instance.
 	 * 
 	 * @param pool
@@ -218,7 +246,7 @@ public enum PoolScope implements ScopeImplementation {
 	 *            the target class
 	 * @return the object
 	 */
-	private Object obtainInstance(PoolType pool, Pooling poolingConfig,
+	private Object obtainInstance(Pool pool, Pooling poolingConfig,
 			Class<?> targetClass) {
 
 		Object result = null;

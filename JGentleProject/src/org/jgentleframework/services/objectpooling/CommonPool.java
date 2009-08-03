@@ -32,7 +32,7 @@ import org.jgentleframework.utils.data.TimestampObjectBean;
  * @author Quoc Chung - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
  * @date Apr 8, 2008
- * @see PoolType
+ * @see Pool
  * @see BasePooling
  * @see ProviderAware
  * @see Initializing
@@ -58,7 +58,7 @@ public class CommonPool extends AbstractBaseFactory {
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.jgentleframework.services.objectpooling.PoolType#addObject()
+	 * @see org.jgentleframework.services.objectpooling.Pool#addObject()
 	 */
 	@Override
 	public void addObject() throws UnsupportedOperationException, Throwable {
@@ -70,7 +70,7 @@ public class CommonPool extends AbstractBaseFactory {
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.jgentleframework.services.objectpooling.PoolType#close()
+	 * @see org.jgentleframework.services.objectpooling.Pool#close()
 	 */
 	@Override
 	public void close() throws Throwable {
@@ -84,7 +84,7 @@ public class CommonPool extends AbstractBaseFactory {
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.jgentleframework.services.objectpooling.PoolType#obtainObject()
+	 * @see org.jgentleframework.services.objectpooling.Pool#obtainObject()
 	 */
 	@Override
 	public Object obtainObject() throws NoSuchElementException, Throwable {

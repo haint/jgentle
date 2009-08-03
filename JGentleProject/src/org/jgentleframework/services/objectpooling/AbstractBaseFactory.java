@@ -35,6 +35,18 @@ public abstract class AbstractBaseFactory extends AbstractBaseController {
 	/** pool. */
 	protected Collection<TimestampObjectBean<Object>>	pool	= null;
 
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * org.jgentleframework.services.objectpooling.AbstractBasePooling#activate
+	 * ()
+	 */
+	@Override
+	public synchronized void activate() {
+
+		super.activate();
+	}
+
 	/**
 	 * Adds the object to pool.
 	 * 
@@ -63,11 +75,11 @@ public abstract class AbstractBaseFactory extends AbstractBaseController {
 		}
 		synchronized (this) {
 			if (isEnable() && success) {
-//				if (ReflectUtils.isCast(Stack.class, pool))
-//					((Stack<TimestampObjectBean<Object>>) pool)
-//							.push(new TimestampObjectBean<Object>(obj));
-//				else
-					pool.add(new TimestampObjectBean<Object>(obj));
+				// if (ReflectUtils.isCast(Stack.class, pool))
+				// ((Stack<TimestampObjectBean<Object>>) pool)
+				// .push(new TimestampObjectBean<Object>(obj));
+				// else
+				pool.add(new TimestampObjectBean<Object>(obj));
 			}
 		}
 		if (decrementNumActive) {
@@ -80,7 +92,7 @@ public abstract class AbstractBaseFactory extends AbstractBaseController {
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.jgentleframework.services.objectpooling.PoolType#clear()
+	 * @see org.jgentleframework.services.objectpooling.Pool#clear()
 	 */
 	@Override
 	public void clear() throws UnsupportedOperationException, Throwable {
@@ -99,7 +111,7 @@ public abstract class AbstractBaseFactory extends AbstractBaseController {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.jgentleframework.services.objectpooling.PoolType#returnObject(java
+	 * org.jgentleframework.services.objectpooling.Pool#returnObject(java
 	 * .lang.Object)
 	 */
 	@Override
@@ -110,7 +122,7 @@ public abstract class AbstractBaseFactory extends AbstractBaseController {
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.jgentleframework.services.objectpooling.PoolType#getNumIdle()
+	 * @see org.jgentleframework.services.objectpooling.Pool#getNumIdle()
 	 */
 	@Override
 	public int getNumIdle() throws UnsupportedOperationException {
@@ -120,7 +132,7 @@ public abstract class AbstractBaseFactory extends AbstractBaseController {
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.jgentleframework.services.objectpooling.PoolType#isEmpty()
+	 * @see org.jgentleframework.services.objectpooling.Pool#isEmpty()
 	 */
 	@Override
 	public boolean isEmpty() {

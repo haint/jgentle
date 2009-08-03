@@ -61,7 +61,7 @@ public class WeakPool extends AbstractBaseController implements ProviderAware {
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.jgentleframework.services.objectpooling.PoolType#addObject()
+	 * @see org.jgentleframework.services.objectpooling.Pool#addObject()
 	 */
 	@Override
 	public synchronized void addObject() throws Throwable {
@@ -85,7 +85,7 @@ public class WeakPool extends AbstractBaseController implements ProviderAware {
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.jgentleframework.services.objectpooling.PoolType#close()
+	 * @see org.jgentleframework.services.objectpooling.Pool#close()
 	 */
 	@Override
 	public void close() throws Throwable {
@@ -96,7 +96,7 @@ public class WeakPool extends AbstractBaseController implements ProviderAware {
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.jgentleframework.services.objectpooling.PoolType#clear()
+	 * @see org.jgentleframework.services.objectpooling.Pool#clear()
 	 */
 	@Override
 	public synchronized void clear() throws Throwable {
@@ -132,7 +132,7 @@ public class WeakPool extends AbstractBaseController implements ProviderAware {
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.jgentleframework.services.objectpooling.PoolType#obtainObject()
+	 * @see org.jgentleframework.services.objectpooling.Pool#obtainObject()
 	 */
 	@Override
 	public Object obtainObject() throws NoSuchElementException {
@@ -186,7 +186,7 @@ public class WeakPool extends AbstractBaseController implements ProviderAware {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.jgentleframework.services.objectpooling.PoolType#returnObject(java
+	 * org.jgentleframework.services.objectpooling.Pool#returnObject(java
 	 * .lang.Object)
 	 */
 	@Override
@@ -210,7 +210,7 @@ public class WeakPool extends AbstractBaseController implements ProviderAware {
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.jgentleframework.services.objectpooling.PoolType#isEmpty()
+	 * @see org.jgentleframework.services.objectpooling.Pool#isEmpty()
 	 */
 	@Override
 	public boolean isEmpty() {
