@@ -32,7 +32,6 @@ public abstract class REF {
 	 * 
 	 * @param ID
 	 *            the ID of specified {@link Definition}
-	 * @return the string
 	 */
 	public static final String ref(String ID) {
 
@@ -44,7 +43,6 @@ public abstract class REF {
 	 * 
 	 * @param constantName
 	 *            name of constant
-	 * @return the string
 	 */
 	public static final String refConstant(String constantName) {
 
@@ -56,8 +54,6 @@ public abstract class REF {
 	 * when binding bean by {@link BindingConfig#bind()} method and its
 	 * overloadings. In other cases, using this method is the cause of
 	 * unforeseen exceptions.
-	 * 
-	 * @return the string
 	 */
 	public static final String refMapping() {
 
@@ -69,7 +65,6 @@ public abstract class REF {
 	 * 
 	 * @param mappingName
 	 *            name of specified mapping.
-	 * @return the string
 	 */
 	public static final String refMapping(String mappingName) {
 
@@ -81,7 +76,6 @@ public abstract class REF {
 	 * 
 	 * @param type
 	 *            the given type
-	 * @return the string
 	 */
 	public static final String refMapping(Class<?> type) {
 

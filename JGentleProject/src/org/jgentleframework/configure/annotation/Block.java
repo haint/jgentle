@@ -23,11 +23,11 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Chỉ định một khối cấu hình. Khối cấu hình chịu trách nhiệm ràng buộc tất cả
- * các lời triệu gọi phương thức cấu hình trong một method của configurable
- * class là đồng nhất tương ứng với một hoặc nhiều config instance chỉ định. Các
- * config instance được chỉ định tách biệt bởi kiểu type (interface) của chúng
- * lúc implements của configurable class.
+ * Represents a block configuration method. Chỉ định một khối cấu hình. Khối cấu
+ * hình chịu trách nhiệm ràng buộc tất cả các lời triệu gọi phương thức cấu hình
+ * trong một method của configurable class là đồng nhất tương ứng với một hoặc
+ * nhiều config instance chỉ định. Các config instance được chỉ định tách biệt
+ * bởi kiểu type (interface) của chúng lúc implements của configurable class.
  * 
  * @author LE QUOC CHUNG - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>

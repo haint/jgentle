@@ -90,7 +90,7 @@ public class CommonPool extends AbstractBaseFactory {
 	public Object obtainObject() throws NoSuchElementException, Throwable {
 
 		long starttime = System.currentTimeMillis();
-		for (;;) {
+		while (true) {
 			TimestampObjectBean<Object> pair = null;
 			synchronized (this) {
 				assertDisable();

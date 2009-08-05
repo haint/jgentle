@@ -23,6 +23,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 import org.aopalliance.intercept.MethodInterceptor;
@@ -44,6 +45,7 @@ import org.jgentleframework.utils.ReflectUtils;
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
  * @date Sep 21, 2008
  * @see MethodInterceptor
+ * @see RuntimeLoading
  */
 class AnnotationAroundAdviceMethodInterceptor extends AbstractBeforeAdvice
 		implements RuntimeLoading {
@@ -51,10 +53,10 @@ class AnnotationAroundAdviceMethodInterceptor extends AbstractBeforeAdvice
 	boolean								runtimeLoading		= false;
 
 	/** The attributes mapping. */
-	HashMap<Method, Object>				attributesMapping	= new HashMap<Method, Object>();
+	Map<Method, Object>					attributesMapping	= new HashMap<Method, Object>();
 
 	/** The outject method map. */
-	HashMap<Method, Outject>			outjectMethodMap	= new HashMap<Method, Outject>();
+	Map<Method, Outject>				outjectMethodMap	= new HashMap<Method, Outject>();
 
 	/** The provider. */
 	final Provider						provider;
@@ -62,6 +64,7 @@ class AnnotationAroundAdviceMethodInterceptor extends AbstractBeforeAdvice
 	/** The target class. */
 	final Class<? extends Annotation>	targetClass;
 
+	/** The log. */
 	final Log							log					= LogFactory
 																	.getLog(getClass());
 

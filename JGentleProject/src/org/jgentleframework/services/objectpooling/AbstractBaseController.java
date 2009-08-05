@@ -18,8 +18,13 @@
 package org.jgentleframework.services.objectpooling;
 
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.TooManyListenersException;
+
+import net.sf.cglib.reflect.FastClass;
+import net.sf.cglib.reflect.FastMethod;
 
 import org.jgentleframework.context.beans.Disposable;
 import org.jgentleframework.context.beans.Initializing;
@@ -53,25 +58,25 @@ import org.jgentleframework.utils.data.TimestampObjectBean;
 public abstract class AbstractBaseController extends AbstractBasePooling
 		implements ProviderAware {
 	/** The num active. */
-	protected int			numActive				= 0;
+	protected int				numActive				= 0;
 
 	/** The current {@link Provider}. */
-	protected Provider		provider				= null;
+	protected Provider			provider				= null;
 
 	/** The init method lst. */
-	protected List<Method>	initMethodLst			= null;
+	protected List<FastMethod>	initMethodLst			= null;
 
 	/** The can be pooled method lst. */
-	protected List<Method>	canBePooledMethodLst	= null;
+	protected List<FastMethod>	canBePooledMethodLst	= null;
 
 	/** The deactivate method lst. */
-	protected List<Method>	deactivateMethodLst		= null;
+	protected List<FastMethod>	deactivateMethodLst		= null;
 
 	/** The disposable method lst. */
-	protected List<Method>	disposableMethodLst		= null;
+	protected List<FastMethod>	disposableMethodLst		= null;
 
 	/** The validate method lst. */
-	protected List<Method>	validateMethodLst		= null;
+	protected List<FastMethod>	validateMethodLst		= null;
 
 	/*
 	 * (non-Javadoc)
@@ -86,43 +91,104 @@ public abstract class AbstractBaseController extends AbstractBasePooling
 		// Find activate methods
 		if (this.definition
 				.isAnnotationPresentAtAnyMethods(InitializingMethod.class)) {
-			this.initMethodLst = this.definition
+			List<Method> methodList = this.definition
 					.getMethodsAnnotatedWith(InitializingMethod.class);
+			for (Method method : methodList) {
+				if (!Modifier.isPublic(method.getModifiers())) {
+					if (log.isErrorEnabled()) {
+						log.error("The initializing method [" + method
+								+ "] must be public !!",
+								new UnsupportedOperationException());
+					}
+				}
+				FastClass fclass = FastClass.create(method.getDeclaringClass());
+				FastMethod fmethod = fclass.getMethod(method);
+				if (this.initMethodLst == null)
+					this.initMethodLst = new ArrayList<FastMethod>();
+				this.initMethodLst.add(fmethod);
+			}
 		}
 		// Find canBePooled methods
 		if (this.definition
 				.isAnnotationPresentAtAnyMethods(CanBePooledMethod.class)) {
-			this.canBePooledMethodLst = this.definition
+			List<Method> methodList = this.definition
 					.getMethodsAnnotatedWith(CanBePooledMethod.class);
-			for (Method method : canBePooledMethodLst) {
+			for (Method method : methodList) {
+				if (!Modifier.isPublic(method.getModifiers())) {
+					if (log.isErrorEnabled()) {
+						log.error("The CanBePooled method [" + method
+								+ "] must be public !!",
+								new UnsupportedOperationException());
+					}
+				}
 				if (method.getReturnType() != Boolean.class
 						&& method.getReturnType() != boolean.class) {
 					if (log.isErrorEnabled()) {
-						log.error("The 'return type' of canBePooled method ["
+						log.error("The 'return type' of CanBePooled method ["
 								+ method + "] must be boolean !!",
 								new UnsupportedOperationException());
 					}
 				}
+				FastClass fclass = FastClass.create(method.getDeclaringClass());
+				FastMethod fmethod = fclass.getMethod(method);
+				if (this.canBePooledMethodLst == null)
+					this.canBePooledMethodLst = new ArrayList<FastMethod>();
+				this.canBePooledMethodLst.add(fmethod);
 			}
 		}
 		// Find deactivate methods
 		if (this.definition
 				.isAnnotationPresentAtAnyMethods(DeactivateMethod.class)) {
-			this.deactivateMethodLst = this.definition
+			List<Method> methodList = this.definition
 					.getMethodsAnnotatedWith(DeactivateMethod.class);
+			for (Method method : methodList) {
+				if (!Modifier.isPublic(method.getModifiers())) {
+					if (log.isErrorEnabled()) {
+						log.error("The deactivate method [" + method
+								+ "] must be public !!",
+								new UnsupportedOperationException());
+					}
+				}
+				FastClass fclass = FastClass.create(method.getDeclaringClass());
+				FastMethod fmethod = fclass.getMethod(method);
+				if (this.deactivateMethodLst == null)
+					this.deactivateMethodLst = new ArrayList<FastMethod>();
+				this.deactivateMethodLst.add(fmethod);
+			}
 		}
 		// Find disposable methods
 		if (this.definition
 				.isAnnotationPresentAtAnyMethods(DisposableMethod.class)) {
-			this.disposableMethodLst = this.definition
+			List<Method> methodList = this.definition
 					.getMethodsAnnotatedWith(DisposableMethod.class);
+			for (Method method : methodList) {
+				if (!Modifier.isPublic(method.getModifiers())) {
+					if (log.isErrorEnabled()) {
+						log.error("The disposable method [" + method
+								+ "] must be public !!",
+								new UnsupportedOperationException());
+					}
+				}
+				FastClass fclass = FastClass.create(method.getDeclaringClass());
+				FastMethod fmethod = fclass.getMethod(method);
+				if (this.disposableMethodLst == null)
+					this.disposableMethodLst = new ArrayList<FastMethod>();
+				this.disposableMethodLst.add(fmethod);
+			}
 		}
 		// Find validate methods
 		if (this.definition
 				.isAnnotationPresentAtAnyMethods(ValidateMethod.class)) {
-			this.validateMethodLst = this.definition
+			List<Method> methodList = this.definition
 					.getMethodsAnnotatedWith(ValidateMethod.class);
-			for (Method method : validateMethodLst) {
+			for (Method method : methodList) {
+				if (!Modifier.isPublic(method.getModifiers())) {
+					if (log.isErrorEnabled()) {
+						log.error("The validate method [" + method
+								+ "] must be public !!",
+								new UnsupportedOperationException());
+					}
+				}
 				if (method.getReturnType() != Boolean.class
 						&& method.getReturnType() != boolean.class) {
 					if (log.isErrorEnabled()) {
@@ -131,6 +197,11 @@ public abstract class AbstractBaseController extends AbstractBasePooling
 								new UnsupportedOperationException());
 					}
 				}
+				FastClass fclass = FastClass.create(method.getDeclaringClass());
+				FastMethod fmethod = fclass.getMethod(method);
+				if (this.validateMethodLst == null)
+					this.validateMethodLst = new ArrayList<FastMethod>();
+				this.validateMethodLst.add(fmethod);
 			}
 		}
 	}
@@ -149,9 +220,8 @@ public abstract class AbstractBaseController extends AbstractBasePooling
 			if (ReflectUtils.isCast(Initializing.class, obj))
 				((Initializing) obj).activate();
 			else if (this.initMethodLst != null) {
-				for (Method method : initMethodLst) {
-					method.setAccessible(true);
-					method.invoke(obj);
+				for (FastMethod method : initMethodLst) {
+					method.invoke(obj, null);
 				}
 			}
 		}
@@ -175,9 +245,8 @@ public abstract class AbstractBaseController extends AbstractBasePooling
 					return ((CanBePooled) obj).canBePooled();
 				}
 				else if (this.canBePooledMethodLst != null) {
-					for (Method method : canBePooledMethodLst) {
-						method.setAccessible(true);
-						return (Boolean) method.invoke(obj);
+					for (FastMethod method : canBePooledMethodLst) {
+						return (Boolean) method.invoke(obj, null);
 					}
 				}
 			}
@@ -274,9 +343,8 @@ public abstract class AbstractBaseController extends AbstractBasePooling
 					((Deactivate) obj).deactivate();
 				}
 				else if (this.deactivateMethodLst != null) {
-					for (Method method : deactivateMethodLst) {
-						method.setAccessible(true);
-						method.invoke(obj);
+					for (FastMethod method : deactivateMethodLst) {
+						method.invoke(obj, null);
 					}
 				}
 			}
@@ -293,8 +361,7 @@ public abstract class AbstractBaseController extends AbstractBasePooling
 
 	/*
 	 * (non-Javadoc)
-	 * @see
-	 * org.jgentleframework.services.objectpooling.Pool#invalidateObject
+	 * @see org.jgentleframework.services.objectpooling.Pool#invalidateObject
 	 * (java.lang.Object)
 	 */
 	@Override
@@ -326,9 +393,8 @@ public abstract class AbstractBaseController extends AbstractBasePooling
 				if (ReflectUtils.isCast(Disposable.class, obj))
 					((Disposable) obj).destroy();
 				else if (this.disposableMethodLst != null) {
-					for (Method method : disposableMethodLst) {
-						method.setAccessible(true);
-						method.invoke(obj);
+					for (FastMethod method : disposableMethodLst) {
+						method.invoke(obj, null);
 					}
 				}
 			}
@@ -359,9 +425,8 @@ public abstract class AbstractBaseController extends AbstractBasePooling
 						throw new Exception("Validate failed !!");
 				}
 				else if (this.validateMethodLst != null) {
-					for (Method method : validateMethodLst) {
-						method.setAccessible(true);
-						if (!(Boolean) method.invoke(obj))
+					for (FastMethod method : validateMethodLst) {
+						if (!(Boolean) method.invoke(obj, null))
 							throw new Exception("Validate failed !!");
 					}
 				}

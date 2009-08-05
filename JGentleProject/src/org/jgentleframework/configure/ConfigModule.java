@@ -17,7 +17,7 @@
  */
 package org.jgentleframework.configure;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -31,7 +31,7 @@ public interface ConfigModule {
 	/**
 	 * Returns the {@link Map} containing all configured information.
 	 */
-	Map<String, ArrayList<?>> getOptionsList();
+	Map<String, List<?>> getOptionsList();
 
 	/**
 	 * Returns the target object class of current proxy.

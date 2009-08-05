@@ -22,6 +22,9 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.List;
 
+import net.sf.cglib.reflect.FastClass;
+import net.sf.cglib.reflect.FastMethod;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jgentleframework.context.beans.DefinitionAware;
@@ -98,8 +101,10 @@ public class CommonFactory {
 			if (methods != null && methods.size() != 0) {
 				for (Method method : methods) {
 					if (Modifier.isPublic(method.getModifiers())) {
-						method.setAccessible(true);
-						method.invoke(obj);
+						FastClass fclass = FastClass.create(method
+								.getDeclaringClass());
+						FastMethod fmethod = fclass.getMethod(method);
+						fmethod.invoke(obj, null);
 					}
 					else {
 						if (log.isErrorEnabled()) {

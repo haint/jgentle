@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
@@ -47,19 +48,19 @@ import org.jgentleframework.utils.ReflectUtils;
 class ThrowsAdviceStackMethodInterceptor implements MethodInterceptor {
 	/** The advice map. */
 	@SuppressWarnings("unchecked")
-	HashMap<Class<? extends Throwable>, ThrowsAdvice>	adviceMap		= new HashMap<Class<? extends Throwable>, ThrowsAdvice>();
+	Map<Class<? extends Throwable>, ThrowsAdvice>	adviceMap		= new HashMap<Class<? extends Throwable>, ThrowsAdvice>();
 
 	/** The throws advices. */
-	ArrayList<ThrowsAdvice<Throwable>>					throwsAdvices	= new ArrayList<ThrowsAdvice<Throwable>>();
+	List<ThrowsAdvice<Throwable>>					throwsAdvices	= new ArrayList<ThrowsAdvice<Throwable>>();
 
 	/** The provider. */
-	final Provider										provider;
+	final Provider									provider;
 
 	/** The runtime loading. */
-	private boolean										runtimeLoading	= false;
+	private boolean									runtimeLoading	= false;
 
 	/** The definition. */
-	Definition											definition;
+	Definition										definition;
 
 	/**
 	 * Instantiates a new throws advice stack method interceptor.
@@ -134,7 +135,7 @@ class ThrowsAdviceStackMethodInterceptor implements MethodInterceptor {
 	public void addThrowsAdvice(ThrowsAdvice<?> advice)
 			throws ClassNotFoundException {
 
-		ArrayList<Type> typeList = ReflectUtils.getAllGenericInterfaces(advice
+		List<Type> typeList = ReflectUtils.getAllGenericInterfaces(advice
 				.getClass(), true);
 		for (Type type : typeList) {
 			if (ReflectUtils.isCast(ParameterizedType.class, type)) {

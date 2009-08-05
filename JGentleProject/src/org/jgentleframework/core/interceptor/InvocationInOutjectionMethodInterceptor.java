@@ -22,6 +22,7 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.aopalliance.intercept.MethodInterceptor;
@@ -191,7 +192,7 @@ class InvocationInOutjectionMethodInterceptor implements MethodInterceptor,
 	public Object invoke(MethodInvocation invocation) throws Throwable {
 
 		Object proxy = invocation.getThis();
-		HashMap<Field, Object> map = new HashMap<Field, Object>();
+		Map<Field, Object> map = new HashMap<Field, Object>();
 		Method method = invocation.getMethod();
 		Definition defMethod = definition.getMemberDefinition(method);
 		Object result = null;
@@ -238,8 +239,8 @@ class InvocationInOutjectionMethodInterceptor implements MethodInterceptor,
 	 * @throws Throwable
 	 *             the throwable
 	 */
-	private synchronized void releaseFlag(Object proxy,
-			HashMap<Field, Object> map) throws Throwable {
+	private synchronized void releaseFlag(Object proxy, Map<Field, Object> map)
+			throws Throwable {
 
 		this.flag--;
 		if (flag == 0) {
@@ -274,7 +275,7 @@ class InvocationInOutjectionMethodInterceptor implements MethodInterceptor,
 	 *             the throwable
 	 */
 	private synchronized void takeCurrentFlag(Object proxy,
-			HashMap<Field, Object> map) throws Throwable {
+			Map<Field, Object> map) throws Throwable {
 
 		flag++;
 		if (flag == 1
