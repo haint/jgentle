@@ -135,7 +135,7 @@ public class WeakPool extends AbstractBaseController implements ProviderAware {
 	 * @see org.jgentleframework.services.objectpooling.Pool#obtainObject()
 	 */
 	@Override
-	public Object obtainObject() throws NoSuchElementException {
+	public synchronized Object obtainObject() throws NoSuchElementException {
 
 		assertDisable();
 		Object obj = null;
@@ -185,12 +185,11 @@ public class WeakPool extends AbstractBaseController implements ProviderAware {
 
 	/*
 	 * (non-Javadoc)
-	 * @see
-	 * org.jgentleframework.services.objectpooling.Pool#returnObject(java
+	 * @see org.jgentleframework.services.objectpooling.Pool#returnObject(java
 	 * .lang.Object)
 	 */
 	@Override
-	public void returnObject(Object obj) throws Throwable {
+	public synchronized void returnObject(Object obj) throws Throwable {
 
 		boolean success = !isEnable();
 		if (!this.canBePooled(obj)) {

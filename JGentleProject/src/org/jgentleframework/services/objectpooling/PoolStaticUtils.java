@@ -108,15 +108,17 @@ public final class PoolStaticUtils {
 	 *            the base pool
 	 * @return the int
 	 */
-	private synchronized static int calculateDeficit(BasePooling basePool) {
+	private static int calculateDeficit(BasePooling basePool) {
 
-		int objectDeficit = basePool.getMinIdle() - basePool.getNumIdle();
-		if (basePool.getMaxPoolSize() > 0) {
-			int growLimit = Math.max(0, basePool.getMaxPoolSize()
-					- basePool.getNumActive() - basePool.getNumIdle());
-			objectDeficit = Math.min(objectDeficit, growLimit);
+		synchronized (basePool) {
+			int objectDeficit = basePool.getMinIdle() - basePool.getNumIdle();
+			if (basePool.getMaxPoolSize() > 0) {
+				int growLimit = Math.max(0, basePool.getMaxPoolSize()
+						- basePool.getNumActive() - basePool.getNumIdle());
+				objectDeficit = Math.min(objectDeficit, growLimit);
+			}
+			return objectDeficit;
 		}
-		return objectDeficit;
 	}
 
 	/**
@@ -178,47 +180,49 @@ public final class PoolStaticUtils {
 	public synchronized static void evict(AbstractBaseFactory pool, boolean lifo)
 			throws Exception {
 
-		pool.assertDisable();
-		if (pool.isEmpty()) {
-			int numTest = 0;
-			int numTestsPerRun = getNumTests(pool);
-			TimestampObjectBean<Object> pair = null;
-			if (!lifo) {
-				if (ReflectUtils.isCast(Queue.class, pool.pool)) {
-					for (Iterator<TimestampObjectBean<Object>> iterator = pool.pool
-							.iterator(); iterator.hasNext();) {
-						numTest++;
-						if (numTest > numTestsPerRun)
-							break;
-						else {
-							try {
-								pair = (TimestampObjectBean<Object>) iterator
-										.next();
-							}
-							catch (NoSuchElementException e) {
+		synchronized (pool) {
+			pool.assertDisable();
+			if (pool.isEmpty()) {
+				int numTest = 0;
+				int numTestsPerRun = getNumTests(pool);
+				TimestampObjectBean<Object> pair = null;
+				if (!lifo) {
+					if (ReflectUtils.isCast(Queue.class, pool.pool)) {
+						for (Iterator<TimestampObjectBean<Object>> iterator = pool.pool
+								.iterator(); iterator.hasNext();) {
+							numTest++;
+							if (numTest > numTestsPerRun)
 								break;
+							else {
+								try {
+									pair = (TimestampObjectBean<Object>) iterator
+											.next();
+								}
+								catch (NoSuchElementException e) {
+									break;
+								}
+								evict(pair, pool);
 							}
-							evict(pair, pool);
 						}
 					}
 				}
-			}
-			else {
-				if (ReflectUtils.isCast(Stack.class, pool.pool)) {
-					Stack<TimestampObjectBean<Object>> stack = (Stack<TimestampObjectBean<Object>>) pool.pool;
-					while (stack.size() > 0) {
-						numTest++;
-						if (numTest > numTestsPerRun)
-							break;
-						else {
-							try {
-								pair = (TimestampObjectBean<Object>) stack
-										.get(stack.size() - numTest);
-							}
-							catch (ArrayIndexOutOfBoundsException e) {
+				else {
+					if (ReflectUtils.isCast(Stack.class, pool.pool)) {
+						Stack<TimestampObjectBean<Object>> stack = (Stack<TimestampObjectBean<Object>>) pool.pool;
+						while (stack.size() > 0) {
+							numTest++;
+							if (numTest > numTestsPerRun)
 								break;
+							else {
+								try {
+									pair = (TimestampObjectBean<Object>) stack
+											.get(stack.size() - numTest);
+								}
+								catch (ArrayIndexOutOfBoundsException e) {
+									break;
+								}
+								evict(pair, pool);
 							}
-							evict(pair, pool);
 						}
 					}
 				}
@@ -237,45 +241,47 @@ public final class PoolStaticUtils {
 	private static void evict(TimestampObjectBean<Object> pair,
 			AbstractBaseFactory pool) {
 
-		if (pair != null) {
-			boolean remove = false;
-			final long idleTimeMilis = System.currentTimeMillis()
-					- pair.getTstamp();
-			// check minimum evictable idle time
-			if ((pool.getMinEvictableIdleTime() > 0)
-					&& (idleTimeMilis > pool.getMinEvictableIdleTime())) {
-				remove = true;
-			}
-			else if ((pool.getSoftMinEvictableIdleTime() > 0)
-					&& (idleTimeMilis > pool.getSoftMinEvictableIdleTime())
-					&& (pool.getNumIdle() > pool.getMinIdle())) {
-				remove = true;
-			}
-			if (pool.isTestWhileIdle() && !remove) {
-				boolean active = false;
-				try {
-					pool.activatesObject(pair.getValue());
-					active = true;
-				}
-				catch (Exception e) {
+		synchronized (pool) {
+			if (pair != null) {
+				boolean remove = false;
+				final long idleTimeMilis = System.currentTimeMillis()
+						- pair.getTstamp();
+				// check minimum evictable idle time
+				if ((pool.getMinEvictableIdleTime() > 0)
+						&& (idleTimeMilis > pool.getMinEvictableIdleTime())) {
 					remove = true;
 				}
-				if (active) {
+				else if ((pool.getSoftMinEvictableIdleTime() > 0)
+						&& (idleTimeMilis > pool.getSoftMinEvictableIdleTime())
+						&& (pool.getNumIdle() > pool.getMinIdle())) {
+					remove = true;
+				}
+				if (pool.isTestWhileIdle() && !remove) {
+					boolean active = false;
 					try {
-						pool.validatesObject(pair.getValue());
-						pool.deactivateObject(pair.getValue());
+						pool.activatesObject(pair.getValue());
+						active = true;
 					}
-					catch (Throwable e) {
+					catch (Exception e) {
 						remove = true;
 					}
+					if (active) {
+						try {
+							pool.validatesObject(pair.getValue());
+							pool.deactivateObject(pair.getValue());
+						}
+						catch (Throwable e) {
+							remove = true;
+						}
+					}
 				}
-			}
-			if (remove) {
-				pool.pool.remove(pair);
-				try {
-					pool.destroyObject(pair.getValue());
-				}
-				catch (Throwable e) {
+				if (remove) {
+					pool.pool.remove(pair);
+					try {
+						pool.destroyObject(pair.getValue());
+					}
+					catch (Throwable e) {
+					}
 				}
 			}
 		}
@@ -294,16 +300,18 @@ public final class PoolStaticUtils {
 	 * @param lifo
 	 *            if is <code>'last in first out'</code>
 	 */
-	public synchronized static void startEvictor(Evictor evictor, long delay,
+	public static void startEvictor(Evictor evictor, long delay,
 			AbstractBaseFactory basePool, boolean lifo) {
 
-		if (null != evictor) {
-			EvictionTimer.cancel(evictor);
-			evictor = null;
-		}
-		if (delay > 0) {
-			evictor = new Evictor(basePool, lifo);
-			EvictionTimer.schedule(evictor, delay, delay);
+		synchronized (basePool) {
+			if (null != evictor) {
+				EvictionTimer.cancel(evictor);
+				evictor = null;
+			}
+			if (delay > 0) {
+				evictor = new Evictor(basePool, lifo);
+				EvictionTimer.schedule(evictor, delay, delay);
+			}
 		}
 	}
 }

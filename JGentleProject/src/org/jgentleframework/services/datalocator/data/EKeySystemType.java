@@ -65,7 +65,7 @@ public enum EKeySystemType {
 	 * <br>
 	 * HKEY_SYSTEM_MACHINE chứa các thông tin về hệ thống, scripting file,
 	 * database, hoặc tất cả thông tin liên quan đến hệ thống cần cất trữ trên
-	 * mbRegistry
+	 * data locator
 	 **************************************************************************/
 	HKEY_SYSTEM_MACHINE (
 			new Key[] {

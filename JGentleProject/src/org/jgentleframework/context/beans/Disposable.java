@@ -38,6 +38,7 @@ public interface Disposable {
 	 * Invoked by the owning container container before it is destroyed.
 	 * 
 	 * @throws Exception
+	 *             the exception
 	 */
 	public void destroy() throws Exception;
 }

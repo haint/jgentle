@@ -61,7 +61,8 @@ public class CommonPool extends AbstractBaseFactory {
 	 * @see org.jgentleframework.services.objectpooling.Pool#addObject()
 	 */
 	@Override
-	public void addObject() throws UnsupportedOperationException, Throwable {
+	public synchronized void addObject() throws UnsupportedOperationException,
+			Throwable {
 
 		assertDisable();
 		Object obj = this.createsBean();

@@ -57,15 +57,6 @@ import org.jgentleframework.utils.data.TimestampObjectBean;
  */
 public abstract class AbstractBaseController extends AbstractBasePooling
 		implements ProviderAware {
-	/** The num active. */
-	protected int				numActive				= 0;
-
-	/** The current {@link Provider}. */
-	protected Provider			provider				= null;
-
-	/** The init method lst. */
-	protected List<FastMethod>	initMethodLst			= null;
-
 	/** The can be pooled method lst. */
 	protected List<FastMethod>	canBePooledMethodLst	= null;
 
@@ -74,6 +65,15 @@ public abstract class AbstractBaseController extends AbstractBasePooling
 
 	/** The disposable method lst. */
 	protected List<FastMethod>	disposableMethodLst		= null;
+
+	/** The init method lst. */
+	protected List<FastMethod>	initMethodLst			= null;
+
+	/** The num active. */
+	protected int				numActive				= 0;
+
+	/** The current {@link Provider}. */
+	protected Provider			provider				= null;
 
 	/** The validate method lst. */
 	protected List<FastMethod>	validateMethodLst		= null;
@@ -216,12 +216,14 @@ public abstract class AbstractBaseController extends AbstractBasePooling
 	 */
 	protected void activatesObject(Object obj) throws Exception {
 
-		if (obj != null) {
-			if (ReflectUtils.isCast(Initializing.class, obj))
-				((Initializing) obj).activate();
-			else if (this.initMethodLst != null) {
-				for (FastMethod method : initMethodLst) {
-					method.invoke(obj, null);
+		synchronized (obj) {
+			if (obj != null) {
+				if (ReflectUtils.isCast(Initializing.class, obj))
+					((Initializing) obj).activate();
+				else if (this.initMethodLst != null) {
+					for (FastMethod method : initMethodLst) {
+						method.invoke(obj, null);
+					}
 				}
 			}
 		}
@@ -238,29 +240,31 @@ public abstract class AbstractBaseController extends AbstractBasePooling
 	 */
 	protected boolean canBePooled(Object obj) throws Throwable {
 
-		try {
-			if (obj != null) {
-				if (this.isCanBePooled()
-						&& ReflectUtils.isCast(CanBePooled.class, obj)) {
-					return ((CanBePooled) obj).canBePooled();
-				}
-				else if (this.canBePooledMethodLst != null) {
-					for (FastMethod method : canBePooledMethodLst) {
-						return (Boolean) method.invoke(obj, null);
+		synchronized (obj) {
+			try {
+				if (obj != null) {
+					if (this.isCanBePooled()
+							&& ReflectUtils.isCast(CanBePooled.class, obj)) {
+						return ((CanBePooled) obj).canBePooled();
+					}
+					else if (this.canBePooledMethodLst != null) {
+						for (FastMethod method : canBePooledMethodLst) {
+							return (Boolean) method.invoke(obj, null);
+						}
 					}
 				}
 			}
-		}
-		catch (Throwable e) {
-			// object cannot be activated or is invalid
-			destroyObject(obj);
-			synchronized (this) {
-				this.numActive--;
-				notifyAll();
+			catch (Throwable e) {
+				// object cannot be activated or is invalid
+				destroyObject(obj);
+				synchronized (this) {
+					this.numActive--;
+					notifyAll();
+				}
 			}
+			// return default value of CanBePooled attribute.
+			return SystemPooling.DEFAULT_CAN_BE_POOLED;
 		}
-		// return default value of CanBePooled attribute.
-		return SystemPooling.DEFAULT_CAN_BE_POOLED;
 	}
 
 	/**
@@ -335,28 +339,69 @@ public abstract class AbstractBaseController extends AbstractBasePooling
 	 * @throws Throwable
 	 *             the throwable
 	 */
-	protected void deactivateObject(Object obj) throws Throwable {
+	protected synchronized void deactivateObject(Object obj) throws Throwable {
 
-		try {
-			if (obj != null) {
-				if (ReflectUtils.isCast(Deactivate.class, obj)) {
-					((Deactivate) obj).deactivate();
-				}
-				else if (this.deactivateMethodLst != null) {
-					for (FastMethod method : deactivateMethodLst) {
-						method.invoke(obj, null);
+		synchronized (obj) {
+			try {
+				if (obj != null) {
+					if (ReflectUtils.isCast(Deactivate.class, obj)) {
+						((Deactivate) obj).deactivate();
+					}
+					else if (this.deactivateMethodLst != null) {
+						for (FastMethod method : deactivateMethodLst) {
+							method.invoke(obj, null);
+						}
 					}
 				}
 			}
-		}
-		catch (Throwable e) {
-			// object cannot be activated or is invalid
-			destroyObject(obj);
-			synchronized (this) {
-				this.numActive--;
-				notifyAll();
+			catch (Throwable e) {
+				// object cannot be activated or is invalid
+				destroyObject(obj);
+				synchronized (this) {
+					this.numActive--;
+					notifyAll();
+				}
 			}
 		}
+	}
+
+	/**
+	 * Destroy object bean.
+	 * 
+	 * @param obj
+	 *            the given object need to be destroyed.
+	 * @throws Throwable
+	 *             the throwable
+	 */
+	protected void destroyObject(Object obj) throws Throwable {
+
+		synchronized (obj) {
+			try {
+				if (obj != null) {
+					if (ReflectUtils.isCast(Disposable.class, obj))
+						((Disposable) obj).destroy();
+					else if (this.disposableMethodLst != null) {
+						for (FastMethod method : disposableMethodLst) {
+							method.invoke(obj, null);
+						}
+					}
+				}
+			}
+			catch (Throwable e) {
+				obj = null;
+				throw e;
+			}
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see org.jgentleframework.services.objectpooling.Pool#getNumActive()
+	 */
+	@Override
+	public synchronized int getNumActive() {
+
+		return this.numActive;
 	}
 
 	/*
@@ -378,31 +423,15 @@ public abstract class AbstractBaseController extends AbstractBasePooling
 		}
 	}
 
-	/**
-	 * Destroy object bean.
-	 * 
-	 * @param obj
-	 *            the given object need to be destroyed.
-	 * @throws Throwable
-	 *             the throwable
+	/*
+	 * (non-Javadoc)
+	 * @seeorg.jgentleframework.context.beans.ProviderAware#setProvider(org.
+	 * jgentleframework.context.injecting.Provider)
 	 */
-	protected void destroyObject(Object obj) throws Throwable {
+	@Override
+	public void setProvider(Provider provider) {
 
-		try {
-			if (obj != null) {
-				if (ReflectUtils.isCast(Disposable.class, obj))
-					((Disposable) obj).destroy();
-				else if (this.disposableMethodLst != null) {
-					for (FastMethod method : disposableMethodLst) {
-						method.invoke(obj, null);
-					}
-				}
-			}
-		}
-		catch (Throwable e) {
-			obj = null;
-			throw e;
-		}
+		this.provider = provider;
 	}
 
 	/**
@@ -417,48 +446,29 @@ public abstract class AbstractBaseController extends AbstractBasePooling
 	 */
 	protected void validatesObject(Object obj) throws Throwable {
 
-		try {
-			if (obj != null) {
-				if (this.isTestOnObtain()
-						&& ReflectUtils.isCast(Validate.class, obj)) {
-					if (!((Validate) obj).validate())
-						throw new Exception("Validate failed !!");
-				}
-				else if (this.validateMethodLst != null) {
-					for (FastMethod method : validateMethodLst) {
-						if (!(Boolean) method.invoke(obj, null))
+		synchronized (obj) {
+			try {
+				if (obj != null) {
+					if (this.isTestOnObtain()
+							&& ReflectUtils.isCast(Validate.class, obj)) {
+						if (!((Validate) obj).validate())
 							throw new Exception("Validate failed !!");
+					}
+					else if (this.validateMethodLst != null) {
+						for (FastMethod method : validateMethodLst) {
+							if (!(Boolean) method.invoke(obj, null))
+								throw new Exception("Validate failed !!");
+						}
 					}
 				}
 			}
-		}
-		catch (Throwable e) {
-			destroyObject(obj);
-			synchronized (this) {
-				this.numActive--;
-				notifyAll();
+			catch (Throwable e) {
+				destroyObject(obj);
+				synchronized (this) {
+					this.numActive--;
+					notifyAll();
+				}
 			}
 		}
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @seeorg.jgentleframework.context.beans.ProviderAware#setProvider(org.
-	 * jgentleframework.context.injecting.Provider)
-	 */
-	@Override
-	public void setProvider(Provider provider) {
-
-		this.provider = provider;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see org.jgentleframework.services.objectpooling.Pool#getNumActive()
-	 */
-	@Override
-	public synchronized int getNumActive() {
-
-		return this.numActive;
 	}
 }

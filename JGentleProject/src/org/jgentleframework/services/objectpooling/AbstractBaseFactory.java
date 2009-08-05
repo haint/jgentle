@@ -95,7 +95,8 @@ public abstract class AbstractBaseFactory extends AbstractBaseController {
 	 * @see org.jgentleframework.services.objectpooling.Pool#clear()
 	 */
 	@Override
-	public void clear() throws UnsupportedOperationException, Throwable {
+	public synchronized void clear() throws UnsupportedOperationException,
+			Throwable {
 
 		for (Iterator<TimestampObjectBean<Object>> iterator = pool.iterator(); iterator
 				.hasNext();) {
@@ -110,8 +111,7 @@ public abstract class AbstractBaseFactory extends AbstractBaseController {
 
 	/*
 	 * (non-Javadoc)
-	 * @see
-	 * org.jgentleframework.services.objectpooling.Pool#returnObject(java
+	 * @see org.jgentleframework.services.objectpooling.Pool#returnObject(java
 	 * .lang.Object)
 	 */
 	@Override
@@ -125,7 +125,7 @@ public abstract class AbstractBaseFactory extends AbstractBaseController {
 	 * @see org.jgentleframework.services.objectpooling.Pool#getNumIdle()
 	 */
 	@Override
-	public int getNumIdle() throws UnsupportedOperationException {
+	public synchronized int getNumIdle() throws UnsupportedOperationException {
 
 		return pool.size();
 	}
