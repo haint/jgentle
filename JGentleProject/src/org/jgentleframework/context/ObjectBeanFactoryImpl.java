@@ -79,16 +79,16 @@ abstract class ObjectBeanFactoryImpl implements ObjectBeanFactory {
 	/** The service handler. */
 	private ServiceHandler								serviceHandler		= null;
 
-	/** The {@link Map} holds mapping list which has mapping name. */
+	/** The {@link Map map} holds mapping list which has mapping name. */
 	protected Map<String, Entry<Class<?>, Class<?>>>	aliasMap			= new HashMap<String, Entry<Class<?>, Class<?>>>();
 
-	/** The {@link Map} holds mapping constants. */
+	/** The {@link Map map} holds mapping constants. */
 	protected Map<String, Object>						mapDirectList		= new HashMap<String, Object>();
 
-	/** The {@link Map} holds mapping scoped list. */
+	/** The {@link Map map} holds mapping scoped list. */
 	protected Map<String, ScopeInstance>				scopeList			= new HashMap<String, ScopeInstance>();
 
-	/** The {@link Map} holds mapping list. */
+	/** The {@link Map map} holds mapping list. */
 	protected Map<Class<?>, Class<?>>					mappingList			= new HashMap<Class<?>, Class<?>>();
 
 	/**
@@ -105,8 +105,8 @@ abstract class ObjectBeanFactoryImpl implements ObjectBeanFactory {
 	}
 
 	/**
-	 * This method is responsible for {@link Definition} loading and building
-	 * depending on the annotating data of specified
+	 * This method is responsible for {@link Definition definition} loading and
+	 * building depending on the annotating data of specified
 	 * {@link ObjectBindingConstant}.
 	 * 
 	 * @param inClass
@@ -139,7 +139,7 @@ abstract class ObjectBeanFactoryImpl implements ObjectBeanFactory {
 	}
 
 	/**
-	 * Builds the {@link Definition} of an instance based on
+	 * Builds the {@link Definition definition} of an instance based on
 	 * {@link ObjectBindingConstant}.
 	 * 
 	 * @param inClass
@@ -264,10 +264,12 @@ abstract class ObjectBeanFactoryImpl implements ObjectBeanFactory {
 		buildDefFormAnnotating(inClass, annotatedValueList, ID, annotateIDList);
 		// Creates object bean if lazy_init attribute is false
 		if (lazy_init == false) {
-			if (notLazyList != null && !scope.equals(Scope.PROTOTYPE)) {
+			if (notLazyList != null && !scope.equals(Scope.PROTOTYPE)
+					&& !this.provider.isCustomizedScope(scope)) {
 				notLazyList.add(REF.ref(ID));
 			}
-			else if (!scope.equals(Scope.PROTOTYPE)) {
+			else if (!scope.equals(Scope.PROTOTYPE)
+					&& !this.provider.isCustomizedScope(scope)) {
 				this.provider.getBeanBoundToDefinition(ID);
 			}
 		}
@@ -505,7 +507,8 @@ abstract class ObjectBeanFactoryImpl implements ObjectBeanFactory {
 				ScopeInstance scopeIns = enScope.getValue();
 				this.scopeList.put(scopeName, scopeIns);
 				// Instantiates bean instance if lazy-init attribute is false.
-				if (!objAth.isLazyInit() && !scopeIns.equals(Scope.PROTOTYPE)) {
+				if (!objAth.isLazyInit() && !scopeIns.equals(Scope.PROTOTYPE)
+						&& !this.provider.isCustomizedScope(scopeIns)) {
 					if (notLazyList != null) {
 						if (objAth.isNameBool() == true
 								&& !objAth.getName().isEmpty()) {
