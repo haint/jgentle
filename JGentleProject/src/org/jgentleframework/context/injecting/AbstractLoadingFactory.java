@@ -39,7 +39,7 @@ import org.jgentleframework.core.reflection.annohandler.AnnotationBeanProcessor;
  */
 public abstract class AbstractLoadingFactory {
 	/** The {@link DefinitionManager}. */
-	protected DefinitionManager	definitionManager			= null;
+	protected DefinitionManager	definitionManager	= null;
 
 	/** The object bean factory. */
 	protected ObjectBeanFactory	objectBeanFactory	= null;
@@ -55,8 +55,8 @@ public abstract class AbstractLoadingFactory {
 			Map<Class, AnnotationBeanProcessor> ABPList) {
 
 		for (Entry<Class, AnnotationBeanProcessor> entry : ABPList.entrySet()) {
-			this.definitionManager.addAnnotationBeanProcessor(entry.getKey(), entry
-					.getValue());
+			this.definitionManager.addAnnotationBeanProcessor(entry.getKey(),
+					entry.getValue());
 		}
 	}
 
@@ -110,7 +110,8 @@ public abstract class AbstractLoadingFactory {
 			List<DefinitionPostProcessor> DPPList) {
 
 		for (DefinitionPostProcessor dpp : DPPList) {
-			this.definitionManager.getVisitorHandler().addDefinitionPostProcessor(dpp);
+			this.definitionManager.getVisitorHandler()
+					.addDefinitionPostProcessor(dpp);
 		}
 	}
 
