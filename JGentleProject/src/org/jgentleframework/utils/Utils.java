@@ -24,7 +24,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.HashMap;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -168,7 +168,7 @@ public final class Utils {
 		Object[] args = new Object[constructor.getParameterTypes().length];
 		for (int i = 0; i < constructor.getParameterAnnotations().length; i++) {
 			Map<Class<? extends Annotation>, Annotation> annoList = new HashMap<Class<? extends Annotation>, Annotation>();
-			List<Class<? extends Annotation>> clazzlist = new LinkedList<Class<? extends Annotation>>();
+			List<Class<? extends Annotation>> clazzlist = new ArrayList<Class<? extends Annotation>>();
 			for (Annotation anno : constructor.getParameterAnnotations()[i]) {
 				annoList.put(anno.annotationType(), anno);
 				clazzlist.add(anno.annotationType());

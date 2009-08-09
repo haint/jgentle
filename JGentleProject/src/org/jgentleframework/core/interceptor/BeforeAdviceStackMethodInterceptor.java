@@ -17,7 +17,7 @@
  */
 package org.jgentleframework.core.interceptor;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.aopalliance.intercept.MethodInterceptor;
@@ -43,7 +43,7 @@ import org.jgentleframework.utils.ReflectUtils;
 class BeforeAdviceStackMethodInterceptor extends AbstractBeforeAdvice implements
 		RuntimeLoading {
 	/** The before advices. */
-	List<MethodBeforeAdvice>	beforeAdviceList	= new LinkedList<MethodBeforeAdvice>();
+	List<MethodBeforeAdvice>	beforeAdviceList	= new ArrayList<MethodBeforeAdvice>();
 
 	/** The provider. */
 	final Provider				provider;
@@ -80,7 +80,7 @@ class BeforeAdviceStackMethodInterceptor extends AbstractBeforeAdvice implements
 	private void findAdviceInstances(Before before,
 			List<MethodBeforeAdvice> beforeAdviceList) {
 
-		List<MethodBeforeAdvice> list = new LinkedList<MethodBeforeAdvice>();
+		List<MethodBeforeAdvice> list = new ArrayList<MethodBeforeAdvice>();
 		String[] objStr = before.value();
 		if (objStr != null && !(objStr.length == 1 && objStr[0].isEmpty())) {
 			for (String str : objStr) {

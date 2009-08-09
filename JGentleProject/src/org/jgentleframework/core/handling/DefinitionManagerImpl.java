@@ -22,7 +22,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.HashMap;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -400,7 +400,7 @@ public class DefinitionManagerImpl extends AbstractDefinitionController
 			Annotation annotation, String ID) {
 
 		Definition def = null;
-		List<Annotation> annotationList = new LinkedList<Annotation>();
+		List<Annotation> annotationList = new ArrayList<Annotation>();
 		// Kiểm tra điều kiện các annotation
 		if (annotation != null) {
 			Definition current = ID != null ? this.getDefinition(ID) : this
@@ -495,7 +495,7 @@ public class DefinitionManagerImpl extends AbstractDefinitionController
 			throw new InOutDependencyException("Annotation "
 					+ annotation.toString() + " has invalid target.");
 		}
-		List<Annotation> annotationList = new LinkedList<Annotation>();
+		List<Annotation> annotationList = new ArrayList<Annotation>();
 		// Kiểm tra điều kiện các annotation
 		Definition classDef = ID != null ? this.getDefinition(ID) : this
 				.getDefinition(clazz);
@@ -544,7 +544,7 @@ public class DefinitionManagerImpl extends AbstractDefinitionController
 			throw new InOutDependencyException("Annotation "
 					+ annotation.toString() + " has invalid target.");
 		}
-		List<Annotation> annotationList = new LinkedList<Annotation>();
+		List<Annotation> annotationList = new ArrayList<Annotation>();
 		// Kiểm tra điều kiện các annotation
 		Definition classDef = ID != null ? this.getDefinition(ID) : this
 				.getDefinition(clazz);

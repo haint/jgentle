@@ -21,7 +21,6 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -96,7 +95,7 @@ class ThrowsAdviceStackMethodInterceptor implements MethodInterceptor {
 	private void findAdviceInstances(Throws throwz)
 			throws ClassNotFoundException {
 
-		List<ThrowsAdvice> list = new LinkedList<ThrowsAdvice>();
+		List<ThrowsAdvice> list = new ArrayList<ThrowsAdvice>();
 		String[] objStr = throwz.value();
 		if (objStr != null && !(objStr.length == 1 && objStr[0].isEmpty())) {
 			for (String str : objStr) {

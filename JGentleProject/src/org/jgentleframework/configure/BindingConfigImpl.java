@@ -18,7 +18,7 @@
 package org.jgentleframework.configure;
 
 import java.lang.reflect.Method;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -165,19 +165,19 @@ public class BindingConfigImpl extends AbstractBindingConfig implements
 		/*
 		 * add các danh sách thông tin cấu hình
 		 */
-		this.beanClassList = new LinkedList<Class<?>>();
+		this.beanClassList = new ArrayList<Class<?>>();
 		this.optionsList
 				.put(AbstractConfig.BEAN_CLASS_LIST, this.beanClassList);
-		this.objectAttachList = new LinkedList<ObjectAttach<?>>();
+		this.objectAttachList = new ArrayList<ObjectAttach<?>>();
 		this.optionsList.put(AbstractConfig.OBJECT_ATTACH_LIST,
 				this.objectAttachList);
-		this.objectConstantList = new LinkedList<ObjectConstant>();
+		this.objectConstantList = new ArrayList<ObjectConstant>();
 		this.optionsList.put(AbstractConfig.OBJECT_CONSTANT_LIST,
 				this.objectConstantList);
-		this.objBindingConstantList = new LinkedList<ObjectBindingConstant>();
+		this.objBindingConstantList = new ArrayList<ObjectBindingConstant>();
 		this.optionsList.put(AbstractConfig.OBJECT_BINDING_CONSTANT_LIST,
 				this.objBindingConstantList);
-		this.objBindingInterceptorList = new LinkedList<ObjectBindingInterceptor>();
+		this.objBindingInterceptorList = new ArrayList<ObjectBindingInterceptor>();
 		this.optionsList.put(AbstractConfig.OBJECT_BINDING_INTERCEPTOR_LIST,
 				this.objBindingInterceptorList);
 	}

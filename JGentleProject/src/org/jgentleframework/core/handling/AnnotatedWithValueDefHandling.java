@@ -22,7 +22,6 @@ import java.lang.reflect.Array;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
 
 import org.jgentleframework.configure.annotation.AnnotatedWithValue;
@@ -77,7 +76,7 @@ public class AnnotatedWithValueDefHandling implements
 		catch (IllegalAccessException e) {
 			e.printStackTrace();
 		}
-		List<Class<? extends Annotation>> annoRawList = new LinkedList<Class<? extends Annotation>>();
+		List<Class<? extends Annotation>> annoRawList = new ArrayList<Class<? extends Annotation>>();
 		for (Annotation anno : clazz.getAnnotations()) {
 			annoRawList.add(anno.annotationType());
 		}

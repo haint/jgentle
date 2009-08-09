@@ -18,7 +18,7 @@
 package org.jgentleframework.core.handling;
 
 import java.lang.annotation.Annotation;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.jgentleframework.configure.annotation.AnnotatedWith;
@@ -69,7 +69,7 @@ public class AnnotatedWithDefHandling implements
 		catch (IllegalAccessException e) {
 			e.printStackTrace();
 		}
-		List<Class<? extends Annotation>> annoRawList = new LinkedList<Class<? extends Annotation>>();
+		List<Class<? extends Annotation>> annoRawList = new ArrayList<Class<? extends Annotation>>();
 		for (Annotation anno : clazz.getAnnotations()) {
 			annoRawList.add(anno.annotationType());
 		}
@@ -111,7 +111,7 @@ public class AnnotatedWithDefHandling implements
 	private void checkStrList(String[] strList, RuntimeException exception,
 			List<Class<? extends Annotation>> annoRawList) {
 
-		List<Class<? extends Annotation>> strClazzList = new LinkedList<Class<? extends Annotation>>();
+		List<Class<? extends Annotation>> strClazzList = new ArrayList<Class<? extends Annotation>>();
 		for (String str : strList) {
 			try {
 				Class<?> obj = Class.forName(str);

@@ -19,7 +19,7 @@ package org.jgentleframework.core.factory.support;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -97,7 +97,7 @@ class ElementAspectFactory {
 		Assertor.notNull(definition, "The definition must not be null !!");
 		Assertor.notNull(method, "The method must not be null !!");
 		MethodAspectPair result = new MethodAspectPair(method);
-		List<MethodInterceptor> list = new LinkedList<MethodInterceptor>();
+		List<MethodInterceptor> list = new ArrayList<MethodInterceptor>();
 		/*
 		 * Search on given interceptor array.
 		 */
@@ -216,7 +216,7 @@ class ElementAspectFactory {
 				.notNull(definition, "The given definition must not be null !!");
 		Assertor.notNull(field, "The given field must not be null !!");
 		FieldAspectPair result = new FieldAspectPair(field);
-		List<FieldInterceptor> list = new LinkedList<FieldInterceptor>();
+		List<FieldInterceptor> list = new ArrayList<FieldInterceptor>();
 		/*
 		 * Search on given interceptor array.
 		 */

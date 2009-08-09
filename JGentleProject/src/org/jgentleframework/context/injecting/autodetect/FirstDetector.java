@@ -101,7 +101,7 @@ public class FirstDetector extends AbstractDetector {
 	 */
 	public List<Detector> getAllDetectors() {
 
-		ArrayList<Detector> result = new ArrayList<Detector>();
+		List<Detector> result = new ArrayList<Detector>();
 		Detector current = getNextDetector();
 		while (current != null) {
 			result.add(current);

@@ -29,7 +29,6 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashSet;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
@@ -125,7 +124,7 @@ public final class ReflectUtils {
 				constructor = clazz.getDeclaredConstructor();
 			}
 			else {
-				List<Class<?>> argsType = new LinkedList<Class<?>>();
+				List<Class<?>> argsType = new ArrayList<Class<?>>();
 				for (Object arg : args) {
 					argsType.add(arg.getClass());
 				}
@@ -381,7 +380,7 @@ public final class ReflectUtils {
 	 */
 	public static Field[] getAllDeclaredFields(Class<?> clazz) {
 
-		List<Field> result = new LinkedList<Field>();
+		List<Field> result = new ArrayList<Field>();
 		result.addAll(Arrays.asList(getDeclaredFields(clazz, false, false)));
 		return result.toArray(new Field[result.size()]);
 	}
@@ -398,7 +397,7 @@ public final class ReflectUtils {
 	 */
 	public static Method[] getAllDeclaredMethods(Class<?> clazz) {
 
-		List<Method> result = new LinkedList<Method>();
+		List<Method> result = new ArrayList<Method>();
 		result.addAll(Arrays.asList(getDeclaredMethods(clazz, false, false)));
 		Set<Class<?>> interfaces = getAllInterfaces(clazz, true);
 		for (Class<?> interfaze : interfaces) {
@@ -545,7 +544,7 @@ public final class ReflectUtils {
 	public static List<Class<?>> getAllSuperClass(Class<?> clazz,
 			boolean includesObjectClass) {
 
-		List<Class<?>> result = new LinkedList<Class<?>>();
+		List<Class<?>> result = new ArrayList<Class<?>>();
 		Class<?> temp = clazz.getSuperclass();
 		while (temp != null) {
 			if (includesObjectClass == false) {
@@ -613,7 +612,7 @@ public final class ReflectUtils {
 	public static Field[] getDeclaredFields(Class<?> clazz,
 			boolean includeStatic, boolean non_multiple) {
 
-		List<Field> accum = new LinkedList<Field>();
+		List<Field> accum = new ArrayList<Field>();
 		while (clazz != null && clazz != Object.class) {
 			Field[] fields = clazz.getDeclaredFields();
 			for (int i = 0; i < fields.length; i++) {
@@ -676,7 +675,7 @@ public final class ReflectUtils {
 	public static Method[] getDeclaredMethods(Class<?> clazz,
 			boolean includeStatic, boolean non_multiple) {
 
-		List<Method> accum = new LinkedList<Method>();
+		List<Method> accum = new ArrayList<Method>();
 		while (clazz != null && clazz != Object.class) {
 			Method[] methods = clazz.getDeclaredMethods();
 			for (int i = 0; i < methods.length; i++) {

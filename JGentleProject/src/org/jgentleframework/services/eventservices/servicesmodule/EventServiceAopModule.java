@@ -20,7 +20,7 @@ package org.jgentleframework.services.eventservices.servicesmodule;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.HashMap;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.jgentleframework.context.ServiceProvider;
@@ -79,7 +79,7 @@ public class EventServiceAopModule {
 		boolean inParallel = anno.inParallel();
 		final String authenticationCode = anno.authenticationCode();
 		// Nạp các event class
-		List<EventClass> eventList = new LinkedList<EventClass>();
+		List<EventClass> eventList = new ArrayList<EventClass>();
 		EventServiceContext<?> eventContext = serviceProvider
 				.getCSContext(EventServiceContext.class);
 		for (String event : events) {

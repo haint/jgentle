@@ -19,9 +19,9 @@ package org.jgentleframework.configure;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -57,7 +57,7 @@ public class ConfigurationProxy implements MethodInterceptor {
 	Map<Class<?>, Object>			configObjList	= null;
 
 	/** The obj block list. */
-	List<ObjectBlock>				objBlockList	= new LinkedList<ObjectBlock>();
+	List<ObjectBlock>				objBlockList	= new ArrayList<ObjectBlock>();
 
 	public static final Log			log				= LogFactory
 															.getLog(ConfigurationProxy.class);

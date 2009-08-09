@@ -19,7 +19,7 @@ package org.jgentleframework.core.factory.support;
 
 import java.lang.reflect.Method;
 import java.util.Arrays;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.aopalliance.intercept.MethodInterceptor;
@@ -35,6 +35,7 @@ import org.aopalliance.intercept.MethodInterceptor;
 class MethodAspectPair {
 	/** The method. */
 	final Method			method;
+
 	/** The interceptors. */
 	List<MethodInterceptor>	interceptors;
 
@@ -47,7 +48,7 @@ class MethodAspectPair {
 	public MethodAspectPair(Method method) {
 
 		this.method = method;
-		this.interceptors = new LinkedList<MethodInterceptor>();
+		this.interceptors = new ArrayList<MethodInterceptor>();
 	}
 
 	/**
@@ -87,7 +88,7 @@ class MethodAspectPair {
 	public void addAll(List<MethodInterceptor> interceptors) {
 
 		if (this.interceptors == null) {
-			this.interceptors = new LinkedList<MethodInterceptor>();
+			this.interceptors = new ArrayList<MethodInterceptor>();
 		}
 		this.interceptors.addAll(interceptors);
 	}
@@ -103,7 +104,7 @@ class MethodAspectPair {
 	public void add(int index, MethodInterceptor interceptor) {
 
 		if (this.interceptors == null) {
-			this.interceptors = new LinkedList<MethodInterceptor>();
+			this.interceptors = new ArrayList<MethodInterceptor>();
 		}
 		this.interceptors.add(index, interceptor);
 	}
@@ -117,7 +118,7 @@ class MethodAspectPair {
 	public void add(MethodInterceptor interceptor) {
 
 		if (this.interceptors == null) {
-			this.interceptors = new LinkedList<MethodInterceptor>();
+			this.interceptors = new ArrayList<MethodInterceptor>();
 		}
 		this.interceptors.add(interceptor);
 	}

@@ -18,8 +18,8 @@
 package org.jgentleframework.core.factory;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.LinkedList;
 import java.util.List;
 
 import org.aopalliance.intercept.Interceptor;
@@ -168,7 +168,7 @@ public class BeanCreationProcessor implements ServiceClass,
 	}
 
 	/** The bpt lst. */
-	List<Object>	bptLst	= new LinkedList<Object>();
+	List<Object>	bptLst	= new ArrayList<Object>();
 
 	private void doBeforeBeanPost(Selector targetSelector) {
 

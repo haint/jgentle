@@ -17,7 +17,7 @@
  */
 package org.jgentleframework.core.interceptor;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.aopalliance.intercept.MethodInterceptor;
@@ -43,7 +43,7 @@ import org.jgentleframework.utils.ReflectUtils;
  */
 class AfterReturningStackMethodInterceptor implements MethodInterceptor {
 	/** The after advices. */
-	List<AfterReturning>	afterAdvices	= new LinkedList<AfterReturning>();
+	List<AfterReturning>	afterAdvices	= new ArrayList<AfterReturning>();
 
 	/** The provider. */
 	final Provider			provider;
@@ -84,7 +84,7 @@ class AfterReturningStackMethodInterceptor implements MethodInterceptor {
 	private void findAdviceInstances(After after,
 			List<AfterReturning> afterAdviceList) {
 
-		List<AfterReturning> list = new LinkedList<AfterReturning>();
+		List<AfterReturning> list = new ArrayList<AfterReturning>();
 		String[] objStr = after.value();
 		if (objStr != null && !(objStr.length == 1 && objStr[0].isEmpty())) {
 			for (String str : objStr) {

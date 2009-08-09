@@ -22,7 +22,6 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -43,9 +42,13 @@ import org.jgentleframework.services.eventservices.objectmeta.Subscription;
  */
 public class EventClassImpl extends Observable implements EventClass {
 	EventServiceContext<?>			context				= null;
+
 	HashMap<String, ISubscriber>	subscriberList		= null;
+
 	ObjectEvent						event				= null;
+
 	Subscription					subscription		= null;
+
 	Subscription					transientSubscrip	= null;
 
 	/**
@@ -63,16 +66,16 @@ public class EventClassImpl extends Observable implements EventClass {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.services.eventServices.EventClass#fireEvent(java.lang.String,
-	 *      java.lang.Object)
+	 * @see
+	 * org.jgentleframework.services.eventServices.EventClass#fireEvent(java
+	 * .lang.String, java.lang.Object)
 	 */
 	@Override
 	public void fireEvent(final String authenticationCode, final Object... args) {
 
 		setChanged();
 		notifyObservers(args);
-		ArrayList<String> names = new ArrayList<String>();
+		List<String> names = new ArrayList<String>();
 		if (this.transientSubscrip != null) {
 			names.addAll(this.transientSubscrip.getSubscriberNames());
 		}
@@ -80,7 +83,7 @@ public class EventClassImpl extends Observable implements EventClass {
 			names.addAll(this.subscription.getSubscriberNames());
 		}
 		if (this.subscription.isInParallel()) {
-			List<ISubscriber> list = new LinkedList<ISubscriber>();
+			List<ISubscriber> list = new ArrayList<ISubscriber>();
 			for (String name : names) {
 				if (this.subscriberList.containsKey(name)) {
 					list.add(this.subscriberList.get(name));
@@ -182,7 +185,6 @@ public class EventClassImpl extends Observable implements EventClass {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.jgentleframework.services.eventServices.EventClass#getEvent()
 	 */
 	public ObjectEvent getEvent() {
@@ -192,8 +194,8 @@ public class EventClassImpl extends Observable implements EventClass {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.services.eventServices.EventClass#getSubscription()
+	 * @see
+	 * org.jgentleframework.services.eventServices.EventClass#getSubscription()
 	 */
 	public Subscription getSubscription() {
 
@@ -202,8 +204,9 @@ public class EventClassImpl extends Observable implements EventClass {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.services.eventServices.EventClass#getTransientSubscrip()
+	 * @see
+	 * org.jgentleframework.services.eventServices.EventClass#getTransientSubscrip
+	 * ()
 	 */
 	public Subscription getTransientSubscrip() {
 
@@ -212,7 +215,6 @@ public class EventClassImpl extends Observable implements EventClass {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.jgentleframework.services.eventServices.EventClass#getContext()
 	 */
 	public EventServiceContext<?> getContext() {
@@ -222,8 +224,9 @@ public class EventClassImpl extends Observable implements EventClass {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.services.eventServices.EventClass#getSubscriberList()
+	 * @see
+	 * org.jgentleframework.services.eventServices.EventClass#getSubscriberList
+	 * ()
 	 */
 	public HashMap<String, ISubscriber> getSubscriberList() {
 
@@ -232,8 +235,9 @@ public class EventClassImpl extends Observable implements EventClass {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.jgentleframework.services.eventServices.EventClass#setTransientSubscrip(org.jgentleframework.services.eventServices.objectmeta.Subscription)
+	 * @see
+	 * org.jgentleframework.services.eventServices.EventClass#setTransientSubscrip
+	 * (org.jgentleframework.services.eventServices.objectmeta.Subscription)
 	 */
 	public void setTransientSubscrip(Subscription transientSubscrip) {
 

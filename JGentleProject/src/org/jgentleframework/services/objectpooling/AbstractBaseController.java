@@ -339,7 +339,7 @@ public abstract class AbstractBaseController extends AbstractBasePooling
 	 * @throws Throwable
 	 *             the throwable
 	 */
-	protected synchronized void deactivateObject(Object obj) throws Throwable {
+	protected void deactivateObject(Object obj) throws Throwable {
 
 		synchronized (obj) {
 			try {

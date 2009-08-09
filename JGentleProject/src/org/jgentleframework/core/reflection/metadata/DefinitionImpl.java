@@ -24,7 +24,6 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 import java.util.Map.Entry;
@@ -216,7 +215,7 @@ class DefinitionImpl extends DefinitionCoreImpl implements Metadata, Definition 
 	@Override
 	public Annotation[] getAnnotations() {
 
-		List<Annotation> result = new LinkedList<Annotation>();
+		List<Annotation> result = new ArrayList<Annotation>();
 		for (Annotation anno : this.getOriginalAnnotations()) {
 			result.add((Annotation) AnnotationProxy.createProxy(anno, this));
 		}
@@ -435,7 +434,7 @@ class DefinitionImpl extends DefinitionCoreImpl implements Metadata, Definition 
 			throw new IllegalPropertyException(
 					"This definition is not object-class definition.");
 		}
-		List<Definition> result = new LinkedList<Definition>();
+		List<Definition> result = new ArrayList<Definition>();
 		for (Entry<Field, Definition> entry : this.getFieldDefList().entrySet()) {
 			if (entry.getKey().getName().equals(fieldName)) {
 				result.add(entry.getValue());
@@ -460,7 +459,7 @@ class DefinitionImpl extends DefinitionCoreImpl implements Metadata, Definition 
 			throw new IllegalPropertyException(
 					"This definition is not object-class definition.");
 		}
-		List<Method> methodResult = new LinkedList<Method>();
+		List<Method> methodResult = new ArrayList<Method>();
 		for (Method method : this.getMethodDefList().keySet()) {
 			if (method.getName().equals(methodName)) {
 				Class<?>[] argsTemp = method.getParameterTypes();

@@ -22,9 +22,9 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -76,7 +76,7 @@ public class SystemConfigImpl extends AbstractConfigModule implements
 	private List<DefinitionPostProcessor>							DPPList					= null;
 
 	/** The imports cfg lst. */
-	private List<ConfigurableImporter>								importsCfgLst			= new LinkedList<ConfigurableImporter>();
+	private List<ConfigurableImporter>								importsCfgLst			= new ArrayList<ConfigurableImporter>();
 
 	/*
 	 * (non-Javadoc)
@@ -579,11 +579,11 @@ public class SystemConfigImpl extends AbstractConfigModule implements
 	public void setOptionsList(Map<String, Object> optionsList, Method configure) {
 
 		this.optionsList = optionsList;
-		this.DPPList = new LinkedList<DefinitionPostProcessor>();
+		this.DPPList = new ArrayList<DefinitionPostProcessor>();
 		this.optionsList.put(AbstractConfig.DEFINITION_POST_PROCESSOR, DPPList);
-		this.cscClassList = new LinkedList<Class<? extends ComponentServiceContextType<?>>>();
+		this.cscClassList = new ArrayList<Class<? extends ComponentServiceContextType<?>>>();
 		this.optionsList.put(AbstractConfig.CSC_CLASS_LIST, this.cscClassList);
-		this.annotationConfigList = new LinkedList<Annotation>();
+		this.annotationConfigList = new ArrayList<Annotation>();
 		this.optionsList.put(AbstractConfig.ANNOTATION_CONFIG_LIST,
 				this.annotationConfigList);
 		this.annoBeanProcessorList = new HashMap<Class, AnnotationBeanProcessor>();

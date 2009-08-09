@@ -17,7 +17,7 @@
  */
 package org.jgentleframework.services.queuedbeans;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,7 +27,8 @@ import java.util.List;
  */
 public class BlockingQueue {
 	@SuppressWarnings("unchecked")
-	private List	queue	= new LinkedList();
+	private List	queue	= new ArrayList();
+
 	private int		limit	= 10;
 
 	public BlockingQueue(int limit) {

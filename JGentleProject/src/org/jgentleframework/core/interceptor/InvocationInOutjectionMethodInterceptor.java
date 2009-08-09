@@ -20,7 +20,7 @@ package org.jgentleframework.core.interceptor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.HashMap;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -103,8 +103,8 @@ class InvocationInOutjectionMethodInterceptor implements MethodInterceptor,
 	private synchronized void getInOutField() {
 
 		Set<Field> set = definition.getAllAnnotatedFields();
-		List<Field> fieldInject = new LinkedList<Field>();
-		List<Field> fieldOutject = new LinkedList<Field>();
+		List<Field> fieldInject = new ArrayList<Field>();
+		List<Field> fieldOutject = new ArrayList<Field>();
 		if (set != null) {
 			for (Field field : set) {
 				Definition defField = this.definition
@@ -137,8 +137,8 @@ class InvocationInOutjectionMethodInterceptor implements MethodInterceptor,
 	private synchronized void getInOutMethod() {
 
 		Set<Method> set = definition.getAllAnnotatedMethods();
-		List<Method> methodInject = new LinkedList<Method>();
-		List<Method> methodOutject = new LinkedList<Method>();
+		List<Method> methodInject = new ArrayList<Method>();
+		List<Method> methodOutject = new ArrayList<Method>();
 		if (set != null) {
 			for (Method method : set) {
 				Definition defMethod = this.definition

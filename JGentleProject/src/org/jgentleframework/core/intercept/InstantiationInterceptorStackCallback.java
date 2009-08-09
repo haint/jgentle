@@ -19,7 +19,7 @@ package org.jgentleframework.core.intercept;
 
 import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Constructor;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.aopalliance.intercept.Interceptor;
@@ -330,7 +330,7 @@ public class InstantiationInterceptorStackCallback {
 		}
 		else
 			this.targetInterface = null;
-		List<InstantiationInterceptor> list = new LinkedList<InstantiationInterceptor>();
+		List<InstantiationInterceptor> list = new ArrayList<InstantiationInterceptor>();
 		if (selector.getInstantiationInterceptors() != null) {
 			for (InstantiationInterceptor icpt : selector
 					.getInstantiationInterceptors()) {

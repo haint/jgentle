@@ -18,7 +18,7 @@
 package org.jgentleframework.configure.objectmeta;
 
 import java.lang.reflect.Method;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.jgentleframework.utils.Assertor;
@@ -50,7 +50,7 @@ public class ObjectBlock {
 		Assertor.notNull(interfazes);
 		Assertor.notNull(method);
 		this.method = method;
-		this.blockList = new LinkedList<Class<?>>();
+		this.blockList = new ArrayList<Class<?>>();
 		for (Class<?> interfaze : interfazes) {
 			if (!this.blockList.contains(interfaze)) {
 				this.blockList.add(interfaze);

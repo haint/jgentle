@@ -20,7 +20,6 @@ package org.jgentleframework.context;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -133,7 +132,7 @@ public abstract class AbstractServiceManagement extends ProviderCoreCreator
 			List<Matcher<Definition>> mList = new ArrayList<Matcher<Definition>>();
 			AbstractMatcher.getSuperMatcher(matcher, mList);
 			for (Matcher<Definition> obj : mList) {
-				List<Interceptor> icptList = new LinkedList<Interceptor>();
+				List<Interceptor> icptList = new ArrayList<Interceptor>();
 				getInterceptorFromMatcher(obj, icptList);
 				for (Interceptor inter : icptList) {
 					mapMatcherInterceptor.put(inter, obj);
@@ -193,7 +192,7 @@ public abstract class AbstractServiceManagement extends ProviderCoreCreator
 	@Override
 	protected void init(List<Map<String, Object>> OLArray) {
 
-		List<ObjectBindingInterceptor> obiList = new LinkedList<ObjectBindingInterceptor>();
+		List<ObjectBindingInterceptor> obiList = new ArrayList<ObjectBindingInterceptor>();
 		for (Map<String, Object> optionsList : OLArray) {
 			obiList
 					.addAll((Collection<? extends ObjectBindingInterceptor>) optionsList
@@ -271,7 +270,7 @@ public abstract class AbstractServiceManagement extends ProviderCoreCreator
 			List<Matcher<Definition>> matchers) {
 
 		Assertor.notNull(matchers);
-		List<Interceptor> result = new LinkedList<Interceptor>();
+		List<Interceptor> result = new ArrayList<Interceptor>();
 		for (Matcher<Definition> matcher : matchers) {
 			getInterceptorFromMatcher(matcher, result);
 		}

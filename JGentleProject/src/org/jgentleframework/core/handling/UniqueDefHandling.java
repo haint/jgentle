@@ -19,7 +19,7 @@ package org.jgentleframework.core.handling;
 
 import java.lang.annotation.Annotation;
 import java.util.Arrays;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.jgentleframework.configure.annotation.Unique;
@@ -91,7 +91,7 @@ public class UniqueDefHandling implements AnnotationValidator<Unique> {
 			}
 		}
 		List<Class<?>> except = Arrays.asList(annotation.except());
-		List<Annotation> listAnno = new LinkedList<Annotation>();
+		List<Annotation> listAnno = new ArrayList<Annotation>();
 		// loại bỏ các annotation không được đăng kí.
 		for (Annotation anno : clazz.getAnnotations()) {
 			if (definitionManager.getAnnotationRegister()

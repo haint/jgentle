@@ -23,7 +23,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -44,8 +43,8 @@ import org.jgentleframework.context.enums.RegisterAnnotationInjecting;
 import org.jgentleframework.context.injecting.Provider;
 import org.jgentleframework.context.services.ServiceHandler;
 import org.jgentleframework.context.services.ServiceHandlerImpl;
-import org.jgentleframework.core.JGentleRuntimeException;
 import org.jgentleframework.core.JGentleException;
+import org.jgentleframework.core.JGentleRuntimeException;
 import org.jgentleframework.core.handling.AnnotationRegister;
 import org.jgentleframework.core.handling.AnnotationRegisterImpl;
 import org.jgentleframework.core.handling.DefinitionManager;
@@ -240,7 +239,7 @@ public abstract class JGentle {
 		 * Thực thi các tiền xử lý trước khi thực thi cấu hình (invoke configure
 		 * methods).
 		 */
-		List<Class<? extends Configurable>> absCfgList = new LinkedList<Class<? extends Configurable>>();
+		List<Class<? extends Configurable>> absCfgList = new ArrayList<Class<? extends Configurable>>();
 		for (Class<? extends Configurable> clazz : configClasses) {
 			absCfgList.add(clazz);
 		}
@@ -249,7 +248,7 @@ public abstract class JGentle {
 					absCfgList);
 		}
 		// Khởi tạo config instance
-		List<Configurable> objectList = new LinkedList<Configurable>();
+		List<Configurable> objectList = new ArrayList<Configurable>();
 		for (Class<? extends Configurable> targetClass : absCfgList) {
 			Configurable result = ConfigurationProxy.createProxy(targetClass,
 					argsType, args);
@@ -257,7 +256,7 @@ public abstract class JGentle {
 			// Tìm các imported configurable class nếu có
 			List<ConfigurableImporter> importingList = result
 					.getImportsCfgLst();
-			List<Configurable> allResults = new LinkedList<Configurable>();
+			List<Configurable> allResults = new ArrayList<Configurable>();
 			if (importingList != null && importingList.size() != 0) {
 				for (ConfigurableImporter ci : importingList) {
 					allResults.add(ConfigurationProxy.createProxy(ci
@@ -467,7 +466,7 @@ public abstract class JGentle {
 		 * Thực thi các xử lý khởi tạo CSC
 		 */
 		List<Class<? extends ComponentServiceContextType<?>>> cscClassList = null;
-		cscClassList = new LinkedList<Class<? extends ComponentServiceContextType<?>>>();
+		cscClassList = new ArrayList<Class<? extends ComponentServiceContextType<?>>>();
 		for (Configurable instance : configInstances) {
 			cscClassList.addAll(instance.getCscClassList());
 		}

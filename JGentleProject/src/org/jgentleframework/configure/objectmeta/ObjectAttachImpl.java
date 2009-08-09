@@ -19,7 +19,6 @@ package org.jgentleframework.configure.objectmeta;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -54,7 +53,7 @@ public class ObjectAttachImpl<T> implements ObjectAttach<T> {
 	private Map<Entry<Class<?>, Class<?>>, ScopeInstance>	scopeList	= new HashMap<Entry<Class<?>, Class<?>>, ScopeInstance>();
 
 	/** The type list. */
-	private List<Class<?>>									typeList	= new LinkedList<Class<?>>();
+	private List<Class<?>>									typeList	= new ArrayList<Class<?>>();
 
 	/** lazy_init property, default setting is <b>false</b>. */
 	private boolean											lazyInit	= false;

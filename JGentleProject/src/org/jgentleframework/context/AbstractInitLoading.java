@@ -19,7 +19,6 @@ package org.jgentleframework.context;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -64,12 +63,12 @@ public abstract class AbstractInitLoading {
 				.isCast(AbstractLoadingFactory.class, provider) ? provider
 				: null);
 		// query option list
-		List<DefinitionPostProcessor> dppList = new LinkedList<DefinitionPostProcessor>();
+		List<DefinitionPostProcessor> dppList = new ArrayList<DefinitionPostProcessor>();
 		Map<Class, AnnotationBeanProcessor> abpHash = new HashMap<Class, AnnotationBeanProcessor>();
-		List<ObjectAttach<?>> oaList = new LinkedList<ObjectAttach<?>>();
-		List<Class<?>> beanClassList = new LinkedList<Class<?>>();
-		List<ObjectBindingConstant> obcList = new LinkedList<ObjectBindingConstant>();
-		List<ObjectConstant> ocList = new LinkedList<ObjectConstant>();
+		List<ObjectAttach<?>> oaList = new ArrayList<ObjectAttach<?>>();
+		List<Class<?>> beanClassList = new ArrayList<Class<?>>();
+		List<ObjectBindingConstant> obcList = new ArrayList<ObjectBindingConstant>();
+		List<ObjectConstant> ocList = new ArrayList<ObjectConstant>();
 		for (Map<String, Object> optionsList : OLArray) {
 			/***************/
 			List<DefinitionPostProcessor> dpp = (List<DefinitionPostProcessor>) optionsList

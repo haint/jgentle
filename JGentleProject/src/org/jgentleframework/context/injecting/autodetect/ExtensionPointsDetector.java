@@ -17,8 +17,8 @@
  */
 package org.jgentleframework.context.injecting.autodetect;
 
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -309,9 +309,9 @@ public class ExtensionPointsDetector extends AbstractDetector {
 	@Override
 	public void handling(List<Map<String, Object>> OLArray) {
 
-		List<ObjectBindingConstant> obcList = new LinkedList<ObjectBindingConstant>();
-		List<ObjectAttach<?>> objectAttachList = new LinkedList<ObjectAttach<?>>();
-		List<Class<?>> beanClassList = new LinkedList<Class<?>>();
+		List<ObjectBindingConstant> obcList = new ArrayList<ObjectBindingConstant>();
+		List<ObjectAttach<?>> objectAttachList = new ArrayList<ObjectAttach<?>>();
+		List<Class<?>> beanClassList = new ArrayList<Class<?>>();
 		for (Map<String, Object> optionsList : OLArray) {
 			obcList
 					.addAll((Collection<? extends ObjectBindingConstant>) optionsList

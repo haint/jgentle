@@ -20,7 +20,7 @@ package org.jgentleframework.core.interceptor;
 import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.aopalliance.intercept.FieldAccess;
@@ -40,7 +40,8 @@ import org.jgentleframework.utils.Utils;
  */
 class FieldStackMethodInterceptor implements MethodInterceptor {
 	/** The after advices. */
-	List<FieldInterceptor>	fieldInterceptors	= new LinkedList<FieldInterceptor>();
+	List<FieldInterceptor>	fieldInterceptors	= new ArrayList<FieldInterceptor>();
+
 	/** The field. */
 	final Field				field;
 
@@ -58,8 +59,9 @@ class FieldStackMethodInterceptor implements MethodInterceptor {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.aopalliance.intercept.MethodInterceptor#invoke(org.aopalliance.intercept.MethodInvocation)
+	 * @see
+	 * org.aopalliance.intercept.MethodInterceptor#invoke(org.aopalliance.intercept
+	 * .MethodInvocation)
 	 */
 	@Override
 	public Object invoke(MethodInvocation invocation) throws Throwable {
@@ -88,8 +90,10 @@ class FieldStackMethodInterceptor implements MethodInterceptor {
 	class InterceptedFieldAccess implements FieldAccess {
 		/** The access type. */
 		int					accessType;
+
 		/** The proxy. */
 		protected Object	proxy;
+
 		/** The index. */
 		int					index	= -1;
 
@@ -109,7 +113,6 @@ class FieldStackMethodInterceptor implements MethodInterceptor {
 
 		/*
 		 * (non-Javadoc)
-		 * 
 		 * @see org.aopalliance.intercept.FieldAccess#getAccessType()
 		 */
 		@Override
@@ -120,7 +123,6 @@ class FieldStackMethodInterceptor implements MethodInterceptor {
 
 		/*
 		 * (non-Javadoc)
-		 * 
 		 * @see org.aopalliance.intercept.FieldAccess#getField()
 		 */
 		@Override
@@ -131,7 +133,6 @@ class FieldStackMethodInterceptor implements MethodInterceptor {
 
 		/*
 		 * (non-Javadoc)
-		 * 
 		 * @see org.aopalliance.intercept.FieldAccess#getValueToSet()
 		 */
 		@Override
@@ -148,7 +149,6 @@ class FieldStackMethodInterceptor implements MethodInterceptor {
 
 		/*
 		 * (non-Javadoc)
-		 * 
 		 * @see org.aopalliance.intercept.Joinpoint#getStaticPart()
 		 */
 		@Override
@@ -159,7 +159,6 @@ class FieldStackMethodInterceptor implements MethodInterceptor {
 
 		/*
 		 * (non-Javadoc)
-		 * 
 		 * @see org.aopalliance.intercept.Joinpoint#getThis()
 		 */
 		@Override
@@ -170,7 +169,6 @@ class FieldStackMethodInterceptor implements MethodInterceptor {
 
 		/*
 		 * (non-Javadoc)
-		 * 
 		 * @see org.aopalliance.intercept.Joinpoint#proceed()
 		 */
 		@Override
