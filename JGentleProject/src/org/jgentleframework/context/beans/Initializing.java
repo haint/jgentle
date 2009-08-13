@@ -43,5 +43,5 @@ public interface Initializing {
 	 * method allows the bean instance to perform initialization only possible
 	 * when all bean properties have been set.
 	 */
-	public void activate();
+	public void initialize();
 }

@@ -27,18 +27,18 @@ import net.sf.cglib.reflect.FastClass;
 import net.sf.cglib.reflect.FastMethod;
 
 import org.jgentleframework.context.beans.Disposable;
-import org.jgentleframework.context.beans.Initializing;
 import org.jgentleframework.context.beans.ProviderAware;
 import org.jgentleframework.context.beans.annotation.DisposableMethod;
-import org.jgentleframework.context.beans.annotation.InitializingMethod;
 import org.jgentleframework.context.injecting.Provider;
 import org.jgentleframework.context.support.CoreInstantiationSelector;
 import org.jgentleframework.context.support.CoreInstantiationSelectorImpl;
 import org.jgentleframework.core.factory.BeanCreationProcessor;
+import org.jgentleframework.services.objectpooling.annotation.ActivateMethod;
 import org.jgentleframework.services.objectpooling.annotation.CanBePooledMethod;
 import org.jgentleframework.services.objectpooling.annotation.DeactivateMethod;
 import org.jgentleframework.services.objectpooling.annotation.SystemPooling;
 import org.jgentleframework.services.objectpooling.annotation.ValidateMethod;
+import org.jgentleframework.services.objectpooling.context.Activate;
 import org.jgentleframework.services.objectpooling.context.CanBePooled;
 import org.jgentleframework.services.objectpooling.context.Deactivate;
 import org.jgentleframework.services.objectpooling.context.Validate;
@@ -67,7 +67,7 @@ public abstract class AbstractBaseController extends AbstractBasePooling
 	protected List<FastMethod>	disposableMethodLst		= null;
 
 	/** The init method lst. */
-	protected List<FastMethod>	initMethodLst			= null;
+	protected List<FastMethod>	activateMethodLst		= null;
 
 	/** The num active. */
 	protected int				numActive				= 0;
@@ -81,18 +81,18 @@ public abstract class AbstractBaseController extends AbstractBasePooling
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.jgentleframework.services.objectpooling.AbstractBasePooling#activate
+	 * org.jgentleframework.services.objectpooling.AbstractBasePooling#initialize
 	 * ()
 	 */
 	@Override
-	public synchronized void activate() {
+	public synchronized void initialize() {
 
-		super.activate();
+		super.initialize();
 		// Find activate methods
 		if (this.definition
-				.isAnnotationPresentAtAnyMethods(InitializingMethod.class)) {
+				.isAnnotationPresentAtAnyMethods(ActivateMethod.class)) {
 			List<Method> methodList = this.definition
-					.getMethodsAnnotatedWith(InitializingMethod.class);
+					.getMethodsAnnotatedWith(ActivateMethod.class);
 			for (Method method : methodList) {
 				if (!Modifier.isPublic(method.getModifiers())) {
 					if (log.isErrorEnabled()) {
@@ -103,9 +103,9 @@ public abstract class AbstractBaseController extends AbstractBasePooling
 				}
 				FastClass fclass = FastClass.create(method.getDeclaringClass());
 				FastMethod fmethod = fclass.getMethod(method);
-				if (this.initMethodLst == null)
-					this.initMethodLst = new ArrayList<FastMethod>();
-				this.initMethodLst.add(fmethod);
+				if (this.activateMethodLst == null)
+					this.activateMethodLst = new ArrayList<FastMethod>();
+				this.activateMethodLst.add(fmethod);
 			}
 		}
 		// Find canBePooled methods
@@ -218,10 +218,10 @@ public abstract class AbstractBaseController extends AbstractBasePooling
 
 		synchronized (obj) {
 			if (obj != null) {
-				if (ReflectUtils.isCast(Initializing.class, obj))
-					((Initializing) obj).activate();
-				else if (this.initMethodLst != null) {
-					for (FastMethod method : initMethodLst) {
+				if (ReflectUtils.isCast(Activate.class, obj))
+					((Activate) obj).activate();
+				else if (this.activateMethodLst != null) {
+					for (FastMethod method : activateMethodLst) {
 						method.invoke(obj, null);
 					}
 				}
@@ -235,10 +235,10 @@ public abstract class AbstractBaseController extends AbstractBasePooling
 	 * @param obj
 	 *            the obj
 	 * @return true, if can be pooled
-	 * @throws Throwable
+	 * @throws Exception
 	 *             the throwable
 	 */
-	protected boolean canBePooled(Object obj) throws Throwable {
+	protected boolean canBePooled(Object obj) throws Exception {
 
 		synchronized (obj) {
 			try {
@@ -254,7 +254,7 @@ public abstract class AbstractBaseController extends AbstractBasePooling
 					}
 				}
 			}
-			catch (Throwable e) {
+			catch (Exception e) {
 				// object cannot be activated or is invalid
 				destroyObject(obj);
 				synchronized (this) {
@@ -273,10 +273,10 @@ public abstract class AbstractBaseController extends AbstractBasePooling
 	 * @return the object
 	 * @throws Exception
 	 *             the exception
-	 * @throws Throwable
+	 * @throws Exception
 	 *             the throwable
 	 */
-	protected Object createsBean() throws Throwable {
+	protected Object createsBean() throws Exception {
 
 		synchronized (this) {
 			this.numActive++;
@@ -311,7 +311,7 @@ public abstract class AbstractBaseController extends AbstractBasePooling
 				newlyCreated = true;
 			}
 		}
-		catch (Throwable e) {
+		catch (Exception e) {
 			if (log.isErrorEnabled()) {
 				log.error(
 						"The object bean can not be activated or created !! ",
@@ -326,8 +326,6 @@ public abstract class AbstractBaseController extends AbstractBasePooling
 				}
 			}
 		}
-		// validate the object bean
-		validatesObject(result);
 		return pair != null ? pair.getValue() : null;
 	}
 
@@ -336,10 +334,10 @@ public abstract class AbstractBaseController extends AbstractBasePooling
 	 * 
 	 * @param obj
 	 *            the obj
-	 * @throws Throwable
+	 * @throws Exception
 	 *             the throwable
 	 */
-	protected void deactivateObject(Object obj) throws Throwable {
+	protected void deactivateObject(Object obj) throws Exception {
 
 		synchronized (obj) {
 			try {
@@ -354,7 +352,7 @@ public abstract class AbstractBaseController extends AbstractBasePooling
 					}
 				}
 			}
-			catch (Throwable e) {
+			catch (Exception e) {
 				// object cannot be activated or is invalid
 				destroyObject(obj);
 				synchronized (this) {
@@ -370,10 +368,10 @@ public abstract class AbstractBaseController extends AbstractBasePooling
 	 * 
 	 * @param obj
 	 *            the given object need to be destroyed.
-	 * @throws Throwable
+	 * @throws Exception
 	 *             the throwable
 	 */
-	protected void destroyObject(Object obj) throws Throwable {
+	protected void destroyObject(Object obj) throws Exception {
 
 		synchronized (obj) {
 			try {
@@ -387,7 +385,7 @@ public abstract class AbstractBaseController extends AbstractBasePooling
 					}
 				}
 			}
-			catch (Throwable e) {
+			catch (Exception e) {
 				obj = null;
 				throw e;
 			}
@@ -410,7 +408,7 @@ public abstract class AbstractBaseController extends AbstractBasePooling
 	 * (java.lang.Object)
 	 */
 	@Override
-	public void invalidateObject(Object obj) throws Throwable {
+	public void invalidateObject(Object obj) throws Exception {
 
 		try {
 			destroyObject(obj);
@@ -441,10 +439,10 @@ public abstract class AbstractBaseController extends AbstractBasePooling
 	 *            the given object need to be validated.
 	 * @throws Exception
 	 *             the exception
-	 * @throws Throwable
+	 * @throws Exception
 	 *             the throwable
 	 */
-	protected void validatesObject(Object obj) throws Throwable {
+	protected void validatesObject(Object obj) throws Exception {
 
 		synchronized (obj) {
 			try {
@@ -462,7 +460,7 @@ public abstract class AbstractBaseController extends AbstractBasePooling
 					}
 				}
 			}
-			catch (Throwable e) {
+			catch (Exception e) {
 				destroyObject(obj);
 				synchronized (this) {
 					this.numActive--;

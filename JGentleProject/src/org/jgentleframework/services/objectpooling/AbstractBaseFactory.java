@@ -38,13 +38,13 @@ public abstract class AbstractBaseFactory extends AbstractBaseController {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.jgentleframework.services.objectpooling.AbstractBasePooling#activate
+	 * org.jgentleframework.services.objectpooling.AbstractBaseController#initialize
 	 * ()
 	 */
 	@Override
-	public synchronized void activate() {
+	public synchronized void initialize() {
 
-		super.activate();
+		super.initialize();
 	}
 
 	/**
@@ -58,7 +58,7 @@ public abstract class AbstractBaseFactory extends AbstractBaseController {
 	 *             the exception
 	 */
 	protected void addObjectToPool(Object obj, boolean decrementNumActive)
-			throws Throwable {
+			throws Exception {
 
 		boolean success = true;
 		if (!this.canBePooled(obj)) {
@@ -96,7 +96,7 @@ public abstract class AbstractBaseFactory extends AbstractBaseController {
 	 */
 	@Override
 	public synchronized void clear() throws UnsupportedOperationException,
-			Throwable {
+			Exception {
 
 		for (Iterator<TimestampObjectBean<Object>> iterator = pool.iterator(); iterator
 				.hasNext();) {
@@ -115,7 +115,7 @@ public abstract class AbstractBaseFactory extends AbstractBaseController {
 	 * .lang.Object)
 	 */
 	@Override
-	public void returnObject(Object obj) throws Throwable {
+	public void returnObject(Object obj) throws Exception {
 
 		addObjectToPool(obj, true);
 	}

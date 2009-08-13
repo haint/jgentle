@@ -11,30 +11,29 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License. 
+ * limitations under the License.
  * 
- * Project: JGentleFramework
+ * Project: JGentleProject
  */
-package org.jgentleframework.services.objectpooling.context;
+package org.jgentleframework.services.objectpooling.annotation;
+
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+import org.jgentleframework.services.objectpooling.context.Activate;
 
 /**
- * The implementation of {@link #validate()} method is a useful method to ensure
- * that the pool always returns instances that are in a valid state.
+ * This annotation is responsible for method designating in order to allow
+ * container to identify one method as <code>Activate method</code>.
  * 
  * @author Quoc Chung - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
- * @date Mar 5, 2009
- * @see CanBePooled
- * @see Deactivate
+ * @date Aug 13, 2009
  * @see Activate
  */
-public interface Validate {
-	/**
-	 * Ensures that the instance is safe to be returned by the pool. Returns
-	 * <code>false</code> if <code>instance</code> should be destroyed.
-	 * 
-	 * @return <code>false</code> if <code>the instance</code> is not valid and
-	 *         should be dropped from the pool, <code>true</code> otherwise.
-	 */
-	boolean validate();
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
+public @interface ActivateMethod {
 }

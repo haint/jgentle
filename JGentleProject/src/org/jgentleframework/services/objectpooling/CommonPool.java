@@ -41,19 +41,27 @@ public class CommonPool extends AbstractBaseFactory {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.jgentleframework.services.objectpooling.AbstractBasePooling#activate
+	 * org.jgentleframework.services.objectpooling.AbstractBaseFactory#initialize
 	 * ()
 	 */
 	@Override
-	public void activate() {
+	public void initialize() {
 
-		super.activate();
+		super.initialize();
 		synchronized (this) {
 			this.pool = new ArrayBlockingQueue<TimestampObjectBean<Object>>(
 					this.maxPoolSize, true);
 		}
 		PoolStaticUtils.startEvictor(this.getEvictor(), this
 				.getTimeBetweenEvictionRuns(), this, false);
+		try {
+			PoolStaticUtils.initIdleObject(this, this.minPoolSize);
+		}
+		catch (Exception e) {
+			if (log.isFatalEnabled()) {
+				log.fatal("Could not initialize min pool size !! ", e);
+			}
+		}
 	}
 
 	/*
@@ -62,7 +70,7 @@ public class CommonPool extends AbstractBaseFactory {
 	 */
 	@Override
 	public synchronized void addObject() throws UnsupportedOperationException,
-			Throwable {
+			Exception {
 
 		assertDisable();
 		Object obj = this.createsBean();
@@ -74,7 +82,7 @@ public class CommonPool extends AbstractBaseFactory {
 	 * @see org.jgentleframework.services.objectpooling.Pool#close()
 	 */
 	@Override
-	public void close() throws Throwable {
+	public void close() throws Exception {
 
 		this.enable = false;
 		synchronized (this) {
@@ -88,8 +96,9 @@ public class CommonPool extends AbstractBaseFactory {
 	 * @see org.jgentleframework.services.objectpooling.Pool#obtainObject()
 	 */
 	@Override
-	public Object obtainObject() throws NoSuchElementException, Throwable {
+	public Object obtainObject() throws NoSuchElementException, Exception {
 
+		Object result = null;
 		long starttime = System.currentTimeMillis();
 		while (true) {
 			TimestampObjectBean<Object> pair = null;
@@ -100,12 +109,12 @@ public class CommonPool extends AbstractBaseFactory {
 				if (pair == null) {
 					if (this.maxPoolSize < 0
 							|| this.getNumActive() <= this.maxPoolSize) {
-						return createsBean();
+						result = createsBean();
 					}
 					else {
 						switch (this.exhaustedActionType) {
 						case SystemPooling.EXHAUSTED_GROW:
-							return createsBean();
+							result = createsBean();
 						case SystemPooling.EXHAUSTED_FAIL:
 							throw new NoSuchElementException(
 									"Pool exhausted !!");
@@ -147,11 +156,11 @@ public class CommonPool extends AbstractBaseFactory {
 					}
 				}
 				else {
-					Object result = pair.getValue();
-					activatesObject(result);
-					validatesObject(result);
-					return result;
+					result = pair.getValue();
 				}
+				activatesObject(result);
+				validatesObject(result);
+				return result;
 			}
 		}
 	}

@@ -27,6 +27,7 @@ package org.jgentleframework.services.objectpooling.context;
  * @date Mar 4, 2009
  * @see CanBePooled
  * @see Validate
+ * @see Activate
  */
 public interface Deactivate {
 	/**

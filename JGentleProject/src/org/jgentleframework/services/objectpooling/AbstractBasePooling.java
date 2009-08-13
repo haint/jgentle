@@ -498,10 +498,10 @@ public abstract class AbstractBasePooling implements Pool, Initializing,
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.jgentleframework.context.beans.Initializing#activate()
+	 * @see org.jgentleframework.context.beans.Initializing#initialize()
 	 */
 	@Override
-	public synchronized void activate() {
+	public synchronized void initialize() {
 
 		Assertor.notNull(config,
 				"The given [pooling configuration] must not be null !!");
@@ -509,6 +509,13 @@ public abstract class AbstractBasePooling implements Pool, Initializing,
 		this.enable = config.enable();
 		this.minPoolSize = config.MinPoolSize();
 		this.maxPoolSize = config.MaxPoolSize();
+		if (this.minPoolSize > this.maxPoolSize) {
+			if (log.isFatalEnabled())
+				log
+						.fatal(
+								"The [max pool size] must be equal or greater than [min pool size] !",
+								new PoolConfigurationException());
+		}
 		this.creationTimeOut = config.creationTimeOut();
 		this.justInTime = config.JustInTime();
 		this.minIdle = systemConfig.minIdle();

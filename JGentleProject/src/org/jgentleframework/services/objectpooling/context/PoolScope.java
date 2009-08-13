@@ -160,7 +160,7 @@ public enum PoolScope implements ScopeImplementation {
 	}
 
 	/**
-	 * Return instance to the pool.
+	 * Returns instance to the pool.
 	 * 
 	 * @param instance
 	 *            the instance

@@ -48,13 +48,13 @@ public class WeakPool extends AbstractBaseController implements ProviderAware {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.jgentleframework.services.objectpooling.AbstractBasePooling#activate
+	 * org.jgentleframework.services.objectpooling.AbstractBaseController#initialize
 	 * ()
 	 */
 	@Override
-	public synchronized void activate() {
+	public synchronized void initialize() {
 
-		super.activate();
+		super.initialize();
 		this.pool = new ArrayBlockingQueue<SoftReference<Object>>(
 				this.maxPoolSize, true);
 	}
@@ -64,7 +64,7 @@ public class WeakPool extends AbstractBaseController implements ProviderAware {
 	 * @see org.jgentleframework.services.objectpooling.Pool#addObject()
 	 */
 	@Override
-	public synchronized void addObject() throws Throwable {
+	public synchronized void addObject() throws Exception {
 
 		assertDisable();
 		Object obj = this.createsBean();
@@ -88,7 +88,7 @@ public class WeakPool extends AbstractBaseController implements ProviderAware {
 	 * @see org.jgentleframework.services.objectpooling.Pool#close()
 	 */
 	@Override
-	public void close() throws Throwable {
+	public void close() throws Exception {
 
 		this.enable = false;
 		clear();
@@ -99,7 +99,7 @@ public class WeakPool extends AbstractBaseController implements ProviderAware {
 	 * @see org.jgentleframework.services.objectpooling.Pool#clear()
 	 */
 	@Override
-	public synchronized void clear() throws Throwable {
+	public synchronized void clear() throws Exception {
 
 		Iterator<SoftReference<Object>> iter = pool.iterator();
 		while (iter.hasNext()) {
@@ -154,10 +154,11 @@ public class WeakPool extends AbstractBaseController implements ProviderAware {
 				}
 				if (obj != null) {
 					this.activatesObject(obj);
+					this.validatesObject(obj);
 				}
 			}
 		}
-		catch (Throwable e) {
+		catch (Exception e) {
 			obj = null;
 		}
 		synchronized (this) {
@@ -189,7 +190,7 @@ public class WeakPool extends AbstractBaseController implements ProviderAware {
 	 * .lang.Object)
 	 */
 	@Override
-	public synchronized void returnObject(Object obj) throws Throwable {
+	public synchronized void returnObject(Object obj) throws Exception {
 
 		boolean success = !isEnable();
 		if (!this.canBePooled(obj)) {

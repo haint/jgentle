@@ -102,6 +102,26 @@ public final class PoolStaticUtils {
 	}
 
 	/**
+	 * Call <code>addObject()</code> on <code>pool</code> <code>count</code>
+	 * number of times.
+	 * 
+	 * @param pool the pool to prefill.
+	 * @param count the number of idle objects to add.
+	 * 
+	 * @throws Exception the exception
+	 */
+	public static void initIdleObject(final BasePooling pool, final int count)
+			throws Exception {
+
+		if (pool == null) {
+			throw new IllegalArgumentException("pool must not be null.");
+		}
+		for (int i = 0; i < count; i++) {
+			pool.addObject();
+		}
+	}
+
+	/**
 	 * Calculates deficit.
 	 * 
 	 * @param basePool

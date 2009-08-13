@@ -36,12 +36,12 @@ public interface Pool {
 	 * it, and then place it in the idle object pool. <code>addObject</code> is
 	 * useful for "pre-loading" a pool with idle objects. (Optional operation).
 	 * 
-	 * @throws Throwable
+	 * @throws Exception
 	 *             when creation fails.
 	 * @throws UnsupportedOperationException
 	 *             when this pool cannot add new idle objects.
 	 */
-	void addObject() throws UnsupportedOperationException, Throwable;
+	void addObject() throws UnsupportedOperationException, Exception;
 
 	/**
 	 * Clears any objects sitting idle in the pool, releasing any associated
@@ -51,16 +51,16 @@ public interface Pool {
 	 * @throws UnsupportedOperationException
 	 *             if this implementation does not support the operation
 	 */
-	void clear() throws UnsupportedOperationException, Throwable;
+	void clear() throws UnsupportedOperationException, Exception;
 
 	/**
 	 * Close this pool, and free any resources associated with it.
 	 * 
-	 * @throws Throwable
+	 * @throws Exception
 	 *             implementations should silently fail if not all resources can
 	 *             be freed.
 	 */
-	void close() throws Throwable;
+	void close() throws Exception;
 
 	/**
 	 * Returns the number of instances currently borrowed from this pool
@@ -96,10 +96,10 @@ public interface Pool {
 	 * 
 	 * @param obj
 	 *            a {@link #obtainObject() borrowed} instance to be disposed.
-	 * @throws Throwable
+	 * @throws Exception
 	 *             the throwable
 	 */
-	void invalidateObject(Object obj) throws Throwable;
+	void invalidateObject(Object obj) throws Exception;
 
 	/**
 	 * Checks if this pool is empty.
@@ -121,7 +121,7 @@ public interface Pool {
 	 *             when the pool is exhausted and cannot or will not return
 	 *             another instance.
 	 */
-	Object obtainObject() throws NoSuchElementException, Throwable;
+	Object obtainObject() throws NoSuchElementException, Exception;
 
 	/**
 	 * Return an instance to the pool.
@@ -129,5 +129,5 @@ public interface Pool {
 	 * @param obj
 	 *            a {@link #obtainObject() borrowed} instance to be returned.
 	 */
-	void returnObject(Object obj) throws Throwable;
+	void returnObject(Object obj) throws Exception;
 }

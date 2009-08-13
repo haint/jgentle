@@ -93,7 +93,7 @@ public class CommonFactory {
 			InvocationTargetException, SecurityException, NoSuchMethodException {
 
 		if (ReflectUtils.isCast(Initializing.class, obj)) {
-			((Initializing) obj).activate();
+			((Initializing) obj).initialize();
 		}
 		else {
 			List<Method> methods = definition
