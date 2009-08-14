@@ -26,10 +26,10 @@ import org.jgentleframework.configure.enums.Scope;
 import org.jgentleframework.context.JGentle;
 import org.jgentleframework.context.injecting.Provider;
 import org.jgentleframework.core.handling.DefinitionManager;
-import org.jgentleframework.core.reflection.AnnotationBeanException;
-import org.jgentleframework.core.reflection.annohandler.AnnotationHandler;
-import org.jgentleframework.core.reflection.annohandler.AnnotationPostProcessor;
-import org.jgentleframework.core.reflection.metadata.AnnoMeta;
+import org.jgentleframework.reflection.AnnotationBeanException;
+import org.jgentleframework.reflection.annohandler.AnnotationHandler;
+import org.jgentleframework.reflection.annohandler.AnnotationPostProcessor;
+import org.jgentleframework.reflection.metadata.AnnoMeta;
 import org.jgentleframework.utils.ReflectUtils;
 
 /**

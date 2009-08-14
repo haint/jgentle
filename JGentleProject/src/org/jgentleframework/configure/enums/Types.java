@@ -22,10 +22,10 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
-import org.jgentleframework.core.reflection.FieldIdentification;
-import org.jgentleframework.core.reflection.Identification;
-import org.jgentleframework.core.reflection.MethodIdentification;
-import org.jgentleframework.core.reflection.SingleClassIdentification;
+import org.jgentleframework.reflection.FieldIdentification;
+import org.jgentleframework.reflection.Identification;
+import org.jgentleframework.reflection.MethodIdentification;
+import org.jgentleframework.reflection.SingleClassIdentification;
 
 /**
  * This enum represents the information of all object types. This information

@@ -23,7 +23,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jgentleframework.context.beans.Initializing;
 import org.jgentleframework.context.support.Selector;
-import org.jgentleframework.core.reflection.metadata.Definition;
+import org.jgentleframework.reflection.metadata.Definition;
 import org.jgentleframework.services.objectpooling.annotation.Pooling;
 import org.jgentleframework.services.objectpooling.annotation.SystemPooling;
 import org.jgentleframework.utils.Assertor;

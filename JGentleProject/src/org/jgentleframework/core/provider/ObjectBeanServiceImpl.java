@@ -24,7 +24,7 @@ import java.lang.reflect.Constructor;
 
 import org.jgentleframework.configure.annotation.BeanServices;
 import org.jgentleframework.context.injecting.Provider;
-import org.jgentleframework.core.reflection.metadata.Definition;
+import org.jgentleframework.reflection.metadata.Definition;
 import org.jgentleframework.utils.ReflectUtils;
 
 /**

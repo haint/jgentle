@@ -24,8 +24,8 @@ import org.aopalliance.reflect.Metadata;
 import org.jgentleframework.context.JGentle;
 import org.jgentleframework.context.injecting.Provider;
 import org.jgentleframework.core.handling.DefinitionManager;
-import org.jgentleframework.core.reflection.metadata.AnnoMeta;
-import org.jgentleframework.core.reflection.metadata.Definition;
+import org.jgentleframework.reflection.metadata.AnnoMeta;
+import org.jgentleframework.reflection.metadata.Definition;
 
 /**
  * @author LE QUOC CHUNG - mailto: <a

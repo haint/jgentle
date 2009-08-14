@@ -23,13 +23,13 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 import org.jgentleframework.core.factory.InOutDependencyException;
-import org.jgentleframework.core.reflection.AbstractVisitorHandler;
-import org.jgentleframework.core.reflection.DefinitionPostProcessor;
-import org.jgentleframework.core.reflection.IAnnotationVisitor;
-import org.jgentleframework.core.reflection.annohandler.AnnotationBeanProcessor;
-import org.jgentleframework.core.reflection.annohandler.AnnotationHandler;
-import org.jgentleframework.core.reflection.annohandler.AnnotationPostProcessor;
-import org.jgentleframework.core.reflection.metadata.AnnoMeta;
+import org.jgentleframework.reflection.AbstractVisitorHandler;
+import org.jgentleframework.reflection.DefinitionPostProcessor;
+import org.jgentleframework.reflection.IAnnotationVisitor;
+import org.jgentleframework.reflection.annohandler.AnnotationBeanProcessor;
+import org.jgentleframework.reflection.annohandler.AnnotationHandler;
+import org.jgentleframework.reflection.annohandler.AnnotationPostProcessor;
+import org.jgentleframework.reflection.metadata.AnnoMeta;
 import org.jgentleframework.utils.Assertor;
 import org.jgentleframework.utils.ReflectUtils;
 

@@ -35,7 +35,6 @@ import org.jgentleframework.context.beans.Initializing;
 import org.jgentleframework.context.beans.ProviderAware;
 import org.jgentleframework.context.injecting.Provider;
 import org.jgentleframework.core.handling.DefinitionManager;
-import org.jgentleframework.core.reflection.metadata.Definition;
 import org.jgentleframework.integration.remoting.enums.RemoteType;
 import org.jgentleframework.integration.remoting.enums.SSLCipherSuites;
 import org.jgentleframework.integration.remoting.rmi.RmiExportingException;
@@ -46,6 +45,7 @@ import org.jgentleframework.integration.remoting.rmi.customsocket.SSLSocket_RMIC
 import org.jgentleframework.integration.remoting.rmi.customsocket.SSLSocket_RMIServerSocketFactory;
 import org.jgentleframework.integration.remoting.rmi.support.RmiExporter;
 import org.jgentleframework.integration.remoting.rmi.support.RmiExporterImpl;
+import org.jgentleframework.reflection.metadata.Definition;
 import org.jgentleframework.utils.ReflectUtils;
 
 /**

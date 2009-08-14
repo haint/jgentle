@@ -43,10 +43,10 @@ import org.jgentleframework.core.intercept.support.Matcher;
 import org.jgentleframework.core.intercept.support.MethodAnnotatedWithMatcher;
 import org.jgentleframework.core.intercept.support.ParameterAnnotatedWithMatcher;
 import org.jgentleframework.core.intercept.support.TypeAnnotatedWithMatcher;
-import org.jgentleframework.core.reflection.FieldIdentification;
-import org.jgentleframework.core.reflection.Identification;
-import org.jgentleframework.core.reflection.MethodIdentification;
-import org.jgentleframework.core.reflection.metadata.Definition;
+import org.jgentleframework.reflection.FieldIdentification;
+import org.jgentleframework.reflection.Identification;
+import org.jgentleframework.reflection.MethodIdentification;
+import org.jgentleframework.reflection.metadata.Definition;
 import org.jgentleframework.utils.Assertor;
 import org.jgentleframework.utils.data.Pair;
 

@@ -22,8 +22,8 @@ import java.util.Map;
 
 import org.jgentleframework.configure.enums.Types;
 import org.jgentleframework.configure.objectmeta.ObjectBindingConstant.ScopeObjectBinding;
-import org.jgentleframework.core.reflection.Identification;
-import org.jgentleframework.core.reflection.MemberIdentification;
+import org.jgentleframework.reflection.Identification;
+import org.jgentleframework.reflection.MemberIdentification;
 import org.jgentleframework.utils.ReflectUtils;
 import org.jgentleframework.utils.data.Pair;
 

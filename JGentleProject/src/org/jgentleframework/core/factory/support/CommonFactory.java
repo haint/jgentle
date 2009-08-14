@@ -36,7 +36,7 @@ import org.jgentleframework.context.beans.TargetClassesAware;
 import org.jgentleframework.context.beans.annotation.InitializingMethod;
 import org.jgentleframework.context.injecting.Provider;
 import org.jgentleframework.core.factory.InOutExecutor;
-import org.jgentleframework.core.reflection.metadata.Definition;
+import org.jgentleframework.reflection.metadata.Definition;
 import org.jgentleframework.utils.ReflectUtils;
 
 /**

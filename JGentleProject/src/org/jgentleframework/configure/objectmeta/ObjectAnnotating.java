@@ -18,9 +18,9 @@
 package org.jgentleframework.configure.objectmeta;
 
 import org.jgentleframework.configure.enums.Types;
-import org.jgentleframework.core.reflection.Identification;
-import org.jgentleframework.core.reflection.ReflectIdentification;
-import org.jgentleframework.core.reflection.metadata.Definition;
+import org.jgentleframework.reflection.Identification;
+import org.jgentleframework.reflection.ReflectIdentification;
+import org.jgentleframework.reflection.metadata.Definition;
 import org.jgentleframework.utils.data.Pair;
 
 /**

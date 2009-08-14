@@ -54,7 +54,7 @@ import org.jgentleframework.core.intercept.JGentleFastClass;
 import org.jgentleframework.core.intercept.support.CoreIdentification;
 import org.jgentleframework.core.intercept.support.InterceptConditioner;
 import org.jgentleframework.core.intercept.support.Matcher;
-import org.jgentleframework.core.reflection.metadata.Definition;
+import org.jgentleframework.reflection.metadata.Definition;
 
 /**
  * The Class Utils.
@@ -513,7 +513,7 @@ public final class Utils {
 						argTypes[i], provider);
 			}
 		}
-		if (defMethod.isAnnotationPresentAtAnyParameters(Inject.class)) {
+		if (defMethod.isAnnotationPresentOnAnyParameters(Inject.class)) {
 			Definition[] defLst = defMethod.getParameterDefList();
 			if (argTypes.length != defLst.length)
 				throw new InOutDependencyException(

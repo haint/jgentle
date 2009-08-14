@@ -25,7 +25,7 @@ import org.aopalliance.intercept.MethodInterceptor;
 import org.jgentleframework.core.intercept.InstantiationInterceptor;
 import org.jgentleframework.core.intercept.ObjectInstantiation;
 import org.jgentleframework.core.intercept.support.Matcher;
-import org.jgentleframework.core.reflection.metadata.Definition;
+import org.jgentleframework.reflection.metadata.Definition;
 
 /**
  * The Interface InstantiationSelector is responsible for holding all neccessary

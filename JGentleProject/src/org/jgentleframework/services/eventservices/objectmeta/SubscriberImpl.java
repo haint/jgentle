@@ -19,7 +19,7 @@ package org.jgentleframework.services.eventservices.objectmeta;
 
 import java.lang.reflect.Method;
 
-import org.jgentleframework.core.reflection.metadata.Definition;
+import org.jgentleframework.reflection.metadata.Definition;
 import org.jgentleframework.services.eventservices.SubscriberQueuedThread;
 
 /**

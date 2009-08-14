@@ -52,8 +52,8 @@ import org.jgentleframework.context.injecting.scope.ScopeInstanceImpl;
 import org.jgentleframework.context.services.ServiceHandler;
 import org.jgentleframework.core.factory.InOutDependencyException;
 import org.jgentleframework.core.handling.DefinitionManager;
-import org.jgentleframework.core.reflection.Identification;
-import org.jgentleframework.core.reflection.metadata.Definition;
+import org.jgentleframework.reflection.Identification;
+import org.jgentleframework.reflection.metadata.Definition;
 import org.jgentleframework.utils.ReflectUtils;
 import org.jgentleframework.utils.UniqueNumberGenerator;
 import org.jgentleframework.utils.Utils;
@@ -454,10 +454,10 @@ abstract class ObjectBeanFactoryImpl implements ObjectBeanFactory {
 							Definition defValue = this.definitionManager
 									.getDefinition(entry.getValue());
 							if (defKey
-									.isAnnotationPresentAtAnyWhere(Annotate.class))
+									.isAnnotationPresentOnAnyWhere(Annotate.class))
 								annotateIDList.add(entry.getKey());
 							if (defValue
-									.isAnnotationPresentAtAnyWhere(Annotate.class))
+									.isAnnotationPresentOnAnyWhere(Annotate.class))
 								annotateIDList.add(entry.getValue());
 						}
 					}
@@ -480,10 +480,10 @@ abstract class ObjectBeanFactoryImpl implements ObjectBeanFactory {
 						Definition defValue = this.definitionManager
 								.getDefinition(entry.getValue());
 						if (defKey
-								.isAnnotationPresentAtAnyWhere(Annotate.class))
+								.isAnnotationPresentOnAnyWhere(Annotate.class))
 							annotateIDList.add(entry.getKey());
 						if (defValue
-								.isAnnotationPresentAtAnyWhere(Annotate.class))
+								.isAnnotationPresentOnAnyWhere(Annotate.class))
 							annotateIDList.add(entry.getValue());
 					}
 				}

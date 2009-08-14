@@ -40,7 +40,7 @@ import org.jgentleframework.context.support.InstantiationSelectorImpl;
 import org.jgentleframework.core.intercept.InterceptionException;
 import org.jgentleframework.core.intercept.support.AbstractMatcher;
 import org.jgentleframework.core.intercept.support.Matcher;
-import org.jgentleframework.core.reflection.metadata.Definition;
+import org.jgentleframework.reflection.metadata.Definition;
 import org.jgentleframework.utils.Assertor;
 import org.jgentleframework.utils.ReflectUtils;
 import org.jgentleframework.utils.data.Pair;

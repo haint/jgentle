@@ -30,7 +30,7 @@ import org.jgentleframework.context.injecting.Provider;
 import org.jgentleframework.context.support.Selector;
 import org.jgentleframework.core.ServiceProviderException;
 import org.jgentleframework.core.handling.DefinitionManager;
-import org.jgentleframework.core.reflection.metadata.Definition;
+import org.jgentleframework.reflection.metadata.Definition;
 import org.jgentleframework.utils.Assertor;
 import org.jgentleframework.utils.ReflectUtils;
 

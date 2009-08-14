@@ -21,7 +21,7 @@ import java.beans.beancontext.BeanContextMembershipListener;
 import java.lang.reflect.Constructor;
 
 import org.jgentleframework.context.injecting.Provider;
-import org.jgentleframework.core.reflection.metadata.Definition;
+import org.jgentleframework.reflection.metadata.Definition;
 
 /**
  * The Interface ObjectBeanService.

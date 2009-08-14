@@ -17,7 +17,7 @@
  */
 package org.jgentleframework.context.beans;
 
-import org.jgentleframework.core.reflection.metadata.Definition;
+import org.jgentleframework.reflection.metadata.Definition;
 
 /**
  * Interface to be implemented by beans that wish to be aware of their owning
@@ -28,7 +28,7 @@ import org.jgentleframework.core.reflection.metadata.Definition;
  * <b>Note:</b>
  * <p>
  * - The {@link #setDefinition(Definition)} method will be invoked before the
- * {@link Initializing#activate()} method is invoked.
+ * {@link Initializing#initialize()} method is invoked.
  * <p>
  * - For a list of all bean lifecycle methods, see the {@link Initializing} and
  * {@link Disposable}.
@@ -43,7 +43,7 @@ public interface DefinitionAware {
 	/**
 	 * Callback that supplies the owning Definition to a bean instance. Invoked
 	 * after the population of normal bean properties but before an
-	 * initialization callback such as {@link Initializing#activate()} or a
+	 * initialization callback such as {@link Initializing#initialize()} or a
 	 * custom init-method.
 	 * 
 	 * @param definition

@@ -38,7 +38,7 @@ import org.jgentleframework.context.support.Selector;
 import org.jgentleframework.core.factory.InOutDependencyException;
 import org.jgentleframework.core.intercept.MethodInterceptorCallback;
 import org.jgentleframework.core.interceptor.InterceptorUtils;
-import org.jgentleframework.core.reflection.metadata.Definition;
+import org.jgentleframework.reflection.metadata.Definition;
 import org.jgentleframework.utils.ReflectUtils;
 import org.jgentleframework.utils.Utils;
 

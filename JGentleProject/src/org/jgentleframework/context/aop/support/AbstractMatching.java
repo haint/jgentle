@@ -21,7 +21,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import org.jgentleframework.core.reflection.metadata.MetadataController;
+import org.jgentleframework.reflection.metadata.MetadataController;
 
 /**
  * The Class AbstractMatching.

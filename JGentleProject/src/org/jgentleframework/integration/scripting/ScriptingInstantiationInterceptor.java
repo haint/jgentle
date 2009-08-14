@@ -41,8 +41,8 @@ import org.jgentleframework.core.handling.DefinitionManager;
 import org.jgentleframework.core.intercept.BasicMethodInvocation;
 import org.jgentleframework.core.intercept.BeanInstantiationInterceptor;
 import org.jgentleframework.core.intercept.ObjectInstantiation;
-import org.jgentleframework.core.reflection.metadata.Definition;
 import org.jgentleframework.integration.scripting.annotation.ScriptingInject;
+import org.jgentleframework.reflection.metadata.Definition;
 import org.jgentleframework.utils.ReflectUtils;
 
 /**

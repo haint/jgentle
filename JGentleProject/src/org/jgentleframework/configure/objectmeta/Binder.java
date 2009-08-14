@@ -28,7 +28,7 @@ import org.jgentleframework.configure.Configurable;
 import org.jgentleframework.context.AbstractInitLoading;
 import org.jgentleframework.context.injecting.Provider;
 import org.jgentleframework.core.intercept.support.Matcher;
-import org.jgentleframework.core.reflection.metadata.Definition;
+import org.jgentleframework.reflection.metadata.Definition;
 import org.jgentleframework.utils.Assertor;
 import org.jgentleframework.utils.data.Pair;
 

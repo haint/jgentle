@@ -22,7 +22,7 @@ import java.util.Map;
 
 import org.aopalliance.intercept.Interceptor;
 import org.jgentleframework.core.intercept.support.Matcher;
-import org.jgentleframework.core.reflection.metadata.Definition;
+import org.jgentleframework.reflection.metadata.Definition;
 
 /**
  * Provides some methods in order to manage {@link Interceptor} and

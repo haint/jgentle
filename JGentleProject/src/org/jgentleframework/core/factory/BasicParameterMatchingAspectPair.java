@@ -20,7 +20,7 @@ package org.jgentleframework.core.factory;
 import java.lang.reflect.Method;
 
 import org.jgentleframework.context.aop.support.ParameterMatching;
-import org.jgentleframework.core.reflection.metadata.MetadataController;
+import org.jgentleframework.reflection.metadata.MetadataController;
 import org.jgentleframework.utils.Assertor;
 
 /**

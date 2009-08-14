@@ -18,7 +18,7 @@
 package org.jgentleframework.core.interceptor;
 
 import org.aopalliance.intercept.Interceptor;
-import org.jgentleframework.core.reflection.metadata.Definition;
+import org.jgentleframework.reflection.metadata.Definition;
 
 /**
  * Represents <code>runtime loading</code> status of an {@link Interceptor}

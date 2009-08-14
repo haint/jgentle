@@ -18,7 +18,7 @@
 package org.jgentleframework.core.intercept;
 
 import org.aopalliance.intercept.Joinpoint;
-import org.jgentleframework.core.reflection.metadata.MetadataControl;
+import org.jgentleframework.reflection.metadata.MetadataControl;
 
 /**
  * The Interface ObjectInstantiation.

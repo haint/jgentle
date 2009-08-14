@@ -17,7 +17,7 @@
  */
 package org.jgentleframework.core.intercept.support;
 
-import org.jgentleframework.core.reflection.Identification;
+import org.jgentleframework.reflection.Identification;
 
 /**
  * The Interface CoreIdentification.

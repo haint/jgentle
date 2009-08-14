@@ -27,8 +27,8 @@ import org.jgentleframework.configure.objectmeta.ObjectAttach;
 import org.jgentleframework.configure.objectmeta.ObjectBindingConstant;
 import org.jgentleframework.configure.objectmeta.ObjectConstant;
 import org.jgentleframework.core.handling.DefinitionManager;
-import org.jgentleframework.core.reflection.DefinitionPostProcessor;
-import org.jgentleframework.core.reflection.annohandler.AnnotationBeanProcessor;
+import org.jgentleframework.reflection.DefinitionPostProcessor;
+import org.jgentleframework.reflection.annohandler.AnnotationBeanProcessor;
 
 /**
  * The Class AbstractLoadingFactory.

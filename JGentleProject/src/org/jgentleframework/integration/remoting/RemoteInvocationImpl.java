@@ -22,7 +22,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import org.aopalliance.intercept.MethodInvocation;
-import org.jgentleframework.core.reflection.metadata.SerializableMetadataControl;
+import org.jgentleframework.reflection.metadata.SerializableMetadataControl;
 
 /**
  * Represents an remote invocation implementation providing core method

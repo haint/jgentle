@@ -23,7 +23,7 @@ import java.util.Map;
 import org.jgentleframework.configure.annotation.Inject;
 import org.jgentleframework.context.injecting.Provider;
 import org.jgentleframework.core.factory.InOutExecutor;
-import org.jgentleframework.core.reflection.metadata.Definition;
+import org.jgentleframework.reflection.metadata.Definition;
 import org.jgentleframework.utils.data.Pair;
 
 /**
@@ -71,7 +71,7 @@ public final class DefinitionUtils {
 						}
 					}
 					if (defCons
-							.isAnnotationPresentAtAnyParameters(Inject.class)) {
+							.isAnnotationPresentOnAnyParameters(Inject.class)) {
 						Definition[] defList = defCons.getParameterDefList();
 						for (int i = 0; i < defList.length; i++) {
 							if (defList[i] != null

@@ -36,8 +36,8 @@ import org.aopalliance.reflect.Metadata;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jgentleframework.core.handling.DefinitionManager;
-import org.jgentleframework.core.reflection.metadata.AnnoMeta;
-import org.jgentleframework.core.reflection.metadata.MetaDataFactory;
+import org.jgentleframework.reflection.metadata.AnnoMeta;
+import org.jgentleframework.reflection.metadata.MetaDataFactory;
 
 import sun.reflect.FieldAccessor;
 import sun.reflect.ReflectionFactory;

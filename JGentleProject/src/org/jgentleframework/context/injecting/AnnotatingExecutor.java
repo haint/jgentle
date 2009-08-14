@@ -27,8 +27,8 @@ import org.jgentleframework.configure.annotation.Annotate;
 import org.jgentleframework.configure.enums.Types;
 import org.jgentleframework.configure.objectmeta.ObjectAnnotating;
 import org.jgentleframework.core.handling.DefinitionManager;
-import org.jgentleframework.core.reflection.Identification;
-import org.jgentleframework.core.reflection.metadata.Definition;
+import org.jgentleframework.reflection.Identification;
+import org.jgentleframework.reflection.metadata.Definition;
 import org.jgentleframework.utils.ReflectUtils;
 
 /**

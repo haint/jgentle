@@ -42,7 +42,7 @@ import org.jgentleframework.core.CouldNotInstantiateException;
 import org.jgentleframework.core.factory.InOutDependencyException;
 import org.jgentleframework.core.factory.support.CommonFactory;
 import org.jgentleframework.core.handling.DefinitionManager;
-import org.jgentleframework.core.reflection.metadata.Definition;
+import org.jgentleframework.reflection.metadata.Definition;
 import org.jgentleframework.utils.Assertor;
 import org.jgentleframework.utils.DefinitionUtils;
 import org.jgentleframework.utils.ReflectUtils;
@@ -130,7 +130,7 @@ public abstract class AbstractBeanFactory extends AbstractBeanCacher implements
 				}
 			}
 			// checking fields
-			if (def.isAnnotationPresentAtAnyFields(Annotate.class)) {
+			if (def.isAnnotationPresentOnAnyFields(Annotate.class)) {
 				List<Field> fieldList = def
 						.getFieldsAnnotatedWith(Annotate.class);
 				for (Field field : fieldList) {
@@ -168,7 +168,7 @@ public abstract class AbstractBeanFactory extends AbstractBeanCacher implements
 				}
 			}
 			// checking methods
-			if (def.isAnnotationPresentAtAnyMethods(Annotate.class)) {
+			if (def.isAnnotationPresentOnAnyMethods(Annotate.class)) {
 				List<Method> methodList = def
 						.getMethodsAnnotatedWith(Annotate.class);
 				for (Method method : methodList) {

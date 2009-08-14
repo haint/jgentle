@@ -39,7 +39,7 @@ import org.jgentleframework.context.injecting.scope.InvalidAddingOperationExcept
 import org.jgentleframework.context.injecting.scope.ScopeImplementation;
 import org.jgentleframework.core.GenericException;
 import org.jgentleframework.core.InvalidOperationException;
-import org.jgentleframework.core.reflection.metadata.Definition;
+import org.jgentleframework.reflection.metadata.Definition;
 import org.jgentleframework.utils.Assertor;
 import org.jgentleframework.utils.ReflectUtils;
 import org.jgentleframework.utils.Utils;

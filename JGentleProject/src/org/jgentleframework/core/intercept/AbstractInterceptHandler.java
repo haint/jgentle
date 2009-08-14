@@ -18,7 +18,7 @@
 package org.jgentleframework.core.intercept;
 
 import org.aopalliance.intercept.MethodInvocation;
-import org.jgentleframework.core.reflection.metadata.Definition;
+import org.jgentleframework.reflection.metadata.Definition;
 
 /**
  * This abstract class represents a service method interceptor in a chain of

@@ -27,7 +27,7 @@ import org.jgentleframework.context.beans.annotation.InitializingMethod;
  * set.
  * <p>
  * An alternative to implementing Initializing is specifying a custom
- * init-method.
+ * init-method with {@link InitializingMethod} annotation.
  * 
  * @author LE QUOC CHUNG - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>

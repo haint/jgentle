@@ -18,7 +18,7 @@
 package org.jgentleframework.services.objectpooling.support;
 
 import org.jgentleframework.core.intercept.support.InterceptConditioner;
-import org.jgentleframework.core.reflection.metadata.Definition;
+import org.jgentleframework.reflection.metadata.Definition;
 import org.jgentleframework.services.objectpooling.annotation.Pooling;
 
 /**

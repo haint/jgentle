@@ -18,7 +18,7 @@
 package org.jgentleframework.utils.data;
 
 import org.aopalliance.reflect.Metadata;
-import org.jgentleframework.core.reflection.metadata.MetadataController;
+import org.jgentleframework.reflection.metadata.MetadataController;
 
 /**
  * This class represents a pair of values (key,data).

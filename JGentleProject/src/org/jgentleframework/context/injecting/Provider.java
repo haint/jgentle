@@ -24,7 +24,7 @@ import org.jgentleframework.configure.Configurable;
 import org.jgentleframework.context.Context;
 import org.jgentleframework.context.injecting.autodetect.AbstractDetector;
 import org.jgentleframework.context.injecting.autodetect.Detector;
-import org.jgentleframework.core.reflection.metadata.Definition;
+import org.jgentleframework.reflection.metadata.Definition;
 
 /**
  * This is the interface which is responsible for core of container of JGentle

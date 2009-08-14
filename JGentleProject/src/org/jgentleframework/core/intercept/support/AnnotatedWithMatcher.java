@@ -29,7 +29,7 @@ import org.jgentleframework.context.aop.ParameterFilter;
 import org.jgentleframework.context.aop.PointcutOfAll;
 import org.jgentleframework.context.aop.StaticallySupportFilter;
 import org.jgentleframework.context.aop.support.Matching;
-import org.jgentleframework.core.reflection.Identification;
+import org.jgentleframework.reflection.Identification;
 
 /**
  * The Class AnnotatedWithMatcher.

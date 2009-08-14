@@ -33,8 +33,8 @@ import org.jgentleframework.context.injecting.AbstractBeanFactory;
 import org.jgentleframework.context.injecting.AbstractLoadingFactory;
 import org.jgentleframework.context.injecting.Provider;
 import org.jgentleframework.core.JGentleException;
-import org.jgentleframework.core.reflection.DefinitionPostProcessor;
-import org.jgentleframework.core.reflection.annohandler.AnnotationBeanProcessor;
+import org.jgentleframework.reflection.DefinitionPostProcessor;
+import org.jgentleframework.reflection.annohandler.AnnotationBeanProcessor;
 import org.jgentleframework.utils.ReflectUtils;
 
 /**

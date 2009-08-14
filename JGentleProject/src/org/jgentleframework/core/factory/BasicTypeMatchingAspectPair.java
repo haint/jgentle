@@ -22,9 +22,9 @@ import java.lang.reflect.Method;
 
 import org.jgentleframework.configure.enums.MetadataKey;
 import org.jgentleframework.context.aop.support.ClassMatching;
-import org.jgentleframework.core.reflection.metadata.Definition;
-import org.jgentleframework.core.reflection.metadata.MetadataController;
-import org.jgentleframework.core.reflection.metadata.MetadataImpl;
+import org.jgentleframework.reflection.metadata.Definition;
+import org.jgentleframework.reflection.metadata.MetadataController;
+import org.jgentleframework.reflection.metadata.MetadataImpl;
 
 /**
  * The Class BasicTypeMatchingAspectPair.

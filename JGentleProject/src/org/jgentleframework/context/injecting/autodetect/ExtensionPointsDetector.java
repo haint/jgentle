@@ -38,9 +38,9 @@ import org.jgentleframework.context.injecting.scope.ScopeInstance;
 import org.jgentleframework.core.factory.BeanCreationProcessor;
 import org.jgentleframework.core.factory.BeanPostInstantiationSupportInterface;
 import org.jgentleframework.core.provider.Domain;
-import org.jgentleframework.core.reflection.DefinitionPostProcessor;
-import org.jgentleframework.core.reflection.annohandler.AnnotationBeanProcessor;
-import org.jgentleframework.core.reflection.metadata.Definition;
+import org.jgentleframework.reflection.DefinitionPostProcessor;
+import org.jgentleframework.reflection.annohandler.AnnotationBeanProcessor;
+import org.jgentleframework.reflection.metadata.Definition;
 
 /**
  * It represents a detector which is responsible for automatically system bean

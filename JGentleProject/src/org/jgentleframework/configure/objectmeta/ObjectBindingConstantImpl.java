@@ -27,7 +27,7 @@ import org.jgentleframework.configure.enums.Scope;
 import org.jgentleframework.configure.enums.Types;
 import org.jgentleframework.context.injecting.scope.ScopeInstance;
 import org.jgentleframework.core.factory.InOutDependencyException;
-import org.jgentleframework.core.reflection.Identification;
+import org.jgentleframework.reflection.Identification;
 import org.jgentleframework.utils.Assertor;
 import org.jgentleframework.utils.ReflectUtils;
 import org.jgentleframework.utils.data.Pair;

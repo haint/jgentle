@@ -27,7 +27,7 @@ import org.jgentleframework.configure.objectmeta.ObjectBindingConstant;
 import org.jgentleframework.configure.objectmeta.ObjectConstant;
 import org.jgentleframework.context.injecting.Provider;
 import org.jgentleframework.core.handling.DefinitionManager;
-import org.jgentleframework.core.reflection.metadata.Definition;
+import org.jgentleframework.reflection.metadata.Definition;
 
 /**
  * Là một <b>detector</b> chịu trách nhiệm tự động diễn dịch thông tin tất cả

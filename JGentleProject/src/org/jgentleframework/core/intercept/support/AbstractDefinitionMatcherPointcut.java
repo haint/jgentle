@@ -36,10 +36,10 @@ import org.jgentleframework.context.aop.support.Matching;
 import org.jgentleframework.context.aop.support.MethodConstructorMatching;
 import org.jgentleframework.context.aop.support.ParameterMatching;
 import org.jgentleframework.core.intercept.InterceptionException;
-import org.jgentleframework.core.reflection.FieldIdentification;
-import org.jgentleframework.core.reflection.Identification;
-import org.jgentleframework.core.reflection.MethodIdentification;
-import org.jgentleframework.core.reflection.metadata.Definition;
+import org.jgentleframework.reflection.FieldIdentification;
+import org.jgentleframework.reflection.Identification;
+import org.jgentleframework.reflection.MethodIdentification;
+import org.jgentleframework.reflection.metadata.Definition;
 import org.jgentleframework.utils.Assertor;
 import org.jgentleframework.utils.ReflectUtils;
 
@@ -115,22 +115,22 @@ public abstract class AbstractDefinitionMatcherPointcut<T extends Matching>
 		switch (requestor) {
 		case thisMatcher:
 			if (ReflectUtils.isCast(AnnotatedWithMatcher.class, this)) {
-				return definition.isAnnotationPresentAtAnyWhere(clazz);
+				return definition.isAnnotationPresentOnAnyWhere(clazz);
 			}
 			else if (ReflectUtils.isCast(ConstructorAnnotatedWithMatcher.class,
 					this)) {
-				return definition.isAnnotationPresentAtAnyConstructors(clazz);
+				return definition.isAnnotationPresentOnAnyConstructors(clazz);
 			}
 			else if (ReflectUtils.isCast(FieldAnnotatedWithMatcher.class, this)) {
-				return definition.isAnnotationPresentAtAnyFields(clazz);
+				return definition.isAnnotationPresentOnAnyFields(clazz);
 			}
 			else if (ReflectUtils
 					.isCast(MethodAnnotatedWithMatcher.class, this)) {
-				return definition.isAnnotationPresentAtAnyMethods(clazz);
+				return definition.isAnnotationPresentOnAnyMethods(clazz);
 			}
 			else if (ReflectUtils.isCast(ParameterAnnotatedWithMatcher.class,
 					this)) {
-				return definition.isAnnotationPresentAtAnyParameters(clazz);
+				return definition.isAnnotationPresentOnAnyParameters(clazz);
 			}
 			else if (ReflectUtils.isCast(TypeAnnotatedWithMatcher.class, this)) {
 				return definition.isAnnotationPresent(clazz);
@@ -491,7 +491,8 @@ public abstract class AbstractDefinitionMatcherPointcut<T extends Matching>
 	/**
 	 * The Class DefinitionMatcherParameterFilter.
 	 * 
-	 * @param <T> 	 *
+	 * @param <T>
+	 *            *
 	 * @author LE QUOC CHUNG - mailto: <a
 	 *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
 	 * @date Aug 17, 2008

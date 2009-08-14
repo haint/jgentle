@@ -32,7 +32,7 @@ import org.jgentleframework.configure.annotation.Outject;
 import org.jgentleframework.context.beans.annotation.DisablesInOut;
 import org.jgentleframework.context.injecting.Provider;
 import org.jgentleframework.core.factory.InOutExecutor;
-import org.jgentleframework.core.reflection.metadata.Definition;
+import org.jgentleframework.reflection.metadata.Definition;
 import org.jgentleframework.utils.Assertor;
 import org.jgentleframework.utils.Utils;
 

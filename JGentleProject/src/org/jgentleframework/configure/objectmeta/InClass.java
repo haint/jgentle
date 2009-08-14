@@ -18,7 +18,7 @@
 package org.jgentleframework.configure.objectmeta;
 
 import org.jgentleframework.configure.objectmeta.ObjectBindingConstant.ScopeObjectBinding;
-import org.jgentleframework.core.reflection.metadata.Definition;
+import org.jgentleframework.reflection.metadata.Definition;
 
 /**
  * Represents the Class which is 'target class' of current binding bean.

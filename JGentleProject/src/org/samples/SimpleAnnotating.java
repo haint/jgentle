@@ -24,8 +24,8 @@ import org.jgentleframework.configure.Configurable;
 import org.jgentleframework.configure.annotation.Inject;
 import org.jgentleframework.context.JGentle;
 import org.jgentleframework.context.injecting.Provider;
-import org.jgentleframework.core.reflection.ReflectIdentification;
-import org.jgentleframework.core.reflection.metadata.Definition;
+import org.jgentleframework.reflection.ReflectIdentification;
+import org.jgentleframework.reflection.metadata.Definition;
 
 /**
  * @author Quoc Chung - mailto: <a

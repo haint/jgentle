@@ -28,10 +28,10 @@ import org.jgentleframework.context.aop.support.FieldMatching;
 import org.jgentleframework.context.aop.support.Matching;
 import org.jgentleframework.context.aop.support.MethodConstructorMatching;
 import org.jgentleframework.core.intercept.MatchingException;
-import org.jgentleframework.core.reflection.FieldIdentification;
-import org.jgentleframework.core.reflection.Identification;
-import org.jgentleframework.core.reflection.MethodIdentification;
-import org.jgentleframework.core.reflection.metadata.Definition;
+import org.jgentleframework.reflection.FieldIdentification;
+import org.jgentleframework.reflection.Identification;
+import org.jgentleframework.reflection.MethodIdentification;
+import org.jgentleframework.reflection.metadata.Definition;
 import org.jgentleframework.utils.ReflectUtils;
 
 /**

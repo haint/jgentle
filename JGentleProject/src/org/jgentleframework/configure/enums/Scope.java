@@ -36,7 +36,7 @@ import org.jgentleframework.context.support.CoreInstantiationSelectorImpl;
 import org.jgentleframework.context.support.Selector;
 import org.jgentleframework.core.InvalidOperationException;
 import org.jgentleframework.core.factory.BeanCreationProcessor;
-import org.jgentleframework.core.reflection.metadata.Definition;
+import org.jgentleframework.reflection.metadata.Definition;
 import org.jgentleframework.utils.DefinitionUtils;
 import org.jgentleframework.utils.ReflectUtils;
 import org.jgentleframework.utils.data.NullClass;

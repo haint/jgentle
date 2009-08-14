@@ -17,7 +17,7 @@
  */
 package org.jgentleframework.core.intercept.support;
 
-import org.jgentleframework.core.reflection.metadata.Definition;
+import org.jgentleframework.reflection.metadata.Definition;
 
 /**
  * The Class AbstractDefinitionMatcher.

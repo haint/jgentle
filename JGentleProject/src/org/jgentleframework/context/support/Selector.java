@@ -17,7 +17,7 @@
  */
 package org.jgentleframework.context.support;
 
-import org.jgentleframework.core.reflection.metadata.Definition;
+import org.jgentleframework.reflection.metadata.Definition;
 
 /**
  * The Interface Selector.

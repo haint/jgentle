@@ -18,7 +18,7 @@
 package org.jgentleframework.context.aop.support;
 
 import org.jgentleframework.core.intercept.support.Matcher;
-import org.jgentleframework.core.reflection.metadata.MetadataControl;
+import org.jgentleframework.reflection.metadata.MetadataControl;
 
 /**
  * Represents a matching containing all necessary attributes to the call of

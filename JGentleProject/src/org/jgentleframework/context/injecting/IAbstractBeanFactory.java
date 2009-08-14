@@ -21,7 +21,7 @@ import org.jgentleframework.context.injecting.scope.ScopeController;
 import org.jgentleframework.context.injecting.scope.ScopeInstance;
 import org.jgentleframework.context.services.ServiceHandler;
 import org.jgentleframework.core.handling.DefinitionManager;
-import org.jgentleframework.core.reflection.metadata.Definition;
+import org.jgentleframework.reflection.metadata.Definition;
 
 /**
  * The Interface IAbstractBeanFactory.

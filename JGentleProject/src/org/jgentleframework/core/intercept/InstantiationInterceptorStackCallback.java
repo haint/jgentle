@@ -28,9 +28,9 @@ import org.apache.commons.logging.LogFactory;
 import org.jgentleframework.configure.enums.MetadataKey;
 import org.jgentleframework.context.injecting.Provider;
 import org.jgentleframework.context.support.InstantiationSelector;
-import org.jgentleframework.core.reflection.metadata.Definition;
-import org.jgentleframework.core.reflection.metadata.MetadataController;
-import org.jgentleframework.core.reflection.metadata.MetadataImpl;
+import org.jgentleframework.reflection.metadata.Definition;
+import org.jgentleframework.reflection.metadata.MetadataController;
+import org.jgentleframework.reflection.metadata.MetadataImpl;
 import org.jgentleframework.utils.Assertor;
 import org.jgentleframework.utils.Utils;
 

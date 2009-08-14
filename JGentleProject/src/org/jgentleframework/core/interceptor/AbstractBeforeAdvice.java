@@ -19,7 +19,7 @@ package org.jgentleframework.core.interceptor;
 
 import org.aopalliance.intercept.MethodInterceptor;
 import org.jgentleframework.context.aop.advice.MethodBeforeAdvice;
-import org.jgentleframework.core.reflection.metadata.Definition;
+import org.jgentleframework.reflection.metadata.Definition;
 import org.jgentleframework.utils.Assertor;
 
 /**

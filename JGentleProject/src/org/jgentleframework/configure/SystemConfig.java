@@ -26,8 +26,8 @@ import org.jgentleframework.context.ComponentServiceContextType;
 import org.jgentleframework.context.ServiceProvider;
 import org.jgentleframework.core.handling.AnnotationRegister;
 import org.jgentleframework.core.handling.DefinitionManager;
-import org.jgentleframework.core.reflection.DefinitionPostProcessor;
-import org.jgentleframework.core.reflection.annohandler.AnnotationBeanProcessor;
+import org.jgentleframework.reflection.DefinitionPostProcessor;
+import org.jgentleframework.reflection.annohandler.AnnotationBeanProcessor;
 
 /**
  * Provides some system methods in order to execute some system configurations

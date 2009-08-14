@@ -53,7 +53,7 @@ import org.jgentleframework.core.interceptor.InterceptorUtils;
 import org.jgentleframework.core.interceptor.ReturnScopeName;
 import org.jgentleframework.core.interceptor.ReturnScopeNameMethodInterceptor;
 import org.jgentleframework.core.provider.ServiceClass;
-import org.jgentleframework.core.reflection.metadata.Definition;
+import org.jgentleframework.reflection.metadata.Definition;
 import org.jgentleframework.utils.Assertor;
 import org.jgentleframework.utils.ReflectUtils;
 import org.jgentleframework.utils.Utils;

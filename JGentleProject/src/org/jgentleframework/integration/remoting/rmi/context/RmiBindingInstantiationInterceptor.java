@@ -29,7 +29,6 @@ import org.jgentleframework.context.injecting.Provider;
 import org.jgentleframework.core.handling.DefinitionManager;
 import org.jgentleframework.core.intercept.BeanInstantiationInterceptor;
 import org.jgentleframework.core.intercept.ObjectInstantiation;
-import org.jgentleframework.core.reflection.metadata.Definition;
 import org.jgentleframework.integration.remoting.RemoteDefaultID;
 import org.jgentleframework.integration.remoting.annotation.Remote;
 import org.jgentleframework.integration.remoting.enums.RemoteType;
@@ -38,6 +37,7 @@ import org.jgentleframework.integration.remoting.rmi.annotation.RmiBinding;
 import org.jgentleframework.integration.remoting.rmi.support.RmiBinder;
 import org.jgentleframework.integration.remoting.rmi.support.RmiBinderImpl;
 import org.jgentleframework.integration.remoting.rmi.support.RmiBinderInterceptor;
+import org.jgentleframework.reflection.metadata.Definition;
 
 /**
  * The Class RmiBindingInstantiationInterceptor.

@@ -43,7 +43,7 @@ import org.jgentleframework.core.JGentleRuntimeException;
 import org.jgentleframework.core.factory.BeanCreationProcessor;
 import org.jgentleframework.core.factory.InOutDependencyException;
 import org.jgentleframework.core.intercept.support.Matcher;
-import org.jgentleframework.core.reflection.metadata.Definition;
+import org.jgentleframework.reflection.metadata.Definition;
 import org.jgentleframework.utils.Assertor;
 import org.jgentleframework.utils.Utils;
 

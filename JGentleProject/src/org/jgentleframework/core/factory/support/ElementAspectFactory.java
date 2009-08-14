@@ -44,7 +44,7 @@ import org.jgentleframework.core.intercept.support.Matcher;
 import org.jgentleframework.core.intercept.support.MethodAnnotatedWithMatcher;
 import org.jgentleframework.core.intercept.support.ParameterAnnotatedWithMatcher;
 import org.jgentleframework.core.intercept.support.TypeAnnotatedWithMatcher;
-import org.jgentleframework.core.reflection.metadata.Definition;
+import org.jgentleframework.reflection.metadata.Definition;
 import org.jgentleframework.utils.Assertor;
 import org.jgentleframework.utils.ReflectUtils;
 import org.jgentleframework.utils.Utils;

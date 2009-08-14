@@ -26,7 +26,7 @@ import org.jgentleframework.configure.Configurable;
 import org.jgentleframework.configure.Location;
 import org.jgentleframework.context.JGentle;
 import org.jgentleframework.context.injecting.Provider;
-import org.jgentleframework.core.reflection.ReflectIdentification;
+import org.jgentleframework.reflection.ReflectIdentification;
 
 /**
  * @author Quoc Chung - mailto: <a

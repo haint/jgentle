@@ -27,7 +27,7 @@ import org.jgentleframework.context.ServiceProvider;
 import org.jgentleframework.context.injecting.Provider;
 import org.jgentleframework.context.services.ServiceHandler;
 import org.jgentleframework.core.handling.DefinitionManager;
-import org.jgentleframework.core.reflection.metadata.Definition;
+import org.jgentleframework.reflection.metadata.Definition;
 import org.jgentleframework.services.eventservices.EventClass;
 import org.jgentleframework.services.eventservices.EventClassImpl;
 import org.jgentleframework.services.eventservices.EventServicesConfig;

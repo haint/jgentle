@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.jgentleframework.context.ServiceProvider;
-import org.jgentleframework.core.reflection.metadata.Definition;
+import org.jgentleframework.reflection.metadata.Definition;
 import org.jgentleframework.services.eventservices.EventClass;
 import org.jgentleframework.services.eventservices.EventServicesException;
 import org.jgentleframework.services.eventservices.annotation.fireEvent;

@@ -17,7 +17,7 @@
  */
 package org.jgentleframework.configure;
 
-import org.jgentleframework.core.reflection.metadata.Definition;
+import org.jgentleframework.reflection.metadata.Definition;
 
 /**
  * Provides some static method in order to refer specified instances.

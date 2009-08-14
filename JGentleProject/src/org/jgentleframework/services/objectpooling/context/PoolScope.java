@@ -39,7 +39,7 @@ import org.jgentleframework.context.injecting.scope.ScopeInstance;
 import org.jgentleframework.context.support.Selector;
 import org.jgentleframework.core.intercept.JGentleNamingPolicy;
 import org.jgentleframework.core.interceptor.ReturnScopeName;
-import org.jgentleframework.core.reflection.metadata.Definition;
+import org.jgentleframework.reflection.metadata.Definition;
 import org.jgentleframework.services.objectpooling.PoolOperationException;
 import org.jgentleframework.services.objectpooling.Pool;
 import org.jgentleframework.services.objectpooling.annotation.Pooling;
@@ -200,7 +200,7 @@ public enum PoolScope implements ScopeImplementation {
 		else {
 			if (log.isInfoEnabled()) {
 				log
-						.info(" In case of Just In Time Pool, this method can not be executed !! "
+						.info("In case of 'Just In Time' Pool, this method can not be executed !! "
 								+ "Or the instance bean was not created by this pool !!");
 			}
 			return false;
@@ -209,7 +209,7 @@ public enum PoolScope implements ScopeImplementation {
 	}
 
 	/**
-	 * Returns the pool service according to given object instance.
+	 * Returns the pool service bound to given object instance.
 	 * 
 	 * @param instance
 	 *            the given instance

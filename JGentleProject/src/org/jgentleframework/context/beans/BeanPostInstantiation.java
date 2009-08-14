@@ -19,7 +19,7 @@ package org.jgentleframework.context.beans;
 
 import org.jgentleframework.context.injecting.Provider;
 import org.jgentleframework.context.support.CoreInstantiationSelector;
-import org.jgentleframework.core.reflection.metadata.Definition;
+import org.jgentleframework.reflection.metadata.Definition;
 
 /**
  * The implementation of this interface represents a

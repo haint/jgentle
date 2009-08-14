@@ -90,7 +90,7 @@ public abstract class AbstractBaseController extends AbstractBasePooling
 		super.initialize();
 		// Find activate methods
 		if (this.definition
-				.isAnnotationPresentAtAnyMethods(ActivateMethod.class)) {
+				.isAnnotationPresentOnAnyMethods(ActivateMethod.class)) {
 			List<Method> methodList = this.definition
 					.getMethodsAnnotatedWith(ActivateMethod.class);
 			for (Method method : methodList) {
@@ -110,7 +110,7 @@ public abstract class AbstractBaseController extends AbstractBasePooling
 		}
 		// Find canBePooled methods
 		if (this.definition
-				.isAnnotationPresentAtAnyMethods(CanBePooledMethod.class)) {
+				.isAnnotationPresentOnAnyMethods(CanBePooledMethod.class)) {
 			List<Method> methodList = this.definition
 					.getMethodsAnnotatedWith(CanBePooledMethod.class);
 			for (Method method : methodList) {
@@ -138,7 +138,7 @@ public abstract class AbstractBaseController extends AbstractBasePooling
 		}
 		// Find deactivate methods
 		if (this.definition
-				.isAnnotationPresentAtAnyMethods(DeactivateMethod.class)) {
+				.isAnnotationPresentOnAnyMethods(DeactivateMethod.class)) {
 			List<Method> methodList = this.definition
 					.getMethodsAnnotatedWith(DeactivateMethod.class);
 			for (Method method : methodList) {
@@ -158,7 +158,7 @@ public abstract class AbstractBaseController extends AbstractBasePooling
 		}
 		// Find disposable methods
 		if (this.definition
-				.isAnnotationPresentAtAnyMethods(DisposableMethod.class)) {
+				.isAnnotationPresentOnAnyMethods(DisposableMethod.class)) {
 			List<Method> methodList = this.definition
 					.getMethodsAnnotatedWith(DisposableMethod.class);
 			for (Method method : methodList) {
@@ -178,7 +178,7 @@ public abstract class AbstractBaseController extends AbstractBasePooling
 		}
 		// Find validate methods
 		if (this.definition
-				.isAnnotationPresentAtAnyMethods(ValidateMethod.class)) {
+				.isAnnotationPresentOnAnyMethods(ValidateMethod.class)) {
 			List<Method> methodList = this.definition
 					.getMethodsAnnotatedWith(ValidateMethod.class);
 			for (Method method : methodList) {

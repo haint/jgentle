@@ -23,12 +23,12 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Map;
 
-import org.jgentleframework.core.reflection.AbstractVisitorHandler;
-import org.jgentleframework.core.reflection.DefinitionPostProcessor;
-import org.jgentleframework.core.reflection.IAnnotationVisitor;
-import org.jgentleframework.core.reflection.annohandler.AnnotationBeanProcessor;
-import org.jgentleframework.core.reflection.annohandler.AnnotationPostProcessor;
-import org.jgentleframework.core.reflection.metadata.Definition;
+import org.jgentleframework.reflection.AbstractVisitorHandler;
+import org.jgentleframework.reflection.DefinitionPostProcessor;
+import org.jgentleframework.reflection.IAnnotationVisitor;
+import org.jgentleframework.reflection.annohandler.AnnotationBeanProcessor;
+import org.jgentleframework.reflection.annohandler.AnnotationPostProcessor;
+import org.jgentleframework.reflection.metadata.Definition;
 
 /**
  * {@link DefinitionManager} is responsible for {@link Definition} management.

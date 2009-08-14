@@ -25,13 +25,13 @@ import org.jgentleframework.configure.enums.Scope;
 import org.jgentleframework.configure.objectmeta.Binder;
 import org.jgentleframework.context.beans.ProviderAware;
 import org.jgentleframework.context.injecting.Provider;
-import org.jgentleframework.core.reflection.AnnotationBeanException;
-import org.jgentleframework.core.reflection.annohandler.AnnotationPostProcessor;
-import org.jgentleframework.core.reflection.annohandler.PointStatus;
-import org.jgentleframework.core.reflection.metadata.AnnoMeta;
 import org.jgentleframework.integration.remoting.RemoteDefaultID;
 import org.jgentleframework.integration.remoting.rmi.RmiExportingException;
 import org.jgentleframework.integration.remoting.rmi.annotation.RmiExporting;
+import org.jgentleframework.reflection.AnnotationBeanException;
+import org.jgentleframework.reflection.annohandler.AnnotationPostProcessor;
+import org.jgentleframework.reflection.annohandler.PointStatus;
+import org.jgentleframework.reflection.metadata.AnnoMeta;
 import org.jgentleframework.utils.ReflectUtils;
 
 /**

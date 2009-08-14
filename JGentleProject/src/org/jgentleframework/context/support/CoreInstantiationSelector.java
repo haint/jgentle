@@ -20,7 +20,7 @@ package org.jgentleframework.context.support;
 import java.util.Map;
 
 import org.jgentleframework.core.factory.support.CachedConstructor;
-import org.jgentleframework.core.reflection.metadata.Definition;
+import org.jgentleframework.reflection.metadata.Definition;
 
 /**
  * The Interface CoreInstantiationSelector.

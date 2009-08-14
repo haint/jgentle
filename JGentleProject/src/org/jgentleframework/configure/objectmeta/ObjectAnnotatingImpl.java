@@ -24,7 +24,7 @@ import java.util.Map;
 import org.jgentleframework.configure.AnnotatingRuntimeException;
 import org.jgentleframework.configure.enums.Types;
 import org.jgentleframework.core.factory.InOutDependencyException;
-import org.jgentleframework.core.reflection.Identification;
+import org.jgentleframework.reflection.Identification;
 import org.jgentleframework.utils.Assertor;
 import org.jgentleframework.utils.ReflectUtils;
 import org.jgentleframework.utils.data.Pair;

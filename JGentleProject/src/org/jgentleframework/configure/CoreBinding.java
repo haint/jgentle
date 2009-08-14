@@ -36,11 +36,11 @@ import org.jgentleframework.context.aop.support.Matching;
 import org.jgentleframework.context.injecting.Provider;
 import org.jgentleframework.core.intercept.support.InterceptConditioner;
 import org.jgentleframework.core.intercept.support.Matcher;
-import org.jgentleframework.core.reflection.FieldIdentification;
-import org.jgentleframework.core.reflection.Identification;
-import org.jgentleframework.core.reflection.MethodIdentification;
-import org.jgentleframework.core.reflection.ReflectIdentification;
-import org.jgentleframework.core.reflection.metadata.Definition;
+import org.jgentleframework.reflection.FieldIdentification;
+import org.jgentleframework.reflection.Identification;
+import org.jgentleframework.reflection.MethodIdentification;
+import org.jgentleframework.reflection.ReflectIdentification;
+import org.jgentleframework.reflection.metadata.Definition;
 import org.jgentleframework.utils.data.Pair;
 
 /**

@@ -32,7 +32,7 @@ import org.jgentleframework.configure.aopweaving.annotation.Before;
 import org.jgentleframework.configure.aopweaving.annotation.Throws;
 import org.jgentleframework.context.injecting.Provider;
 import org.jgentleframework.core.intercept.InterceptionException;
-import org.jgentleframework.core.reflection.metadata.Definition;
+import org.jgentleframework.reflection.metadata.Definition;
 import org.jgentleframework.utils.ReflectUtils;
 import org.jgentleframework.utils.Utils;
 

@@ -51,7 +51,7 @@ import org.jgentleframework.core.handling.DefinitionManager;
 import org.jgentleframework.core.handling.DefinitionManagerImpl;
 import org.jgentleframework.core.provider.AnnotationValidator;
 import org.jgentleframework.core.provider.ServiceClass;
-import org.jgentleframework.core.reflection.metadata.Definition;
+import org.jgentleframework.reflection.metadata.Definition;
 import org.jgentleframework.utils.Assertor;
 import org.jgentleframework.utils.ReflectUtils;
 import org.jgentleframework.utils.data.NullClass;

@@ -24,7 +24,7 @@ import java.util.Map;
 import org.jgentleframework.configure.objectmeta.ObjectAttach;
 import org.jgentleframework.configure.objectmeta.ObjectBindingConstant;
 import org.jgentleframework.configure.objectmeta.ObjectConstant;
-import org.jgentleframework.core.reflection.metadata.Definition;
+import org.jgentleframework.reflection.metadata.Definition;
 
 /**
  * {@link BindingConfig} interface provides all methods need to perform binding.

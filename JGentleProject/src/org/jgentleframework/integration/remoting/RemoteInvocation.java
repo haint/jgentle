@@ -19,7 +19,7 @@ package org.jgentleframework.integration.remoting;
 
 import java.lang.reflect.InvocationTargetException;
 
-import org.jgentleframework.core.reflection.metadata.SerializableMetadata;
+import org.jgentleframework.reflection.metadata.SerializableMetadata;
 
 /**
  * Description of an remote invocation to a method, given to an interceptor upon
