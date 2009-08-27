@@ -33,8 +33,8 @@ import org.jgentleframework.configure.objectmeta.ObjectBindingConstant;
  */
 public abstract class ReflectIdentification {
 	/**
-	 * Returns a class identification that corresponds to configuration data of
-	 * configuration data.
+	 * Returns a class identification that corresponds to its configuration
+	 * data.
 	 * 
 	 * @return {@link Identification}
 	 */

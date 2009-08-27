@@ -20,7 +20,7 @@ package org.jgentleframework.reflection;
 import java.lang.annotation.Annotation;
 
 import org.jgentleframework.reflection.annohandler.AnnotationBeanProcessor;
-import org.jgentleframework.reflection.metadata.AnnoMeta;
+import org.jgentleframework.reflection.metadata.AnnotationMetadata;
 import org.jgentleframework.reflection.metadata.Definition;
 
 /**
@@ -133,5 +133,5 @@ public interface IAnnotationVisitor {
 	 * @param annoArray
 	 * @param rootAnnoMeta
 	 */
-	public void visit(Annotation[] annoArray, AnnoMeta rootAnnoMeta);
+	public void visit(Annotation[] annoArray, AnnotationMetadata rootAnnoMeta);
 }

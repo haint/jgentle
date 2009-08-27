@@ -32,7 +32,7 @@ import org.jgentleframework.reflection.IAnnotationVisitor;
  */
 public abstract class MetaDataFactory {
 	/**
-	 * Create a new {@link Definition definition}
+	 * Creates a new {@link Definition definition}
 	 * 
 	 * @param key
 	 *            key of {@link Definition definition}
@@ -46,7 +46,7 @@ public abstract class MetaDataFactory {
 	}
 
 	/**
-	 * Create a new {@link Definition definition}
+	 * Creates a new {@link Definition definition}
 	 * 
 	 * @param key
 	 *            key of {@link Definition definition}
@@ -63,59 +63,60 @@ public abstract class MetaDataFactory {
 	}
 
 	/**
-	 * Create a new {@link AnnoMeta annotation metadata}
+	 * Creates a new {@link AnnotationMetadata annotation metadata}
 	 * 
 	 * @param key
-	 *            key of {@link AnnoMeta annotation metadata}
+	 *            key of {@link AnnotationMetadata annotation metadata}
 	 * @param value
-	 *            value of {@link AnnoMeta annotation metadata}
+	 *            value of {@link AnnotationMetadata annotation metadata}
 	 */
-	public static AnnoMeta createAnnoMeta(Object key, Object value) {
+	public static AnnotationMetadata createAnnotationMetadata(Object key,
+			Object value) {
 
-		return new AnnoMetaImpl(key, value);
+		return new AnnotationMetadataImpl(key, value);
 	}
 
 	/**
-	 * Create a new {@link AnnoMeta annotation metadata}
+	 * Creates a new {@link AnnotationMetadata annotation metadata}
 	 * 
 	 * @param key
-	 *            key of {@link AnnoMeta annotation metadata}
+	 *            key of {@link AnnotationMetadata annotation metadata}
 	 * @param value
-	 *            value of {@link AnnoMeta annotation metadata}
+	 *            value of {@link AnnotationMetadata annotation metadata}
 	 * @param annoParents
-	 *            annoMeta parents of {@link AnnoMeta annotation metadata} need
-	 *            to be created.
+	 *            annotationMetadata parents of {@link AnnotationMetadata
+	 *            annotation metadata} need to be created.
 	 */
-	public static AnnoMeta createAnnoMeta(Object key, Object value,
-			AnnoMeta annoParents) {
+	public static AnnotationMetadata createAnnotationMetadata(Object key,
+			Object value, AnnotationMetadata annoParents) {
 
-		return new AnnoMetaImpl(key, value, annoParents);
+		return new AnnotationMetadataImpl(key, value, annoParents);
 	}
 
 	/**
-	 * Create a new {@link AnnoMeta annotation metadata}
+	 * Creates a new {@link AnnotationMetadata annotation metadata}
 	 * 
 	 * @param key
-	 *            key of {@link AnnoMeta annotation metadata}
+	 *            key of {@link AnnotationMetadata annotation metadata}
 	 * @param value
-	 *            value of {@link AnnoMeta annotation metadata}
+	 *            value of {@link AnnotationMetadata annotation metadata}
 	 * @param annoParents
-	 *            annoMeta parents of {@link AnnoMeta annotation metadata} need
-	 *            to be created.
+	 *            annotationMetadata parents of {@link AnnotationMetadata
+	 *            annotation metadata} need to be created.
 	 * @param name
 	 *            name of desired annotation metadata.
 	 */
-	public static AnnoMeta createAnnoMeta(Object key, Object value,
-			AnnoMeta annoParents, String name) {
+	public static AnnotationMetadata createAnnotationMetadata(Object key,
+			Object value, AnnotationMetadata annoParents, String name) {
 
-		return new AnnoMetaImpl(key, value, annoParents, name);
+		return new AnnotationMetadataImpl(key, value, annoParents, name);
 	}
 
 	/**
-	 * Create a new {@link Metadata metadata}
+	 * Creates a new {@link Metadata metadata}
 	 * 
 	 * @param key
-	 *            key of {@link AnnoMeta annotation metadata}
+	 *            key of {@link AnnotationMetadata annotation metadata}
 	 */
 	public static Metadata createMetaData(Object key) {
 
@@ -123,7 +124,7 @@ public abstract class MetaDataFactory {
 	}
 
 	/**
-	 * Create a new {@link Metadata metadata}
+	 * Creates a new {@link Metadata metadata}
 	 * 
 	 * @param key
 	 *            key of {@link Metadata metadata}

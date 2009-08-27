@@ -24,13 +24,13 @@ import java.util.Set;
 import org.aopalliance.reflect.Metadata;
 
 /**
- * Represents the {@link AnnoMeta annotation metadata} will be created in
- * JGentle system. An {@link AnnoMeta annotation metadata} will hold a list of
- * {@link Metadata metadatas} which may be another {@link AnnoMeta annotation
+ * Represents the {@link AnnotationMetadata annotation metadata} will be created in
+ * JGentle system. An {@link AnnotationMetadata annotation metadata} will hold a list of
+ * {@link Metadata metadatas} which may be another {@link AnnotationMetadata annotation
  * metadatas} or basic datas (values of attributes of an annotation) are
  * interpreted.
  * <p>
- * If {@link AnnoMeta annotation metadata} is interpreted of annotation, key of
+ * If {@link AnnotationMetadata annotation metadata} is interpreted of annotation, key of
  * it will be the instance which is annotated with that <code>annotation</code>,
  * and value will be the <code>annotation instance</code>.
  * 
@@ -39,31 +39,31 @@ import org.aopalliance.reflect.Metadata;
  * @date Sep 5, 2007
  * @see Metadata
  */
-public interface AnnoMeta extends Metadata {
+public interface AnnotationMetadata extends Metadata {
 	/**
-	 * Removes all the {@link Metadata metadatas} in current {@link AnnoMeta
+	 * Removes all the {@link Metadata metadatas} in current {@link AnnotationMetadata
 	 * annotation metadata}
 	 */
 	public void clear();
 
 	/**
-	 * Returns <code>true</code> if current {@link AnnoMeta annotation metadata}
+	 * Returns <code>true</code> if current {@link AnnotationMetadata annotation metadata}
 	 * contains the given {@link Metadata metadata}
 	 * 
 	 * @param metadata
 	 *            the desired {@link Metadata} need to be tested.
-	 * @return returns <b>true</b> if this {@link AnnoMeta annotation metadata}
+	 * @return returns <b>true</b> if this {@link AnnotationMetadata annotation metadata}
 	 *         contains the given {@link Metadata}, <b>false</b> otherwise.
 	 */
 	public boolean contains(Metadata metadata);
 
 	/**
-	 * Returns <b>true</b> if this {@link AnnoMeta annotation metadata} contains
+	 * Returns <b>true</b> if this {@link AnnotationMetadata annotation metadata} contains
 	 * a {@link Metadata metadata} corresponds to the given object key.
 	 * 
 	 * @param key
 	 *            key of {@link Metadata} need to be tested.
-	 * @return returns <b>true</b> if this {@link AnnoMeta annotation metadata}
+	 * @return returns <b>true</b> if this {@link AnnotationMetadata annotation metadata}
 	 *         contains a {@link Metadata metadata} corresponds to the given
 	 *         key, <b>false</b> otherwise.
 	 */
@@ -71,13 +71,13 @@ public interface AnnoMeta extends Metadata {
 
 	/**
 	 * Returns the number of all {@link Metadata metadatas} in current
-	 * {@link AnnoMeta annotation metadata}
+	 * {@link AnnotationMetadata annotation metadata}
 	 */
 	public int count();
 
 	/**
 	 * Returns the {@link Metadata metadata} corresponds to the given object
-	 * key, or <code>null</code> if current {@link AnnoMeta annotation metadata}
+	 * key, or <code>null</code> if current {@link AnnotationMetadata annotation metadata}
 	 * doesn't contain any mapping corresponding to the given key.
 	 * 
 	 * @param key
@@ -87,47 +87,47 @@ public interface AnnoMeta extends Metadata {
 
 	/**
 	 * Returns the {@link Map map} containing all {@link Metadata metadatas} in
-	 * current {@link AnnoMeta annotation metadata}
+	 * current {@link AnnotationMetadata annotation metadata}
 	 */
 	public Map<Object, Metadata> getMetaList();
 
 	/**
-	 * Returns the name of this {@link AnnoMeta annotation metadata}, if it's
-	 * not specified, a default name is name of object class of {@link AnnoMeta
+	 * Returns the name of this {@link AnnotationMetadata annotation metadata}, if it's
+	 * not specified, a default name is name of object class of {@link AnnotationMetadata
 	 * annotation metadata} will be returned.
 	 */
 	public String getName();
 
 	/**
-	 * Returns the parents of current {@link AnnoMeta annotation metadata}, if
+	 * Returns the parents of current {@link AnnotationMetadata annotation metadata}, if
 	 * returning value is <b>null</b>, it will be key of one {@link Definition
 	 * definition}.
 	 * 
 	 * @see Definition
 	 * @see DefinitionCore
 	 */
-	public AnnoMeta getParents();
+	public AnnotationMetadata getParents();
 
 	/**
-	 * Returns the object class type of current {@link AnnoMeta annotation
+	 * Returns the object class type of current {@link AnnotationMetadata annotation
 	 * metadata}
 	 */
 	public Class<?> getType();
 
 	/**
-	 * Returns <b>true</b> if current {@link AnnoMeta annotation metadata} is
+	 * Returns <b>true</b> if current {@link AnnotationMetadata annotation metadata} is
 	 * empty, otherwise returns <b>false</b>.
 	 */
 	public boolean isEmpty();
 
 	/**
 	 * Returns a {@link Set set} of keys corresponds to all {@link Metadata
-	 * metadatas} existing in current {@link AnnoMeta annotation metadata}
+	 * metadatas} existing in current {@link AnnotationMetadata annotation metadata}
 	 */
 	public Set<Object> keySet();
 
 	/**
-	 * Puts a {@link Metadata metadata} into current {@link AnnoMeta annotation
+	 * Puts a {@link Metadata metadata} into current {@link AnnotationMetadata annotation
 	 * metadata}.
 	 * 
 	 * @param data
@@ -144,7 +144,7 @@ public interface AnnoMeta extends Metadata {
 	public Metadata removeMetadata(Object key);
 
 	/**
-	 * Sets name to current {@link AnnoMeta annotation metadata}.
+	 * Sets name to current {@link AnnotationMetadata annotation metadata}.
 	 * 
 	 * @param name
 	 *            the given name
@@ -153,7 +153,7 @@ public interface AnnoMeta extends Metadata {
 
 	/**
 	 * Returns a {@link Collection collection} view of {@link Metadata
-	 * metadatas} existing in current {@link AnnoMeta annotation metadata}.
+	 * metadatas} existing in current {@link AnnotationMetadata annotation metadata}.
 	 * 
 	 * @return {@link Collection}
 	 */

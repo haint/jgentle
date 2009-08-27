@@ -24,7 +24,7 @@ import org.aopalliance.reflect.Metadata;
 import org.jgentleframework.context.JGentle;
 import org.jgentleframework.context.injecting.Provider;
 import org.jgentleframework.core.handling.DefinitionManager;
-import org.jgentleframework.reflection.metadata.AnnoMeta;
+import org.jgentleframework.reflection.metadata.AnnotationMetadata;
 import org.jgentleframework.reflection.metadata.Definition;
 
 /**
@@ -43,9 +43,10 @@ public class AnnoMetaTest {
 		defManager.loadDefinition(Client.class);
 		// Lấy ra thông tin definition
 		Definition def = defManager.getDefinition(Client.class);
-		AnnoMeta root = def.getAnnoMeta();
-		AnnoMeta annoMeta = (AnnoMeta) root.getMetadata(MyAnnotation.class);
-		Metadata metadata = annoMeta.getMetadata("name");
+		AnnotationMetadata root = def.getAnnotationMetadata();
+		AnnotationMetadata annotationMetadata = (AnnotationMetadata) root
+				.getMetadata(MyAnnotation.class);
+		Metadata metadata = annotationMetadata.getMetadata("name");
 		System.out.println(metadata.getValue().toString());
 	}
 }

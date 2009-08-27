@@ -36,7 +36,7 @@ import org.aopalliance.reflect.Metadata;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jgentleframework.core.handling.DefinitionManager;
-import org.jgentleframework.reflection.metadata.AnnoMeta;
+import org.jgentleframework.reflection.metadata.AnnotationMetadata;
 import org.jgentleframework.reflection.metadata.MetaDataFactory;
 
 import sun.reflect.FieldAccessor;
@@ -57,15 +57,17 @@ public final class ReflectUtils {
 	private final static Log	log	= LogFactory.getLog(ReflectUtils.class);
 
 	/**
-	 * Creates {@link AnnoMeta} object.
+	 * Creates {@link AnnotationMetadata} object.
 	 * 
 	 * @param annos
-	 *            annotation instance need to be create to {@link AnnoMeta}
+	 *            annotation instance need to be create to
+	 *            {@link AnnotationMetadata}
 	 * @param container
-	 *            the parrent {@link AnnoMeta} of returned {@link AnnoMeta}
+	 *            the parrent {@link AnnotationMetadata} of returned
+	 *            {@link AnnotationMetadata}
 	 * @param definitionManager
 	 *            the {@link DefinitionManager} instance
-	 * @return AnnoMeta
+	 * @return AnnotationMetadata
 	 * @throws InvocationTargetException
 	 *             the invocation target exception
 	 * @throws IllegalAccessException
@@ -73,16 +75,16 @@ public final class ReflectUtils {
 	 * @throws IllegalArgumentException
 	 *             the illegal argument exception
 	 */
-	public static AnnoMeta buildAnnoMeta(Annotation annos, AnnoMeta container,
-			DefinitionManager definitionManager)
+	public static AnnotationMetadata buildAnnoMeta(Annotation annos,
+			AnnotationMetadata container, DefinitionManager definitionManager)
 			throws IllegalArgumentException, IllegalAccessException,
 			InvocationTargetException {
 
-		AnnoMeta thisMeta = null;
+		AnnotationMetadata thisMeta = null;
 		Class<?> clazz = annos.annotationType();
 		Method[] methods = clazz.getDeclaredMethods();
-		thisMeta = MetaDataFactory.createAnnoMeta(clazz, annos, container,
-				clazz.toString());
+		thisMeta = MetaDataFactory.createAnnotationMetadata(clazz, annos,
+				container, clazz.toString());
 		if (methods.length > 0) {
 			for (Method obj : methods) {
 				Object value = null;
@@ -91,14 +93,14 @@ public final class ReflectUtils {
 				Metadata part = null;
 				part = MetaDataFactory.createMetaData(obj.getName(), value);
 				/*
-				 * Đưa list sub annoMeta vừa được tạo vào trong annoMeta hiện
-				 * hành
+				 * Đưa list sub annotationMetadata vừa được tạo vào trong
+				 * annotationMetadata hiện hành
 				 */
 				thisMeta.putMetaData(part);
 			}
 		}
 		/*
-		 * add annoMeta vào container (annoMeta cha chứ nó)
+		 * add annotationMetadata vào container (annotationMetadata cha chứ nó)
 		 */
 		container.putMetaData(thisMeta);
 		return thisMeta;
@@ -421,11 +423,11 @@ public final class ReflectUtils {
 	 * @return an {@link ArrayList} containing returned types if they exist,
 	 *         otherwise, returns an empty {@link ArrayList}.
 	 */
-	public static ArrayList<Type> getAllGenericInterfaces(Class<?> clazz,
+	public static List<Type> getAllGenericInterfaces(Class<?> clazz,
 			boolean superClass) {
 
 		Assertor.notNull(clazz);
-		ArrayList<Type> result = new ArrayList<Type>();
+		List<Type> result = new ArrayList<Type>();
 		for (Type type : clazz.getGenericInterfaces()) {
 			if (!result.contains(type)) {
 				int i = 0;

@@ -19,7 +19,7 @@ package org.jgentleframework.reflection;
 
 import java.lang.annotation.Annotation;
 
-import org.jgentleframework.reflection.metadata.AnnoMeta;
+import org.jgentleframework.reflection.metadata.AnnotationMetadata;
 import org.jgentleframework.reflection.metadata.Definition;
 
 /**
@@ -40,11 +40,11 @@ public interface DefinitionPostProcessor {
 	 * 
 	 * @param annoArray
 	 *            the annotation list of current {@link Definition}
-	 * @param annoMeta
-	 *            The {@link AnnoMeta} of current {@link Definition}
+	 * @param annotationMetadata
+	 *            The {@link AnnotationMetadata} of current {@link Definition}
 	 * @throws DefinitionPostException
 	 */
-	void beforePost(Annotation[] annoArray, AnnoMeta annoMeta)
+	void beforePost(Annotation[] annoArray, AnnotationMetadata annotationMetadata)
 			throws DefinitionPostException;
 
 	/**
@@ -53,25 +53,25 @@ public interface DefinitionPostProcessor {
 	 * 
 	 * @param annoArray
 	 *            the annotation list of current {@link Definition}
-	 * @param annoMeta
-	 *            The {@link AnnoMeta} of current {@link Definition}
+	 * @param annotationMetadata
+	 *            The {@link AnnotationMetadata} of current {@link Definition}
 	 * @throws DefinitionPostException
 	 */
-	void afterPost(Annotation[] annoArray, AnnoMeta annoMeta)
+	void afterPost(Annotation[] annoArray, AnnotationMetadata annotationMetadata)
 			throws DefinitionPostException;
 
 	/**
 	 * This method will catch all exceptions thrown during the corresponding
 	 * {@link Definition} is instantiating, includes thrown exceptions of
-	 * {@link #beforePost(Annotation[], AnnoMeta)} method and
-	 * {@link #afterPost(Annotation[], AnnoMeta)} method.
+	 * {@link #beforePost(Annotation[], AnnotationMetadata)} method and
+	 * {@link #afterPost(Annotation[], AnnotationMetadata)} method.
 	 * 
 	 * @param ex
 	 *            the exception
 	 * @param annoArray
 	 *            the annotation list of current {@link Definition}
-	 * @param annoMeta
-	 *            The {@link AnnoMeta} of current {@link Definition}
+	 * @param annotationMetadata
+	 *            The {@link AnnotationMetadata} of current {@link Definition}
 	 * @param bool
 	 *            this boolean value represents the time of exception catching.
 	 *            If <b>true</b>, it is <code>before post</code>,if <b>false</b>,
@@ -82,5 +82,5 @@ public interface DefinitionPostProcessor {
 	 *         this instantiation will be interupted.
 	 */
 	boolean catchException(Exception ex, Annotation[] annoArray,
-			AnnoMeta annoMeta, boolean bool);
+			AnnotationMetadata annotationMetadata, boolean bool);
 }

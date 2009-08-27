@@ -20,7 +20,7 @@ package org.jgentleframework.reflection.annohandler;
 import java.lang.annotation.Annotation;
 
 import org.jgentleframework.core.handling.DefinitionManager;
-import org.jgentleframework.reflection.metadata.AnnoMeta;
+import org.jgentleframework.reflection.metadata.AnnotationMetadata;
 
 /**
  * Chỉ định một processor thực thi việc diễn dịch.
@@ -34,17 +34,19 @@ import org.jgentleframework.reflection.metadata.AnnoMeta;
 public interface AnnotationHandler<T extends Annotation> extends
 		AnnotationBeanProcessor<T> {
 	/**
-	 * Thực thi tao tác diễn dịch một annotation chỉ định thành AnnoMeta.
+	 * Thực thi tao tác diễn dịch một annotation chỉ định thành
+	 * AnnotationMetadata.
 	 * 
 	 * @param annotation
 	 *            đối tượng Annotation tương ứng cần diễn dịch
-	 * @param annoMeta
+	 * @param annotationMetadata
 	 *            đối tượng root_AnnoMeta của definition hiện hành sẽ chứa
-	 *            AnnoMeta sắp diễn dịch.
-	 * @param defManager
+	 *            AnnotationMetadata sắp diễn dịch.
+	 * @param definitionManager
 	 *            đối tượng Definition Manager của container hiện hành.
-	 * @return trả về đối tượng AnnoMeta được diễn dịch.
+	 * @return trả về đối tượng AnnotationMetadata được diễn dịch.
 	 */
-	public AnnoMeta handleVisit(T annotation, AnnoMeta annoMeta,
-			DefinitionManager defManager) throws Exception;
+	public AnnotationMetadata handleVisit(T annotation,
+			AnnotationMetadata annotationMetadata,
+			DefinitionManager definitionManager) throws Exception;
 }

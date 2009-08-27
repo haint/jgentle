@@ -20,7 +20,7 @@ package org.jgentleframework.core.handling;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
+import java.util.List;
 
 import org.jgentleframework.core.factory.InOutDependencyException;
 import org.jgentleframework.reflection.AbstractVisitorHandler;
@@ -29,14 +29,14 @@ import org.jgentleframework.reflection.IAnnotationVisitor;
 import org.jgentleframework.reflection.annohandler.AnnotationBeanProcessor;
 import org.jgentleframework.reflection.annohandler.AnnotationHandler;
 import org.jgentleframework.reflection.annohandler.AnnotationPostProcessor;
-import org.jgentleframework.reflection.metadata.AnnoMeta;
+import org.jgentleframework.reflection.metadata.AnnotationMetadata;
 import org.jgentleframework.utils.Assertor;
 import org.jgentleframework.utils.ReflectUtils;
 
 /**
  * Quản lý các phương thức điều khiển các <i>module</i> là các
  * <i>extension-point</i> trong khi thực thi xử lý annotation, bao gồm việc diễn
- * dịch <code>annotation</code> thành {@link AnnoMeta}, quản lý
+ * dịch <code>annotation</code> thành {@link AnnotationMetadata}, quản lý
  * {@link DefinitionPostProcessor}, {@link AnnotationBeanProcessor}, ...
  * 
  * @author LE QUOC CHUNG - mailto: <a
@@ -52,9 +52,9 @@ public abstract class AbstractDefinitionController extends
 	protected IAnnotationVisitor	visitorHandler		= new AbstractVisitorHandler(
 																this) {
 															@Override
-															protected AnnoMeta build(
+															protected AnnotationMetadata build(
 																	Annotation element,
-																	AnnoMeta containter,
+																	AnnotationMetadata containter,
 																	DefinitionManager defManager)
 																	throws Exception {
 
@@ -80,8 +80,7 @@ public abstract class AbstractDefinitionController extends
 
 		Assertor.notNull(handler);
 		Class<?> clazz = handler.getClass();
-		ArrayList<Type> typeList = ReflectUtils.getAllGenericInterfaces(clazz,
-				true);
+		List<Type> typeList = ReflectUtils.getAllGenericInterfaces(clazz, true);
 		for (Type type : typeList) {
 			if (ReflectUtils.isCast(ParameterizedType.class, type)) {
 				ParameterizedType pType = (ParameterizedType) type;
@@ -244,7 +243,7 @@ public abstract class AbstractDefinitionController extends
 	 * org.jgentleframework.core.reflection.metadata.AnnoMeta)
 	 */
 	@Override
-	public void visit(Annotation[] annoArray, AnnoMeta rootAnnoMeta) {
+	public void visit(Annotation[] annoArray, AnnotationMetadata rootAnnoMeta) {
 
 		this.visitorHandler.visit(annoArray, rootAnnoMeta);
 	}

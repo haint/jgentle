@@ -30,7 +30,7 @@ import org.jgentleframework.reflection.annohandler.AnnotationBeanProcessor;
 import org.jgentleframework.reflection.annohandler.AnnotationHandler;
 import org.jgentleframework.reflection.annohandler.AnnotationPostProcessor;
 import org.jgentleframework.reflection.annohandler.PointStatus;
-import org.jgentleframework.reflection.metadata.AnnoMeta;
+import org.jgentleframework.reflection.metadata.AnnotationMetadata;
 import org.jgentleframework.utils.Assertor;
 import org.jgentleframework.utils.ReflectUtils;
 
@@ -49,8 +49,8 @@ public abstract class AbstractVisitorHandler implements IAnnotationVisitor {
 	/** The successors. */
 	protected List<DefinitionPostProcessor>	successors;
 
-	/** The def manager. */
-	public DefinitionManager				defManager	= null;
+	/** The definition manager. */
+	public DefinitionManager				definitionManager	= null;
 
 	/**
 	 * Instantiates a new abstract visitor handler.
@@ -62,7 +62,7 @@ public abstract class AbstractVisitorHandler implements IAnnotationVisitor {
 	public <T extends Annotation> AbstractVisitorHandler(
 			DefinitionManager defManager) {
 
-		this.defManager = defManager;
+		this.definitionManager = defManager;
 		this.handlerList = new HashMap<Class, AnnotationBeanProcessor>();
 		this.successors = new ArrayList<DefinitionPostProcessor>();
 	}
@@ -80,8 +80,9 @@ public abstract class AbstractVisitorHandler implements IAnnotationVisitor {
 	 * @throws Exception
 	 *             the exception
 	 */
-	protected abstract AnnoMeta build(Annotation element, AnnoMeta containter,
-			DefinitionManager definitionManager) throws Exception;
+	protected abstract AnnotationMetadata build(Annotation element,
+			AnnotationMetadata containter, DefinitionManager definitionManager)
+			throws Exception;
 
 	/**
 	 * Interprets annotation.
@@ -92,7 +93,8 @@ public abstract class AbstractVisitorHandler implements IAnnotationVisitor {
 	 *            the root anno meta
 	 */
 	@SuppressWarnings("unchecked")
-	private void visitAnnotation(Annotation[] annoArray, AnnoMeta rootAnnoMeta) {
+	private void visitAnnotation(Annotation[] annoArray,
+			AnnotationMetadata rootAnnoMeta) {
 
 		/*
 		 * Thực thi xử lý chuyển đổi dữ liệu annotation
@@ -101,7 +103,7 @@ public abstract class AbstractVisitorHandler implements IAnnotationVisitor {
 			AnnotationBeanProcessor<?> annoHandler = this.handlerList
 					.get(element.annotationType());
 			AnnotationPostProcessor app = null;
-			AnnoMeta result = null;
+			AnnotationMetadata result = null;
 			/*
 			 * Thực thi method before của AnnotationPostProcessor
 			 */
@@ -126,11 +128,12 @@ public abstract class AbstractVisitorHandler implements IAnnotationVisitor {
 						if ((ps != null && ps.isEnable()) || ps == null) {
 							AnnotationHandler ahl = (AnnotationHandler) annoHandler;
 							result = ahl.handleVisit(element, rootAnnoMeta,
-									this.defManager);
+									this.definitionManager);
 						}
 					}
 					else {
-						result = build(element, rootAnnoMeta, this.defManager);
+						result = build(element, rootAnnoMeta,
+								this.definitionManager);
 					}
 					/*
 					 * Thực thi method after của AnnotationPostProcessor
@@ -149,7 +152,8 @@ public abstract class AbstractVisitorHandler implements IAnnotationVisitor {
 					 * Thực thi việc diễn dịch mặc địch nếu không tìm thấy
 					 * method handleVisit
 					 */
-					result = build(element, rootAnnoMeta, this.defManager);
+					result = build(element, rootAnnoMeta,
+							this.definitionManager);
 				}
 			}
 			catch (Exception e) {
@@ -185,7 +189,7 @@ public abstract class AbstractVisitorHandler implements IAnnotationVisitor {
 	 * .annotation.Annotation[],
 	 * org.jgentleframework.core.reflection.metadata.AnnoMeta)
 	 */
-	public void visit(Annotation[] annoArray, AnnoMeta rootAnnoMeta) {
+	public void visit(Annotation[] annoArray, AnnotationMetadata rootAnnoMeta) {
 
 		/*
 		 * Thực thi method before của DefinitionPostProcessor

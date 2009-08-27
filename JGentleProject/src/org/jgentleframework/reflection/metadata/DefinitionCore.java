@@ -34,28 +34,29 @@ import java.util.Map;
  */
 public interface DefinitionCore extends MetadataControl {
 	/**
-	 * Creates {@link AnnoMeta annotation metadata} content.
+	 * Creates {@link AnnotationMetadata annotation metadata} content.
 	 */
 	public void buildAnnoMeta();
 
 	/**
 	 * Returns <b>true</b> if this {@link Definition definition} contains given
-	 * {@link AnnoMeta}.
+	 * {@link AnnotationMetadata}.
 	 * 
-	 * @param annoMeta
-	 *            the {@link AnnoMeta annotation metadata} whose presence in
-	 *            this {@link Definition definition} is to be tested.
+	 * @param annotationMetadata
+	 *            the {@link AnnotationMetadata annotation metadata} whose
+	 *            presence in this {@link Definition definition} is to be
+	 *            tested.
 	 * @return <b>true</b> if this {@link Definition definition} contains a
-	 *         specified {@link AnnoMeta annotation metada}, <b>false</b>
-	 *         otherwise.
+	 *         specified {@link AnnotationMetadata annotation metada},
+	 *         <b>false</b> otherwise.
 	 */
-	public boolean containsMeta(AnnoMeta annoMeta);
+	public boolean containsMeta(AnnotationMetadata annotationMetadata);
 
 	/**
-	 * Returns current {@link AnnoMeta annotation metadata} of this
+	 * Returns current {@link AnnotationMetadata annotation metadata} of this
 	 * {@link Definition definition}
 	 */
-	public AnnoMeta getAnnoMeta();
+	public AnnotationMetadata getAnnotationMetadata();
 
 	/**
 	 * Returns a {@link Map map} containing all member {@link Definition
@@ -155,8 +156,8 @@ public interface DefinitionCore extends MetadataControl {
 	 * Sets original annotations
 	 * <p>
 	 * <b>Note:</b> The invoking of this method will also execute creating of
-	 * {@link AnnoMeta} content by automate invoke {@link #buildAnnoMeta()}
-	 * method after all original annotations is setted.
+	 * {@link AnnotationMetadata} content by automate invoke
+	 * {@link #buildAnnoMeta()} method after all original annotations is setted.
 	 * 
 	 * @param originalAnnotations
 	 *            array of original annotations need to be set.

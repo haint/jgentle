@@ -29,7 +29,7 @@ import org.jgentleframework.core.handling.DefinitionManager;
 import org.jgentleframework.reflection.AnnotationBeanException;
 import org.jgentleframework.reflection.annohandler.AnnotationHandler;
 import org.jgentleframework.reflection.annohandler.AnnotationPostProcessor;
-import org.jgentleframework.reflection.metadata.AnnoMeta;
+import org.jgentleframework.reflection.metadata.AnnotationMetadata;
 import org.jgentleframework.utils.ReflectUtils;
 
 /**
@@ -49,11 +49,11 @@ public class PostProcessorTest {
 
 class MyAHR implements AnnotationHandler<TestAnno> {
 	@Override
-	public AnnoMeta handleVisit(TestAnno annotation, AnnoMeta annoMeta,
+	public AnnotationMetadata handleVisit(TestAnno annotation, AnnotationMetadata annotationMetadata,
 			DefinitionManager defManager) throws Exception {
 
 		if (annotation.value() == false) {
-			return ReflectUtils.buildAnnoMeta(annotation, annoMeta, defManager);
+			return ReflectUtils.buildAnnoMeta(annotation, annotationMetadata, defManager);
 		}
 		else {
 			// Thực thi diễn dịch
@@ -65,7 +65,7 @@ class MyAHR implements AnnotationHandler<TestAnno> {
 class MyAPP implements AnnotationPostProcessor<TestAnno>,
 		AnnotationHandler<TestAnno> {
 	@Override
-	public void after(TestAnno anno, AnnoMeta parents, AnnoMeta annoMeta,
+	public void after(TestAnno anno, AnnotationMetadata parents, AnnotationMetadata annotationMetadata,
 			Annotation[] listAnno, Object objConfig)
 			throws AnnotationBeanException {
 
@@ -74,21 +74,21 @@ class MyAPP implements AnnotationPostProcessor<TestAnno>,
 	}
 
 	@Override
-	public void before(TestAnno anno, AnnoMeta parents, Annotation[] listAnno,
+	public void before(TestAnno anno, AnnotationMetadata parents, Annotation[] listAnno,
 			Object objConfig) throws AnnotationBeanException {
 
 		System.out.println(anno + "is begun.");
 	}
 
 	@Override
-	public void catchException(Exception ex, TestAnno anno, AnnoMeta parents,
-			AnnoMeta annoMeta, Annotation[] listAnno, Object objConfig)
+	public void catchException(Exception ex, TestAnno anno, AnnotationMetadata parents,
+			AnnotationMetadata annotationMetadata, Annotation[] listAnno, Object objConfig)
 			throws AnnotationBeanException {
 
 	}
 
 	@Override
-	public AnnoMeta handleVisit(TestAnno annotation, AnnoMeta annoMeta,
+	public AnnotationMetadata handleVisit(TestAnno annotation, AnnotationMetadata annotationMetadata,
 			DefinitionManager defManager) throws Exception {
 
 		// TODO Auto-generated method stub

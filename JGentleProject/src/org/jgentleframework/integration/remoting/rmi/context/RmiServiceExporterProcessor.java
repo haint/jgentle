@@ -31,7 +31,7 @@ import org.jgentleframework.integration.remoting.rmi.annotation.RmiExporting;
 import org.jgentleframework.reflection.AnnotationBeanException;
 import org.jgentleframework.reflection.annohandler.AnnotationPostProcessor;
 import org.jgentleframework.reflection.annohandler.PointStatus;
-import org.jgentleframework.reflection.metadata.AnnoMeta;
+import org.jgentleframework.reflection.metadata.AnnotationMetadata;
 import org.jgentleframework.utils.ReflectUtils;
 
 /**
@@ -79,7 +79,7 @@ public class RmiServiceExporterProcessor implements
 	 * java.lang.annotation.Annotation[], java.lang.Object)
 	 */
 	@Override
-	public void after(RmiExporting anno, AnnoMeta parents, AnnoMeta annoMeta,
+	public void after(RmiExporting anno, AnnotationMetadata parents, AnnotationMetadata annotationMetadata,
 			Annotation[] listAnno, Object objConfig)
 			throws AnnotationBeanException {
 
@@ -119,7 +119,7 @@ public class RmiServiceExporterProcessor implements
 	 * java.lang.annotation.Annotation[], java.lang.Object)
 	 */
 	@Override
-	public void before(RmiExporting anno, AnnoMeta parents,
+	public void before(RmiExporting anno, AnnotationMetadata parents,
 			Annotation[] listAnno, Object objConfig)
 			throws AnnotationBeanException {
 
@@ -137,7 +137,7 @@ public class RmiServiceExporterProcessor implements
 	 */
 	@Override
 	public void catchException(Exception ex, RmiExporting anno,
-			AnnoMeta parents, AnnoMeta annoMeta, Annotation[] listAnno,
+			AnnotationMetadata parents, AnnotationMetadata annotationMetadata, Annotation[] listAnno,
 			Object objConfig) throws AnnotationBeanException {
 
 		if (ex instanceof RmiExportingException) {

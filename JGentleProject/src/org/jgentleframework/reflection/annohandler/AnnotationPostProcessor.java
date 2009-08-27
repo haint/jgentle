@@ -20,7 +20,7 @@ package org.jgentleframework.reflection.annohandler;
 import java.lang.annotation.Annotation;
 
 import org.jgentleframework.reflection.AnnotationBeanException;
-import org.jgentleframework.reflection.metadata.AnnoMeta;
+import org.jgentleframework.reflection.metadata.AnnotationMetadata;
 
 /**
  * Mô tả các hành vi sẽ được thực thi trước và sau khi <code>Annotation</code>
@@ -43,15 +43,15 @@ public interface AnnotationPostProcessor<T extends Annotation> extends
 	 * @param anno
 	 *            annotation chỉ định được sử dụng để interpreter
 	 * @param parents
-	 *            annoMeta cha sẽ chứa annoMeta sắp được interpreter. (có thể là
-	 *            root-AnnoMeta của Definition)
+	 *            annotationMetadata cha sẽ chứa annotationMetadata sắp được
+	 *            diễn dịch. (có thể là root-AnnotationMetadata của Definition)
 	 * @param listAnno
 	 *            danh sách annotation gốc được chỉ định cùng với annotation
 	 *            hiện hành
 	 * @param objConfig
 	 *            đối tượng được cấu hình annotation.
 	 */
-	void before(T anno, AnnoMeta parents, Annotation[] listAnno,
+	void before(T anno, AnnotationMetadata parents, Annotation[] listAnno,
 			Object objConfig) throws AnnotationBeanException;
 
 	/**
@@ -63,19 +63,20 @@ public interface AnnotationPostProcessor<T extends Annotation> extends
 	 * @param anno
 	 *            annotation chỉ định được sử dụng để interpreter
 	 * @param parents
-	 *            annoMeta cha chứa annoMeta được interpreter (có thể là
-	 *            root-AnnoMeta của Definition).
-	 * @param annoMeta
-	 *            annoMeta ứng với annotation sau khi đã được interpreter.
+	 *            annotationMetadata cha chứa annotationMetadata được diễn dịch
+	 *            (có thể là root-AnnotationMetadata của Definition).
+	 * @param annotationMetadata
+	 *            annotationMetadata ứng với annotation sau khi đã được
+	 *            interpreter.
 	 * @param listAnno
 	 *            danh sách annotation gốc được chỉ định cùng với annotation
 	 *            hiện hành
 	 * @param objConfig
 	 *            đối tượng được chỉ định annotation.
 	 */
-	void after(T anno, AnnoMeta parents, AnnoMeta annoMeta,
-			Annotation[] listAnno, Object objConfig)
-			throws AnnotationBeanException;
+	void after(T anno, AnnotationMetadata parents,
+			AnnotationMetadata annotationMetadata, Annotation[] listAnno,
+			Object objConfig) throws AnnotationBeanException;
 
 	/**
 	 * Hàm xử lý catch các ngoại lệ được ném ra bởi before method hoặc after
@@ -86,19 +87,21 @@ public interface AnnotationPostProcessor<T extends Annotation> extends
 	 * @param anno
 	 *            annotation chỉ định được sử dụng để interpreter
 	 * @param parents
-	 *            annoMeta cha chứa annoMeta được interpreter (có thể là
-	 *            root-AnnoMeta của Definition).
-	 * @param annoMeta
-	 *            annoMeta ứng với annotation sau khi đã được interpreter nếu có
-	 *            (catch exception từ after method), còn nếu annoMeta là null có
-	 *            nghĩa rằng đang catch exception được ném ra bởi before method.
+	 *            annotationMetadata cha chứa annotationMetadata được
+	 *            interpreter (có thể là root-AnnotationMetadata của
+	 *            Definition).
+	 * @param annotationMetadata
+	 *            annotationMetadata ứng với annotation sau khi đã được
+	 *            interpreter nếu có (catch exception từ after method), còn nếu
+	 *            annotationMetadata là null có nghĩa rằng đang catch exception
+	 *            được ném ra bởi before method.
 	 * @param listAnno
 	 *            danh sách annotation gốc được chỉ định cùng với annotation
 	 *            hiện hành
 	 * @param objConfig
 	 *            đối tượng được chỉ định annotation.
 	 */
-	void catchException(Exception ex, T anno, AnnoMeta parents,
-			AnnoMeta annoMeta, Annotation[] listAnno, Object objConfig)
-			throws AnnotationBeanException;
+	void catchException(Exception ex, T anno, AnnotationMetadata parents,
+			AnnotationMetadata annotationMetadata, Annotation[] listAnno,
+			Object objConfig) throws AnnotationBeanException;
 }

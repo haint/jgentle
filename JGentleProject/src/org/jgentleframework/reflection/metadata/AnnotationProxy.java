@@ -27,12 +27,13 @@ import org.jgentleframework.core.IllegalPropertyException;
 import org.jgentleframework.utils.ReflectUtils;
 
 /**
- * This class represents creating proxied annotation from {@link Definition}
- * data. These proxied annotation are responsible for intermediation between
- * {@link AnnoMeta} data type and object annotation type in order to access,
- * modify configured data easily and simplify operations of using
- * {@link AnnoMeta}. A proxied annotation is a proxy of an annotation instance,
- * taking an annotation interface, but accessible data is its {@link AnnoMeta}.
+ * This class represents created proxied annotation of {@link Definition
+ * definition} data. These proxied annotation are responsible for intermediation
+ * between {@link AnnotationMetadata} data type and object annotation type in
+ * order to access, modify configured data easily and simplify operations of
+ * using {@link AnnotationMetadata}. A proxied annotation is a proxy of an
+ * annotation instance, taking an annotation interface, but accessible data is
+ * its {@link AnnotationMetadata}.
  * 
  * @author LE QUOC CHUNG - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
@@ -47,8 +48,8 @@ class AnnotationProxy implements InvocationHandler, SetValueOfAnnotation {
 	 * @param obj
 	 *            desired original annotation instance.
 	 * @param definition
-	 *            the current {@link Definition} holding {@link AnnoMeta} of
-	 *            original annotation instance.
+	 *            the current {@link Definition} holding
+	 *            {@link AnnotationMetadata} of original annotation instance.
 	 * @return returns an proxied annotation
 	 */
 	public static Object createProxy(Object obj, Definition definition) {
@@ -64,13 +65,13 @@ class AnnotationProxy implements InvocationHandler, SetValueOfAnnotation {
 	}
 
 	/** The anno meta. */
-	private AnnoMeta	annoMeta;
+	private AnnotationMetadata	annotationMetadata;
 
 	/** The definition. */
-	private Definition	definition;
+	private Definition			definition;
 
 	/** The target. */
-	private Object		target	= null;
+	private Object				target	= null;
 
 	/**
 	 * Constructor.
@@ -84,8 +85,9 @@ class AnnotationProxy implements InvocationHandler, SetValueOfAnnotation {
 
 		this.target = obj;
 		this.definition = definition;
-		this.annoMeta = (AnnoMeta) definition.getAnnoMeta().getMetadata(
-				((Annotation) target).annotationType());
+		this.annotationMetadata = (AnnotationMetadata) definition
+				.getAnnotationMetadata().getMetadata(
+						((Annotation) target).annotationType());
 	}
 
 	/*
@@ -128,7 +130,8 @@ class AnnotationProxy implements InvocationHandler, SetValueOfAnnotation {
 		else if (method.getName().equals("annotationType")) {
 			return method.invoke(this.target, args);
 		}
-		result = this.annoMeta.getMetadata(method.getName()).getValue();
+		result = this.annotationMetadata.getMetadata(method.getName())
+				.getValue();
 		return result;
 	}
 
@@ -140,7 +143,8 @@ class AnnotationProxy implements InvocationHandler, SetValueOfAnnotation {
 	@Override
 	public Metadata setValueOfAnnotation(String valueName, Object value) {
 
-		Object resource = this.annoMeta.getMetadata(valueName).getValue();
+		Object resource = this.annotationMetadata.getMetadata(valueName)
+				.getValue();
 		if (resource.getClass().isArray()) {
 			if (!value.getClass().isArray()) {
 				throw new IllegalPropertyException("Setting value is invalid.");
@@ -149,8 +153,8 @@ class AnnotationProxy implements InvocationHandler, SetValueOfAnnotation {
 					value.getClass().getComponentType())) {
 				throw new IllegalPropertyException("Setting value is invalid.");
 			}
-			return this.annoMeta.putMetaData(MetaDataFactory.createMetaData(
-					valueName, value));
+			return this.annotationMetadata.putMetaData(MetaDataFactory
+					.createMetaData(valueName, value));
 		}
 		else {
 			if (ReflectUtils.isAnnotation(resource)) {
@@ -163,7 +167,7 @@ class AnnotationProxy implements InvocationHandler, SetValueOfAnnotation {
 					throw new IllegalPropertyException(
 							"Setting value is invalid.");
 				}
-				return this.annoMeta.putMetaData(MetaDataFactory
+				return this.annotationMetadata.putMetaData(MetaDataFactory
 						.createMetaData(valueName, value));
 			}
 			else {
@@ -171,7 +175,7 @@ class AnnotationProxy implements InvocationHandler, SetValueOfAnnotation {
 					throw new IllegalPropertyException(
 							"Setting value is invalid.");
 				}
-				return this.annoMeta.putMetaData(MetaDataFactory
+				return this.annotationMetadata.putMetaData(MetaDataFactory
 						.createMetaData(valueName, value));
 			}
 		}

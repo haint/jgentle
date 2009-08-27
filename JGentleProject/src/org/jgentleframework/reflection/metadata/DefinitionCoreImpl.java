@@ -42,20 +42,19 @@ import org.jgentleframework.utils.ReflectUtils;
  */
 abstract class DefinitionCoreImpl extends MetadataController implements
 		IAnnoVisitable, DefinitionCore {
-	
 	/** The Constant serialVersionUID. */
-	private static final long			serialVersionUID	= -4913719040130848081L;
+	private static final long		serialVersionUID	= -4913719040130848081L;
 
 	/**
-	 * The {@link AnnoMeta} of current {@link Definition}. Its key is key of
-	 * {@link Definition} but its value is this {@link Definition}.
+	 * The {@link AnnotationMetadata} of current {@link Definition}. Its key is
+	 * key of {@link Definition} but its value is this {@link Definition}.
 	 * <p>
-	 * <b>Note:</b> This {@link AnnoMeta} object may be <b>null</b> if it is a
-	 * empty {@link AnnoMeta}. In case of this, this {@link Definition} is
-	 * interpreted of <code>object class</code> but corresponding class is not
-	 * annotated with any annotation.
+	 * <b>Note:</b> This {@link AnnotationMetadata} object may be <b>null</b> if
+	 * it is a empty {@link AnnotationMetadata}. In case of this, this
+	 * {@link Definition} is interpreted of <code>object class</code> but
+	 * corresponding class is not annotated with any annotation.
 	 */
-	AnnoMeta							annoMeta			= null;
+	AnnotationMetadata				annotationMetadata	= null;
 
 	/**
 	 * containing {@link Definition} of {@link Constructor} objects in case this
@@ -78,13 +77,13 @@ abstract class DefinitionCoreImpl extends MetadataController implements
 	/**
 	 * The array containing all original annotations of this {@link Definition}
 	 */
-	Annotation[]						originalAnnotations;
+	Annotation[]					originalAnnotations;
 
 	/**
 	 * This array contains all {@link Definition} of parameters of method which
 	 * this {@link Definition} is interpreted of.
 	 */
-	Definition[]						parameterDefList	= null;
+	Definition[]					parameterDefList	= null;
 
 	/**
 	 * Constructor
@@ -118,9 +117,10 @@ abstract class DefinitionCoreImpl extends MetadataController implements
 			throw new NullPointerException("Annotation List must not be null !");
 		}
 		else {
-			this.annoMeta = MetaDataFactory.createAnnoMeta(this.key, this);
-			this.value = this.annoMeta;
-			visitor.visit(this.originalAnnotations, this.annoMeta);
+			this.annotationMetadata = MetaDataFactory.createAnnotationMetadata(
+					this.key, this);
+			this.value = this.annotationMetadata;
+			visitor.visit(this.originalAnnotations, this.annotationMetadata);
 		}
 	}
 
@@ -131,20 +131,22 @@ abstract class DefinitionCoreImpl extends MetadataController implements
 	 * (org.jgentleframework.core.reflection.metadata.AnnoMeta)
 	 */
 	@Override
-	public boolean containsMeta(AnnoMeta annoMeta) {
+	public boolean containsMeta(AnnotationMetadata annotationMetadata) {
 
-		return this.getAnnoMeta().contains(annoMeta.getKey());
+		return this.getAnnotationMetadata().contains(
+				annotationMetadata.getKey());
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.jgentleframework.core.reflection.metadata.DefinitionCore#getAnnoMeta()
+	 * org.jgentleframework.reflection.metadata.DefinitionCore#getAnnotationMetadata
+	 * ()
 	 */
 	@Override
-	public AnnoMeta getAnnoMeta() {
+	public AnnotationMetadata getAnnotationMetadata() {
 
-		return annoMeta;
+		return annotationMetadata;
 	}
 
 	/*
@@ -333,8 +335,10 @@ abstract class DefinitionCoreImpl extends MetadataController implements
 
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result
-				+ ((annoMeta == null) ? 0 : annoMeta.hashCode());
+		result = prime
+				* result
+				+ ((annotationMetadata == null) ? 0 : annotationMetadata
+						.hashCode());
 		result = prime
 				* result
 				+ ((constructorDefList == null) ? 0 : constructorDefList
@@ -362,11 +366,11 @@ abstract class DefinitionCoreImpl extends MetadataController implements
 		if (!(obj instanceof DefinitionCoreImpl))
 			return false;
 		final DefinitionCoreImpl other = (DefinitionCoreImpl) obj;
-		if (annoMeta == null) {
-			if (other.annoMeta != null)
+		if (annotationMetadata == null) {
+			if (other.annotationMetadata != null)
 				return false;
 		}
-		else if (!annoMeta.equals(other.annoMeta))
+		else if (!annotationMetadata.equals(other.annotationMetadata))
 			return false;
 		if (constructorDefList == null) {
 			if (other.constructorDefList != null)

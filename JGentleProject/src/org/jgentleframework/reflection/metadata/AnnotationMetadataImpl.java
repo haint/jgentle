@@ -28,31 +28,31 @@ import org.aopalliance.reflect.Metadata;
 import org.jgentleframework.utils.ReflectUtils;
 
 /**
- * This class is an implementation of {@link AnnoMeta} interface.
+ * This class is an implementation of {@link AnnotationMetadata} interface.
  * 
  * @author LE QUOC CHUNG - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
  * @date Sep 4, 2007
- * @see AnnoMeta
+ * @see AnnotationMetadata
  * @see Metadata
  * @see MetadataImpl
  */
-class AnnoMetaImpl extends MetadataImpl implements Metadata, AnnoMeta {
+class AnnotationMetadataImpl extends MetadataImpl implements Metadata, AnnotationMetadata {
 	/**
 	 * The {@link Map map} containing all {@link Metadata metadata} objects of
-	 * this {@link AnnoMeta annotation metadata}
+	 * this {@link AnnotationMetadata annotation metadata}
 	 */
 	Map<Object, Metadata>	metaList	= new HashMap<Object, Metadata>();
 
-	/** The current name of this {@link AnnoMeta} */
+	/** The current name of this {@link AnnotationMetadata} */
 	String					name		= "";
 
 	/**
-	 * The {@link AnnoMeta} parents of this {@link AnnoMeta} if it exists, if
-	 * not, this mean current {@link AnnoMeta} is a {@link AnnoMeta} of one
+	 * The {@link AnnotationMetadata} parents of this {@link AnnotationMetadata} if it exists, if
+	 * not, this mean current {@link AnnotationMetadata} is a {@link AnnotationMetadata} of one
 	 * {@link Definition} and its value will be <code>null</code>.
 	 */
-	AnnoMeta				parents;
+	AnnotationMetadata				parents;
 
 	/** The type. */
 	Class<?>				type		= null;
@@ -65,7 +65,7 @@ class AnnoMetaImpl extends MetadataImpl implements Metadata, AnnoMeta {
 	 * @param value
 	 *            the value
 	 */
-	public AnnoMetaImpl(Object key, Object value) {
+	public AnnotationMetadataImpl(Object key, Object value) {
 
 		super(key, value);
 		if (ReflectUtils.isClass(key)) {
@@ -90,7 +90,7 @@ class AnnoMetaImpl extends MetadataImpl implements Metadata, AnnoMeta {
 	 * @param parents
 	 *            the parents
 	 */
-	public AnnoMetaImpl(Object key, Object value, AnnoMeta parents) {
+	public AnnotationMetadataImpl(Object key, Object value, AnnotationMetadata parents) {
 
 		super(key, value);
 		if (ReflectUtils.isClass(key)) {
@@ -112,7 +112,7 @@ class AnnoMetaImpl extends MetadataImpl implements Metadata, AnnoMeta {
 	 * @param name
 	 *            the name
 	 */
-	public AnnoMetaImpl(Object key, Object value, AnnoMeta parents, String name) {
+	public AnnotationMetadataImpl(Object key, Object value, AnnotationMetadata parents, String name) {
 
 		super(key, value);
 		if (ReflectUtils.isClass(key))
@@ -267,7 +267,7 @@ class AnnoMetaImpl extends MetadataImpl implements Metadata, AnnoMeta {
 	 * @see org.jgentleframework.core.reflection.metadata.AnnoMeta#getParents()
 	 */
 	@Override
-	public AnnoMeta getParents() {
+	public AnnotationMetadata getParents() {
 
 		return parents;
 	}
