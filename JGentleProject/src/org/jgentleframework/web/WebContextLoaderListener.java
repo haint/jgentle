@@ -21,6 +21,12 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
+import org.jgentleframework.configure.Configurable;
+import org.jgentleframework.context.JGentle;
+import org.jgentleframework.context.injecting.Provider;
+import org.jgentleframework.core.JGentleRuntimeException;
+import org.jgentleframework.utils.Assertor;
+
 /**
  * @author LE QUOC CHUNG - mailto: <a
  *         href="mailto:skydunkpro@yahoo.com">skydunkpro@yahoo.com</a>
@@ -32,9 +38,23 @@ public class WebContextLoaderListener implements ServletContextListener {
 
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void contextInitialized(ServletContextEvent event) {
-
 		ServletContext servletContext = event.getServletContext();
+		String configClassName = servletContext
+				.getInitParameter(WebUtils.WEB_INIT_PARAM);
+		Assertor.notNull(configClassName);
+		Class<Configurable> configClasses = null;
+		try {
+			configClasses = (Class<Configurable>) Class
+					.forName(configClassName);
+			Provider provider = null;
+			provider = JGentle.buildProvider(configClasses);
+			servletContext.setAttribute(WebUtils.WEB_PROVIDER, provider);
+		} catch (ClassNotFoundException e) {
+			throw new JGentleRuntimeException(e);
+		}
+
 	}
 }
