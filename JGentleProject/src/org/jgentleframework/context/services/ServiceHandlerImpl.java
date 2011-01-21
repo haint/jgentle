@@ -31,6 +31,7 @@ import java.util.Map;
 import java.util.TooManyListenersException;
 
 import org.jgentleframework.configure.annotation.AnnotationClass;
+import org.jgentleframework.context.enums.RegisterAnnotationInjecting;
 import org.jgentleframework.context.enums.RegisterSystemAnnotation;
 import org.jgentleframework.context.injecting.Provider;
 import org.jgentleframework.core.IllegalPropertyException;
@@ -632,40 +633,77 @@ public class ServiceHandlerImpl implements ServiceHandler {
 		}
 		for (Enum obj : enumAnnoClass.getEnumConstants()) {
 			Class<?> clazz = null;
-			try {
-				clazz = Class.forName(obj.name().replace("_", "."));
-				if (!clazz.isAnnotation()) {
-					throw new IllegalPropertyException(
-							"Object class of annotation is invalid.");
-				}
-			}
-			catch (ClassNotFoundException e) {
-				if (methodAnno == null) {
-					if (ReflectUtils.getAllInterfaces(enumAnnoClass, true)
-							.contains(GetAnnotationClass.class)) {
-						clazz = ((GetAnnotationClass) obj).getAnnotationClass();
-					}
-					else {
-						throw new IllegalPropertyException(
-								"Does not found object class of annotation or enum is invalid.");
-					}
+			if (methodAnno == null) {
+				if (ReflectUtils.getAllInterfaces(enumAnnoClass, true)
+						.contains(GetAnnotationClass.class)) {
+					clazz = ((GetAnnotationClass) obj).getAnnotationClass();
 				}
 				else {
-					try {
-						methodAnno.setAccessible(true);
-						clazz = (Class<?>) methodAnno.invoke(obj);
-					}
-					catch (IllegalArgumentException e1) {
-						e1.printStackTrace();
-					}
-					catch (IllegalAccessException e1) {
-						e1.printStackTrace();
-					}
-					catch (InvocationTargetException e1) {
-						e1.printStackTrace();
-					}
+					throw new IllegalPropertyException(
+							"Does not found object class of annotation or enum is invalid.");
 				}
 			}
+			else {
+				try {
+					methodAnno.setAccessible(true);
+					clazz = (Class<?>) methodAnno.invoke(obj);
+				}
+				catch (IllegalArgumentException e1) {
+					e1.printStackTrace();
+				}
+				catch (IllegalAccessException e1) {
+					e1.printStackTrace();
+				}
+				catch (InvocationTargetException e1) {
+					e1.printStackTrace();
+				}
+			}
+			if(clazz == null){
+				try {
+					clazz = Class.forName(obj.name().replace("_", "."));
+				} catch (ClassNotFoundException e) {
+					
+				}
+			}
+//			try {
+//				if(obj instanceof RegisterAnnotationInjecting){
+//					RegisterAnnotationInjecting registerAnnotationInjecting = (RegisterAnnotationInjecting) obj;
+//					clazz = registerAnnotationInjecting.getAnnotationClass();
+//				}else{
+//					clazz = Class.forName(obj.name().replace("_", "."));
+//				}
+//				if (!clazz.isAnnotation()) {
+//					throw new IllegalPropertyException(
+//							"Object class of annotation is invalid.");
+//				}
+//			}
+//			catch (ClassNotFoundException e) {
+//				if (methodAnno == null) {
+//					if (ReflectUtils.getAllInterfaces(enumAnnoClass, true)
+//							.contains(GetAnnotationClass.class)) {
+//						clazz = ((GetAnnotationClass) obj).getAnnotationClass();
+//					}
+//					else {
+//						throw new IllegalPropertyException(
+//								"Does not found object class of annotation or enum is invalid.");
+//					}
+//				}
+//				else {
+//					try {
+//						methodAnno.setAccessible(true);
+//						clazz = (Class<?>) methodAnno.invoke(obj);
+//					}
+//					catch (IllegalArgumentException e1) {
+//						e1.printStackTrace();
+//					}
+//					catch (IllegalAccessException e1) {
+//						e1.printStackTrace();
+//					}
+//					catch (InvocationTargetException e1) {
+//						e1.printStackTrace();
+//					}
+//				}
+//			}
 			if (clazz == null) {
 				throw new IllegalPropertyException(
 						"Object class of annotation is invalid.");
